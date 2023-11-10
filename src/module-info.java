@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author Jadou
- *
- */
-module Appli {
-}
