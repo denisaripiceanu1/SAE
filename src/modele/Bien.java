@@ -19,52 +19,54 @@ public class Bien {
         this.immeuble = immeuble;
     }
 
-    public String getIdBien() {
-        return idBien;
-    }
+	public String getIdBien() {
+		return idBien;
+	}
 
-    public void setIdBien(String idBien) {
-        this.idBien = idBien;
-    }
+	public void setIdBien(String idBien) {
+		this.idBien = idBien;
+	}
 
-    public double getSurfaceHabitable() {
-        return surfaceHabitable;
-    }
+	public double getSurfaceHabitable() {
+		return surfaceHabitable;
+	}
 
-    public void setSurfaceHabitable(double surfaceHabitable) {
-        this.surfaceHabitable = surfaceHabitable;
-    }
+	public void setSurfaceHabitable(double surfaceHabitable) {
+		this.surfaceHabitable = surfaceHabitable;
+	}
 
-    public int getNbPieces() {
-        return nbPieces;
-    }
+	public int getNbPieces() {
+		return nbPieces;
+	}
 
-    public void setNbPieces(int nbPieces) {
-        this.nbPieces = nbPieces;
-    }
+	public void setNbPieces(int nbPieces) {
+		this.nbPieces = nbPieces;
+	}
 
-    public int getNumEtage() {
-        return numEtage;
-    }
+	public int getNumEtage() {
+		return numEtage;
+	}
 
-    public void setNumEtage(int numEtage) {
-        this.numEtage = numEtage;
-    }
+	public void setNumEtage(int numEtage) {
+		this.numEtage = numEtage;
+	}
 
-    public String getDateAcquisition() {
-        return dateAcquisition;
-    }
+	public String getDateAcquisition() {
+		return dateAcquisition;
+	}
 
-    public void setDateAcquisition(String dateAcquisition) {
-        this.dateAcquisition = dateAcquisition;
-    }
+	public void setDateAcquisition(String dateAcquisition) {
+		this.dateAcquisition = dateAcquisition;
+	}
 
-    public Immeuble getIdImmeuble() {
-        return this.immeuble;
-    }
+	public Immeuble getImmeuble() {
+		return immeuble;
+	}
 
-    public void setIdImmeuble(Immeuble immeuble) {
-        this.immeuble = immeuble;
-    }
+	public void setImmeuble(Immeuble immeuble) {
+		this.immeuble = immeuble;
+	}
+    
+    
 }
 
