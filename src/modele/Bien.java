@@ -8,15 +8,15 @@ public class Bien {
     private int nbPieces;
     private int numEtage;
     private String dateAcquisition;
-    private String idImmeuble;
+    private Immeuble immeuble;
 
-    public Bien(String idBien, double surfaceHabitable, int nbPieces, int numEtage, String dateAcquisition, String idImmeuble) {
+    public Bien(String idBien, double surfaceHabitable, int nbPieces, int numEtage, String dateAcquisition, Immeuble immeuble) {
         this.idBien = idBien;
         this.surfaceHabitable = surfaceHabitable;
         this.nbPieces = nbPieces;
         this.numEtage = numEtage;
         this.dateAcquisition = dateAcquisition;
-        this.idImmeuble = idImmeuble;
+        this.immeuble = immeuble;
     }
 
     public String getIdBien() {
@@ -59,12 +59,12 @@ public class Bien {
         this.dateAcquisition = dateAcquisition;
     }
 
-    public String getIdImmeuble() {
-        return idImmeuble;
+    public Immeuble getIdImmeuble() {
+        return this.immeuble;
     }
 
-    public void setIdImmeuble(String idImmeuble) {
-        this.idImmeuble = idImmeuble;
+    public void setIdImmeuble(Immeuble immeuble) {
+        this.immeuble = immeuble;
     }
 }
 
