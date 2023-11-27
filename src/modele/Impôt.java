@@ -8,7 +8,6 @@ public class Impôt {
 	private Bien bien;
 
 	public Impôt(int idImpot, String nom, double montant, Bien bien) {
-		super();
 		this.idImpot = idImpot;
 		this.nom = nom;
 		this.montant = montant;

@@ -22,7 +22,6 @@ public class Facture {
 	public Facture(int idFacture, String numero, String dateEmission, String datePaiement, String modePaiement,
 			String numeroDevis, String designation, double accompteVerse, double montant, int imputableLocataire,
 			Immeuble immeuble, Bien bien, Entreprise entreprise, Locataire locataire, Bien bien_1, Louer louer) {
-		super();
 		this.idFacture = idFacture;
 		this.numero = numero;
 		this.dateEmission = dateEmission;

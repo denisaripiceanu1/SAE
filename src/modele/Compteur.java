@@ -12,32 +12,26 @@ public class Compteur {
         this.typeComp = typeComp;
     }
 
-    // Getter pour Id_Compteur
     public int getIdCompteur() {
         return idCompteur;
     }
 
-    // Setter pour Id_Compteur
     public void setIdCompteur(int idCompteur) {
         this.idCompteur = idCompteur;
     }
 
-    // Getter pour indexComp
     public long getIndexComp() {
         return indexComp;
     }
 
-    // Setter pour indexComp
     public void setIndexComp(long indexComp) {
         this.indexComp = indexComp;
     }
 
-    // Getter pour typeComp
     public String getTypeComp() {
         return typeComp;
     }
 
-    // Setter pour typeComp
     public void setTypeComp(String typeComp) {
         this.typeComp = typeComp;
     }
