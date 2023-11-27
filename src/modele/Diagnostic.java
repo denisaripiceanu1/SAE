@@ -1,7 +1,5 @@
 package modele;
 
-import java.util.Date;
-
 public class Diagnostic {
     private int idDiagnostic;
     private String dateValidite;

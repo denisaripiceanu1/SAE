@@ -282,7 +282,7 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 
 		JLabel lblNewLabel_8 = new JLabel("");
 		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_8.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/SAES3/src/icon/logo_appli.png")));
+		lblNewLabel_8.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/Appli/src/icon/logo_appli.png")));
 		panel_4.add(lblNewLabel_8);
 
 		JPanel panel_10 = new JPanel();
@@ -294,7 +294,7 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 		btnAccueil.addActionListener(this);
 		btnAccueil.setBackground(new Color(192, 192, 192));
 		btnAccueil.setIcon(
-				new ImageIcon(Fenetre_Accueil.class.getResource("/SAES3/src/icon/home_att-removebg-preview.png")));
+				new ImageIcon(Fenetre_Accueil.class.getResource("/Appli/src/icon/home_att-removebg-preview.png")));
 		btnAccueil.setBounds(0, 53, 42, 31);
 		btnAccueil.setName("btnAccueil");
 		panel_10.add(btnAccueil);

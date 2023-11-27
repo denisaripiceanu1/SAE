@@ -6,10 +6,10 @@ public class Charge {
     private String nom;
     private double montantReel;
     private double montantPrevisionnel;
-    private boolean deductible;
+    private int deductible;
     private Bien idBien;
     
-	public Charge(int idCharge, String nom, double montantReel, double montantPrevisionnel, boolean deductible,
+	public Charge(int idCharge, String nom, double montantReel, double montantPrevisionnel, int deductible,
 			Bien idBien) {
 
 		this.idCharge = idCharge;
@@ -52,11 +52,11 @@ public class Charge {
 		this.montantPrevisionnel = montantPrevisionnel;
 	}
 
-	public boolean isDeductible() {
+	public int isDeductible() {
 		return deductible;
 	}
 
-	public void setDeductible(boolean deductible) {
+	public void setDeductible(int deductible) {
 		this.deductible = deductible;
 	}
 
