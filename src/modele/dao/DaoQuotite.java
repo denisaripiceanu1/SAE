@@ -1,10 +1,14 @@
 package modele.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import modele.Quotite;
+import modele.dao.requetes.select.RequeteSelectQuotite;
+import modele.dao.requetes.select.RequeteSelectQuotiteById;
 
-public class DaoQuotite implements Dao<Quotite>{
+public class DaoQuotite extends DaoModele<Quotite> implements Dao<Quotite>{
 
 	@Override
 	public void create(Quotite donnees) {
@@ -20,20 +24,33 @@ public class DaoQuotite implements Dao<Quotite>{
 
 	@Override
 	public void delete(Quotite donnees) {
-		// TODO Auto-generated method stub
+		delete(donnees);
 		
 	}
 
 	@Override
-	public Quotite findById(String... id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Quotite findById(String... id) throws SQLException{
+		List<Quotite> quotites = find(new RequeteSelectQuotiteById(), id);
+		if (quotites.isEmpty()) {
+			return null;
+		}
+		return quotites.get(0);
 	}
 
 	@Override
-	public List<Quotite> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Quotite> findAll() throws SQLException{
+		return find(new RequeteSelectQuotite());
+	}
+
+	@Override
+	protected Quotite creerInstance(ResultSet curseur) throws SQLException {
+		Quotite quotite = null;
+		try {
+			quotite = new Quotite(curseur.getString("type_quotite"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return quotite;
 	}
     
 }

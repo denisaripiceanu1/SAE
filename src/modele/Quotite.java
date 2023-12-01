@@ -3,8 +3,6 @@ package modele;
 public class Quotite {
 
 	private String type_quotite;
-	
-	
 
 	public Quotite(String type_quotite) {
 		this.type_quotite = type_quotite;
@@ -17,7 +15,5 @@ public class Quotite {
 	public void setType_quotite(String type_quotite) {
 		this.type_quotite = type_quotite;
 	}
-	
-	
-    
+
 }
