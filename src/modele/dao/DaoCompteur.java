@@ -4,8 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import modele.Bien;
 import modele.Charge;
 import modele.Compteur;
+import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectCharge;
 import modele.dao.requetes.select.RequeteSelectChargeById;
 import modele.dao.requetes.select.RequeteSelectCompteur;
@@ -34,10 +36,16 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 	protected Compteur creerInstance(ResultSet curseur) throws SQLException {
 		Compteur compteur = null;
 		try {
+			String idBien = curseur.getString("Id_Bien");
+			DaoBien daoBien = new DaoBien();
+			Bien bien = daoBien.findById(idBien);
+			
+			String idImmeuble = curseur.getString("Id_Immeuble");
+			DaoImmeuble daoImmeuble = new DaoImmeuble();
+			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
+			
 			compteur = new Compteur(curseur.getString("id_compteur"), 
-					curseur.getString("typeComp"),
-					
-					curseur.getFloat("prix_abonnement"));
+					curseur.getString("typeComp"),bien,immeuble);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

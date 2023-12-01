@@ -3,9 +3,6 @@ package modele;
 public class Compteur {
     private String idCompteur;
     private String typeComp;
-<<<<<<< HEAD
-    private float prix_abonnement;
-=======
     private Bien bien;
     private Immeuble immeuble;
     
@@ -46,7 +43,6 @@ public class Compteur {
 		this.immeuble = immeuble;
 	}
 
->>>>>>> 633fc9105d4543dbbb71678a57674201d9afea90
     
 
 
