@@ -4,7 +4,6 @@ public class Compteur {
     private String idCompteur;
     private String typeComp;
     private float prix_abonnement;
-
     
     public Compteur(String idCompteur, String typeComp, float prix_abonnement) {
         this.idCompteur = idCompteur;

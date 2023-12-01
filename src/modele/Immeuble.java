@@ -2,7 +2,7 @@ package modele;
 
 public class Immeuble {
 
-	private Immeuble immeuble;
+	private String idImmeuble;
 	private String adresse;
 	private String cp;
 	private String ville;
@@ -10,9 +10,9 @@ public class Immeuble {
 	private int nbLogement;
 	private String dateAcquisition;
 
-	public Immeuble(Immeuble immeuble, String adresse, String cp, String ville, String periodeConstruction,
+	public Immeuble(String idImmeuble, String adresse, String cp, String ville, String periodeConstruction,
 			int nbLogement, String dateAcquisition) {
-		this.immeuble = immeuble;
+		this.idImmeuble = idImmeuble;
 		this.adresse = adresse;
 		this.cp = cp;
 		this.ville = ville;
@@ -21,12 +21,12 @@ public class Immeuble {
 		this.dateAcquisition = dateAcquisition;
 	}
 
-	public Immeuble getImmeuble() {
-		return immeuble;
+	public String getImmeuble() {
+		return idImmeuble;
 	}
 
-	public void setImmeuble(Immeuble immeuble) {
-		this.immeuble = immeuble;
+	public void setImmeuble(String immeuble) {
+		this.idImmeuble = immeuble;
 	}
 
 	public String getAdresse() {
