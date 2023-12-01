@@ -5,13 +5,11 @@ public class Impôt {
 	private int idImpot;
 	private String nom;
 	private double montant;
-	private Bien bien;
 
-	public Impôt(int idImpot, String nom, double montant, Bien bien) {
+	public Impôt(int idImpot, String nom, double montant) {
 		this.idImpot = idImpot;
 		this.nom = nom;
 		this.montant = montant;
-		this.bien = bien;
 	}
 
 	public int getIdImpot() {
@@ -37,13 +35,4 @@ public class Impôt {
 	public void setMontant(double montant) {
 		this.montant = montant;
 	}
-
-	public Bien getIdBien() {
-		return bien;
-	}
-
-	public void setIdBien(Bien bien) {
-		this.bien = bien;
-	}
-
 }
