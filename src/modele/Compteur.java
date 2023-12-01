@@ -3,44 +3,51 @@ package modele;
 public class Compteur {
     private String idCompteur;
     private String typeComp;
+<<<<<<< HEAD
     private float prix_abonnement;
+=======
+    private Bien bien;
+    private Immeuble immeuble;
     
-    public Compteur(String idCompteur, String typeComp, float prix_abonnement) {
-        this.idCompteur = idCompteur;
-        this.typeComp = typeComp;
-        this.prix_abonnement = prix_abonnement;
-    }
+	public Compteur(String idCompteur, String typeComp, Bien bien, Immeuble immeuble) {
+		super();
+		this.idCompteur = idCompteur;
+		this.typeComp = typeComp;
+		this.bien = bien;
+		this.immeuble = immeuble;
+	}
+	
+	public String getIdCompteur() {
+		return idCompteur;
+	}
+	public String getTypeComp() {
+		return typeComp;
+	}
+	public Bien getBien() {
+		return bien;
+	}
+	public Immeuble getImmeuble() {
+		return immeuble;
+	}
 
-    public String getIdCompteur() {
-        return idCompteur;
-    }
+	public void setIdCompteur(String idCompteur) {
+		this.idCompteur = idCompteur;
+	}
 
-    public void setIdCompteur(String idCompteur) {
-        this.idCompteur = idCompteur;
-    }
+	public void setTypeComp(String typeComp) {
+		this.typeComp = typeComp;
+	}
 
-    public float getIndexComp() {
-        return prix_abonnement;
-    }
+	public void setBien(Bien bien) {
+		this.bien = bien;
+	}
 
-    public void setIndexComp(float prix_abonnement) {
-        this.prix_abonnement = prix_abonnement;
-    }
+	public void setImmeuble(Immeuble immeuble) {
+		this.immeuble = immeuble;
+	}
 
-    public String getTypeComp() {
-        return typeComp;
-    }
+>>>>>>> 633fc9105d4543dbbb71678a57674201d9afea90
+    
 
-    public void setTypeComp(String typeComp) {
-        this.typeComp = typeComp;
-    }
 
-    @Override
-    public String toString() {
-        return "Compteur{" +
-                "idCompteur=" + idCompteur +
-                ", indexComp=" + prix_abonnement +
-                ", typeComp='" + typeComp + '\'' +
-                '}';
-    }
 }

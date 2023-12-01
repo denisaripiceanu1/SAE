@@ -5,13 +5,11 @@ public class Échéance {
     private String numeroPolice;
     private String dateEcheance;
     private double montantEcheance;
-    private Assurance assurance;
     
-	public Échéance(String numeroPolice, String dateEcheance, double montantEcheance, Assurance assurance) {
+	public Échéance(String numeroPolice, String dateEcheance, double montantEcheance) {
 		this.numeroPolice = numeroPolice;
 		this.dateEcheance = dateEcheance;
 		this.montantEcheance = montantEcheance;
-		this.assurance = assurance;
 	}
 
 	public String getNumeroPolice() {
@@ -36,13 +34,5 @@ public class Échéance {
 
 	public void setMontantEcheance(double montantEcheance) {
 		this.montantEcheance = montantEcheance;
-	}
-
-	public Assurance getAssurance() {
-		return assurance;
-	}
-
-	public void setAssurance(Assurance assurance) {
-		this.assurance = assurance;
 	}
 }
