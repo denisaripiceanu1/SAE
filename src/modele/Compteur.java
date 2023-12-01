@@ -1,43 +1,37 @@
 package modele;
 
 public class Compteur {
-    private int idCompteur;
-    private long indexComp;
+    private String idCompteur;
     private String typeComp;
+    private float prix_abonnement;
 
     
-    public Compteur(int idCompteur, long indexComp, String typeComp) {
+    public Compteur(String idCompteur, String typeComp, float prix_abonnement) {
         this.idCompteur = idCompteur;
-        this.indexComp = indexComp;
         this.typeComp = typeComp;
+        this.prix_abonnement = prix_abonnement;
     }
 
-    // Getter pour Id_Compteur
-    public int getIdCompteur() {
+    public String getIdCompteur() {
         return idCompteur;
     }
 
-    // Setter pour Id_Compteur
-    public void setIdCompteur(int idCompteur) {
+    public void setIdCompteur(String idCompteur) {
         this.idCompteur = idCompteur;
     }
 
-    // Getter pour indexComp
-    public long getIndexComp() {
-        return indexComp;
+    public float getIndexComp() {
+        return prix_abonnement;
     }
 
-    // Setter pour indexComp
-    public void setIndexComp(long indexComp) {
-        this.indexComp = indexComp;
+    public void setIndexComp(float prix_abonnement) {
+        this.prix_abonnement = prix_abonnement;
     }
 
-    // Getter pour typeComp
     public String getTypeComp() {
         return typeComp;
     }
 
-    // Setter pour typeComp
     public void setTypeComp(String typeComp) {
         this.typeComp = typeComp;
     }
@@ -46,7 +40,7 @@ public class Compteur {
     public String toString() {
         return "Compteur{" +
                 "idCompteur=" + idCompteur +
-                ", indexComp=" + indexComp +
+                ", indexComp=" + prix_abonnement +
                 ", typeComp='" + typeComp + '\'' +
                 '}';
     }

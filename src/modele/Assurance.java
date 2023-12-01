@@ -1,13 +1,12 @@
-//nesrine
 package modele;
 
 public class Assurance {
 
 	private String numéroPolice;
-	private int montantInit;
+	private float montantInit;
 	private Immeuble immeuble;
 
-	public Assurance(String numéroPolice, int montantInit, Immeuble immeuble) {
+	public Assurance(String numéroPolice, float montantInit, Immeuble immeuble) {
 		this.numéroPolice = numéroPolice;
 		this.montantInit = montantInit;
 		this.immeuble = immeuble;
@@ -21,11 +20,11 @@ public class Assurance {
 		this.numéroPolice = numéroPolice;
 	}
 
-	public int getMontantInit() {
+	public float getMontantInit() {
 		return this.montantInit;
 	}
 
-	public void setMontantInit(int montantInit) {
+	public void setMontantInit(float montantInit) {
 		this.montantInit = montantInit;
 	}
 
