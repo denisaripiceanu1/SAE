@@ -424,7 +424,7 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 
 		JLabel logo = new JLabel("");
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
-		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/SAES3/src/icon/logo_appli.png")));
+		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png"))); //pour éviter l'erreur location is null faire de façon graphique
 		bandeAccueil.add(logo);
 
 		JPanel panelDuBtnAccueil = new JPanel();
@@ -435,8 +435,7 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 		JButton btnAccueil = new JButton("");
 		btnAccueil.addActionListener(this);
 		btnAccueil.setBackground(new Color(192, 192, 192));
-		btnAccueil.setIcon(
-				new ImageIcon(Fenetre_Accueil.class.getResource("/SAES3/src/icon/home_att-removebg-preview.png")));
+		btnAccueil.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/home_att-removebg-preview.png"))); //pour éviter l'erreur location is null
 		btnAccueil.setBounds(0, 53, 42, 31);
 		btnAccueil.setName("btnAccueil");
 		panelDuBtnAccueil.add(btnAccueil);
