@@ -9,24 +9,24 @@ import modele.ICC;
 import modele.dao.requetes.select.RequeteSelectICC;
 import modele.dao.requetes.select.RequeteSelectICCById;
 
-public class DaoICC extends DaoModele<ICC> implements Dao<ICC>{
+public class DaoICC extends DaoModele<ICC> implements Dao<ICC> {
 
 	@Override
 	public void create(ICC donnees) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void update(ICC donnees) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(ICC donnees) {
 		delete(donnees);
-		
+
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class DaoICC extends DaoModele<ICC> implements Dao<ICC>{
 	}
 
 	@Override
-	public List<ICC> findAll()throws SQLException  {
+	public List<ICC> findAll() throws SQLException {
 		return find(new RequeteSelectICC());
 	}
 
@@ -47,8 +47,7 @@ public class DaoICC extends DaoModele<ICC> implements Dao<ICC>{
 	protected ICC creerInstance(ResultSet curseur) throws SQLException {
 		ICC icc = null;
 		try {
-			icc = new ICC(curseur.getString("annee"), curseur.getString("trimestre"),
-					curseur.getDouble("indice"));
+			icc = new ICC(curseur.getString("annee"), curseur.getString("trimestre"), curseur.getDouble("indice"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
