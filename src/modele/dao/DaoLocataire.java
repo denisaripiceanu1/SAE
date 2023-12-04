@@ -50,7 +50,7 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 			// Convertir les dates en chaînes de caractères
 			java.sql.Date dateNaissance = curseur.getDate("date_naissance");
 			String dateNaissanceStr = dateNaissance.toString();
-			
+
 			locataire = new Locataire(curseur.getString("Id_Locataire"), curseur.getString("nom"),
 					curseur.getString("prenom"), curseur.getString("telephone"), curseur.getString("mail"),
 					dateNaissanceStr);

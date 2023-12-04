@@ -15,10 +15,9 @@ public class Facture {
 	private Bien bien;
 	private Entreprise entreprise;
 
-
 	public Facture(int idFacture, String numero, String dateEmission, String datePaiement, String modePaiement,
-			String numeroDevis, String designation, double accompteVerse,int imputableLocataire,
-			Immeuble immeuble, Bien bien, Entreprise entreprise) {
+			String numeroDevis, String designation, double accompteVerse, int imputableLocataire, Immeuble immeuble,
+			Bien bien, Entreprise entreprise) {
 		this.idFacture = idFacture;
 		this.numero = numero;
 		this.dateEmission = dateEmission;

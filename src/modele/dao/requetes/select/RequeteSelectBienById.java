@@ -9,19 +9,19 @@ import java.sql.SQLException;
 
 public class RequeteSelectBienById implements Requete<Bien> {
 
-    @Override
-    public String requete() {
-        return "SELECT * FROM Bien WHERE Id_Bien = ?";
-    }
+	@Override
+	public String requete() {
+		return "SELECT * FROM Bien WHERE Id_Bien = ?";
+	}
 
-    @Override
-    public void parametres(PreparedStatement prSt, String... id) throws SQLException {
-        prSt.setString(1, id[0]);
-    }
+	@Override
+	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
+		prSt.setString(1, id[0]);
+	}
 
-    @Override
-    public void parametres(PreparedStatement prSt, Bien data) throws SQLException {
-        prSt.setString(1, data.getIdBien());
-    }
+	@Override
+	public void parametres(PreparedStatement prSt, Bien data) throws SQLException {
+		prSt.setString(1, data.getIdBien());
+	}
 
 }

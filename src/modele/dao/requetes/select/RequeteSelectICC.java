@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import modele.ICC;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectICC implements Requete<ICC>{
+public class RequeteSelectICC implements Requete<ICC> {
 
 	@Override
 	public String requete() {
@@ -16,13 +16,13 @@ public class RequeteSelectICC implements Requete<ICC>{
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, ICC data) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
