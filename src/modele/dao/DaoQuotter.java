@@ -21,8 +21,7 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 
 	@Override
 	public void update(Quotter donnees) throws SQLException {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
