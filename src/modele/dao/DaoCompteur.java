@@ -34,12 +34,12 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 	protected Compteur creerInstance(ResultSet curseur) throws SQLException {
 		Compteur compteur = null;
 		try {
-	        // Récupérer l'identifiant du Bien
+			// Récupérer l'identifiant du Bien
 			String idBien = curseur.getString("Id_Bien");
 			DaoBien daoBien = new DaoBien();
 			Bien bien = daoBien.findById(idBien);
-			
-	        // Récupérer l'identifiant de l'immeuble
+
+			// Récupérer l'identifiant de l'immeuble
 			String idImmeuble = curseur.getString("Id_Immeuble");
 			DaoImmeuble daoImmeuble = new DaoImmeuble();
 			Immeuble immeuble = daoImmeuble.findById(idImmeuble);

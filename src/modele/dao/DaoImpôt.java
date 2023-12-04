@@ -13,23 +13,23 @@ public class DaoImpôt extends DaoModele<Impôt> implements Dao<Impôt> {
 	@Override
 	public void create(Impôt donnees) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void update(Impôt donnees) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(Impôt donnees) {
 		delete(donnees);
-		
+
 	}
 
 	@Override
-	public Impôt findById(String... id) throws SQLException{
+	public Impôt findById(String... id) throws SQLException {
 		List<Impôt> impots = find(new RequeteSelectImpôtById(), id);
 		if (impots.isEmpty()) {
 			return null;
