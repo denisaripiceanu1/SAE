@@ -1,6 +1,7 @@
 package modele.dao;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -8,7 +9,6 @@ import modele.Assurance;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectAssurance;
 import modele.dao.requetes.select.RequeteSelectAssuranceById;
-import modele.dao.requetes.select.RequeteSelectEntreprise;
 
 public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance> {
 
@@ -24,7 +24,7 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 
 	@Override
 	public void delete(Assurance donnees) {
-		// TODO: Implémenter la suppression
+		delete(donnees);
 	}
 
 	@Override

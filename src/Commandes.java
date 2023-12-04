@@ -6,7 +6,7 @@ public class Commandes {
 //git commit -m "message nimporte"
 //git push
 //
-//	// pour recuperer les trucs des autres:
+////	// pour recuperer les trucs des autres:
 //git pull origin main
 
 }

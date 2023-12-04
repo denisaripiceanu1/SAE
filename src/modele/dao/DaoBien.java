@@ -11,7 +11,7 @@ import modele.dao.requetes.select.RequeteSelectBienById;
 
 public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 
-	//     private static Iterateur<Bien> iterateurBien;
+	// private static Iterateur<Bien> iterateurBien;
 
 	@Override
 	public void create(Bien donnees) {
@@ -19,56 +19,54 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 //		CallableStatement st = CictOracleDataSource.getConnexion().prepareCall(sp.appelSousProgramme());
 //		sp.parametres(st, data);
 //		st.execute();
-		
+
 	}
 
 	@Override
 	public void update(Bien donnees) {
-		//miseAJour(new RequeteUpdateBien(), data);
-		
+		// miseAJour(new RequeteUpdateBien(), data);
+
 	}
 
 	@Override
 	public void delete(Bien donnees) {
-        delete(donnees);
+		delete(donnees);
 	}
-	
+
 	@Override
 	protected Bien creerInstance(ResultSet curseur) throws SQLException {
 		Bien bien = null;
-        try {
-        	String idImmeuble = curseur.getString("Id_Immeuble");
-	        DaoImmeuble daoImmeuble = new DaoImmeuble();
-	        Immeuble immeuble = daoImmeuble.findById(idImmeuble);
-	        
-            bien = new Bien(
-            		curseur.getString("Id_Bien"),
-            		curseur.getDouble("surface_habitable"),
-            		curseur.getInt("nb_pieces"),
-            		curseur.getInt("num_etage"),
-            		curseur.getString("date_acquisition"),
-            		immeuble
-            		
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return bien;
-	}
+		try {
+			// Convertir les dates en chaînes de caractères
+			java.sql.Date dateAcquisition = curseur.getDate("date_acquisition");
+			String dateAcquisitionStr = dateAcquisition.toString();
 
+			String idImmeuble = curseur.getString("Id_Immeuble");
+			DaoImmeuble daoImmeuble = new DaoImmeuble();
+			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
+
+			bien = new Bien(curseur.getString("Id_Bien"), curseur.getDouble("surface_habitable"),
+					curseur.getInt("nb_pieces"), curseur.getInt("num_etage"), dateAcquisitionStr, immeuble
+
+			);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bien;
+	}
 
 	@Override
 	public Bien findById(String... id) throws SQLException {
 		List<Bien> biens = find(new RequeteSelectBienById(), id);
-        if (biens.isEmpty()) {
-            return null;
-        }
-        return biens.get(0);
+		if (biens.isEmpty()) {
+			return null;
+		}
+		return biens.get(0);
 	}
 
 	@Override
-	public List<Bien> findAll() throws SQLException{
-		 return find(new RequeteSelectBien());
+	public List<Bien> findAll() throws SQLException {
+		return find(new RequeteSelectBien());
 	}
 //	@Override
 //	public Iterateur<Bien> findAllIterateur() throws SQLException {
@@ -81,5 +79,3 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 //        return DaoBien.iterateurBien;
 //    }
 }
-
-
