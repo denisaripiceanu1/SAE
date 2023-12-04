@@ -8,28 +8,28 @@ import modele.Quotite;
 import modele.dao.requetes.select.RequeteSelectQuotite;
 import modele.dao.requetes.select.RequeteSelectQuotiteById;
 
-public class DaoQuotite extends DaoModele<Quotite> implements Dao<Quotite>{
+public class DaoQuotite extends DaoModele<Quotite> implements Dao<Quotite> {
 
 	@Override
 	public void create(Quotite donnees) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void update(Quotite donnees) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(Quotite donnees) {
 		delete(donnees);
-		
+
 	}
 
 	@Override
-	public Quotite findById(String... id) throws SQLException{
+	public Quotite findById(String... id) throws SQLException {
 		List<Quotite> quotites = find(new RequeteSelectQuotiteById(), id);
 		if (quotites.isEmpty()) {
 			return null;
@@ -38,7 +38,7 @@ public class DaoQuotite extends DaoModele<Quotite> implements Dao<Quotite>{
 	}
 
 	@Override
-	public List<Quotite> findAll() throws SQLException{
+	public List<Quotite> findAll() throws SQLException {
 		return find(new RequeteSelectQuotite());
 	}
 
@@ -52,5 +52,5 @@ public class DaoQuotite extends DaoModele<Quotite> implements Dao<Quotite>{
 		}
 		return quotite;
 	}
-    
+
 }

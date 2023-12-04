@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import modele.Entreprise;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectEntrepriseById implements Requete<Entreprise>{
+public class RequeteSelectEntrepriseById implements Requete<Entreprise> {
 
 	@Override
 	public String requete() {
@@ -16,13 +16,13 @@ public class RequeteSelectEntrepriseById implements Requete<Entreprise>{
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
 		prSt.setString(1, id[0]);
-		
+
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, Entreprise data) throws SQLException {
 		prSt.setString(1, data.getSiret());
-		
+
 	}
 
 }

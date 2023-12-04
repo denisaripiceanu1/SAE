@@ -1,11 +1,11 @@
 package modele;
 
 public class Diagnostic {
-    private int idDiagnostic;
-    private String dateValidite;
-    private String typeDiagnostic;
-    private Bien bien;
-    
+	private int idDiagnostic;
+	private String dateValidite;
+	private String typeDiagnostic;
+	private Bien bien;
+
 	public Diagnostic(int idDiagnostic, String dateValidite, String typeDiagnostic, Bien bien) {
 		this.idDiagnostic = idDiagnostic;
 		this.dateValidite = dateValidite;
