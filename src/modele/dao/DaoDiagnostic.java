@@ -1,12 +1,14 @@
 package modele.dao;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
 import modele.Bien;
-import modele.Charge;
 import modele.Diagnostic;
+import modele.dao.requetes.select.RequeteSelectDiagnostic;
+import modele.dao.requetes.select.RequeteSelectDiagnosticById;
 
 public class DaoDiagnostic extends DaoModele<Diagnostic> implements Dao<Diagnostic> {
 
@@ -37,7 +39,11 @@ public class DaoDiagnostic extends DaoModele<Diagnostic> implements Dao<Diagnost
 			DaoBien daoBien = new DaoBien();
 			Bien bien = daoBien.findById(idBien);
 
-			diagnostic = new Diagnostic(curseur.getInt("Id_Diagnostic"), curseur.getString("date_validite"),
+			// Convertir les dates en chaînes de caractères
+			java.sql.Date dateValidite = curseur.getDate("date_validite");
+			String dateValiditeStr = dateValidite.toString();
+
+			diagnostic = new Diagnostic(curseur.getInt("Id_Diagnostic"), dateValiditeStr,
 					curseur.getString("type_diagnostic"), bien);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,15 +52,18 @@ public class DaoDiagnostic extends DaoModele<Diagnostic> implements Dao<Diagnost
 	}
 
 	@Override
-	public Diagnostic findById(String... id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Diagnostic findById(String... id) throws SQLException {
+		List<Diagnostic> diagnostic = find(new RequeteSelectDiagnosticById(), id);
+		if (diagnostic.isEmpty()) {
+			return null;
+		}
+		return diagnostic.get(0);
 	}
 
 	@Override
-	public List<Diagnostic> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Diagnostic> findAll() throws SQLException {
+		return find(new RequeteSelectDiagnostic());
+
 	}
 
 }

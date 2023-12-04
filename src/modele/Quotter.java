@@ -7,7 +7,6 @@ public class Quotter {
 	private double pourcentage;
 	
 	public Quotter(Bien bien, Quotite typeQuotite, double pourcentage) {
-		super();
 		this.bien = bien;
 		this.typeQuotite = typeQuotite;
 		this.pourcentage = pourcentage;

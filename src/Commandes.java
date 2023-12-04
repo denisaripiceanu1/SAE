@@ -7,6 +7,6 @@ public class Commandes {
 	// - git push
 
 	// pour recuperer les trucs des autres:
-	// - git pull origin main
+//git pull origin main
 
 }

@@ -5,17 +5,35 @@ public class Entreprise {
 	private String siret;
 	private String nom;
 	private String adresse;
+	private String cp;
+	private String ville;
 	private String mail;
 	private String telephone;
 	private String iban;
 
-	public Entreprise(String siret, String nom, String adresse, String mail, String telephone, String iban) {
+	public Entreprise(String siret, String nom, String adresse, String cp, String ville, String mail, String telephone, String iban) {
 		this.siret = siret;
 		this.nom = nom;
 		this.adresse = adresse;
 		this.mail = mail;
 		this.telephone = telephone;
 		this.iban = iban;
+	}
+
+	public String getCp() {
+		return cp;
+	}
+
+	public void setCp(String cp) {
+		this.cp = cp;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
 	}
 
 	public String getSiret() {

@@ -1,10 +1,10 @@
 package modele.dao;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
-import modele.Assurance;
 import modele.Échéance;
 import modele.dao.requetes.select.RequeteSelectEcheance;
 import modele.dao.requetes.select.RequeteSelectEcheanceById;
@@ -33,13 +33,9 @@ public class DaoÉchéance extends DaoModele<Échéance> implements Dao<Échéan
 	protected Échéance creerInstance(ResultSet curseur) throws SQLException {
 		Échéance echeance = null;
 		try {
-			// Récupérer l'identifiant de l'Assurance
-			String idAssurance = curseur.getString("numero_police");
-			DaoAssurance daoAssurance = new DaoAssurance();
-			Assurance assurance = daoAssurance.findById(idAssurance);
 
 			echeance = new Échéance(curseur.getString("numero_police"), curseur.getString("dateEcheance"),
-					curseur.getDouble("montantEcheance"), assurance);
+					curseur.getDouble("montantEcheance"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,11 +1,13 @@
 package modele.dao;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
 import modele.Assurance;
 import modele.Immeuble;
+import modele.dao.requetes.select.RequeteSelectAssurance;
 import modele.dao.requetes.select.RequeteSelectAssuranceById;
 
 public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance> {
@@ -22,7 +24,7 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 
 	@Override
 	public void delete(Assurance donnees) {
-		// TODO: Implémenter la suppression
+		delete(donnees);
 	}
 
 	@Override
@@ -46,8 +48,7 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 
 	@Override
 	public List<Assurance> findAll() throws SQLException {
-		// TODO: Implémenter la recherche de toutes les assurances
-		return null;
+		return find(new RequeteSelectAssurance());
 	}
 
 	@Override
