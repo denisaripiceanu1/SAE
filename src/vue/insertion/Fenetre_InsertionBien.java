@@ -16,7 +16,11 @@ import javax.swing.border.LineBorder;
 public class Fenetre_InsertionBien extends JInternalFrame {
 	private JTextField textField_IdImmeuble;
 	private JTextField textField_adresse;
-	private JTextField textField;
+	private JTextField textField_codePostal;
+	private JTextField textField_ville;
+	private JTextField textField_periodeDeConstruction;
+	private JTextField textField_nbLogement;
+	private JTextField textField_dateAcquisition;
 
 	/**
 	 * Launch the application.
@@ -72,14 +76,38 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		textField_adresse = new JTextField();
 		textField_adresse.setColumns(10);
 		textField_adresse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Adresse", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_adresse.setBounds(72, 150, 190, 40);
+		textField_adresse.setBounds(72, 147, 190, 40);
 		panel.add(textField_adresse);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Adresse", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField.setBounds(72, 200, 190, 40);
-		panel.add(textField);
+		textField_codePostal = new JTextField();
+		textField_codePostal.setColumns(10);
+		textField_codePostal.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Code Postal", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_codePostal.setBounds(72, 197, 190, 40);
+		panel.add(textField_codePostal);
+		
+		textField_ville = new JTextField();
+		textField_ville.setColumns(10);
+		textField_ville.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Ville", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_ville.setBounds(72, 245, 190, 40);
+		panel.add(textField_ville);
+		
+		textField_periodeDeConstruction = new JTextField();
+		textField_periodeDeConstruction.setColumns(10);
+		textField_periodeDeConstruction.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "P\u00E9riode de construction", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_periodeDeConstruction.setBounds(72, 293, 190, 40);
+		panel.add(textField_periodeDeConstruction);
+		
+		textField_nbLogement = new JTextField();
+		textField_nbLogement.setColumns(10);
+		textField_nbLogement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Nombre de logements", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_nbLogement.setBounds(72, 340, 190, 40);
+		panel.add(textField_nbLogement);
+		
+		textField_dateAcquisition = new JTextField();
+		textField_dateAcquisition.setColumns(10);
+		textField_dateAcquisition.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date d'acquisition", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_dateAcquisition.setBounds(72, 388, 190, 40);
+		panel.add(textField_dateAcquisition);
 
 	}
 }
