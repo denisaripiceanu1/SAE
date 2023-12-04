@@ -522,6 +522,10 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
 
 		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png"))); //pour éviter l'erreur location is null faire de façon graphique
+		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png")));
+
+
+		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png"))); //pour éviter l'erreur location is null faire de façon graphique
 
 		bandeAccueil.add(logo);
 
@@ -534,6 +538,10 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 		btnAccueil.setBorder(null);
 		btnAccueil.addActionListener(this);
 		btnAccueil.setBackground(new Color(192, 192, 192));
+
+		btnAccueil.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/home_att-removebg-preview.png"))); //pour éviter l'erreur location is null
+		btnAccueil.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/home_att-removebg-preview.png")));
+
 
 		btnAccueil.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/home_att-removebg-preview.png"))); //pour éviter l'erreur location is null
 
