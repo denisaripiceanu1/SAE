@@ -1,13 +1,12 @@
 package modele;
 
 public class Releve {
-	
+
 	private Compteur compteur;
 	private String date_releve;
 	private double indexComp;
-	
+
 	public Releve(Compteur compteur, String date_releve, double indexComp) {
-		super();
 		this.compteur = compteur;
 		this.date_releve = date_releve;
 		this.indexComp = indexComp;
@@ -36,7 +35,5 @@ public class Releve {
 	public void setIndexComp(double indexComp) {
 		this.indexComp = indexComp;
 	}
-	
-	
-	
+
 }

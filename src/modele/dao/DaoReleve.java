@@ -1,12 +1,11 @@
 package modele.dao;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
-import modele.Bien;
 import modele.Compteur;
-import modele.Releve;
 import modele.Releve;
 import modele.dao.requetes.select.RequeteSelectReleve;
 import modele.dao.requetes.select.RequeteSelectReleveById;
@@ -37,7 +36,6 @@ public class DaoReleve extends DaoModele<Releve> implements Dao<Releve> {
 			String idCompteur = curseur.getString("Id_Compteur");
 			DaoCompteur daoCompteur = new DaoCompteur();
 			Compteur compteur = daoCompteur.findById(idCompteur);
-
 			
 			releve = new Releve(compteur,curseur.getString("date_relevé"),curseur.getDouble("indexComp"));
 		} catch (Exception e) {

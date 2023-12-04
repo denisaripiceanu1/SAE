@@ -1,13 +1,11 @@
 package modele.dao;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
-import modele.Entreprise;
 import modele.ICC;
-import modele.dao.requetes.select.RequeteSelectEntreprise;
-import modele.dao.requetes.select.RequeteSelectEntrepriseById;
 import modele.dao.requetes.select.RequeteSelectICC;
 import modele.dao.requetes.select.RequeteSelectICCById;
 

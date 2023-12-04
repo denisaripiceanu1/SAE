@@ -1,28 +1,30 @@
 package modele;
 
 public class Compteur {
-    private String idCompteur;
-    private String typeComp;
-    private Bien bien;
-    private Immeuble immeuble;
-    
+	private String idCompteur;
+	private String typeComp;
+	private Bien bien;
+	private Immeuble immeuble;
+
 	public Compteur(String idCompteur, String typeComp, Bien bien, Immeuble immeuble) {
-		super();
 		this.idCompteur = idCompteur;
 		this.typeComp = typeComp;
 		this.bien = bien;
 		this.immeuble = immeuble;
 	}
-	
+
 	public String getIdCompteur() {
 		return idCompteur;
 	}
+
 	public String getTypeComp() {
 		return typeComp;
 	}
+
 	public Bien getBien() {
 		return bien;
 	}
+
 	public Immeuble getImmeuble() {
 		return immeuble;
 	}
@@ -42,8 +44,5 @@ public class Compteur {
 	public void setImmeuble(Immeuble immeuble) {
 		this.immeuble = immeuble;
 	}
-
-    
-
 
 }

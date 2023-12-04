@@ -1,23 +1,23 @@
 package modele.dao.requetes.select;
 
 import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
 
-import modele.Quotter;
 import modele.Releve;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectReleveById  implements Requete<Releve>{
+public class RequeteSelectReleveById implements Requete<Releve> {
 
 	@Override
 	public String requete() {
-		// TODO Auto-generated method stub
 		return "SELECT * FROM Releve WHERE Id_Compteur = ? AND date_relevé = ?";
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
-		prSt.setString(0, id[0]);
+		prSt.setString(1, id[0]);
+		prSt.setString(2, id[1]);
 	}
 
 	@Override

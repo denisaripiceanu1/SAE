@@ -3,24 +3,27 @@ package modele.dao.requetes.select;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import modele.Impôt;
+import modele.Facture;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectImpôtById implements Requete<Impôt> {
+public class RequeteSelectFactureById implements Requete<Facture>{
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Impot WHERE Id_Impot = ?";
+        return "SELECT * FROM Facture WHERE Id_Facture = ?";
+
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
 		prSt.setString(1, id[0]);
+		
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Impôt data) throws SQLException {
-		prSt.setInt(1, data.getIdImpot());
+	public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
+		prSt.setInt(1, data.getIdFacture());
+		
 	}
 
 }

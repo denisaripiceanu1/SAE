@@ -3,7 +3,7 @@ package modele;
 public class Imposer {
 	private Bien bien;
 	private Impôt impot;
-	
+
 	public Imposer(Bien bien, Impôt impot) {
 		super();
 		this.bien = bien;
@@ -25,6 +25,5 @@ public class Imposer {
 	public void setImpot(Impôt impot) {
 		this.impot = impot;
 	}
-	
-	
+
 }

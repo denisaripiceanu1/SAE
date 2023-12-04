@@ -1,25 +1,28 @@
 package modele.dao.requetes.select;
 
 import java.sql.PreparedStatement;
-
 import java.sql.SQLException;
 
-import modele.Imposer;
+import modele.Facture;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectImposer implements Requete<Imposer> {
+public class RequeteSelectFacture implements Requete<Facture> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Imposer";
+		return "SELECT * FROM Facture";
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Imposer data) throws SQLException {
+	public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

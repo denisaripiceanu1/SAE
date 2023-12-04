@@ -1,22 +1,23 @@
 package modele.dao.requetes.select;
 
 import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
 
 import modele.Imposer;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectImposerById implements Requete<Imposer>{
+public class RequeteSelectImposerById implements Requete<Imposer> {
 
 	@Override
 	public String requete() {
-		// TODO Auto-generated method stub
 		return "SELECT * FROM Imposer WHERE Id_Bien = ? AND Id_Impot = ?";
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
-		prSt.setString(0, id[0]);
+        prSt.setString(1, id[0]);
+        prSt.setString(2, id[1]);
 	}
 
 	@Override
