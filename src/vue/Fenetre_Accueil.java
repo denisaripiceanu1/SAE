@@ -8,10 +8,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -19,10 +17,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import vue.insertion.Fenetre_InsertionAssurance;
+import vue.insertion.Fenetre_InsertionBien;
 
 public class Fenetre_Accueil extends JFrame implements ActionListener {
 
@@ -48,6 +51,13 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 	private JTable table_MesChargesLocatives;
 	private JTable table_MesAssurances;
 	private JTable table_SoldeDeToutCompte;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
 
 	/**
 	 * Launch the application.
@@ -170,14 +180,13 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 
 		JScrollPane scrollPane_MesLocations = new JScrollPane();
 		scrollPane_MesLocations.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesLocations.setBounds(55, 96, 643, 225);
+		scrollPane_MesLocations.setBounds(30, 95, 418, 309);
 		panel_MesLocations.add(scrollPane_MesLocations);
 
 		this.table_MesLocations = new JTable();
 		this.table_MesLocations.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesLocations.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null }, },
-				new String[] { "New column", "New column", "New column", "New column", "New column", "New column" }));
+		this.table_MesLocations.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
+				new String[] { "Locataire", "Bien", "Adresse", "Code Postal", "Ville" }));
 		this.table_MesLocations.setBounds(40, 53, 668, 130);
 		scrollPane_MesLocations.setViewportView(this.table_MesLocations);
 
@@ -212,21 +221,84 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 		separator.setBounds(258, 63, 190, 2);
 		panel_MesLocations.add(separator);
 
+		this.textField = new JTextField();
+		this.textField.setBackground(new Color(255, 255, 255));
+		this.textField.setEditable(false);
+		this.textField.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 2, true), "Loyer",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField.setBounds(510, 107, 152, 31);
+		panel_MesLocations.add(this.textField);
+		this.textField.setColumns(10);
+
+		this.textField_1 = new JTextField();
+		this.textField_1.setEditable(false);
+		this.textField_1.setColumns(10);
+		this.textField_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 2, true),
+				"Provision sur charges", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField_1.setBackground(Color.WHITE);
+		this.textField_1.setBounds(510, 353, 152, 31);
+		panel_MesLocations.add(this.textField_1);
+
+		this.textField_2 = new JTextField();
+		this.textField_2.setEditable(false);
+		this.textField_2.setColumns(10);
+		this.textField_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 2, true), "Caution",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField_2.setBackground(Color.WHITE);
+		this.textField_2.setBounds(510, 312, 152, 31);
+		panel_MesLocations.add(this.textField_2);
+
+		this.textField_3 = new JTextField();
+		this.textField_3.setEditable(false);
+		this.textField_3.setColumns(10);
+		this.textField_3.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 2, true), "Date",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField_3.setBackground(Color.WHITE);
+		this.textField_3.setBounds(510, 148, 152, 31);
+		panel_MesLocations.add(this.textField_3);
+
+		this.textField_4 = new JTextField();
+		this.textField_4.setEditable(false);
+		this.textField_4.setColumns(10);
+		this.textField_4.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 2, true), "Ech\u00E9ance",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField_4.setBackground(Color.WHITE);
+		this.textField_4.setBounds(510, 189, 152, 31);
+		panel_MesLocations.add(this.textField_4);
+
+		this.textField_5 = new JTextField();
+		this.textField_5.setEditable(false);
+		this.textField_5.setColumns(10);
+		this.textField_5.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 2, true), "Pay\u00E9",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField_5.setBackground(Color.WHITE);
+		this.textField_5.setBounds(510, 230, 152, 31);
+		panel_MesLocations.add(this.textField_5);
+
+		this.textField_6 = new JTextField();
+		this.textField_6.setEditable(false);
+		this.textField_6.setColumns(10);
+		this.textField_6.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 2, true), "Restant d\u00FB",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField_6.setBackground(Color.WHITE);
+		this.textField_6.setBounds(510, 271, 152, 31);
+		panel_MesLocations.add(this.textField_6);
+
 		// LAYERED ACCUEIL
 		// ////////////////////////////////////////////////////////////////
 
-		this.layeredPane_Accueil = new JLayeredPane();
-		this.layeredPane_Accueil.setBackground(new Color(255, 255, 255));
-		this.contentPane.add(this.layeredPane_Accueil, BorderLayout.CENTER);
-		this.layeredPane_Accueil.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel = new JPanel();
-		this.layeredPane_Accueil.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
-
-		JLabel lblNewLabel_1 = new JLabel("Accueil");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel_1, BorderLayout.CENTER);
+//		this.layeredPane_Accueil = new JLayeredPane();
+//		this.layeredPane_Accueil.setBackground(new Color(255, 255, 255));
+//		this.contentPane.add(this.layeredPane_Accueil, BorderLayout.CENTER);
+//		this.layeredPane_Accueil.setLayout(new BorderLayout(0, 0));
+//
+//		JPanel panel = new JPanel();
+//		this.layeredPane_Accueil.add(panel, BorderLayout.CENTER);
+//		panel.setLayout(new BorderLayout(0, 0));
+//
+//		JLabel lblNewLabel_1 = new JLabel("Accueil");
+//		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+//		panel.add(lblNewLabel_1, BorderLayout.CENTER);
 
 		// LAYERED MES BIENS
 		// ////////////////////////////////////////////////////////////////
@@ -283,13 +355,13 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 		JScrollPane scrollPane_MesBiens_Logements = new JScrollPane();
 		scrollPane_MesBiens_Logements.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPane_MesBiens_Logements.setBackground(Color.LIGHT_GRAY);
-		scrollPane_MesBiens_Logements.setBounds(40, 266, 420, 106);
+		scrollPane_MesBiens_Logements.setBounds(40, 266, 454, 106);
 		panel_biens.add(scrollPane_MesBiens_Logements);
 
 		this.table_MesBiens_Logements = new JTable();
-		this.table_MesBiens_Logements
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
-						new String[] { "ID", "Surface", "Nombre de Pi\u00E8ces", "Etage", "Date d'aquisition" }));
+		this.table_MesBiens_Logements.setModel(
+				new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, }, new String[] { "ID",
+						"Surface", "Nombre de Pi\u00E8ces", "Etage", "Date d'aquisition", "Occup\u00E9" }));
 		this.table_MesBiens_Logements.setBounds(40, 266, 438, 106);
 		scrollPane_MesBiens_Logements.setViewportView(this.table_MesBiens_Logements);
 
@@ -323,192 +395,192 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 		// LAYERED MES
 		// TRAVAUX////////////////////////////////////////////////////////////////
 
-		this.layeredPane_MesTravaux = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_MesTravaux, BorderLayout.CENTER);
-		this.layeredPane_MesTravaux.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_MesTravaux = new JPanel();
-		panel_MesTravaux.setBackground(Color.WHITE);
-		this.layeredPane_MesTravaux.add(panel_MesTravaux);
-		panel_MesTravaux.setLayout(null);
-
-		JLabel lbl_MesTravaux = new JLabel("Mes Travaux");
-		lbl_MesTravaux.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_MesTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_MesTravaux.setBounds(244, 22, 216, 43);
-		panel_MesTravaux.add(lbl_MesTravaux);
-
-		JScrollPane scrollPane_MesTravaux = new JScrollPane();
-		scrollPane_MesTravaux.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesTravaux.setBounds(55, 96, 643, 225);
-		panel_MesTravaux.add(scrollPane_MesTravaux);
-
-		this.table_MesTravaux = new JTable();
-		this.table_MesTravaux.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesTravaux.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
-				new String[] { "New column", "New column", "New column", "New column", "New column", "New column" }));
-		this.table_MesTravaux.setBounds(40, 53, 668, 130);
-		scrollPane_MesTravaux.setViewportView(this.table_MesTravaux);
-
-		JButton btn_MesTravaux_Charger = new JButton("Charger");
-		btn_MesTravaux_Charger.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_MesTravaux_Charger.setBounds(245, 449, 94, 31);
-		panel_MesTravaux.add(btn_MesTravaux_Charger);
-
-		JButton btn_MesTravaux_Inserer = new JButton("Insérer");
-		btn_MesTravaux_Inserer.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_MesTravaux_Inserer.setBounds(93, 449, 94, 31);
-		panel_MesTravaux.add(btn_MesTravaux_Inserer);
-
-		JButton btn_MesTravaux_Supprimer = new JButton("Supprimer");
-		btn_MesTravaux_Supprimer.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_MesTravaux_Supprimer.setBounds(396, 449, 94, 31);
-		panel_MesTravaux.add(btn_MesTravaux_Supprimer);
-
-		JButton btn_MesTravaux_Modifier = new JButton("Modifier");
-		btn_MesTravaux_Modifier.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_MesTravaux_Modifier.setBounds(551, 449, 99, 31);
-		panel_MesTravaux.add(btn_MesTravaux_Modifier);
-
-		JSeparator separator_MesTravaux = new JSeparator();
-		separator_MesTravaux.setForeground(new Color(0, 102, 204));
-		separator_MesTravaux.setBounds(258, 63, 190, 2);
-		panel_MesTravaux.add(separator_MesTravaux);
+//		this.layeredPane_MesTravaux = new JLayeredPane();
+//		this.contentPane.add(this.layeredPane_MesTravaux, BorderLayout.CENTER);
+//		this.layeredPane_MesTravaux.setLayout(new BorderLayout(0, 0));
+//
+//		JPanel panel_MesTravaux = new JPanel();
+//		panel_MesTravaux.setBackground(Color.WHITE);
+//		this.layeredPane_MesTravaux.add(panel_MesTravaux);
+//		panel_MesTravaux.setLayout(null);
+//
+//		JLabel lbl_MesTravaux = new JLabel("Mes Travaux");
+//		lbl_MesTravaux.setHorizontalAlignment(SwingConstants.CENTER);
+//		lbl_MesTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		lbl_MesTravaux.setBounds(244, 22, 216, 43);
+//		panel_MesTravaux.add(lbl_MesTravaux);
+//
+//		JScrollPane scrollPane_MesTravaux = new JScrollPane();
+//		scrollPane_MesTravaux.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+//		scrollPane_MesTravaux.setBounds(55, 96, 643, 225);
+//		panel_MesTravaux.add(scrollPane_MesTravaux);
+//
+//		this.table_MesTravaux = new JTable();
+//		this.table_MesTravaux.setSelectionBackground(new Color(0, 102, 204));
+//		this.table_MesTravaux.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
+//				new String[] { "New column", "New column", "New column", "New column", "New column", "New column" }));
+//		this.table_MesTravaux.setBounds(40, 53, 668, 130);
+//		scrollPane_MesTravaux.setViewportView(this.table_MesTravaux);
+//
+//		JButton btn_MesTravaux_Charger = new JButton("Charger");
+//		btn_MesTravaux_Charger.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//		btn_MesTravaux_Charger.setBounds(245, 449, 94, 31);
+//		panel_MesTravaux.add(btn_MesTravaux_Charger);
+//
+//		JButton btn_MesTravaux_Inserer = new JButton("Insérer");
+//		btn_MesTravaux_Inserer.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//		btn_MesTravaux_Inserer.setBounds(93, 449, 94, 31);
+//		panel_MesTravaux.add(btn_MesTravaux_Inserer);
+//
+//		JButton btn_MesTravaux_Supprimer = new JButton("Supprimer");
+//		btn_MesTravaux_Supprimer.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//		btn_MesTravaux_Supprimer.setBounds(396, 449, 94, 31);
+//		panel_MesTravaux.add(btn_MesTravaux_Supprimer);
+//
+//		JButton btn_MesTravaux_Modifier = new JButton("Modifier");
+//		btn_MesTravaux_Modifier.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//		btn_MesTravaux_Modifier.setBounds(551, 449, 99, 31);
+//		panel_MesTravaux.add(btn_MesTravaux_Modifier);
+//
+//		JSeparator separator_MesTravaux = new JSeparator();
+//		separator_MesTravaux.setForeground(new Color(0, 102, 204));
+//		separator_MesTravaux.setBounds(258, 63, 190, 2);
+//		panel_MesTravaux.add(separator_MesTravaux);
 
 		// LAYERED MES CHARGES LOCATIVES
 		// ////////////////////////////////////////////////////////////////
 
-		this.layeredPane_MesChargesLocatives = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_MesChargesLocatives, BorderLayout.CENTER);
-		this.layeredPane_MesChargesLocatives.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_chargesLocatives = new JPanel();
-		panel_chargesLocatives.setBackground(Color.WHITE);
-		this.layeredPane_MesChargesLocatives.add(panel_chargesLocatives);
-		panel_chargesLocatives.setLayout(null);
-
-		JScrollPane scrollPane_MesChargesLocatives = new JScrollPane();
-		scrollPane_MesChargesLocatives.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesChargesLocatives.setBounds(55, 96, 643, 225);
-		panel_chargesLocatives.add(scrollPane_MesChargesLocatives);
-
-		this.table_MesChargesLocatives = new JTable();
-		this.table_MesChargesLocatives.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesChargesLocatives.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null }, },
-				new String[] { "New column", "New column", "New column", "New column", "New column", "New column" }));
-		this.table_MesChargesLocatives.setBounds(40, 53, 668, 130);
-		scrollPane_MesChargesLocatives.setViewportView(this.table_MesChargesLocatives);
-
-		JButton btn_MesChargesLocatives_Charger = new JButton("Charger");
-		btn_MesChargesLocatives_Charger.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_MesChargesLocatives_Charger.setBounds(245, 449, 94, 31);
-		panel_chargesLocatives.add(btn_MesChargesLocatives_Charger);
-
-		JButton btn_MesChargesLocatives_Inserer = new JButton("Insérer");
-		btn_MesChargesLocatives_Inserer.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_MesChargesLocatives_Inserer.setBounds(93, 449, 94, 31);
-		panel_chargesLocatives.add(btn_MesChargesLocatives_Inserer);
-
-		JButton btn_MesChargesLocatives_Supprimer = new JButton("Supprimer");
-		btn_MesChargesLocatives_Supprimer.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_MesChargesLocatives_Supprimer.setBounds(396, 449, 94, 31);
-		panel_chargesLocatives.add(btn_MesChargesLocatives_Supprimer);
-
-		JButton btn_MesChargesLocatives_Modifier = new JButton("Modifier");
-		btn_MesChargesLocatives_Modifier.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_MesChargesLocatives_Modifier.setBounds(551, 449, 99, 31);
-		panel_chargesLocatives.add(btn_MesChargesLocatives_Modifier);
-
-		JLabel lbl_MesChargesLocatives = new JLabel("Mes Charges Locatives");
-		lbl_MesChargesLocatives.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_MesChargesLocatives.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_MesChargesLocatives.setBounds(244, 22, 216, 43);
-		panel_chargesLocatives.add(lbl_MesChargesLocatives);
-
-		JSeparator separator_mesChargesLocatives = new JSeparator();
-		separator_mesChargesLocatives.setForeground(new Color(0, 102, 204));
-		separator_mesChargesLocatives.setBounds(258, 63, 190, 2);
-		panel_chargesLocatives.add(separator_mesChargesLocatives);
+//		this.layeredPane_MesChargesLocatives = new JLayeredPane();
+//		this.contentPane.add(this.layeredPane_MesChargesLocatives, BorderLayout.CENTER);
+//		this.layeredPane_MesChargesLocatives.setLayout(new BorderLayout(0, 0));
+//
+//		JPanel panel_chargesLocatives = new JPanel();
+//		panel_chargesLocatives.setBackground(Color.WHITE);
+//		this.layeredPane_MesChargesLocatives.add(panel_chargesLocatives);
+//		panel_chargesLocatives.setLayout(null);
+//
+//		JScrollPane scrollPane_MesChargesLocatives = new JScrollPane();
+//		scrollPane_MesChargesLocatives.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+//		scrollPane_MesChargesLocatives.setBounds(55, 96, 643, 225);
+//		panel_chargesLocatives.add(scrollPane_MesChargesLocatives);
+//
+//		this.table_MesChargesLocatives = new JTable();
+//		this.table_MesChargesLocatives.setSelectionBackground(new Color(0, 102, 204));
+//		this.table_MesChargesLocatives.setModel(new DefaultTableModel(
+//				new Object[][] { { null, null, null, null, null, null }, },
+//				new String[] { "New column", "New column", "New column", "New column", "New column", "New column" }));
+//		this.table_MesChargesLocatives.setBounds(40, 53, 668, 130);
+//		scrollPane_MesChargesLocatives.setViewportView(this.table_MesChargesLocatives);
+//
+//		JButton btn_MesChargesLocatives_Charger = new JButton("Charger");
+//		btn_MesChargesLocatives_Charger.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//		btn_MesChargesLocatives_Charger.setBounds(245, 449, 94, 31);
+//		panel_chargesLocatives.add(btn_MesChargesLocatives_Charger);
+//
+//		JButton btn_MesChargesLocatives_Inserer = new JButton("Insérer");
+//		btn_MesChargesLocatives_Inserer.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//		btn_MesChargesLocatives_Inserer.setBounds(93, 449, 94, 31);
+//		panel_chargesLocatives.add(btn_MesChargesLocatives_Inserer);
+//
+//		JButton btn_MesChargesLocatives_Supprimer = new JButton("Supprimer");
+//		btn_MesChargesLocatives_Supprimer.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//		btn_MesChargesLocatives_Supprimer.setBounds(396, 449, 94, 31);
+//		panel_chargesLocatives.add(btn_MesChargesLocatives_Supprimer);
+//
+//		JButton btn_MesChargesLocatives_Modifier = new JButton("Modifier");
+//		btn_MesChargesLocatives_Modifier.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//		btn_MesChargesLocatives_Modifier.setBounds(551, 449, 99, 31);
+//		panel_chargesLocatives.add(btn_MesChargesLocatives_Modifier);
+//
+//		JLabel lbl_MesChargesLocatives = new JLabel("Mes Charges Locatives");
+//		lbl_MesChargesLocatives.setHorizontalAlignment(SwingConstants.CENTER);
+//		lbl_MesChargesLocatives.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		lbl_MesChargesLocatives.setBounds(244, 22, 216, 43);
+//		panel_chargesLocatives.add(lbl_MesChargesLocatives);
+//
+//		JSeparator separator_mesChargesLocatives = new JSeparator();
+//		separator_mesChargesLocatives.setForeground(new Color(0, 102, 204));
+//		separator_mesChargesLocatives.setBounds(258, 63, 190, 2);
+//		panel_chargesLocatives.add(separator_mesChargesLocatives);
 
 		// LAYERED MES ASSURANCES
 		// ////////////////////////////////////////////////////////////////
 
-		this.layeredPane_MesAssurances = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_MesAssurances, BorderLayout.CENTER);
-		this.layeredPane_MesAssurances.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_MesAssurances = new JPanel();
-		panel_MesAssurances.setBackground(Color.WHITE);
-		this.layeredPane_MesAssurances.add(panel_MesAssurances);
-		panel_MesAssurances.setLayout(null);
-
-		JLabel lbl_MesAssurances = new JLabel("Mes Assurances");
-		lbl_MesAssurances.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_MesAssurances.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_MesAssurances.setBounds(244, 22, 216, 43);
-		panel_MesAssurances.add(lbl_MesAssurances);
-
-		JSeparator separator_mesAssurances = new JSeparator();
-		separator_mesAssurances.setForeground(new Color(0, 102, 204));
-		separator_mesAssurances.setBounds(258, 63, 190, 2);
-		panel_MesAssurances.add(separator_mesAssurances);
-
-		JScrollPane scrollPane_MesAssurances = new JScrollPane();
-		scrollPane_MesAssurances.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesAssurances.setBounds(55, 96, 643, 225);
-		panel_MesAssurances.add(scrollPane_MesAssurances);
-
-		this.table_MesAssurances = new JTable();
-		this.table_MesAssurances.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesAssurances.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null }, },
-				new String[] { "New column", "New column", "New column", "New column", "New column", "New column" }));
-		this.table_MesAssurances.setBounds(40, 53, 668, 130);
-		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);
-
-		JButton btn_MesAssurances_Inserer = new JButton("Insérer");
-		btn_MesAssurances_Inserer.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_MesAssurances_Inserer.setBounds(244, 449, 94, 31);
-		panel_MesAssurances.add(btn_MesAssurances_Inserer);
-
-		JButton btn_MesAssurances_Annuler = new JButton("Annuler");
-		btn_MesAssurances_Annuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_MesAssurances_Annuler.setBounds(396, 449, 94, 31);
-		panel_MesAssurances.add(btn_MesAssurances_Annuler);
-
-		JComboBox comboBox_MesAssurances = new JComboBox();
-		comboBox_MesAssurances.setModel(new DefaultComboBoxModel(new String[] { "ID de l'immeuble" }));
-		comboBox_MesAssurances.setBounds(55, 63, 130, 21);
-		panel_MesAssurances.add(comboBox_MesAssurances);
+//		this.layeredPane_MesAssurances = new JLayeredPane();
+//		this.contentPane.add(this.layeredPane_MesAssurances, BorderLayout.CENTER);
+//		this.layeredPane_MesAssurances.setLayout(new BorderLayout(0, 0));
+//
+//		JPanel panel_MesAssurances = new JPanel();
+//		panel_MesAssurances.setBackground(Color.WHITE);
+//		this.layeredPane_MesAssurances.add(panel_MesAssurances);
+//		panel_MesAssurances.setLayout(null);
+//
+//		JLabel lbl_MesAssurances = new JLabel("Mes Assurances");
+//		lbl_MesAssurances.setHorizontalAlignment(SwingConstants.CENTER);
+//		lbl_MesAssurances.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		lbl_MesAssurances.setBounds(244, 22, 216, 43);
+//		panel_MesAssurances.add(lbl_MesAssurances);
+//
+//		JSeparator separator_mesAssurances = new JSeparator();
+//		separator_mesAssurances.setForeground(new Color(0, 102, 204));
+//		separator_mesAssurances.setBounds(258, 63, 190, 2);
+//		panel_MesAssurances.add(separator_mesAssurances);
+//
+//		JScrollPane scrollPane_MesAssurances = new JScrollPane();
+//		scrollPane_MesAssurances.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+//		scrollPane_MesAssurances.setBounds(55, 96, 643, 225);
+//		panel_MesAssurances.add(scrollPane_MesAssurances);
+//
+//		this.table_MesAssurances = new JTable();
+//		this.table_MesAssurances.setSelectionBackground(new Color(0, 102, 204));
+//		this.table_MesAssurances.setModel(new DefaultTableModel(
+//				new Object[][] { { null, null, null, null, null, null }, },
+//				new String[] { "New column", "New column", "New column", "New column", "New column", "New column" }));
+//		this.table_MesAssurances.setBounds(40, 53, 668, 130);
+//		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);
+//
+//		JButton btn_MesAssurances_Inserer = new JButton("Insérer");
+//		btn_MesAssurances_Inserer.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//		btn_MesAssurances_Inserer.setBounds(244, 449, 94, 31);
+//		panel_MesAssurances.add(btn_MesAssurances_Inserer);
+//
+//		JButton btn_MesAssurances_Annuler = new JButton("Annuler");
+//		btn_MesAssurances_Annuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//		btn_MesAssurances_Annuler.setBounds(396, 449, 94, 31);
+//		panel_MesAssurances.add(btn_MesAssurances_Annuler);
+//
+//		JComboBox comboBox_MesAssurances = new JComboBox();
+//		comboBox_MesAssurances.setModel(new DefaultComboBoxModel(new String[] { "ID de l'immeuble" }));
+//		comboBox_MesAssurances.setBounds(55, 63, 130, 21);
+//		panel_MesAssurances.add(comboBox_MesAssurances);
 
 		// LAYERED REGULARISATION DES CHARGES
 		// ////////////////////////////////////////////////////////////////
 
-		this.layeredPane_RegularisationDesCharges = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_RegularisationDesCharges, BorderLayout.CENTER);
-		this.layeredPane_RegularisationDesCharges.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_RegularisationDesCharges = new JPanel();
-		panel_RegularisationDesCharges.setBackground(Color.WHITE);
-		this.layeredPane_RegularisationDesCharges.add(panel_RegularisationDesCharges);
-		panel_RegularisationDesCharges.setLayout(null);
-
-		JLabel lbl_RegularisationDesCharges = new JLabel("Régularisation des Charges");
-		lbl_RegularisationDesCharges.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_RegularisationDesCharges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_RegularisationDesCharges.setBounds(244, 22, 216, 43);
-		panel_RegularisationDesCharges.add(lbl_RegularisationDesCharges);
-
-		JSeparator separator_RegularisationDesChargess = new JSeparator();
-		separator_RegularisationDesChargess.setForeground(new Color(0, 102, 204));
-		separator_RegularisationDesChargess.setBounds(258, 63, 190, 2);
-		panel_RegularisationDesCharges.add(separator_RegularisationDesChargess);
-
-		JLabel aFAIRE = new JLabel("A FAIRE");
-		aFAIRE.setFont(new Font("Tahoma", Font.PLAIN, 44));
-		aFAIRE.setBounds(258, 189, 312, 139);
-		panel_RegularisationDesCharges.add(aFAIRE);
+//		this.layeredPane_RegularisationDesCharges = new JLayeredPane();
+//		this.contentPane.add(this.layeredPane_RegularisationDesCharges, BorderLayout.CENTER);
+//		this.layeredPane_RegularisationDesCharges.setLayout(new BorderLayout(0, 0));
+//
+//		JPanel panel_RegularisationDesCharges = new JPanel();
+//		panel_RegularisationDesCharges.setBackground(Color.WHITE);
+//		this.layeredPane_RegularisationDesCharges.add(panel_RegularisationDesCharges);
+//		panel_RegularisationDesCharges.setLayout(null);
+//
+//		JLabel lbl_RegularisationDesCharges = new JLabel("Régularisation des Charges");
+//		lbl_RegularisationDesCharges.setHorizontalAlignment(SwingConstants.CENTER);
+//		lbl_RegularisationDesCharges.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		lbl_RegularisationDesCharges.setBounds(244, 22, 216, 43);
+//		panel_RegularisationDesCharges.add(lbl_RegularisationDesCharges);
+//
+//		JSeparator separator_RegularisationDesChargess = new JSeparator();
+//		separator_RegularisationDesChargess.setForeground(new Color(0, 102, 204));
+//		separator_RegularisationDesChargess.setBounds(258, 63, 190, 2);
+//		panel_RegularisationDesCharges.add(separator_RegularisationDesChargess);
+//
+//		JLabel aFAIRE = new JLabel("A FAIRE");
+//		aFAIRE.setFont(new Font("Tahoma", Font.PLAIN, 44));
+//		aFAIRE.setBounds(258, 189, 312, 139);
+//		panel_RegularisationDesCharges.add(aFAIRE);
 
 		////// Bande accueil//////////////////////////////////////////////////
 
@@ -520,13 +592,7 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 
 		JLabel logo = new JLabel("");
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
-
-		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png"))); //pour éviter l'erreur location is null faire de façon graphique
 		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png")));
-
-
-		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png"))); //pour éviter l'erreur location is null faire de façon graphique
-
 		bandeAccueil.add(logo);
 
 		JPanel panelDuBtnAccueil = new JPanel();
@@ -538,99 +604,93 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 		btnAccueil.setBorder(null);
 		btnAccueil.addActionListener(this);
 		btnAccueil.setBackground(new Color(192, 192, 192));
-
-		btnAccueil.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/home_att-removebg-preview.png"))); //pour éviter l'erreur location is null
 		btnAccueil.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/home_att-removebg-preview.png")));
-
-
-		btnAccueil.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/home_att-removebg-preview.png"))); //pour éviter l'erreur location is null
-
 		btnAccueil.setBounds(0, 53, 42, 31);
 		btnAccueil.setName("btnAccueil");
 		panelDuBtnAccueil.add(btnAccueil);
 
 		// LAYERED SOLDE DE TOUT
 		// COMPTE////////////////////////////////////////////////////////////////
-
-		this.layeredPane_SoldeDeToutCompte = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_SoldeDeToutCompte, BorderLayout.CENTER);
-		this.layeredPane_SoldeDeToutCompte.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_SoldeDeToutCompte = new JPanel();
-		panel_SoldeDeToutCompte.setBackground(Color.WHITE);
-		this.layeredPane_SoldeDeToutCompte.add(panel_SoldeDeToutCompte);
-		panel_SoldeDeToutCompte.setLayout(null);
-
-		JLabel lbl_SoldeDeToutCompte = new JLabel("Mon Solde de Tout Compte");
-		lbl_SoldeDeToutCompte.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_SoldeDeToutCompte.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_SoldeDeToutCompte.setBounds(244, 22, 216, 43);
-		panel_SoldeDeToutCompte.add(lbl_SoldeDeToutCompte);
-
-		JSeparator separator_SoldeDeToutCompte = new JSeparator();
-		separator_SoldeDeToutCompte.setForeground(new Color(0, 102, 204));
-		separator_SoldeDeToutCompte.setBounds(258, 63, 190, 2);
-		panel_SoldeDeToutCompte.add(separator_SoldeDeToutCompte);
-
-		JScrollPane scrollPane_SoldeDeToutCompte = new JScrollPane();
-		scrollPane_SoldeDeToutCompte.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_SoldeDeToutCompte.setBounds(55, 131, 643, 225);
-		panel_SoldeDeToutCompte.add(scrollPane_SoldeDeToutCompte);
-
-		this.table_SoldeDeToutCompte = new JTable();
-		this.table_SoldeDeToutCompte.setSelectionBackground(new Color(0, 102, 204));
-		this.table_SoldeDeToutCompte
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
-						new String[] { "New column", "New column", "New column", "New column" }));
-		this.table_SoldeDeToutCompte.setBounds(40, 53, 668, 130);
-		scrollPane_SoldeDeToutCompte.setViewportView(this.table_SoldeDeToutCompte);
-
-		JButton btn_SoldeDeToutCompte_Inserer = new JButton("Générer le reçu");
-		btn_SoldeDeToutCompte_Inserer.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_SoldeDeToutCompte_Inserer.setBounds(201, 449, 137, 31);
-		panel_SoldeDeToutCompte.add(btn_SoldeDeToutCompte_Inserer);
-
-		JButton btn_SoldeDeToutCompte_Annuler = new JButton("Annuler");
-		btn_SoldeDeToutCompte_Annuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_SoldeDeToutCompte_Annuler.setBounds(396, 449, 94, 31);
-		panel_SoldeDeToutCompte.add(btn_SoldeDeToutCompte_Annuler);
-
-		JComboBox comboBox_SoldeDeToutCompte = new JComboBox();
-		comboBox_SoldeDeToutCompte.setModel(new DefaultComboBoxModel(new String[] { "Locataire" }));
-		comboBox_SoldeDeToutCompte.setBounds(55, 92, 118, 21);
-		panel_SoldeDeToutCompte.add(comboBox_SoldeDeToutCompte);
-
-		JLabel lbl_SoldeDeToutCompte_Locataires = new JLabel("Locataires");
-		lbl_SoldeDeToutCompte_Locataires.setBounds(56, 69, 82, 13);
-		panel_SoldeDeToutCompte.add(lbl_SoldeDeToutCompte_Locataires);
+//
+//		this.layeredPane_SoldeDeToutCompte = new JLayeredPane();
+//		this.contentPane.add(this.layeredPane_SoldeDeToutCompte, BorderLayout.CENTER);
+//		this.layeredPane_SoldeDeToutCompte.setLayout(new BorderLayout(0, 0));
+//
+//		JPanel panel_SoldeDeToutCompte = new JPanel();
+//		panel_SoldeDeToutCompte.setBackground(Color.WHITE);
+//		this.layeredPane_SoldeDeToutCompte.add(panel_SoldeDeToutCompte);
+//		panel_SoldeDeToutCompte.setLayout(null);
+//
+//		JLabel lbl_SoldeDeToutCompte = new JLabel("Mon Solde de Tout Compte");
+//		lbl_SoldeDeToutCompte.setHorizontalAlignment(SwingConstants.CENTER);
+//		lbl_SoldeDeToutCompte.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		lbl_SoldeDeToutCompte.setBounds(244, 22, 216, 43);
+//		panel_SoldeDeToutCompte.add(lbl_SoldeDeToutCompte);
+//
+//		JSeparator separator_SoldeDeToutCompte = new JSeparator();
+//		separator_SoldeDeToutCompte.setForeground(new Color(0, 102, 204));
+//		separator_SoldeDeToutCompte.setBounds(258, 63, 190, 2);
+//		panel_SoldeDeToutCompte.add(separator_SoldeDeToutCompte);
+//
+//		JScrollPane scrollPane_SoldeDeToutCompte = new JScrollPane();
+//		scrollPane_SoldeDeToutCompte.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+//		scrollPane_SoldeDeToutCompte.setBounds(55, 131, 643, 225);
+//		panel_SoldeDeToutCompte.add(scrollPane_SoldeDeToutCompte);
+//
+//		this.table_SoldeDeToutCompte = new JTable();
+//		this.table_SoldeDeToutCompte.setSelectionBackground(new Color(0, 102, 204));
+//		this.table_SoldeDeToutCompte
+//				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
+//						new String[] { "New column", "New column", "New column", "New column" }));
+//		this.table_SoldeDeToutCompte.setBounds(40, 53, 668, 130);
+//		scrollPane_SoldeDeToutCompte.setViewportView(this.table_SoldeDeToutCompte);
+//
+//		JButton btn_SoldeDeToutCompte_Inserer = new JButton("Générer le reçu");
+//		btn_SoldeDeToutCompte_Inserer.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//		btn_SoldeDeToutCompte_Inserer.setBounds(201, 449, 137, 31);
+//		panel_SoldeDeToutCompte.add(btn_SoldeDeToutCompte_Inserer);
+//
+//		JButton btn_SoldeDeToutCompte_Annuler = new JButton("Annuler");
+//		btn_SoldeDeToutCompte_Annuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//		btn_SoldeDeToutCompte_Annuler.setBounds(396, 449, 94, 31);
+//		panel_SoldeDeToutCompte.add(btn_SoldeDeToutCompte_Annuler);
+//
+//		JComboBox comboBox_SoldeDeToutCompte = new JComboBox();
+//		comboBox_SoldeDeToutCompte.setModel(new DefaultComboBoxModel(new String[] { "Locataire" }));
+//		comboBox_SoldeDeToutCompte.setBounds(55, 92, 118, 21);
+//		panel_SoldeDeToutCompte.add(comboBox_SoldeDeToutCompte);
+//
+//		JLabel lbl_SoldeDeToutCompte_Locataires = new JLabel("Locataires");
+//		lbl_SoldeDeToutCompte_Locataires.setBounds(56, 69, 82, 13);
+//		panel_SoldeDeToutCompte.add(lbl_SoldeDeToutCompte_Locataires);
 
 		// LAYERED
 		// DOCUMENTS////////////////////////////////////////////////////////////////
-
-		this.layeredPane_MesDocuments = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
-		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_MesDocuments = new JPanel();
-		panel_MesDocuments.setBackground(Color.WHITE);
-		this.layeredPane_MesDocuments.add(panel_MesDocuments);
-		panel_MesDocuments.setLayout(null);
-
-		JLabel lbl_MesDocuments = new JLabel("Mes Documents");
-		lbl_MesDocuments.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_MesDocuments.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_MesDocuments.setBounds(244, 22, 216, 43);
-		panel_MesDocuments.add(lbl_MesDocuments);
-
-		JSeparator separator_MesDocuments = new JSeparator();
-		separator_MesDocuments.setForeground(new Color(0, 102, 204));
-		separator_MesDocuments.setBounds(258, 63, 190, 2);
-		panel_MesDocuments.add(separator_MesDocuments);
-
-		JLabel aFAIRE2 = new JLabel("A FAIRE");
-		aFAIRE2.setFont(new Font("Tahoma", Font.PLAIN, 44));
-		aFAIRE2.setBounds(258, 189, 312, 139);
-		panel_MesDocuments.add(aFAIRE2);
+//
+//		this.layeredPane_MesDocuments = new JLayeredPane();
+//		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
+//		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
+//
+//		JPanel panel_MesDocuments = new JPanel();
+//		panel_MesDocuments.setBackground(Color.WHITE);
+//		this.layeredPane_MesDocuments.add(panel_MesDocuments);
+//		panel_MesDocuments.setLayout(null);
+//
+//		JLabel lbl_MesDocuments = new JLabel("Mes Documents");
+//		lbl_MesDocuments.setHorizontalAlignment(SwingConstants.CENTER);
+//		lbl_MesDocuments.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		lbl_MesDocuments.setBounds(244, 22, 216, 43);
+//		panel_MesDocuments.add(lbl_MesDocuments);
+//
+//		JSeparator separator_MesDocuments = new JSeparator();
+//		separator_MesDocuments.setForeground(new Color(0, 102, 204));
+//		separator_MesDocuments.setBounds(258, 63, 190, 2);
+//		panel_MesDocuments.add(separator_MesDocuments);
+//
+//		JLabel aFAIRE2 = new JLabel("A FAIRE");
+//		aFAIRE2.setFont(new Font("Tahoma", Font.PLAIN, 44));
+//		aFAIRE2.setBounds(258, 189, 312, 139);
+//		panel_MesDocuments.add(aFAIRE2);
 
 		// this.mettrePageParDef();
 	}
@@ -666,26 +726,33 @@ public class Fenetre_Accueil extends JFrame implements ActionListener {
 		case "btnMesDocuments":
 			this.rendreVisible(this.layeredPane_MesDocuments);
 			break;
-		case "Ajouter une location":
-			AjouterLogement logement = new AjouterLogement();
-			this.getLayeredPane().add(logement);
-			logement.setVisible(true);
-			logement.moveToFront();
+		// Inserer un bien
+		case "btnInserer":
+			Fenetre_InsertionBien insertion_bien = new Fenetre_InsertionBien();
+			this.getLayeredPane().add(insertion_bien);
+			insertion_bien.setVisible(true);
+			insertion_bien.moveToFront();
+			break;
+		case "btn_MesAssurances_Inserer":
+			Fenetre_InsertionAssurance insertion_assurance = new Fenetre_InsertionAssurance();
+			this.getLayeredPane().add(insertion_assurance);
+			insertion_assurance.setVisible(true);
+			insertion_assurance.moveToFront();
 			break;
 
 		}
 	}
 
 	public void rendreVisible(JLayeredPane visible) {
-		this.layeredPane_Accueil.setVisible(false);
+		// this.layeredPane_Accueil.setVisible(false);
 		this.layeredPane_MesBiens.setVisible(false);
-		this.layeredPane_MesTravaux.setVisible(false);
-		this.layeredPane_MesChargesLocatives.setVisible(false);
-		this.layeredPane_MesLocations.setVisible(false);
-		this.layeredPane_MesAssurances.setVisible(false);
-		this.layeredPane_RegularisationDesCharges.setVisible(false);
-		this.layeredPane_SoldeDeToutCompte.setVisible(false);
-		this.layeredPane_MesDocuments.setVisible(false);
+//		this.layeredPane_MesTravaux.setVisible(false);
+//		this.layeredPane_MesChargesLocatives.setVisible(false);
+//		this.layeredPane_MesLocations.setVisible(false);
+//		this.layeredPane_MesAssurances.setVisible(false);
+//		this.layeredPane_RegularisationDesCharges.setVisible(false);
+//		this.layeredPane_SoldeDeToutCompte.setVisible(false);
+//		this.layeredPane_MesDocuments.setVisible(false);
 
 		visible.setVisible(true);
 		this.contentPane.add(visible, BorderLayout.CENTER);
