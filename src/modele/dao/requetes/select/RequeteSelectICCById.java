@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import modele.ICC;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectICCById implements Requete<ICC>{
+public class RequeteSelectICCById implements Requete<ICC> {
 
 	@Override
 	public String requete() {
@@ -16,7 +16,8 @@ public class RequeteSelectICCById implements Requete<ICC>{
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
 		prSt.setString(1, id[0]);
-		
+		prSt.setString(2, id[1]);
+
 	}
 
 	@Override
@@ -26,5 +27,4 @@ public class RequeteSelectICCById implements Requete<ICC>{
 
 	}
 
-	
 }

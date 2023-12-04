@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import modele.Impôt;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectImpôtById implements Requete<Impôt>{
+public class RequeteSelectImpôtById implements Requete<Impôt> {
 
 	@Override
 	public String requete() {
@@ -15,14 +15,12 @@ public class RequeteSelectImpôtById implements Requete<Impôt>{
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
-		
-		
+		prSt.setString(1, id[0]);
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, Impôt data) throws SQLException {
-		
-		
+		prSt.setInt(1, data.getIdImpot());
 	}
 
 }

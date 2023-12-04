@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import modele.Quotter;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectQuotter implements Requete<Quotter>{
+public class RequeteSelectQuotter implements Requete<Quotter> {
 
 	@Override
 	public String requete() {
@@ -16,13 +16,13 @@ public class RequeteSelectQuotter implements Requete<Quotter>{
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, Quotter data) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

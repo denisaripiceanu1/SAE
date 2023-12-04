@@ -3,14 +3,14 @@ package modele.dao.requetes.select;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import modele.ICC;
+import modele.Louer;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectICC implements Requete<ICC> {
+public class RequeteSelectLouer implements Requete<Louer> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM ICC";
+		return "SELECT * FROM Louer";
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class RequeteSelectICC implements Requete<ICC> {
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, ICC data) throws SQLException {
+	public void parametres(PreparedStatement prSt, Louer data) throws SQLException {
 		// TODO Auto-generated method stub
 
 	}

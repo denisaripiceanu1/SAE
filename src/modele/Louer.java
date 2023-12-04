@@ -17,8 +17,8 @@ public class Louer {
 	private double montantReelPaye;
 
 	public Louer(Locataire locataire, Bien bien, String dateDebut, int nbMois, double loyerTTC, double cautionTTC,
-			String bail, String dateDepart, int loyerPaye, int colocation, String annee, String trimestre,
-			double montantReelPaye) {
+			String bail, String dateDepart, int loyerPaye, int colocation, double montantReelPaye, String annee,
+			String trimestre) {
 		this.locataire = locataire;
 		this.bien = bien;
 		this.dateDebut = dateDebut;

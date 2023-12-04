@@ -1,15 +1,13 @@
 package modele.dao;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
 import modele.Bien;
-import modele.Charge;
 import modele.Compteur;
 import modele.Immeuble;
-import modele.dao.requetes.select.RequeteSelectCharge;
-import modele.dao.requetes.select.RequeteSelectChargeById;
 import modele.dao.requetes.select.RequeteSelectCompteur;
 import modele.dao.requetes.select.RequeteSelectCompteurById;
 
@@ -31,21 +29,22 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 	public void delete(Compteur donnees) {
 		delete(donnees);
 	}
-	
+
 	@Override
 	protected Compteur creerInstance(ResultSet curseur) throws SQLException {
 		Compteur compteur = null;
 		try {
+			// Récupérer l'identifiant du Bien
 			String idBien = curseur.getString("Id_Bien");
 			DaoBien daoBien = new DaoBien();
 			Bien bien = daoBien.findById(idBien);
-			
+
+			// Récupérer l'identifiant de l'immeuble
 			String idImmeuble = curseur.getString("Id_Immeuble");
 			DaoImmeuble daoImmeuble = new DaoImmeuble();
 			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
-			
-			compteur = new Compteur(curseur.getString("id_compteur"), 
-					curseur.getString("typeComp"),bien,immeuble);
+
+			compteur = new Compteur(curseur.getString("id_compteur"), curseur.getString("typeComp"), bien, immeuble);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

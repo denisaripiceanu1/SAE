@@ -1,23 +1,22 @@
 package modele;
 
-import java.util.Date;
-
 public class Bien {
-    private String idBien;
-    private double surfaceHabitable;
-    private int nbPieces;
-    private int numEtage;
-    private String dateAcquisition;
-    private Immeuble immeuble;
+	private String idBien;
+	private double surfaceHabitable;
+	private int nbPieces;
+	private int numEtage;
+	private String dateAcquisition;
+	private Immeuble immeuble;
 
-    public Bien(String idBien, double surfaceHabitable, int nbPieces, int numEtage, String dateAcquisition, Immeuble immeuble) {
-        this.idBien = idBien;
-        this.surfaceHabitable = surfaceHabitable;
-        this.nbPieces = nbPieces;
-        this.numEtage = numEtage;
-        this.dateAcquisition = dateAcquisition;
-        this.immeuble = immeuble;
-    }
+	public Bien(String idBien, double surfaceHabitable, int nbPieces, int numEtage, String dateAcquisition,
+			Immeuble immeuble) {
+		this.idBien = idBien;
+		this.surfaceHabitable = surfaceHabitable;
+		this.nbPieces = nbPieces;
+		this.numEtage = numEtage;
+		this.dateAcquisition = dateAcquisition;
+		this.immeuble = immeuble;
+	}
 
 	public String getIdBien() {
 		return idBien;
@@ -66,7 +65,5 @@ public class Bien {
 	public void setImmeuble(Immeuble immeuble) {
 		this.immeuble = immeuble;
 	}
-    
-    
-}
 
+}

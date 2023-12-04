@@ -1,14 +1,14 @@
 package modele;
 
 public class Charge {
-	
-    private int idCharge;
-    private String nom;
-    private double montantReel;
-    private double montantPrevisionnel;
-    private int deductible;
-    private Bien idBien;
-    
+
+	private int idCharge;
+	private String nom;
+	private double montantReel;
+	private double montantPrevisionnel;
+	private int deductible;
+	private Bien idBien;
+
 	public Charge(int idCharge, String nom, double montantReel, double montantPrevisionnel, int deductible,
 			Bien idBien) {
 
@@ -67,4 +67,4 @@ public class Charge {
 	public void setIdBien(Bien idBien) {
 		this.idBien = idBien;
 	}
-}    
+}

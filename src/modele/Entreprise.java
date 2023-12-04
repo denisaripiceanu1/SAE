@@ -11,7 +11,8 @@ public class Entreprise {
 	private String telephone;
 	private String iban;
 
-	public Entreprise(String siret, String nom, String adresse, String cp, String ville, String mail, String telephone, String iban) {
+	public Entreprise(String siret, String nom, String adresse, String cp, String ville, String mail, String telephone,
+			String iban) {
 		this.siret = siret;
 		this.nom = nom;
 		this.adresse = adresse;

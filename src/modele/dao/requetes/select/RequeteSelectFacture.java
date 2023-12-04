@@ -3,14 +3,14 @@ package modele.dao.requetes.select;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import modele.ICC;
+import modele.Facture;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectICC implements Requete<ICC> {
+public class RequeteSelectFacture implements Requete<Facture> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM ICC";
+		return "SELECT * FROM Facture";
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class RequeteSelectICC implements Requete<ICC> {
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, ICC data) throws SQLException {
+	public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
 		// TODO Auto-generated method stub
 
 	}

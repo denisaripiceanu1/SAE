@@ -39,7 +39,7 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 	}
 
 	@Override
-	public List<Immeuble> findAll() throws SQLException{
+	public List<Immeuble> findAll() throws SQLException {
 		return find(new RequeteSelectImmeuble());
 	}
 
@@ -47,10 +47,13 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 	protected Immeuble creerInstance(ResultSet curseur) throws SQLException {
 		Immeuble immeuble = null;
 		try {
+			// Convertir les dates en chaînes de caractères
+			java.sql.Date dateAcquisition = curseur.getDate("date_acquisition");
+			String dateAcquisitionStr = dateAcquisition.toString();
 
 			immeuble = new Immeuble(curseur.getString("Id_Immeuble"), curseur.getString("adresse"),
 					curseur.getString("cp"), curseur.getString("ville"), curseur.getString("periode_construction"),
-					curseur.getInt("nb_logement"), curseur.getString("date_acquisition"));
+					curseur.getInt("nb_logement"), dateAcquisitionStr);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
