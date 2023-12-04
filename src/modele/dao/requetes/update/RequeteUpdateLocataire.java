@@ -21,7 +21,7 @@ public class RequeteUpdateLocataire implements Requete<Locataire>{
 		prSt.setString(3, data.getTelephone());
 		prSt.setString(4, data.getMail());
 		prSt.setString(5, data.getDateNaissance());
-		prSt.setString(6, data.getIdLocataire());
+		prSt.setString(6, data.getIdLocataire()); // clé priamire de Locataire
 	}
 
 	@Override
