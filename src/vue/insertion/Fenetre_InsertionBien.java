@@ -2,6 +2,7 @@ package vue.insertion;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -12,6 +13,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
 
 public class Fenetre_InsertionBien extends JInternalFrame {
 	private JTextField textField_IdImmeuble;
@@ -21,6 +24,10 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 	private JTextField textField_periodeDeConstruction;
 	private JTextField textField_nbLogement;
 	private JTextField textField_dateAcquisition;
+	private JTextField textField_IdCompteur;
+	private JTextField textField_IndexCompteur;
+	private JSeparator separator_Compteur;
+	private JButton btn_ajouterCompteur;
 
 	/**
 	 * Launch the application.
@@ -54,60 +61,80 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		
 		JSeparator separator_titreInsererBien = new JSeparator();
 		separator_titreInsererBien.setForeground(new Color(0, 102, 204));
-		separator_titreInsererBien.setBounds(72, 72, 190, 2);
+		separator_titreInsererBien.setBounds(271, 72, 190, 2);
 		panel.add(separator_titreInsererBien);
 		
 		JLabel lbl_InsererUnBien = new JLabel("Ajouter un Bien");
 		lbl_InsererUnBien.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUnBien.setBounds(105, 24, 117, 48);
+		lbl_InsererUnBien.setBounds(308, 26, 117, 48);
 		panel.add(lbl_InsererUnBien);
-		
-		JSeparator separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(369, 26, 100, 461);
-		panel.add(separator);
 		
 		textField_IdImmeuble = new JTextField();
 		textField_IdImmeuble.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Bien", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
-		textField_IdImmeuble.setBounds(72, 100, 190, 40);
+		textField_IdImmeuble.setBounds(110, 104, 190, 40);
 		panel.add(textField_IdImmeuble);
 		textField_IdImmeuble.setColumns(10);
 		
 		textField_adresse = new JTextField();
 		textField_adresse.setColumns(10);
 		textField_adresse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Adresse", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_adresse.setBounds(72, 147, 190, 40);
+		textField_adresse.setBounds(110, 168, 190, 40);
 		panel.add(textField_adresse);
 		
 		textField_codePostal = new JTextField();
 		textField_codePostal.setColumns(10);
 		textField_codePostal.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Code Postal", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_codePostal.setBounds(72, 197, 190, 40);
+		textField_codePostal.setBounds(427, 168, 190, 40);
 		panel.add(textField_codePostal);
 		
 		textField_ville = new JTextField();
 		textField_ville.setColumns(10);
 		textField_ville.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Ville", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_ville.setBounds(72, 245, 190, 40);
+		textField_ville.setBounds(110, 228, 190, 40);
 		panel.add(textField_ville);
 		
 		textField_periodeDeConstruction = new JTextField();
 		textField_periodeDeConstruction.setColumns(10);
 		textField_periodeDeConstruction.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "P\u00E9riode de construction", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_periodeDeConstruction.setBounds(72, 293, 190, 40);
+		textField_periodeDeConstruction.setBounds(427, 228, 190, 40);
 		panel.add(textField_periodeDeConstruction);
 		
 		textField_nbLogement = new JTextField();
 		textField_nbLogement.setColumns(10);
 		textField_nbLogement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Nombre de logements", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_nbLogement.setBounds(72, 340, 190, 40);
+		textField_nbLogement.setBounds(110, 294, 190, 40);
 		panel.add(textField_nbLogement);
 		
 		textField_dateAcquisition = new JTextField();
 		textField_dateAcquisition.setColumns(10);
 		textField_dateAcquisition.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date d'acquisition", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_dateAcquisition.setBounds(72, 388, 190, 40);
+		textField_dateAcquisition.setBounds(427, 294, 190, 40);
 		panel.add(textField_dateAcquisition);
+		
+		JComboBox comboBox_typeDeBien = new JComboBox();
+		comboBox_typeDeBien.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
+		comboBox_typeDeBien.setBounds(427, 104, 189, 39);
+		panel.add(comboBox_typeDeBien);
+		
+		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnAjouter.setBounds(246, 447, 94, 31);
+		panel.add(btnAjouter);
+		
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnAnnuler.setBounds(398, 447, 94, 31);
+		panel.add(btnAnnuler);
+		
+		separator_Compteur = new JSeparator();
+		separator_Compteur.setBounds(82, 354, 591, 2);
+		panel.add(separator_Compteur);
+		
+		btn_ajouterCompteur = new JButton("Ajouter un compteur");
+		btn_ajouterCompteur.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btn_ajouterCompteur.setBounds(246, 378, 246, 31);
+		panel.add(btn_ajouterCompteur);
+		
 
 	}
 }
