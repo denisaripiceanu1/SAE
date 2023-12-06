@@ -83,11 +83,15 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 		JButton btnAjouter = new JButton("Ajouter");
 		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAjouter.setBounds(246, 447, 94, 31);
+		btnAjouter.setForeground(Color.WHITE);
+		btnAjouter.setBackground(new Color(0, 102, 204));
 		panel.add(btnAjouter);
 		
 		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAnnuler.setBounds(398, 447, 94, 31);
+		btnAnnuler.setForeground(Color.WHITE);
+		btnAnnuler.setBackground(new Color(0, 102, 204));
 		panel.add(btnAnnuler);
 		
 

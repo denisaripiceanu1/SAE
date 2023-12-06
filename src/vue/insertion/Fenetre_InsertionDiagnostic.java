@@ -17,7 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 
-public class Fenetre_InsertionDiagnostic extends JFrame {
+public class Fenetre_InsertionDiagnostic extends JInternalFrame {
 	private JTextField textField_Date_Validite;
 	private JTextField textField_Id_Bien;
 

@@ -129,6 +129,8 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		panel.add(comboBox_typeDeBien);
 		
 		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.setForeground(Color.WHITE);
+		btnAjouter.setBackground(new Color(0, 102, 204));
 		btnAjouter.addActionListener(this.gestionInsertionBien);
 		
 		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -136,6 +138,8 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		panel.add(btnAjouter);
 		
 		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setForeground(Color.WHITE);
+		btnAnnuler.setBackground(new Color(0, 102, 204));
 		btnAnnuler.addActionListener(this.gestionInsertionBien);
 		
 		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -147,6 +151,8 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		panel.add(separator_Compteur);
 		
 		btn_ajouterCompteur = new JButton("Ajouter un compteur");
+		btn_ajouterCompteur.setForeground(Color.WHITE);
+		btn_ajouterCompteur.setBackground(new Color(0, 102, 204));
 		btn_ajouterCompteur.addActionListener(this.gestionInsertionBien);
 		
 		btn_ajouterCompteur.setFont(new Font("Tahoma", Font.PLAIN, 12));
