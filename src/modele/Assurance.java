@@ -5,12 +5,25 @@ public class Assurance {
 	private String numéroPolice;
 	private float montantInit;
 	private Immeuble immeuble;
+	private Entreprise entreprise;
 
-	public Assurance(String numéroPolice, float montantInit, Immeuble immeuble) {
+	public Assurance(String numéroPolice, float montantInit, Immeuble immeuble,Entreprise entreprise) {
 		this.numéroPolice = numéroPolice;
 		this.montantInit = montantInit;
 		this.immeuble = immeuble;
+		this.entreprise = entreprise;
 	}
+	
+
+	public Entreprise getEntreprise() {
+		return entreprise;
+	}
+
+
+	public void setEntreprise(Entreprise entreprise) {
+		this.entreprise = entreprise;
+	}
+
 
 	public String getNuméroPolice() {
 		return this.numéroPolice;
