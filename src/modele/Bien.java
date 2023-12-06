@@ -6,15 +6,17 @@ public class Bien {
 	private int nbPieces;
 	private int numEtage;
 	private String dateAcquisition;
+	private String type_bien;
 	private Immeuble immeuble;
 
 	public Bien(String idBien, double surfaceHabitable, int nbPieces, int numEtage, String dateAcquisition,
-			Immeuble immeuble) {
+			String type_bien,Immeuble immeuble) {
 		this.idBien = idBien;
 		this.surfaceHabitable = surfaceHabitable;
 		this.nbPieces = nbPieces;
 		this.numEtage = numEtage;
 		this.dateAcquisition = dateAcquisition;
+		this.type_bien = type_bien;
 		this.immeuble = immeuble;
 	}
 
@@ -56,6 +58,14 @@ public class Bien {
 
 	public void setDateAcquisition(String dateAcquisition) {
 		this.dateAcquisition = dateAcquisition;
+	}
+	
+	public String getType_bien() {
+		return type_bien;
+	}
+
+	public void setType_bien(String type_bien) {
+		this.type_bien = type_bien;
 	}
 
 	public Immeuble getImmeuble() {

@@ -73,7 +73,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 			String dateDepartStr = dateDepart.toString();
 
 			louer = new Louer(locataire, bien, dateDebutStr, curseur.getInt("nb_mois"), curseur.getDouble("loyer_TTC"),
-					curseur.getDouble("caution_TTC"), curseur.getString("bail"), dateDepartStr,
+					curseur.getDouble("provision_chargeMens_TTC"),curseur.getDouble("caution_TTC"), curseur.getString("bail"),curseur.getString("etat_lieux"), dateDepartStr,
 					curseur.getInt("loyer_paye"), curseur.getInt("colocation"), curseur.getDouble("montant_reel_paye"),
 					icc.getAnnee(), icc.getTrimestre());
 		} catch (Exception e) {

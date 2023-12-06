@@ -22,7 +22,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 
-public class Fenetre_InsertionTravaux extends JFrame implements ActionListener{
+public class Fenetre_InsertionTravaux extends JInternalFrame{
 	private JTextField textField_Numero;
 	private JTextField textField_date_emission;
 	private JTextField textField_date_paiement;
@@ -134,7 +134,8 @@ public class Fenetre_InsertionTravaux extends JFrame implements ActionListener{
 		panel.add(separator_Travaux);
 		
 		JComboBox comboBox_modePaiement = new JComboBox();
-		comboBox_modePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mode de Paiement", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		comboBox_modePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mode de Paiement", TitledBorder.LEADING, 
+				TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		comboBox_modePaiement.setBounds(427, 104, 189, 39);
 		panel.add(comboBox_modePaiement);
 		
