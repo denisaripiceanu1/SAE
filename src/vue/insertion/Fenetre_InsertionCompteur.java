@@ -13,6 +13,9 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import controleur.insertion.GestionInsertionCompteur;
+
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -22,27 +25,12 @@ import javax.swing.DefaultComboBoxModel;
 public class Fenetre_InsertionCompteur extends JInternalFrame {
 	private JTextField textField_IdCompteur;
 	private JTextField textField_IndiceCompteur;
+	private GestionInsertionCompteur gestionClic;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Fenetre_InsertionCompteur frame = new Fenetre_InsertionCompteur();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_InsertionCompteur() {
+		this.gestionClic = new GestionInsertionCompteur(this);
+		
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
@@ -85,6 +73,7 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 		btnAjouter.setBounds(246, 447, 94, 31);
 		btnAjouter.setForeground(Color.WHITE);
 		btnAjouter.setBackground(new Color(0, 102, 204));
+		btnAjouter.addActionListener(this.gestionClic);
 		panel.add(btnAjouter);
 		
 		JButton btnAnnuler = new JButton("Annuler");
@@ -92,6 +81,7 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 		btnAnnuler.setBounds(398, 447, 94, 31);
 		btnAnnuler.setForeground(Color.WHITE);
 		btnAnnuler.setBackground(new Color(0, 102, 204));
+		btnAnnuler.addActionListener(this.gestionClic);
 		panel.add(btnAnnuler);
 		
 
