@@ -20,7 +20,7 @@ import javax.swing.JRadioButton;
 import controleur.insertion.GestionInsertionBien;
 import controleur.insertion.GestionInsertionCharges;
 
-public class Fenetre_InsertionCharges extends JFrame {
+public class Fenetre_InsertionCharges extends JInternalFrame {
 	private JTextField textField_nomCharge;
 	private JTextField textField_montantPrevisionnel;
 	private GestionInsertionCharges gestionClic;
