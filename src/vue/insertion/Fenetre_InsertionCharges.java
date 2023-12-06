@@ -39,4 +39,4 @@ public class Fenetre_InsertionCharges extends JInternalFrame {
 
 	}
 
-}
+

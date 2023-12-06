@@ -20,8 +20,8 @@ public class RequeteUpdateBien implements Requete<Bien> {
 		prSt.setInt(2, data.getNbPieces());
 		prSt.setInt(3, data.getNumEtage());
 		prSt.setDate(4, Date.valueOf(data.getDateAcquisition()));
-		prSt.setString(5, data.getImmeuble().toString());
-		prSt.setString(6, data.getIdBien().toString()); // cle primaire
+		prSt.setString(5, data.getImmeuble().getImmeuble());
+		prSt.setString(6, data.getIdBien()); // cle primaire
 	}
 
 	@Override
