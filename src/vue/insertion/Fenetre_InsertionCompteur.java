@@ -54,30 +54,30 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 		
 		JSeparator separator_titreInsererCompteur = new JSeparator();
 		separator_titreInsererCompteur.setForeground(new Color(0, 102, 204));
-		separator_titreInsererCompteur.setBounds(271, 72, 190, 2);
+		separator_titreInsererCompteur.setBounds(270, 102, 190, 2);
 		panel.add(separator_titreInsererCompteur);
 		
 		JLabel lbl_InsererUnCompteur = new JLabel("Ajouter un Compteur");
 		lbl_InsererUnCompteur.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUnCompteur.setBounds(286, 26, 160, 48);
+		lbl_InsererUnCompteur.setBounds(285, 56, 160, 48);
 		panel.add(lbl_InsererUnCompteur);
 		
 		JComboBox comboBox_typeDeCompteur = new JComboBox();
 		comboBox_typeDeCompteur.setModel(new DefaultComboBoxModel(new String[] {"Eau", "Gaz", "Electricité"}));
 		comboBox_typeDeCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
-		comboBox_typeDeCompteur.setBounds(272, 108, 189, 39);
+		comboBox_typeDeCompteur.setBounds(270, 147, 189, 39);
 		panel.add(comboBox_typeDeCompteur);
 		
 		textField_IdCompteur = new JTextField();
 		textField_IdCompteur.setColumns(10);
 		textField_IdCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Compteur", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_IdCompteur.setBounds(271, 166, 190, 40);
+		textField_IdCompteur.setBounds(270, 217, 190, 40);
 		panel.add(textField_IdCompteur);
 		
 		textField_IndiceCompteur = new JTextField();
 		textField_IndiceCompteur.setColumns(10);
 		textField_IndiceCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Indice du Compteur", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_IndiceCompteur.setBounds(271, 227, 190, 40);
+		textField_IndiceCompteur.setBounds(270, 296, 190, 40);
 		panel.add(textField_IndiceCompteur);
 		
 		JButton btnAjouter = new JButton("Ajouter");

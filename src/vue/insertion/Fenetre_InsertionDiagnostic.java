@@ -19,7 +19,7 @@ import javax.swing.JButton;
 
 public class Fenetre_InsertionDiagnostic extends JInternalFrame {
 	private JTextField textField_Date_Validite;
-	private JTextField textField_Id_Bien;
+	private JTextField textField_Type;
 
 	/**
 	 * Launch the application.
@@ -53,30 +53,19 @@ public class Fenetre_InsertionDiagnostic extends JInternalFrame {
 		
 		JSeparator separator_titreInsererBien = new JSeparator();
 		separator_titreInsererBien.setForeground(new Color(0, 102, 204));
-		separator_titreInsererBien.setBounds(263, 71, 190, 2);
+		separator_titreInsererBien.setBounds(263, 99, 190, 2);
 		panel.add(separator_titreInsererBien);
 		
 		JLabel lbl_InsererUnDiagnostic = new JLabel("Ajouter un Diagnostic");
 		lbl_InsererUnDiagnostic.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUnDiagnostic.setBounds(275, 25, 163, 48);
+		lbl_InsererUnDiagnostic.setBounds(275, 53, 163, 48);
 		panel.add(lbl_InsererUnDiagnostic);
 		
 		textField_Date_Validite = new JTextField();
 		textField_Date_Validite.setColumns(10);
 		textField_Date_Validite.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date Validite", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Date_Validite.setBounds(263, 197, 190, 40);
+		textField_Date_Validite.setBounds(263, 232, 190, 40);
 		panel.add(textField_Date_Validite);
-		
-		textField_Id_Bien = new JTextField();
-		textField_Id_Bien.setColumns(10);
-		textField_Id_Bien.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Bien", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Id_Bien.setBounds(263, 247, 190, 40);
-		panel.add(textField_Id_Bien);
-		
-		JComboBox comboBox_typeDeDiagnostic = new JComboBox();
-		comboBox_typeDeDiagnostic.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
-		comboBox_typeDeDiagnostic.setBounds(264, 148, 189, 39);
-		panel.add(comboBox_typeDeDiagnostic);
 		
 		JButton btnAjouter = new JButton("Ajouter");
 		btnAjouter.setForeground(Color.WHITE);
@@ -89,6 +78,12 @@ public class Fenetre_InsertionDiagnostic extends JInternalFrame {
 		btnAnnuler.setBackground(new Color(0, 102, 204));
 		btnAnnuler.setBounds(396, 395, 94, 31);
 		panel.add(btnAnnuler);
+		
+		textField_Type = new JTextField();
+		textField_Type.setColumns(10);
+		textField_Type.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_Type.setBounds(263, 161, 190, 40);
+		panel.add(textField_Type);
 		
 
 	}
