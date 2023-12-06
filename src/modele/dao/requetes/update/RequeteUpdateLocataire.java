@@ -1,5 +1,6 @@
 package modele.dao.requetes.update;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -20,7 +21,7 @@ public class RequeteUpdateLocataire implements Requete<Locataire>{
 		prSt.setString(2, data.getPrenom());
 		prSt.setString(3, data.getTelephone());
 		prSt.setString(4, data.getMail());
-		prSt.setString(5, data.getDateNaissance());
+		prSt.setDate(5, Date.valueOf(data.getDateNaissance()));
 		prSt.setString(6, data.getIdLocataire()); // clé priamire de Locataire
 	}
 
