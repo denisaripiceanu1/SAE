@@ -15,17 +15,15 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.JRadioButton;
 
 import controleur.insertion.GestionInsertionBien;
 import controleur.insertion.GestionInsertionCharges;
 
 public class Fenetre_InsertionCharges extends JFrame {
 	private JTextField textField_nomCharge;
-	private JTextField textField_montantReel;
 	private JTextField textField_montantPrevisionnel;
-	private JTextField textField_deductible;
 	private GestionInsertionCharges gestionClic;
-
 	public Fenetre_InsertionCharges() {
 		
 		this.gestionClic = new GestionInsertionCharges(this);
@@ -71,24 +69,22 @@ public class Fenetre_InsertionCharges extends JFrame {
 		textField_nomCharge.setBounds(271, 109, 190, 40);
 		panel.add(textField_nomCharge);
 		
-		textField_montantReel = new JTextField();
-		textField_montantReel.setColumns(10);
-		textField_montantReel.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant r\u00E9el", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_montantReel.setBounds(271, 173, 190, 40);
-		panel.add(textField_montantReel);
-		
 		textField_montantPrevisionnel = new JTextField();
 		textField_montantPrevisionnel.setColumns(10);
 		textField_montantPrevisionnel.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant pr\u00E9visionnel", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_montantPrevisionnel.setBounds(271, 241, 190, 40);
+		textField_montantPrevisionnel.setBounds(271, 194, 190, 40);
 		panel.add(textField_montantPrevisionnel);
+		JRadioButton rdbtnAjouterChargeOui = new JRadioButton("Oui");
+		rdbtnAjouterChargeOui.setBounds(288, 291, 111, 23);
+		panel.add(rdbtnAjouterChargeOui);
 		
-		textField_deductible = new JTextField();
-		textField_deductible.setColumns(10);
-		textField_deductible.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "D\u00E9ductible", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_deductible.setBounds(271, 311, 190, 40);
-		panel.add(textField_deductible);
+		JRadioButton rdbtnAjouterChargeNon = new JRadioButton("Non");
+		rdbtnAjouterChargeNon.setBounds(288, 324, 111, 23);
+		panel.add(rdbtnAjouterChargeNon);
 		
+		JLabel lbl_AjouterCharge_Déductible = new JLabel("Déductible");
+		lbl_AjouterCharge_Déductible.setBounds(280, 270, 96, 14);
+		panel.add(lbl_AjouterCharge_Déductible);
 		}
 	}
 
