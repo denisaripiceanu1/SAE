@@ -12,6 +12,9 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import controleur.insertion.GestionInsertionDiagnostic;
+
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -20,28 +23,13 @@ import javax.swing.JButton;
 public class Fenetre_InsertionDiagnostic extends JInternalFrame {
 	private JTextField textField_Date_Validite;
 	private JTextField textField_Type;
+	private GestionInsertionDiagnostic gestionClic;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Fenetre_InsertionDiagnostic frame = new Fenetre_InsertionDiagnostic();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_InsertionDiagnostic() {
+		
+		this.gestionClic = new GestionInsertionDiagnostic(this);
+		
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
@@ -71,12 +59,14 @@ public class Fenetre_InsertionDiagnostic extends JInternalFrame {
 		btnAjouter.setForeground(Color.WHITE);
 		btnAjouter.setBackground(new Color(0, 102, 204));
 		btnAjouter.setBounds(244, 395, 94, 31);
+		btnAjouter.addActionListener(gestionClic);
 		panel.add(btnAjouter);
 		
 		JButton btnAnnuler = new JButton("Annuler");		
 		btnAnnuler.setForeground(Color.WHITE);
 		btnAnnuler.setBackground(new Color(0, 102, 204));
 		btnAnnuler.setBounds(396, 395, 94, 31);
+		btnAnnuler.addActionListener(gestionClic);
 		panel.add(btnAnnuler);
 		
 		textField_Type = new JTextField();
