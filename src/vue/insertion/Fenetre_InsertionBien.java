@@ -12,9 +12,15 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import controleur.insertion.GestionInsertionBien;
+
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
 
 public class Fenetre_InsertionBien extends JInternalFrame {
 	private JTextField textField_IdImmeuble;
@@ -28,6 +34,8 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 	private JTextField textField_IndexCompteur;
 	private JSeparator separator_Compteur;
 	private JButton btn_ajouterCompteur;
+	private GestionInsertionBien gestionInsertionBien;
+
 
 	/**
 	 * Launch the application.
@@ -50,6 +58,9 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public Fenetre_InsertionBien() {
+		
+		this.gestionInsertionBien = new GestionInsertionBien(this);
+		
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
@@ -112,16 +123,21 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		panel.add(textField_dateAcquisition);
 		
 		JComboBox comboBox_typeDeBien = new JComboBox();
+		comboBox_typeDeBien.setModel(new DefaultComboBoxModel(new String[] {"Immeuble", "Maison"}));
 		comboBox_typeDeBien.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
 		comboBox_typeDeBien.setBounds(427, 104, 189, 39);
 		panel.add(comboBox_typeDeBien);
 		
 		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.addActionListener(this.gestionInsertionBien);
+		
 		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAjouter.setBounds(246, 447, 94, 31);
 		panel.add(btnAjouter);
 		
 		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.addActionListener(this.gestionInsertionBien);
+		
 		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAnnuler.setBounds(398, 447, 94, 31);
 		panel.add(btnAnnuler);
@@ -131,6 +147,8 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		panel.add(separator_Compteur);
 		
 		btn_ajouterCompteur = new JButton("Ajouter un compteur");
+		btn_ajouterCompteur.addActionListener(this.gestionInsertionBien);
+		
 		btn_ajouterCompteur.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_ajouterCompteur.setBounds(246, 378, 246, 31);
 		panel.add(btn_ajouterCompteur);

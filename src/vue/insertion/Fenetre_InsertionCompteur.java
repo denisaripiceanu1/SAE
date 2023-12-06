@@ -17,6 +17,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+import javax.swing.DefaultComboBoxModel;
 
 public class Fenetre_InsertionCompteur extends JInternalFrame {
 	private JTextField textField_IdCompteur;
@@ -62,6 +63,7 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 		panel.add(lbl_InsererUnCompteur);
 		
 		JComboBox comboBox_typeDeCompteur = new JComboBox();
+		comboBox_typeDeCompteur.setModel(new DefaultComboBoxModel(new String[] {"Eau", "Gaz", "Electricité"}));
 		comboBox_typeDeCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
 		comboBox_typeDeCompteur.setBounds(272, 108, 189, 39);
 		panel.add(comboBox_typeDeCompteur);
