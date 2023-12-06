@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,7 +26,7 @@ public class Fenetre_InsertionCharges extends JInternalFrame {
 	private JTextField textField_montantPrevisionnel;
 	private GestionInsertionCharges gestionClic;
 	public Fenetre_InsertionCharges() {
-		
+	
 		this.gestionClic = new GestionInsertionCharges(this);
 		
 		this.setBounds(100, 100, 762, 541);
@@ -81,6 +82,10 @@ public class Fenetre_InsertionCharges extends JInternalFrame {
 		JRadioButton rdbtnAjouterChargeNon = new JRadioButton("Non");
 		rdbtnAjouterChargeNon.setBounds(288, 324, 111, 23);
 		panel.add(rdbtnAjouterChargeNon);
+		
+		ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(rdbtnAjouterChargeOui);
+        buttonGroup.add(rdbtnAjouterChargeNon);
 		
 		JLabel lbl_AjouterCharge_Déductible = new JLabel("Déductible");
 		lbl_AjouterCharge_Déductible.setBounds(280, 270, 96, 14);
