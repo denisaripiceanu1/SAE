@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,33 +16,20 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class Fenetre_InsertionCharges extends JInternalFrame {
+import controleur.insertion.GestionInsertionBien;
+import controleur.insertion.GestionInsertionCharges;
+
+public class Fenetre_InsertionCharges extends JFrame {
 	private JTextField textField_nomCharge;
 	private JTextField textField_montantReel;
 	private JTextField textField_montantPrevisionnel;
 	private JTextField textField_deductible;
+	private GestionInsertionCharges gestionClic;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Fenetre_InsertionCharges frame = new Fenetre_InsertionCharges();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_InsertionCharges() {
+		
+		this.gestionClic = new GestionInsertionCharges(this);
+		
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
@@ -66,6 +54,7 @@ public class Fenetre_InsertionCharges extends JInternalFrame {
 		btnAjouter.setBounds(246, 447, 94, 31);
 		btnAjouter.setForeground(Color.WHITE);
 		btnAjouter.setBackground(new Color(0, 102, 204));
+		btnAjouter.addActionListener(gestionClic);
 		panel.add(btnAjouter);
 		
 		JButton btnAnnuler = new JButton("Annuler");
@@ -73,6 +62,7 @@ public class Fenetre_InsertionCharges extends JInternalFrame {
 		btnAnnuler.setBounds(398, 447, 94, 31);
 		btnAnnuler.setForeground(Color.WHITE);
 		btnAnnuler.setBackground(new Color(0, 102, 204));
+		btnAnnuler.addActionListener(gestionClic);
 		panel.add(btnAnnuler);
 		
 		textField_nomCharge = new JTextField();
@@ -98,7 +88,7 @@ public class Fenetre_InsertionCharges extends JInternalFrame {
 		textField_deductible.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "D\u00E9ductible", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_deductible.setBounds(271, 311, 190, 40);
 		panel.add(textField_deductible);
-
+		
 		}
 	}
 

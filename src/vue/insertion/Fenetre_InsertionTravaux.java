@@ -22,7 +22,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 
-public class Fenetre_InsertionTravaux extends JInternalFrame{
+public class Fenetre_InsertionTravaux extends JFrame{
 	private JTextField textField_Numero;
 	private JTextField textField_date_emission;
 	private JTextField textField_date_paiement;
