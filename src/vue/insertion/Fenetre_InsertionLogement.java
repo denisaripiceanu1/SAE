@@ -13,6 +13,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.DefaultComboBoxModel;
 
 
 public class Fenetre_InsertionLogement extends JInternalFrame {
@@ -64,6 +65,7 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		panel.add(lbl_InsererUnLogement);
 		
 		JComboBox comboBox_typeDeLogement = new JComboBox();
+		comboBox_typeDeLogement.setModel(new DefaultComboBoxModel(new String[] {"Appartement", "Maison", "Garage"}));
 		comboBox_typeDeLogement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
 		comboBox_typeDeLogement.setBounds(272, 142, 189, 39);
 		panel.add(comboBox_typeDeLogement);
@@ -101,11 +103,15 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		btnAjouter = new JButton("Ajouter");
 		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAjouter.setBounds(241, 445, 94, 31);
+		btnAjouter.setForeground(Color.WHITE);
+		btnAjouter.setBackground(new Color(0, 102, 204));
 		panel.add(btnAjouter);
 		
 		btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAnnuler.setBounds(394, 445, 94, 31);
+		btnAnnuler.setForeground(Color.WHITE);
+		btnAnnuler.setBackground(new Color(0, 102, 204));
 		panel.add(btnAnnuler);
 
 	}

@@ -7,8 +7,10 @@ public class Louer {
 	private String dateDebut;
 	private int nbMois;
 	private double loyerTTC;
+	private double provision_chargeMens_TTC;
 	private double cautionTTC;
 	private String bail;
+	private String etat_lieux;
 	private String dateDepart;
 	private int loyerPaye;
 	private int colocation;
@@ -16,16 +18,19 @@ public class Louer {
 	private String trimestre;
 	private double montantReelPaye;
 
-	public Louer(Locataire locataire, Bien bien, String dateDebut, int nbMois, double loyerTTC, double cautionTTC,
-			String bail, String dateDepart, int loyerPaye, int colocation, double montantReelPaye, String annee,
-			String trimestre) {
+	public Louer(Locataire locataire, Bien bien, String dateDebut, int nbMois, double loyerTTC,
+			double provision_chargeMens_TTC, double cautionTTC, String bail, String etat_lieux, String dateDepart,
+			int loyerPaye, int colocation, double montantReelPaye, String trimestre, String annee) {
+		super();
 		this.locataire = locataire;
 		this.bien = bien;
 		this.dateDebut = dateDebut;
 		this.nbMois = nbMois;
 		this.loyerTTC = loyerTTC;
+		this.provision_chargeMens_TTC = provision_chargeMens_TTC;
 		this.cautionTTC = cautionTTC;
 		this.bail = bail;
+		this.etat_lieux = etat_lieux;
 		this.dateDepart = dateDepart;
 		this.loyerPaye = loyerPaye;
 		this.colocation = colocation;
@@ -138,4 +143,22 @@ public class Louer {
 		this.montantReelPaye = montantReelPaye;
 	}
 
+	public double getProvision_chargeMens_TTC() {
+		return provision_chargeMens_TTC;
+	}
+
+	public void setProvision_chargeMens_TTC(double provision_chargeMens_TTC) {
+		this.provision_chargeMens_TTC = provision_chargeMens_TTC;
+	}
+
+	public String getEtat_lieux() {
+		return etat_lieux;
+	}
+
+	public void setEtat_lieux(String etat_lieux) {
+		this.etat_lieux = etat_lieux;
+	}
+
+	
+	
 }

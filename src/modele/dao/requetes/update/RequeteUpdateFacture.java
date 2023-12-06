@@ -12,7 +12,8 @@ public class RequeteUpdateFacture implements Requete<Facture>{
 	@Override
 	public String requete() {
 		// TODO Auto-generated method stub
-		return "UPDATE SET numero = ?, dateEmission = ?, datePaiment = ?, modePaiement = ?, numeroDevis = ?, designation = ?, accompteVerse = ?, imputableLocataire = ?, Id_Immeuble = ?, Id_Bien = ?, SIRET = ? WHERE idFacture = ?";
+		return "UPDATE SET numero = ?, dateEmission = ?, datePaiment = ?, modePaiement = ?, numeroDevis = ?, designation = ?, accompteVerse = ?,"
+				+ " imputableLocataire = ?, Id_Immeuble = ?, Id_Bien = ?, SIRET = ? WHERE idFacture = ?";
 	}
 
 	@Override
