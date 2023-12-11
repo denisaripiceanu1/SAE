@@ -11,7 +11,9 @@ import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
+import vue.insertion.Fenetre_InsertionCharges;
 import vue.insertion.Fenetre_InsertionDiagnostic;
+import vue.insertion.Fenetre_InsertionLocation;
 import vue.insertion.Fenetre_InsertionLogement;
 import vue.insertion.Fenetre_InsertionTravaux;
 
@@ -127,7 +129,11 @@ public class GestionAccueil implements ActionListener {
 			case "btn_MesLocations_Modifier":
 				break;
 			case "btn_MesLocations_Inserer":
-				break;	
+				Fenetre_InsertionLocation location = new Fenetre_InsertionLocation();
+				this.fenetreAccueil.getLayeredPane().add(location);
+				location.setVisible(true);
+				location.moveToFront();
+				break;
 			case "btn_MesLocations_Supprimer":
 				break;
 				
@@ -159,7 +165,11 @@ public class GestionAccueil implements ActionListener {
 			case "btn_MesChargesLocatives_Modifier":
 				break;
 			case "btn_MesChargesLocatives_Inserer":
-				break;	
+				Fenetre_InsertionCharges charges = new Fenetre_InsertionCharges();
+				this.fenetreAccueil.getLayeredPane().add(charges);
+				charges.setVisible(true);
+				charges.moveToFront();
+				break;
 			case "btn_MesChargesLocatives_Supprimer":
 				break;
 			
