@@ -26,6 +26,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.GestionAccueil;
+import controleur.GestionBienLogement;
 import controleur.insertion.GestionInsertionBien;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
@@ -66,6 +67,7 @@ public class Fenetre_Accueil extends JFrame {
 	private JTable tableRegularisation;
 
 	private GestionAccueil gestionAccueil;
+	private GestionBienLogement gestionBienLogement;
 
 	/**
 	 * Launch the application.
@@ -88,7 +90,7 @@ public class Fenetre_Accueil extends JFrame {
 	 * Create the frame.
 	 */
 	public Fenetre_Accueil() {
-
+		this.gestionBienLogement = new GestionBienLogement(this);
 		this.gestionAccueil = new GestionAccueil(this);
 
 		this.setResizable(false);
@@ -249,7 +251,7 @@ public class Fenetre_Accueil extends JFrame {
 				new String[] { "Nom du bien", "Adresse", "Nb de logements" }));
 		this.tableMesBiens.setBounds(40, 53, 668, 130);
 		scrollPaneMesBiens.setViewportView(this.tableMesBiens);
-		// this.tableMesBiens.getSelectionModel().addListSelectionListener(table_MesTravaux);
+		this.tableMesBiens.getSelectionModel().addListSelectionListener(this.gestionBienLogement);
 
 		JScrollPane scrollPaneMesBiens_Logements = new JScrollPane();
 		scrollPaneMesBiens_Logements.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));

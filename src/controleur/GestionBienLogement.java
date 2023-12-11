@@ -36,9 +36,7 @@ public class GestionBienLogement implements ListSelectionListener {
 	            try {
 	                immeuble = daoImmeuble.findById(tableBiens.getValueAt(selectedRow, 0).toString(),
 	                        tableBiens.getValueAt(selectedRow, 1).toString(),
-	                        tableBiens.getValueAt(selectedRow, 2).toString(),
-	                        tableBiens.getValueAt(selectedRow, 3).toString(),
-	                        tableBiens.getValueAt(selectedRow, 5).toString());
+	                        tableBiens.getValueAt(selectedRow, 2).toString());
 	            } catch (SQLException e1) {
 	                e1.printStackTrace();
 	            }
