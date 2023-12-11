@@ -171,4 +171,5 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 	public JComboBox getComboBox_typeDeBien() {
 		return comboBox_typeDeBien;
 	}
+	
 }

@@ -39,6 +39,7 @@ public class GestionInsertionBien implements ActionListener {
 			break;
 		case "Ajouter":	
 			try {
+								
 				Immeuble immeuble = new Immeuble(
 						this.insertionBien.getTextField_IdImmeuble().getText(),
 						this.insertionBien.getTextField_adresse().getText(), 
@@ -53,6 +54,8 @@ public class GestionInsertionBien implements ActionListener {
 				this.daoImmeuble.create(immeuble);
 //				Boite.deleteItem("Bien");
 //				Boite.addItem("Bien", bien);
+				this.insertionBien.dispose(); //Fermer la page après l'ajout
+				
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}

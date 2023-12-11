@@ -15,7 +15,7 @@ public class SousProgrammeInsertImmeuble implements SousProgramme<Immeuble> {
 	
 	@Override
 	public String appelSousProgramme() {
-		return "{call Insert_Immeuble(?, ?, ?, ?, ?, ?, ?)}";
+		return "{call Insert_Immeuble(?, ?, ?, ?, ?, ?, ?, ?)}";
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class SousProgrammeInsertImmeuble implements SousProgramme<Immeuble> {
 		prSt.setString(5, donnee.getPeriodeConstruction()); 
 		prSt.setInt(6, donnee.getNbLogement());
 		prSt.setDate(7, java.sql.Date.valueOf(donnee.getDateAcquisition()));// Pour la date 
-		
+		prSt.setString(8, donnee.getType_immeuble()); 
 	}
 
 }
