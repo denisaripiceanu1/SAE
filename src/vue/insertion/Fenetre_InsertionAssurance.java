@@ -15,6 +15,7 @@ import controleur.insertion.GestionInsertionAssurance;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JSeparator;
 
 public class Fenetre_InsertionAssurance extends JInternalFrame {
 	private JTextField textField_numPolice;
@@ -29,7 +30,8 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		this.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 6, 755, 511);
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(0, 0, 755, 511);
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -40,7 +42,7 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		panel.add(textField_numPolice);
 		
 		JLabel lbl_InsertionAssurance = new JLabel("Assurance");
-		lbl_InsertionAssurance.setBounds(354, 41, 71, 20);
+		lbl_InsertionAssurance.setBounds(314, 41, 163, 20);
 		lbl_InsertionAssurance.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_InsertionAssurance.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(lbl_InsertionAssurance);
@@ -78,6 +80,11 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		btnAnnuler.setBounds(428, 431, 94, 31);
 		btnAnnuler.addActionListener(gestionClic);
 		panel.add(btnAnnuler);
+		
+		JSeparator separator_Assurance = new JSeparator();
+		separator_Assurance.setForeground(new Color(0, 102, 204));
+		separator_Assurance.setBounds(302, 72, 190, 2);
+		panel.add(separator_Assurance);
 
 	}
 }

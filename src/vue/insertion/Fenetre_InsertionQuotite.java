@@ -26,6 +26,7 @@ public class Fenetre_InsertionQuotite extends JInternalFrame {
 	public Fenetre_InsertionQuotite() {
 
 		this.gestionClic = new GestionInsertionQuotite(this);
+		
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
@@ -66,6 +67,7 @@ public class Fenetre_InsertionQuotite extends JInternalFrame {
 		btnAjouter.setBounds(246, 447, 94, 31);
 		btnAjouter.setForeground(Color.WHITE);
 		btnAjouter.setBackground(new Color(0, 102, 204));
+		btnAjouter.addActionListener(gestionClic);
 		panel.add(btnAjouter);
 
 		JButton btnAnnuler = new JButton("Annuler");
@@ -73,6 +75,7 @@ public class Fenetre_InsertionQuotite extends JInternalFrame {
 		btnAnnuler.setBounds(398, 447, 94, 31);
 		btnAnnuler.setForeground(Color.WHITE);
 		btnAnnuler.setBackground(new Color(0, 102, 204));
+		btnAnnuler.addActionListener(gestionClic);
 		panel.add(btnAnnuler);
 
 	}
