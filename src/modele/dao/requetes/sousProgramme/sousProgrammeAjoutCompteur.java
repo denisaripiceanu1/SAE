@@ -10,14 +10,16 @@ public class sousProgrammeAjoutCompteur implements SousProgramme<Compteur>{
 
 	@Override
 	public String appelSousProgramme() {
-		// TODO Auto-generated method stub
-		return null;
+		return "{call Insert_Compteur(?, ?, ?, ?, ?)}";
 	}
 
 	@Override
 	public void parametres(CallableStatement prSt, String... parametres) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		prSt.setString(1, parametres[0]);
+		prSt.setString(2, parametres[1]);
+		prSt.setString(3, parametres[2]);
+		prSt.setString(4, parametres[3]);
+		prSt.setString(5, parametres[4]);
 	}
 
 }

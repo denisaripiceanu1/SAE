@@ -16,9 +16,11 @@ public class GestionInsertionBien implements ActionListener {
 	
 	private Fenetre_InsertionBien insertionBien;
 	private DaoImmeuble daoImmeuble;
+	private String idBien;
 	
 	public GestionInsertionBien(Fenetre_InsertionBien insertionBien) {
 		this.insertionBien = insertionBien;
+		this.idBien = null;
 	}
 
 	@Override
@@ -27,7 +29,8 @@ public class GestionInsertionBien implements ActionListener {
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.insertionBien.getTopLevelAncestor(); //fenetre dans laquelle on ouvre des internal frame
 		switch (btn.getText()) {
 		case "Ajouter un compteur":
-			Fenetre_InsertionCompteur fenetreCompteur = new Fenetre_InsertionCompteur();
+			this.idBien = insertionBien.getTextField_IdImmeuble().getText();
+			Fenetre_InsertionCompteur fenetreCompteur = new Fenetre_InsertionCompteur(this,(GestionInsertionLogement) null);
 			fenetre_Principale.getLayeredPane().add(fenetreCompteur);
 			fenetreCompteur.setVisible(true);
 			fenetreCompteur.moveToFront();
@@ -57,5 +60,9 @@ public class GestionInsertionBien implements ActionListener {
 			break;
 		}
 	}
+
+	public String getIdBien() {
+		return idBien;
+	}	
 
 }
