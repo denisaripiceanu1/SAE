@@ -1,23 +1,35 @@
 package controleur.insertion;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 
-import vue.insertion.Fenetre_InsertionAssurance;
-import vue.insertion.Fenetre_InsertionDiagnostic;
+import javax.swing.JButton;
 
-public class GestionInsertionAssurance implements ActionListener{
+import vue.Fenetre_Accueil;
+import vue.insertion.Fenetre_InsertionAssurance;
+
+public class GestionInsertionAssurance implements ActionListener {
 
 	private Fenetre_InsertionAssurance fia;
-	
+
 	public GestionInsertionAssurance(Fenetre_InsertionAssurance fia) {
 		this.fia = fia;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		JButton btn = (JButton) e.getSource();
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fia.getTopLevelAncestor();
+		switch (btn.getText()) {
+
+		case "Ajouter":
+
+			break;
+		case "Annuler":
+			this.fia.dispose();
+			break;
+		}
 	}
 
 }
