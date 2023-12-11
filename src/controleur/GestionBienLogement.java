@@ -1,10 +1,12 @@
 package controleur;
+
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 import modele.Bien;
 import modele.Immeuble;
@@ -14,72 +16,79 @@ import vue.Fenetre_Accueil;
 
 public class GestionBienLogement implements ListSelectionListener {
 
-	private Fenetre_Accueil fenetreAccueil;
-	private DaoImmeuble daoImmeuble;
-	private DaoBien daoBien;
+    private Fenetre_Accueil fenetreAccueil;
+    private DaoImmeuble daoImmeuble;
+    private DaoBien daoBien;
 
-	public GestionBienLogement(Fenetre_Accueil fenetreAccueil) {
-		this.fenetreAccueil = fenetreAccueil;
-		this.daoImmeuble = new DaoImmeuble();
-		this.daoBien = new DaoBien();
-	}
+    public GestionBienLogement(Fenetre_Accueil fenetreAccueil) {
+        this.fenetreAccueil = fenetreAccueil;
+        this.daoImmeuble = new DaoImmeuble();
+        this.daoBien = new DaoBien();
+    }
 
-	@Override
-	public void valueChanged(ListSelectionEvent e) {
-	    if (!e.getValueIsAdjusting()) {
-	        int selectedRow = fenetreAccueil.getTableBiens().getSelectedRow();
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting()) {
+            int selectedRow = fenetreAccueil.getTableBiens().getSelectedRow();
 
-	        if (selectedRow > -1) {
+            if (selectedRow > -1) {
+                JTable tableBiens = fenetreAccueil.getTableBiens();
+                Immeuble immeuble = null;
+                try {
+                    immeuble = daoImmeuble.findById(tableBiens.getValueAt(selectedRow, 0).toString(),
+                            tableBiens.getValueAt(selectedRow, 1).toString(),
+                            tableBiens.getValueAt(selectedRow, 2).toString());
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
 
-	            JTable tableBiens = fenetreAccueil.getTableBiens();
-	            Immeuble immeuble = null;
-	            try {
-	                immeuble = daoImmeuble.findById(tableBiens.getValueAt(selectedRow, 0).toString(),
-	                        tableBiens.getValueAt(selectedRow, 1).toString(),
-	                        tableBiens.getValueAt(selectedRow, 2).toString());
-	            } catch (SQLException e1) {
-	                e1.printStackTrace();
-	            }
+                if (immeuble != null) {
+                    List<Bien> biens = null;
+                    try {
+                        biens = daoBien.findBiensparImmeuble(immeuble.getImmeuble());
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
 
-	            if (immeuble != null) {
+                    System.out.println("Number of biens: " + (biens != null ? biens.size() : 0));
 
-	                List<Bien> biens = null;
-	                try {
-	                    biens = daoBien.findBiensparImmeuble(immeuble.getImmeuble());
-	                } catch (SQLException e1) {
-	                    e1.printStackTrace();
-	                }
+                    JTable logements = fenetreAccueil.getTableLogementsParBien();
+                    GestionAccueil.viderTable(logements);
 
-	                JTable logements = fenetreAccueil.getTableLogementsParBien();
-	                GestionAccueil.viderTable(logements);
+                    DefaultTableModel model = (DefaultTableModel) logements.getModel();
 
-	                for (int i = 0; i < biens.size(); i++) {
-	                    String nom = biens.get(i).getIdBien();
-	                    double surface = biens.get(i).getSurfaceHabitable();
-	                    int nbPieces = biens.get(i).getNbPieces();
-	                    int etage = biens.get(i).getNumEtage();
-	                    String date = biens.get(i).getDateAcquisition();
-	                    int occupe = 0; // changer
+                    // Assuming you know the number of columns in your logements table
+                    int numColumns = 6; // Change this to the actual number of columns
 
-	                    if (biens.get(i) == null) {
-	                        logements.setValueAt(null, i, 0);
-	                        logements.setValueAt(null, i, 1);
-	                        logements.setValueAt(null, i, 2);
-	                        logements.setValueAt(null, i, 3);
-	                        logements.setValueAt(null, i, 4);
-	                        logements.setValueAt(null, i, 5);
-	                    } else {
-	                        logements.setValueAt(nom, i, 0);
-	                        logements.setValueAt(surface, i, 1);
-	                        logements.setValueAt(nbPieces, i, 2);
-	                        logements.setValueAt(etage, i, 3);
-	                        logements.setValueAt(date, i, 4);
-	                        logements.setValueAt(occupe, i, 5);
-	                    }
-	                }
-	            }
-	        }
-	    }
-	}
+                    // Ensure the table has enough rows
+                    int numRowsNeeded = biens.size();
+                    int currentRows = model.getRowCount();
 
+                    for (int i = 0; i < numRowsNeeded - currentRows; i++) {
+                        model.addRow(new Object[numColumns]);
+                    }
+
+                    // Now populate the table
+                    for (int i = 0; i < biens.size(); i++) {
+                        Bien bien = biens.get(i);
+                        if (bien != null) {
+                            String nom = bien.getIdBien();
+                            double surface = bien.getSurfaceHabitable();
+                            int nbPieces = bien.getNbPieces();
+                            int etage = bien.getNumEtage();
+                            String date = bien.getDateAcquisition();
+                            int occupe = 0; // You should change this to the actual value
+
+                            model.setValueAt(nom, i, 0);
+                            model.setValueAt(surface, i, 1);
+                            model.setValueAt(nbPieces, i, 2);
+                            model.setValueAt(etage, i, 3);
+                            model.setValueAt(date, i, 4);
+                            model.setValueAt(occupe, i, 5);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
