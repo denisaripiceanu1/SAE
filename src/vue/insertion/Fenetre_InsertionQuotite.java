@@ -12,16 +12,23 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import controleur.insertion.GestionInsertionColocataire;
+import controleur.insertion.GestionInsertionQuotite;
+
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 
+
 public class Fenetre_InsertionQuotite extends JInternalFrame {
 	private JTextField textField_Pourcentage;
+	private GestionInsertionQuotite gestionClic;
+
 
 	public Fenetre_InsertionQuotite() {
 
+		this.gestionClic = new GestionInsertionQuotite(this);
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 

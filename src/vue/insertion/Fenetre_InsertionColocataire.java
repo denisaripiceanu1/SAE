@@ -14,24 +14,9 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class Fenetre_InsertionColocataire extends JInternalFrame {
+import controleur.insertion.GestionInsertionColocataire;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Fenetre_InsertionColocataire frame = new Fenetre_InsertionColocataire();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+public class Fenetre_InsertionColocataire extends JInternalFrame {
 
 	private JTextField textField_IdLocataire;
 	private JTextField textField_Nom;
@@ -39,11 +24,14 @@ public class Fenetre_InsertionColocataire extends JInternalFrame {
 	private JTextField textField_Date_de_naissance;
 	private JTextField textField;
 	private JTextField textField_1;
+	private GestionInsertionColocataire gestionClic;
 
 	/**
 	 * Create the frame.
 	 */
 	public Fenetre_InsertionColocataire() {
+
+		this.gestionClic = new GestionInsertionColocataire(this);
 		this.setBounds(100, 100, 609, 397);
 
 		JPanel panel = new JPanel();
@@ -116,6 +104,7 @@ public class Fenetre_InsertionColocataire extends JInternalFrame {
 		btn_annuler_colocataire.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_annuler_colocataire.setBounds(347, 300, 83, 40);
 		panel.add(btn_annuler_colocataire);
+		btn_annuler_colocataire.addActionListener(gestionClic);
 
 	}
 

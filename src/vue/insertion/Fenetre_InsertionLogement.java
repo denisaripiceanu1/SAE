@@ -30,26 +30,8 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 	private JButton btnAjouterCompteur;
 	private JButton btnAjouterQuotite;
 	private GestionInsertionLogement gestionClic;
+	
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Fenetre_InsertionLogement frame = new Fenetre_InsertionLogement();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_InsertionLogement() {
 		
 		this.gestionClic = new GestionInsertionLogement(this);
