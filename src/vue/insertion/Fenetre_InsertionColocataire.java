@@ -94,6 +94,7 @@ public class Fenetre_InsertionColocataire extends JInternalFrame {
 		btn_ajouter_colocataire.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_ajouter_colocataire.setBounds(131, 300, 190, 40);
 		panel.add(btn_ajouter_colocataire);
+		btn_ajouter_colocataire.addActionListener(gestionClic);
 
 		JButton btn_annuler_colocataire = new JButton("Annuler");
 		btn_annuler_colocataire.setForeground(new Color(255, 255, 255));

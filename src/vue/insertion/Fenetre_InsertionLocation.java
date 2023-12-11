@@ -36,16 +36,11 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 	private JTextField textField_provision_sur_charges;
 	private JTextField textField_loyer;
 	private JTable table_liste_locataires;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
 	private GestionInsertionLocation gestionClic;
-
 
 	public Fenetre_InsertionLocation() {
 		this.gestionClic = new GestionInsertionLocation(this);
-		
+
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
@@ -113,8 +108,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 				"Date de naissance", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		this.textField_Date_de_naissance.setBounds(24, 215, 190, 40);
 		panel.add(this.textField_Date_de_naissance);
-		
-		
+
 		JButton btn_ajouter_coloc = new JButton("Ajouter un colocataire");
 		btn_ajouter_coloc.setForeground(new Color(255, 255, 255));
 		btn_ajouter_coloc.setBackground(new Color(0, 102, 204));
@@ -165,7 +159,8 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 
 		this.table_id_logements = new JTable();
 		this.table_id_logements.setCellSelectionEnabled(true);
-		this.table_id_logements.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "ID des logements" }));
+		this.table_id_logements
+				.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "ID des logements" }));
 		this.table_id_logements.setBounds(0, 0, 1, 1);
 		scrollPane_table_id_logements.setViewportView(this.table_id_logements);
 
