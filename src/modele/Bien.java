@@ -10,7 +10,7 @@ public class Bien {
 	private Immeuble immeuble;
 
 	public Bien(String idBien, double surfaceHabitable, int nbPieces, int numEtage, String dateAcquisition,
-			String type_bien,Immeuble immeuble) {
+			String type_bien, Immeuble immeuble) {
 		this.idBien = idBien;
 		this.surfaceHabitable = surfaceHabitable;
 		this.nbPieces = nbPieces;
@@ -21,7 +21,7 @@ public class Bien {
 	}
 
 	public String getIdBien() {
-		return idBien;
+		return this.idBien;
 	}
 
 	public void setIdBien(String idBien) {
@@ -29,7 +29,7 @@ public class Bien {
 	}
 
 	public double getSurfaceHabitable() {
-		return surfaceHabitable;
+		return this.surfaceHabitable;
 	}
 
 	public void setSurfaceHabitable(double surfaceHabitable) {
@@ -37,7 +37,7 @@ public class Bien {
 	}
 
 	public int getNbPieces() {
-		return nbPieces;
+		return this.nbPieces;
 	}
 
 	public void setNbPieces(int nbPieces) {
@@ -45,7 +45,7 @@ public class Bien {
 	}
 
 	public int getNumEtage() {
-		return numEtage;
+		return this.numEtage;
 	}
 
 	public void setNumEtage(int numEtage) {
@@ -53,15 +53,15 @@ public class Bien {
 	}
 
 	public String getDateAcquisition() {
-		return dateAcquisition;
+		return this.dateAcquisition;
 	}
 
 	public void setDateAcquisition(String dateAcquisition) {
 		this.dateAcquisition = dateAcquisition;
 	}
-	
+
 	public String getType_bien() {
-		return type_bien;
+		return this.type_bien;
 	}
 
 	public void setType_bien(String type_bien) {
@@ -69,7 +69,7 @@ public class Bien {
 	}
 
 	public Immeuble getImmeuble() {
-		return immeuble;
+		return this.immeuble;
 	}
 
 	public void setImmeuble(Immeuble immeuble) {

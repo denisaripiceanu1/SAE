@@ -1,27 +1,26 @@
 package vue.insertion;
 
 import java.awt.Color;
-
 import java.awt.Font;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import controleur.insertion.GestionInsertionQuotite;
 
-import javax.swing.border.LineBorder;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.DefaultComboBoxModel;
-
 public class Fenetre_InsertionQuotite extends JInternalFrame {
 	private JTextField textField_Pourcentage;
 	private GestionInsertionQuotite gestionClic;
+	private JComboBox comboBox_typeDeCompteur;
 
 	public Fenetre_InsertionQuotite() {
 
@@ -47,27 +46,27 @@ public class Fenetre_InsertionQuotite extends JInternalFrame {
 		lbl_InsererUneQuotite.setBounds(284, 84, 160, 48);
 		panel.add(lbl_InsererUneQuotite);
 
-		JComboBox comboBox_typeDeCompteur = new JComboBox();
-		comboBox_typeDeCompteur
+		this.comboBox_typeDeCompteur = new JComboBox();
+		this.comboBox_typeDeCompteur
 				.setModel(new DefaultComboBoxModel(new String[] { "Eau", "Gaz", "Electricité", "Ordure Ménagère" }));
-		comboBox_typeDeCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type",
+		this.comboBox_typeDeCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
-		comboBox_typeDeCompteur.setBounds(271, 215, 189, 39);
-		panel.add(comboBox_typeDeCompteur);
+		this.comboBox_typeDeCompteur.setBounds(271, 215, 189, 39);
+		panel.add(this.comboBox_typeDeCompteur);
 
-		textField_Pourcentage = new JTextField();
-		textField_Pourcentage.setColumns(10);
-		textField_Pourcentage.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Pourcentage",
+		this.textField_Pourcentage = new JTextField();
+		this.textField_Pourcentage.setColumns(10);
+		this.textField_Pourcentage.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Pourcentage",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Pourcentage.setBounds(271, 291, 190, 40);
-		panel.add(textField_Pourcentage);
+		this.textField_Pourcentage.setBounds(271, 291, 190, 40);
+		panel.add(this.textField_Pourcentage);
 
 		JButton btnAjouter = new JButton("Ajouter");
 		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAjouter.setBounds(246, 447, 94, 31);
 		btnAjouter.setForeground(Color.WHITE);
 		btnAjouter.setBackground(new Color(0, 102, 204));
-		btnAjouter.addActionListener(gestionClic);
+		btnAjouter.addActionListener(this.gestionClic);
 		panel.add(btnAjouter);
 
 		JButton btnAnnuler = new JButton("Annuler");
@@ -75,8 +74,17 @@ public class Fenetre_InsertionQuotite extends JInternalFrame {
 		btnAnnuler.setBounds(398, 447, 94, 31);
 		btnAnnuler.setForeground(Color.WHITE);
 		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.addActionListener(gestionClic);
+		btnAnnuler.addActionListener(this.gestionClic);
 		panel.add(btnAnnuler);
 
 	}
+
+	public JTextField getTextField_Pourcentage() {
+		return this.textField_Pourcentage;
+	}
+
+	public JComboBox getComboBox_typeDeCompteur() {
+		return this.comboBox_typeDeCompteur;
+	}
+
 }

@@ -9,10 +9,10 @@ public class Charge {
 	private int deductible;
 	private Bien idBien;
 
-	public Charge(int idCharge, String nom, double montantReel, double montantPrevisionnel, int deductible,
+	public Charge(/* int idCharge */ String nom, double montantReel, double montantPrevisionnel, int deductible,
 			Bien idBien) {
 
-		this.idCharge = idCharge;
+		// this.idCharge = idCharge;
 		this.nom = nom;
 		this.montantReel = montantReel;
 		this.montantPrevisionnel = montantPrevisionnel;
@@ -21,7 +21,7 @@ public class Charge {
 	}
 
 	public int getIdCharge() {
-		return idCharge;
+		return this.idCharge;
 	}
 
 	public void setIdCharge(int idCharge) {
@@ -29,7 +29,7 @@ public class Charge {
 	}
 
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 
 	public void setNom(String nom) {
@@ -37,7 +37,7 @@ public class Charge {
 	}
 
 	public double getMontantReel() {
-		return montantReel;
+		return this.montantReel;
 	}
 
 	public void setMontantReel(double montantReel) {
@@ -45,7 +45,7 @@ public class Charge {
 	}
 
 	public double getMontantPrevisionnel() {
-		return montantPrevisionnel;
+		return this.montantPrevisionnel;
 	}
 
 	public void setMontantPrevisionnel(double montantPrevisionnel) {
@@ -53,7 +53,7 @@ public class Charge {
 	}
 
 	public int isDeductible() {
-		return deductible;
+		return this.deductible;
 	}
 
 	public void setDeductible(int deductible) {
@@ -61,7 +61,7 @@ public class Charge {
 	}
 
 	public Bien getIdBien() {
-		return idBien;
+		return this.idBien;
 	}
 
 	public void setIdBien(Bien idBien) {

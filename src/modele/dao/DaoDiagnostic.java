@@ -6,33 +6,33 @@ import java.sql.SQLException;
 import java.util.List;
 
 import modele.Bien;
-import modele.Diagnostic;
+import modele.Diagnostics;
 import modele.dao.requetes.select.RequeteSelectDiagnostic;
 import modele.dao.requetes.select.RequeteSelectDiagnosticById;
 
-public class DaoDiagnostic extends DaoModele<Diagnostic> implements Dao<Diagnostic> {
+public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnostics> {
 
 	@Override
-	public void create(Diagnostic donnees) {
+	public void create(Diagnostics donnees) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void update(Diagnostic donnees) {
+	public void update(Diagnostics donnees) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void delete(Diagnostic donnees) {
+	public void delete(Diagnostics donnees) {
 		delete(donnees);
 
 	}
 
 	@Override
-	protected Diagnostic creerInstance(ResultSet curseur) throws SQLException {
-		Diagnostic diagnostic = null;
+	protected Diagnostics creerInstance(ResultSet curseur) throws SQLException {
+		Diagnostics diagnostic = null;
 		try {
 			// Récupérer l'identifiant du Bien
 			String idBien = curseur.getString("Id_Bien");
@@ -43,7 +43,7 @@ public class DaoDiagnostic extends DaoModele<Diagnostic> implements Dao<Diagnost
 			java.sql.Date dateValidite = curseur.getDate("date_validite");
 			String dateValiditeStr = dateValidite.toString();
 
-			diagnostic = new Diagnostic(curseur.getInt("Id_Diagnostic"), dateValiditeStr,
+			diagnostic = new Diagnostics(curseur.getInt("Id_Diagnostic"), dateValiditeStr,
 					curseur.getString("type_diagnostic"), bien);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,8 +52,8 @@ public class DaoDiagnostic extends DaoModele<Diagnostic> implements Dao<Diagnost
 	}
 
 	@Override
-	public Diagnostic findById(String... id) throws SQLException {
-		List<Diagnostic> diagnostic = find(new RequeteSelectDiagnosticById(), id);
+	public Diagnostics findById(String... id) throws SQLException {
+		List<Diagnostics> diagnostic = find(new RequeteSelectDiagnosticById(), id);
 		if (diagnostic.isEmpty()) {
 			return null;
 		}
@@ -61,7 +61,7 @@ public class DaoDiagnostic extends DaoModele<Diagnostic> implements Dao<Diagnost
 	}
 
 	@Override
-	public List<Diagnostic> findAll() throws SQLException {
+	public List<Diagnostics> findAll() throws SQLException {
 		return find(new RequeteSelectDiagnostic());
 
 	}
