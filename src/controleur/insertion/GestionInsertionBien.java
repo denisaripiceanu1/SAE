@@ -1,10 +1,13 @@
 package controleur.insertion;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import modele.Immeuble;
+import modele.dao.DaoImmeuble;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionBien;
 import vue.insertion.Fenetre_InsertionCompteur;
@@ -12,6 +15,7 @@ import vue.insertion.Fenetre_InsertionCompteur;
 public class GestionInsertionBien implements ActionListener {
 	
 	private Fenetre_InsertionBien insertionBien;
+	private DaoImmeuble daoImmeuble;
 	
 	public GestionInsertionBien(Fenetre_InsertionBien insertionBien) {
 		this.insertionBien = insertionBien;
@@ -28,7 +32,24 @@ public class GestionInsertionBien implements ActionListener {
 			fenetreCompteur.setVisible(true);
 			fenetreCompteur.moveToFront();
 			break;
-		case "Ajouter":
+		case "Ajouter":	
+			try {
+				Immeuble immeuble = new Immeuble(
+						this.insertionBien.getTextField_IdImmeuble().getText(),
+						this.insertionBien.getTextField_adresse().getText(), 
+						this.insertionBien.getTextField_codePostal().getText(), 
+						this.insertionBien.getTextField_ville().getText(), 
+						this.insertionBien.getTextField_periodeDeConstruction().getText(), 
+						Integer.parseInt(this.insertionBien.getTextField_nbLogement().getText()),
+						this.insertionBien.getTextField_dateAcquisition().getText(),
+						this.insertionBien.getComboBox_typeDeBien().getSelectedItem().toString()
+				);
+				this.daoImmeuble.create(immeuble);
+//				Boite.deleteItem("Bien");
+//				Boite.addItem("Bien", bien);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 			
 			break;
 		case "Annuler":
