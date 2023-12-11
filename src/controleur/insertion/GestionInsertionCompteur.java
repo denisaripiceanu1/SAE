@@ -8,7 +8,9 @@ import javax.swing.JButton;
 import modele.Bien;
 import modele.Compteur;
 import modele.Immeuble;
+import modele.dao.DaoBien;
 import modele.dao.DaoCompteur;
+import modele.dao.DaoImmeuble;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionCompteur;
 
@@ -32,11 +34,17 @@ public class GestionInsertionCompteur implements ActionListener {
 		switch (btn.getText()) {
 		case "Ajouter":
 			try {
+				
+				DaoImmeuble daoImmeuble = new DaoImmeuble();
+				Immeuble immeuble = daoImmeuble.findById(this.gib.getIdBien()); //Le bien est l'immeuble dans la BD
+				DaoBien daoBien = new DaoBien();
+				Bien bien = daoBien.findById(null); //Le logement est un bien dans la BD
+				
 				Compteur compteur = new Compteur(
 						this.fic.getTextField_IdCompteur().getText(),
 						this.fic.getComboBox_typeDeCompteur().getSelectedItem().toString(),
-						this.gib.getIdBien(),
-						//this.gil
+						bien,
+						immeuble
 				);
 				this.daoCompteur.create(compteur);
 //				Boite.deleteItem("Bien");

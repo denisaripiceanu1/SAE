@@ -1,12 +1,12 @@
 package modele.dao.requetes.select;
 
-import modele.Diagnostic;
+import modele.Diagnostics;
 import modele.dao.requetes.Requete;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class RequeteSelectDiagnosticById implements Requete<Diagnostic> {
+public class RequeteSelectDiagnosticById implements Requete<Diagnostics> {
 
 	@Override
 	public String requete() {
@@ -19,7 +19,7 @@ public class RequeteSelectDiagnosticById implements Requete<Diagnostic> {
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Diagnostic data) throws SQLException {
+	public void parametres(PreparedStatement prSt, Diagnostics data) throws SQLException {
 		prSt.setInt(1, data.getIdDiagnostic());
 	}
 

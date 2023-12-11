@@ -5,6 +5,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import modele.Bien;
+import modele.Immeuble;
+import modele.dao.DaoBien;
+import modele.dao.DaoImmeuble;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionCompteur;
 import vue.insertion.Fenetre_InsertionLogement;
@@ -13,6 +17,7 @@ import vue.insertion.Fenetre_InsertionQuotite;
 public class GestionInsertionLogement implements ActionListener {
 
 	private Fenetre_InsertionLogement fil;
+	private DaoBien daoBien;
 
 	public GestionInsertionLogement(Fenetre_InsertionLogement fil) {
 		this.fil = fil;
@@ -40,7 +45,26 @@ public class GestionInsertionLogement implements ActionListener {
 			break;
 
 		case "Ajouter":
-			// Ajout d'un logement
+			Bien logement = null;
+			try {
+				DaoImmeuble daoImmeuble = new DaoImmeuble();
+				Immeuble immeuble = daoImmeuble
+						.findById(/* voir comment recuperer l’id bien du bien sélectionné dans le tableau */);
+
+				String typeLogement = (String) this.fil.getComboBox_typeDeLogement().getSelectedItem();
+
+				logement = new Bien(this.fil.getTextField_IdLogement().getText(),
+						Double.parseDouble(this.fil.getTextField_SurfaceHabitable().getText()),
+						Integer.parseInt(this.fil.getTextField_NbPièces().getText()),
+						Integer.parseInt(this.fil.getTextField_NumEtage().getText()),
+						this.fil.getTextField_DateAcquisition().getText(), typeLogement, immeuble);
+
+				this.daoBien.create(logement);
+
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			this.fil.dispose();
 			break;
 		case "Annuler":
 			this.fil.dispose();

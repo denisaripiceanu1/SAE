@@ -4,10 +4,10 @@ import java.sql.PreparedStatement;
 
 import java.sql.SQLException;
 
-import modele.Diagnostic;
+import modele.Diagnostics;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectDiagnostic implements Requete<Diagnostic> {
+public class RequeteSelectDiagnostic implements Requete<Diagnostics> {
 
 	@Override
 	public String requete() {
@@ -19,6 +19,6 @@ public class RequeteSelectDiagnostic implements Requete<Diagnostic> {
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Diagnostic data) throws SQLException {
+	public void parametres(PreparedStatement prSt, Diagnostics data) throws SQLException {
 	}
 }

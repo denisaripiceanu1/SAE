@@ -1,20 +1,20 @@
 package modele;
 
-public class Diagnostic {
+public class Diagnostics {
 	private int idDiagnostic;
 	private String dateValidite;
 	private String typeDiagnostic;
 	private Bien bien;
 
-	public Diagnostic(int idDiagnostic, String dateValidite, String typeDiagnostic, Bien bien) {
-		this.idDiagnostic = idDiagnostic;
+	public Diagnostics(/* int idDiagnostic */ String dateValidite, String typeDiagnostic, Bien bien) {
+		// this.idDiagnostic = idDiagnostic;
 		this.dateValidite = dateValidite;
 		this.typeDiagnostic = typeDiagnostic;
 		this.bien = bien;
 	}
 
 	public int getIdDiagnostic() {
-		return idDiagnostic;
+		return this.idDiagnostic;
 	}
 
 	public void setIdDiagnostic(int idDiagnostic) {
@@ -22,7 +22,7 @@ public class Diagnostic {
 	}
 
 	public String getDateValidite() {
-		return dateValidite;
+		return this.dateValidite;
 	}
 
 	public void setDateValidite(String dateValidite) {
@@ -30,7 +30,7 @@ public class Diagnostic {
 	}
 
 	public String getTypeDiagnostic() {
-		return typeDiagnostic;
+		return this.typeDiagnostic;
 	}
 
 	public void setTypeDiagnostic(String typeDiagnostic) {
@@ -38,7 +38,7 @@ public class Diagnostic {
 	}
 
 	public Bien getBien() {
-		return bien;
+		return this.bien;
 	}
 
 	public void setBien(Bien bien) {

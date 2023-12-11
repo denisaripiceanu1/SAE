@@ -57,7 +57,7 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		this.textField_montant.setColumns(10);
 		this.textField_montant.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_montant.setBounds(70, 168, 163, 40);
+		this.textField_montant.setBounds(70, 169, 163, 40);
 		panel.add(this.textField_montant);
 
 		this.textField_IDImmeuble = new JTextField();
@@ -150,5 +150,53 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		this.textField_IBAN.setBounds(359, 350, 163, 40);
 		panel.add(this.textField_IBAN);
 
+	}
+
+	public JTextField getTextField_numPolice() {
+		return this.textField_numPolice;
+	}
+
+	public JTextField getTextField_montant() {
+		return this.textField_montant;
+	}
+
+	public JTextField getTextField_IDImmeuble() {
+		return this.textField_IDImmeuble;
+	}
+
+	public JTextField getTextField_SIRET() {
+		return this.textField_SIRET;
+	}
+
+	public GestionInsertionAssurance getGestionClic() {
+		return this.gestionClic;
+	}
+
+	public JTextField getTextField_Nom() {
+		return this.textField_Nom;
+	}
+
+	public JTextField getTextField_Adresse() {
+		return this.textField_Adresse;
+	}
+
+	public JTextField getTextField_CodePostal() {
+		return this.textField_CodePostal;
+	}
+
+	public JTextField getTextField_Ville() {
+		return this.textField_Ville;
+	}
+
+	public JTextField getTextField_Mail() {
+		return this.textField_Mail;
+	}
+
+	public JTextField getTextField_tel() {
+		return this.textField_tel;
+	}
+
+	public JTextField getTextField_IBAN() {
+		return this.textField_IBAN;
 	}
 }

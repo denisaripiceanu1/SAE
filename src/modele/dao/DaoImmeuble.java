@@ -1,5 +1,6 @@
 package modele.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 
 
@@ -9,14 +10,17 @@ import java.util.List;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectImmeuble;
 import modele.dao.requetes.select.RequeteSelectImmeubleById;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertImmeuble;
 import modele.dao.requetes.update.RequeteUpdateImmeuble;
 
 public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 
 	@Override
-	public void create(Immeuble donnees) {
-		// TODO Auto-generated method stub
-
+	public void create(Immeuble donnees) throws SQLException {
+		SousProgramme<Immeuble> sp = new SousProgrammeInsertImmeuble();
+    	CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+    	sp.parametres(st, donnees);
+		st.execute();
 	}
 
 	@Override
