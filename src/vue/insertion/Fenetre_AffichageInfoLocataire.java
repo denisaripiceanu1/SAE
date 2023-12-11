@@ -145,4 +145,70 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		lblDpartLoca.setBounds(534, 264, 137, 25);
 		panel.add(lblDpartLoca);
 	}
+
+	public JTextField getTextField_Nom() {
+		return textField_Nom;
+	}
+
+	public void setTextField_Nom(JTextField textField_Nom) {
+		this.textField_Nom = textField_Nom;
+	}
+
+	public JTextField getTextField_Prenom() {
+		return textField_Prenom;
+	}
+
+	public void setTextField_Prenom(JTextField textField_Prenom) {
+		this.textField_Prenom = textField_Prenom;
+	}
+
+	public JTextField getTextField_Adresse() {
+		return textField_Adresse;
+	}
+
+	public void setTextField_Adresse(JTextField textField_Adresse) {
+		this.textField_Adresse = textField_Adresse;
+	}
+
+	public JTextField getTextField_Telephone() {
+		return textField_Telephone;
+	}
+
+	public void setTextField_Telephone(JTextField textField_Telephone) {
+		this.textField_Telephone = textField_Telephone;
+	}
+
+	public JTextField getTextField_Mail() {
+		return textField_Mail;
+	}
+
+	public void setTextField_Mail(JTextField textField_Mail) {
+		this.textField_Mail = textField_Mail;
+	}
+
+	public JTextField getTextField_DateN() {
+		return textField_DateN;
+	}
+
+	public void setTextField_DateN(JTextField textField_DateN) {
+		this.textField_DateN = textField_DateN;
+	}
+
+	public JTextField getTextField_Id() {
+		return textField_Id;
+	}
+
+	public void setTextField_Id(JTextField textField_Id) {
+		this.textField_Id = textField_Id;
+	}
+
+	public GestionAffichageInfoLocataire getGestionClic() {
+		return gestionClic;
+	}
+
+	public void setGestionClic(GestionAffichageInfoLocataire gestionClic) {
+		this.gestionClic = gestionClic;
+	}
+    
+    
 }
