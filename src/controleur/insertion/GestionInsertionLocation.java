@@ -7,7 +7,6 @@ import javax.swing.JButton;
 
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionColocataire;
-import vue.insertion.Fenetre_InsertionCompteur;
 import vue.insertion.Fenetre_InsertionLocation;
 
 public class GestionInsertionLocation implements ActionListener {
@@ -21,7 +20,7 @@ public class GestionInsertionLocation implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor(); 
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor();
 		switch (btn.getText()) {
 		case "Ajouter un colocataire":
 			Fenetre_InsertionColocataire fenetreColo = new Fenetre_InsertionColocataire();
