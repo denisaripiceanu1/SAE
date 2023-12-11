@@ -10,7 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import controleur.insertion.GestionInsertionBien;
 import controleur.insertion.GestionInsertionCompteur;
+import controleur.insertion.GestionInsertionLogement;
 
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
@@ -21,9 +23,10 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 	private JTextField textField_IdCompteur;
 	private JTextField textField_IndiceCompteur;
 	private GestionInsertionCompteur gestionClic;
+	private JComboBox comboBox_typeDeCompteur;
 
-	public Fenetre_InsertionCompteur() {
-		this.gestionClic = new GestionInsertionCompteur(this);
+	public Fenetre_InsertionCompteur(GestionInsertionBien gib, GestionInsertionLogement gil) {
+		this.gestionClic = new GestionInsertionCompteur(this,gib,gil);
 
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
@@ -44,7 +47,7 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 		lbl_InsererUnCompteur.setBounds(285, 56, 160, 48);
 		panel.add(lbl_InsererUnCompteur);
 
-		JComboBox comboBox_typeDeCompteur = new JComboBox();
+		comboBox_typeDeCompteur = new JComboBox();
 		comboBox_typeDeCompteur.setModel(new DefaultComboBoxModel(new String[] { "Eau", "Gaz", "Electricité" }));
 		comboBox_typeDeCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
@@ -82,4 +85,19 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 		panel.add(btnAnnuler);
 
 	}
+
+	public JTextField getTextField_IdCompteur() {
+		return textField_IdCompteur;
+	}
+
+	public JTextField getTextField_IndiceCompteur() {
+		return textField_IndiceCompteur;
+	}
+
+	public JComboBox getComboBox_typeDeCompteur() {
+		return comboBox_typeDeCompteur;
+	}
+	
+	
+	
 }

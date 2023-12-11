@@ -54,22 +54,34 @@ public class GestionAccueil implements ActionListener {
 		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
 
 		modeleTable.setValueAt(immeuble.getImmeuble(), numeroLigne, 0);
-		modeleTable.setValueAt(immeuble.getAdresse() + " " + immeuble.getCp() + " " + immeuble.getVille(), numeroLigne,
+		modeleTable.setValueAt(immeuble.getAdresse() + "\n" + immeuble.getCp() + " " + immeuble.getVille(), numeroLigne,
 				1);
 		modeleTable.setValueAt(immeuble.getNbLogement(), numeroLigne, 2);
 	}
 
 	private void chargerBiens() throws SQLException {
 
-		List<Immeuble> biens = daoImmeuble.findAll();
+		List<Immeuble> immeubles = daoImmeuble.findAll();
 
 		DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableBiens().getModel();
 
-		modeleTable.setRowCount(biens.size());
+		modeleTable.setRowCount(immeubles.size());
 
-		for (int i = 0; i < biens.size(); i++) {
-			Immeuble bien = biens.get(i);
-			ecrireLigneTable(i, bien);
+		for (int i = 0; i < immeubles.size(); i++) {
+			Immeuble immeuble = immeubles.get(i);
+			ecrireLigneTable(i, immeuble);
+		}
+	}
+
+	public static void viderTable(JTable table) {
+		DefaultTableModel modeleTable = (DefaultTableModel) table.getModel();
+		int rowCount = modeleTable.getRowCount();
+		int columnCount = modeleTable.getColumnCount();
+
+		for (int row = 0; row < rowCount; row++) {
+			for (int col = 0; col < columnCount; col++) {
+				modeleTable.setValueAt(null, row, col);
+			}
 		}
 	}
 
@@ -110,6 +122,11 @@ public class GestionAccueil implements ActionListener {
 		// LAYERED MES BIENS
 		///////////////////
 		case "btnMesBiens_Charger":
+			try {
+				chargerBiens();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "btnMesBiens_Supprimer":
 			break;
