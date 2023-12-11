@@ -30,7 +30,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 	private JTextField textField_tel;
 	private JTextField textField_e_mail;
 	private JTextField textField_Date_de_naissance;
-	private JTable table;
 	private JTable table_id_logements;
 	private JTextField textField_caution;
 	private JTextField textField_date_arrivee;
@@ -119,7 +118,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 		JButton btn_ajouter_coloc = new JButton("Ajouter un colocataire");
 		btn_ajouter_coloc.setForeground(new Color(255, 255, 255));
 		btn_ajouter_coloc.setBackground(new Color(0, 102, 204));
-		btn_ajouter_coloc.setBounds(54, 439, 139, 21);
+		btn_ajouter_coloc.setBounds(47, 479, 139, 21);
 		btn_ajouter_coloc.addActionListener(gestionClic);
 		panel.add(btn_ajouter_coloc);
 
@@ -158,9 +157,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 		comboBox_bien.setModel(new DefaultComboBoxModel(new String[] { "Biens" }));
 		comboBox_bien.setBounds(267, 131, 94, 21);
 		panel.add(comboBox_bien);
-		this.table.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "ID des logements" }));
-		this.table.setBounds(369, 214, 1, 1);
-		panel.add(this.table);
 
 		JScrollPane scrollPane_table_id_logements = new JScrollPane();
 		scrollPane_table_id_logements.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
@@ -169,8 +165,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 
 		this.table_id_logements = new JTable();
 		this.table_id_logements.setCellSelectionEnabled(true);
-		this.table_id_logements
-				.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "ID des logements" }));
+		this.table_id_logements.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "ID des logements" }));
 		this.table_id_logements.setBounds(0, 0, 1, 1);
 		scrollPane_table_id_logements.setViewportView(this.table_id_logements);
 
@@ -213,7 +208,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 		panel.add(this.textField_loyer);
 
 		JScrollPane scrollPane_table_locataires = new JScrollPane();
-		scrollPane_table_locataires.setBounds(24, 395, 190, 93);
+		scrollPane_table_locataires.setBounds(24, 375, 190, 93);
 		panel.add(scrollPane_table_locataires);
 
 		this.table_liste_locataires = new JTable();
