@@ -313,6 +313,14 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesBiens_Charger.addActionListener(this.gestionAccueil);
 		btnMesBiens_Charger.setName("btnMesBiens_Charger");
 		panelMesBiens.add(btnMesBiens_Charger);
+		
+		JButton btnMesBiens_Modifier = new JButton("Modifier");
+		btnMesBiens_Modifier.setForeground(Color.WHITE);
+		btnMesBiens_Modifier.setBackground(new Color(0, 102, 204));
+		btnMesBiens_Modifier.setBounds(287, 449, 99, 31);
+		btnMesBiens_Modifier.addActionListener(this.gestionAccueil);
+		btnMesBiens_Modifier.setName("btnMesBiens_Modifier");
+		panelMesBiens.add(btnMesBiens_Modifier);
 
 		JButton btnMesBiens_Supprimer = new JButton("Supprimer");
 		btnMesBiens_Supprimer.setForeground(Color.WHITE);
@@ -322,13 +330,6 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesBiens_Supprimer.setName("btnMesBiens_Supprimer");
 		panelMesBiens.add(btnMesBiens_Supprimer);
 
-		JButton btnMesBiens_Modifier = new JButton("Modifier");
-		btnMesBiens_Modifier.setForeground(Color.WHITE);
-		btnMesBiens_Modifier.setBackground(new Color(0, 102, 204));
-		btnMesBiens_Modifier.setBounds(287, 449, 99, 31);
-		btnMesBiens_Modifier.addActionListener(this.gestionAccueil);
-		btnMesBiens_Modifier.setName("btnMesBiens_Modifier");
-		panelMesBiens.add(btnMesBiens_Modifier);
 	
 		//Boutons BIENS
 		JButton btnMesBiens_AjouterBien = new JButton("Ajouter un bien");
@@ -383,7 +384,9 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesLocations.setBackground(Color.WHITE);
 		this.layeredPane_MesLocations.add(panel_MesLocations, BorderLayout.CENTER);
 		panel_MesLocations.setLayout(null);
-
+		
+		
+		//Tableaux et scrollPane
 		JScrollPane scrollPane_MesLocations = new JScrollPane();
 		scrollPane_MesLocations.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPane_MesLocations.setBounds(30, 95, 447, 323);
@@ -401,7 +404,21 @@ public class Fenetre_Accueil extends JFrame {
 		));
 		this.table_MesLocations.setBounds(40, 53, 668, 130);
 		scrollPane_MesLocations.setViewportView(this.table_MesLocations);
-
+		
+		//Labels
+		JLabel lbl_MesLocations = new JLabel("Mes Locations");
+		lbl_MesLocations.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_MesLocations.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_MesLocations.setBounds(244, 22, 216, 43);
+		panel_MesLocations.add(lbl_MesLocations);
+		
+		//Séparateurs
+		JSeparator separator = new JSeparator();
+		separator.setForeground(new Color(0, 102, 204));
+		separator.setBounds(258, 63, 190, 2);
+		panel_MesLocations.add(separator);
+		
+		//Boutons généraux
 		JButton btn_MesLocations_Charger = new JButton("Charger");
 		btn_MesLocations_Charger.setForeground(Color.WHITE);
 		btn_MesLocations_Charger.setBackground(new Color(0, 102, 204));
@@ -409,6 +426,14 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesLocations_Charger.addActionListener(this.gestionAccueil);
 		btn_MesLocations_Charger.setName("btn_MesLocations_Charger");
 		panel_MesLocations.add(btn_MesLocations_Charger);
+		
+		JButton btn_MesLocations_Modifier = new JButton("Modifier");
+		btn_MesLocations_Modifier.setForeground(Color.WHITE);
+		btn_MesLocations_Modifier.setBackground(new Color(0, 102, 204));
+		btn_MesLocations_Modifier.setBounds(396, 449, 99, 31);
+		btn_MesLocations_Modifier.addActionListener(this.gestionAccueil);
+		btn_MesLocations_Modifier.setName("btn_MesLocations_Modifier");
+		panel_MesLocations.add(btn_MesLocations_Modifier);
 
 		JButton btn_MesLocations_Inserer = new JButton("Insérer");
 		btn_MesLocations_Inserer.setForeground(Color.WHITE);
@@ -426,25 +451,15 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesLocations_Supprimer.setName("btn_MesLocations_Supprimer");
 		panel_MesLocations.add(btn_MesLocations_Supprimer);
 
-		JButton btn_MesLocations_Modifier = new JButton("Modifier");
-		btn_MesLocations_Modifier.setForeground(Color.WHITE);
-		btn_MesLocations_Modifier.setBackground(new Color(0, 102, 204));
-		btn_MesLocations_Modifier.setBounds(396, 449, 99, 31);
-		btn_MesLocations_Modifier.addActionListener(this.gestionAccueil);
-		btn_MesLocations_Modifier.setName("btn_MesLocations_Modifier");
-		panel_MesLocations.add(btn_MesLocations_Modifier);
+		
+		//Bouton propre à la page
+		JButton btn_mesLocations_InfoLocataire = new JButton("Mon locataire");
+		btn_mesLocations_InfoLocataire.setBounds(510, 395, 152, 23);
+		btn_mesLocations_InfoLocataire.addActionListener(this.gestionAccueil);
+		btn_mesLocations_InfoLocataire.setName("btn_mesLocations_InfoLocataire");
+		panel_MesLocations.add(btn_mesLocations_InfoLocataire);
 
-		JLabel lbl_MesLocations = new JLabel("Mes Locations");
-		lbl_MesLocations.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_MesLocations.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_MesLocations.setBounds(244, 22, 216, 43);
-		panel_MesLocations.add(lbl_MesLocations);
-
-		JSeparator separator = new JSeparator();
-		separator.setForeground(new Color(0, 102, 204));
-		separator.setBounds(258, 63, 190, 2);
-		panel_MesLocations.add(separator);
-
+		//Champs de saisie
 		this.textField_loyer = new JTextField();
 		this.textField_loyer.setBackground(new Color(255, 255, 255));
 		this.textField_loyer.setEditable(false);
@@ -504,12 +519,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_restantDu.setBackground(Color.WHITE);
 		this.textField_restantDu.setBounds(510, 257, 152, 31);
 		panel_MesLocations.add(this.textField_restantDu);
-		
-		JButton btn_mesLocations_InfoLocataire = new JButton("Mon locataire");
-		btn_mesLocations_InfoLocataire.setBounds(510, 395, 152, 23);
-		btn_mesLocations_InfoLocataire.addActionListener(this.gestionAccueil);
-		btn_mesLocations_InfoLocataire.setName("btn_mesLocations_InfoLocataire");
-		panel_MesLocations.add(btn_mesLocations_InfoLocataire);
+
 			
 		
 		
@@ -527,12 +537,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.layeredPane_MesTravaux.add(panel_MesTravaux);
 		panel_MesTravaux.setLayout(null);
 
-		JLabel lbl_MesTravaux = new JLabel("Mes Travaux");
-		lbl_MesTravaux.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_MesTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_MesTravaux.setBounds(244, 22, 216, 43);
-		panel_MesTravaux.add(lbl_MesTravaux);
-
+		//Tableaux et scrollPane
 		JScrollPane scrollPane_MesTravaux = new JScrollPane();
 		scrollPane_MesTravaux.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPane_MesTravaux.setBounds(51, 128, 641, 289);
@@ -550,31 +555,21 @@ public class Fenetre_Accueil extends JFrame {
 		));
 		this.table_MesTravaux.setBounds(40, 53, 668, 130);
 		scrollPane_MesTravaux.setViewportView(this.table_MesTravaux);
-
+		
+		//labels
+		JLabel lbl_MesTravaux = new JLabel("Mes Travaux");
+		lbl_MesTravaux.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_MesTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_MesTravaux.setBounds(244, 22, 216, 43);
+		panel_MesTravaux.add(lbl_MesTravaux);
+		
+		//Séparateurs
 		JSeparator separator_MesTravaux = new JSeparator();
 		separator_MesTravaux.setForeground(new Color(0, 102, 204));
 		separator_MesTravaux.setBounds(258, 63, 190, 2);
 		panel_MesTravaux.add(separator_MesTravaux);
 		
-		JToggleButton tglbtn_Travaux_immeubles = new JToggleButton("Travaux pour mes immeubles");
-		tglbtn_Travaux_immeubles.setBounds(112, 76, 216, 23);
-		tglbtn_Travaux_immeubles.addActionListener(this.gestionAccueil);
-		panel_MesTravaux.add(tglbtn_Travaux_immeubles);
-		
-		JToggleButton tglbtn_Travaux_logements = new JToggleButton("Travaux pour mes logements");
-		tglbtn_Travaux_logements.setBounds(384, 76, 208, 23);
-		tglbtn_Travaux_logements.addActionListener(this.gestionAccueil);
-		panel_MesTravaux.add(tglbtn_Travaux_logements);
-		
-
-		JButton btn_Travaux_Supprimer = new JButton("Supprimer");
-		btn_Travaux_Supprimer.setForeground(Color.WHITE);
-		btn_Travaux_Supprimer.setBackground(new Color(0, 102, 204));
-		btn_Travaux_Supprimer.setBounds(425, 449, 105, 31);
-		btn_Travaux_Supprimer.addActionListener(this.gestionAccueil);
-		btn_Travaux_Supprimer.setName("btn_Travaux_Supprimer");
-		panel_MesTravaux.add(btn_Travaux_Supprimer);
-
+		//Boutons généraux
 		JButton btn_Travaux_Modifier = new JButton("Modifier");
 		btn_Travaux_Modifier.setForeground(Color.WHITE);
 		btn_Travaux_Modifier.setBackground(new Color(0, 102, 204));
@@ -582,6 +577,27 @@ public class Fenetre_Accueil extends JFrame {
 		btn_Travaux_Modifier.addActionListener(this.gestionAccueil);
 		btn_Travaux_Modifier.setName("btn_Travaux_Modifier");
 		panel_MesTravaux.add(btn_Travaux_Modifier);
+		
+		JButton btn_Travaux_Supprimer = new JButton("Supprimer");
+		btn_Travaux_Supprimer.setForeground(Color.WHITE);
+		btn_Travaux_Supprimer.setBackground(new Color(0, 102, 204));
+		btn_Travaux_Supprimer.setBounds(425, 449, 105, 31);
+		btn_Travaux_Supprimer.addActionListener(this.gestionAccueil);
+		btn_Travaux_Supprimer.setName("btn_Travaux_Supprimer");
+		panel_MesTravaux.add(btn_Travaux_Supprimer);
+		
+		//Boutons propres à la page
+		JToggleButton tglbtn_Travaux_immeubles = new JToggleButton("Travaux pour mes immeubles");
+		tglbtn_Travaux_immeubles.setBounds(112, 76, 216, 23);
+		tglbtn_Travaux_immeubles.addActionListener(this.gestionAccueil);
+		tglbtn_Travaux_immeubles.setName("tglbtn_Travaux_immeubles");
+		panel_MesTravaux.add(tglbtn_Travaux_immeubles);
+		
+		JToggleButton tglbtn_Travaux_logements = new JToggleButton("Travaux pour mes logements");
+		tglbtn_Travaux_logements.setBounds(384, 76, 208, 23);
+		tglbtn_Travaux_logements.addActionListener(this.gestionAccueil);
+		tglbtn_Travaux_logements.setName("tglbtn_Travaux_logements");
+		panel_MesTravaux.add(tglbtn_Travaux_logements);
 
 		
 		

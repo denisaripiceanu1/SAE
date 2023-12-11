@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 
 import vue.Fenetre_Accueil;
+import vue.insertion.Fenetre_AffichageInfoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
 import vue.insertion.Fenetre_InsertionDiagnostic;
@@ -42,6 +43,7 @@ public class GestionAccueil implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
 		switch (btn.getName()) { // a partir du nom des boutons
+		
 			//NAVIGATION ENTRE LES LAYEREDPANE
 			case "btnAccueil":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_Accueil());
@@ -117,11 +119,45 @@ public class GestionAccueil implements ActionListener {
 				travaux_logement.setVisible(true);
 				travaux_logement.moveToFront();
 				break;
-			
+			///////////////////////	
 			//LAYERED MES LOCATIONS
+			///////////////////////
+			case "btn_MesLocations_Charger":
+				break;
+			case "btn_MesLocations_Modifier":
+				break;
+			case "btn_MesLocations_Inserer":
+				break;	
+			case "btn_MesLocations_Supprimer":
+				break;
+				
+			case "btn_mesLocations_InfoLocataire": //A MODIFIER POUR QUE L'OUVERTURE SOIT FAITES APRES LA SELECTION D'UNE LIGNE DU TABLEAU
+				Fenetre_AffichageInfoLocataire infos_locataire = new Fenetre_AffichageInfoLocataire();
+				this.fenetreAccueil.getLayeredPane().add(infos_locataire);
+				infos_locataire.setVisible(true);
+				infos_locataire.moveToFront();
+				break;
+			/////////////////////	
 			//LAYERED MES TRAVAUX
+			/////////////////////
+			case "btn_Travaux_Modifier":
+				break;
+			case "btn_Travaux_Supprimer":
+				break;
+				
+			case "tglbtn_Travaux_immeubles":
+				//Permet de trier le tableau de travaux en n'affichant que ceux concernants les immeubles
+				break;
+			case "tglbtn_Travaux_logements":
+				//Permet de trier le tableau de travaux en n'affichant que ceux concernants les logements
+				break;
+			///////////////////////////////	
 			//LAYERED MES CHARGES LOCATIVES
+			///////////////////////////////	
+				
+			////////////////////////	
 			//LAYERED MES ASSURANCES
+			////////////////////////	
 			case "btn_MesAssurances_Inserer":
 				Fenetre_InsertionAssurance insertion_assurance = new Fenetre_InsertionAssurance();
 				this.fenetreAccueil.getLayeredPane().add(insertion_assurance);
