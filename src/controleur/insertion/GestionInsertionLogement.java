@@ -24,18 +24,14 @@ public class GestionInsertionLogement implements ActionListener {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor(); // fenetre dans laquelle on ouvre des internal frame
 		switch (btn.getText()) {
-		case "Ajouter un colocataire":
-			Fenetre_InsertionColocataire fenetreColo = new Fenetre_InsertionColocataire();
-			fenetre_Principale.getLayeredPane().add(fenetreColo);
-			fenetreColo.setVisible(true);
-			fenetreColo.moveToFront();
+		case "Ajouter une quotité":
+			
 			break;
-		case "Ajouter un bail":
-			// un pdf
+			
+		case "Ajouter un compteur":
+	
 			break;
-		case "Ajouter l'état des lieux":
-			// un pdf
-			break;
+		
 		case "Ajouter":
 			// Ajouter le code pour gérer l'ajout de la location
 			break;

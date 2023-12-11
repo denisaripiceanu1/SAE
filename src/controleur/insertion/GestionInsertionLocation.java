@@ -10,10 +10,10 @@ import vue.insertion.Fenetre_InsertionColocataire;
 import vue.insertion.Fenetre_InsertionCompteur;
 import vue.insertion.Fenetre_InsertionLocation;
 
-public class GestionInsertionLocation implements ActionListener{
-	
+public class GestionInsertionLocation implements ActionListener {
+
 	private Fenetre_InsertionLocation fil;
-	
+
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
 	}
@@ -21,26 +21,26 @@ public class GestionInsertionLocation implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor(); //fenetre dans laquelle on ouvre des internal frame
-        switch (btn.getText()) {
-        case "Ajouter un colocataire":
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor(); 
+		switch (btn.getText()) {
+		case "Ajouter un colocataire":
 			Fenetre_InsertionColocataire fenetreColo = new Fenetre_InsertionColocataire();
 			fenetre_Principale.getLayeredPane().add(fenetreColo);
 			fenetreColo.setVisible(true);
 			fenetreColo.moveToFront();
 			break;
-        case "Ajouter un bail":
-            // un pdf
-            break;
-        case "Ajouter l'état des lieux":
-            // un pdf
-            break;
-        case "Ajouter":
-            // Ajouter le code pour gérer l'ajout de la location
-            break;
-        case "Annuler":
-            this.fil.dispose();
-            break;
-    }
+		case "Ajouter un bail":
+			// un pdf
+			break;
+		case "Ajouter l'état des lieux":
+			// un pdf
+			break;
+		case "Ajouter":
+			// Ajouter le code pour gérer l'ajout de la location
+			break;
+		case "Annuler":
+			this.fil.dispose();
+			break;
+		}
 	}
 }

@@ -30,8 +30,6 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 	private JTextField textField_periodeDeConstruction;
 	private JTextField textField_nbLogement;
 	private JTextField textField_dateAcquisition;
-	private JTextField textField_IdCompteur;
-	private JTextField textField_IndexCompteur;
 	private JSeparator separator_Compteur;
 	private JButton btn_ajouterCompteur;
 	

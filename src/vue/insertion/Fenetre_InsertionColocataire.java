@@ -26,9 +26,6 @@ public class Fenetre_InsertionColocataire extends JInternalFrame {
 	private JTextField textField_1;
 	private GestionInsertionColocataire gestionClic;
 
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_InsertionColocataire() {
 
 		this.gestionClic = new GestionInsertionColocataire(this);
