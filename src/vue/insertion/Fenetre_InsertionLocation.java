@@ -1,15 +1,12 @@
 package vue.insertion;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
 import controleur.insertion.GestionInsertionLocation;
 
 public class Fenetre_InsertionLocation extends JInternalFrame implements ActionListener {
@@ -113,7 +111,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 		btn_ajouter_coloc.setForeground(new Color(255, 255, 255));
 		btn_ajouter_coloc.setBackground(new Color(0, 102, 204));
 		btn_ajouter_coloc.setBounds(47, 479, 139, 21);
-		btn_ajouter_coloc.addActionListener(gestionClic);
+		btn_ajouter_coloc.addActionListener(this.gestionClic);
 		panel.add(btn_ajouter_coloc);
 
 		JLabel lbl_titre_locataire = new JLabel("Locataire");
@@ -135,7 +133,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 		btn_ajouter_location.setBackground(new Color(0, 102, 204));
 		btn_ajouter_location.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_ajouter_location.setBounds(257, 457, 94, 31);
-		btn_ajouter_location.addActionListener(gestionClic);
+		btn_ajouter_location.addActionListener(this.gestionClic);
 		panel.add(btn_ajouter_location);
 
 		JButton btn_annuler_location = new JButton("Annuler");
@@ -143,7 +141,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 		btn_annuler_location.setBackground(new Color(0, 102, 204));
 		btn_annuler_location.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_annuler_location.setBounds(400, 457, 94, 31);
-		btn_annuler_location.addActionListener(gestionClic);
+		btn_annuler_location.addActionListener(this.gestionClic);
 		panel.add(btn_annuler_location);
 
 		JComboBox comboBox_bien = new JComboBox();
@@ -166,12 +164,12 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 
 		JButton btnAjouterBail = new JButton("Ajouter un bail");
 		btnAjouterBail.setBounds(534, 149, 154, 21);
-		btnAjouterBail.addActionListener(gestionClic);
+		btnAjouterBail.addActionListener(this.gestionClic);
 		panel.add(btnAjouterBail);
 
 		JButton btnAjouterEtatDesLieux = new JButton("Ajouter l'état des lieux");
 		btnAjouterEtatDesLieux.setBounds(534, 116, 154, 21);
-		btnAjouterEtatDesLieux.addActionListener(gestionClic);
+		btnAjouterEtatDesLieux.addActionListener(this.gestionClic);
 		panel.add(btnAjouterEtatDesLieux);
 
 		this.textField_caution = new JTextField();
@@ -214,6 +212,4 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 
 	}
 
-	public void actionPerformed(ActionEvent e) {
-	}
 }
