@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import modele.Assurance;
+import modele.Entreprise;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectAssurance;
 import modele.dao.requetes.select.RequeteSelectAssuranceById;
@@ -38,8 +39,11 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 			String idImmeuble = curseur.getString("Id_Immeuble");
 			DaoImmeuble daoImmeuble = new DaoImmeuble();
 			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
+			
+			DaoEntreprise daoEntreprise = new DaoEntreprise();
+			Entreprise entreprise = daoEntreprise.findById("SIRET");
 
-			assurance = new Assurance(numeroPolice, montantInit, immeuble);
+			assurance = new Assurance(numeroPolice, montantInit, immeuble,entreprise);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
