@@ -2,6 +2,7 @@ package modele.dao;
 
 import java.sql.ResultSet;
 
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import modele.Entreprise;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectAssurance;
 import modele.dao.requetes.select.RequeteSelectAssuranceById;
+import modele.dao.requetes.update.RequeteUpdateAssurance;
 
 public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance> {
 
@@ -19,8 +21,8 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 	}
 
 	@Override
-	public void update(Assurance donnees) {
-		// TODO: Implémenter la mise à jour
+	public void update(Assurance donnees) throws SQLException {
+		miseAJour(new RequeteUpdateAssurance(), donnees);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import java.util.List;
 import modele.Locataire;
 import modele.dao.requetes.select.RequeteSelectLocataire;
 import modele.dao.requetes.select.RequeteSelectLocataireById;
+import modele.dao.requetes.update.RequeteUpdateLocataire;
 
 public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire> {
 
@@ -18,8 +19,8 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 	}
 
 	@Override
-	public void update(Locataire donnees) {
-		// TODO Auto-generated method stub
+	public void update(Locataire donnees) throws SQLException {
+		miseAJour(new RequeteUpdateLocataire(), donnees);
 
 	}
 

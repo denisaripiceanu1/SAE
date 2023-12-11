@@ -1,6 +1,7 @@
 package modele.dao;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import modele.Bien;
 import modele.Charge;
 import modele.dao.requetes.select.RequeteSelectCharge;
 import modele.dao.requetes.select.RequeteSelectChargeById;
+import modele.dao.requetes.update.RequeteUpdateCharge;
 
 public class DaoCharge extends DaoModele<Charge> implements Dao<Charge> {
 
@@ -18,8 +20,8 @@ public class DaoCharge extends DaoModele<Charge> implements Dao<Charge> {
 	}
 
 	@Override
-	public void update(Charge donnees) {
-		// TODO Auto-generated method stub
+	public void update(Charge donnees) throws SQLException {
+		miseAJour(new RequeteUpdateCharge(), donnees);
 
 	}
 

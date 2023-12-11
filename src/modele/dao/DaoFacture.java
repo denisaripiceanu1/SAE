@@ -1,6 +1,7 @@
 package modele.dao;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import modele.Facture;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectFacture;
 import modele.dao.requetes.select.RequeteSelectFactureById;
+import modele.dao.requetes.update.RequeteUpdateFacture;
 
 public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 
@@ -20,8 +22,8 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	}
 
 	@Override
-	public void update(Facture donnees) {
-		// TODO Auto-generated method stub
+	public void update(Facture donnees) throws SQLException {
+		miseAJour(new RequeteUpdateFacture(), donnees);
 
 	}
 
