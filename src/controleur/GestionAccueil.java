@@ -73,6 +73,18 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
+	public static void viderTable(JTable table) {
+		DefaultTableModel modeleTable = (DefaultTableModel) table.getModel();
+		int rowCount = modeleTable.getRowCount();
+		int columnCount = modeleTable.getColumnCount();
+
+		for (int row = 0; row < rowCount; row++) {
+			for (int col = 0; col < columnCount; col++) {
+				modeleTable.setValueAt(null, row, col);
+			}
+		}
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
