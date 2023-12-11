@@ -22,7 +22,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 
-public class Fenetre_InsertionTravaux extends JFrame{
+public class Fenetre_InsertionTravaux extends JInternalFrame{
 	private JTextField textField_Numero;
 	private JTextField textField_date_emission;
 	private JTextField textField_date_paiement;
@@ -33,28 +33,7 @@ public class Fenetre_InsertionTravaux extends JFrame{
 	private JSeparator separator_Travaux;
     JRadioButton rdbtnOui = new JRadioButton("Oui");
     JRadioButton rdbtnNon = new JRadioButton("Non");
-	
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Fenetre_InsertionTravaux frame = new Fenetre_InsertionTravaux();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_InsertionTravaux() {
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);

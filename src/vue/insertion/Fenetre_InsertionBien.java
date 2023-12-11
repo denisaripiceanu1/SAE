@@ -34,6 +34,7 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 	private JTextField textField_IndexCompteur;
 	private JSeparator separator_Compteur;
 	private JButton btn_ajouterCompteur;
+	
 	private GestionInsertionBien gestionInsertionBien;
 
 

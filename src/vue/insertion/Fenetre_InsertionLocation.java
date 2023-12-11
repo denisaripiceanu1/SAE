@@ -22,13 +22,19 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ee69bdc566ad9dc772efaa9258a5d96bd2e58412
 import controleur.insertion.GestionInsertionLocation;
 
-public class Fenetre_InsertionLocation extends JInternalFrame {
+public class Fenetre_InsertionLocation extends JInternalFrame implements ActionListener {
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> ee69bdc566ad9dc772efaa9258a5d96bd2e58412
 	private JTextField textField_IdLocataire;
 	private JTextField textField_Nom;
 	private JTextField textField_Prenom;
@@ -119,14 +125,11 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 				"Date de naissance", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		this.textField_Date_de_naissance.setBounds(24, 215, 190, 40);
 		panel.add(this.textField_Date_de_naissance);
-
-		JButton btn_ajouter_coloc = new JButton("Ajouter");
-		btn_ajouter_coloc.setForeground(new Color(255, 255, 255));
-		btn_ajouter_coloc.setBackground(new Color(0, 102, 204));
-		btn_ajouter_coloc.addActionListener(this);
-		btn_ajouter_coloc.setBounds(46, 362, 139, 21);
+		
 		
 		JButton btn_ajouter_coloc = new JButton("Ajouter un colocataire");
+		btn_ajouter_coloc.setForeground(new Color(255, 255, 255));
+		btn_ajouter_coloc.setBackground(new Color(0, 102, 204));
 		btn_ajouter_coloc.setBounds(54, 439, 139, 21);
 		btn_ajouter_coloc.addActionListener(gestionClic);
 		panel.add(btn_ajouter_coloc);
@@ -181,14 +184,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 				.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "ID des logements" }));
 		this.table_id_logements.setBounds(0, 0, 1, 1);
 		scrollPane_table_id_logements.setViewportView(this.table_id_logements);
-
-		JButton btn_ajouter_bail = new JButton("Ajouter un bail");
-		btn_ajouter_bail.setBounds(534, 149, 154, 21);
-		panel.add(btn_ajouter_bail);
-
-		JButton btn_ajouter_etat_lieux = new JButton("Ajouter l'état des lieux");
-		btn_ajouter_etat_lieux.setBounds(534, 116, 154, 21);
-		panel.add(btn_ajouter_etat_lieux);
 
 		JButton btnAjouterBail = new JButton("Ajouter un bail");
 		btnAjouterBail.setBounds(534, 149, 154, 21);
