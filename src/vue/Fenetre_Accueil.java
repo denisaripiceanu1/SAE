@@ -49,8 +49,8 @@ public class Fenetre_Accueil extends JFrame {
 	private JLayeredPane layeredPane_RegularisationDesCharges;
 	private JLayeredPane layeredPane_SoldeDeToutCompte;
 	private JLayeredPane layeredPane_MesDocuments;
-	private JTable table_MesBiens;
-	private JTable table_MesBiens_Logements;
+	private JTable tableMesBiens;
+	private JTable tableMesBiens_Logements;
 	private JTable table_MesLocations;
 	private JTable table_MesTravaux;
 	private JTable table_MesChargesLocatives;
@@ -231,33 +231,27 @@ public class Fenetre_Accueil extends JFrame {
 		
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES BIENS
-		// ////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////
 		this.layeredPane_MesBiens = new JLayeredPane();
 		this.contentPane.add(this.layeredPane_MesBiens, BorderLayout.CENTER);
 		this.layeredPane_MesBiens.setLayout(new BorderLayout(0, 0));
 
-		JPanel panel_biens = new JPanel();
-		panel_biens.setBackground(Color.WHITE);
-		this.layeredPane_MesBiens.add(panel_biens);
-		panel_biens.setLayout(null);
+		JPanel panelMesBiens = new JPanel();
+		panelMesBiens.setBackground(Color.WHITE);
+		this.layeredPane_MesBiens.add(panelMesBiens);
+		panelMesBiens.setLayout(null);
+		
+		//Tableaux et scrollPane
+		JScrollPane scrollPaneMesBiens = new JScrollPane();
+		scrollPaneMesBiens.setToolTipText("40, 53, 668, 130");
+		scrollPaneMesBiens.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+		scrollPaneMesBiens.setBackground(Color.LIGHT_GRAY);
+		scrollPaneMesBiens.setBounds(40, 76, 475, 148);
+		panelMesBiens.add(scrollPaneMesBiens);
 
-		JLabel lbl_mesBiens = new JLabel("Mes Biens");
-		lbl_mesBiens.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_mesBiens.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_mesBiens.setHorizontalTextPosition(SwingConstants.CENTER);
-		lbl_mesBiens.setBounds(244, 22, 216, 43);
-		panel_biens.add(lbl_mesBiens);
-
-		JScrollPane scrollPane_MesBiens = new JScrollPane();
-		scrollPane_MesBiens.setToolTipText("40, 53, 668, 130");
-		scrollPane_MesBiens.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesBiens.setBackground(Color.LIGHT_GRAY);
-		scrollPane_MesBiens.setBounds(40, 76, 475, 148);
-		panel_biens.add(scrollPane_MesBiens);
-
-		this.table_MesBiens = new JTable();
-		this.table_MesBiens.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesBiens.setModel(new DefaultTableModel(
+		this.tableMesBiens = new JTable();
+		this.tableMesBiens.setSelectionBackground(new Color(0, 102, 204));
+		this.tableMesBiens.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null},
 			},
@@ -265,41 +259,17 @@ public class Fenetre_Accueil extends JFrame {
 				"Nom du bien", "Adresse", "Nb de logements"
 			}
 		));
-		this.table_MesBiens.setBounds(40, 53, 668, 130);
-		scrollPane_MesBiens.setViewportView(this.table_MesBiens);
+		this.tableMesBiens.setBounds(40, 53, 668, 130);
+		scrollPaneMesBiens.setViewportView(this.tableMesBiens);
 
-		JButton btnCharger = new JButton("Charger");
-		btnCharger.setForeground(Color.WHITE);
-		btnCharger.setBackground(new Color(0, 102, 204));
-		btnCharger.setBounds(111, 449, 94, 31);
-		btnCharger.addActionListener(this.gestionAccueil);
-		btnCharger.setName("btnCharger");
-		panel_biens.add(btnCharger);
+		JScrollPane scrollPaneMesBiens_Logements = new JScrollPane();
+		scrollPaneMesBiens_Logements.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+		scrollPaneMesBiens_Logements.setBackground(Color.LIGHT_GRAY);
+		scrollPaneMesBiens_Logements.setBounds(40, 293, 475, 134);
+		panelMesBiens.add(scrollPaneMesBiens_Logements);
 
-		JButton btnSupprimer = new JButton("Supprimer");
-		btnSupprimer.setForeground(Color.WHITE);
-		btnSupprimer.setBackground(new Color(0, 102, 204));
-		btnSupprimer.setBounds(457, 449, 109, 31);
-		btnSupprimer.addActionListener(this.gestionAccueil);
-		btnSupprimer.setName("btnSupprimer");
-		panel_biens.add(btnSupprimer);
-
-		JButton btnModifier = new JButton("Modifier");
-		btnModifier.setForeground(Color.WHITE);
-		btnModifier.setBackground(new Color(0, 102, 204));
-		btnModifier.setBounds(287, 449, 99, 31);
-		btnModifier.addActionListener(this.gestionAccueil);
-		btnModifier.setName("btnModifier");
-		panel_biens.add(btnModifier);
-
-		JScrollPane scrollPane_MesBiens_Logements = new JScrollPane();
-		scrollPane_MesBiens_Logements.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesBiens_Logements.setBackground(Color.LIGHT_GRAY);
-		scrollPane_MesBiens_Logements.setBounds(40, 293, 475, 134);
-		panel_biens.add(scrollPane_MesBiens_Logements);
-
-		this.table_MesBiens_Logements = new JTable();
-		this.table_MesBiens_Logements.setModel(
+		this.tableMesBiens_Logements = new JTable();
+		this.tableMesBiens_Logements.setModel(
 				new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null},
@@ -308,61 +278,95 @@ public class Fenetre_Accueil extends JFrame {
 				"Nom", "Surface", "Nb pi\u00E8ces", "Etage", "Aquisition", "Occup\u00E9"
 			}
 		));
-		this.table_MesBiens_Logements.setBounds(40, 266, 438, 106);
-		scrollPane_MesBiens_Logements.setViewportView(this.table_MesBiens_Logements);
-
+		this.tableMesBiens_Logements.setBounds(40, 266, 438, 106);
+		scrollPaneMesBiens_Logements.setViewportView(this.tableMesBiens_Logements);
+		
+		//Labels
+		JLabel lblMesBiens = new JLabel("Mes Biens");
+		lblMesBiens.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblMesBiens.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMesBiens.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblMesBiens.setBounds(244, 22, 216, 43);
+		panelMesBiens.add(lblMesBiens);
+		
 		JLabel lblLogements = new JLabel("Mes Logements");
 		lblLogements.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblLogements.setBounds(40, 269, 94, 13);
-		panel_biens.add(lblLogements);
-
-		JSeparator separator_mesBiens = new JSeparator();
-		separator_mesBiens.setForeground(new Color(0, 102, 204));
-		separator_mesBiens.setBounds(258, 63, 190, 2);
-		panel_biens.add(separator_mesBiens);
+		panelMesBiens.add(lblLogements);
 		
-		JButton btnAjouterDiagnostic_Bien = new JButton("Ajouter un diagnostic");
-		btnAjouterDiagnostic_Bien.setBounds(551, 131, 161, 23);
-		btnAjouterDiagnostic_Bien.addActionListener(this.gestionAccueil);
-		btnAjouterDiagnostic_Bien.setName("btnAjouterDiagnostic_Bien");
-		panel_biens.add(btnAjouterDiagnostic_Bien);
-		
-		JButton btnAjouterDesTravaux_Biens = new JButton("Ajouter des travaux");
-		btnAjouterDesTravaux_Biens.addActionListener(this.gestionAccueil); 
-		btnAjouterDesTravaux_Biens.setBounds(551, 165, 161, 23);
-		btnAjouterDesTravaux_Biens.setName("btnAjouterDesTravaux_Biens");
-		panel_biens.add(btnAjouterDesTravaux_Biens);
-		
-		JButton btnAjouterDesTravaux_Logements = new JButton("Ajouter des travaux");
-		btnAjouterDesTravaux_Logements.setBounds(551, 382, 161, 23);
-		btnAjouterDesTravaux_Logements.addActionListener(this.gestionAccueil);
-		btnAjouterDesTravaux_Logements.setName("btnCharger");
-		panel_biens.add(btnAjouterDesTravaux_Logements);
-		
-		JButton btnAjouterDiagnostic_Logement = new JButton("Ajouter un diagnostic");
-		btnAjouterDiagnostic_Logement.setBounds(551, 348, 161, 23);
-		btnAjouterDiagnostic_Logement.addActionListener(this.gestionAccueil);
-		btnAjouterDiagnostic_Logement.setName("btnAjouterDiagnostic_Logement");
-		panel_biens.add(btnAjouterDiagnostic_Logement);
-		 
-		JButton btn_Accueil_AjouterBien = new JButton("Ajouter un bien");
-		btn_Accueil_AjouterBien.setBounds(551, 97, 161, 23);
-		btn_Accueil_AjouterBien.addActionListener(this.gestionAccueil);
-		btn_Accueil_AjouterBien.setName("btn_Accueil_AjouterBien");
-		panel_biens.add(btn_Accueil_AjouterBien);
-		
-		JButton btn_Accueil_AjouterLogement = new JButton("Ajouter un logement");
-		btn_Accueil_AjouterLogement.setBounds(551, 314, 161, 23);
-		btn_Accueil_AjouterLogement.addActionListener(this.gestionAccueil);
-		btn_Accueil_AjouterLogement.setName("btn_Accueil_AjouterLogement");
-		panel_biens.add(btn_Accueil_AjouterLogement);
+		//Séparateurs
+		JSeparator separatorMesBiens = new JSeparator();
+		separatorMesBiens.setForeground(new Color(0, 102, 204));
+		separatorMesBiens.setBounds(258, 63, 190, 2);
+		panelMesBiens.add(separatorMesBiens);
 		
 		JSeparator separator_mesBiens_1 = new JSeparator();
 		separator_mesBiens_1.setForeground(new Color(0, 102, 204));
 		separator_mesBiens_1.setBounds(32, 250, 494, 2);
-		panel_biens.add(separator_mesBiens_1);
+		panelMesBiens.add(separator_mesBiens_1);
 		
+		//Boutons généraux
+		JButton btnMesBiens_Charger = new JButton("Charger");
+		btnMesBiens_Charger.setForeground(Color.WHITE);
+		btnMesBiens_Charger.setBackground(new Color(0, 102, 204));
+		btnMesBiens_Charger.setBounds(111, 449, 94, 31);
+		btnMesBiens_Charger.addActionListener(this.gestionAccueil);
+		btnMesBiens_Charger.setName("btnMesBiens_Charger");
+		panelMesBiens.add(btnMesBiens_Charger);
+
+		JButton btnMesBiens_Supprimer = new JButton("Supprimer");
+		btnMesBiens_Supprimer.setForeground(Color.WHITE);
+		btnMesBiens_Supprimer.setBackground(new Color(0, 102, 204));
+		btnMesBiens_Supprimer.setBounds(457, 449, 109, 31);
+		btnMesBiens_Supprimer.addActionListener(this.gestionAccueil);
+		btnMesBiens_Supprimer.setName("btnMesBiens_Supprimer");
+		panelMesBiens.add(btnMesBiens_Supprimer);
+
+		JButton btnMesBiens_Modifier = new JButton("Modifier");
+		btnMesBiens_Modifier.setForeground(Color.WHITE);
+		btnMesBiens_Modifier.setBackground(new Color(0, 102, 204));
+		btnMesBiens_Modifier.setBounds(287, 449, 99, 31);
+		btnMesBiens_Modifier.addActionListener(this.gestionAccueil);
+		btnMesBiens_Modifier.setName("btnMesBiens_Modifier");
+		panelMesBiens.add(btnMesBiens_Modifier);
+	
+		//Boutons BIENS
+		JButton btnMesBiens_AjouterBien = new JButton("Ajouter un bien");
+		btnMesBiens_AjouterBien.setBounds(551, 97, 161, 23);
+		btnMesBiens_AjouterBien.addActionListener(this.gestionAccueil);
+		btnMesBiens_AjouterBien.setName("btnMesBiens_AjouterBien");
+		panelMesBiens.add(btnMesBiens_AjouterBien);
 		
+		JButton btnMesBiens_AjouterDiagnostic = new JButton("Ajouter un diagnostic");
+		btnMesBiens_AjouterDiagnostic.setBounds(551, 131, 161, 23);
+		btnMesBiens_AjouterDiagnostic.addActionListener(this.gestionAccueil);
+		btnMesBiens_AjouterDiagnostic.setName("btnMesBiens_AjouterDiagnostic");
+		panelMesBiens.add(btnMesBiens_AjouterDiagnostic);
+		
+		JButton btnMesBiens_AjouterDesTravaux = new JButton("Ajouter des travaux");
+		btnMesBiens_AjouterDesTravaux.addActionListener(this.gestionAccueil); 
+		btnMesBiens_AjouterDesTravaux.setBounds(551, 165, 161, 23);
+		btnMesBiens_AjouterDesTravaux.setName("btnMesBiens_AjouterDesTravaux");
+		panelMesBiens.add(btnMesBiens_AjouterDesTravaux);
+		
+		//Boutons LOGEMENTS
+		JButton btnMesBiens_AjouterLogement = new JButton("Ajouter un logement");
+		btnMesBiens_AjouterLogement.setBounds(551, 314, 161, 23);
+		btnMesBiens_AjouterLogement.addActionListener(this.gestionAccueil);
+		btnMesBiens_AjouterLogement.setName("btnMesBiens_AjouterLogement");
+		panelMesBiens.add(btnMesBiens_AjouterLogement);
+		
+		JButton btnMesBiens_AjouterDiagnostic_Logements = new JButton("Ajouter un diagnostic");
+		btnMesBiens_AjouterDiagnostic_Logements.setBounds(551, 348, 161, 23);
+		btnMesBiens_AjouterDiagnostic_Logements.addActionListener(this.gestionAccueil);
+		btnMesBiens_AjouterDiagnostic_Logements.setName("btnMesBiens_AjouterDiagnostic_Logements");
+		panelMesBiens.add(btnMesBiens_AjouterDiagnostic_Logements);
+		
+		JButton btnMesBiens_AjouterDesTravaux_Logements = new JButton("Ajouter des travaux");
+		btnMesBiens_AjouterDesTravaux_Logements.setBounds(551, 382, 161, 23);
+		btnMesBiens_AjouterDesTravaux_Logements.addActionListener(this.gestionAccueil);
+		btnMesBiens_AjouterDesTravaux_Logements.setName("btnMesBiens_AjouterDesTravaux_Logements");
+		panelMesBiens.add(btnMesBiens_AjouterDesTravaux_Logements);
 		
 		
 		
