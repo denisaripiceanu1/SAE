@@ -6,19 +6,14 @@ import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import controleur.insertion.GestionInsertionDiagnostic;
 import controleur.insertion.GestionInsertionTravaux;
 
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
@@ -50,16 +45,25 @@ public class Fenetre_InsertionTravaux extends JInternalFrame{
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JSeparator separator_titreInsererTravaux = new JSeparator();
-		separator_titreInsererTravaux.setForeground(new Color(0, 102, 204));
-		separator_titreInsererTravaux.setBounds(271, 72, 190, 2);
-		panel.add(separator_titreInsererTravaux);
-		
+		//Labels
 		JLabel lbl_InsererUnTravaux = new JLabel("Ajouter un Travaux");
 		lbl_InsererUnTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUnTravaux.setBounds(294, 26, 153, 48);
 		panel.add(lbl_InsererUnTravaux);
 		
+		JLabel lbl_ImputableLocataire = new JLabel("Imputable Locataire");
+		lbl_ImputableLocataire.setForeground(Color.BLACK);
+		lbl_ImputableLocataire.setBackground(new Color(0, 102, 204));
+		lbl_ImputableLocataire.setBounds(311, 337, 132, 31);
+		panel.add(lbl_ImputableLocataire);
+		
+		//Séparateurs
+		JSeparator separator_titreInsererTravaux = new JSeparator();
+		separator_titreInsererTravaux.setForeground(new Color(0, 102, 204));
+		separator_titreInsererTravaux.setBounds(271, 72, 190, 2);
+		panel.add(separator_titreInsererTravaux);
+
+		//Champs de saisie
 		textField_Numero = new JTextField();
 		textField_Numero.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Numero", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_Numero.setBounds(110, 104, 190, 40);
@@ -102,46 +106,43 @@ public class Fenetre_InsertionTravaux extends JInternalFrame{
 		textField_dateAcquisition.setBounds(427, 294, 190, 40);
 		panel.add(textField_dateAcquisition);
 		
-		JButton btnAjouter = new JButton("Ajouter");
-		btnAjouter.setForeground(Color.WHITE);
-		btnAjouter.setBackground(new Color(0, 102, 204));
-		btnAjouter.setBounds(248, 437, 94, 31);
-		panel.add(btnAjouter);
-		
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setForeground(Color.WHITE);
-		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.setBounds(389, 437, 94, 31);
-		panel.add(btnAnnuler);
-		
 		separator_Travaux = new JSeparator();
 		separator_Travaux.setBounds(90, 401, 591, 2);
 		panel.add(separator_Travaux);
 		
+		//Menu déroulant
 		JComboBox comboBox_modePaiement = new JComboBox();
 		comboBox_modePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mode de Paiement", TitledBorder.LEADING, 
 				TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		comboBox_modePaiement.setBounds(427, 104, 189, 39);
 		panel.add(comboBox_modePaiement);
 		
+		//Boutons radio
 		this.rdbtnOui.setForeground(new Color(0, 0, 0));
 		this.rdbtnOui.setHorizontalAlignment(SwingConstants.TRAILING);
 		this.rdbtnOui.setHorizontalTextPosition(SwingConstants.LEADING);
 		this.rdbtnOui.setBounds(286, 374, 54, 21);
 		panel.add(this.rdbtnOui);
-		
 		this.rdbtnNon.setBounds(389, 374, 54, 21);
 		panel.add(this.rdbtnNon);
-		
 		ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(this.rdbtnOui);
         buttonGroup.add(this.rdbtnNon);
 		
-		JLabel lbl_ImputableLocataire = new JLabel("Imputable Locataire");
-		lbl_ImputableLocataire.setForeground(Color.BLACK);
-		lbl_ImputableLocataire.setBackground(new Color(0, 102, 204));
-		lbl_ImputableLocataire.setBounds(311, 337, 132, 31);
-		panel.add(lbl_ImputableLocataire);
+        //Boutons généraux
+		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.setForeground(Color.WHITE);
+		btnAjouter.setBackground(new Color(0, 102, 204));
+		btnAjouter.setBounds(248, 437, 94, 31);
+		btnAjouter.addActionListener(gestionClic);
+		panel.add(btnAjouter);
+		
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setForeground(Color.WHITE);
+		btnAnnuler.setBackground(new Color(0, 102, 204));
+		btnAnnuler.setBounds(389, 437, 94, 31);
+		btnAnnuler.addActionListener(gestionClic);
+		panel.add(btnAnnuler);
         
         
 	}
