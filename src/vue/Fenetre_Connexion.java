@@ -20,7 +20,6 @@ public class Fenetre_Connexion extends JFrame {
     private JPasswordField textFieldMdp;
     private GestionConnexion gestionClic;
 
-
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
