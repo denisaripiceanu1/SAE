@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import modele.Immeuble;
+import modele.dao.DaoBien;
 import modele.dao.DaoImmeuble;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionBien;
@@ -19,6 +20,7 @@ public class GestionInsertionBien implements ActionListener {
 	
 	public GestionInsertionBien(Fenetre_InsertionBien insertionBien) {
 		this.insertionBien = insertionBien;
+		this.daoImmeuble = new DaoImmeuble();
 	}
 
 	@Override
@@ -44,6 +46,7 @@ public class GestionInsertionBien implements ActionListener {
 						this.insertionBien.getTextField_dateAcquisition().getText(),
 						this.insertionBien.getComboBox_typeDeBien().getSelectedItem().toString()
 				);
+				
 				this.daoImmeuble.create(immeuble);
 //				Boite.deleteItem("Bien");
 //				Boite.addItem("Bien", bien);
