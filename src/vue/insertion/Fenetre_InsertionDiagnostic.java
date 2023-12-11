@@ -23,6 +23,7 @@ import javax.swing.JButton;
 public class Fenetre_InsertionDiagnostic extends JInternalFrame {
 	private JTextField textField_Date_Validite;
 	private JTextField textField_Type;
+	
 	private GestionInsertionDiagnostic gestionClic;
 
 

@@ -1,8 +1,5 @@
 package vue.insertion;
 
-import java.awt.EventQueue;
-
-
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -15,6 +12,10 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import controleur.insertion.GestionInsertionDiagnostic;
+import controleur.insertion.GestionInsertionTravaux;
+
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -33,8 +34,13 @@ public class Fenetre_InsertionTravaux extends JInternalFrame{
 	private JSeparator separator_Travaux;
     JRadioButton rdbtnOui = new JRadioButton("Oui");
     JRadioButton rdbtnNon = new JRadioButton("Non");
+    
+    private GestionInsertionTravaux gestionClic;
 
 	public Fenetre_InsertionTravaux() {
+		
+		this.gestionClic = new GestionInsertionTravaux(this);
+		
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
