@@ -14,18 +14,11 @@ import javax.swing.border.EmptyBorder;
 import controleur.GestionConnexion;
 
 public class Fenetre_Connexion extends JFrame {
-<<<<<<< HEAD
 
-=======
->>>>>>> 61c6bbe325f2d625d1c3b5feefd9972f69378eb7
     private JPanel contentPane;
     private JTextField textFieldUtilisateur;
     private JPasswordField textFieldMdp;
     private GestionConnexion gestionClic;
-<<<<<<< HEAD
-    
-=======
->>>>>>> 61c6bbe325f2d625d1c3b5feefd9972f69378eb7
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
