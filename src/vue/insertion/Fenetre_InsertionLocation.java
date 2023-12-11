@@ -2,6 +2,7 @@ package vue.insertion;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
@@ -210,6 +211,12 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 		this.table_liste_locataires.setBounds(0, 0, 1, 1);
 		scrollPane_table_locataires.setViewportView(this.table_liste_locataires);
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
