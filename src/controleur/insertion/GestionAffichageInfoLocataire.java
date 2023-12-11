@@ -7,7 +7,6 @@ import javax.swing.JButton;
 
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
-import vue.insertion.Fenetre_InsertionCompteur;
 
 public class GestionAffichageInfoLocataire implements ActionListener {
 
