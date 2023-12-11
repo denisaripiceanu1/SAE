@@ -21,12 +21,12 @@ public class GestionInsertionTravaux implements ActionListener{
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fit.getTopLevelAncestor(); //fenetre dans laquelle on ouvre des internal frame
 		switch (btn.getText()) {
-		case "Ajouter":
-			
-			break;
-		case "Annuler":
-			this.fit.dispose();
-			break;
-		}
+			case "Ajouter":
+				
+				break;
+			case "Annuler":
+				this.fit.dispose();
+				break;
+			}
 	}
 }
