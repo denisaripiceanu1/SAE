@@ -25,22 +25,9 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 	private JTextField textField_DateN;
 	private JTextField textField_Id;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Fenetre_AffichageInfoLocataire frame = new Fenetre_AffichageInfoLocataire();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	public Fenetre_AffichageInfoLocataire() {
-		this.setBounds(100, 100, 762, 541);
-		this.getContentPane().setLayout(null);
+    public Fenetre_AffichageInfoLocataire() {
+        this.setBounds(100, 100, 762, 541);
+        this.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
