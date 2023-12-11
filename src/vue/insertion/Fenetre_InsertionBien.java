@@ -35,27 +35,6 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 	
 	private GestionInsertionBien gestionInsertionBien;
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Fenetre_InsertionBien frame = new Fenetre_InsertionBien();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_InsertionBien() {
 		
 		this.gestionInsertionBien = new GestionInsertionBien(this);

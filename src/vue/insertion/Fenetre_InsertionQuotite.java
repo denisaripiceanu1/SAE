@@ -26,7 +26,7 @@ public class Fenetre_InsertionQuotite extends JInternalFrame {
 	public Fenetre_InsertionQuotite() {
 
 		this.gestionClic = new GestionInsertionQuotite(this);
-		
+
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
