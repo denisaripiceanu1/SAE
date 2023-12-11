@@ -10,6 +10,9 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import controleur.insertion.GestionInsertionLogement;
+
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -26,6 +29,7 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 	private JButton btnAnnuler;
 	private JButton btnAjouterCompteur;
 	private JButton btnAjouterQuotite;
+	private GestionInsertionLogement gestionClic;
 
 	/**
 	 * Launch the application.
@@ -47,6 +51,9 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public Fenetre_InsertionLogement() {
+		
+		this.gestionClic = new GestionInsertionLogement(this);
+		
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
@@ -107,6 +114,7 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		btnAjouter.setBounds(235, 445, 94, 31);
 		btnAjouter.setForeground(Color.WHITE);
 		btnAjouter.setBackground(new Color(0, 102, 204));
+		btnAjouter.addActionListener(gestionClic);
 		panel.add(btnAjouter);
 		
 		btnAnnuler = new JButton("Annuler");
@@ -114,14 +122,17 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		btnAnnuler.setBounds(394, 445, 94, 31);
 		btnAnnuler.setForeground(Color.WHITE);
 		btnAnnuler.setBackground(new Color(0, 102, 204));
+		btnAnnuler.addActionListener(gestionClic);
 		panel.add(btnAnnuler);
 		
 		btnAjouterCompteur = new JButton("Ajouter un compteur");
 		btnAjouterCompteur.setBounds(291, 390, 154, 23);
+		btnAjouterCompteur.addActionListener(gestionClic);
 		panel.add(btnAjouterCompteur);
 		
 		btnAjouterQuotite = new JButton("Ajouter une quotité");
 		btnAjouterQuotite.setBounds(290, 356, 154, 23);
+		btnAjouterQuotite.addActionListener(gestionClic);
 		panel.add(btnAjouterQuotite);
 
 	}
