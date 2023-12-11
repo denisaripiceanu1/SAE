@@ -613,7 +613,8 @@ public class Fenetre_Accueil extends JFrame {
 		panel_chargesLocatives.setBackground(Color.WHITE);
 		this.layeredPane_MesChargesLocatives.add(panel_chargesLocatives);
 		panel_chargesLocatives.setLayout(null);
-
+		
+		//Tableaux et scrollPane
 		JScrollPane scrollPane_MesChargesLocatives = new JScrollPane();
 		scrollPane_MesChargesLocatives.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPane_MesChargesLocatives.setBounds(55, 124, 643, 288);
@@ -631,7 +632,21 @@ public class Fenetre_Accueil extends JFrame {
 		));
 		this.table_MesChargesLocatives.setBounds(40, 53, 668, 130);
 		scrollPane_MesChargesLocatives.setViewportView(this.table_MesChargesLocatives);
-
+		
+		//Labels
+		JLabel lbl_MesChargesLocatives = new JLabel("Mes Charges Locatives");
+		lbl_MesChargesLocatives.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_MesChargesLocatives.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_MesChargesLocatives.setBounds(244, 22, 216, 43);
+		panel_chargesLocatives.add(lbl_MesChargesLocatives);
+		
+		//Séparateurs
+		JSeparator separator_mesChargesLocatives = new JSeparator();
+		separator_mesChargesLocatives.setForeground(new Color(0, 102, 204));
+		separator_mesChargesLocatives.setBounds(258, 63, 190, 2);
+		panel_chargesLocatives.add(separator_mesChargesLocatives);
+		
+		//Boutons généraux
 		JButton btn_MesChargesLocatives_Charger = new JButton("Charger");
 		btn_MesChargesLocatives_Charger.setForeground(Color.WHITE);
 		btn_MesChargesLocatives_Charger.setBackground(new Color(0, 102, 204));
@@ -639,6 +654,14 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesChargesLocatives_Charger.addActionListener(this.gestionAccueil);
 		btn_MesChargesLocatives_Charger.setName("btn_MesChargesLocatives_Charger");
 		panel_chargesLocatives.add(btn_MesChargesLocatives_Charger);
+
+		JButton btn_MesChargesLocatives_Modifier = new JButton("Modifier");
+		btn_MesChargesLocatives_Modifier.setForeground(Color.WHITE);
+		btn_MesChargesLocatives_Modifier.setBackground(new Color(0, 102, 204));
+		btn_MesChargesLocatives_Modifier.setBounds(396, 449, 99, 31);
+		btn_MesChargesLocatives_Modifier.addActionListener(this.gestionAccueil);
+		btn_MesChargesLocatives_Modifier.setName("btn_MesChargesLocatives_Modifier");
+		panel_chargesLocatives.add(btn_MesChargesLocatives_Modifier);
 
 		JButton btn_MesChargesLocatives_Inserer = new JButton("Insérer");
 		btn_MesChargesLocatives_Inserer.setForeground(Color.WHITE);
@@ -655,26 +678,10 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesChargesLocatives_Supprimer.addActionListener(this.gestionAccueil);
 		btn_MesChargesLocatives_Supprimer.setName("btn_MesChargesLocatives_Supprimer");
 		panel_chargesLocatives.add(btn_MesChargesLocatives_Supprimer);
-
-		JButton btn_MesChargesLocatives_Modifier = new JButton("Modifier");
-		btn_MesChargesLocatives_Modifier.setForeground(Color.WHITE);
-		btn_MesChargesLocatives_Modifier.setBackground(new Color(0, 102, 204));
-		btn_MesChargesLocatives_Modifier.setBounds(396, 449, 99, 31);
-		btn_MesChargesLocatives_Modifier.addActionListener(this.gestionAccueil);
-		btn_MesChargesLocatives_Modifier.setName("btn_MesChargesLocatives_Modifier");
-		panel_chargesLocatives.add(btn_MesChargesLocatives_Modifier);
-
-		JLabel lbl_MesChargesLocatives = new JLabel("Mes Charges Locatives");
-		lbl_MesChargesLocatives.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_MesChargesLocatives.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_MesChargesLocatives.setBounds(244, 22, 216, 43);
-		panel_chargesLocatives.add(lbl_MesChargesLocatives);
-
-		JSeparator separator_mesChargesLocatives = new JSeparator();
-		separator_mesChargesLocatives.setForeground(new Color(0, 102, 204));
-		separator_mesChargesLocatives.setBounds(258, 63, 190, 2);
-		panel_chargesLocatives.add(separator_mesChargesLocatives);
 		
+		
+		//ComboBox
+		//CODE A FOURNIR POUR LA LISTE DES IDENTIFIANTS DE LOGEMENTS
 		JComboBox comboBox_MesChargesLocatives  = new JComboBox();
 		comboBox_MesChargesLocatives.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
 		comboBox_MesChargesLocatives.setBounds(55, 81, 130, 21);
@@ -694,18 +701,8 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesAssurances.setBackground(Color.WHITE);
 		this.layeredPane_MesAssurances.add(panel_MesAssurances);
 		panel_MesAssurances.setLayout(null);
-
-		JLabel lbl_MesAssurances = new JLabel("Mes Assurances");
-		lbl_MesAssurances.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_MesAssurances.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_MesAssurances.setBounds(244, 22, 216, 43);
-		panel_MesAssurances.add(lbl_MesAssurances);
-
-		JSeparator separator_mesAssurances = new JSeparator();
-		separator_mesAssurances.setForeground(new Color(0, 102, 204));
-		separator_mesAssurances.setBounds(258, 63, 190, 2);
-		panel_MesAssurances.add(separator_mesAssurances);
-
+		
+		//Tableaux et scrollPane
 		JScrollPane scrollPane_MesAssurances = new JScrollPane();
 		scrollPane_MesAssurances.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPane_MesAssurances.setBounds(55, 124, 643, 270);
@@ -723,11 +720,41 @@ public class Fenetre_Accueil extends JFrame {
 		));
 		this.table_MesAssurances.setBounds(40, 53, 668, 130);
 		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);
+		
+		//Labels
+		JLabel lbl_MesAssurances = new JLabel("Mes Assurances");
+		lbl_MesAssurances.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_MesAssurances.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_MesAssurances.setBounds(244, 22, 216, 43);
+		panel_MesAssurances.add(lbl_MesAssurances);
 
+		//Séparateurs
+		JSeparator separator_mesAssurances = new JSeparator();
+		separator_mesAssurances.setForeground(new Color(0, 102, 204));
+		separator_mesAssurances.setBounds(258, 63, 190, 2);
+		panel_MesAssurances.add(separator_mesAssurances);
+
+		//Boutons généraux
+		JButton btn_MesAssurances_Charger = new JButton("Charger");
+		btn_MesAssurances_Charger.setForeground(Color.WHITE);
+		btn_MesAssurances_Charger.setBackground(new Color(0, 102, 204));
+		btn_MesAssurances_Charger.setBounds(118, 449, 94, 31);
+		btn_MesAssurances_Charger.addActionListener(this.gestionAccueil);
+		btn_MesAssurances_Charger.setName("btn_MesAssurances_Charger");
+		panel_MesAssurances.add(btn_MesAssurances_Charger);
+		
+		JButton btn_MesAssurances_Modifier = new JButton("Modifier");
+		btn_MesAssurances_Modifier.setForeground(Color.WHITE);
+		btn_MesAssurances_Modifier.setBackground(new Color(0, 102, 204));
+		btn_MesAssurances_Modifier.setBounds(396, 449, 99, 31);
+		btn_MesAssurances_Modifier.addActionListener(this.gestionAccueil);
+		btn_MesAssurances_Modifier.setName("btn_MesAssurances_Modifier");
+		panel_MesAssurances.add(btn_MesAssurances_Modifier);
+		
 		JButton btn_MesAssurances_Inserer = new JButton("Insérer");
 		btn_MesAssurances_Inserer.setForeground(Color.WHITE);
 		btn_MesAssurances_Inserer.setBackground(new Color(0, 102, 204));
-		btn_MesAssurances_Inserer.setBounds(161, 449, 94, 31);
+		btn_MesAssurances_Inserer.setBounds(258, 449, 94, 31);
 		btn_MesAssurances_Inserer.addActionListener(this.gestionAccueil);
 		btn_MesAssurances_Inserer.setName("btn_MesAssurances_Inserer");
 		panel_MesAssurances.add(btn_MesAssurances_Inserer);
@@ -735,21 +762,15 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesAssurances_Supprimer = new JButton("Supprimer");
 		btn_MesAssurances_Supprimer.setForeground(Color.WHITE);
 		btn_MesAssurances_Supprimer.setBackground(new Color(0, 102, 204));
-		btn_MesAssurances_Supprimer.setBounds(501, 449, 106, 31);
+		btn_MesAssurances_Supprimer.setBounds(539, 449, 106, 31);
 		btn_MesAssurances_Supprimer.addActionListener(this.gestionAccueil);
 		btn_MesAssurances_Supprimer.setName("btn_MesAssurances_Supprimer");
 		panel_MesAssurances.add(btn_MesAssurances_Supprimer);
 
-		JButton btn_MesAssurances_Modifier = new JButton("Modifier");
-		btn_MesAssurances_Modifier.setForeground(Color.WHITE);
-		btn_MesAssurances_Modifier.setBackground(new Color(0, 102, 204));
-		btn_MesAssurances_Modifier.setBounds(333, 449, 99, 31);
-		btn_MesAssurances_Modifier.addActionListener(this.gestionAccueil);
-		btn_MesAssurances_Modifier.setName("btn_MesAssurances_Modifier");
-		panel_MesAssurances.add(btn_MesAssurances_Modifier);
-		
+		//ComboBox
+		//CODE A FOURNIR POUR LA LISTE DES IDENTIFIANTS DE LOGEMENTS
 		JComboBox comboBox_MesAssurances = new JComboBox();
-		comboBox_MesAssurances.setModel(new DefaultComboBoxModel(new String[] { "ID de l'immeuble" }));
+		comboBox_MesAssurances.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
 		comboBox_MesAssurances.setBounds(55, 80, 130, 21);
 		panel_MesAssurances.add(comboBox_MesAssurances);
 
@@ -767,19 +788,8 @@ public class Fenetre_Accueil extends JFrame {
 		panel_RegularisationDesCharges.setBackground(Color.WHITE);
 		this.layeredPane_RegularisationDesCharges.add(panel_RegularisationDesCharges);
 		panel_RegularisationDesCharges.setLayout(null);
-
-		JLabel lbl_RegularisationDesCharges = new JLabel("Régularisation des Charges");
-		lbl_RegularisationDesCharges.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_RegularisationDesCharges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_RegularisationDesCharges.setBounds(244, 22, 216, 43);
-		panel_RegularisationDesCharges.add(lbl_RegularisationDesCharges);
-
-		JSeparator separator_RegularisationDesChargess = new JSeparator();
-		separator_RegularisationDesChargess.setForeground(new Color(0, 102, 204));
-		separator_RegularisationDesChargess.setBounds(258, 63, 190, 2);
-		panel_RegularisationDesCharges.add(separator_RegularisationDesChargess);
 		
-		
+		//Tableaux et scrollPane
 		JScrollPane scrollPane_Regularisation = new JScrollPane();
 		scrollPane_Regularisation.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPane_Regularisation.setBounds(28, 121, 697, 303);
@@ -800,6 +810,20 @@ public class Fenetre_Accueil extends JFrame {
 		this.tableRegularisation.setBounds(40, 53, 668, 130);
 		scrollPane_Regularisation.setViewportView(this.tableRegularisation);
 		
+		//Labels
+		JLabel lbl_RegularisationDesCharges = new JLabel("Régularisation des Charges");
+		lbl_RegularisationDesCharges.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_RegularisationDesCharges.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_RegularisationDesCharges.setBounds(244, 22, 216, 43);
+		panel_RegularisationDesCharges.add(lbl_RegularisationDesCharges);
+		
+		//Séparateurs
+		JSeparator separator_RegularisationDesChargess = new JSeparator();
+		separator_RegularisationDesChargess.setForeground(new Color(0, 102, 204));
+		separator_RegularisationDesChargess.setBounds(258, 63, 190, 2);
+		panel_RegularisationDesCharges.add(separator_RegularisationDesChargess);
+		
+		//JComboBox
 		JComboBox comboBox_Regularisation  = new JComboBox();
 		comboBox_Regularisation.setModel(new DefaultComboBoxModel(new String[] { "Locataire" }));
 		comboBox_Regularisation.setBounds(55, 81, 130, 21);

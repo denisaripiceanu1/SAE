@@ -153,20 +153,52 @@ public class GestionAccueil implements ActionListener {
 				break;
 			///////////////////////////////	
 			//LAYERED MES CHARGES LOCATIVES
-			///////////////////////////////	
+			///////////////////////////////
+			case "btn_MesChargesLocatives_Charger":
+				break;
+			case "btn_MesChargesLocatives_Modifier":
+				break;
+			case "btn_MesChargesLocatives_Inserer":
+				break;	
+			case "btn_MesChargesLocatives_Supprimer":
+				break;
+			
+			//Coder la cas de la selection d'un id logement
+			//parmi la liste présente dans le JComboBox "comboBox_MesChargesLocatives"
 				
 			////////////////////////	
 			//LAYERED MES ASSURANCES
-			////////////////////////	
+			////////////////////////
+			case "btn_MesAssurances_Charger":
+				break;	
+			case "btn_MesAssurances_Modifier":
+				break;
 			case "btn_MesAssurances_Inserer":
 				Fenetre_InsertionAssurance insertion_assurance = new Fenetre_InsertionAssurance();
 				this.fenetreAccueil.getLayeredPane().add(insertion_assurance);
 				insertion_assurance.setVisible(true);
 				insertion_assurance.moveToFront();
 				break;
+			case "btn_MesAssurances_Supprimer":
+				break;
+			
+			//Coder la cas de la selection d'un id logement
+			//parmi la liste présente dans le JComboBox "comboBox_MesAssurances"	
+				
+			////////////////////////////////////
 			//LAYERED REGULARISATION DES CHARGES
+			////////////////////////////////////
+				
+			//Coder la cas de la selection d'un locataire
+			//parmi la liste présente dans le JComboBox "comboBox_Regularisation"
+			
+			///////////////////////////
 			//LAYERED SOLDE TOUT COMPTE
+			///////////////////////////
+				
+			///////////////////////
 			//LAYERED MES DOCUMENTS
+			///////////////////////	
 	
 		}
 	}
