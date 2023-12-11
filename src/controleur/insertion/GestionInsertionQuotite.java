@@ -7,27 +7,29 @@ import javax.swing.JButton;
 
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionCompteur;
+import vue.insertion.Fenetre_InsertionQuotite;
 
-public class GestionInsertionCompteur implements ActionListener {
+public class GestionInsertionQuotite implements ActionListener{
 
-	private Fenetre_InsertionCompteur fic;
+	private Fenetre_InsertionQuotite fiq;
 
-	public GestionInsertionCompteur(Fenetre_InsertionCompteur fic) {
-		this.fic = fic;
+	public GestionInsertionQuotite(Fenetre_InsertionQuotite fiq) {
+		this.fiq = fiq;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fic.getTopLevelAncestor();
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fiq.getTopLevelAncestor();
 		switch (btn.getText()) {
 		case "Ajouter":
 
 			break;
 		case "Annuler":
-			this.fic.dispose();
+			this.fiq.dispose();
 			break;
 		}
 
 	}
+
 }

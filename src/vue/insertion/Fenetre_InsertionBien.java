@@ -30,33 +30,11 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 	private JTextField textField_periodeDeConstruction;
 	private JTextField textField_nbLogement;
 	private JTextField textField_dateAcquisition;
-	private JTextField textField_IdCompteur;
-	private JTextField textField_IndexCompteur;
 	private JSeparator separator_Compteur;
 	private JButton btn_ajouterCompteur;
+	
 	private GestionInsertionBien gestionInsertionBien;
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Fenetre_InsertionBien frame = new Fenetre_InsertionBien();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_InsertionBien() {
 		
 		this.gestionInsertionBien = new GestionInsertionBien(this);

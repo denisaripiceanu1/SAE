@@ -1,5 +1,7 @@
 package modele.dao;
 
+import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -8,24 +10,24 @@ import modele.Bien;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectBien;
 import modele.dao.requetes.select.RequeteSelectBienById;
+import modele.dao.requetes.update.RequeteUpdateBien;
 
 public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 
 	// private static Iterateur<Bien> iterateurBien;
 
 	@Override
-	public void create(Bien donnees) {
-//		SousProgramme<Bien> sp = new SpAjoutBien();
-//		CallableStatement st = CictOracleDataSource.getConnexion().prepareCall(sp.appelSousProgramme());
-//		sp.parametres(st, data);
-//		st.execute();
+	public void create(Bien donnees) throws SQLException {
+		SousProgramme<Bien> sp = new SpAjoutBien();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
+		st.execute();
 
 	}
 
 	@Override
-	public void update(Bien donnees) {
-		// miseAJour(new RequeteUpdateBien(), data);
-
+	public void update(Bien donnees) throws SQLException {
+		miseAJour(new RequeteUpdateBien(), donnees);
 	}
 
 	@Override
@@ -46,7 +48,8 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
 
 			bien = new Bien(curseur.getString("Id_Bien"), curseur.getDouble("surface_habitable"),
-					curseur.getInt("nb_pieces"), curseur.getInt("num_etage"), dateAcquisitionStr,curseur.getString("type_bien") ,immeuble
+					curseur.getInt("nb_pieces"), curseur.getInt("num_etage"), dateAcquisitionStr,
+					curseur.getString("type_bien"), immeuble
 
 			);
 		} catch (Exception e) {
@@ -68,14 +71,13 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 	public List<Bien> findAll() throws SQLException {
 		return find(new RequeteSelectBien());
 	}
-//	@Override
-//	public Iterateur<Bien> findAllIterateur() throws SQLException {
-//        RequeteSelectBien req = new RequeteSelectBien();
-//        PreparedStatement st = CictOracleDataSource.getConnexion().prepareStatement(req.requete());
-//        req.parametres(st);
-//        ResultSet res = st.executeQuery();
-//
-//        iterateurBien = new Iterateur<>(res, this);
-//        return DaoBien.iterateurBien;
-//    }
+	public Iterateur<Bien> findAllIterateur() throws SQLException {
+        RequeteSelectBien req = new RequeteSelectBien();
+        PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(req.requete());
+        req.parametres(st);
+        ResultSet res = st.executeQuery();
+
+        iterateurBien = new Iterateur<>(res, this);
+        return DaoBien.iterateurBien;
+    }
 }

@@ -21,7 +21,6 @@ public class Louer {
 	public Louer(Locataire locataire, Bien bien, String dateDebut, int nbMois, double loyerTTC,
 			double provision_chargeMens_TTC, double cautionTTC, String bail, String etat_lieux, String dateDepart,
 			int loyerPaye, int colocation, double montantReelPaye, String trimestre, String annee) {
-		super();
 		this.locataire = locataire;
 		this.bien = bien;
 		this.dateDebut = dateDebut;

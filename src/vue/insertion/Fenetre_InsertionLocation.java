@@ -1,15 +1,13 @@
 package vue.insertion;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,25 +21,19 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionInsertionLocation;
 
-public class Fenetre_InsertionLocation extends JInternalFrame {
-
+public class Fenetre_InsertionLocation extends JInternalFrame implements ActionListener {
 	private JTextField textField_IdLocataire;
 	private JTextField textField_Nom;
 	private JTextField textField_Prenom;
 	private JTextField textField_tel;
 	private JTextField textField_e_mail;
 	private JTextField textField_Date_de_naissance;
-	private JTable table;
 	private JTable table_id_logements;
 	private JTextField textField_caution;
 	private JTextField textField_date_arrivee;
 	private JTextField textField_provision_sur_charges;
 	private JTextField textField_loyer;
 	private JTable table_liste_locataires;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
 	private GestionInsertionLocation gestionClic;
 
 	public Fenetre_InsertionLocation() {
@@ -115,14 +107,10 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		this.textField_Date_de_naissance.setBounds(24, 215, 190, 40);
 		panel.add(this.textField_Date_de_naissance);
 
-		JButton btn_ajouter_coloc = new JButton("Ajouter");
+		JButton btn_ajouter_coloc = new JButton("Ajouter un colocataire");
 		btn_ajouter_coloc.setForeground(new Color(255, 255, 255));
 		btn_ajouter_coloc.setBackground(new Color(0, 102, 204));
-		btn_ajouter_coloc.addActionListener(this);
-		btn_ajouter_coloc.setBounds(46, 362, 139, 21);
-
-		JButton btn_ajouter_coloc = new JButton("Ajouter un colocataire");
-		btn_ajouter_coloc.setBounds(54, 439, 139, 21);
+		btn_ajouter_coloc.setBounds(47, 479, 139, 21);
 		btn_ajouter_coloc.addActionListener(this.gestionClic);
 		panel.add(btn_ajouter_coloc);
 
@@ -161,9 +149,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		comboBox_bien.setModel(new DefaultComboBoxModel(new String[] { "Biens" }));
 		comboBox_bien.setBounds(267, 131, 94, 21);
 		panel.add(comboBox_bien);
-		this.table.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "ID des logements" }));
-		this.table.setBounds(369, 214, 1, 1);
-		panel.add(this.table);
 
 		JScrollPane scrollPane_table_id_logements = new JScrollPane();
 		scrollPane_table_id_logements.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
@@ -177,13 +162,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		this.table_id_logements.setBounds(0, 0, 1, 1);
 		scrollPane_table_id_logements.setViewportView(this.table_id_logements);
 
-		JButton btn_ajouter_bail = new JButton("Ajouter un bail");
-		btn_ajouter_bail.setBounds(534, 149, 154, 21);
-		panel.add(btn_ajouter_bail);
-
-		JButton btn_ajouter_etat_lieux = new JButton("Ajouter l'état des lieux");
-		btn_ajouter_etat_lieux.setBounds(534, 116, 154, 21);
-		panel.add(btn_ajouter_etat_lieux);
 		JButton btnAjouterBail = new JButton("Ajouter un bail");
 		btnAjouterBail.setBounds(534, 149, 154, 21);
 		btnAjouterBail.addActionListener(this.gestionClic);
@@ -223,7 +201,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		panel.add(this.textField_loyer);
 
 		JScrollPane scrollPane_table_locataires = new JScrollPane();
-		scrollPane_table_locataires.setBounds(24, 395, 190, 93);
+		scrollPane_table_locataires.setBounds(24, 375, 190, 93);
 		panel.add(scrollPane_table_locataires);
 
 		this.table_liste_locataires = new JTable();
@@ -234,8 +212,4 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-	}
-}}
+}

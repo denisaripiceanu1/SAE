@@ -35,6 +35,11 @@ public abstract class DaoModele<T> implements Dao<T> {
 		return st.executeUpdate(); // Nombre de lignes mise à jour
 	}
 
+	public int delete(Requete<T> req, T data) throws SQLException {
+		return miseAJour(req, data);
+
+	}
+
 	// Méthode protégée pour exécuter une requête de recherche
 	protected List<T> find(Requete<T> requete, String... id) throws SQLException {
 		PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(requete.requete());
@@ -54,8 +59,4 @@ public abstract class DaoModele<T> implements Dao<T> {
 		return liste.get(0);
 	}
 
-	public int delete(Requete<T> req, T data) throws SQLException {
-		return miseAJour(req, data);
-
-	}
 }
