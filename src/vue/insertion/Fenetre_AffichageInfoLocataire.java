@@ -12,6 +12,9 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import controleur.insertion.GestionAffichageInfoLocataire;
+
 import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -24,6 +27,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 	private JTextField textField_Mail;
 	private JTextField textField_DateN;
 	private JTextField textField_Id;
+	private GestionAffichageInfoLocataire gestionClic;
 
     public Fenetre_AffichageInfoLocataire() {
         this.setBounds(100, 100, 762, 541);
@@ -55,6 +59,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		btnRegularisationCharges.setBounds(502, 198, 200, 25);
 		// Ajoutez le code associé à l'action du bouton ici
 		panel.add(btnRegularisationCharges);
+		btnRegularisationCharges.addActionListener(gestionClic);
 
 		textField_Nom = new JTextField();
 		textField_Nom.setColumns(10);
@@ -94,6 +99,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		JButton btnAnnuler = new JButton("Retour");
 		btnAnnuler.setBounds(399, 460, 200, 25);
 		panel.add(btnAnnuler);
+		btnAnnuler.addActionListener(gestionClic);
 
 		JButton btnModifier = new JButton("Modifier");
 		btnModifier.addActionListener(new ActionListener() {
@@ -102,6 +108,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		});
 		btnModifier.setBounds(144, 461, 200, 25);
 		panel.add(btnModifier);
+		btnModifier.addActionListener(gestionClic);
 
 		textField_DateN = new JTextField();
 		textField_DateN.setColumns(10);
@@ -131,6 +138,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		JButton btnSoldeToutCompte = new JButton("Solde tout compte");
 		btnSoldeToutCompte.setBounds(502, 295, 200, 25);
 		panel.add(btnSoldeToutCompte);
+		btnSoldeToutCompte.addActionListener(gestionClic);
 
 		JLabel lblDpartLoca = new JLabel("Départ de votre locataire :");
 		lblDpartLoca.setFont(new Font("Tahoma", Font.PLAIN, 11));

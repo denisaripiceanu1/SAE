@@ -68,6 +68,7 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAjouter.setBackground(new Color(0, 102, 204));
 		btnAjouter.setBounds(276, 431, 94, 31);
+		btnAjouter.addActionListener(gestionClic);
 		panel.add(btnAjouter);
 		
 		JButton btnAnnuler = new JButton("Annuler");
@@ -75,6 +76,7 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAnnuler.setBackground(new Color(0, 102, 204));
 		btnAnnuler.setBounds(428, 431, 94, 31);
+		btnAnnuler.addActionListener(gestionClic);
 		panel.add(btnAnnuler);
 
 	}
