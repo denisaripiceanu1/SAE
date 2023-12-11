@@ -3,13 +3,13 @@ package modele;
 public class Assurance {
 
 	private String numéroPolice;
-	private float montantInit;
+	private float montant;
 	private Immeuble immeuble;
 	private Entreprise entreprise;
 
 	public Assurance(String numéroPolice, float montantInit, Immeuble immeuble,Entreprise entreprise) {
 		this.numéroPolice = numéroPolice;
-		this.montantInit = montantInit;
+		this.montant = montantInit;
 		this.immeuble = immeuble;
 		this.entreprise = entreprise;
 	}
@@ -34,11 +34,11 @@ public class Assurance {
 	}
 
 	public float getMontantInit() {
-		return this.montantInit;
+		return this.montant;
 	}
 
 	public void setMontantInit(float montantInit) {
-		this.montantInit = montantInit;
+		this.montant = montantInit;
 	}
 
 	public Immeuble getImmeuble() {

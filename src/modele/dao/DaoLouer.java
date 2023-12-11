@@ -1,5 +1,6 @@
 package modele.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
@@ -11,6 +12,8 @@ import modele.Locataire;
 import modele.Louer;
 import modele.dao.requetes.select.RequeteSelectLouer;
 import modele.dao.requetes.select.RequeteSelectLouerById;
+import modele.dao.requetes.sousProgramme.SousProgrammeDeleteLocation;
+import modele.dao.requetes.update.RequeteUpdateLouer;
 
 public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 
@@ -21,16 +24,24 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 	}
 
 	@Override
-	public void update(Louer donnees) {
-		// TODO Auto-generated method stub
-
-	}
+    public void update(Louer donnees) throws SQLException {
+		RequeteUpdateLouer requeteUpdate = new RequeteUpdateLouer();
+        miseAJour(requeteUpdate, donnees);
+    }
 
 	@Override
-	public void delete(Louer donnees) {
-		delete(donnees);
+    public void delete(Louer donnees) throws SQLException {
+        SousProgrammeDeleteLocation sousProgramme = new SousProgrammeDeleteLocation(
+                donnees.getIdLocataire(),
+                donnees.getIdBien(),
+                donnees.getDateDebut()
+        );
 
-	}
+        try (CallableStatement st = connection.prepareCall(sousProgramme.appelSousProgramme())) {
+            sousProgramme.parametres(st);
+            st.execute();
+        }
+    }
 
 	@Override
 	public Louer findById(String... id) throws SQLException {

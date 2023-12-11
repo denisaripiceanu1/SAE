@@ -2,12 +2,14 @@ package modele.dao;
 
 import java.sql.ResultSet;
 
+
 import java.sql.SQLException;
 import java.util.List;
 
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectImmeuble;
 import modele.dao.requetes.select.RequeteSelectImmeubleById;
+import modele.dao.requetes.update.RequeteUpdateImmeuble;
 
 public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 
@@ -18,8 +20,8 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 	}
 
 	@Override
-	public void update(Immeuble donnees) {
-		// TODO Auto-generated method stub
+	public void update(Immeuble donnees) throws SQLException {
+		miseAJour(new RequeteUpdateImmeuble(), donnees);
 
 	}
 

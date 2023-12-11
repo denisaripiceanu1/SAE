@@ -22,10 +22,19 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> ee69bdc566ad9dc772efaa9258a5d96bd2e58412
 import controleur.insertion.GestionInsertionLocation;
 
 public class Fenetre_InsertionLocation extends JInternalFrame implements ActionListener {
 	
+<<<<<<< HEAD
+
+=======
+>>>>>>> ee69bdc566ad9dc772efaa9258a5d96bd2e58412
 	private JTextField textField_IdLocataire;
 	private JTextField textField_Nom;
 	private JTextField textField_Prenom;
@@ -226,7 +235,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 	}
 }

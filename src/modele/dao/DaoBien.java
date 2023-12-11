@@ -8,6 +8,7 @@ import modele.Bien;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectBien;
 import modele.dao.requetes.select.RequeteSelectBienById;
+import modele.dao.requetes.update.RequeteUpdateBien;
 
 public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 
@@ -23,9 +24,8 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 	}
 
 	@Override
-	public void update(Bien donnees) {
-		// miseAJour(new RequeteUpdateBien(), data);
-
+	public void update(Bien donnees) throws SQLException {
+		miseAJour(new RequeteUpdateBien(), donnees);
 	}
 
 	@Override
@@ -46,7 +46,8 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
 
 			bien = new Bien(curseur.getString("Id_Bien"), curseur.getDouble("surface_habitable"),
-					curseur.getInt("nb_pieces"), curseur.getInt("num_etage"), dateAcquisitionStr,curseur.getString("type_bien") ,immeuble
+					curseur.getInt("nb_pieces"), curseur.getInt("num_etage"), dateAcquisitionStr,
+					curseur.getString("type_bien"), immeuble
 
 			);
 		} catch (Exception e) {
