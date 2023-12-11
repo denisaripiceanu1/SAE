@@ -9,6 +9,9 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import controleur.insertion.GestionInsertionAssurance;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -19,9 +22,10 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 	private JTextField textField_montant;
 	private JTextField textField_IDImmeuble;
 	private JTextField textField_SIRET;
-
+	private GestionInsertionAssurance gestionClic;
 	
 	public Fenetre_InsertionAssurance() {
+		this.gestionClic = new GestionInsertionAssurance(this);
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
