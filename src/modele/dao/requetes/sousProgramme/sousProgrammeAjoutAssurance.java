@@ -3,14 +3,14 @@ package modele.dao.requetes.sousProgramme;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 
-import modele.Compteur;
+import modele.Assurance;
 import modele.dao.SousProgramme;
 
-public class sousProgrammeAjoutCompteur implements SousProgramme<Compteur>{
+public class sousProgrammeAjoutAssurance implements SousProgramme<Assurance>{
 
 	@Override
 	public String appelSousProgramme() {
-		return "{call Insert_Compteur(?, ?, ?, ?, ?)}";
+		return "{call Insert_Assurance(?, ?, ?, ?)}";
 	}
 
 	@Override
@@ -19,7 +19,5 @@ public class sousProgrammeAjoutCompteur implements SousProgramme<Compteur>{
 		prSt.setString(2, parametres[1]);
 		prSt.setString(3, parametres[2]);
 		prSt.setString(4, parametres[3]);
-		prSt.setString(5, parametres[4]);
 	}
-
 }
