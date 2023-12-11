@@ -11,7 +11,7 @@ public class RequeteUpdateBien implements Requete<Bien> {
 
 	@Override
 	public String requete() {
-		return "UPDATE Bien SET surface_habitable = ?, nb_pieces = ?, num_etages = ?, date_acquisition = ?, Id_Immeuble = ? WHERE Id_Bien = ?";
+		return "UPDATE Bien SET surface_habitable = ?, nb_pieces = ?, num_etages = ?, date_acquisition = ?, type_bien = ? ,Id_Immeuble = ? WHERE Id_Bien = ?";
 	}
 
 	@Override
@@ -20,8 +20,9 @@ public class RequeteUpdateBien implements Requete<Bien> {
 		prSt.setInt(2, data.getNbPieces());
 		prSt.setInt(3, data.getNumEtage());
 		prSt.setDate(4, Date.valueOf(data.getDateAcquisition()));
-		prSt.setString(5, data.getImmeuble().getImmeuble());
-		prSt.setString(6, data.getIdBien()); // cle primaire
+		prSt.setString(5,data.getType_bien());
+		prSt.setString(6, data.getImmeuble().getImmeuble());
+		prSt.setString(7, data.getIdBien()); // cle primaire
 	}
 
 	@Override

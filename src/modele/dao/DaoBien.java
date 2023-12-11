@@ -46,7 +46,7 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
 
 			bien = new Bien(curseur.getString("Id_Bien"), curseur.getDouble("surface_habitable"),
-					curseur.getInt("nb_pieces"), curseur.getInt("num_etage"), dateAcquisitionStr, immeuble
+					curseur.getInt("nb_pieces"), curseur.getInt("num_etage"), dateAcquisitionStr,curseur.getString("type_bien") ,immeuble
 
 			);
 		} catch (Exception e) {
