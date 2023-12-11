@@ -14,31 +14,10 @@ import javax.swing.border.EmptyBorder;
 import controleur.GestionConnexion;
 
 public class Fenetre_Connexion extends JFrame {
-
-<<<<<<< HEAD
     private JPanel contentPane;
     private JTextField textFieldUtilisateur;
     private JPasswordField textFieldMdp;
     private GestionConnexion gestionClic;
-    
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Fenetre_Connexion frame = new Fenetre_Connexion();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-=======
-	private JPanel contentPane;
-	private JTextField textFieldUtilisateur;
-	private JPasswordField textFieldMdp;
-	private GestionConnexion gestionClic;
->>>>>>> 6e232e31bf642e4bd99a44d88ab15b5723f3074d
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
