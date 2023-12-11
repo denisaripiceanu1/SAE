@@ -10,6 +10,7 @@ import javax.swing.JButton;
 
 import modele.Locataire;
 import modele.dao.CictOracleDataSource;
+import modele.dao.DaoLocataire;
 import modele.dao.requetes.update.RequeteUpdateLocataire;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
@@ -17,9 +18,11 @@ import vue.insertion.Fenetre_AffichageInfoLocataire;
 public class GestionAffichageInfoLocataire implements ActionListener {
 
 	private Fenetre_AffichageInfoLocataire fail;
+	private DaoLocataire daoLocataire;
 
 	public GestionAffichageInfoLocataire(Fenetre_AffichageInfoLocataire fail) {
 		this.fail = fail;
+		this.daoLocataire = new DaoLocataire();
 	}
 
 	@Override
@@ -31,7 +34,8 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		case "Modifier":
 			Locataire locataire = creationLocataire();
 			try {
-				updateLocataireBD(locataire);
+				RequeteUpdateLocataire updateLocataire = new RequeteUpdateLocataire();
+				this.daoLocataire.update(locataire);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -57,18 +61,4 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 
         return locataire;
 	}
-	
-	private void updateLocataireBD(Locataire locataire) throws SQLException{
-		
-		RequeteUpdateLocataire updateLocataire = new RequeteUpdateLocataire();
-		
-		Connection cn = CictOracleDataSource.creerAcces("bnl4835a", "a");
-		PreparedStatement prSt = cn.prepareStatement(updateLocataire.requete());
-		updateLocataire.parametres(prSt, locataire);
-		prSt.executeUpdate();
-		prSt.close();
-		CictOracleDataSource.deconnecter();
-		cn.close();
-	}
-
 }
