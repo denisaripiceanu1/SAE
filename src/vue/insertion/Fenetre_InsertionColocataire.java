@@ -36,8 +36,6 @@ public class Fenetre_InsertionColocataire extends JInternalFrame {
 	private JTextField textField_IdLocataire;
 	private JTextField textField_Nom;
 	private JTextField textField_Prenom;
-	private Object textField_tel;
-	private JTextField textField_e_mail;
 	private JTextField textField_Date_de_naissance;
 	private JTextField textField;
 	private JTextField textField_1;

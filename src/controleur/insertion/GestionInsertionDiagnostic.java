@@ -11,7 +11,7 @@ import vue.insertion.Fenetre_InsertionDiagnostic;
 public class GestionInsertionDiagnostic implements ActionListener{
 	
 	private Fenetre_InsertionDiagnostic fid;
-	
+
 	public GestionInsertionDiagnostic(Fenetre_InsertionDiagnostic fid) {
 		this.fid = fid;
 	}
