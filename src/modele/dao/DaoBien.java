@@ -18,10 +18,10 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 
 	@Override
 	public void create(Bien donnees) throws SQLException {
-		SousProgramme<Bien> sp = new SpAjoutBien();
-		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
-		sp.parametres(st, donnees);
-		st.execute();
+//		SousProgramme<Bien> sp = new SpAjoutBien();
+//		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+//		sp.parametres(st, donnees);
+//		st.execute();
 
 	}
 
@@ -72,12 +72,13 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		return find(new RequeteSelectBien());
 	}
 	public Iterateur<Bien> findAllIterateur() throws SQLException {
-        RequeteSelectBien req = new RequeteSelectBien();
-        PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(req.requete());
-        req.parametres(st);
-        ResultSet res = st.executeQuery();
-
-        iterateurBien = new Iterateur<>(res, this);
-        return DaoBien.iterateurBien;
+//        RequeteSelectBien req = new RequeteSelectBien();
+//        PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(req.requete());
+//        req.parametres(st);
+//        ResultSet res = st.executeQuery();
+//
+//        iterateurBien = new Iterateur<>(res, this);
+//        return DaoBien.iterateurBien;
+		return  null;
     }
 }
