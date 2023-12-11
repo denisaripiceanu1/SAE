@@ -64,7 +64,7 @@ public class Fenetre_Accueil extends JFrame {
 	private JTextField textField_paye;
 	private JTextField textField_restantDu;
 	private JTable tableRegularisation;
-	
+
 	private GestionAccueil gestionAccueil;
 
 	/**
@@ -88,9 +88,9 @@ public class Fenetre_Accueil extends JFrame {
 	 * Create the frame.
 	 */
 	public Fenetre_Accueil() {
-		
+
 		this.gestionAccueil = new GestionAccueil(this);
-		
+
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 970, 646);
@@ -109,7 +109,6 @@ public class Fenetre_Accueil extends JFrame {
 		panel_Menu_Boutons.setBackground(Color.LIGHT_GRAY);
 		panel_Menu.add(panel_Menu_Boutons, BorderLayout.CENTER);
 		panel_Menu_Boutons.setLayout(new GridLayout(8, 1, 0, 0));
-		
 
 		////// Bande accueil//////////////////////////////////////////////////
 		JPanel bandeAccueil = new JPanel();
@@ -121,7 +120,10 @@ public class Fenetre_Accueil extends JFrame {
 		JLabel logo = new JLabel("");
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
 
-		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png"))); //pour éviter l'erreur location is null faire de façon graphique
+		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png"))); // pour éviter l'erreur
+																								// location is null
+																								// faire de façon
+																								// graphique
 		bandeAccueil.add(logo);
 		JPanel panelDuBtnAccueil = new JPanel();
 		panelDuBtnAccueil.setBackground(new Color(192, 192, 192));
@@ -132,14 +134,17 @@ public class Fenetre_Accueil extends JFrame {
 		btnAccueil.setBorder(null);
 		btnAccueil.addActionListener(this.gestionAccueil);
 		btnAccueil.setBackground(new Color(192, 192, 192));
-		btnAccueil.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/home_att-removebg-preview.png"))); //pour éviter l'erreur location is null
+		btnAccueil.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/home_att-removebg-preview.png"))); // pour
+																														// éviter
+																														// l'erreur
+																														// location
+																														// is
+																														// null
 
 		btnAccueil.setBounds(0, 53, 42, 31);
 		btnAccueil.setName("btnAccueil");
 		panelDuBtnAccueil.add(btnAccueil);
-		
-		
-		
+
 		///////////////////////////////////////////////////////////////////
 		// MENU DE BOUTONS SUR LE CÔTE
 		// ////////////////////////////////////////////////////////////////
@@ -207,8 +212,6 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesDocuments.setName("btnMesDocuments");
 		panel_Menu_Boutons.add(btnMesDocuments);
 
-
-
 		///////////////////////////////////////////////////////////////////
 		// LAYERED ACCUEIL
 		// ////////////////////////////////////////////////////////////////
@@ -225,10 +228,7 @@ public class Fenetre_Accueil extends JFrame {
 		JLabel lbl_accueil = new JLabel("Accueil");
 		lbl_accueil.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_accueil.add(lbl_accueil, BorderLayout.CENTER);
-		
-		
-		
-		
+
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES BIENS
 		///////////////////////////////////////////////////////////////////
@@ -240,8 +240,8 @@ public class Fenetre_Accueil extends JFrame {
 		panelMesBiens.setBackground(Color.WHITE);
 		this.layeredPane_MesBiens.add(panelMesBiens);
 		panelMesBiens.setLayout(null);
-		
-		//Tableaux et scrollPane
+
+		// Tableaux et scrollPane
 		JScrollPane scrollPaneMesBiens = new JScrollPane();
 		scrollPaneMesBiens.setToolTipText("40, 53, 668, 130");
 		scrollPaneMesBiens.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
@@ -251,16 +251,11 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.tableMesBiens = new JTable();
 		this.tableMesBiens.setSelectionBackground(new Color(0, 102, 204));
-		this.tableMesBiens.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"Nom du bien", "Adresse", "Nb de logements"
-			}
-		));
+		this.tableMesBiens.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
+				new String[] { "Nom du bien", "Adresse", "Nb de logements" }));
 		this.tableMesBiens.setBounds(40, 53, 668, 130);
 		scrollPaneMesBiens.setViewportView(this.tableMesBiens);
+		//this.tableMesBiens.getSelectionModel().addListSelectionListener(table_MesTravaux);
 
 		JScrollPane scrollPaneMesBiens_Logements = new JScrollPane();
 		scrollPaneMesBiens_Logements.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
@@ -269,43 +264,37 @@ public class Fenetre_Accueil extends JFrame {
 		panelMesBiens.add(scrollPaneMesBiens_Logements);
 
 		this.tableMesBiens_Logements = new JTable();
-		this.tableMesBiens_Logements.setModel(
-				new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"Nom", "Surface", "Nb pi\u00E8ces", "Etage", "Aquisition", "Occup\u00E9"
-			}
-		));
+		this.tableMesBiens_Logements
+				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
+						new String[] { "Nom", "Surface", "Nb pi\u00E8ces", "Etage", "Aquisition", "Occup\u00E9" }));
 		this.tableMesBiens_Logements.setBounds(40, 266, 438, 106);
 		scrollPaneMesBiens_Logements.setViewportView(this.tableMesBiens_Logements);
-		
-		//Labels
+
+		// Labels
 		JLabel lblMesBiens = new JLabel("Mes Biens");
 		lblMesBiens.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMesBiens.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMesBiens.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblMesBiens.setBounds(244, 22, 216, 43);
 		panelMesBiens.add(lblMesBiens);
-		
+
 		JLabel lblLogements = new JLabel("Mes Logements");
 		lblLogements.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblLogements.setBounds(40, 269, 94, 13);
 		panelMesBiens.add(lblLogements);
-		
-		//Séparateurs
+
+		// Séparateurs
 		JSeparator separatorMesBiens = new JSeparator();
 		separatorMesBiens.setForeground(new Color(0, 102, 204));
 		separatorMesBiens.setBounds(258, 63, 190, 2);
 		panelMesBiens.add(separatorMesBiens);
-		
+
 		JSeparator separator_mesBiens_1 = new JSeparator();
 		separator_mesBiens_1.setForeground(new Color(0, 102, 204));
 		separator_mesBiens_1.setBounds(32, 250, 494, 2);
 		panelMesBiens.add(separator_mesBiens_1);
-		
-		//Boutons généraux
+
+		// Boutons généraux
 		JButton btnMesBiens_Charger = new JButton("Charger");
 		btnMesBiens_Charger.setForeground(Color.WHITE);
 		btnMesBiens_Charger.setBackground(new Color(0, 102, 204));
@@ -313,7 +302,7 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesBiens_Charger.addActionListener(this.gestionAccueil);
 		btnMesBiens_Charger.setName("btnMesBiens_Charger");
 		panelMesBiens.add(btnMesBiens_Charger);
-		
+
 		JButton btnMesBiens_Modifier = new JButton("Modifier");
 		btnMesBiens_Modifier.setForeground(Color.WHITE);
 		btnMesBiens_Modifier.setBackground(new Color(0, 102, 204));
@@ -330,48 +319,44 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesBiens_Supprimer.setName("btnMesBiens_Supprimer");
 		panelMesBiens.add(btnMesBiens_Supprimer);
 
-	
-		//Boutons BIENS
+		// Boutons BIENS
 		JButton btnMesBiens_AjouterBien = new JButton("Ajouter un bien");
 		btnMesBiens_AjouterBien.setBounds(551, 97, 161, 23);
 		btnMesBiens_AjouterBien.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterBien.setName("btnMesBiens_AjouterBien");
 		panelMesBiens.add(btnMesBiens_AjouterBien);
-		
+
 		JButton btnMesBiens_AjouterDiagnostic = new JButton("Ajouter un diagnostic");
 		btnMesBiens_AjouterDiagnostic.setBounds(551, 131, 161, 23);
 		btnMesBiens_AjouterDiagnostic.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterDiagnostic.setName("btnMesBiens_AjouterDiagnostic");
 		panelMesBiens.add(btnMesBiens_AjouterDiagnostic);
-		
+
 		JButton btnMesBiens_AjouterDesTravaux = new JButton("Ajouter des travaux");
-		btnMesBiens_AjouterDesTravaux.addActionListener(this.gestionAccueil); 
+		btnMesBiens_AjouterDesTravaux.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterDesTravaux.setBounds(551, 165, 161, 23);
 		btnMesBiens_AjouterDesTravaux.setName("btnMesBiens_AjouterDesTravaux");
 		panelMesBiens.add(btnMesBiens_AjouterDesTravaux);
-		
-		//Boutons LOGEMENTS
+
+		// Boutons LOGEMENTS
 		JButton btnMesBiens_AjouterLogement = new JButton("Ajouter un logement");
 		btnMesBiens_AjouterLogement.setBounds(551, 314, 161, 23);
 		btnMesBiens_AjouterLogement.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterLogement.setName("btnMesBiens_AjouterLogement");
 		panelMesBiens.add(btnMesBiens_AjouterLogement);
-		
+
 		JButton btnMesBiens_AjouterDiagnostic_Logements = new JButton("Ajouter un diagnostic");
 		btnMesBiens_AjouterDiagnostic_Logements.setBounds(551, 348, 161, 23);
 		btnMesBiens_AjouterDiagnostic_Logements.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterDiagnostic_Logements.setName("btnMesBiens_AjouterDiagnostic_Logements");
 		panelMesBiens.add(btnMesBiens_AjouterDiagnostic_Logements);
-		
+
 		JButton btnMesBiens_AjouterDesTravaux_Logements = new JButton("Ajouter des travaux");
 		btnMesBiens_AjouterDesTravaux_Logements.setBounds(551, 382, 161, 23);
 		btnMesBiens_AjouterDesTravaux_Logements.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterDesTravaux_Logements.setName("btnMesBiens_AjouterDesTravaux_Logements");
 		panelMesBiens.add(btnMesBiens_AjouterDesTravaux_Logements);
-		
-		
-		
-		
+
 		////////////////////////////////////////////////////////////////////////////
 		// LAYERED MES
 		// LOCATIONS////////////////////////////////////////////////////////////////
@@ -384,9 +369,8 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesLocations.setBackground(Color.WHITE);
 		this.layeredPane_MesLocations.add(panel_MesLocations, BorderLayout.CENTER);
 		panel_MesLocations.setLayout(null);
-		
-		
-		//Tableaux et scrollPane
+
+		// Tableaux et scrollPane
 		JScrollPane scrollPane_MesLocations = new JScrollPane();
 		scrollPane_MesLocations.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPane_MesLocations.setBounds(30, 95, 447, 323);
@@ -394,31 +378,26 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesLocations = new JTable();
 		this.table_MesLocations.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesLocations.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"Locataire", "Bien", "Type", "Adresse", "Code Postal", "Ville"
-			}
-		));
+		this.table_MesLocations
+				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
+						new String[] { "Locataire", "Bien", "Type", "Adresse", "Code Postal", "Ville" }));
 		this.table_MesLocations.setBounds(40, 53, 668, 130);
 		scrollPane_MesLocations.setViewportView(this.table_MesLocations);
-		
-		//Labels
+
+		// Labels
 		JLabel lbl_MesLocations = new JLabel("Mes Locations");
 		lbl_MesLocations.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_MesLocations.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_MesLocations.setBounds(244, 22, 216, 43);
 		panel_MesLocations.add(lbl_MesLocations);
-		
-		//Séparateurs
+
+		// Séparateurs
 		JSeparator separator = new JSeparator();
 		separator.setForeground(new Color(0, 102, 204));
 		separator.setBounds(258, 63, 190, 2);
 		panel_MesLocations.add(separator);
-		
-		//Boutons généraux
+
+		// Boutons généraux
 		JButton btn_MesLocations_Charger = new JButton("Charger");
 		btn_MesLocations_Charger.setForeground(Color.WHITE);
 		btn_MesLocations_Charger.setBackground(new Color(0, 102, 204));
@@ -426,7 +405,7 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesLocations_Charger.addActionListener(this.gestionAccueil);
 		btn_MesLocations_Charger.setName("btn_MesLocations_Charger");
 		panel_MesLocations.add(btn_MesLocations_Charger);
-		
+
 		JButton btn_MesLocations_Modifier = new JButton("Modifier");
 		btn_MesLocations_Modifier.setForeground(Color.WHITE);
 		btn_MesLocations_Modifier.setBackground(new Color(0, 102, 204));
@@ -451,19 +430,19 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesLocations_Supprimer.setName("btn_MesLocations_Supprimer");
 		panel_MesLocations.add(btn_MesLocations_Supprimer);
 
-		
-		//Bouton propre à la page
+		// Bouton propre à la page
 		JButton btn_mesLocations_InfoLocataire = new JButton("Mon locataire");
 		btn_mesLocations_InfoLocataire.setBounds(510, 395, 152, 23);
 		btn_mesLocations_InfoLocataire.addActionListener(this.gestionAccueil);
 		btn_mesLocations_InfoLocataire.setName("btn_mesLocations_InfoLocataire");
 		panel_MesLocations.add(btn_mesLocations_InfoLocataire);
 
-		//Champs de saisie
+		// Champs de saisie
 		this.textField_loyer = new JTextField();
 		this.textField_loyer.setBackground(new Color(255, 255, 255));
 		this.textField_loyer.setEditable(false);
-		this.textField_loyer.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true), "Loyer", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField_loyer.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true), "Loyer",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
 		this.textField_loyer.setBounds(510, 89, 152, 31);
 		panel_MesLocations.add(this.textField_loyer);
 		this.textField_loyer.setColumns(10);
@@ -489,7 +468,8 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_dateEmission = new JTextField();
 		this.textField_dateEmission.setEditable(false);
 		this.textField_dateEmission.setColumns(10);
-		this.textField_dateEmission.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true), "Date \u00E9mission", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField_dateEmission.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true),
+				"Date \u00E9mission", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
 		this.textField_dateEmission.setBackground(Color.WHITE);
 		this.textField_dateEmission.setBounds(510, 131, 152, 31);
 		panel_MesLocations.add(this.textField_dateEmission);
@@ -497,7 +477,8 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_dateEcheance = new JTextField();
 		this.textField_dateEcheance.setEditable(false);
 		this.textField_dateEcheance.setColumns(10);
-		this.textField_dateEcheance.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true), "Date \u00E9ch\u00E9ance", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField_dateEcheance.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true),
+				"Date \u00E9ch\u00E9ance", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
 		this.textField_dateEcheance.setBackground(Color.WHITE);
 		this.textField_dateEcheance.setBounds(510, 173, 152, 31);
 		panel_MesLocations.add(this.textField_dateEcheance);
@@ -514,17 +495,12 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_restantDu = new JTextField();
 		this.textField_restantDu.setEditable(false);
 		this.textField_restantDu.setColumns(10);
-		this.textField_restantDu.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true), "Restant d\u00FB",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField_restantDu.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true),
+				"Restant d\u00FB", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
 		this.textField_restantDu.setBackground(Color.WHITE);
 		this.textField_restantDu.setBounds(510, 257, 152, 31);
 		panel_MesLocations.add(this.textField_restantDu);
 
-			
-		
-		
-		
-		
 		//////////////////////////////////////////////////////////////////////////
 		// LAYERED MES
 		// TRAVAUX////////////////////////////////////////////////////////////////
@@ -537,7 +513,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.layeredPane_MesTravaux.add(panel_MesTravaux);
 		panel_MesTravaux.setLayout(null);
 
-		//Tableaux et scrollPane
+		// Tableaux et scrollPane
 		JScrollPane scrollPane_MesTravaux = new JScrollPane();
 		scrollPane_MesTravaux.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPane_MesTravaux.setBounds(51, 128, 641, 289);
@@ -546,30 +522,25 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesTravaux = new JTable();
 		this.table_MesTravaux.setSelectionBackground(new Color(0, 102, 204));
 		this.table_MesTravaux.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"Bien/Logement", "D\u00E9signation", "Date \u00E9mission", "Montant", "Pay\u00E9", "Prestataire", "Adresse"
-			}
-		));
+				new Object[][] { { null, null, null, null, null, null, null }, }, new String[] { "Bien/Logement",
+						"D\u00E9signation", "Date \u00E9mission", "Montant", "Pay\u00E9", "Prestataire", "Adresse" }));
 		this.table_MesTravaux.setBounds(40, 53, 668, 130);
 		scrollPane_MesTravaux.setViewportView(this.table_MesTravaux);
-		
-		//labels
+
+		// labels
 		JLabel lbl_MesTravaux = new JLabel("Mes Travaux");
 		lbl_MesTravaux.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_MesTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_MesTravaux.setBounds(244, 22, 216, 43);
 		panel_MesTravaux.add(lbl_MesTravaux);
-		
-		//Séparateurs
+
+		// Séparateurs
 		JSeparator separator_MesTravaux = new JSeparator();
 		separator_MesTravaux.setForeground(new Color(0, 102, 204));
 		separator_MesTravaux.setBounds(258, 63, 190, 2);
 		panel_MesTravaux.add(separator_MesTravaux);
-		
-		//Boutons généraux
+
+		// Boutons généraux
 		JButton btn_Travaux_Modifier = new JButton("Modifier");
 		btn_Travaux_Modifier.setForeground(Color.WHITE);
 		btn_Travaux_Modifier.setBackground(new Color(0, 102, 204));
@@ -577,7 +548,7 @@ public class Fenetre_Accueil extends JFrame {
 		btn_Travaux_Modifier.addActionListener(this.gestionAccueil);
 		btn_Travaux_Modifier.setName("btn_Travaux_Modifier");
 		panel_MesTravaux.add(btn_Travaux_Modifier);
-		
+
 		JButton btn_Travaux_Supprimer = new JButton("Supprimer");
 		btn_Travaux_Supprimer.setForeground(Color.WHITE);
 		btn_Travaux_Supprimer.setBackground(new Color(0, 102, 204));
@@ -585,23 +556,20 @@ public class Fenetre_Accueil extends JFrame {
 		btn_Travaux_Supprimer.addActionListener(this.gestionAccueil);
 		btn_Travaux_Supprimer.setName("btn_Travaux_Supprimer");
 		panel_MesTravaux.add(btn_Travaux_Supprimer);
-		
-		//Boutons propres à la page
+
+		// Boutons propres à la page
 		JToggleButton tglbtn_Travaux_immeubles = new JToggleButton("Travaux pour mes immeubles");
 		tglbtn_Travaux_immeubles.setBounds(112, 76, 216, 23);
 		tglbtn_Travaux_immeubles.addActionListener(this.gestionAccueil);
 		tglbtn_Travaux_immeubles.setName("tglbtn_Travaux_immeubles");
 		panel_MesTravaux.add(tglbtn_Travaux_immeubles);
-		
+
 		JToggleButton tglbtn_Travaux_logements = new JToggleButton("Travaux pour mes logements");
 		tglbtn_Travaux_logements.setBounds(384, 76, 208, 23);
 		tglbtn_Travaux_logements.addActionListener(this.gestionAccueil);
 		tglbtn_Travaux_logements.setName("tglbtn_Travaux_logements");
 		panel_MesTravaux.add(tglbtn_Travaux_logements);
 
-		
-		
-		
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES CHARGES LOCATIVES
 		// ////////////////////////////////////////////////////////////////
@@ -613,8 +581,8 @@ public class Fenetre_Accueil extends JFrame {
 		panel_chargesLocatives.setBackground(Color.WHITE);
 		this.layeredPane_MesChargesLocatives.add(panel_chargesLocatives);
 		panel_chargesLocatives.setLayout(null);
-		
-		//Tableaux et scrollPane
+
+		// Tableaux et scrollPane
 		JScrollPane scrollPane_MesChargesLocatives = new JScrollPane();
 		scrollPane_MesChargesLocatives.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPane_MesChargesLocatives.setBounds(55, 124, 643, 288);
@@ -622,31 +590,25 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesChargesLocatives = new JTable();
 		this.table_MesChargesLocatives.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesChargesLocatives.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-			},
-			new String[] {
-				"Libell\u00E9", "Bien", "D\u00E9ductible", "Montant"
-			}
-		));
+		this.table_MesChargesLocatives.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null }, },
+				new String[] { "Libell\u00E9", "Bien", "D\u00E9ductible", "Montant" }));
 		this.table_MesChargesLocatives.setBounds(40, 53, 668, 130);
 		scrollPane_MesChargesLocatives.setViewportView(this.table_MesChargesLocatives);
-		
-		//Labels
+
+		// Labels
 		JLabel lbl_MesChargesLocatives = new JLabel("Mes Charges Locatives");
 		lbl_MesChargesLocatives.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_MesChargesLocatives.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_MesChargesLocatives.setBounds(244, 22, 216, 43);
 		panel_chargesLocatives.add(lbl_MesChargesLocatives);
-		
-		//Séparateurs
+
+		// Séparateurs
 		JSeparator separator_mesChargesLocatives = new JSeparator();
 		separator_mesChargesLocatives.setForeground(new Color(0, 102, 204));
 		separator_mesChargesLocatives.setBounds(258, 63, 190, 2);
 		panel_chargesLocatives.add(separator_mesChargesLocatives);
-		
-		//Boutons généraux
+
+		// Boutons généraux
 		JButton btn_MesChargesLocatives_Charger = new JButton("Charger");
 		btn_MesChargesLocatives_Charger.setForeground(Color.WHITE);
 		btn_MesChargesLocatives_Charger.setBackground(new Color(0, 102, 204));
@@ -678,18 +640,14 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesChargesLocatives_Supprimer.addActionListener(this.gestionAccueil);
 		btn_MesChargesLocatives_Supprimer.setName("btn_MesChargesLocatives_Supprimer");
 		panel_chargesLocatives.add(btn_MesChargesLocatives_Supprimer);
-		
-		
-		//ComboBox
-		//CODE A FOURNIR POUR LA LISTE DES IDENTIFIANTS DE LOGEMENTS
-		JComboBox comboBox_MesChargesLocatives  = new JComboBox();
+
+		// ComboBox
+		// CODE A FOURNIR POUR LA LISTE DES IDENTIFIANTS DE LOGEMENTS
+		JComboBox comboBox_MesChargesLocatives = new JComboBox();
 		comboBox_MesChargesLocatives.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
 		comboBox_MesChargesLocatives.setBounds(55, 81, 130, 21);
 		panel_chargesLocatives.add(comboBox_MesChargesLocatives);
-		
-		
-		
-		
+
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES ASSURANCES
 		// ////////////////////////////////////////////////////////////////
@@ -701,8 +659,8 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesAssurances.setBackground(Color.WHITE);
 		this.layeredPane_MesAssurances.add(panel_MesAssurances);
 		panel_MesAssurances.setLayout(null);
-		
-		//Tableaux et scrollPane
+
+		// Tableaux et scrollPane
 		JScrollPane scrollPane_MesAssurances = new JScrollPane();
 		scrollPane_MesAssurances.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPane_MesAssurances.setBounds(55, 124, 643, 270);
@@ -711,30 +669,25 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesAssurances = new JTable();
 		this.table_MesAssurances.setSelectionBackground(new Color(0, 102, 204));
 		this.table_MesAssurances.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"n\u00B0 Police", "Montant", "Date \u00E9ch\u00E9ance", "Prestataire", "Adresse", "n\u00B0 T\u00E9l\u00E9phone"
-			}
-		));
+				new Object[][] { { null, null, null, null, null, null }, }, new String[] { "n\u00B0 Police", "Montant",
+						"Date \u00E9ch\u00E9ance", "Prestataire", "Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
 		this.table_MesAssurances.setBounds(40, 53, 668, 130);
 		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);
-		
-		//Labels
+
+		// Labels
 		JLabel lbl_MesAssurances = new JLabel("Mes Assurances");
 		lbl_MesAssurances.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_MesAssurances.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_MesAssurances.setBounds(244, 22, 216, 43);
 		panel_MesAssurances.add(lbl_MesAssurances);
 
-		//Séparateurs
+		// Séparateurs
 		JSeparator separator_mesAssurances = new JSeparator();
 		separator_mesAssurances.setForeground(new Color(0, 102, 204));
 		separator_mesAssurances.setBounds(258, 63, 190, 2);
 		panel_MesAssurances.add(separator_mesAssurances);
 
-		//Boutons généraux
+		// Boutons généraux
 		JButton btn_MesAssurances_Charger = new JButton("Charger");
 		btn_MesAssurances_Charger.setForeground(Color.WHITE);
 		btn_MesAssurances_Charger.setBackground(new Color(0, 102, 204));
@@ -742,7 +695,7 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesAssurances_Charger.addActionListener(this.gestionAccueil);
 		btn_MesAssurances_Charger.setName("btn_MesAssurances_Charger");
 		panel_MesAssurances.add(btn_MesAssurances_Charger);
-		
+
 		JButton btn_MesAssurances_Modifier = new JButton("Modifier");
 		btn_MesAssurances_Modifier.setForeground(Color.WHITE);
 		btn_MesAssurances_Modifier.setBackground(new Color(0, 102, 204));
@@ -750,7 +703,7 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesAssurances_Modifier.addActionListener(this.gestionAccueil);
 		btn_MesAssurances_Modifier.setName("btn_MesAssurances_Modifier");
 		panel_MesAssurances.add(btn_MesAssurances_Modifier);
-		
+
 		JButton btn_MesAssurances_Inserer = new JButton("Insérer");
 		btn_MesAssurances_Inserer.setForeground(Color.WHITE);
 		btn_MesAssurances_Inserer.setBackground(new Color(0, 102, 204));
@@ -767,15 +720,12 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesAssurances_Supprimer.setName("btn_MesAssurances_Supprimer");
 		panel_MesAssurances.add(btn_MesAssurances_Supprimer);
 
-		//ComboBox
-		//CODE A FOURNIR POUR LA LISTE DES IDENTIFIANTS DE LOGEMENTS
+		// ComboBox
+		// CODE A FOURNIR POUR LA LISTE DES IDENTIFIANTS DE LOGEMENTS
 		JComboBox comboBox_MesAssurances = new JComboBox();
 		comboBox_MesAssurances.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
 		comboBox_MesAssurances.setBounds(55, 80, 130, 21);
 		panel_MesAssurances.add(comboBox_MesAssurances);
-
-		
-		
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED REGULARISATION DES CHARGES
@@ -788,48 +738,41 @@ public class Fenetre_Accueil extends JFrame {
 		panel_RegularisationDesCharges.setBackground(Color.WHITE);
 		this.layeredPane_RegularisationDesCharges.add(panel_RegularisationDesCharges);
 		panel_RegularisationDesCharges.setLayout(null);
-		
-		//Tableaux et scrollPane
+
+		// Tableaux et scrollPane
 		JScrollPane scrollPane_Regularisation = new JScrollPane();
 		scrollPane_Regularisation.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPane_Regularisation.setBounds(28, 121, 697, 303);
 		panel_RegularisationDesCharges.add(scrollPane_Regularisation);
-		
+
 		tableRegularisation = new JTable();
 		tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
-		tableRegularisation.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"Date entr\u00E9e", "Date sortie", "Total charges", "Travaux imputables", "Charges garage", "Total des provisions"
-			}
-		));
+		tableRegularisation.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
+				new String[] { "Date entr\u00E9e", "Date sortie", "Total charges", "Travaux imputables",
+						"Charges garage", "Total des provisions" }));
 		tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(65);
 		tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(65);
 		this.tableRegularisation.setBounds(40, 53, 668, 130);
 		scrollPane_Regularisation.setViewportView(this.tableRegularisation);
-		
-		//Labels
+
+		// Labels
 		JLabel lbl_RegularisationDesCharges = new JLabel("Régularisation des Charges");
 		lbl_RegularisationDesCharges.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_RegularisationDesCharges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_RegularisationDesCharges.setBounds(244, 22, 216, 43);
 		panel_RegularisationDesCharges.add(lbl_RegularisationDesCharges);
-		
-		//Séparateurs
+
+		// Séparateurs
 		JSeparator separator_RegularisationDesChargess = new JSeparator();
 		separator_RegularisationDesChargess.setForeground(new Color(0, 102, 204));
 		separator_RegularisationDesChargess.setBounds(258, 63, 190, 2);
 		panel_RegularisationDesCharges.add(separator_RegularisationDesChargess);
-		
-		//JComboBox
-		JComboBox comboBox_Regularisation  = new JComboBox();
+
+		// JComboBox
+		JComboBox comboBox_Regularisation = new JComboBox();
 		comboBox_Regularisation.setModel(new DefaultComboBoxModel(new String[] { "Locataire" }));
 		comboBox_Regularisation.setBounds(55, 81, 130, 21);
 		panel_RegularisationDesCharges.add(comboBox_Regularisation);
-
-		
 
 		/////////////////////////////////////////////////////////////////////////
 		// LAYERED SOLDE DE TOUT
@@ -885,9 +828,7 @@ public class Fenetre_Accueil extends JFrame {
 //		JLabel lbl_SoldeDeToutCompte_Locataires = new JLabel("Locataires");
 //		lbl_SoldeDeToutCompte_Locataires.setBounds(56, 69, 82, 13);
 //		panel_SoldeDeToutCompte.add(lbl_SoldeDeToutCompte_Locataires);
-		
-		
-		
+
 		// A faire éventuellement à la fin
 		////////////////////////////////////////////////////////////////////////////
 		// LAYERED
@@ -919,7 +860,7 @@ public class Fenetre_Accueil extends JFrame {
 
 		// this.mettrePageParDef();
 	}
-	
+
 	public JLayeredPane getLayeredPane_MesDocuments() {
 		return layeredPane_MesDocuments;
 	}
@@ -960,5 +901,10 @@ public class Fenetre_Accueil extends JFrame {
 		return contentPane;
 	}
 
+	
+	// ---------fonctions--------//
+	public JTable getTableBiens() {
+		return tableMesBiens;
+	}
 
 }
