@@ -242,7 +242,7 @@ public class Fenetre_Accueil extends JFrame {
 		scrollPaneMesBiens.setToolTipText("40, 53, 668, 130");
 		scrollPaneMesBiens.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPaneMesBiens.setBackground(Color.LIGHT_GRAY);
-		scrollPaneMesBiens.setBounds(40, 76, 475, 148);
+		scrollPaneMesBiens.setBounds(40, 101, 475, 147);
 		panelMesBiens.add(scrollPaneMesBiens);
 
 		this.tableMesBiens = new JTable();
@@ -256,7 +256,7 @@ public class Fenetre_Accueil extends JFrame {
 		JScrollPane scrollPaneMesBiens_Logements = new JScrollPane();
 		scrollPaneMesBiens_Logements.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
 		scrollPaneMesBiens_Logements.setBackground(Color.LIGHT_GRAY);
-		scrollPaneMesBiens_Logements.setBounds(40, 293, 475, 134);
+		scrollPaneMesBiens_Logements.setBounds(40, 314, 475, 113);
 		panelMesBiens.add(scrollPaneMesBiens_Logements);
 
 		this.tableMesBiens_Logements = new JTable();
@@ -273,10 +273,15 @@ public class Fenetre_Accueil extends JFrame {
 		lblMesBiens.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblMesBiens.setBounds(244, 22, 216, 43);
 		panelMesBiens.add(lblMesBiens);
+		
+		JLabel lblImmeubles = new JLabel("Immeuble/Maison");
+		lblImmeubles.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblImmeubles.setBounds(40, 71, 109, 31);
+		panelMesBiens.add(lblImmeubles);
 
 		JLabel lblLogements = new JLabel("Mes Logements");
 		lblLogements.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblLogements.setBounds(40, 269, 94, 13);
+		lblLogements.setBounds(40, 287, 94, 26);
 		panelMesBiens.add(lblLogements);
 
 		// Séparateurs
@@ -287,7 +292,7 @@ public class Fenetre_Accueil extends JFrame {
 
 		JSeparator separator_mesBiens_1 = new JSeparator();
 		separator_mesBiens_1.setForeground(new Color(0, 102, 204));
-		separator_mesBiens_1.setBounds(32, 250, 494, 2);
+		separator_mesBiens_1.setBounds(40, 274, 494, 2);
 		panelMesBiens.add(separator_mesBiens_1);
 
 		// Boutons généraux
@@ -317,38 +322,38 @@ public class Fenetre_Accueil extends JFrame {
 
 		// Boutons BIENS
 		JButton btnMesBiens_AjouterBien = new JButton("Ajouter un bien");
-		btnMesBiens_AjouterBien.setBounds(551, 97, 161, 23);
+		btnMesBiens_AjouterBien.setBounds(551, 124, 161, 23);
 		btnMesBiens_AjouterBien.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterBien.setName("btnMesBiens_AjouterBien");
 		panelMesBiens.add(btnMesBiens_AjouterBien);
 
 		JButton btnMesBiens_AjouterDiagnostic = new JButton("Ajouter un diagnostic");
-		btnMesBiens_AjouterDiagnostic.setBounds(551, 131, 161, 23);
+		btnMesBiens_AjouterDiagnostic.setBounds(551, 158, 161, 23);
 		btnMesBiens_AjouterDiagnostic.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterDiagnostic.setName("btnMesBiens_AjouterDiagnostic");
 		panelMesBiens.add(btnMesBiens_AjouterDiagnostic);
 
 		JButton btnMesBiens_AjouterDesTravaux = new JButton("Ajouter des travaux");
 		btnMesBiens_AjouterDesTravaux.addActionListener(this.gestionAccueil);
-		btnMesBiens_AjouterDesTravaux.setBounds(551, 165, 161, 23);
+		btnMesBiens_AjouterDesTravaux.setBounds(551, 192, 161, 23);
 		btnMesBiens_AjouterDesTravaux.setName("btnMesBiens_AjouterDesTravaux");
 		panelMesBiens.add(btnMesBiens_AjouterDesTravaux);
 
 		// Boutons LOGEMENTS
 		JButton btnMesBiens_AjouterLogement = new JButton("Ajouter un logement");
-		btnMesBiens_AjouterLogement.setBounds(551, 314, 161, 23);
+		btnMesBiens_AjouterLogement.setBounds(551, 323, 161, 23);
 		btnMesBiens_AjouterLogement.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterLogement.setName("btnMesBiens_AjouterLogement");
 		panelMesBiens.add(btnMesBiens_AjouterLogement);
 
 		JButton btnMesBiens_AjouterDiagnostic_Logements = new JButton("Ajouter un diagnostic");
-		btnMesBiens_AjouterDiagnostic_Logements.setBounds(551, 348, 161, 23);
+		btnMesBiens_AjouterDiagnostic_Logements.setBounds(551, 357, 161, 23);
 		btnMesBiens_AjouterDiagnostic_Logements.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterDiagnostic_Logements.setName("btnMesBiens_AjouterDiagnostic_Logements");
 		panelMesBiens.add(btnMesBiens_AjouterDiagnostic_Logements);
 
 		JButton btnMesBiens_AjouterDesTravaux_Logements = new JButton("Ajouter des travaux");
-		btnMesBiens_AjouterDesTravaux_Logements.setBounds(551, 382, 161, 23);
+		btnMesBiens_AjouterDesTravaux_Logements.setBounds(551, 391, 161, 23);
 		btnMesBiens_AjouterDesTravaux_Logements.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterDesTravaux_Logements.setName("btnMesBiens_AjouterDesTravaux_Logements");
 		panelMesBiens.add(btnMesBiens_AjouterDesTravaux_Logements);

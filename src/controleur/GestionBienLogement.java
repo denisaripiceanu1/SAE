@@ -50,8 +50,6 @@ public class GestionBienLogement implements ListSelectionListener {
                         e1.printStackTrace();
                     }
 
-                    System.out.println("Number of biens: " + (biens != null ? biens.size() : 0));
-
                     JTable logements = fenetreAccueil.getTableLogementsParBien();
                     GestionAccueil.viderTable(logements);
 
@@ -77,7 +75,7 @@ public class GestionBienLogement implements ListSelectionListener {
                             int nbPieces = bien.getNbPieces();
                             int etage = bien.getNumEtage();
                             String date = bien.getDateAcquisition();
-                            int occupe = 0; // You should change this to the actual value
+                            int occupe = 0; // Traitement à faire plus tard 
 
                             model.setValueAt(nom, i, 0);
                             model.setValueAt(surface, i, 1);
