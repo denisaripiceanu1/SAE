@@ -11,6 +11,7 @@ import modele.Compteur;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectCompteur;
 import modele.dao.requetes.select.RequeteSelectCompteurById;
+import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertCompteur;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertImmeuble;
 

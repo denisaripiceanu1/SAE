@@ -9,6 +9,7 @@ import modele.Bien;
 import modele.Charge;
 import modele.dao.requetes.select.RequeteSelectCharge;
 import modele.dao.requetes.select.RequeteSelectChargeById;
+import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertCharge;
 import modele.dao.requetes.update.RequeteUpdateCharge;
 

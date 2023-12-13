@@ -9,6 +9,7 @@ import modele.Quotite;
 import modele.Quotter;
 import modele.dao.requetes.select.RequeteSelectQuotite;
 import modele.dao.requetes.select.RequeteSelectQuotiteById;
+import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertQuotite;
 
 public class DaoQuotite extends DaoModele<Quotite> implements Dao<Quotite> {
