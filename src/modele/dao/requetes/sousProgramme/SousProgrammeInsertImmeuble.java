@@ -1,10 +1,5 @@
 package modele.dao.requetes.sousProgramme;
 
-<<<<<<< HEAD
-=======
-import java.sql.CallableStatement;
-
->>>>>>> cc0ab06a3b11267dab4d0502b293a637fca62667
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 

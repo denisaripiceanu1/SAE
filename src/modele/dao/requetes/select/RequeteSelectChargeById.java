@@ -21,7 +21,7 @@ public class RequeteSelectChargeById implements Requete<Charge> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, Charge data) throws SQLException {
-		prSt.setLong(1, data.getIdCharge());
+		//prSt.setLong(1, data.getIdCharge()); L'ID est auto incrementé dans la BDD
 	}
 
 }
