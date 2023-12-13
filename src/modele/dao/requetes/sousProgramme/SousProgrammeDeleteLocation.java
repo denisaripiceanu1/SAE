@@ -1,6 +1,7 @@
 package modele.dao.requetes.sousProgramme;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import modele.Bien;
@@ -26,11 +27,17 @@ public class SousProgrammeDeleteLocation implements SousProgramme<Louer> {
 	}
 
 	@Override
-	public void parametres(CallableStatement prSt, String... parametres) throws SQLException {
+	public void parametres(PreparedStatement prSt, String... parametres) throws SQLException {
 		prSt.setString(1, locataire.toString());
 		prSt.setString(2, bien.toString());
 
-		java.sql.Date dateDebut = prSt.getDate("date_debut");
+		java.sql.Date dateDebut = ((CallableStatement) prSt).getDate("date_debut");
 		prSt.setDate(3, dateDebut);
+	}
+
+	@Override
+	public void parametres(PreparedStatement prSt, Louer donnee) throws SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 }

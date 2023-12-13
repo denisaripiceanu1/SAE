@@ -2,15 +2,14 @@ package modele;
 
 public class Charge {
 
-	private int idCharge;
+	// private int idCharge;
 	private String nom;
 	private double montantReel;
 	private double montantPrevisionnel;
 	private int deductible;
 	private Bien idBien;
 
-	public Charge(/* int idCharge */ String nom, double montantReel, double montantPrevisionnel, int deductible,
-			Bien idBien) {
+	public Charge(String nom, double montantReel, double montantPrevisionnel, int deductible, Bien idBien) {
 
 		// this.idCharge = idCharge;
 		this.nom = nom;
@@ -20,13 +19,11 @@ public class Charge {
 		this.idBien = idBien;
 	}
 
-	public int getIdCharge() {
-		return this.idCharge;
-	}
-
-	public void setIdCharge(int idCharge) {
-		this.idCharge = idCharge;
-	}
+	/*
+	 * public int getIdCharge() { return this.idCharge; }
+	 * 
+	 * public void setIdCharge(int idCharge) { this.idCharge = idCharge; }
+	 */
 
 	public String getNom() {
 		return this.nom;
@@ -60,11 +57,11 @@ public class Charge {
 		this.deductible = deductible;
 	}
 
-	public Bien getIdBien() {
+	public Bien getBien() {
 		return this.idBien;
 	}
 
-	public void setIdBien(Bien idBien) {
+	public void setBien(Bien idBien) {
 		this.idBien = idBien;
 	}
 }

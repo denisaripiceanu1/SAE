@@ -1,19 +1,18 @@
 package modele.dao.requetes.sousProgramme;
 
+<<<<<<< HEAD
+=======
 import java.sql.CallableStatement;
 
+>>>>>>> cc0ab06a3b11267dab4d0502b293a637fca62667
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Types;
 
-import modele.Bien;
 import modele.Immeuble;
-import modele.Locataire;
-import modele.Louer;
 import modele.dao.SousProgramme;
 
 public class SousProgrammeInsertImmeuble implements SousProgramme<Immeuble> {
-	
+
 	@Override
 	public String appelSousProgramme() {
 		return "{call Insert_Immeuble(?, ?, ?, ?, ?, ?, ?, ?)}";
@@ -30,17 +29,16 @@ public class SousProgrammeInsertImmeuble implements SousProgramme<Immeuble> {
 //		prSt.setString(7, parametres[6]);
 	}
 
-
 	@Override
 	public void parametres(PreparedStatement prSt, Immeuble donnee) throws SQLException {
 		prSt.setString(1, donnee.getImmeuble());
 		prSt.setString(2, donnee.getAdresse());
 		prSt.setString(3, donnee.getCp());
 		prSt.setString(4, donnee.getVille());
-		prSt.setString(5, donnee.getPeriodeConstruction()); 
+		prSt.setString(5, donnee.getPeriodeConstruction());
 		prSt.setInt(6, donnee.getNbLogement());
-		prSt.setDate(7, java.sql.Date.valueOf(donnee.getDateAcquisition()));// Pour la date 
-		prSt.setString(8, donnee.getType_immeuble()); 
+		prSt.setDate(7, java.sql.Date.valueOf(donnee.getDateAcquisition()));// Pour la date
+		prSt.setString(8, donnee.getType_immeuble());
 	}
 
 }

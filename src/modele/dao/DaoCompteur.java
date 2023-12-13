@@ -1,5 +1,6 @@
 package modele.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
@@ -10,12 +11,17 @@ import modele.Compteur;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectCompteur;
 import modele.dao.requetes.select.RequeteSelectCompteurById;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertCompteur;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertImmeuble;
 
 public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 
 	@Override
-	public void create(Compteur donnees) {
-		// TODO Auto-generated method stub
+	public void create(Compteur donnees) throws SQLException {
+		SousProgramme<Compteur> sp = new SousProgrammeInsertCompteur();
+    	CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+    	sp.parametres(st, donnees);
+		st.execute();
 
 	}
 
@@ -44,7 +50,7 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 			DaoImmeuble daoImmeuble = new DaoImmeuble();
 			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
 
-			compteur = new Compteur(curseur.getString("id_compteur"), curseur.getString("typeComp"), bien, immeuble);
+			compteur = new Compteur(curseur.getString("id_compteur"), curseur.getString("typeComp") ,bien, immeuble);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
