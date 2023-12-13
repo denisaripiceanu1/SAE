@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import controleur.outils.Sauvegarde;
 import modele.Bien;
 import modele.Compteur;
 import modele.Immeuble;
@@ -17,14 +18,10 @@ import vue.insertion.Fenetre_InsertionCompteur;
 public class GestionInsertionCompteur implements ActionListener {
 
 	private Fenetre_InsertionCompteur fic;
-	private GestionInsertionBien gib;
-	private GestionInsertionLogement gil;
 	private DaoCompteur daoCompteur;
 	
-	public GestionInsertionCompteur(Fenetre_InsertionCompteur fic , GestionInsertionBien gib, GestionInsertionLogement gil) {
+	public GestionInsertionCompteur(Fenetre_InsertionCompteur fic) {
 		this.fic = fic;
-		this.gib = gib;
-		this.gil = gil;
 	}
 
 	@Override
@@ -35,18 +32,14 @@ public class GestionInsertionCompteur implements ActionListener {
 		case "Ajouter":
 			try {
 				
-				DaoImmeuble daoImmeuble = new DaoImmeuble();
-				Immeuble immeuble = daoImmeuble.findById(this.gib.getIdBien()); //Le bien est l'immeuble dans la BD
-				DaoBien daoBien = new DaoBien();
-				Bien bien = daoBien.findById(null); //Le logement est un bien dans la BD
-				
 				Compteur compteur = new Compteur(
 						this.fic.getTextField_IdCompteur().getText(),
 						this.fic.getComboBox_typeDeCompteur().getSelectedItem().toString(),
-						bien,
-						immeuble
+						(Bien) Sauvegarde.getItem("Bien"),
+						(Immeuble) Sauvegarde.getItem("Immeuble")
 				);
-				this.daoCompteur.create(compteur);
+				Sauvegarde.deleteItem("Compteur");
+				Sauvegarde.addItem("Compteur", compteur);
 //				Boite.deleteItem("Bien");
 //				Boite.addItem("Bien", bien);
 			} catch (Exception e1) {
