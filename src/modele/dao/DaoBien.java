@@ -84,6 +84,7 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 			ResultSet res = st.executeQuery();
 			biens = this.convertirResultSetEnListe(res);
 			biens = convertirResultSetEnListe(res);
+			st.close();
 		}
 
 		return biens;

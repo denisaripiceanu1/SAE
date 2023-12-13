@@ -57,7 +57,21 @@ public class GestionAccueil implements ActionListener {
 		visible.setVisible(true);
 		this.fenetreAccueil.getContentPane().add(visible, BorderLayout.CENTER);
 	}
+	
+	public static void viderTable(JTable table) {
+		DefaultTableModel modeleTable = (DefaultTableModel) table.getModel();
+		int rowCount = modeleTable.getRowCount();
+		int columnCount = modeleTable.getColumnCount();
 
+		for (int row = 0; row < rowCount; row++) {
+			for (int col = 0; col < columnCount; col++) {
+				modeleTable.setValueAt(null, row, col);
+			}
+		}
+	}
+
+
+	//------------------- TABLE BIENS ------------------- //
 	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) {
 		JTable tableImmeuble = fenetreAccueil.getTableBiens();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
@@ -68,15 +82,6 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(immeuble.getNbLogement(), numeroLigne, 2);
 	}
 	
-	public void ecrireLigneTableLocations(int numeroLigne, Louer location, Bien bien) {
-		JTable tableLocations = fenetreAccueil.getTableLocations();
-		DefaultTableModel modeleTable = (DefaultTableModel) tableLocations.getModel();
-
-		modeleTable.setValueAt(location.getIdLocataire(), numeroLigne, 0);
-		modeleTable.setValueAt(location.getIdBien(), numeroLigne, 1);
-		modeleTable.setValueAt(bien.getType_bien(), numeroLigne, 2);
-	}
-
 	private void chargerBiens() throws SQLException {
 
 		List<Immeuble> immeubles = daoImmeuble.findAll();
@@ -89,6 +94,17 @@ public class GestionAccueil implements ActionListener {
 			Immeuble immeuble = immeubles.get(i);
 			ecrireLigneTableBiens(i, immeuble);
 		}
+	}
+
+	//------------------- TABLE LOCATIONS ------------------- //
+	
+	public void ecrireLigneTableLocations(int numeroLigne, Louer location, Bien bien) {
+		JTable tableLocations = fenetreAccueil.getTableLocations();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableLocations.getModel();
+
+		modeleTable.setValueAt(location.getIdLocataire(), numeroLigne, 0);
+		modeleTable.setValueAt(location.getIdBien(), numeroLigne, 1);
+		modeleTable.setValueAt(bien.getType_bien(), numeroLigne, 2);
 	}
 
 	private void chargerLocations() throws SQLException {
@@ -110,18 +126,7 @@ public class GestionAccueil implements ActionListener {
 			ecrireLigneTableLocations(i, location, bien);
 		}
 	}
-	public static void viderTable(JTable table) {
-		DefaultTableModel modeleTable = (DefaultTableModel) table.getModel();
-		int rowCount = modeleTable.getRowCount();
-		int columnCount = modeleTable.getColumnCount();
-
-		for (int row = 0; row < rowCount; row++) {
-			for (int col = 0; col < columnCount; col++) {
-				modeleTable.setValueAt(null, row, col);
-			}
-		}
-	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();

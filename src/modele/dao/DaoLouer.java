@@ -63,10 +63,10 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 				.prepareStatement(new RequeteSelectLocationParBien().requete())) {
 			new RequeteSelectLocationParBien().parametres(st, id);
 			ResultSet res = st.executeQuery();
-
 			locations = convertirResultSetEnListe(res);
+			st.close();
 		}
-
+		
 		return locations;
 
 	}
