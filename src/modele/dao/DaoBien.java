@@ -26,7 +26,6 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
-
 	}
 
 	@Override
