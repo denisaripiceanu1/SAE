@@ -50,7 +50,7 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 			DaoImmeuble daoImmeuble = new DaoImmeuble();
 			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
 
-			compteur = new Compteur(curseur.getString("id_compteur"), curseur.getString("typeComp"),curseur.getDouble("prixAbonnement") ,bien, immeuble);
+			compteur = new Compteur(curseur.getString("id_compteur"), curseur.getString("typeComp") ,bien, immeuble);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
