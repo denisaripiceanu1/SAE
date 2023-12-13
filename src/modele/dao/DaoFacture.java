@@ -56,14 +56,15 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	public Facture findDerniereFactureLoayer(Bien bien) throws SQLException {
 	    List<Facture> factures = null;
 	    String b = bien.getIdBien();
-	    try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(new RequeteSelectBienparImmeuble().requete())) {
+	    try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(new RequeteSelectFactureByBien().requete())) {
 	        new RequeteSelectFactureByBien().parametres(st, b);
 	        ResultSet res = st.executeQuery();
 	        
 	        factures = convertirResultSetEnListe(res);
+	        
 	    }
 
-	    return factures.get(factures.size()-1);
+	    return factures.isEmpty() ? null : factures.get(factures.size() - 1);
 	}
 
 	private List<Facture> convertirResultSetEnListe(ResultSet res) throws SQLException {
