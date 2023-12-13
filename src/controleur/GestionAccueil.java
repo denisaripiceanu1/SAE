@@ -114,7 +114,7 @@ public class GestionAccueil implements ActionListener {
 	    List<Louer> locations = new ArrayList<>(); 
 
 	    for (Bien b : biens) {
-	        locations.addAll(daoLouer.findLocationByBien(b.getIdBien())); // Ajoutez toutes les locations du bien à la liste
+	        locations.addAll(daoLouer.findLocationByBien(b.getIdBien())); // Ajouter toutes les locations du bien à la liste
 	    }
 
 	    DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableLocations().getModel();

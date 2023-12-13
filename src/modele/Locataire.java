@@ -67,4 +67,9 @@ public class Locataire {
 		this.dateNaissance = dateNaissance;
 	}
 
+	@Override
+	public String toString() {
+	    return getNom() + " " + getPrenom();
+	}
+
 }

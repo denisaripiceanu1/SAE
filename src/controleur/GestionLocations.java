@@ -51,23 +51,23 @@ public class GestionLocations implements ListSelectionListener {
 	                JTextField loyer = fenetreAccueil.getTextField_loyer();
 	                loyer.setText(String.valueOf(location.getLoyerTTC()));
 
-	                JTextField dateEmission = fenetreAccueil.getTextField_dateEmission();
-	                dateEmission.setText(derniereFactureLoayer.getDateEmission());
+//	                JTextField dateEmission = fenetreAccueil.getTextField_dateEmission();
+//	                dateEmission.setText(derniereFactureLoayer.getDateEmission());
+//
+//	                JTextField dateEcheance = fenetreAccueil.getTextField_dateEcheance();
+//	                dateEcheance.setText(derniereFactureLoayer.getDatePaiement());
 
-	                JTextField dateEcheance = fenetreAccueil.getTextField_dateEcheance();
-	                dateEcheance.setText(derniereFactureLoayer.getDatePaiement());
-
-	                JTextField paye = fenetreAccueil.getTextField_paye();
-	                paye.setText(String.valueOf(location.getMontantReelPaye()));
-
-	                JTextField restantDu = fenetreAccueil.getTextField_restantDu();
-	                restantDu.setText(String.valueOf(location.getLoyerTTC() - location.getMontantReelPaye()));
-
-	                JTextField caution = fenetreAccueil.getTextField_caution();
-	                caution.setText(String.valueOf(location.getCautionTTC()));
-
-	                JTextField provision = fenetreAccueil.getTextField_provisionCharges();
-	                provision.setText(String.valueOf(location.getProvision_chargeMens_TTC()));
+//	                JTextField paye = fenetreAccueil.getTextField_paye();
+//	                paye.setText(String.valueOf(location.getMontantReelPaye()));
+//
+//	                JTextField restantDu = fenetreAccueil.getTextField_restantDu();
+//	                restantDu.setText(String.valueOf(location.getLoyerTTC() - location.getMontantReelPaye()));
+//
+//	                JTextField caution = fenetreAccueil.getTextField_caution();
+//	                caution.setText(String.valueOf(location.getCautionTTC()));
+//
+//	                JTextField provision = fenetreAccueil.getTextField_provisionCharges();
+//	                provision.setText(String.valueOf(location.getProvision_chargeMens_TTC()));
 	            }
 	        }
 	    }

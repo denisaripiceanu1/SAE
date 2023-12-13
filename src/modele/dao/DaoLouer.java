@@ -57,31 +57,6 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 		return find(new RequeteSelectLouer());
 	}
 
-	public List<Louer> findLocationByBien(String id) throws SQLException {
-		List<Louer> locations = null;
-		try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
-				.prepareStatement(new RequeteSelectLocationParBien().requete())) {
-			new RequeteSelectLocationParBien().parametres(st, id);
-			ResultSet res = st.executeQuery();
-			locations = convertirResultSetEnListe(res);
-			st.close();
-		}
-		
-		return locations;
-
-	}
-
-	private List<Louer> convertirResultSetEnListe(ResultSet res) throws SQLException {
-		List<Louer> locations = new ArrayList<>();
-
-		while (res.next()) {
-			Louer l = creerInstance(res);
-			locations.add(l);
-		}
-
-		return locations;
-	}
-
 	@Override
 	protected Louer creerInstance(ResultSet curseur) throws SQLException {
 		Louer louer = null;
@@ -103,13 +78,13 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 			ICC icc = daoICC.findById(annee, trimestre);
 
 			// Convertir les dates en chaînes de caractères
+			String dateDebutStr = curseur.getDate("date_debut").toString();
 			String dateDepartStr = null;
-			java.sql.Date dateDebut = curseur.getDate("date_debut");
-			String dateDebutStr = dateDebut.toString();
 			if (curseur.getDate("date_depart") != null) {
 				java.sql.Date dateDepart = curseur.getDate("date_depart");
 				dateDepartStr = dateDepart.toString();
 			}
+
 			louer = new Louer(locataire, bien, dateDebutStr, curseur.getInt("nb_mois"), curseur.getDouble("loyer_TTC"),
 					curseur.getDouble("provision_chargeMens_TTC"), curseur.getDouble("caution_TTC"),
 					curseur.getString("bail"), curseur.getString("etat_lieux"), dateDepartStr,
@@ -119,6 +94,33 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 			e.printStackTrace();
 		}
 		return louer;
+	}
+
+	// ---------------- AUTRES METHODES ----------------//
+	
+	public List<Louer> findLocationByBien(String id) throws SQLException {
+		List<Louer> locations = null;
+		try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectLocationParBien().requete())) {
+			new RequeteSelectLocationParBien().parametres(st, id);
+			ResultSet res = st.executeQuery();
+			locations = convertirResultSetEnListe(res);
+			st.close();
+		}
+
+		return locations;
+
+	}
+
+	private List<Louer> convertirResultSetEnListe(ResultSet res) throws SQLException {
+		List<Louer> locations = new ArrayList<>();
+
+		while (res.next()) {
+			Louer l = creerInstance(res);
+			locations.add(l);
+		}
+
+		return locations;
 	}
 
 }

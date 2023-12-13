@@ -76,4 +76,8 @@ public class Bien {
 		this.immeuble = immeuble;
 	}
 
+	@Override
+	public String toString() {
+		return getIdBien();
+	}
 }
