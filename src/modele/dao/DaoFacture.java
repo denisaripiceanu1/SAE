@@ -87,8 +87,6 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	}
 
 	// ---------------- AUTRES METHODES ----------------//
-<<<<<<< HEAD
-
 	public Facture findDerniereFactureLoyer(Bien bien) throws SQLException {
 	    List<Facture> factures = null;
 	    String b = bien.getIdBien();
@@ -96,16 +94,6 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	            .prepareStatement(new RequeteSelectFactureByBien().requete())) {
 	        new RequeteSelectFactureByBien().parametres(st, b);
 	        ResultSet res = st.executeQuery();
-
-=======
-	public Facture findDerniereFactureLoyer(Bien bien) throws SQLException {
-		List<Facture> factures = null;
-		String b = bien.getIdBien();
-		try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
-				.prepareStatement(new RequeteSelectFactureByBien().requete())) {
-			new RequeteSelectFactureByBien().parametres(st, b);
-			ResultSet res = st.executeQuery();
->>>>>>> 482b1f6e0b292b5e5792f84ba13265b60cafedb3
 	        factures = convertirResultSetEnListe(res);
 	        st.close();
 	    }
