@@ -10,7 +10,7 @@ public class RequeteSelectICCById implements Requete<ICC> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Entreprise WHERE annee = ? and trimestre = ?";
+		return "SELECT * FROM ICC WHERE annee = ? and trimestre = ?";
 	}
 
 	@Override
