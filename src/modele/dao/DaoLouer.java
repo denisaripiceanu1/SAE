@@ -1,15 +1,18 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import modele.Bien;
 import modele.ICC;
 import modele.Locataire;
 import modele.Louer;
+import modele.dao.requetes.select.RequeteSelectLocationParBien;
 import modele.dao.requetes.select.RequeteSelectLouer;
 import modele.dao.requetes.select.RequeteSelectLouerById;
 import modele.dao.requetes.sousProgramme.SousProgrammeDeleteLocation;
@@ -24,24 +27,21 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 	}
 
 	@Override
-    public void update(Louer donnees) throws SQLException {
+	public void update(Louer donnees) throws SQLException {
 		RequeteUpdateLouer requeteUpdate = new RequeteUpdateLouer();
-        miseAJour(requeteUpdate, donnees);
-    }
+		miseAJour(requeteUpdate, donnees);
+	}
 
 	@Override
-    public void delete(Louer donnees) throws SQLException {
-        SousProgrammeDeleteLocation sousProgramme = new SousProgrammeDeleteLocation(
-                donnees.getIdLocataire(),
-                donnees.getIdBien(),
-                donnees.getDateDebut()
-        );
+	public void delete(Louer donnees) throws SQLException {
+		SousProgrammeDeleteLocation sousProgramme = new SousProgrammeDeleteLocation(donnees.getIdLocataire(),
+				donnees.getIdBien(), donnees.getDateDebut());
 
-        try (CallableStatement st = connection.prepareCall(sousProgramme.appelSousProgramme())) {
-            sousProgramme.parametres(st);
-            st.execute();
-        }
-    }
+		try (CallableStatement st = connection.prepareCall(sousProgramme.appelSousProgramme())) {
+			sousProgramme.parametres(st);
+			st.execute();
+		}
+	}
 
 	@Override
 	public Louer findById(String... id) throws SQLException {
@@ -55,6 +55,31 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 	@Override
 	public List<Louer> findAll() throws SQLException {
 		return find(new RequeteSelectLouer());
+	}
+
+	public List<Louer> findLocationByBien(String id) throws SQLException {
+		List<Louer> locations = null;
+		try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectLocationParBien().requete())) {
+			new RequeteSelectLocationParBien().parametres(st, id);
+			ResultSet res = st.executeQuery();
+
+			locations = convertirResultSetEnListe(res);
+		}
+
+		return locations;
+
+	}
+
+	private List<Louer> convertirResultSetEnListe(ResultSet res) throws SQLException {
+		List<Louer> locations = new ArrayList<>();
+
+		while (res.next()) {
+			Louer bien = creerInstance(res);
+			locations.add(bien);
+		}
+
+		return locations;
 	}
 
 	@Override
@@ -84,7 +109,8 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 			String dateDepartStr = dateDepart.toString();
 
 			louer = new Louer(locataire, bien, dateDebutStr, curseur.getInt("nb_mois"), curseur.getDouble("loyer_TTC"),
-					curseur.getDouble("provision_chargeMens_TTC"),curseur.getDouble("caution_TTC"), curseur.getString("bail"),curseur.getString("etat_lieux"), dateDepartStr,
+					curseur.getDouble("provision_chargeMens_TTC"), curseur.getDouble("caution_TTC"),
+					curseur.getString("bail"), curseur.getString("etat_lieux"), dateDepartStr,
 					curseur.getInt("loyer_paye"), curseur.getInt("colocation"), curseur.getDouble("montant_reel_paye"),
 					icc.getAnnee(), icc.getTrimestre());
 		} catch (Exception e) {
