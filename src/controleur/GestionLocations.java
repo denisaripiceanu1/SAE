@@ -41,20 +41,21 @@ public class GestionLocations implements ListSelectionListener {
 	            if (location != null) {
 	                Facture derniereFactureLoyer = null;
 
-	                try {
-	                    derniereFactureLoyer = daoFacture.findDerniereFactureLoayer(location.getIdBien());
-	                } catch (SQLException e1) {
-	                    e1.printStackTrace();
-	                }
+	                    try {
+							derniereFactureLoyer = daoFacture.findDerniereFactureLoayer(location.getIdBien());
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+
 
 	                JTextField loyer = fenetreAccueil.getTextField_loyer();
 	                loyer.setText(String.valueOf(location.getLoyerTTC()));
 
-//	                JTextField dateEmission = fenetreAccueil.getTextField_dateEmission();
-//	                dateEmission.setText(derniereFactureLoayer.getDateEmission());
-//
-//	                JTextField dateEcheance = fenetreAccueil.getTextField_dateEcheance();
-//	                dateEcheance.setText(derniereFactureLoayer.getDatePaiement());
+	                JTextField dateEmission = fenetreAccueil.getTextField_dateEmission();
+	                dateEmission.setText(derniereFactureLoyer.getDateEmission());
+
+	                JTextField dateEcheance = fenetreAccueil.getTextField_dateEcheance();
+	                dateEcheance.setText(derniereFactureLoyer.getDatePaiement());
 
 //	                JTextField paye = fenetreAccueil.getTextField_paye();
 //	                paye.setText(String.valueOf(location.getMontantReelPaye()));
