@@ -55,18 +55,15 @@ public class GestionBienLogement implements ListSelectionListener {
 
                     DefaultTableModel model = (DefaultTableModel) logements.getModel();
 
-                    // Assuming you know the number of columns in your logements table
-                    int numColumns = 6; // Change this to the actual number of columns
+                    int numColonnes = 6; //Nombre de colonnes
+                    int numLignesNecessaires = biens.size(); //Nombre de lignes
+                    int numLigneActuel = model.getRowCount();
 
-                    // Ensure the table has enough rows
-                    int numRowsNeeded = biens.size();
-                    int currentRows = model.getRowCount();
-
-                    for (int i = 0; i < numRowsNeeded - currentRows; i++) {
-                        model.addRow(new Object[numColumns]);
+                    for (int i = 0; i < numLignesNecessaires - numLigneActuel; i++) {
+                        model.addRow(new Object[numColonnes]);
                     }
 
-                    // Now populate the table
+                    //Remplissage du tableau de logements
                     for (int i = 0; i < biens.size(); i++) {
                         Bien bien = biens.get(i);
                         if (bien != null) {
@@ -75,7 +72,7 @@ public class GestionBienLogement implements ListSelectionListener {
                             int nbPieces = bien.getNbPieces();
                             int etage = bien.getNumEtage();
                             String date = bien.getDateAcquisition();
-                            int occupe = 0; // Traitement à faire plus tard 
+                            int occupe = 0; // Traitement à faire plus tard avec requete jdbc 
 
                             model.setValueAt(nom, i, 0);
                             model.setValueAt(surface, i, 1);
