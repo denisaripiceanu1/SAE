@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -71,6 +72,7 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	// ------------------- TABLE BIENS ------------------- //
+	
 	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) {
 		JTable tableImmeuble = fenetreAccueil.getTableBiens();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
@@ -108,23 +110,23 @@ public class GestionAccueil implements ActionListener {
 
 	private void chargerLocations() throws SQLException {
 
-		List<Bien> biens = daoBien.findAll();
+	    List<Bien> biens = daoBien.findAll();
+	    List<Louer> locations = new ArrayList<>(); 
 
-		List<Louer> locations = null;
-		for (Bien b : biens) {
-			locations = daoLouer.findLocationByBien(b.getIdBien());
-		}
+	    for (Bien b : biens) {
+	        locations.addAll(daoLouer.findLocationByBien(b.getIdBien())); // Ajoutez toutes les locations du bien à la liste
+	    }
 
-		DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableLocations().getModel();
+	    DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableLocations().getModel();
+	    modeleTable.setRowCount(locations.size());
 
-		modeleTable.setRowCount(locations.size());
-
-		for (int i = 0; i < locations.size(); i++) {
-			Louer location = locations.get(i);
-			Bien bien = location.getIdBien();
-			ecrireLigneTableLocations(i, location, bien);
-		}
+	    for (int i = 0; i < locations.size(); i++) {
+	        Louer location = locations.get(i);
+	        Bien bien = location.getIdBien();
+	        ecrireLigneTableLocations(i, location, bien);
+	    }
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -224,6 +226,7 @@ public class GestionAccueil implements ActionListener {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+			break;
 		case "btn_MesLocations_Modifier":
 			break;
 		case "btn_MesLocations_Inserer":
