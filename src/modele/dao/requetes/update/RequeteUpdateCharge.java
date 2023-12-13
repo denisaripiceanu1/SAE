@@ -25,7 +25,7 @@ public class RequeteUpdateCharge implements Requete<Charge> {
 		prSt.setDouble(2, data.getMontantReel());
 		prSt.setDouble(3, data.getMontantPrevisionnel());
 		prSt.setInt(4, data.isDeductible());
-		prSt.setString(5, data.getIdBien().toString());
+		prSt.setString(5, data.getBien().toString());
 
 	}
 
