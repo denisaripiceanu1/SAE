@@ -12,8 +12,12 @@ import javax.swing.JLayeredPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import modele.Bien;
 import modele.Immeuble;
+import modele.Louer;
+import modele.dao.DaoBien;
 import modele.dao.DaoImmeuble;
+import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
@@ -28,10 +32,14 @@ public class GestionAccueil implements ActionListener {
 
 	private Fenetre_Accueil fenetreAccueil;
 	private DaoImmeuble daoImmeuble;
+	private DaoLouer daoLouer;
+	private DaoBien daoBien;
 
 	public GestionAccueil(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
 		this.daoImmeuble = new DaoImmeuble();
+		this.daoBien = new DaoBien();
+		this.daoLouer = new DaoLouer();
 	}
 
 	public void rendreVisible(JLayeredPane visible) {
@@ -49,7 +57,7 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getContentPane().add(visible, BorderLayout.CENTER);
 	}
 
-	public void ecrireLigneTable(int numeroLigne, Immeuble immeuble) {
+	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) {
 		JTable tableImmeuble = fenetreAccueil.getTableBiens();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
 
@@ -57,6 +65,15 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(immeuble.getAdresse() + "\n" + immeuble.getCp() + " " + immeuble.getVille(), numeroLigne,
 				1);
 		modeleTable.setValueAt(immeuble.getNbLogement(), numeroLigne, 2);
+	}
+	
+	public void ecrireLigneTableLocations(int numeroLigne, Louer location, Bien bien) {
+		JTable tableLocations = fenetreAccueil.getTableLocations();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableLocations.getModel();
+
+		modeleTable.setValueAt(location.getIdLocataire(), numeroLigne, 0);
+		modeleTable.setValueAt(location.getIdBien(), numeroLigne, 1);
+		modeleTable.setValueAt(bien.getType_bien(), numeroLigne, 2);
 	}
 
 	private void chargerBiens() throws SQLException {
@@ -69,10 +86,29 @@ public class GestionAccueil implements ActionListener {
 
 		for (int i = 0; i < immeubles.size(); i++) {
 			Immeuble immeuble = immeubles.get(i);
-			ecrireLigneTable(i, immeuble);
+			ecrireLigneTableBiens(i, immeuble);
 		}
 	}
 
+	private void chargerLocations() throws SQLException {
+
+		List<Bien> biens = daoBien.findAll();
+		
+		List<Louer> locations = null;
+		for(Bien b : biens) {
+			locations = daoLouer.findLocationByBien(b.getIdBien());
+		}
+
+		DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableLocations().getModel();
+
+		modeleTable.setRowCount(locations.size());
+
+		for (int i = 0; i < locations.size(); i++) {
+			Louer location = locations.get(i);
+			Bien bien = location.getIdBien();
+			ecrireLigneTableLocations(i, location, bien);
+		}
+	}
 	public static void viderTable(JTable table) {
 		DefaultTableModel modeleTable = (DefaultTableModel) table.getModel();
 		int rowCount = modeleTable.getRowCount();
@@ -178,7 +214,11 @@ public class GestionAccueil implements ActionListener {
 		// LAYERED MES LOCATIONS
 		///////////////////////
 		case "btn_MesLocations_Charger":
-			break;
+			try {
+				chargerLocations();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		case "btn_MesLocations_Modifier":
 			break;
 		case "btn_MesLocations_Inserer":

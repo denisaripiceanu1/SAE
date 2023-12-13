@@ -10,7 +10,7 @@ public class RequeteSelectEntreprise implements Requete<Entreprise> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Echeance";
+		return "SELECT * FROM Entreprise";
 	}
 
 	@Override

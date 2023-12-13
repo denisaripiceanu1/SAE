@@ -25,8 +25,8 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 	private GestionInsertionCompteur gestionClic;
 	private JComboBox comboBox_typeDeCompteur;
 
-	public Fenetre_InsertionCompteur(GestionInsertionBien gib, GestionInsertionLogement gil) {
-		this.gestionClic = new GestionInsertionCompteur(this,gib,gil);
+	public Fenetre_InsertionCompteur() {
+		this.gestionClic = new GestionInsertionCompteur(this);
 
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);

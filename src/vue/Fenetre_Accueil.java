@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.GestionAccueil;
 import controleur.GestionBienLogement;
+import controleur.GestionLocations;
 import controleur.insertion.GestionInsertionBien;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
@@ -68,6 +69,7 @@ public class Fenetre_Accueil extends JFrame {
 
 	private GestionAccueil gestionAccueil;
 	private GestionBienLogement gestionBienLogement;
+	private GestionLocations gestionLocations;
 
 	/**
 	 * Launch the application.
@@ -91,6 +93,7 @@ public class Fenetre_Accueil extends JFrame {
 	 */
 	public Fenetre_Accueil() {
 		this.gestionBienLogement = new GestionBienLogement(this);
+		this.gestionLocations = new GestionLocations(this);
 		this.gestionAccueil = new GestionAccueil(this);
 
 		this.setResizable(false);
@@ -909,6 +912,10 @@ public class Fenetre_Accueil extends JFrame {
 
 	public JTable getTableLogementsParBien() {
 		return tableMesBiens_Logements;
+	}
+	
+	public JTable getTableLocations() {
+		return table_MesLocations;
 	}
 	
 }
