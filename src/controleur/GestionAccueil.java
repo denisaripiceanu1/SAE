@@ -57,7 +57,7 @@ public class GestionAccueil implements ActionListener {
 		visible.setVisible(true);
 		this.fenetreAccueil.getContentPane().add(visible, BorderLayout.CENTER);
 	}
-	
+
 	public static void viderTable(JTable table) {
 		DefaultTableModel modeleTable = (DefaultTableModel) table.getModel();
 		int rowCount = modeleTable.getRowCount();
@@ -70,8 +70,7 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-
-	//------------------- TABLE BIENS ------------------- //
+	// ------------------- TABLE BIENS ------------------- //
 	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) {
 		JTable tableImmeuble = fenetreAccueil.getTableBiens();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
@@ -81,7 +80,7 @@ public class GestionAccueil implements ActionListener {
 				1);
 		modeleTable.setValueAt(immeuble.getNbLogement(), numeroLigne, 2);
 	}
-	
+
 	private void chargerBiens() throws SQLException {
 
 		List<Immeuble> immeubles = daoImmeuble.findAll();
@@ -96,8 +95,8 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	//------------------- TABLE LOCATIONS ------------------- //
-	
+	// ------------------- TABLE LOCATIONS ------------------- //
+
 	public void ecrireLigneTableLocations(int numeroLigne, Louer location, Bien bien) {
 		JTable tableLocations = fenetreAccueil.getTableLocations();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableLocations.getModel();
@@ -110,9 +109,9 @@ public class GestionAccueil implements ActionListener {
 	private void chargerLocations() throws SQLException {
 
 		List<Bien> biens = daoBien.findAll();
-		
+
 		List<Louer> locations = null;
-		for(Bien b : biens) {
+		for (Bien b : biens) {
 			locations = daoLouer.findLocationByBien(b.getIdBien());
 		}
 
@@ -126,7 +125,7 @@ public class GestionAccueil implements ActionListener {
 			ecrireLigneTableLocations(i, location, bien);
 		}
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();

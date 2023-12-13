@@ -1,6 +1,7 @@
 package modele.dao;
 
 import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
@@ -11,8 +12,6 @@ import modele.Bien;
 import modele.Entreprise;
 import modele.Facture;
 import modele.Immeuble;
-import modele.dao.requetes.select.RequeteSelectBienById;
-import modele.dao.requetes.select.RequeteSelectBienparImmeuble;
 import modele.dao.requetes.select.RequeteSelectFacture;
 import modele.dao.requetes.select.RequeteSelectFactureByBien;
 import modele.dao.requetes.select.RequeteSelectFactureById;
