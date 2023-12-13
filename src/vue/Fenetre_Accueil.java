@@ -336,11 +336,11 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesBiens_AjouterDiagnostic.setName("btnMesBiens_AjouterDiagnostic");
 		panelMesBiens.add(btnMesBiens_AjouterDiagnostic);
 
-		JButton btnMesBiens_AjouterDesTravaux = new JButton("Ajouter des travaux");
-		btnMesBiens_AjouterDesTravaux.addActionListener(this.gestionAccueil);
-		btnMesBiens_AjouterDesTravaux.setBounds(551, 192, 161, 23);
-		btnMesBiens_AjouterDesTravaux.setName("btnMesBiens_AjouterDesTravaux");
-		panelMesBiens.add(btnMesBiens_AjouterDesTravaux);
+		JButton btnMesBiens_AjouterPaiements = new JButton("Ajouter des factures");
+		btnMesBiens_AjouterPaiements.addActionListener(this.gestionAccueil);
+		btnMesBiens_AjouterPaiements.setBounds(551, 192, 161, 23);
+		btnMesBiens_AjouterPaiements.setName("btnMesBiens_AjouterPaiements");
+		panelMesBiens.add(btnMesBiens_AjouterPaiements);
 
 		// Boutons LOGEMENTS
 		JButton btnMesBiens_AjouterLogement = new JButton("Ajouter un logement");
@@ -355,11 +355,11 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesBiens_AjouterDiagnostic_Logements.setName("btnMesBiens_AjouterDiagnostic_Logements");
 		panelMesBiens.add(btnMesBiens_AjouterDiagnostic_Logements);
 
-		JButton btnMesBiens_AjouterDesTravaux_Logements = new JButton("Ajouter des travaux");
-		btnMesBiens_AjouterDesTravaux_Logements.setBounds(551, 391, 161, 23);
-		btnMesBiens_AjouterDesTravaux_Logements.addActionListener(this.gestionAccueil);
-		btnMesBiens_AjouterDesTravaux_Logements.setName("btnMesBiens_AjouterDesTravaux_Logements");
-		panelMesBiens.add(btnMesBiens_AjouterDesTravaux_Logements);
+		JButton btnMesBiens_AjouterPaiements_Logements = new JButton("Ajouter des factures");
+		btnMesBiens_AjouterPaiements_Logements.setBounds(551, 391, 161, 23);
+		btnMesBiens_AjouterPaiements_Logements.addActionListener(this.gestionAccueil);
+		btnMesBiens_AjouterPaiements_Logements.setName("btnMesBiens_AjouterPaiements_Logements");
+		panelMesBiens.add(btnMesBiens_AjouterPaiements_Logements);
 
 		////////////////////////////////////////////////////////////////////////////
 		// LAYERED MES
@@ -383,8 +383,14 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesLocations = new JTable();
 		this.table_MesLocations.setSelectionBackground(new Color(0, 102, 204));
 		this.table_MesLocations
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
-						new String[] { "Locataire", "Bien", "Type", "Adresse", "Code Postal", "Ville" }));
+				.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+			},
+			new String[] {
+				"Locataire", "Bien", "Type"
+			}
+		));
 		this.table_MesLocations.setBounds(40, 53, 668, 130);
 		scrollPane_MesLocations.setViewportView(this.table_MesLocations);
 
@@ -505,6 +511,8 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_restantDu.setBounds(510, 257, 152, 31);
 		panel_MesLocations.add(this.textField_restantDu);
 
+		
+		
 		//////////////////////////////////////////////////////////////////////////
 		// LAYERED MES
 		// TRAVAUX////////////////////////////////////////////////////////////////
