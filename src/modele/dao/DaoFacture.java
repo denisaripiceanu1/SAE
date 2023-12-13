@@ -85,23 +85,30 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		}
 		return facture;
 	}
-	
+
 	// ---------------- AUTRES METHODES ----------------//
 
 	public Facture findDerniereFactureLoayer(Bien bien) throws SQLException {
-		List<Facture> factures = null;
-		String b = bien.getIdBien();
-		try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
-				.prepareStatement(new RequeteSelectFactureByBien().requete())) {
-			new RequeteSelectFactureByBien().parametres(st, b);
-			ResultSet res = st.executeQuery();
+	    List<Facture> factures = null;
+	    String b = bien.getIdBien();
+	    try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
+	            .prepareStatement(new RequeteSelectFactureByBien().requete())) {
+	        new RequeteSelectFactureByBien().parametres(st, b);
+	        ResultSet res = st.executeQuery();
 
-			factures = convertirResultSetEnListe(res);
-			st.close();
-		}
+	        factures = convertirResultSetEnListe(res);
+	        st.close();
+	    }
 
-		return factures.isEmpty() ? null : factures.get(factures.size() - 1);
+	    // Vérifier si la liste de factures est vide avant d'accéder à l'élément
+	    if (!factures.isEmpty()) {
+	        return factures.get(0);
+	    } else {
+	        // Retourner null ou une autre valeur par défaut, selon votre logique métier
+	        return null;
+	    }
 	}
+
 
 	private List<Facture> convertirResultSetEnListe(ResultSet res) throws SQLException {
 		List<Facture> factures = new ArrayList<>();

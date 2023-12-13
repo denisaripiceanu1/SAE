@@ -9,7 +9,7 @@ import modele.dao.requetes.Requete;
 public class RequeteSelectFactureByBien implements Requete<Facture> {
 
 	public String requete() {
-		return "SELECT * FROM Facture WHERE designation = 'Loayer' and Id_Bien = ?";
+		return "SELECT * FROM Facture WHERE designation = 'Loyer' and Id_Bien = ? ORDER BY date_emission DESC";
 	}
 
 	@Override
