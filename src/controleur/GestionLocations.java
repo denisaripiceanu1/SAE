@@ -32,18 +32,17 @@ public class GestionLocations implements ListSelectionListener {
 	            JTable tableLocations = fenetreAccueil.getTableLocations();
 	            Louer location = null;
 	            try {
-	                location = daoLouer.findById(tableLocations.getValueAt(selectedRow, 0).toString(),
-	                        tableLocations.getValueAt(selectedRow, 1).toString(),
-	                        tableLocations.getValueAt(selectedRow, 2).toString());
+	                location = daoLouer.findById(tableLocations.getValueAt(selectedRow, 1).toString(),
+	                        tableLocations.getValueAt(selectedRow, 0).toString());
 	            } catch (SQLException e1) {
 	                e1.printStackTrace();
 	            }
 
 	            if (location != null) {
-	                Facture derniereFactureLoayer = null;
+	                Facture derniereFactureLoyer = null;
 
 	                try {
-	                    derniereFactureLoayer = daoFacture.findDerniereFactureLoayer(location.getIdBien());
+	                    derniereFactureLoyer = daoFacture.findDerniereFactureLoayer(location.getIdBien());
 	                } catch (SQLException e1) {
 	                    e1.printStackTrace();
 	                }

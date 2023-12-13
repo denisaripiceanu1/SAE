@@ -11,7 +11,7 @@ public class RequeteSelectLouerById implements Requete<Louer> {
 
     @Override
     public String requete() {
-        return "SELECT * FROM Louer WHERE Id_Bien = ? AND Id_Locataire = ? AND Date_Debut = ?";
+        return "SELECT * FROM Louer WHERE Id_Bien = ? AND Id_Locataire = ?";
     }
 
     @Override
@@ -19,7 +19,6 @@ public class RequeteSelectLouerById implements Requete<Louer> {
         // Assurez-vous de convertir les chaînes en types appropriés pour la base de données
         prSt.setString(1, id[0]);  // Id_Bien
         prSt.setString(2, id[1]);  // Id_Locataire
-        prSt.setDate(3, java.sql.Date.valueOf(id[2]));  // Date_Debut
     }
 
     @Override

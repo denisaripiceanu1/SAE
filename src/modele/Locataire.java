@@ -69,7 +69,8 @@ public class Locataire {
 
 	@Override
 	public String toString() {
-	    return getNom() + " " + getPrenom();
+	    return this.getIdLocataire();
+		//return getNom() + " " + getPrenom();
 	}
 
 }
