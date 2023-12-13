@@ -33,7 +33,7 @@ public class GestionInsertionDiagnostic implements ActionListener {
 			Diagnostics diagnostic = null;
 			try {
 				DaoBien daoBien = new DaoBien();
-				Bien bien = this.daoDiagnostic.findById(//recuperer id bien du bien selectionné juste avant);
+				Bien bien = this.daoDiagnostic.findById(/*recuperer id bien du bien selectionné juste avant*/);
 
 				diagnostic = new Diagnostics(this.fid.getTextField_Date_Validite().getText(),
 						this.fid.getTextField_Type().getText(), bien);

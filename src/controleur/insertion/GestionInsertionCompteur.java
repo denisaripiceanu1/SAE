@@ -40,8 +40,7 @@ public class GestionInsertionCompteur implements ActionListener {
 				);
 				Sauvegarde.deleteItem("Compteur");
 				Sauvegarde.addItem("Compteur", compteur);
-//				Boite.deleteItem("Bien");
-//				Boite.addItem("Bien", bien);
+				fic.dispose();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
