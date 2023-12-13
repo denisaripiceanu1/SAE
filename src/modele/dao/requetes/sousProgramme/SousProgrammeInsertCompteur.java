@@ -29,9 +29,9 @@ public class SousProgrammeInsertCompteur implements SousProgramme<Compteur>{
 	public void parametres(PreparedStatement prSt, Compteur donnee) throws SQLException {
 		prSt.setString(1, donnee.getIdCompteur());
 		prSt.setString(2, donnee.getTypeComp());
-		prSt.setDouble(3, 1.0);
-		prSt.setString(4, donnee.getBien().getIdBien());
-		prSt.setString(5, donnee.getImmeuble().getImmeuble());
+		prSt.setDouble(3, 1.0); //Changer la valeur de l'abonnement par défaut
+		prSt.setString(4, donnee.getImmeuble().getImmeuble());
+		prSt.setString(5, donnee.getBien().getIdBien());
 	}
 
 }

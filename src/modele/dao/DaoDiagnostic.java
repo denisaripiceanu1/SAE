@@ -43,7 +43,7 @@ public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnos
 			java.sql.Date dateValidite = curseur.getDate("date_validite");
 			String dateValiditeStr = dateValidite.toString();
 
-			diagnostic = new Diagnostics(curseur.getInt("Id_Diagnostic"), dateValiditeStr,
+			diagnostic = new Diagnostics(/* curseur.getInt("Id_Diagnostic")*/ dateValiditeStr,
 					curseur.getString("type_diagnostic"), bien);
 		} catch (Exception e) {
 			e.printStackTrace();

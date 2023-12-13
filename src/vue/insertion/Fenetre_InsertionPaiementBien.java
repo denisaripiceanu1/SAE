@@ -10,7 +10,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import controleur.insertion.GestionInsertionTravaux;
+import controleur.insertion.GestionInsertionPaiementBien;
 
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
@@ -18,7 +18,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 
-public class Fenetre_InsertionTravaux extends JInternalFrame {
+public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 	private JTextField textField_Numero;
 	private JTextField textField_date_emission;
 	private JTextField textField_date_paiement;
@@ -30,11 +30,11 @@ public class Fenetre_InsertionTravaux extends JInternalFrame {
 	JRadioButton rdbtnOui = new JRadioButton("Oui");
 	JRadioButton rdbtnNon = new JRadioButton("Non");
 
-	private GestionInsertionTravaux gestionClic;
+	private GestionInsertionPaiementBien gestionClic;
 
-	public Fenetre_InsertionTravaux() {
+	public Fenetre_InsertionPaiementBien() {
 
-		this.gestionClic = new GestionInsertionTravaux(this);
+		this.gestionClic = new GestionInsertionPaiementBien(this);
 
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
