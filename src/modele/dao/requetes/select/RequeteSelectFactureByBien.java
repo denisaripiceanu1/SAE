@@ -14,13 +14,14 @@ public class RequeteSelectFactureByBien implements Requete<Facture> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
-		prSt.setString(1, id[0]);
-		
+	    prSt.setString(1, id[0]);    
 	}
+
 
 	@Override
 	public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
-		prSt.setInt(1, data.getIdFacture());
+		prSt.setString(1, data.getDesignation());
+		prSt.setString(2, data.getBien().getIdBien());
 		
 	}
 }

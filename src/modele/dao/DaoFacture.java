@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,11 +71,13 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 			DaoEntreprise daoEntreprise = new DaoEntreprise();
 			Entreprise entreprise = daoEntreprise.findById(siret);
 
-			// Convertir les dates en chaînes de caractères
-			java.sql.Date dateEmission = curseur.getDate("date_emission");
-			java.sql.Date datePaiement = curseur.getDate("date_paiement");
-			String dateEmissionStr = dateEmission.toString();
-			String datePaiementStr = datePaiement.toString();
+			// Convertir les dates en chaînes de caractères avec un format spécifique
+	        java.sql.Date dateEmission = curseur.getDate("date_emission");
+	        java.sql.Date datePaiement = curseur.getDate("date_paiement");
+
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        String dateEmissionStr = dateFormat.format(dateEmission);
+	        String datePaiementStr = dateFormat.format(datePaiement);
 
 			facture = new Facture(curseur.getInt("Id_Facture"), curseur.getString("numero"), dateEmissionStr,
 					datePaiementStr, curseur.getString("mode_paiement "), curseur.getString("numero_devis "),
@@ -97,16 +100,12 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	        factures = convertirResultSetEnListe(res);
 	        st.close();
 	    }
-
-	    // Vérifier si la liste de factures est vide avant d'accéder à l'élément
 	    if (!factures.isEmpty()) {
 	        return factures.get(0);
 	    } else {
-	        // Retourner null ou une autre valeur par défaut, selon votre logique métier
 	        return null;
 	    }
 	}
-
 
 	private List<Facture> convertirResultSetEnListe(ResultSet res) throws SQLException {
 		List<Facture> factures = new ArrayList<>();
