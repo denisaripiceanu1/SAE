@@ -497,7 +497,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_paye = new JTextField();
 		this.textField_paye.setEditable(false);
 		this.textField_paye.setColumns(10);
-		this.textField_paye.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true), "Pay\u00E9",
+		this.textField_paye.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true), "Montant pay\u00E9",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
 		this.textField_paye.setBackground(Color.WHITE);
 		this.textField_paye.setBounds(510, 173, 152, 40);
