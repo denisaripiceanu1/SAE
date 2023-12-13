@@ -393,6 +393,7 @@ public class Fenetre_Accueil extends JFrame {
 		));
 		this.table_MesLocations.setBounds(40, 53, 668, 130);
 		scrollPane_MesLocations.setViewportView(this.table_MesLocations);
+		this.table_MesLocations.getSelectionModel().addListSelectionListener(this.gestionLocations);
 
 		// Labels
 		JLabel lbl_MesLocations = new JLabel("Mes Locations");

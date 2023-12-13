@@ -1,6 +1,7 @@
 package modele.dao;
 
 import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
@@ -11,8 +12,6 @@ import modele.Bien;
 import modele.Entreprise;
 import modele.Facture;
 import modele.Immeuble;
-import modele.dao.requetes.select.RequeteSelectBienById;
-import modele.dao.requetes.select.RequeteSelectBienparImmeuble;
 import modele.dao.requetes.select.RequeteSelectFacture;
 import modele.dao.requetes.select.RequeteSelectFactureByBien;
 import modele.dao.requetes.select.RequeteSelectFactureById;
@@ -51,32 +50,6 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	public List<Facture> findAll() throws SQLException {
 		return find(new RequeteSelectFacture());
 	}
-	
-	
-	public Facture findDerniereFactureLoayer(Bien bien) throws SQLException {
-	    List<Facture> factures = null;
-	    String b = bien.getIdBien();
-	    try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(new RequeteSelectFactureByBien().requete())) {
-	        new RequeteSelectFactureByBien().parametres(st, b);
-	        ResultSet res = st.executeQuery();
-	        
-	        factures = convertirResultSetEnListe(res);
-	        
-	    }
-
-	    return factures.isEmpty() ? null : factures.get(factures.size() - 1);
-	}
-
-	private List<Facture> convertirResultSetEnListe(ResultSet res) throws SQLException {
-		List<Facture> factures = new ArrayList<>();
-
-	    while (res.next()) {
-	        Facture f = creerInstance(res);
-	        factures.add(f);
-	    }
-
-	    return factures;
-	}
 
 	@Override
 	protected Facture creerInstance(ResultSet curseur) throws SQLException {
@@ -112,7 +85,33 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		}
 		return facture;
 	}
-
 	
+	// ---------------- AUTRES METHODES ----------------//
+
+	public Facture findDerniereFactureLoayer(Bien bien) throws SQLException {
+		List<Facture> factures = null;
+		String b = bien.getIdBien();
+		try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectFactureByBien().requete())) {
+			new RequeteSelectFactureByBien().parametres(st, b);
+			ResultSet res = st.executeQuery();
+
+			factures = convertirResultSetEnListe(res);
+			st.close();
+		}
+
+		return factures.isEmpty() ? null : factures.get(factures.size() - 1);
+	}
+
+	private List<Facture> convertirResultSetEnListe(ResultSet res) throws SQLException {
+		List<Facture> factures = new ArrayList<>();
+
+		while (res.next()) {
+			Facture f = creerInstance(res);
+			factures.add(f);
+		}
+
+		return factures;
+	}
 
 }

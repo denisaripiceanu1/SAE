@@ -67,4 +67,10 @@ public class Locataire {
 		this.dateNaissance = dateNaissance;
 	}
 
+	@Override
+	public String toString() {
+	    return this.getIdLocataire();
+		//return getNom() + " " + getPrenom();
+	}
+
 }
