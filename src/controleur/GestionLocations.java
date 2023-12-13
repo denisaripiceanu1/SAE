@@ -42,7 +42,6 @@ public class GestionLocations implements ListSelectionListener {
                     Facture derniereFactureLoyer = null;
 
                     try {
-                        // Utilisation de la méthode findDerniereFactureLoayer avec un objet Louer en argument
                     	derniereFactureLoyer = daoFacture.findDerniereFactureLoyer(location.getIdBien());
                     } catch (SQLException e1) {
                         e1.printStackTrace();
@@ -63,7 +62,7 @@ public class GestionLocations implements ListSelectionListener {
                     paye.setText(String.valueOf(location.getMontantReelPaye()));
 
                     JTextField restantDu = fenetreAccueil.getTextField_restantDu();
-                    restantDu.setText(String.valueOf(location.getLoyerTTC() - location.getMontantReelPaye()));
+                    restantDu.setText(String.valueOf(location.getLoyerTTC() + location.getProvision_chargeMens_TTC() - location.getMontantReelPaye()));
 
                     JTextField caution = fenetreAccueil.getTextField_caution();
                     caution.setText(String.valueOf(location.getCautionTTC()));
