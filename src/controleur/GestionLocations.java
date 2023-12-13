@@ -43,7 +43,7 @@ public class GestionLocations implements ListSelectionListener {
 
                     try {
                         // Utilisation de la méthode findDerniereFactureLoayer avec un objet Louer en argument
-                    	derniereFactureLoyer = daoFacture.findDerniereFactureLoayer(location.getIdBien());
+                    	derniereFactureLoyer = daoFacture.findDerniereFactureLoyer(location.getIdBien());
                     } catch (SQLException e1) {
                         e1.printStackTrace();
                     }
