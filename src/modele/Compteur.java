@@ -6,7 +6,7 @@ public class Compteur {
 	private Bien bien;
 	private Immeuble immeuble;
 
-	public Compteur(String idCompteur, String typeComp, Bien bien, Immeuble immeuble) {
+	public Compteur(String idCompteur, String typeComp,Bien bien, Immeuble immeuble) {
 		this.idCompteur = idCompteur;
 		this.typeComp = typeComp;
 		this.bien = bien;
@@ -44,5 +44,8 @@ public class Compteur {
 	public void setImmeuble(Immeuble immeuble) {
 		this.immeuble = immeuble;
 	}
+
+	
+	
 
 }

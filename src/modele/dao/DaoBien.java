@@ -73,32 +73,32 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 	public List<Bien> findAll() throws SQLException {
 		return find(new RequeteSelectBien());
 	}
-	
-	public List<Bien> findBiensparImmeuble(String id) throws SQLException {
-	    List<Bien> biens = null;
-	    
-	    try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(new RequeteSelectBienparImmeuble().requete())) {
-	        new RequeteSelectBienparImmeuble().parametres(st, id);
-	        ResultSet res = st.executeQuery();
-	        
-	        biens = convertirResultSetEnListe(res);
-	    }
 
-	    return biens;
+	public List<Bien> findBiensparImmeuble(String id) throws SQLException {
+		List<Bien> biens = null;
+
+		try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectBienparImmeuble().requete())) {
+			new RequeteSelectBienparImmeuble().parametres(st, id);
+			ResultSet res = st.executeQuery();
+
+			biens = convertirResultSetEnListe(res);
+		}
+
+		return biens;
 	}
 
 	private List<Bien> convertirResultSetEnListe(ResultSet res) throws SQLException {
-	    List<Bien> biens = new ArrayList<>();
+		List<Bien> biens = new ArrayList<>();
 
-	    while (res.next()) {
-	        Bien bien = creerInstance(res);
-	        biens.add(bien);
-	    }
+		while (res.next()) {
+			Bien bien = creerInstance(res);
+			biens.add(bien);
+		}
 
-	    return biens;
+		return biens;
 	}
 
-	
 	public Iterateur<Bien> findAllIterateur() throws SQLException {
 //        RequeteSelectBien req = new RequeteSelectBien();
 //        PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(req.requete());
@@ -107,6 +107,6 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 //
 //        iterateurBien = new Iterateur<>(res, this);
 //        return DaoBien.iterateurBien;
-		return  null;
-    }
+		return null;
+	}
 }

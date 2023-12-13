@@ -913,7 +913,7 @@ public class Fenetre_Accueil extends JFrame {
 		return contentPane;
 	}
 
-	// ---------fonctions--------//
+	// --------- GETTERS --------//
 	public JTable getTableBiens() {
 		return tableMesBiens;
 	}
@@ -925,5 +925,34 @@ public class Fenetre_Accueil extends JFrame {
 	public JTable getTableLocations() {
 		return table_MesLocations;
 	}
+
+	public JTextField getTextField_loyer() {
+		return textField_loyer;
+	}
+
+	public JTextField getTextField_provisionCharges() {
+		return textField_provisionCharges;
+	}
+
+	public JTextField getTextField_caution() {
+		return textField_caution;
+	}
+
+	public JTextField getTextField_dateEmission() {
+		return textField_dateEmission;
+	}
+
+	public JTextField getTextField_dateEcheance() {
+		return textField_dateEcheance;
+	}
+
+	public JTextField getTextField_paye() {
+		return textField_paye;
+	}
+
+	public JTextField getTextField_restantDu() {
+		return textField_restantDu;
+	}
+	
 	
 }
