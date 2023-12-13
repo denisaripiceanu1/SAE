@@ -12,6 +12,7 @@ import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectBien;
 import modele.dao.requetes.select.RequeteSelectBienById;
 import modele.dao.requetes.select.RequeteSelectBienparImmeuble;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertBien;
 import modele.dao.requetes.update.RequeteUpdateBien;
 
 public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
@@ -20,21 +21,21 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 
 	@Override
 	public void create(Bien donnees) throws SQLException {
-//		SousProgramme<Bien> sp = new SpAjoutBien();
-//		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
-//		sp.parametres(st, donnees);
-//		st.execute();
+		SousProgramme<Bien> sp = new SousProgrammeInsertBien();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
+		st.execute();
 
 	}
 
 	@Override
 	public void update(Bien donnees) throws SQLException {
-		miseAJour(new RequeteUpdateBien(), donnees);
+		this.miseAJour(new RequeteUpdateBien(), donnees);
 	}
 
 	@Override
 	public void delete(Bien donnees) {
-		delete(donnees);
+		this.delete(donnees);
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 
 	@Override
 	public Bien findById(String... id) throws SQLException {
-		List<Bien> biens = find(new RequeteSelectBienById(), id);
+		List<Bien> biens = this.find(new RequeteSelectBienById(), id);
 		if (biens.isEmpty()) {
 			return null;
 		}
@@ -71,7 +72,7 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 
 	@Override
 	public List<Bien> findAll() throws SQLException {
-		return find(new RequeteSelectBien());
+		return this.find(new RequeteSelectBien());
 	}
 
 	public List<Bien> findBiensparImmeuble(String id) throws SQLException {
@@ -82,7 +83,11 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 			new RequeteSelectBienparImmeuble().parametres(st, id);
 			ResultSet res = st.executeQuery();
 
+<<<<<<< HEAD
+			biens = this.convertirResultSetEnListe(res);
+=======
 			biens = convertirResultSetEnListe(res);
+>>>>>>> 6b01f644700de734d1455dd549560042370345d2
 		}
 
 		return biens;
@@ -92,7 +97,11 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		List<Bien> biens = new ArrayList<>();
 
 		while (res.next()) {
+<<<<<<< HEAD
+			Bien bien = this.creerInstance(res);
+=======
 			Bien bien = creerInstance(res);
+>>>>>>> 6b01f644700de734d1455dd549560042370345d2
 			biens.add(bien);
 		}
 
