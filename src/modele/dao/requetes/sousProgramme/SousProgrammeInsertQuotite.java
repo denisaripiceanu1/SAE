@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import modele.Quotite;
-import modele.dao.SousProgramme;
 
 public class SousProgrammeInsertQuotite implements SousProgramme<Quotite> {
 

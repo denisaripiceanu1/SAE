@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import modele.Charge;
-import modele.dao.SousProgramme;
 
 public class SousProgrammeInsertCharge implements SousProgramme<Charge> {
 
