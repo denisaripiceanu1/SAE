@@ -10,9 +10,11 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controleur.outils.Sauvegarde;
 import modele.Bien;
 import modele.Immeuble;
 import modele.Louer;
@@ -29,6 +31,7 @@ import vue.insertion.Fenetre_InsertionLocation;
 import vue.insertion.Fenetre_InsertionLogement;
 import vue.insertion.Fenetre_InsertionPaiementBien;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
+import vue.modification.Fenetre_ModificationBien;
 
 public class GestionAccueil implements ActionListener {
 
@@ -175,6 +178,40 @@ public class GestionAccueil implements ActionListener {
 		case "btnMesBiens_Supprimer":
 			break;
 		case "btnMesBiens_Modifier":
+			
+			//Premier test si il n'y a aucun immeuble sélectionné alors erreur
+			if(Sauvegarde.onSave("Immeuble") == false) {
+				JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien pour modifier", "Erreur",
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				//On ouvre la fenêtre
+				Fenetre_ModificationBien modif_bien = new Fenetre_ModificationBien();
+				this.fenetreAccueil.getLayeredPane().add(modif_bien);
+				modif_bien.setVisible(true);
+				modif_bien.moveToFront();
+				// permet de recuperer les infos sur l'immeuble courant pour les afficher
+				// On récupère l'immeuble de la sauvegarde
+				Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
+				Immeuble immeubleCourant;
+				try {
+					//A partir de l'ID de l'immeuble dans la sauvegarde on utilise la BD pour récupérer l'immeuble le plus récent correspondant
+					immeubleCourant = daoImmeuble.findById(immeubleSauvegarde.getImmeuble());
+					//afficher les infos dans la page
+					modif_bien.getTextField_IdImmeuble().setText(immeubleCourant.getImmeuble());
+					modif_bien.getTextField_adresse().setText(immeubleCourant.getAdresse());
+					modif_bien.getTextField_codePostal().setText(immeubleCourant.getCp());
+					modif_bien.getTextField_ville().setText(immeubleCourant.getVille());
+					modif_bien.getTextField_periodeDeConstruction().setText(immeubleCourant.getPeriodeConstruction());
+					modif_bien.getTextField_nbLogement().setText(Integer.toString(immeubleCourant.getNbLogement()));
+					modif_bien.getTextField_dateAcquisition().setText(immeubleCourant.getDateAcquisition());
+					modif_bien.getComboBox_typeDeBien().setSelectedItem(immeubleCourant.getType_immeuble());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
+			}
+			
 			break;
 
 		case "btnMesBiens_AjouterBien":

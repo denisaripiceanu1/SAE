@@ -47,7 +47,7 @@ public class Fenetre_ModificationBien extends JInternalFrame {
 		separator_titreInsererBien.setBounds(271, 72, 190, 2);
 		panel.add(separator_titreInsererBien);
 
-		JLabel lbl_InsererUnBien = new JLabel("Ajouter un Bien");
+		JLabel lbl_InsererUnBien = new JLabel("Modifier un Bien");
 		lbl_InsererUnBien.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUnBien.setBounds(308, 26, 117, 48);
 		panel.add(lbl_InsererUnBien);
@@ -58,6 +58,7 @@ public class Fenetre_ModificationBien extends JInternalFrame {
 		this.textField_IdImmeuble.setBounds(110, 104, 190, 40);
 		panel.add(this.textField_IdImmeuble);
 		this.textField_IdImmeuble.setColumns(10);
+		this.textField_IdImmeuble.setEditable(false);
 
 		this.textField_adresse = new JTextField();
 		this.textField_adresse.setColumns(10);
