@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -30,6 +32,7 @@ import controleur.GestionBienLogement;
 import controleur.GestionLocations;
 import controleur.GestionTableLogement;
 import controleur.insertion.GestionInsertionBien;
+import modele.dao.DaoBien;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
 import javax.swing.JTextPane;
@@ -73,6 +76,8 @@ public class Fenetre_Accueil extends JFrame {
 	private GestionTableLogement gestionTableLogement;
 	private GestionLocations gestionLocations;
 	
+	private DaoBien daoBien;
+	
 
 	/**
 	 * Launch the application.
@@ -99,6 +104,8 @@ public class Fenetre_Accueil extends JFrame {
 		this.gestionBienLogement = new GestionBienLogement(this);
 		this.gestionLocations = new GestionLocations(this);
 		this.gestionAccueil = new GestionAccueil(this);
+		
+		this.daoBien = new DaoBien();
 
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -737,6 +744,15 @@ public class Fenetre_Accueil extends JFrame {
 		comboBox_MesAssurances.setBounds(55, 80, 130, 21);
 		panel_MesAssurances.add(comboBox_MesAssurances);
 
+		 // Remplir le JComboBox avec les identifiants des logements
+        try {
+            List<String> identifiantsLogements = daoBien.getAllIdentifiers(); 
+            // Ajouter les identifiants au modèle du JComboBox
+            DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(identifiantsLogements.toArray(new String[0]));
+            comboBox_MesAssurances.setModel(modelComboBox);
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
 		///////////////////////////////////////////////////////////////////
 		// LAYERED REGULARISATION DES CHARGES
 		// ////////////////////////////////////////////////////////////////
