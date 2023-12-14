@@ -15,10 +15,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.outils.Sauvegarde;
+import modele.Assurance;
 import modele.Bien;
+import modele.Echeance;
+import modele.Entreprise;
 import modele.Immeuble;
 import modele.Louer;
+import modele.dao.DaoAssurance;
 import modele.dao.DaoBien;
+import modele.dao.DaoEcheance;
 import modele.dao.DaoImmeuble;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
@@ -40,15 +45,20 @@ public class GestionAccueil implements ActionListener {
 	private DaoImmeuble daoImmeuble;
 	private DaoLouer daoLouer;
 	private DaoBien daoBien;
+	private DaoAssurance daoAssurance;
+	private DaoEcheance daoEcheance;
 
 	public GestionAccueil(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
 		this.daoImmeuble = new DaoImmeuble();
 		this.daoBien = new DaoBien();
 		this.daoLouer = new DaoLouer();
+		this.daoAssurance = new DaoAssurance();
+		this.daoEcheance = new DaoEcheance();
 	}
 
-	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE ACCUEIL
+	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE
+	// ACCUEIL
 	public void rendreVisible(JLayeredPane visible) {
 		this.fenetreAccueil.getLayeredPane_Accueil().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesBiens().setVisible(false);
@@ -77,7 +87,7 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	// ------------------- TABLE BIENS ------------------- //
-	
+
 	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) {
 		JTable tableImmeuble = fenetreAccueil.getTableBiens();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
@@ -114,24 +124,52 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	private void chargerLocations() throws SQLException {
+		List<Bien> biens = daoBien.findAll();
+		List<Louer> locations = new ArrayList<>();
 
-	    List<Bien> biens = daoBien.findAll();
-	    List<Louer> locations = new ArrayList<>(); 
+		for (Bien b : biens) {
+			locations.addAll(daoLouer.findLocationByBien(b.getIdBien())); // Ajouter toutes les locations du bien à la
+																			// liste
+		}
 
-	    for (Bien b : biens) {
-	        locations.addAll(daoLouer.findLocationByBien(b.getIdBien())); // Ajouter toutes les locations du bien à la liste
-	    }
+		DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableLocations().getModel();
+		modeleTable.setRowCount(locations.size());
 
-	    DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableLocations().getModel();
-	    modeleTable.setRowCount(locations.size());
-
-	    for (int i = 0; i < locations.size(); i++) {
-	        Louer location = locations.get(i);
-	        Bien bien = location.getIdBien();
-	        ecrireLigneTableLocations(i, location, bien);
-	    }
+		for (int i = 0; i < locations.size(); i++) {
+			Louer location = locations.get(i);
+			Bien bien = location.getIdBien();
+			ecrireLigneTableLocations(i, location, bien);
+		}
 	}
 
+	// ------------------- TABLE ASSURANCES ------------------- //
+
+	public void ecrireLigneTableAssurances(int numeroLigne, Assurance assurance, Entreprise entreprise,
+			Echeance echeance) {
+		JTable tableAssurances = fenetreAccueil.getTableAssurances();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
+
+		modeleTable.setValueAt(assurance.getNuméroPolice(), numeroLigne, 0);
+		modeleTable.setValueAt(assurance.getMontantInit(), numeroLigne, 1);
+		modeleTable.setValueAt(echeance.getDateEcheance(), numeroLigne, 2);
+		modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 3);
+		modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
+				numeroLigne, 4);
+		modeleTable.setValueAt(entreprise.getTelephone(), numeroLigne, 5);
+	}
+
+	private void chargerAssurances() throws SQLException {
+
+		List<Assurance> assurances = daoAssurance.findAll();
+
+		for (int i = 0; i < assurances.size(); i++) {
+			Assurance a = assurances.get(i);
+			Entreprise entreprise = daoAssurance.findEntrepriseByAssurance(a.getEntreprise());
+			Echeance echeance = daoEcheance.findEcheanceByAssurance(a.getNuméroPolice());
+
+			ecrireLigneTableAssurances(i, a, entreprise, echeance);
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -179,23 +217,23 @@ public class GestionAccueil implements ActionListener {
 		case "btnMesBiens_Supprimer":
 			break;
 		case "btnMesBiens_Modifier":
-			
-			////////POUR UN LOGEMENT/BIEN ///////////
-			if(Sauvegarde.onSave("Logement") == true) {
+
+			//////// POUR UN LOGEMENT/BIEN ///////////
+			if (Sauvegarde.onSave("Logement") == true) {
 				Fenetre_ModificationLogement modif_logement = new Fenetre_ModificationLogement();
 				this.fenetreAccueil.getLayeredPane().add(modif_logement);
 				modif_logement.setVisible(true);
 				modif_logement.moveToFront();
-				
+
 			} else {
-				
-				////////POUR MODIFIER UN IMMEUBLE///////////
-				//Premier test si il n'y a aucun immeuble sélectionné alors erreur
-				if(Sauvegarde.onSave("Immeuble") == false) {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien pour modifier", "Erreur",
-							JOptionPane.ERROR_MESSAGE);
+
+				//////// POUR MODIFIER UN IMMEUBLE///////////
+				// Premier test si il n'y a aucun immeuble sélectionné alors erreur
+				if (Sauvegarde.onSave("Immeuble") == false) {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien pour modifier",
+							"Erreur", JOptionPane.ERROR_MESSAGE);
 				} else {
-					//On ouvre la fenêtre
+					// On ouvre la fenêtre
 					Fenetre_ModificationBien modif_bien = new Fenetre_ModificationBien();
 					this.fenetreAccueil.getLayeredPane().add(modif_bien);
 					modif_bien.setVisible(true);
@@ -205,14 +243,16 @@ public class GestionAccueil implements ActionListener {
 					Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
 					Immeuble immeubleCourant;
 					try {
-						//A partir de l'ID de l'immeuble dans la sauvegarde on utilise la BD pour récupérer l'immeuble le plus récent correspondant
+						// A partir de l'ID de l'immeuble dans la sauvegarde on utilise la BD pour
+						// récupérer l'immeuble le plus récent correspondant
 						immeubleCourant = daoImmeuble.findById(immeubleSauvegarde.getImmeuble());
-						//afficher les infos dans la page
+						// afficher les infos dans la page
 						modif_bien.getTextField_IdImmeuble().setText(immeubleCourant.getImmeuble());
 						modif_bien.getTextField_adresse().setText(immeubleCourant.getAdresse());
 						modif_bien.getTextField_codePostal().setText(immeubleCourant.getCp());
 						modif_bien.getTextField_ville().setText(immeubleCourant.getVille());
-						modif_bien.getTextField_periodeDeConstruction().setText(immeubleCourant.getPeriodeConstruction());
+						modif_bien.getTextField_periodeDeConstruction()
+								.setText(immeubleCourant.getPeriodeConstruction());
 						modif_bien.getTextField_nbLogement().setText(Integer.toString(immeubleCourant.getNbLogement()));
 						modif_bien.getTextField_dateAcquisition().setText(immeubleCourant.getDateAcquisition());
 						modif_bien.getComboBox_typeDeBien().setSelectedItem(immeubleCourant.getType_immeuble());
@@ -220,11 +260,10 @@ public class GestionAccueil implements ActionListener {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				
+
 				}
 			}
-			
-			
+
 			break;
 
 		case "btnMesBiens_AjouterBien":
@@ -335,6 +374,11 @@ public class GestionAccueil implements ActionListener {
 		// LAYERED MES ASSURANCES
 		////////////////////////
 		case "btn_MesAssurances_Charger":
+			try {
+				chargerAssurances();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "btn_MesAssurances_Modifier":
 			break;

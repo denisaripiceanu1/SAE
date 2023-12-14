@@ -143,7 +143,7 @@ public class Fenetre_Accueil extends JFrame {
 		btnAccueil.setBorder(null);
 		btnAccueil.addActionListener(this.gestionAccueil);
 		btnAccueil.setBackground(new Color(192, 192, 192));
-		btnAccueil.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/home_att-removebg-preview.png"))); 
+		btnAccueil.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/home_att-removebg-preview.png")));
 		btnAccueil.setBounds(0, 53, 42, 31);
 		btnAccueil.setName("btnAccueil");
 		panelDuBtnAccueil.add(btnAccueil);
@@ -272,7 +272,7 @@ public class Fenetre_Accueil extends JFrame {
 						new String[] { "Nom", "Surface", "Nb pi\u00E8ces", "Etage", "Aquisition", "Occup\u00E9" }));
 		this.tableMesBiens_Logements.setBounds(40, 266, 438, 106);
 		scrollPaneMesBiens_Logements.setViewportView(this.tableMesBiens_Logements);
-		//Pour action listener sur table logement
+		// Pour action listener sur table logement
 		this.tableMesBiens_Logements.getSelectionModel().addListSelectionListener(this.gestionTableLogement);
 
 		// Labels
@@ -282,7 +282,7 @@ public class Fenetre_Accueil extends JFrame {
 		lblMesBiens.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblMesBiens.setBounds(244, 22, 216, 43);
 		panelMesBiens.add(lblMesBiens);
-		
+
 		JLabel lblImmeubles = new JLabel("Immeuble/Maison");
 		lblImmeubles.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblImmeubles.setBounds(40, 71, 109, 31);
@@ -388,15 +388,8 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesLocations = new JTable();
 		this.table_MesLocations.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesLocations
-				.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"Locataire", "Bien", "Type"
-			}
-		));
+		this.table_MesLocations.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
+				new String[] { "Locataire", "Bien", "Type" }));
 		this.table_MesLocations.setBounds(40, 53, 668, 130);
 		scrollPane_MesLocations.setViewportView(this.table_MesLocations);
 		this.table_MesLocations.getSelectionModel().addListSelectionListener(this.gestionLocations);
@@ -503,8 +496,8 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_paye = new JTextField();
 		this.textField_paye.setEditable(false);
 		this.textField_paye.setColumns(10);
-		this.textField_paye.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true), "Montant pay\u00E9",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField_paye.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true),
+				"Montant pay\u00E9", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
 		this.textField_paye.setBackground(Color.WHITE);
 		this.textField_paye.setBounds(510, 173, 152, 40);
 		panel_MesLocations.add(this.textField_paye);
@@ -518,8 +511,6 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_restantDu.setBounds(510, 213, 152, 40);
 		panel_MesLocations.add(this.textField_restantDu);
 
-		
-		
 		//////////////////////////////////////////////////////////////////////////
 		// LAYERED MES
 		// TRAVAUX////////////////////////////////////////////////////////////////
@@ -928,9 +919,13 @@ public class Fenetre_Accueil extends JFrame {
 	public JTable getTableLogementsParBien() {
 		return tableMesBiens_Logements;
 	}
-	
+
 	public JTable getTableLocations() {
 		return table_MesLocations;
+	}
+
+	public JTable getTableAssurances() {
+		return table_MesAssurances;
 	}
 
 	public JTextField getTextField_loyer() {
@@ -960,6 +955,5 @@ public class Fenetre_Accueil extends JFrame {
 	public JTextField getTextField_restantDu() {
 		return textField_restantDu;
 	}
-	
-	
+
 }

@@ -1,12 +1,12 @@
 package modele.dao.requetes.select;
 
-import modele.Échéance;
+import modele.Echeance;
 import modele.dao.requetes.Requete;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class RequeteSelectEcheanceById implements Requete<Échéance> {
+public class RequeteSelectEcheanceById implements Requete<Echeance> {
 
 	@Override
 	public String requete() {
@@ -19,7 +19,7 @@ public class RequeteSelectEcheanceById implements Requete<Échéance> {
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Échéance data) throws SQLException {
+	public void parametres(PreparedStatement prSt, Echeance data) throws SQLException {
 		prSt.setString(1, data.getNumeroPolice());
 	}
 

@@ -10,6 +10,7 @@ import modele.Entreprise;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectAssurance;
 import modele.dao.requetes.select.RequeteSelectAssuranceById;
+import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertAssurance;
 import modele.dao.requetes.update.RequeteUpdateAssurance;
 

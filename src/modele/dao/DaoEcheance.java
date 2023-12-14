@@ -5,36 +5,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import modele.Échéance;
+import modele.Echeance;
 import modele.dao.requetes.select.RequeteSelectEcheance;
 import modele.dao.requetes.select.RequeteSelectEcheanceById;
 
-public class DaoÉchéance extends DaoModele<Échéance> implements Dao<Échéance> {
+public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 
 	@Override
-	public void create(Échéance donnees) {
+	public void create(Echeance donnees) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void update(Échéance donnees) {
+	public void update(Echeance donnees) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void delete(Échéance donnees) {
+	public void delete(Echeance donnees) {
 		delete(donnees);
 
 	}
 
 	@Override
-	protected Échéance creerInstance(ResultSet curseur) throws SQLException {
-		Échéance echeance = null;
+	protected Echeance creerInstance(ResultSet curseur) throws SQLException {
+		Echeance echeance = null;
 		try {
 
-			echeance = new Échéance(curseur.getString("numero_police"), curseur.getString("dateEcheance"),
+			echeance = new Echeance(curseur.getString("numero_police"), curseur.getString("dateEcheance"),
 					curseur.getDouble("montantEcheance"));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -43,8 +43,8 @@ public class DaoÉchéance extends DaoModele<Échéance> implements Dao<Échéan
 	}
 
 	@Override
-	public Échéance findById(String... id) throws SQLException {
-		List<Échéance> echeances = find(new RequeteSelectEcheanceById(), id);
+	public Echeance findById(String... id) throws SQLException {
+		List<Echeance> echeances = find(new RequeteSelectEcheanceById(), id);
 		if (echeances.isEmpty()) {
 			return null;
 		}
@@ -52,7 +52,7 @@ public class DaoÉchéance extends DaoModele<Échéance> implements Dao<Échéan
 	}
 
 	@Override
-	public List<Échéance> findAll() throws SQLException {
+	public List<Echeance> findAll() throws SQLException {
 		return find(new RequeteSelectEcheance());
 	}
 
