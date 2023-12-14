@@ -161,15 +161,18 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	private void chargerAssurances() throws SQLException {
-		List<Assurance> assurances = daoAssurance.findAll();
+	    List<Assurance> assurances = daoAssurance.findAll();
 
-		for (int i = 0; i < assurances.size(); i++) {
-			Assurance a = assurances.get(i);
-			Entreprise entreprise = daoEntreprise.findById(a.getEntreprise().getSiret());
-			Echeance echeance = daoEcheance.findById(a.getNuméroPolice());
+	    for (int i = 0; i < assurances.size(); i++) {
+	        Assurance a = assurances.get(i);
+	        Entreprise entreprise = a.getEntreprise();
+	        if (entreprise != null) {
+	            entreprise = daoEntreprise.findById(entreprise.getSiret());
+	        }
+	        Echeance echeance = daoEcheance.findById(a.getNuméroPolice());
 
-			ecrireLigneTableAssurances(i, a, entreprise, echeance);
-		}
+	        ecrireLigneTableAssurances(i, a, entreprise, echeance);
+	    }
 	}
 
 	@Override

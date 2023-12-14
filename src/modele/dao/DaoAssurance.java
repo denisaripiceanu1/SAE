@@ -39,7 +39,7 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 		Assurance assurance = null;
 		try {
 			String numeroPolice = curseur.getString("numero_police");
-			float montantInit = curseur.getFloat("montant_init");
+			float montantInit = curseur.getFloat("montant");
 
 			// Récupérer l'identifiant de l'immeuble
 			String idImmeuble = curseur.getString("Id_Immeuble");

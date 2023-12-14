@@ -34,8 +34,8 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 		Echeance echeance = null;
 		try {
 
-			echeance = new Echeance(curseur.getString("numero_police"), curseur.getString("dateEcheance"),
-					curseur.getDouble("montantEcheance"));
+			echeance = new Echeance(curseur.getString("numero_police"), curseur.getString("date_echeance"),
+					curseur.getDouble("montant_echeance"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
