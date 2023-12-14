@@ -102,20 +102,19 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 	}
 
 	public List<String> getAllIdBien() throws SQLException {
-	    List<String> identifiers = new ArrayList<>();
+	    List<String> identifiants = new ArrayList<>();
 
-	    // Remplacez "SELECT id_logement FROM votre_table_logement" par la requête SQL appropriée
 	    String sql = "SELECT ID_Bien FROM BIEN";
 
 	    try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(sql);
 	         ResultSet resultSet = st.executeQuery()) {
 
 	        while (resultSet.next()) {
-	            identifiers.add(resultSet.getString("ID_Bien"));
+	        	identifiants.add(resultSet.getString("ID_Bien"));
 	        }
 	    }
 
-	    return identifiers;
+	    return identifiants;
 	}
 
 

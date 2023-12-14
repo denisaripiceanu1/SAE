@@ -1,8 +1,10 @@
 package modele.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import modele.Locataire;
@@ -59,6 +61,22 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 			e.printStackTrace();
 		}
 		return locataire;
+	}
+	
+	public List<String> getAllIdLocataire() throws SQLException {
+	    List<String> identifiants = new ArrayList<>();
+
+	    String sql = "SELECT ID_Locataire FROM LOCATAIRE";
+
+	    try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(sql);
+	         ResultSet resultSet = st.executeQuery()) {
+
+	        while (resultSet.next()) {
+	        	identifiants.add(resultSet.getString("ID_Locataire"));
+	        }
+	    }
+
+	    return identifiants;
 	}
 
 }

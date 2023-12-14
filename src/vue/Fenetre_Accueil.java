@@ -33,6 +33,7 @@ import controleur.GestionLocations;
 import controleur.GestionTableLogement;
 import controleur.insertion.GestionInsertionBien;
 import modele.dao.DaoBien;
+import modele.dao.DaoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
 import javax.swing.JTextPane;
@@ -77,6 +78,7 @@ public class Fenetre_Accueil extends JFrame {
 	private GestionLocations gestionLocations;
 	
 	private DaoBien daoBien;
+	private DaoLocataire daoLocataire;
 	
 
 	/**
@@ -106,6 +108,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.gestionAccueil = new GestionAccueil(this);
 		
 		this.daoBien = new DaoBien();
+		this.daoLocataire = new DaoLocataire();
 
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -811,6 +814,17 @@ public class Fenetre_Accueil extends JFrame {
 		comboBox_Regularisation.setModel(new DefaultComboBoxModel(new String[] { "Locataire" }));
 		comboBox_Regularisation.setBounds(55, 81, 130, 21);
 		panel_RegularisationDesCharges.add(comboBox_Regularisation);
+		
+		 // Remplir le JComboBox avec les identifiants des locataires
+        try {
+            List<String> identifiantsLocataires = daoLocataire.getAllIdLocataire(); 
+            identifiantsLocataires.add(0, "ID locataire");
+            // Ajouter les identifiants au modèle du JComboBox
+            DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(identifiantsLocataires.toArray(new String[0]));
+            comboBox_Regularisation.setModel(modelComboBox);
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
 
 		/////////////////////////////////////////////////////////////////////////
 		// LAYERED SOLDE DE TOUT
