@@ -49,7 +49,6 @@ public class GestionInsertionLogement implements ActionListener {
 		case "Ajouter":
 			Bien logement = null;
 			try {
-
 				String typeLogement = this.fil.getComboBox_typeDeLogement().getSelectedItem().toString();
 
 				logement = new Bien(this.fil.getTextField_IdLogement().getText(),

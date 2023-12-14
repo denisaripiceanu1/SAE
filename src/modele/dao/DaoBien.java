@@ -82,11 +82,8 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 				.prepareStatement(new RequeteSelectBienparImmeuble().requete())) {
 			new RequeteSelectBienparImmeuble().parametres(st, id);
 			ResultSet res = st.executeQuery();
-<<<<<<< HEAD
 			biens = this.convertirResultSetEnListe(res);
-=======
 			biens = convertirResultSetEnListe(res);
->>>>>>> 1f6173797a4d7bb996bf9ac9c22f6771ea4e7edd
 			st.close();
 		}
 
@@ -97,11 +94,7 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		List<Bien> biens = new ArrayList<>();
 
 		while (res.next()) {
-<<<<<<< HEAD
 			Bien bien = this.creerInstance(res);
-=======
-			Bien bien = creerInstance(res);
->>>>>>> 1f6173797a4d7bb996bf9ac9c22f6771ea4e7edd
 			biens.add(bien);
 		}
 		return biens;
