@@ -101,7 +101,7 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		return biens;
 	}
 
-	public List<String> getAllIdentifiers() throws SQLException {
+	public List<String> getAllIdBien() throws SQLException {
 	    List<String> identifiers = new ArrayList<>();
 
 	    // Remplacez "SELECT id_logement FROM votre_table_logement" par la requête SQL appropriée

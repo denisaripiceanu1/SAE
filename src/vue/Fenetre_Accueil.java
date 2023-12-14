@@ -746,7 +746,7 @@ public class Fenetre_Accueil extends JFrame {
 
 		 // Remplir le JComboBox avec les identifiants des logements
         try {
-            List<String> identifiantsLogements = daoBien.getAllIdentifiers(); 
+            List<String> identifiantsLogements = daoBien.getAllIdBien(); 
             // Ajouter les identifiants au modèle du JComboBox
             DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(identifiantsLogements.toArray(new String[0]));
             comboBox_MesAssurances.setModel(modelComboBox);
