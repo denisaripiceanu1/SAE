@@ -52,11 +52,11 @@ public class GestionAccueil implements ActionListener {
 	public void rendreVisible(JLayeredPane visible) {
 		this.fenetreAccueil.getLayeredPane_Accueil().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesBiens().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesTravaux().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesChargesLocatives().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesTravaux().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesChargesLocatives().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesLocations().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
 		// this.fenetreAccueil.getLayeredPane_SoldeDeToutCompte().setVisible(false);
 		// this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
 
