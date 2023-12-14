@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 import controleur.GestionAccueil;
 import controleur.GestionBienLogement;
 import controleur.GestionLocations;
+import controleur.GestionTableLogement;
 import controleur.insertion.GestionInsertionBien;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
@@ -69,7 +70,9 @@ public class Fenetre_Accueil extends JFrame {
 
 	private GestionAccueil gestionAccueil;
 	private GestionBienLogement gestionBienLogement;
+	private GestionTableLogement gestionTableLogement;
 	private GestionLocations gestionLocations;
+	
 
 	/**
 	 * Launch the application.
@@ -92,6 +95,7 @@ public class Fenetre_Accueil extends JFrame {
 	 * Create the frame.
 	 */
 	public Fenetre_Accueil() {
+		this.gestionTableLogement = new GestionTableLogement(this);
 		this.gestionBienLogement = new GestionBienLogement(this);
 		this.gestionLocations = new GestionLocations(this);
 		this.gestionAccueil = new GestionAccueil(this);
@@ -268,6 +272,8 @@ public class Fenetre_Accueil extends JFrame {
 						new String[] { "Nom", "Surface", "Nb pi\u00E8ces", "Etage", "Aquisition", "Occup\u00E9" }));
 		this.tableMesBiens_Logements.setBounds(40, 266, 438, 106);
 		scrollPaneMesBiens_Logements.setViewportView(this.tableMesBiens_Logements);
+		//Pour action listener sur table logement
+		this.tableMesBiens_Logements.getSelectionModel().addListSelectionListener(this.gestionTableLogement);
 
 		// Labels
 		JLabel lblMesBiens = new JLabel("Mes Biens");
