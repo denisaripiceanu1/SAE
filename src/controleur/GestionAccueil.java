@@ -9,13 +9,21 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controleur.outils.Sauvegarde;
+import modele.Assurance;
 import modele.Bien;
+import modele.Echeance;
+import modele.Entreprise;
 import modele.Immeuble;
 import modele.Louer;
+import modele.dao.DaoAssurance;
 import modele.dao.DaoBien;
+import modele.dao.DaoEcheance;
+import modele.dao.DaoEntreprise;
 import modele.dao.DaoImmeuble;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
@@ -28,6 +36,9 @@ import vue.insertion.Fenetre_InsertionLocation;
 import vue.insertion.Fenetre_InsertionLogement;
 import vue.insertion.Fenetre_InsertionPaiementBien;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
+import vue.modification.Fenetre_ModificationBien;
+import vue.modification.Fenetre_ModificationLogement;
+import vue.suppression.Fenetre_SupprimerBien;
 
 public class GestionAccueil implements ActionListener {
 
@@ -35,12 +46,18 @@ public class GestionAccueil implements ActionListener {
 	private DaoImmeuble daoImmeuble;
 	private DaoLouer daoLouer;
 	private DaoBien daoBien;
+	private DaoAssurance daoAssurance;
+	private DaoEcheance daoEcheance;
+	private DaoEntreprise daoEntreprise;
 
 	public GestionAccueil(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
 		this.daoImmeuble = new DaoImmeuble();
 		this.daoBien = new DaoBien();
 		this.daoLouer = new DaoLouer();
+		this.daoAssurance = new DaoAssurance();
+		this.daoEcheance = new DaoEcheance();
+		this.daoEntreprise = new DaoEntreprise();
 	}
 
 	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE
@@ -48,11 +65,11 @@ public class GestionAccueil implements ActionListener {
 	public void rendreVisible(JLayeredPane visible) {
 		this.fenetreAccueil.getLayeredPane_Accueil().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesBiens().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesTravaux().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesChargesLocatives().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesTravaux().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesChargesLocatives().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesLocations().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
 		// this.fenetreAccueil.getLayeredPane_SoldeDeToutCompte().setVisible(false);
 		// this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
 
@@ -110,7 +127,6 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	private void chargerLocations() throws SQLException {
-
 		List<Bien> biens = this.daoBien.findAll();
 		List<Louer> locations = new ArrayList<>();
 
@@ -126,6 +142,44 @@ public class GestionAccueil implements ActionListener {
 			Louer location = locations.get(i);
 			Bien bien = location.getIdBien();
 			this.ecrireLigneTableLocations(i, location, bien);
+		}
+	}
+
+	// ------------------- TABLE ASSURANCES ------------------- //
+
+	public void ecrireLigneTableAssurances(int numeroLigne, Assurance assurance, Entreprise entreprise,
+			Echeance echeance) {
+		JTable tableAssurances = this.fenetreAccueil.getTableAssurances();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
+
+		modeleTable.setValueAt(assurance.getNuméroPolice(), numeroLigne, 0);
+		modeleTable.setValueAt(assurance.getMontantInit(), numeroLigne, 1);
+		modeleTable.setValueAt(echeance.getDateEcheance(), numeroLigne, 2);
+		if (entreprise != null) {
+			modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 3);
+			modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
+					numeroLigne, 4);
+			modeleTable.setValueAt(entreprise.getTelephone(), numeroLigne, 5);
+		} else {
+			// Si l'entreprise est null
+			modeleTable.setValueAt("N/A", numeroLigne, 3);
+			modeleTable.setValueAt("N/A", numeroLigne, 4);
+			modeleTable.setValueAt("N/A", numeroLigne, 5);
+		}
+	}
+
+	private void chargerAssurances() throws SQLException {
+		List<Assurance> assurances = this.daoAssurance.findAll();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableAssurances().getModel();
+		modeleTable.setRowCount(assurances.size());
+
+		for (int i = 0; i < assurances.size(); i++) {
+			Assurance a = assurances.get(i);
+			Entreprise entreprise = this.daoEntreprise.findById(a.getEntreprise().getSiret());
+			Echeance echeance = this.daoEcheance.findById(a.getNuméroPolice());
+
+			this.ecrireLigneTableAssurances(i, a, entreprise, echeance);
 		}
 	}
 
@@ -173,8 +227,83 @@ public class GestionAccueil implements ActionListener {
 			}
 			break;
 		case "btnMesBiens_Supprimer":
+			if (Sauvegarde.onSave("Immeuble") == true) {
+				Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
+				Fenetre_SupprimerBien supp_bien = new Fenetre_SupprimerBien();
+				this.fenetreAccueil.getLayeredPane().add(supp_bien);
+				supp_bien.setVisible(true);
+				supp_bien.moveToFront();
+			} else {
+				JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien pour supprimer",
+						"Erreur", JOptionPane.ERROR_MESSAGE);
+			}
+
 			break;
 		case "btnMesBiens_Modifier":
+
+			//////// POUR UN LOGEMENT/BIEN ///////////
+			if (Sauvegarde.onSave("Logement") == true) {
+				Fenetre_ModificationLogement modif_logement = new Fenetre_ModificationLogement();
+				this.fenetreAccueil.getLayeredPane().add(modif_logement);
+				modif_logement.setVisible(true);
+				modif_logement.moveToFront();
+
+				// On recupère le logement de la sauvegarde
+				Bien logementSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+				Bien logementCourant;
+
+				try {
+					logementCourant = this.daoBien.findById(logementSauvegarde.getIdBien());
+					modif_logement.getTextField_IdLogement().setText(logementCourant.getIdBien());
+					modif_logement.getTextField_SurfaceHabitable()
+							.setText(Double.toString(logementCourant.getSurfaceHabitable()));
+					modif_logement.getTextField_NbPièces().setText(Integer.toString(logementCourant.getNbPieces()));
+					modif_logement.getTextField_DateAcquisition().setText(logementCourant.getDateAcquisition());
+					modif_logement.getTextField_NumEtage().setText(Integer.toString(logementCourant.getNumEtage()));
+					modif_logement.getComboBox_typeDeLogement().setSelectedItem(logementCourant.getType_bien());
+					// voir comment potentiellement recuperer le compteur et les autres trucs
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+
+			} else {
+
+				//////// POUR MODIFIER UN IMMEUBLE///////////
+				// Premier test si il n'y a aucun immeuble sélectionné alors erreur
+				if (Sauvegarde.onSave("Immeuble") == false) {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien pour modifier",
+							"Erreur", JOptionPane.ERROR_MESSAGE);
+				} else {
+					// On ouvre la fenêtre
+					Fenetre_ModificationBien modif_bien = new Fenetre_ModificationBien();
+					this.fenetreAccueil.getLayeredPane().add(modif_bien);
+					modif_bien.setVisible(true);
+					modif_bien.moveToFront();
+					// permet de recuperer les infos sur l'immeuble courant pour les afficher
+					// On récupère l'immeuble de la sauvegarde
+					Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
+					Immeuble immeubleCourant;
+					try {
+						// A partir de l'ID de l'immeuble dans la sauvegarde on utilise la BD pour
+						// récupérer l'immeuble le plus récent correspondant
+						immeubleCourant = this.daoImmeuble.findById(immeubleSauvegarde.getImmeuble());
+						// afficher les infos dans la page
+						modif_bien.getTextField_IdImmeuble().setText(immeubleCourant.getImmeuble());
+						modif_bien.getTextField_adresse().setText(immeubleCourant.getAdresse());
+						modif_bien.getTextField_codePostal().setText(immeubleCourant.getCp());
+						modif_bien.getTextField_ville().setText(immeubleCourant.getVille());
+						modif_bien.getTextField_periodeDeConstruction()
+								.setText(immeubleCourant.getPeriodeConstruction());
+						modif_bien.getTextField_nbLogement().setText(Integer.toString(immeubleCourant.getNbLogement()));
+						modif_bien.getTextField_dateAcquisition().setText(immeubleCourant.getDateAcquisition());
+						modif_bien.getComboBox_typeDeBien().setSelectedItem(immeubleCourant.getType_immeuble());
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+
+				}
+			}
+
 			break;
 
 		case "btnMesBiens_AjouterBien":
@@ -285,6 +414,11 @@ public class GestionAccueil implements ActionListener {
 		// LAYERED MES ASSURANCES
 		////////////////////////
 		case "btn_MesAssurances_Charger":
+			try {
+				this.chargerAssurances();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "btn_MesAssurances_Modifier":
 			break;

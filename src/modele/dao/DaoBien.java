@@ -9,6 +9,7 @@ import java.util.List;
 
 import modele.Bien;
 import modele.Immeuble;
+import modele.dao.requetes.delete.RequeteDeleteBien;
 import modele.dao.requetes.select.RequeteSelectBien;
 import modele.dao.requetes.select.RequeteSelectBienById;
 import modele.dao.requetes.select.RequeteSelectBienparImmeuble;
@@ -34,8 +35,8 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 	}
 
 	@Override
-	public void delete(Bien donnees) {
-		this.delete(donnees);
+	public void delete(Bien donnees) throws SQLException {
+		this.miseAJour(new RequeteDeleteBien(), donnees);
 	}
 
 	@Override
@@ -75,6 +76,8 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		return this.find(new RequeteSelectBien());
 	}
 
+	// ---------------- AUTRES METHODES ----------------//
+
 	public List<Bien> findBiensparImmeuble(String id) throws SQLException {
 		List<Bien> biens = null;
 
@@ -83,7 +86,6 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 			new RequeteSelectBienparImmeuble().parametres(st, id);
 			ResultSet res = st.executeQuery();
 			biens = this.convertirResultSetEnListe(res);
-			biens = convertirResultSetEnListe(res);
 			st.close();
 		}
 

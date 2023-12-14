@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import modele.Assurance;
-import modele.dao.SousProgramme;
 
 public class SousProgrammeInsertAssurance implements SousProgramme<Assurance> {
 

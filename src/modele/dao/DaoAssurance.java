@@ -10,6 +10,7 @@ import modele.Entreprise;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectAssurance;
 import modele.dao.requetes.select.RequeteSelectAssuranceById;
+import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertAssurance;
 import modele.dao.requetes.update.RequeteUpdateAssurance;
 
@@ -38,15 +39,17 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 		Assurance assurance = null;
 		try {
 			String numeroPolice = curseur.getString("numero_police");
-			float montantInit = curseur.getFloat("montant_init");
+			float montantInit = curseur.getFloat("montant");
 
 			// Récupérer l'identifiant de l'immeuble
 			String idImmeuble = curseur.getString("Id_Immeuble");
 			DaoImmeuble daoImmeuble = new DaoImmeuble();
 			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
 
+			// Récupérer l'identifiant de l'entreprise
+			String siretEntreprise = curseur.getString("SIRET");
 			DaoEntreprise daoEntreprise = new DaoEntreprise();
-			Entreprise entreprise = daoEntreprise.findById("SIRET");
+			Entreprise entreprise = daoEntreprise.findById(siretEntreprise);
 
 			assurance = new Assurance(numeroPolice, montantInit, immeuble, entreprise);
 		} catch (Exception e) {

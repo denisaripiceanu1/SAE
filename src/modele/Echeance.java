@@ -1,12 +1,12 @@
 package modele;
 
-public class Échéance {
+public class Echeance {
 
 	private String numeroPolice;
 	private String dateEcheance;
 	private double montantEcheance;
 
-	public Échéance(String numeroPolice, String dateEcheance, double montantEcheance) {
+	public Echeance(String numeroPolice, String dateEcheance, double montantEcheance) {
 		this.numeroPolice = numeroPolice;
 		this.dateEcheance = dateEcheance;
 		this.montantEcheance = montantEcheance;

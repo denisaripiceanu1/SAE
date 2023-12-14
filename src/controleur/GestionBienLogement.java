@@ -37,6 +37,7 @@ public class GestionBienLogement implements ListSelectionListener {
                 JTable tableBiens = fenetreAccueil.getTableBiens();
                 Immeuble immeuble = null;
                 try {
+                	//On peut enlever les deux autres paramètres ci-dessous 
                     immeuble = daoImmeuble.findById(tableBiens.getValueAt(selectedRow, 0).toString(),
                             tableBiens.getValueAt(selectedRow, 1).toString(),
                             tableBiens.getValueAt(selectedRow, 2).toString());
@@ -46,8 +47,10 @@ public class GestionBienLogement implements ListSelectionListener {
 
                 if (immeuble != null) {
                 	//Ajout de l'immeuble qui concerne les logements dans le tableau pour pouvoir en ajouter un
+                	Sauvegarde.deleteItem("Logement");
                 	Sauvegarde.deleteItem("Immeuble");
                 	Sauvegarde.addItem("Immeuble", immeuble);
+                	
                     List<Bien> biens = null;
                     try {
                         biens = daoBien.findBiensparImmeuble(immeuble.getImmeuble());
