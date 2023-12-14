@@ -154,25 +154,35 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(assurance.getNuméroPolice(), numeroLigne, 0);
 		modeleTable.setValueAt(assurance.getMontantInit(), numeroLigne, 1);
 		modeleTable.setValueAt(echeance.getDateEcheance(), numeroLigne, 2);
-		modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 3);
-		modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
-				numeroLigne, 4);
-		modeleTable.setValueAt(entreprise.getTelephone(), numeroLigne, 5);
+		if (entreprise != null) {
+			modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 3);
+			modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
+					numeroLigne, 4);
+			modeleTable.setValueAt(entreprise.getTelephone(), numeroLigne, 5);
+		} else {
+			// Si l'entreprise est null
+			modeleTable.setValueAt("N/A", numeroLigne, 3);
+			modeleTable.setValueAt("N/A", numeroLigne, 4);
+			modeleTable.setValueAt("N/A", numeroLigne, 5);
+		}
 	}
 
 	private void chargerAssurances() throws SQLException {
-	    List<Assurance> assurances = daoAssurance.findAll();
+		List<Assurance> assurances = daoAssurance.findAll();
 
-	    for (int i = 0; i < assurances.size(); i++) {
-	        Assurance a = assurances.get(i);
-	        Entreprise entreprise = a.getEntreprise();
-	        if (entreprise != null) {
-	            entreprise = daoEntreprise.findById(entreprise.getSiret());
-	        }
-	        Echeance echeance = daoEcheance.findById(a.getNuméroPolice());
+		DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableAssurances().getModel();
+		modeleTable.setRowCount(assurances.size());
 
-	        ecrireLigneTableAssurances(i, a, entreprise, echeance);
-	    }
+		for (int i = 0; i < assurances.size(); i++) {
+			Assurance a = assurances.get(i);
+			Entreprise entreprise = a.getEntreprise();
+			if (entreprise != null) {
+				entreprise = daoEntreprise.findById(entreprise.getSiret());
+			}
+			Echeance echeance = daoEcheance.findById(a.getNuméroPolice());
+
+			ecrireLigneTableAssurances(i, a, entreprise, echeance);
+		}
 	}
 
 	@Override
