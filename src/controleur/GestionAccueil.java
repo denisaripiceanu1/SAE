@@ -175,10 +175,7 @@ public class GestionAccueil implements ActionListener {
 
 		for (int i = 0; i < assurances.size(); i++) {
 			Assurance a = assurances.get(i);
-			Entreprise entreprise = a.getEntreprise();
-			if (entreprise != null) {
-				entreprise = daoEntreprise.findById(entreprise.getSiret());
-			}
+			Entreprise entreprise = daoEntreprise.findById(a.getEntreprise().getSiret());
 			Echeance echeance = daoEcheance.findById(a.getNuméroPolice());
 
 			ecrireLigneTableAssurances(i, a, entreprise, echeance);
