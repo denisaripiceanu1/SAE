@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -30,6 +32,8 @@ import controleur.GestionBienLogement;
 import controleur.GestionLocations;
 import controleur.GestionTableLogement;
 import controleur.insertion.GestionInsertionBien;
+import modele.dao.DaoBien;
+import modele.dao.DaoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
 import javax.swing.JTextPane;
@@ -72,7 +76,9 @@ public class Fenetre_Accueil extends JFrame {
 	private GestionBienLogement gestionBienLogement;
 	private GestionTableLogement gestionTableLogement;
 	private GestionLocations gestionLocations;
-	
+
+	private DaoBien daoBien;
+	private DaoLocataire daoLocataire;
 
 	/**
 	 * Launch the application.
@@ -99,6 +105,9 @@ public class Fenetre_Accueil extends JFrame {
 		this.gestionBienLogement = new GestionBienLogement(this);
 		this.gestionLocations = new GestionLocations(this);
 		this.gestionAccueil = new GestionAccueil(this);
+
+		this.daoBien = new DaoBien();
+		this.daoLocataire = new DaoLocataire();
 
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -129,10 +138,7 @@ public class Fenetre_Accueil extends JFrame {
 		JLabel logo = new JLabel("");
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
 
-		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png"))); // pour éviter l'erreur
-																								// location is null
-																								// faire de façon
-																								// graphique
+		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png"))); 
 		bandeAccueil.add(logo);
 		JPanel panelDuBtnAccueil = new JPanel();
 		panelDuBtnAccueil.setBackground(new Color(192, 192, 192));
@@ -652,11 +658,21 @@ public class Fenetre_Accueil extends JFrame {
 		panel_chargesLocatives.add(btn_MesChargesLocatives_Supprimer);
 
 		// ComboBox
-		// CODE A FOURNIR POUR LA LISTE DES IDENTIFIANTS DE LOGEMENTS
 		JComboBox comboBox_MesChargesLocatives = new JComboBox();
 		comboBox_MesChargesLocatives.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
 		comboBox_MesChargesLocatives.setBounds(55, 81, 130, 21);
 		panel_chargesLocatives.add(comboBox_MesChargesLocatives);
+		// Remplir le JComboBox avec les identifiants des logements
+		try {
+			List<String> identifiantsLogements = daoBien.getAllIdBien();
+			identifiantsLogements.add(0, "ID du logement");
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsLogements.toArray(new String[0]));
+			comboBox_MesChargesLocatives.setModel(modelComboBox);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES ASSURANCES
@@ -731,11 +747,22 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesAssurances.add(btn_MesAssurances_Supprimer);
 
 		// ComboBox
-		// CODE A FOURNIR POUR LA LISTE DES IDENTIFIANTS DE LOGEMENTS
 		JComboBox comboBox_MesAssurances = new JComboBox();
 		comboBox_MesAssurances.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
 		comboBox_MesAssurances.setBounds(55, 80, 130, 21);
 		panel_MesAssurances.add(comboBox_MesAssurances);
+
+		// Remplir le JComboBox avec les identifiants des logements
+		try {
+			List<String> identifiantsLogements = daoBien.getAllIdBien();
+			identifiantsLogements.add(0, "ID du logement");
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsLogements.toArray(new String[0]));
+			comboBox_MesAssurances.setModel(modelComboBox);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED REGULARISATION DES CHARGES
@@ -783,6 +810,18 @@ public class Fenetre_Accueil extends JFrame {
 		comboBox_Regularisation.setModel(new DefaultComboBoxModel(new String[] { "Locataire" }));
 		comboBox_Regularisation.setBounds(55, 81, 130, 21);
 		panel_RegularisationDesCharges.add(comboBox_Regularisation);
+
+		// Remplir le JComboBox avec les identifiants des locataires
+		try {
+			List<String> identifiantsLocataires = daoLocataire.getAllIdLocataire();
+			identifiantsLocataires.add(0, "ID locataire");
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsLocataires.toArray(new String[0]));
+			comboBox_Regularisation.setModel(modelComboBox);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		/////////////////////////////////////////////////////////////////////////
 		// LAYERED SOLDE DE TOUT

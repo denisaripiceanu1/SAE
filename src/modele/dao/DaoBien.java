@@ -102,6 +102,23 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		return biens;
 	}
 
+	public List<String> getAllIdBien() throws SQLException {
+	    List<String> identifiants = new ArrayList<>();
+
+	    String sql = "SELECT ID_Bien FROM BIEN";
+
+	    try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(sql);
+	         ResultSet resultSet = st.executeQuery()) {
+
+	        while (resultSet.next()) {
+	        	identifiants.add(resultSet.getString("ID_Bien"));
+	        }
+	    }
+
+	    return identifiants;
+	}
+
+
 	public Iterateur<Bien> findAllIterateur() throws SQLException {
 //        RequeteSelectBien req = new RequeteSelectBien();
 //        PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(req.requete());
