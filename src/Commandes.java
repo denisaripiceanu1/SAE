@@ -1,6 +1,5 @@
 
 public class Commandes {
-	//test
 
 	// pour envoyer ce que j'ai fait:
 	// - git add .
