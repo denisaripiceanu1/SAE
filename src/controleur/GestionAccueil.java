@@ -24,6 +24,7 @@ import modele.Louer;
 import modele.dao.DaoAssurance;
 import modele.dao.DaoBien;
 import modele.dao.DaoEcheance;
+import modele.dao.DaoEntreprise;
 import modele.dao.DaoImmeuble;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
@@ -47,6 +48,7 @@ public class GestionAccueil implements ActionListener {
 	private DaoBien daoBien;
 	private DaoAssurance daoAssurance;
 	private DaoEcheance daoEcheance;
+	private DaoEntreprise daoEntreprise;
 
 	public GestionAccueil(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
@@ -55,6 +57,7 @@ public class GestionAccueil implements ActionListener {
 		this.daoLouer = new DaoLouer();
 		this.daoAssurance = new DaoAssurance();
 		this.daoEcheance = new DaoEcheance();
+		this.daoEntreprise = new DaoEntreprise();
 	}
 
 	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE
@@ -99,7 +102,6 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	private void chargerBiens() throws SQLException {
-
 		List<Immeuble> immeubles = daoImmeuble.findAll();
 
 		DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableBiens().getModel();
@@ -159,13 +161,12 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	private void chargerAssurances() throws SQLException {
-
 		List<Assurance> assurances = daoAssurance.findAll();
 
 		for (int i = 0; i < assurances.size(); i++) {
 			Assurance a = assurances.get(i);
-			Entreprise entreprise = daoAssurance.findEntrepriseByAssurance(a.getEntreprise());
-			Echeance echeance = daoEcheance.findEcheanceByAssurance(a.getNuméroPolice());
+			Entreprise entreprise = daoEntreprise.findById(a.getEntreprise().getSiret());
+			Echeance echeance = daoEcheance.findById(a.getNuméroPolice());
 
 			ecrireLigneTableAssurances(i, a, entreprise, echeance);
 		}
