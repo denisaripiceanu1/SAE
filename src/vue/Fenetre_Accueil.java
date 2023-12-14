@@ -659,11 +659,21 @@ public class Fenetre_Accueil extends JFrame {
 		panel_chargesLocatives.add(btn_MesChargesLocatives_Supprimer);
 
 		// ComboBox
-		// CODE A FOURNIR POUR LA LISTE DES IDENTIFIANTS DE LOGEMENTS
 		JComboBox comboBox_MesChargesLocatives = new JComboBox();
 		comboBox_MesChargesLocatives.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
 		comboBox_MesChargesLocatives.setBounds(55, 81, 130, 21);
 		panel_chargesLocatives.add(comboBox_MesChargesLocatives);
+		 // Remplir le JComboBox avec les identifiants des logements
+        try {
+            List<String> identifiantsLogements = daoBien.getAllIdBien(); 
+            identifiantsLogements.add(0, "ID du logement");
+            // Ajouter les identifiants au modèle du JComboBox
+            DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(identifiantsLogements.toArray(new String[0]));
+            comboBox_MesChargesLocatives.setModel(modelComboBox);
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
+        
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES ASSURANCES
@@ -738,7 +748,6 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesAssurances.add(btn_MesAssurances_Supprimer);
 
 		// ComboBox
-		// CODE A FOURNIR POUR LA LISTE DES IDENTIFIANTS DE LOGEMENTS
 		JComboBox comboBox_MesAssurances = new JComboBox();
 		comboBox_MesAssurances.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
 		comboBox_MesAssurances.setBounds(55, 80, 130, 21);
@@ -747,12 +756,15 @@ public class Fenetre_Accueil extends JFrame {
 		 // Remplir le JComboBox avec les identifiants des logements
         try {
             List<String> identifiantsLogements = daoBien.getAllIdBien(); 
+            identifiantsLogements.add(0, "ID du logement");
             // Ajouter les identifiants au modèle du JComboBox
             DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(identifiantsLogements.toArray(new String[0]));
             comboBox_MesAssurances.setModel(modelComboBox);
         } catch (SQLException e) {
             e.printStackTrace(); 
         }
+        
+        
 		///////////////////////////////////////////////////////////////////
 		// LAYERED REGULARISATION DES CHARGES
 		// ////////////////////////////////////////////////////////////////
