@@ -1,7 +1,6 @@
 package controleur;
 
 import java.awt.BorderLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -44,7 +43,8 @@ public class GestionAccueil implements ActionListener {
 		this.daoLouer = new DaoLouer();
 	}
 
-	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE ACCUEIL
+	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE
+	// ACCUEIL
 	public void rendreVisible(JLayeredPane visible) {
 		this.fenetreAccueil.getLayeredPane_Accueil().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesBiens().setVisible(false);
@@ -73,9 +73,9 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	// ------------------- TABLE BIENS ------------------- //
-	
+
 	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) {
-		JTable tableImmeuble = fenetreAccueil.getTableBiens();
+		JTable tableImmeuble = this.fenetreAccueil.getTableBiens();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
 
 		modeleTable.setValueAt(immeuble.getImmeuble(), numeroLigne, 0);
@@ -86,22 +86,22 @@ public class GestionAccueil implements ActionListener {
 
 	private void chargerBiens() throws SQLException {
 
-		List<Immeuble> immeubles = daoImmeuble.findAll();
+		List<Immeuble> immeubles = this.daoImmeuble.findAll();
 
-		DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableBiens().getModel();
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableBiens().getModel();
 
 		modeleTable.setRowCount(immeubles.size());
 
 		for (int i = 0; i < immeubles.size(); i++) {
 			Immeuble immeuble = immeubles.get(i);
-			ecrireLigneTableBiens(i, immeuble);
+			this.ecrireLigneTableBiens(i, immeuble);
 		}
 	}
 
 	// ------------------- TABLE LOCATIONS ------------------- //
 
 	public void ecrireLigneTableLocations(int numeroLigne, Louer location, Bien bien) {
-		JTable tableLocations = fenetreAccueil.getTableLocations();
+		JTable tableLocations = this.fenetreAccueil.getTableLocations();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableLocations.getModel();
 
 		modeleTable.setValueAt(location.getIdLocataire(), numeroLigne, 0);
@@ -111,23 +111,23 @@ public class GestionAccueil implements ActionListener {
 
 	private void chargerLocations() throws SQLException {
 
-	    List<Bien> biens = daoBien.findAll();
-	    List<Louer> locations = new ArrayList<>(); 
+		List<Bien> biens = this.daoBien.findAll();
+		List<Louer> locations = new ArrayList<>();
 
-	    for (Bien b : biens) {
-	        locations.addAll(daoLouer.findLocationByBien(b.getIdBien())); // Ajouter toutes les locations du bien à la liste
-	    }
+		for (Bien b : biens) {
+			locations.addAll(this.daoLouer.findLocationByBien(b.getIdBien())); // Ajouter toutes les locations du bien à
+																				// la liste
+		}
 
-	    DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableLocations().getModel();
-	    modeleTable.setRowCount(locations.size());
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableLocations().getModel();
+		modeleTable.setRowCount(locations.size());
 
-	    for (int i = 0; i < locations.size(); i++) {
-	        Louer location = locations.get(i);
-	        Bien bien = location.getIdBien();
-	        ecrireLigneTableLocations(i, location, bien);
-	    }
+		for (int i = 0; i < locations.size(); i++) {
+			Louer location = locations.get(i);
+			Bien bien = location.getIdBien();
+			this.ecrireLigneTableLocations(i, location, bien);
+		}
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -167,7 +167,7 @@ public class GestionAccueil implements ActionListener {
 		///////////////////
 		case "btnMesBiens_Charger":
 			try {
-				chargerBiens();
+				this.chargerBiens();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -223,7 +223,7 @@ public class GestionAccueil implements ActionListener {
 		///////////////////////
 		case "btn_MesLocations_Charger":
 			try {
-				chargerLocations();
+				this.chargerLocations();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}

@@ -10,7 +10,8 @@ import java.util.List;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectImmeuble;
 import modele.dao.requetes.select.RequeteSelectImmeubleById;
-import modele.dao.requetes.sousProgramme.SousProgramme;
+import modele.dao.requetes.sousProgr
+amme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertImmeuble;
 import modele.dao.requetes.update.RequeteUpdateImmeuble;
 
@@ -26,19 +27,19 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 
 	@Override
 	public void update(Immeuble donnees) throws SQLException {
-		miseAJour(new RequeteUpdateImmeuble(), donnees);
+		this.miseAJour(new RequeteUpdateImmeuble(), donnees);
 
 	}
 
 	@Override
 	public void delete(Immeuble donnees) {
-		delete(donnees);
+		this.delete(donnees);
 
 	}
 
 	@Override
 	public Immeuble findById(String... id) throws SQLException {
-		List<Immeuble> immeuble = find(new RequeteSelectImmeubleById(), id);
+		List<Immeuble> immeuble = this.find(new RequeteSelectImmeubleById(), id);
 		if (immeuble.isEmpty()) {
 			return null;
 		}
@@ -47,7 +48,7 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 
 	@Override
 	public List<Immeuble> findAll() throws SQLException {
-		return find(new RequeteSelectImmeuble());
+		return this.find(new RequeteSelectImmeuble());
 	}
 
 	@Override
