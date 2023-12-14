@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import controleur.outils.GestionPDF;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionColocataire;
 import vue.insertion.Fenetre_InsertionLocation;
@@ -18,6 +19,7 @@ import vue.insertion.Fenetre_InsertionLocation;
 public class GestionInsertionLocation implements ActionListener {
 
 	private Fenetre_InsertionLocation fil;
+	private GestionPDF gestionPDF;
 
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
@@ -35,10 +37,10 @@ public class GestionInsertionLocation implements ActionListener {
 			fenetreColo.moveToFront();
 			break;
 		case "Ajouter un bail":
-			// un pdf
+			this.gestionPDF.importerEtStockerPDF();
 			break;
 		case "Ajouter l'état des lieux":
-			importerEtStockerPDF();
+			this.gestionPDF.importerEtStockerPDF();
 			break;
 		case "Ajouter":
 			// Ajouter le code pour gérer l'ajout de la location
@@ -47,21 +49,5 @@ public class GestionInsertionLocation implements ActionListener {
 			this.fil.dispose();
 			break;
 		}
-	}
-	
-	private void importerEtStockerPDF() {
-	    JFileChooser fileChooser = new JFileChooser();
-	    FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF Documents", "pdf");
-	    fileChooser.setFileFilter(filter);
-	    int returnValue = fileChooser.showOpenDialog(null);
-	    if (returnValue == JFileChooser.APPROVE_OPTION) {
-	        File selectedFile = fileChooser.getSelectedFile();
-	        File destinationFile = new File("chemin/vers/le/dossier/de/stockage/" + selectedFile.getName());
-	        try {
-	            Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
 	}
 }

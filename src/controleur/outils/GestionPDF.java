@@ -11,17 +11,16 @@ public class GestionPDF {
     private static GestionPDF instance;
 
     private GestionPDF() {
-        // Constructeur privé
     }
 
-    public static GestionPDF getInstance() {
+    public static GestionPDF initializePDF() {
         if (instance == null) {
             instance = new GestionPDF();
         }
         return instance;
     }
 
-    public void importerEtStockerPDF() {
+    public static void importerEtStockerPDF() {
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF Documents", "pdf");
         fileChooser.setFileFilter(filter);
@@ -36,6 +35,4 @@ public class GestionPDF {
             }
         }
     }
-
-    // D'autres méthodes liées à la gestion des PDF peuvent être ajoutées ici
 }
