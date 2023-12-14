@@ -76,10 +76,9 @@ public class Fenetre_Accueil extends JFrame {
 	private GestionBienLogement gestionBienLogement;
 	private GestionTableLogement gestionTableLogement;
 	private GestionLocations gestionLocations;
-	
+
 	private DaoBien daoBien;
 	private DaoLocataire daoLocataire;
-	
 
 	/**
 	 * Launch the application.
@@ -106,7 +105,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.gestionBienLogement = new GestionBienLogement(this);
 		this.gestionLocations = new GestionLocations(this);
 		this.gestionAccueil = new GestionAccueil(this);
-		
+
 		this.daoBien = new DaoBien();
 		this.daoLocataire = new DaoLocataire();
 
@@ -666,17 +665,17 @@ public class Fenetre_Accueil extends JFrame {
 		comboBox_MesChargesLocatives.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
 		comboBox_MesChargesLocatives.setBounds(55, 81, 130, 21);
 		panel_chargesLocatives.add(comboBox_MesChargesLocatives);
-		 // Remplir le JComboBox avec les identifiants des logements
-        try {
-            List<String> identifiantsLogements = daoBien.getAllIdBien(); 
-            identifiantsLogements.add(0, "ID du logement");
-            // Ajouter les identifiants au modèle du JComboBox
-            DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(identifiantsLogements.toArray(new String[0]));
-            comboBox_MesChargesLocatives.setModel(modelComboBox);
-        } catch (SQLException e) {
-            e.printStackTrace(); 
-        }
-        
+		// Remplir le JComboBox avec les identifiants des logements
+		try {
+			List<String> identifiantsLogements = daoBien.getAllIdBien();
+			identifiantsLogements.add(0, "ID du logement");
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsLogements.toArray(new String[0]));
+			comboBox_MesChargesLocatives.setModel(modelComboBox);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES ASSURANCES
@@ -756,18 +755,18 @@ public class Fenetre_Accueil extends JFrame {
 		comboBox_MesAssurances.setBounds(55, 80, 130, 21);
 		panel_MesAssurances.add(comboBox_MesAssurances);
 
-		 // Remplir le JComboBox avec les identifiants des logements
-        try {
-            List<String> identifiantsLogements = daoBien.getAllIdBien(); 
-            identifiantsLogements.add(0, "ID du logement");
-            // Ajouter les identifiants au modèle du JComboBox
-            DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(identifiantsLogements.toArray(new String[0]));
-            comboBox_MesAssurances.setModel(modelComboBox);
-        } catch (SQLException e) {
-            e.printStackTrace(); 
-        }
-        
-        
+		// Remplir le JComboBox avec les identifiants des logements
+		try {
+			List<String> identifiantsLogements = daoBien.getAllIdBien();
+			identifiantsLogements.add(0, "ID du logement");
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsLogements.toArray(new String[0]));
+			comboBox_MesAssurances.setModel(modelComboBox);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		///////////////////////////////////////////////////////////////////
 		// LAYERED REGULARISATION DES CHARGES
 		// ////////////////////////////////////////////////////////////////
@@ -814,17 +813,18 @@ public class Fenetre_Accueil extends JFrame {
 		comboBox_Regularisation.setModel(new DefaultComboBoxModel(new String[] { "Locataire" }));
 		comboBox_Regularisation.setBounds(55, 81, 130, 21);
 		panel_RegularisationDesCharges.add(comboBox_Regularisation);
-		
-		 // Remplir le JComboBox avec les identifiants des locataires
-        try {
-            List<String> identifiantsLocataires = daoLocataire.getAllIdLocataire(); 
-            identifiantsLocataires.add(0, "ID locataire");
-            // Ajouter les identifiants au modèle du JComboBox
-            DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(identifiantsLocataires.toArray(new String[0]));
-            comboBox_Regularisation.setModel(modelComboBox);
-        } catch (SQLException e) {
-            e.printStackTrace(); 
-        }
+
+		// Remplir le JComboBox avec les identifiants des locataires
+		try {
+			List<String> identifiantsLocataires = daoLocataire.getAllIdLocataire();
+			identifiantsLocataires.add(0, "ID locataire");
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsLocataires.toArray(new String[0]));
+			comboBox_Regularisation.setModel(modelComboBox);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		/////////////////////////////////////////////////////////////////////////
 		// LAYERED SOLDE DE TOUT
