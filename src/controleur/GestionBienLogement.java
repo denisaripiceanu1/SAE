@@ -8,6 +8,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import controleur.outils.Sauvegarde;
 import modele.Bien;
 import modele.Immeuble;
 import modele.dao.DaoBien;
@@ -24,6 +25,7 @@ public class GestionBienLogement implements ListSelectionListener {
         this.fenetreAccueil = fenetreAccueil;
         this.daoImmeuble = new DaoImmeuble();
         this.daoBien = new DaoBien();
+        Sauvegarde.initializeSave();
     }
 
     @Override
@@ -43,6 +45,9 @@ public class GestionBienLogement implements ListSelectionListener {
                 }
 
                 if (immeuble != null) {
+                	//Ajout de l'immeuble qui concerne les logements dans le tableau pour pouvoir en ajouter un
+                	Sauvegarde.deleteItem("Immeuble");
+                	Sauvegarde.addItem("Immeuble", immeuble);
                     List<Bien> biens = null;
                     try {
                         biens = daoBien.findBiensparImmeuble(immeuble.getImmeuble());

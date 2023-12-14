@@ -9,18 +9,19 @@ import modele.dao.requetes.Requete;
 public class RequeteSelectFactureByBien implements Requete<Facture> {
 
 	public String requete() {
-		return "SELECT * FROM Facture WHERE designation = 'Loayer' and Id_Bien = ?";
+		return "SELECT * FROM Facture WHERE designation = 'Loyer' and Id_Bien = ? ORDER BY date_emission DESC";
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
-		prSt.setString(1, id[0]);
-		
+	    prSt.setString(1, id[0]);    
 	}
+
 
 	@Override
 	public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
-		prSt.setInt(1, data.getIdFacture());
+		prSt.setString(1, data.getDesignation());
+		prSt.setString(2, data.getBien().getIdBien());
 		
 	}
 }

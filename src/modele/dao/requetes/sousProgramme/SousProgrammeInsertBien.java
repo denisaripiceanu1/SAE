@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import modele.Bien;
-import modele.dao.SousProgramme;
 
 public class SousProgrammeInsertBien implements SousProgramme<Bien> {
 

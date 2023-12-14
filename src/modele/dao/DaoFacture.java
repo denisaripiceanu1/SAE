@@ -1,9 +1,11 @@
 package modele.dao;
 
 import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +13,6 @@ import modele.Bien;
 import modele.Entreprise;
 import modele.Facture;
 import modele.Immeuble;
-import modele.dao.requetes.select.RequeteSelectBienById;
-import modele.dao.requetes.select.RequeteSelectBienparImmeuble;
 import modele.dao.requetes.select.RequeteSelectFacture;
 import modele.dao.requetes.select.RequeteSelectFactureByBien;
 import modele.dao.requetes.select.RequeteSelectFactureById;
@@ -51,31 +51,6 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	public List<Facture> findAll() throws SQLException {
 		return find(new RequeteSelectFacture());
 	}
-	
-	
-	public Facture findDerniereFactureLoayer(Bien bien) throws SQLException {
-	    List<Facture> factures = null;
-	    String b = bien.getIdBien();
-	    try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(new RequeteSelectBienparImmeuble().requete())) {
-	        new RequeteSelectFactureByBien().parametres(st, b);
-	        ResultSet res = st.executeQuery();
-	        
-	        factures = convertirResultSetEnListe(res);
-	    }
-
-	    return factures.get(factures.size()-1);
-	}
-
-	private List<Facture> convertirResultSetEnListe(ResultSet res) throws SQLException {
-		List<Facture> factures = new ArrayList<>();
-
-	    while (res.next()) {
-	        Facture f = creerInstance(res);
-	        factures.add(f);
-	    }
-
-	    return factures;
-	}
 
 	@Override
 	protected Facture creerInstance(ResultSet curseur) throws SQLException {
@@ -96,11 +71,13 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 			DaoEntreprise daoEntreprise = new DaoEntreprise();
 			Entreprise entreprise = daoEntreprise.findById(siret);
 
-			// Convertir les dates en chaînes de caractères
-			java.sql.Date dateEmission = curseur.getDate("date_emission");
-			java.sql.Date datePaiement = curseur.getDate("date_paiement");
-			String dateEmissionStr = dateEmission.toString();
-			String datePaiementStr = datePaiement.toString();
+			// Convertir les dates en chaînes de caractères avec un format spécifique
+	        java.sql.Date dateEmission = curseur.getDate("date_emission");
+	        java.sql.Date datePaiement = curseur.getDate("date_paiement");
+
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        String dateEmissionStr = dateFormat.format(dateEmission);
+	        String datePaiementStr = dateFormat.format(datePaiement);
 
 			facture = new Facture(curseur.getInt("Id_Facture"), curseur.getString("numero"), dateEmissionStr,
 					datePaiementStr, curseur.getString("mode_paiement "), curseur.getString("numero_devis "),
@@ -112,6 +89,33 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		return facture;
 	}
 
-	
+	// ---------------- AUTRES METHODES ----------------//
+	public Facture findDerniereFactureLoyer(Bien bien) throws SQLException {
+	    List<Facture> factures = null;
+	    String b = bien.getIdBien();
+	    try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
+	            .prepareStatement(new RequeteSelectFactureByBien().requete())) {
+	        new RequeteSelectFactureByBien().parametres(st, b);
+	        ResultSet res = st.executeQuery();
+	        factures = convertirResultSetEnListe(res);
+	        st.close();
+	    }
+	    if (!factures.isEmpty()) {
+	        return factures.get(0);
+	    } else {
+	        return null;
+	    }
+	}
+
+	private List<Facture> convertirResultSetEnListe(ResultSet res) throws SQLException {
+		List<Facture> factures = new ArrayList<>();
+
+		while (res.next()) {
+			Facture f = creerInstance(res);
+			factures.add(f);
+		}
+
+		return factures;
+	}
 
 }

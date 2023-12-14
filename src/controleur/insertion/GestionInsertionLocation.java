@@ -2,8 +2,13 @@ package controleur.insertion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import javax.swing.JButton;
+<<<<<<< HEAD
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -12,6 +17,12 @@ import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
+=======
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import controleur.outils.GestionPDF;
+>>>>>>> 1f6173797a4d7bb996bf9ac9c22f6771ea4e7edd
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionColocataire;
 import vue.insertion.Fenetre_InsertionLocation;
@@ -19,6 +30,7 @@ import vue.insertion.Fenetre_InsertionLocation;
 public class GestionInsertionLocation implements ActionListener {
 
 	private Fenetre_InsertionLocation fil;
+	private GestionPDF gestionPDF;
 
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
@@ -36,10 +48,10 @@ public class GestionInsertionLocation implements ActionListener {
 			fenetreColo.moveToFront();
 			break;
 		case "Ajouter un bail":
-			// un pdf
+			this.gestionPDF.importerEtStockerPDF();
 			break;
 		case "Ajouter l'état des lieux":
-			// un pdf
+			this.gestionPDF.importerEtStockerPDF();
 			break;
 
 		case "Ajouter":

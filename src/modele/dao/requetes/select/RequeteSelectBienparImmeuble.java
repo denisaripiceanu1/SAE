@@ -20,7 +20,7 @@ public class RequeteSelectBienparImmeuble implements Requete<Bien>{
 
 	@Override
 	public void parametres(PreparedStatement prSt, Bien data) throws SQLException {
-		prSt.setString(1, data.getIdBien());
+		prSt.setString(1, data.getImmeuble().getImmeuble());
 	}
 
 }

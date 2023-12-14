@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import modele.Bien;
 import modele.Compteur;
 import modele.Immeuble;
-import modele.dao.SousProgramme;
 
 public class SousProgrammeInsertCompteur implements SousProgramme<Compteur>{
 

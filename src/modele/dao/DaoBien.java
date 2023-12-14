@@ -12,6 +12,7 @@ import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectBien;
 import modele.dao.requetes.select.RequeteSelectBienById;
 import modele.dao.requetes.select.RequeteSelectBienparImmeuble;
+import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertBien;
 import modele.dao.requetes.update.RequeteUpdateBien;
 
@@ -25,7 +26,6 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
-
 	}
 
 	@Override
@@ -82,7 +82,11 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 				.prepareStatement(new RequeteSelectBienparImmeuble().requete())) {
 			new RequeteSelectBienparImmeuble().parametres(st, id);
 			ResultSet res = st.executeQuery();
+<<<<<<< HEAD
 			biens = this.convertirResultSetEnListe(res);
+=======
+			biens = convertirResultSetEnListe(res);
+>>>>>>> 1f6173797a4d7bb996bf9ac9c22f6771ea4e7edd
 			st.close();
 		}
 
@@ -93,10 +97,13 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		List<Bien> biens = new ArrayList<>();
 
 		while (res.next()) {
+<<<<<<< HEAD
 			Bien bien = this.creerInstance(res);
+=======
+			Bien bien = creerInstance(res);
+>>>>>>> 1f6173797a4d7bb996bf9ac9c22f6771ea4e7edd
 			biens.add(bien);
 		}
-
 		return biens;
 	}
 

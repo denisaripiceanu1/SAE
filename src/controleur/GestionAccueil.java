@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -58,6 +59,20 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getContentPane().add(visible, BorderLayout.CENTER);
 	}
 
+	public static void viderTable(JTable table) {
+		DefaultTableModel modeleTable = (DefaultTableModel) table.getModel();
+		int rowCount = modeleTable.getRowCount();
+		int columnCount = modeleTable.getColumnCount();
+
+		for (int row = 0; row < rowCount; row++) {
+			for (int col = 0; col < columnCount; col++) {
+				modeleTable.setValueAt(null, row, col);
+			}
+		}
+	}
+
+	// ------------------- TABLE BIENS ------------------- //
+	
 	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) {
 		JTable tableImmeuble = fenetreAccueil.getTableBiens();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
@@ -66,15 +81,6 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(immeuble.getAdresse() + "\n" + immeuble.getCp() + " " + immeuble.getVille(), numeroLigne,
 				1);
 		modeleTable.setValueAt(immeuble.getNbLogement(), numeroLigne, 2);
-	}
-	
-	public void ecrireLigneTableLocations(int numeroLigne, Louer location, Bien bien) {
-		JTable tableLocations = fenetreAccueil.getTableLocations();
-		DefaultTableModel modeleTable = (DefaultTableModel) tableLocations.getModel();
-
-		modeleTable.setValueAt(location.getIdLocataire(), numeroLigne, 0);
-		modeleTable.setValueAt(location.getIdBien(), numeroLigne, 1);
-		modeleTable.setValueAt(bien.getType_bien(), numeroLigne, 2);
 	}
 
 	private void chargerBiens() throws SQLException {
@@ -91,36 +97,36 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
+	// ------------------- TABLE LOCATIONS ------------------- //
+
+	public void ecrireLigneTableLocations(int numeroLigne, Louer location, Bien bien) {
+		JTable tableLocations = fenetreAccueil.getTableLocations();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableLocations.getModel();
+
+		modeleTable.setValueAt(location.getIdLocataire(), numeroLigne, 0);
+		modeleTable.setValueAt(location.getIdBien(), numeroLigne, 1);
+		modeleTable.setValueAt(bien.getType_bien(), numeroLigne, 2);
+	}
+
 	private void chargerLocations() throws SQLException {
 
-		List<Bien> biens = daoBien.findAll();
-		
-		List<Louer> locations = null;
-		for(Bien b : biens) {
-			locations = daoLouer.findLocationByBien(b.getIdBien());
-		}
+	    List<Bien> biens = daoBien.findAll();
+	    List<Louer> locations = new ArrayList<>(); 
 
-		DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableLocations().getModel();
+	    for (Bien b : biens) {
+	        locations.addAll(daoLouer.findLocationByBien(b.getIdBien())); // Ajouter toutes les locations du bien à la liste
+	    }
 
-		modeleTable.setRowCount(locations.size());
+	    DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableLocations().getModel();
+	    modeleTable.setRowCount(locations.size());
 
-		for (int i = 0; i < locations.size(); i++) {
-			Louer location = locations.get(i);
-			Bien bien = location.getIdBien();
-			ecrireLigneTableLocations(i, location, bien);
-		}
+	    for (int i = 0; i < locations.size(); i++) {
+	        Louer location = locations.get(i);
+	        Bien bien = location.getIdBien();
+	        ecrireLigneTableLocations(i, location, bien);
+	    }
 	}
-	public static void viderTable(JTable table) {
-		DefaultTableModel modeleTable = (DefaultTableModel) table.getModel();
-		int rowCount = modeleTable.getRowCount();
-		int columnCount = modeleTable.getColumnCount();
 
-		for (int row = 0; row < rowCount; row++) {
-			for (int col = 0; col < columnCount; col++) {
-				modeleTable.setValueAt(null, row, col);
-			}
-		}
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -220,6 +226,7 @@ public class GestionAccueil implements ActionListener {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+			break;
 		case "btn_MesLocations_Modifier":
 			break;
 		case "btn_MesLocations_Inserer":

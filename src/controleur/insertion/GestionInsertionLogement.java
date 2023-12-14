@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import controleur.outils.Sauvegarde;
 import modele.Bien;
 import modele.Immeuble;
 import modele.dao.DaoBien;
@@ -21,6 +22,7 @@ public class GestionInsertionLogement implements ActionListener {
 
 	public GestionInsertionLogement(Fenetre_InsertionLogement fil) {
 		this.fil = fil;
+		this.daoBien = new DaoBien();
 	}
 
 	@Override
@@ -47,19 +49,17 @@ public class GestionInsertionLogement implements ActionListener {
 		case "Ajouter":
 			Bien logement = null;
 			try {
-				DaoImmeuble daoImmeuble = new DaoImmeuble();
-				Immeuble immeuble = daoImmeuble
-						.findById(/* voir comment recuperer l’id bien du bien sélectionné dans le tableau */);
 
-				String typeLogement = (String) this.fil.getComboBox_typeDeLogement().getSelectedItem();
+				String typeLogement = this.fil.getComboBox_typeDeLogement().getSelectedItem().toString();
 
 				logement = new Bien(this.fil.getTextField_IdLogement().getText(),
 						Double.parseDouble(this.fil.getTextField_SurfaceHabitable().getText()),
 						Integer.parseInt(this.fil.getTextField_NbPièces().getText()),
 						Integer.parseInt(this.fil.getTextField_NumEtage().getText()),
-						this.fil.getTextField_DateAcquisition().getText(), typeLogement, immeuble);
-
+						this.fil.getTextField_DateAcquisition().getText(), typeLogement, (Immeuble) Sauvegarde.getItem("Immeuble"));
+				
 				this.daoBien.create(logement);
+				//Potentiellement supprimer l'immeuble de la sauvegarde
 
 			} catch (Exception e1) {
 				e1.printStackTrace();

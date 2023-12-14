@@ -1,98 +1,75 @@
 package controleur;
 
 import java.sql.SQLException;
-
-import java.util.List;
-
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-
-import modele.Bien;
 import modele.Facture;
-import modele.Immeuble;
 import modele.Louer;
-import modele.dao.DaoBien;
 import modele.dao.DaoFacture;
-import modele.dao.DaoImmeuble;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
 
 public class GestionLocations implements ListSelectionListener {
 
-	private Fenetre_Accueil fenetreAccueil;
-	private DaoLouer daoLouer;
-	private DaoFacture daoFacture;
+    private Fenetre_Accueil fenetreAccueil;
+    private DaoLouer daoLouer;
+    private DaoFacture daoFacture;
 
+    public GestionLocations(Fenetre_Accueil fenetreAccueil) {
+        this.fenetreAccueil = fenetreAccueil;
+        this.daoLouer = new DaoLouer();
+        this.daoFacture = new DaoFacture();
+    }
 
-	public GestionLocations(Fenetre_Accueil fenetreAccueil) {
-		this.fenetreAccueil = fenetreAccueil;
-		this.daoLouer = new DaoLouer();
-		this.daoFacture = new DaoFacture();
-	}
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting()) {
+            int selectedRow = fenetreAccueil.getTableLocations().getSelectedRow();
 
-	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		if (!e.getValueIsAdjusting()) {
-			int selectedRow = fenetreAccueil.getTableLocations().getSelectedRow();
+            if (selectedRow > -1) {
+                JTable tableLocations = fenetreAccueil.getTableLocations();
+                Louer location = null;
+                try {
+                    location = daoLouer.findById(tableLocations.getValueAt(selectedRow, 1).toString(),
+                            tableLocations.getValueAt(selectedRow, 0).toString());
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
 
-			if (selectedRow > -1) {
-				JTable tableLocations = fenetreAccueil.getTableLocations();
-				Louer location = null;
-				try {
-					location = daoLouer.findById(tableLocations.getValueAt(selectedRow, 0).toString(),
-							tableLocations.getValueAt(selectedRow, 1).toString(),
-							tableLocations.getValueAt(selectedRow, 2).toString());
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+                if (location != null) {
+                    Facture derniereFactureLoyer = null;
 
-				if (location != null) {
-                    Facture derniereFactureLoayer = null;
-                    
                     try {
-                    	
-                    	derniereFactureLoayer = daoFacture.findDerniereFactureLoayer(location.getIdBien());
+                    	derniereFactureLoyer = daoFacture.findDerniereFactureLoyer(location.getIdBien());
+
                     } catch (SQLException e1) {
                         e1.printStackTrace();
                     }
 
-                    JTable logements = fenetreAccueil.getTableLogementsParBien();
-                    GestionAccueil.viderTable(logements);
+                    JTextField loyer = fenetreAccueil.getTextField_loyer();
+                    loyer.setText(String.valueOf(location.getLoyerTTC()));
 
-                    DefaultTableModel model = (DefaultTableModel) logements.getModel();
+                    JTextField dateEmission = fenetreAccueil.getTextField_dateEmission();
+                    // Vérification si la facture et sa date d'émission ne sont pas null
+                    dateEmission.setText(derniereFactureLoyer != null ? derniereFactureLoyer.getDateEmission() : "");
 
-                    // Assuming you know the number of columns in your logements table
-                    int numColumns = 6; // Change this to the actual number of columns
+                    JTextField dateEcheance = fenetreAccueil.getTextField_dateEcheance();
+                    // Vérification si la facture et sa date de paiement ne sont pas null
+                    dateEcheance.setText(derniereFactureLoyer != null ? derniereFactureLoyer.getDatePaiement() : "");
 
-                    // Ensure the table has enough rows
-                    int numRowsNeeded = biens.size();
-                    int currentRows = model.getRowCount();
+                    JTextField paye = fenetreAccueil.getTextField_paye();
+                    paye.setText(String.valueOf(location.getMontantReelPaye()));
 
-                    for (int i = 0; i < numRowsNeeded - currentRows; i++) {
-                        model.addRow(new Object[numColumns]);
-                    }
+                    JTextField restantDu = fenetreAccueil.getTextField_restantDu();
+                    restantDu.setText(String.valueOf(location.getLoyerTTC() + location.getProvision_chargeMens_TTC() - location.getMontantReelPaye()));
 
-                    // Now populate the table
-                    for (int i = 0; i < biens.size(); i++) {
-                        Bien bien = biens.get(i);
-                        if (bien != null) {
-                            String nom = bien.getIdBien();
-                            double surface = bien.getSurfaceHabitable();
-                            int nbPieces = bien.getNbPieces();
-                            int etage = bien.getNumEtage();
-                            String date = bien.getDateAcquisition();
-                            int occupe = 0; // Traitement à faire plus tard 
+                    JTextField caution = fenetreAccueil.getTextField_caution();
+                    caution.setText(String.valueOf(location.getCautionTTC()));
 
-                            model.setValueAt(nom, i, 0);
-                            model.setValueAt(surface, i, 1);
-                            model.setValueAt(nbPieces, i, 2);
-                            model.setValueAt(etage, i, 3);
-                            model.setValueAt(date, i, 4);
-                            model.setValueAt(occupe, i, 5);
-                        }
-                    }
+                    JTextField provision = fenetreAccueil.getTextField_provisionCharges();
+                    provision.setText(String.valueOf(location.getProvision_chargeMens_TTC()));
                 }
             }
         }

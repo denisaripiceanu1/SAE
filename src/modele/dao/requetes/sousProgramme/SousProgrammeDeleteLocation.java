@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import modele.Bien;
 import modele.Locataire;
 import modele.Louer;
-import modele.dao.SousProgramme;
 
 public class SousProgrammeDeleteLocation implements SousProgramme<Louer> {
 
