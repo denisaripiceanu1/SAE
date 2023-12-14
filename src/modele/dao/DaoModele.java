@@ -27,6 +27,7 @@ public abstract class DaoModele<T> implements Dao<T> {
 		}
 		return liste;
 	}
+	
 
 	// Méthode protégée pour exécuter une requête de mise à jour
 	protected int miseAJour(Requete<T> requete, T donnee) throws SQLException {

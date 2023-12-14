@@ -8,9 +8,21 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 import javax.swing.JButton;
+<<<<<<< HEAD
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+import modele.Bien;
+import modele.Locataire;
+import modele.Louer;
+import modele.dao.DaoBien;
+import modele.dao.DaoLocataire;
+=======
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import controleur.outils.GestionPDF;
+>>>>>>> 1f6173797a4d7bb996bf9ac9c22f6771ea4e7edd
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionColocataire;
 import vue.insertion.Fenetre_InsertionLocation;
@@ -18,6 +30,7 @@ import vue.insertion.Fenetre_InsertionLocation;
 public class GestionInsertionLocation implements ActionListener {
 
 	private Fenetre_InsertionLocation fil;
+	private GestionPDF gestionPDF;
 
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
@@ -35,33 +48,46 @@ public class GestionInsertionLocation implements ActionListener {
 			fenetreColo.moveToFront();
 			break;
 		case "Ajouter un bail":
-			// un pdf
+			this.gestionPDF.importerEtStockerPDF();
 			break;
 		case "Ajouter l'état des lieux":
-			importerEtStockerPDF();
+			this.gestionPDF.importerEtStockerPDF();
 			break;
+
 		case "Ajouter":
-			// Ajouter le code pour gérer l'ajout de la location
+			Louer location = null;
+			try {
+				DaoBien daoBien = new DaoBien();
+				Bien bien = daoBien.findById(null);
+
+				DaoLocataire daoLocataire = new DaoLocataire();
+				Locataire locataire = daoLocataire.findById(null);
+				
+				location = new Louer (
+						locataire,
+						bien,
+						this.fil.getTextField_date_arrivee().getText(),
+						null,/*nb de mois*/
+						Double.parseDouble(this.fil.getTextField_loyer().getText()),
+						Double.parseDouble(this.fil.getTextField_provision_sur_charges().getText()),
+						Double.parseDouble(this.fil.getTextField_caution().getText()),
+						null,/*bail*/
+						null,/*etat des lieux*/
+						null,/*date de départ*/
+						null, /* loyer paye*/
+						this.fil.getTable_liste_locataires().getModel().getRowCount(),
+						null,/*montant reel payé*/
+						null,/*trimestre*/
+						null/*année*/
+						);
+
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "Annuler":
 			this.fil.dispose();
 			break;
 		}
-	}
-	
-	private void importerEtStockerPDF() {
-	    JFileChooser fileChooser = new JFileChooser();
-	    FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF Documents", "pdf");
-	    fileChooser.setFileFilter(filter);
-	    int returnValue = fileChooser.showOpenDialog(null);
-	    if (returnValue == JFileChooser.APPROVE_OPTION) {
-	        File selectedFile = fileChooser.getSelectedFile();
-	        File destinationFile = new File("chemin/vers/le/dossier/de/stockage/" + selectedFile.getName());
-	        try {
-	            Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
 	}
 }

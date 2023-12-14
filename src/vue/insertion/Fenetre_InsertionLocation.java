@@ -33,6 +33,59 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 	private JTextField textField_caution;
 	private JTextField textField_date_arrivee;
 	private JTextField textField_provision_sur_charges;
+
+	public JTextField getTextField_IdLocataire() {
+		return this.textField_IdLocataire;
+	}
+
+	public JTextField getTextField_Nom() {
+		return this.textField_Nom;
+	}
+
+	public JTextField getTextField_Prenom() {
+		return this.textField_Prenom;
+	}
+
+	public JTextField getTextField_tel() {
+		return this.textField_tel;
+	}
+
+	public JTextField getTextField_e_mail() {
+		return this.textField_e_mail;
+	}
+
+	public JTextField getTextField_Date_de_naissance() {
+		return this.textField_Date_de_naissance;
+	}
+
+	public JTable getTable_id_logements() {
+		return this.table_id_logements;
+	}
+
+	public JTextField getTextField_caution() {
+		return this.textField_caution;
+	}
+
+	public JTextField getTextField_date_arrivee() {
+		return this.textField_date_arrivee;
+	}
+
+	public JTextField getTextField_provision_sur_charges() {
+		return this.textField_provision_sur_charges;
+	}
+
+	public JTextField getTextField_loyer() {
+		return this.textField_loyer;
+	}
+
+	public JTable getTable_liste_locataires() {
+		return this.table_liste_locataires;
+	}
+
+	public GestionInsertionLocation getGestionClic() {
+		return this.gestionClic;
+	}
+
 	private JTextField textField_loyer;
 	private JTable table_liste_locataires;
 	private GestionInsertionLocation gestionClic;
@@ -216,7 +269,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -60,7 +60,7 @@ public class GestionInsertionBien implements ActionListener {
 		case "Ajouter":	
 			try {
 								
-				Immeuble immeuble = new Immeuble(
+				Immeuble nouvelImmeuble = new Immeuble(
 						this.insertionBien.getTextField_IdImmeuble().getText(),
 						this.insertionBien.getTextField_adresse().getText(), 
 						this.insertionBien.getTextField_codePostal().getText(), 
@@ -71,13 +71,12 @@ public class GestionInsertionBien implements ActionListener {
 						this.insertionBien.getComboBox_typeDeBien().getSelectedItem().toString()
 				);
 				
-				this.daoImmeuble.create(immeuble);
+				this.daoImmeuble.create(nouvelImmeuble);
 				
 				if(Sauvegarde.onSave("Compteur")) {
 					this.daoCompteur.create((Compteur) Sauvegarde.getItem("Compteur"));
 					Sauvegarde.clearSave();
 				}
-				
 				this.insertionBien.dispose(); //Fermer la page après l'ajout
 				
 			} catch (Exception e1) {
