@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 
 import controleur.outils.Sauvegarde;
+import modele.Compteur;
 import modele.Immeuble;
 import modele.dao.DaoCompteur;
 import modele.dao.DaoImmeuble;
@@ -36,6 +37,9 @@ public class GestionSuppressionBien implements ActionListener {
 		case "Supprimer":
 			Immeuble immeuble_supp = (Immeuble) Sauvegarde.getItem("Immeuble");
 			try {
+				Compteur compteur_supp = this.daoCompteur.findByIdImmeuble(immeuble_supp.getImmeuble());
+				//supprimer le compteur de l'immeuble, puis l'immeuble
+				this.daoCompteur.delete(compteur_supp);
 				this.daoImmeuble.delete(immeuble_supp);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
