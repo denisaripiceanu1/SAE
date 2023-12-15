@@ -911,8 +911,6 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesDocuments.add(aFAIRE2);
 	    PDFListe pdfViewer = new PDFListe();
 	    panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
-
-		this.mettrePageParDefaut();
 	}
 
 	public JLayeredPane getLayeredPane_MesDocuments() {
@@ -1002,19 +1000,5 @@ public class Fenetre_Accueil extends JFrame {
 
 	public JTextField getTextField_restantDu() {
 		return textField_restantDu;
-	}
-
-	private void mettrePageParDefaut() {
-	    montrerPanneau(layeredPane_Accueil); // Remplacez ceci par le panneau que vous voulez montrer par défaut
-	}
-
-	private void montrerPanneau(JLayeredPane pane) {
-	    layeredPane_Accueil.setVisible(false);
-	    layeredPane_MesBiens.setVisible(false);
-	    layeredPane_MesLocations.setVisible(false);
-	    // Faites ceci pour tous les autres panneaux
-	    layeredPane_MesDocuments.setVisible(false);
-
-	    pane.setVisible(true);
 	}
 }
