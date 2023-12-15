@@ -80,8 +80,8 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	        String datePaiementStr = dateFormat.format(datePaiement);
 
 			facture = new Facture(curseur.getInt("Id_Facture"), curseur.getString("numero"), dateEmissionStr,
-					datePaiementStr, curseur.getString("mode_paiement "), curseur.getString("numero_devis "),
-					curseur.getString("designation"), curseur.getDouble("accompte_verse "),curseur.getDouble("montant"),
+					datePaiementStr, curseur.getString("mode_paiement"), curseur.getString("numero_devis"),
+					curseur.getString("designation"), curseur.getDouble("accompte_verse"),curseur.getDouble("montant"),
 					curseur.getInt("imputable_locataire"), immeuble, bien, entreprise);
 		} catch (Exception e) {
 			e.printStackTrace();

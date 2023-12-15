@@ -32,6 +32,7 @@ import controleur.GestionBienLogement;
 import controleur.GestionLocations;
 import controleur.GestionTableLogement;
 import controleur.insertion.GestionInsertionBien;
+import controleur.outils.PDFListe;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
@@ -39,6 +40,8 @@ import vue.insertion.Fenetre_InsertionBien;
 import javax.swing.JTextPane;
 import javax.swing.JComboBox;
 import javax.swing.JToggleButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Fenetre_Accueil extends JFrame {
 
@@ -280,7 +283,7 @@ public class Fenetre_Accueil extends JFrame {
 		scrollPaneMesBiens_Logements.setViewportView(this.tableMesBiens_Logements);
 		// Pour action listener sur table logement
 		this.tableMesBiens_Logements.getSelectionModel().addListSelectionListener(this.gestionTableLogement);
-
+		
 		// Labels
 		JLabel lblMesBiens = new JLabel("Mes Biens");
 		lblMesBiens.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -878,10 +881,11 @@ public class Fenetre_Accueil extends JFrame {
 //		lbl_SoldeDeToutCompte_Locataires.setBounds(56, 69, 82, 13);
 //		panel_SoldeDeToutCompte.add(lbl_SoldeDeToutCompte_Locataires);
 
-		// A faire éventuellement à la fin
-		////////////////////////////////////////////////////////////////////////////
-		// LAYERED
-		// DOCUMENTS////////////////////////////////////////////////////////////////
+
+//		// A faire éventuellement à la fin
+//		////////////////////////////////////////////////////////////////////////////
+//		// LAYERED
+//		// DOCUMENTS////////////////////////////////////////////////////////////////
 //		this.layeredPane_MesDocuments = new JLayeredPane();
 //		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
 //		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
@@ -889,7 +893,7 @@ public class Fenetre_Accueil extends JFrame {
 //		JPanel panel_MesDocuments = new JPanel();
 //		panel_MesDocuments.setBackground(Color.WHITE);
 //		this.layeredPane_MesDocuments.add(panel_MesDocuments);
-//		panel_MesDocuments.setLayout(null);
+//		panel_MesDocuments.setLayout(new BorderLayout());
 //
 //		JLabel lbl_MesDocuments = new JLabel("Mes Documents");
 //		lbl_MesDocuments.setHorizontalAlignment(SwingConstants.CENTER);
@@ -906,8 +910,10 @@ public class Fenetre_Accueil extends JFrame {
 //		aFAIRE2.setFont(new Font("Tahoma", Font.PLAIN, 44));
 //		aFAIRE2.setBounds(258, 189, 312, 139);
 //		panel_MesDocuments.add(aFAIRE2);
-
-		// this.mettrePageParDef();
+//	    PDFListe pdfViewer = new PDFListe();
+//	    panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
+//
+//	
 	}
 
 	public JLayeredPane getLayeredPane_MesDocuments() {
@@ -970,6 +976,10 @@ public class Fenetre_Accueil extends JFrame {
 	public JTable getTableTravaux() {
 		return table_MesTravaux;
 	}
+	
+	public JTable getTableChargesLocatives() {
+		return table_MesChargesLocatives;
+	}
 
 	public JTextField getTextField_loyer() {
 		return textField_loyer;
@@ -998,7 +1008,5 @@ public class Fenetre_Accueil extends JFrame {
 	public JTextField getTextField_restantDu() {
 		return textField_restantDu;
 	}
-	
-	
 
 }

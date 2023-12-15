@@ -5,9 +5,13 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import controleur.outils.Sauvegarde;
 import modele.Facture;
+import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoFacture;
+import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
 
@@ -16,11 +20,13 @@ public class GestionLocations implements ListSelectionListener {
     private Fenetre_Accueil fenetreAccueil;
     private DaoLouer daoLouer;
     private DaoFacture daoFacture;
+    private DaoLocataire daoLocataire;
 
     public GestionLocations(Fenetre_Accueil fenetreAccueil) {
         this.fenetreAccueil = fenetreAccueil;
         this.daoLouer = new DaoLouer();
         this.daoFacture = new DaoFacture();
+        this.daoLocataire = new DaoLocataire();
     }
 
     @Override
@@ -31,9 +37,14 @@ public class GestionLocations implements ListSelectionListener {
             if (selectedRow > -1) {
                 JTable tableLocations = fenetreAccueil.getTableLocations();
                 Louer location = null;
+                Locataire locataire = null;
                 try {
                     location = daoLouer.findById(tableLocations.getValueAt(selectedRow, 1).toString(),
                             tableLocations.getValueAt(selectedRow, 0).toString());
+                    
+                    locataire = daoLocataire.findById(tableLocations.getValueAt(selectedRow, 0).toString());
+                    Sauvegarde.deleteItem("Locataire");
+                    Sauvegarde.addItem("Locataire", locataire);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -70,6 +81,8 @@ public class GestionLocations implements ListSelectionListener {
 
                     JTextField provision = fenetreAccueil.getTextField_provisionCharges();
                     provision.setText(String.valueOf(location.getProvision_chargeMens_TTC()));
+                    
+                    // creer un locataire
                 }
             }
         }
