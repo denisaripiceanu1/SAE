@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import controleur.outils.GestionPDF;
+import controleur.outils.PDFImporter;
 import modele.Bien;
 import modele.Locataire;
 import modele.Louer;
@@ -18,7 +18,7 @@ import vue.insertion.Fenetre_InsertionLocation;
 public class GestionInsertionLocation implements ActionListener {
 
 	private Fenetre_InsertionLocation fil;
-	private GestionPDF gestionPDF;
+	private PDFImporter gestionPDF;
 
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
@@ -36,10 +36,10 @@ public class GestionInsertionLocation implements ActionListener {
 			fenetreColo.moveToFront();
 			break;
 		case "Ajouter un bail":
-			this.gestionPDF.importerEtStockerPDF();
+			this.gestionPDF.getInstance().importPDF();
 			break;
 		case "Ajouter l'état des lieux":
-			this.gestionPDF.importerEtStockerPDF();
+			this.gestionPDF.getInstance().importPDF();
 			break;
 
 		case "Ajouter":
