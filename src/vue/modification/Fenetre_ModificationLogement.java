@@ -128,7 +128,7 @@ public class Fenetre_ModificationLogement extends JInternalFrame {
 		this.btnAjouter.addActionListener(this.gestionClic);
 		panel.add(this.btnAjouter);
 
-		this.btnAnnuler = new JButton("Annuler");
+		this.btnAnnuler = new JButton("Modifier");
 		this.btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.btnAnnuler.setBounds(394, 445, 94, 31);
 		this.btnAnnuler.setForeground(Color.WHITE);

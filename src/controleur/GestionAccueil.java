@@ -419,7 +419,6 @@ public class GestionAccueil implements ActionListener {
 						} catch (SQLException e1) {
 							e1.printStackTrace();
 						}
-
 					}
 				}
 
