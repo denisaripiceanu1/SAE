@@ -973,6 +973,10 @@ public class Fenetre_Accueil extends JFrame {
 	public JTable getTableTravaux() {
 		return table_MesTravaux;
 	}
+	
+	public JTable getTableChargesLocatives() {
+		return table_MesChargesLocatives;
+	}
 
 	public JTextField getTextField_loyer() {
 		return textField_loyer;
