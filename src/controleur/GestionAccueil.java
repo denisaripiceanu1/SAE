@@ -322,6 +322,7 @@ public class GestionAccueil implements ActionListener {
 		List<Assurance> assurancesLogement = daoAssurance.findByLogement(idLogement);
 
 		JTable tableAssurances = this.fenetreAccueil.getTableAssurances();
+		viderTable(tableAssurances);
 		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
 		modeleTable.setRowCount(assurancesLogement.size());
 
@@ -335,6 +336,29 @@ public class GestionAccueil implements ActionListener {
 	}
 
 //------------------------------------------------------------------------------------------------------------------------//
+	// Méthode pour gérer la sélection de l'ID du logement
+	private void handleLogementSelection() {
+		JComboBox<String> comboBox_MesAssurances = this.fenetreAccueil.getComboBox_MesAssurances();
+		String idLogementSelectionne = comboBox_MesAssurances.getSelectedItem().toString();
+
+		// Si l'ID sélectionné est différent de "ID du logement", filtrez la table des
+		// assurances
+		if (!idLogementSelectionne.equals("ID du logement")) {
+			try {
+				updateTableAssurancesForLogement(idLogementSelectionne);
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		} else {
+			// Si "ID du logement" est sélectionné, affichez toutes les assurances
+			try {
+				chargerAssurances();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
@@ -647,28 +671,7 @@ public class GestionAccueil implements ActionListener {
 				break;
 			}
 		}
+		handleLogementSelection();
 
-		// Récupérez l'ID du logement sélectionné
-		JComboBox<String> comboBox_MesAssurances = this.fenetreAccueil.getComboBox_MesAssurances();
-		String idLogementSelectionne = comboBox_MesAssurances.getSelectedItem().toString();
-
-		// Si l'ID sélectionné est différent de "ID du logement", filtrez la table des
-		// assurances
-		if (!idLogementSelectionne.equals("ID du logement")) {
-			// Appelez une méthode pour mettre à jour la table avec les assurances du
-			// logement sélectionné
-			try {
-				updateTableAssurancesForLogement(idLogementSelectionne);
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		} else {
-			// Si "ID du logement" est sélectionné, affichez toutes les assurances
-			try {
-				chargerAssurances();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
 	}
 }

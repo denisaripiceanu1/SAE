@@ -756,7 +756,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.comboBox_MesAssurances = new JComboBox<String>();
 		comboBox_MesAssurances.setBounds(55, 80, 130, 29);
 		panel_MesAssurances.add(comboBox_MesAssurances);
-		comboBox_MesAssurances.addActionListener(this);
+		comboBox_MesAssurances.addActionListener(this.gestionAccueil);
 
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
