@@ -47,10 +47,10 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		panel.setLayout(null);
 
 		// Labels
-		JLabel lbl_InsererPaiementLogement = new JLabel("Ajouter une facture");
-		lbl_InsererPaiementLogement.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererPaiementLogement.setBounds(294, 26, 153, 48);
-		panel.add(lbl_InsererPaiementLogement);
+		JLabel lbl_InsererUnTravaux = new JLabel("Ajouter une facture ");
+		lbl_InsererUnTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_InsererUnTravaux.setBounds(294, 26, 153, 48);
+		panel.add(lbl_InsererUnTravaux);
 
 		JLabel lbl_ImputableLocataire = new JLabel("Imputable Locataire");
 		lbl_ImputableLocataire.setForeground(Color.BLACK);
@@ -66,7 +66,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 
 		// Champs de saisie
 		textField_Numero = new JTextField();
-		textField_Numero.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Numero",
+		textField_Numero.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Numero",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_Numero.setBounds(110, 104, 190, 40);
 		panel.add(textField_Numero);
@@ -93,6 +93,22 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		textField_ville.setBounds(110, 228, 190, 40);
 		panel.add(textField_ville);
 
+		// Menu déroulant pour la designation de la facture
+		JComboBox<String> comboBox_Designation = new JComboBox<>();
+		comboBox_Designation.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Designation",
+				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		comboBox_Designation.setBounds(427, 105, 190, 40);
+
+		DefaultComboBoxModel<String> designationModel = new DefaultComboBoxModel<>();
+		designationModel.addElement("Loayer");
+		designationModel.addElement("Travaux");
+		designationModel.addElement("Eau");
+		designationModel.addElement("Ordures ménagères ");
+		designationModel.addElement("Électricité parties communes ");
+		designationModel.addElement("....");
+		comboBox_Designation.setModel(designationModel);
+		panel.add(comboBox_Designation);
+
 		textField_nbLogement = new JTextField();
 		textField_nbLogement.setColumns(10);
 		textField_nbLogement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
@@ -111,11 +127,16 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		separator_Travaux.setBounds(90, 401, 591, 2);
 		panel.add(separator_Travaux);
 
-		// Menu déroulant
-		JComboBox comboBox_modePaiement = new JComboBox();
+		// Menu déroulant pour le mode de paiement
+		JComboBox<String> comboBox_modePaiement = new JComboBox<>();
 		comboBox_modePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mode de Paiement",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		comboBox_modePaiement.setBounds(427, 229, 189, 39);
+		comboBox_modePaiement.setBounds(427, 230, 189, 39);
+
+		DefaultComboBoxModel<String> modePaiementModel = new DefaultComboBoxModel<>();
+		modePaiementModel.addElement("Virement bancaire");
+		modePaiementModel.addElement("Liquide");
+		comboBox_modePaiement.setModel(modePaiementModel);
 		panel.add(comboBox_modePaiement);
 
 		// Boutons radio
@@ -124,7 +145,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.rdbtnOui.setHorizontalTextPosition(SwingConstants.LEADING);
 		this.rdbtnOui.setBounds(286, 374, 54, 21);
 		panel.add(this.rdbtnOui);
-		this.rdbtnNon.setBounds(389, 374, 54, 21);
+		this.rdbtnNon.setBounds(389, 374, 94, 21);
 		panel.add(this.rdbtnNon);
 		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.add(this.rdbtnOui);
@@ -144,12 +165,6 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		btnAnnuler.setBounds(389, 437, 94, 31);
 		btnAnnuler.addActionListener(gestionClic);
 		panel.add(btnAnnuler);
-		
-		JComboBox comboBox_Désignation = new JComboBox();
-		comboBox_Désignation.setModel(new DefaultComboBoxModel(new String[] { "Loyer, Travaux, Eau, Ordure ménagère, Chauffage, Electricité" }));
-		comboBox_Désignation.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "D\u00E9signation", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		comboBox_Désignation.setBounds(427, 105, 189, 39);
-		panel.add(comboBox_Désignation);
 
 	}
 }

@@ -24,7 +24,6 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 	private JTextField textField_date_emission;
 	private JTextField textField_date_paiement;
 	private JTextField textField_ville;
-	private JTextField textField_periodeDeConstruction;
 	private JTextField textField_nbLogement;
 	private JTextField textField_dateAcquisition;
 	private JSeparator separator_Travaux;
@@ -66,7 +65,7 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 
 		// Champs de saisie
 		textField_Numero = new JTextField();
-		textField_Numero.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Numero",
+		textField_Numero.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Numero",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_Numero.setBounds(110, 104, 190, 40);
 		panel.add(textField_Numero);
@@ -143,7 +142,7 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		this.rdbtnOui.setHorizontalTextPosition(SwingConstants.LEADING);
 		this.rdbtnOui.setBounds(286, 374, 54, 21);
 		panel.add(this.rdbtnOui);
-		this.rdbtnNon.setBounds(389, 374, 54, 21);
+		this.rdbtnNon.setBounds(389, 374, 112, 21);
 		panel.add(this.rdbtnNon);
 		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.add(this.rdbtnOui);
