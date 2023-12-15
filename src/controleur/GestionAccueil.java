@@ -384,12 +384,20 @@ public class GestionAccueil implements ActionListener {
 			break;
 
 		case "tglbtn_Travaux_immeubles":
-			// Permet de trier le tableau de travaux en n'affichant que ceux concernants les
-			// immeubles
+			// Permet de trier le tableau de travaux en n'affichant que ceux concernants les immeubles
+			try {
+				this.chargerTravauxImmeubles();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "tglbtn_Travaux_logements":
-			// Permet de trier le tableau de travaux en n'affichant que ceux concernants les
-			// logements
+			// Permet de trier le tableau de travaux en n'affichant que ceux concernants les logements
+			try {
+				this.chargerTravauxLogements();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		///////////////////////////////
 		// LAYERED MES CHARGES LOCATIVES
