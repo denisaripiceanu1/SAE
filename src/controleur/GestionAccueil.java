@@ -322,7 +322,6 @@ public class GestionAccueil implements ActionListener {
 		List<Assurance> assurancesLogement = daoAssurance.findByLogement(idLogement);
 
 		JTable tableAssurances = this.fenetreAccueil.getTableAssurances();
-		viderTable(tableAssurances);
 		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
 		modeleTable.setRowCount(assurancesLogement.size());
 
@@ -349,14 +348,7 @@ public class GestionAccueil implements ActionListener {
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
-		} else {
-			// Si "ID du logement" est sélectionné, affichez toutes les assurances
-			try {
-				chargerAssurances();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
+		} 
 	}
 
 	@Override
@@ -672,6 +664,6 @@ public class GestionAccueil implements ActionListener {
 			}
 		}
 		handleLogementSelection();
-
+     
 	}
 }
