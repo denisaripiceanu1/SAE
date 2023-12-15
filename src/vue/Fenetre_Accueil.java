@@ -32,6 +32,7 @@ import controleur.GestionBienLogement;
 import controleur.GestionLocations;
 import controleur.GestionTableLogement;
 import controleur.insertion.GestionInsertionBien;
+import controleur.outils.PDFListe;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
@@ -882,32 +883,34 @@ public class Fenetre_Accueil extends JFrame {
 		////////////////////////////////////////////////////////////////////////////
 		// LAYERED
 		// DOCUMENTS////////////////////////////////////////////////////////////////
-//		this.layeredPane_MesDocuments = new JLayeredPane();
-//		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
-//		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
-//
-//		JPanel panel_MesDocuments = new JPanel();
-//		panel_MesDocuments.setBackground(Color.WHITE);
-//		this.layeredPane_MesDocuments.add(panel_MesDocuments);
-//		panel_MesDocuments.setLayout(null);
-//
-//		JLabel lbl_MesDocuments = new JLabel("Mes Documents");
-//		lbl_MesDocuments.setHorizontalAlignment(SwingConstants.CENTER);
-//		lbl_MesDocuments.setFont(new Font("Tahoma", Font.PLAIN, 16));
-//		lbl_MesDocuments.setBounds(244, 22, 216, 43);
-//		panel_MesDocuments.add(lbl_MesDocuments);
-//
-//		JSeparator separator_MesDocuments = new JSeparator();
-//		separator_MesDocuments.setForeground(new Color(0, 102, 204));
-//		separator_MesDocuments.setBounds(258, 63, 190, 2);
-//		panel_MesDocuments.add(separator_MesDocuments);
-//
-//		JLabel aFAIRE2 = new JLabel("A FAIRE");
-//		aFAIRE2.setFont(new Font("Tahoma", Font.PLAIN, 44));
-//		aFAIRE2.setBounds(258, 189, 312, 139);
-//		panel_MesDocuments.add(aFAIRE2);
+		this.layeredPane_MesDocuments = new JLayeredPane();
+		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
+		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
 
-		// this.mettrePageParDef();
+		JPanel panel_MesDocuments = new JPanel();
+		panel_MesDocuments.setBackground(Color.WHITE);
+		this.layeredPane_MesDocuments.add(panel_MesDocuments);
+		panel_MesDocuments.setLayout(new BorderLayout());
+
+		JLabel lbl_MesDocuments = new JLabel("Mes Documents");
+		lbl_MesDocuments.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_MesDocuments.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_MesDocuments.setBounds(244, 22, 216, 43);
+		panel_MesDocuments.add(lbl_MesDocuments);
+
+		JSeparator separator_MesDocuments = new JSeparator();
+		separator_MesDocuments.setForeground(new Color(0, 102, 204));
+		separator_MesDocuments.setBounds(258, 63, 190, 2);
+		panel_MesDocuments.add(separator_MesDocuments);
+
+		JLabel aFAIRE2 = new JLabel("A FAIRE");
+		aFAIRE2.setFont(new Font("Tahoma", Font.PLAIN, 44));
+		aFAIRE2.setBounds(258, 189, 312, 139);
+		panel_MesDocuments.add(aFAIRE2);
+	    PDFListe pdfViewer = new PDFListe();
+	    panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
+
+		this.mettrePageParDefaut();
 	}
 
 	public JLayeredPane getLayeredPane_MesDocuments() {
@@ -995,4 +998,17 @@ public class Fenetre_Accueil extends JFrame {
 		return textField_restantDu;
 	}
 
+	private void mettrePageParDefaut() {
+	    montrerPanneau(layeredPane_Accueil); // Remplacez ceci par le panneau que vous voulez montrer par défaut
+	}
+
+	private void montrerPanneau(JLayeredPane pane) {
+	    layeredPane_Accueil.setVisible(false);
+	    layeredPane_MesBiens.setVisible(false);
+	    layeredPane_MesLocations.setVisible(false);
+	    // Faites ceci pour tous les autres panneaux
+	    layeredPane_MesDocuments.setVisible(false);
+
+	    pane.setVisible(true);
+	}
 }

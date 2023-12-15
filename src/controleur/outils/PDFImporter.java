@@ -29,12 +29,11 @@ public class PDFImporter extends JFrame {
     private void initializeComponents() {
         JButton btnImportPDF = new JButton("Import PDF");
         btnImportPDF.addActionListener(e -> importPDF());
-
         this.setLayout(new FlowLayout());
         this.add(btnImportPDF);
     }
 
-    private void importPDF() {
+    public void importPDF() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf"));
         int result = fileChooser.showOpenDialog(this);
