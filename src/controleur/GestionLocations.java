@@ -14,10 +14,12 @@ import modele.dao.DaoFacture;
 import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
+import vue.insertion.Fenetre_AffichageInfoLocataire;
 
 public class GestionLocations implements ListSelectionListener {
 
     private Fenetre_Accueil fenetreAccueil;
+    private Fenetre_AffichageInfoLocataire fail;
     private DaoLouer daoLouer;
     private DaoFacture daoFacture;
     private DaoLocataire daoLocataire;
@@ -42,9 +44,10 @@ public class GestionLocations implements ListSelectionListener {
                     location = daoLouer.findById(tableLocations.getValueAt(selectedRow, 1).toString(),
                             tableLocations.getValueAt(selectedRow, 0).toString());
                     
-                    locataire = daoLocataire.findById(tableLocations.getValueAt(selectedRow, 0).toString());
-                    Sauvegarde.deleteItem("Locataire");
-                    Sauvegarde.addItem("Locataire", locataire);
+					// On recupère le locataire de la sauvegarde
+                     locataire = daoLocataire.findById(tableLocations.getValueAt(selectedRow, 0).toString());
+                     Sauvegarde.deleteItem("Locataire");
+                     Sauvegarde.addItem("Locataire", locataire);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -82,7 +85,7 @@ public class GestionLocations implements ListSelectionListener {
                     JTextField provision = fenetreAccueil.getTextField_provisionCharges();
                     provision.setText(String.valueOf(location.getProvision_chargeMens_TTC()));
                     
-                    // creer un locataire
+                    
                 }
             }
         }

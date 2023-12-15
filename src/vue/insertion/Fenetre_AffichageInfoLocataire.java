@@ -22,7 +22,6 @@ import java.awt.event.ActionEvent;
 public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 	private JTextField textField_Nom;
 	private JTextField textField_Prenom;
-	private JTextField textField_Adresse;
 	private JTextField textField_Telephone;
 	private JTextField textField_Mail;
 	private JTextField textField_DateN;
@@ -35,7 +34,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 755, 511);
+		panel.setBounds(6, 6, 755, 511);
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -65,35 +64,28 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		textField_Nom.setColumns(10);
 		textField_Nom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Nom", TitledBorder.LEADING,
 				TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Nom.setBounds(33, 169, 190, 40);
+		textField_Nom.setBounds(33, 182, 190, 40);
 		panel.add(textField_Nom);
 
 		textField_Prenom = new JTextField();
 		textField_Prenom.setColumns(10);
 		textField_Prenom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Prenom",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Prenom.setBounds(233, 169, 190, 40);
+		textField_Prenom.setBounds(248, 182, 190, 40);
 		panel.add(textField_Prenom);
-
-		textField_Adresse = new JTextField();
-		textField_Adresse.setColumns(10);
-		textField_Adresse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Adresse",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Adresse.setBounds(33, 220, 390, 69);
-		panel.add(textField_Adresse);
 
 		textField_Telephone = new JTextField();
 		textField_Telephone.setColumns(10);
 		textField_Telephone.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
 				"n\u00B0 T\u00E9l\u00E9phone", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Telephone.setBounds(33, 305, 190, 40);
+		textField_Telephone.setBounds(33, 248, 190, 40);
 		panel.add(textField_Telephone);
 
 		textField_Mail = new JTextField();
 		textField_Mail.setColumns(10);
 		textField_Mail.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mail", TitledBorder.LEADING,
 				TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Mail.setBounds(233, 305, 190, 40);
+		textField_Mail.setBounds(33, 300, 190, 40);
 		panel.add(textField_Mail);
 
 		JButton btnAnnuler = new JButton("Retour");
@@ -114,14 +106,14 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		textField_DateN.setColumns(10);
 		textField_DateN.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date de naissance",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_DateN.setBounds(33, 356, 190, 40);
+		textField_DateN.setBounds(33, 364, 190, 40);
 		panel.add(textField_DateN);
 
 		textField_Id = new JTextField();
 		textField_Id.setColumns(10);
 		textField_Id.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Identifiant",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Id.setBounds(33, 118, 190, 40);
+		textField_Id.setBounds(33, 130, 190, 40);
 		panel.add(textField_Id);
 
 		JSeparator separator = new JSeparator();
@@ -160,14 +152,6 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
 	public void setTextField_Prenom(JTextField textField_Prenom) {
 		this.textField_Prenom = textField_Prenom;
-	}
-
-	public JTextField getTextField_Adresse() {
-		return textField_Adresse;
-	}
-
-	public void setTextField_Adresse(JTextField textField_Adresse) {
-		this.textField_Adresse = textField_Adresse;
 	}
 
 	public JTextField getTextField_Telephone() {

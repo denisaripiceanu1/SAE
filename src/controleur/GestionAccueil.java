@@ -22,6 +22,7 @@ import modele.Echeance;
 import modele.Entreprise;
 import modele.Facture;
 import modele.Immeuble;
+import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoAssurance;
 import modele.dao.DaoBien;
@@ -30,6 +31,7 @@ import modele.dao.DaoEcheance;
 import modele.dao.DaoEntreprise;
 import modele.dao.DaoFacture;
 import modele.dao.DaoImmeuble;
+import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
@@ -56,6 +58,7 @@ public class GestionAccueil implements ActionListener {
 	private DaoEntreprise daoEntreprise;
 	private DaoFacture daoFacture;
 	private DaoCharge daoCharge;
+	private DaoLocataire daoLocataire;
 
 	public GestionAccueil(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
@@ -67,6 +70,8 @@ public class GestionAccueil implements ActionListener {
 		this.daoEntreprise = new DaoEntreprise();
 		this.daoFacture = new DaoFacture();
 		this.daoCharge = new DaoCharge();
+		this.daoLocataire = new DaoLocataire();
+
 	}
 
 	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE
@@ -268,7 +273,7 @@ public class GestionAccueil implements ActionListener {
 			}
 		}
 	}
-	
+
 	// ------------------- TABLE CHARGES LOCATIVES ------------------- //
 
 	public void ecrireLigneTableChargesLocatives(int numeroLigne, Charge charge) {
@@ -278,7 +283,7 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(charge.getNom(), numeroLigne, 0);
 		modeleTable.setValueAt(charge.getBien().getIdBien(), numeroLigne, 1);
 		modeleTable.setValueAt(charge.isDeductible(), numeroLigne, 2);
-		modeleTable.setValueAt(charge.getMontantReel(), numeroLigne, 3);	
+		modeleTable.setValueAt(charge.getMontantReel(), numeroLigne, 3);
 	}
 
 	private void chargerChargesLocatives() throws SQLException {
@@ -289,10 +294,10 @@ public class GestionAccueil implements ActionListener {
 
 		for (int i = 0; i < charges.size(); i++) {
 			Charge c = charges.get(i);
-			this.ecrireLigneTableChargesLocatives(i,c);
+			this.ecrireLigneTableChargesLocatives(i, c);
 		}
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
@@ -483,13 +488,31 @@ public class GestionAccueil implements ActionListener {
 			case "btn_MesLocations_Supprimer":
 				break;
 
-			case "btn_mesLocations_InfoLocataire": // A MODIFIER POUR QUE L'OUVERTURE SOIT FAITES APRES LA SELECTION
-													// D'UNE
-													// LIGNE DU TABLEAU
-				Fenetre_AffichageInfoLocataire infos_locataire = new Fenetre_AffichageInfoLocataire();
-				this.fenetreAccueil.getLayeredPane().add(infos_locataire);
-				infos_locataire.setVisible(true);
-				infos_locataire.moveToFront();
+			case "btn_mesLocations_InfoLocataire":
+				if (Sauvegarde.onSave("Locataire") == true) {
+					Fenetre_AffichageInfoLocataire infos_locataire = new Fenetre_AffichageInfoLocataire();
+					this.fenetreAccueil.getLayeredPane().add(infos_locataire);
+					infos_locataire.setVisible(true);
+					infos_locataire.moveToFront();
+
+					// On recupère le locataire de la sauvegarde
+					Locataire locataireSauvgarde = (Locataire) Sauvegarde.getItem("Locataire");
+					Locataire locataireCourant;
+
+					try {
+						locataireCourant = this.daoLocataire.findById(locataireSauvgarde.getIdLocataire());
+						infos_locataire.getTextField_Id().setText(locataireCourant.getIdLocataire());
+						infos_locataire.getTextField_Nom().setText(locataireCourant.getNom());
+						infos_locataire.getTextField_Prenom().setText(locataireCourant.getPrenom());
+						infos_locataire.getTextField_Telephone().setText(locataireCourant.getTelephone());
+						infos_locataire.getTextField_Mail().setText(locataireCourant.getMail());
+						infos_locataire.getTextField_DateN().setText(locataireCourant.getDateNaissance());
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+
 				break;
 			/////////////////////
 			// LAYERED MES TRAVAUX
