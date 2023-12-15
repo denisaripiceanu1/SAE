@@ -39,6 +39,8 @@ import vue.insertion.Fenetre_InsertionBien;
 import javax.swing.JTextPane;
 import javax.swing.JComboBox;
 import javax.swing.JToggleButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Fenetre_Accueil extends JFrame {
 
@@ -280,7 +282,7 @@ public class Fenetre_Accueil extends JFrame {
 		scrollPaneMesBiens_Logements.setViewportView(this.tableMesBiens_Logements);
 		// Pour action listener sur table logement
 		this.tableMesBiens_Logements.getSelectionModel().addListSelectionListener(this.gestionTableLogement);
-
+		
 		// Labels
 		JLabel lblMesBiens = new JLabel("Mes Biens");
 		lblMesBiens.setFont(new Font("Tahoma", Font.PLAIN, 16));
