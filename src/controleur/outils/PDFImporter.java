@@ -28,6 +28,25 @@ public class PDFImporter extends JFrame {
 		return instance;
 	}
 
+    private void initializeComponents() {
+        JButton btnImportPDF = new JButton("Import PDF");
+        btnImportPDF.addActionListener(e -> importPDF());
+        this.setLayout(new FlowLayout());
+        this.add(btnImportPDF);
+    }
+
+    public void importPDF() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf"));
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            pdfListe.addPDFFile(selectedFile);
+        }
+    }
+    //panel_MesDocuments.setLayout(new BorderLayout());
+    //PDFViewer pdfViewer = new PDFViewer();
+    //panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
 	private void initializeComponents() {
 		JButton btnImportPDF = new JButton("Import PDF");
 		btnImportPDF.addActionListener(e -> this.importPDF());

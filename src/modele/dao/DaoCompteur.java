@@ -9,8 +9,10 @@ import java.util.List;
 import modele.Bien;
 import modele.Compteur;
 import modele.Immeuble;
+import modele.dao.requetes.delete.RequeteDeleteCompteur;
 import modele.dao.requetes.select.RequeteSelectCompteur;
 import modele.dao.requetes.select.RequeteSelectCompteurById;
+import modele.dao.requetes.select.RequeteSelectCompteurParImmeuble;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertCompteur;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertImmeuble;
@@ -33,10 +35,11 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 	}
 
 	@Override
-	public void delete(Compteur donnees) {
-		delete(donnees);
+	public void delete(Compteur donnees) throws SQLException {
+		miseAJour(new RequeteDeleteCompteur(),donnees);
 	}
 
+	
 	@Override
 	protected Compteur creerInstance(ResultSet curseur) throws SQLException {
 		Compteur compteur = null;
@@ -61,6 +64,14 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 	@Override
 	public Compteur findById(String... id) throws SQLException {
 		List<Compteur> compteurs = find(new RequeteSelectCompteurById(), id);
+		if (compteurs.isEmpty()) {
+			return null;
+		}
+		return compteurs.get(0);
+	}
+	
+	public Compteur findByIdImmeuble(String... id) throws SQLException {
+		List<Compteur> compteurs = find(new RequeteSelectCompteurParImmeuble(), id);
 		if (compteurs.isEmpty()) {
 			return null;
 		}
