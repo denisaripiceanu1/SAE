@@ -912,7 +912,6 @@ public class Fenetre_Accueil extends JFrame {
 	    PDFListe pdfViewer = new PDFListe();
 	    panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
 
-		this.mettrePageParDefaut();
 	}
 
 	public JLayeredPane getLayeredPane_MesDocuments() {
