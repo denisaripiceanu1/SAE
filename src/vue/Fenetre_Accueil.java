@@ -747,7 +747,7 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesAssurances.add(btn_MesAssurances_Supprimer);
 
 		// ComboBox
-		JComboBox comboBox_MesAssurances = new JComboBox();
+		JComboBox<String> comboBox_MesAssurances = new JComboBox<String>();
 		comboBox_MesAssurances.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
 		comboBox_MesAssurances.setBounds(55, 80, 130, 29);
 		panel_MesAssurances.add(comboBox_MesAssurances);
@@ -998,5 +998,7 @@ public class Fenetre_Accueil extends JFrame {
 	public JTextField getTextField_restantDu() {
 		return textField_restantDu;
 	}
+	
+	
 
 }
