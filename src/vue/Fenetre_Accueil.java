@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -753,20 +754,24 @@ public class Fenetre_Accueil extends JFrame {
 
 		// ComboBox
 		this.comboBox_MesAssurances = new JComboBox<String>();
-		comboBox_MesAssurances.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
 		comboBox_MesAssurances.setBounds(55, 80, 130, 29);
 		panel_MesAssurances.add(comboBox_MesAssurances);
+		comboBox_MesAssurances.addActionListener(this);
 
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
-			List<String> identifiantsLogements = daoBien.getAllIdBien();
-			identifiantsLogements.add(0, "ID du logement");
-			// Ajouter les identifiants au modèle du JComboBox
-			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-					identifiantsLogements.toArray(new String[0]));
-			comboBox_MesAssurances.setModel(modelComboBox);
+		    List<String> identifiantsLogements = daoBien.getAllIdBien();
+		    identifiantsLogements.add(0, "ID du logement");
+
+		    // Ajouter les identifiants au modèle du JComboBox
+		    DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+		            identifiantsLogements.toArray(new String[0]));
+
+		    comboBox_MesAssurances.setModel(modelComboBox);
 		} catch (SQLException e) {
-			e.printStackTrace();
+		    e.printStackTrace();
+		    // Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
+		    JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 
 		///////////////////////////////////////////////////////////////////
@@ -827,6 +832,7 @@ public class Fenetre_Accueil extends JFrame {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 
 		/////////////////////////////////////////////////////////////////////////
 		// LAYERED SOLDE DE TOUT

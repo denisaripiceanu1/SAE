@@ -22,7 +22,6 @@ public class GestionInsertionAssurance implements ActionListener {
 	public GestionInsertionAssurance(Fenetre_InsertionAssurance fia) {
 		this.fia = fia;
 		this.daoAssurance = new DaoAssurance();
-
 	}
 
 	@Override
@@ -30,7 +29,6 @@ public class GestionInsertionAssurance implements ActionListener {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fia.getTopLevelAncestor();
 		switch (btn.getText()) {
-
 		case "Ajouter":
 			Assurance assurance = null;
 			try {

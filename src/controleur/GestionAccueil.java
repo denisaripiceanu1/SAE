@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -103,6 +104,10 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
+	///////////////////////////////////////////////////////////////////
+	// LAYERED MES BIENS
+	///////////////////////////////////////////////////////////////////
+
 	// ------------------- TABLE BIENS ------------------- //
 
 	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) {
@@ -128,6 +133,10 @@ public class GestionAccueil implements ActionListener {
 			this.ecrireLigneTableBiens(i, immeuble);
 		}
 	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// LAYERED MES
+	// LOCATIONS////////////////////////////////////////////////////////////////
 
 	// ------------------- TABLE LOCATIONS ------------------- //
 
@@ -159,43 +168,9 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	// ------------------- TABLE ASSURANCES ------------------- //
-
-	public void ecrireLigneTableAssurances(int numeroLigne, Assurance assurance, Entreprise entreprise,
-			Echeance echeance) {
-		JTable tableAssurances = this.fenetreAccueil.getTableAssurances();
-		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
-
-		modeleTable.setValueAt(assurance.getNuméroPolice(), numeroLigne, 0);
-		modeleTable.setValueAt(assurance.getMontantInit(), numeroLigne, 1);
-		modeleTable.setValueAt(echeance.getDateEcheance(), numeroLigne, 2);
-		if (entreprise != null) {
-			modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 3);
-			modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
-					numeroLigne, 4);
-			modeleTable.setValueAt(entreprise.getTelephone(), numeroLigne, 5);
-		} else {
-			// Si l'entreprise est null
-			modeleTable.setValueAt("N/A", numeroLigne, 3);
-			modeleTable.setValueAt("N/A", numeroLigne, 4);
-			modeleTable.setValueAt("N/A", numeroLigne, 5);
-		}
-	}
-
-	private void chargerAssurances() throws SQLException {
-		List<Assurance> assurances = this.daoAssurance.findAll();
-
-		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableAssurances().getModel();
-		modeleTable.setRowCount(assurances.size());
-
-		for (int i = 0; i < assurances.size(); i++) {
-			Assurance a = assurances.get(i);
-			Entreprise entreprise = this.daoEntreprise.findById(a.getEntreprise().getSiret());
-			Echeance echeance = this.daoEcheance.findById(a.getNuméroPolice());
-
-			this.ecrireLigneTableAssurances(i, a, entreprise, echeance);
-		}
-	}
+	//////////////////////////////////////////////////////////////////////////
+	// LAYERED MES
+	// TRAVAUX////////////////////////////////////////////////////////////////
 
 	// ------------------- TABLE TRAVAUX pour un IMMEUBLE ------------------- //
 
@@ -274,6 +249,10 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
+	///////////////////////////////////////////////////////////////////
+	// LAYERED MES CHARGES LOCATIVES
+	// ////////////////////////////////////////////////////////////////
+
 	// ------------------- TABLE CHARGES LOCATIVES ------------------- //
 
 	public void ecrireLigneTableChargesLocatives(int numeroLigne, Charge charge) {
@@ -297,7 +276,65 @@ public class GestionAccueil implements ActionListener {
 			this.ecrireLigneTableChargesLocatives(i, c);
 		}
 	}
+	///////////////////////////////////////////////////////////////////
+	// LAYERED MES ASSURANCES
+	// ////////////////////////////////////////////////////////////////
 
+	// ------------------- TABLE ASSURANCES ------------------- //
+
+	public void ecrireLigneTableAssurances(int numeroLigne, Assurance assurance, Entreprise entreprise,
+			Echeance echeance) {
+		JTable tableAssurances = this.fenetreAccueil.getTableAssurances();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
+
+		modeleTable.setValueAt(assurance.getNuméroPolice(), numeroLigne, 0);
+		modeleTable.setValueAt(assurance.getMontantInit(), numeroLigne, 1);
+		modeleTable.setValueAt(echeance.getDateEcheance(), numeroLigne, 2);
+		if (entreprise != null) {
+			modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 3);
+			modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
+					numeroLigne, 4);
+			modeleTable.setValueAt(entreprise.getTelephone(), numeroLigne, 5);
+		} else {
+			// Si l'entreprise est null
+			modeleTable.setValueAt("N/A", numeroLigne, 3);
+			modeleTable.setValueAt("N/A", numeroLigne, 4);
+			modeleTable.setValueAt("N/A", numeroLigne, 5);
+		}
+	}
+
+	private void chargerAssurances() throws SQLException {
+		List<Assurance> assurances = this.daoAssurance.findAll();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableAssurances().getModel();
+		modeleTable.setRowCount(assurances.size());
+
+		for (int i = 0; i < assurances.size(); i++) {
+			Assurance a = assurances.get(i);
+			Entreprise entreprise = this.daoEntreprise.findById(a.getEntreprise().getSiret());
+			Echeance echeance = this.daoEcheance.findById(a.getNuméroPolice());
+
+			this.ecrireLigneTableAssurances(i, a, entreprise, echeance);
+		}
+	}
+
+	private void updateTableAssurancesForLogement(String idLogement) throws SQLException {
+		List<Assurance> assurancesLogement = daoAssurance.findByLogement(idLogement);
+
+		JTable tableAssurances = this.fenetreAccueil.getTableAssurances();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
+		modeleTable.setRowCount(assurancesLogement.size());
+
+		for (int i = 0; i < assurancesLogement.size(); i++) {
+			Assurance assurance = assurancesLogement.get(i);
+			Entreprise entreprise = daoEntreprise.findById(assurance.getEntreprise().getSiret());
+			Echeance echeance = daoEcheance.findById(assurance.getNuméroPolice());
+
+			ecrireLigneTableAssurances(i, assurance, entreprise, echeance);
+		}
+	}
+
+//------------------------------------------------------------------------------------------------------------------------//
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
@@ -610,6 +647,28 @@ public class GestionAccueil implements ActionListener {
 				break;
 			}
 		}
-	}
 
+		// Récupérez l'ID du logement sélectionné
+		JComboBox<String> comboBox_MesAssurances = this.fenetreAccueil.getComboBox_MesAssurances();
+		String idLogementSelectionne = comboBox_MesAssurances.getSelectedItem().toString();
+
+		// Si l'ID sélectionné est différent de "ID du logement", filtrez la table des
+		// assurances
+		if (!idLogementSelectionne.equals("ID du logement")) {
+			// Appelez une méthode pour mettre à jour la table avec les assurances du
+			// logement sélectionné
+			try {
+				updateTableAssurancesForLogement(idLogementSelectionne);
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		} else {
+			// Si "ID du logement" est sélectionné, affichez toutes les assurances
+			try {
+				chargerAssurances();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
 }

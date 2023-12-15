@@ -10,6 +10,7 @@ import modele.Entreprise;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectAssurance;
 import modele.dao.requetes.select.RequeteSelectAssuranceById;
+import modele.dao.requetes.select.RequeteSelectAssuranceByLogement;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertAssurance;
 import modele.dao.requetes.update.RequeteUpdateAssurance;
@@ -71,5 +72,11 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 		}
 		return assurances.get(0);
 	}
+	
+	// ---------------- AUTRES METHODES ----------------//
+
+	 public List<Assurance> findByLogement(String idImmeuble) throws SQLException {
+	        return this.find(new RequeteSelectAssuranceByLogement(), idImmeuble);
+	    }
 
 }
