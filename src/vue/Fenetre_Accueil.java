@@ -881,6 +881,7 @@ public class Fenetre_Accueil extends JFrame {
 //		lbl_SoldeDeToutCompte_Locataires.setBounds(56, 69, 82, 13);
 //		panel_SoldeDeToutCompte.add(lbl_SoldeDeToutCompte_Locataires);
 
+<<<<<<< HEAD
 //		// A faire éventuellement à la fin
 //		////////////////////////////////////////////////////////////////////////////
 //		// LAYERED
@@ -913,6 +914,38 @@ public class Fenetre_Accueil extends JFrame {
 //	    panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
 //
 //	
+=======
+		// A faire éventuellement à la fin
+		////////////////////////////////////////////////////////////////////////////
+		// LAYERED
+		// DOCUMENTS////////////////////////////////////////////////////////////////
+		this.layeredPane_MesDocuments = new JLayeredPane();
+		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
+		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
+
+		JPanel panel_MesDocuments = new JPanel();
+		panel_MesDocuments.setBackground(Color.WHITE);
+		this.layeredPane_MesDocuments.add(panel_MesDocuments);
+		panel_MesDocuments.setLayout(new BorderLayout());
+
+		JLabel lbl_MesDocuments = new JLabel("Mes Documents");
+		lbl_MesDocuments.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_MesDocuments.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_MesDocuments.setBounds(244, 22, 216, 43);
+		panel_MesDocuments.add(lbl_MesDocuments);
+
+		JSeparator separator_MesDocuments = new JSeparator();
+		separator_MesDocuments.setForeground(new Color(0, 102, 204));
+		separator_MesDocuments.setBounds(258, 63, 190, 2);
+		panel_MesDocuments.add(separator_MesDocuments);
+
+		JLabel aFAIRE2 = new JLabel("A FAIRE");
+		aFAIRE2.setFont(new Font("Tahoma", Font.PLAIN, 44));
+		aFAIRE2.setBounds(258, 189, 312, 139);
+		panel_MesDocuments.add(aFAIRE2);
+	    PDFListe pdfViewer = new PDFListe();
+	    panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
+>>>>>>> 062b807385580be52e87ede1a897510e0c17f98b
 	}
 
 	public JLayeredPane getLayeredPane_MesDocuments() {
@@ -1007,5 +1040,4 @@ public class Fenetre_Accueil extends JFrame {
 	public JTextField getTextField_restantDu() {
 		return textField_restantDu;
 	}
-	
 }
