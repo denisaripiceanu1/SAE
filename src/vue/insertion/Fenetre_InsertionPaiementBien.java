@@ -15,6 +15,7 @@ import controleur.insertion.GestionInsertionPaiementBien;
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 
@@ -46,7 +47,7 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		panel.setLayout(null);
 
 		// Labels
-		JLabel lbl_InsererUnTravaux = new JLabel("Ajouter un Travaux");
+		JLabel lbl_InsererUnTravaux = new JLabel("Ajouter une facture ");
 		lbl_InsererUnTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUnTravaux.setBounds(294, 26, 153, 48);
 		panel.add(lbl_InsererUnTravaux);
@@ -92,12 +93,19 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		textField_ville.setBounds(110, 228, 190, 40);
 		panel.add(textField_ville);
 
-		textField_periodeDeConstruction = new JTextField();
-		textField_periodeDeConstruction.setColumns(10);
-		textField_periodeDeConstruction.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"D\u00E9signation", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_periodeDeConstruction.setBounds(427, 228, 190, 40);
-		panel.add(textField_periodeDeConstruction);
+		// Menu déroulant pour la designation de la facture
+		JComboBox<String> comboBox_Designation = new JComboBox<>();
+		comboBox_Designation.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Designation",
+				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		comboBox_Designation.setBounds(427, 105, 190, 40);
+
+		DefaultComboBoxModel<String> designationModel = new DefaultComboBoxModel<>();
+		designationModel.addElement("Travaux");
+		designationModel.addElement("Eau");
+		designationModel.addElement("Électricité parties communes ");
+		designationModel.addElement("....");
+		comboBox_Designation.setModel(designationModel);
+		panel.add(comboBox_Designation);
 
 		textField_nbLogement = new JTextField();
 		textField_nbLogement.setColumns(10);
@@ -117,11 +125,16 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		separator_Travaux.setBounds(90, 401, 591, 2);
 		panel.add(separator_Travaux);
 
-		// Menu déroulant
-		JComboBox comboBox_modePaiement = new JComboBox();
+		// Menu déroulant pour le mode de paiement
+		JComboBox<String> comboBox_modePaiement = new JComboBox<>();
 		comboBox_modePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mode de Paiement",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		comboBox_modePaiement.setBounds(427, 104, 189, 39);
+		comboBox_modePaiement.setBounds(427, 230, 189, 39);
+
+		DefaultComboBoxModel<String> modePaiementModel = new DefaultComboBoxModel<>();
+		modePaiementModel.addElement("Virement bancaire");
+		modePaiementModel.addElement("Liquide");
+		comboBox_modePaiement.setModel(modePaiementModel);
 		panel.add(comboBox_modePaiement);
 
 		// Boutons radio
