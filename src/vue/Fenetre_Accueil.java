@@ -74,6 +74,8 @@ public class Fenetre_Accueil extends JFrame {
 	private JTextField textField_paye;
 	private JTextField textField_restantDu;
 	private JTable tableRegularisation;
+	
+	private JComboBox<String> comboBox_MesAssurances;
 
 	private GestionAccueil gestionAccueil;
 	private GestionBienLogement gestionBienLogement;
@@ -750,7 +752,7 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesAssurances.add(btn_MesAssurances_Supprimer);
 
 		// ComboBox
-		JComboBox comboBox_MesAssurances = new JComboBox();
+		this.comboBox_MesAssurances = new JComboBox<String>();
 		comboBox_MesAssurances.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
 		comboBox_MesAssurances.setBounds(55, 80, 130, 29);
 		panel_MesAssurances.add(comboBox_MesAssurances);
@@ -1008,4 +1010,9 @@ public class Fenetre_Accueil extends JFrame {
 	public JTextField getTextField_restantDu() {
 		return textField_restantDu;
 	}
+	
+	public JComboBox<String> getComboBox_MesAssurances() {
+        return comboBox_MesAssurances;
+    }
+
 }

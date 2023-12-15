@@ -182,7 +182,7 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	private void chargerAssurances() throws SQLException {
+	private void chargerAssurances(String idLogement) throws SQLException {
 		List<Assurance> assurances = this.daoAssurance.findAll();
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableAssurances().getModel();

@@ -2,15 +2,22 @@ package controleur.outils;
 
 import java.awt.FlowLayout;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import modele.dao.CictOracleDataSource;
+
 public class PDFImporter extends JFrame {
 
     private static PDFImporter instance;
-    private static PDFListe pdfListe;
     private String selectedFilePath;  // Attribut pour stocker le chemin du fichier
 
     private PDFImporter() {
@@ -18,7 +25,6 @@ public class PDFImporter extends JFrame {
         this.setSize(300, 200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.initializeComponents();
-        pdfListe = new PDFListe();
     }
 
     public static PDFImporter getInstance() {
@@ -42,11 +48,27 @@ public class PDFImporter extends JFrame {
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             selectedFilePath = selectedFile.getAbsolutePath();  // on stock le chemin pour le mettre dans la bd 
-            pdfListe.addPDFFile(selectedFile);  //pour ajouter a la liste de mes document
         }
     }
 
     public String getSelectedFilePath() {
         return selectedFilePath;
+    }
+    
+    public void importPDFBD(int id,String nom) throws FileNotFoundException, SQLException {
+    	
+    	Connection cn = CictOracleDataSource.getConnectionBD();
+    	
+        String sql = "INSERT INTO documents (id, nom, fichier_pdf) VALUES (?, ?, ?)";
+        PreparedStatement pstmt = cn.prepareStatement(sql);
+
+        File pdfFile = new File(this.getSelectedFilePath());
+        FileInputStream input = new FileInputStream(pdfFile);
+
+        pstmt.setInt(1, id);
+        pstmt.setString(2, nom);
+        pstmt.setBinaryStream(3, input, (int) pdfFile.length());
+        pstmt.executeUpdate();
+        pstmt.close();
     }
 }
