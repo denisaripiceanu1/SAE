@@ -191,51 +191,60 @@ public class GestionAccueil implements ActionListener {
 	// ------------------- TABLE TRAVAUX pour un IMMEUBLE ------------------- //
 
 	public void ecrireLigneTableTravauxImmeubles(int numeroLigne, Facture facture, Entreprise entreprise) {
-	    JTable tableTravauxImmeuble = this.fenetreAccueil.getTableTravaux();
-	    DefaultTableModel modeleTable = (DefaultTableModel) tableTravauxImmeuble.getModel();
+		JTable tableTravauxImmeuble = this.fenetreAccueil.getTableTravaux();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableTravauxImmeuble.getModel();
 
-	    // Vérifiez si l'immeuble de la facture n'est pas null
-	    if (facture.getImmeuble() != null) {
-	        modeleTable.setValueAt(facture.getImmeuble().getImmeuble(), numeroLigne, 0);
-	    } else {
-	        modeleTable.setValueAt("", numeroLigne, 0); // Valeur par défaut si l'immeuble est null
-	    }
+		// Vérifiez si l'immeuble de la facture est null
+		if (facture.getImmeuble() == null) {
+			return; // Quittez la méthode si l'immeuble est null
+		}
 
-	    modeleTable.setValueAt(facture.getDesignation(), numeroLigne, 1);
-	    modeleTable.setValueAt(facture.getDateEmission(), numeroLigne, 2);
-	    modeleTable.setValueAt(facture.getMontant(), numeroLigne, 3);
-	    modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 4);
-	    modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
-	            numeroLigne, 5);
+		modeleTable.setValueAt(facture.getImmeuble().getImmeuble(), numeroLigne, 0);
+		modeleTable.setValueAt(facture.getDesignation(), numeroLigne, 1);
+		modeleTable.setValueAt(facture.getDateEmission(), numeroLigne, 2);
+		modeleTable.setValueAt(facture.getMontant(), numeroLigne, 3);
+		modeleTable.setValueAt(facture.getAccompteVerse(), numeroLigne, 4);
+		modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 5);
+		modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
+				numeroLigne, 6);
 	}
+
 	private void chargerTravauxImmeubles() throws SQLException {
 		List<Facture> factures = this.daoFacture.findAll();
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableTravaux().getModel();
-		modeleTable.setRowCount(factures.size());
+		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
 
 		for (int i = 0; i < factures.size(); i++) {
 			Facture f = factures.get(i);
-			if (f != null) {
-	            Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-				this.ecrireLigneTableTravauxImmeubles(i, f, entreprise);
+			if (f != null && f.getImmeuble() != null) {
+				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
+				modeleTable.addRow(new Object[] { f.getImmeuble().getImmeuble(), f.getDesignation(),
+						f.getDateEmission(), f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
+						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
 			}
 		}
 	}
 
 	// ------------------- TABLE TRAVAUX pour un LOGEMENT ------------------- //
-	
+
 	public void ecrireLigneTableTravauxLogement(int numeroLigne, Facture facture, Entreprise entreprise) {
 		JTable tableTravauxImmeuble = this.fenetreAccueil.getTableTravaux();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableTravauxImmeuble.getModel();
 
-		modeleTable.setValueAt(facture.getBien(), numeroLigne, 0);
+		// Vérifiez si l'immeuble de la facture est null
+		if (facture.getBien() == null) {
+			return; // Quittez la méthode si l'immeuble est null
+		}
+
+		modeleTable.setValueAt(facture.getBien().getIdBien(), numeroLigne, 0);
 		modeleTable.setValueAt(facture.getDesignation(), numeroLigne, 1);
 		modeleTable.setValueAt(facture.getDateEmission(), numeroLigne, 2);
 		modeleTable.setValueAt(facture.getMontant(), numeroLigne, 3);
-		modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 4);
+		modeleTable.setValueAt(facture.getAccompteVerse(), numeroLigne, 4);
+		modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 5);
 		modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
-				numeroLigne, 5);
+				numeroLigne, 6);
 
 	}
 
@@ -243,14 +252,16 @@ public class GestionAccueil implements ActionListener {
 		List<Facture> factures = this.daoFacture.findAll();
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableTravaux().getModel();
-		modeleTable.setRowCount(factures.size());
+		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
 
 		for (int i = 0; i < factures.size(); i++) {
 			Facture f = factures.get(i);
-			if (f != null) {
-	            Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-	            this.ecrireLigneTableTravauxLogement(i, f, entreprise);
-	        }
+			if (f != null && f.getBien() != null) {
+				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
+				modeleTable.addRow(new Object[] { f.getBien().getIdBien(), f.getDesignation(), f.getDateEmission(),
+						f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
+						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
+			}
 		}
 	}
 
@@ -522,8 +533,8 @@ public class GestionAccueil implements ActionListener {
 		} else if (source instanceof JToggleButton) {
 			JToggleButton btnToggle = (JToggleButton) source;
 			switch (btnToggle.getName()) {
-			
-			//------------- MES TRAVAUX -------------//
+
+			// ------------- MES TRAVAUX -------------//
 			case "tglbtn_Travaux_immeubles":
 				// Permet de trier le tableau de travaux en n'affichant que ceux concernants les
 				// immeubles
