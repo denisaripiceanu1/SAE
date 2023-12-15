@@ -10,14 +10,15 @@ public class Facture {
 	private String numeroDevis;
 	private String designation;
 	private double accompteVerse;
+	private double montant;
 	private int imputableLocataire;
 	private Immeuble immeuble;
 	private Bien bien;
 	private Entreprise entreprise;
 
 	public Facture(int idFacture, String numero, String dateEmission, String datePaiement, String modePaiement,
-			String numeroDevis, String designation, double accompteVerse, int imputableLocataire, Immeuble immeuble,
-			Bien bien, Entreprise entreprise) {
+			String numeroDevis, String designation, double accompteVerse, double montant, int imputableLocataire,
+			Immeuble immeuble, Bien bien, Entreprise entreprise) {
 		this.idFacture = idFacture;
 		this.numero = numero;
 		this.dateEmission = dateEmission;
@@ -26,10 +27,19 @@ public class Facture {
 		this.numeroDevis = numeroDevis;
 		this.designation = designation;
 		this.accompteVerse = accompteVerse;
+		this.montant = montant;
 		this.imputableLocataire = imputableLocataire;
 		this.immeuble = immeuble;
 		this.bien = bien;
 		this.entreprise = entreprise;
+	}
+
+	public double getMontant() {
+		return montant;
+	}
+
+	public void setMontant(double montant) {
+		this.montant = montant;
 	}
 
 	public int getIdFacture() {
