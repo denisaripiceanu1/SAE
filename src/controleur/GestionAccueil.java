@@ -191,19 +191,23 @@ public class GestionAccueil implements ActionListener {
 	// ------------------- TABLE TRAVAUX pour un IMMEUBLE ------------------- //
 
 	public void ecrireLigneTableTravauxImmeubles(int numeroLigne, Facture facture, Entreprise entreprise) {
-		JTable tableTravauxImmeuble = this.fenetreAccueil.getTableTravaux();
-		DefaultTableModel modeleTable = (DefaultTableModel) tableTravauxImmeuble.getModel();
+	    JTable tableTravauxImmeuble = this.fenetreAccueil.getTableTravaux();
+	    DefaultTableModel modeleTable = (DefaultTableModel) tableTravauxImmeuble.getModel();
 
-		modeleTable.setValueAt(facture.getImmeuble().getImmeuble(), numeroLigne, 0);
-		modeleTable.setValueAt(facture.getDesignation(), numeroLigne, 1);
-		modeleTable.setValueAt(facture.getDateEmission(), numeroLigne, 2);
-		modeleTable.setValueAt(facture.getMontant(), numeroLigne, 3);
-		modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 4);
-		modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
-				numeroLigne, 5);
+	    // Vérifiez si l'immeuble de la facture n'est pas null
+	    if (facture.getImmeuble() != null) {
+	        modeleTable.setValueAt(facture.getImmeuble().getImmeuble(), numeroLigne, 0);
+	    } else {
+	        modeleTable.setValueAt("", numeroLigne, 0); // Valeur par défaut si l'immeuble est null
+	    }
 
+	    modeleTable.setValueAt(facture.getDesignation(), numeroLigne, 1);
+	    modeleTable.setValueAt(facture.getDateEmission(), numeroLigne, 2);
+	    modeleTable.setValueAt(facture.getMontant(), numeroLigne, 3);
+	    modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 4);
+	    modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
+	            numeroLigne, 5);
 	}
-
 	private void chargerTravauxImmeubles() throws SQLException {
 		List<Facture> factures = this.daoFacture.findAll();
 
@@ -212,13 +216,15 @@ public class GestionAccueil implements ActionListener {
 
 		for (int i = 0; i < factures.size(); i++) {
 			Facture f = factures.get(i);
-			Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-
-			this.ecrireLigneTableTravauxImmeubles(i, f, entreprise);
+			if (f != null) {
+	            Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
+				this.ecrireLigneTableTravauxImmeubles(i, f, entreprise);
+			}
 		}
 	}
 
 	// ------------------- TABLE TRAVAUX pour un LOGEMENT ------------------- //
+	
 	public void ecrireLigneTableTravauxLogement(int numeroLigne, Facture facture, Entreprise entreprise) {
 		JTable tableTravauxImmeuble = this.fenetreAccueil.getTableTravaux();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableTravauxImmeuble.getModel();
@@ -241,9 +247,10 @@ public class GestionAccueil implements ActionListener {
 
 		for (int i = 0; i < factures.size(); i++) {
 			Facture f = factures.get(i);
-			Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-
-			this.ecrireLigneTableTravauxLogement(i, f, entreprise);
+			if (f != null) {
+	            Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
+	            this.ecrireLigneTableTravauxLogement(i, f, entreprise);
+	        }
 		}
 	}
 
