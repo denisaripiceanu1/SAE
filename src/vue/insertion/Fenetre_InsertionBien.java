@@ -103,7 +103,7 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		comboBox_typeDeBien = new JComboBox();
 		comboBox_typeDeBien.setModel(new DefaultComboBoxModel(new String[] {"Immeuble", "Maison"}));
 		comboBox_typeDeBien.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
-		comboBox_typeDeBien.setBounds(427, 104, 189, 39);
+		comboBox_typeDeBien.setBounds(427, 104, 189, 45);
 		panel.add(comboBox_typeDeBien);
 		
 		JButton btnAjouter = new JButton("Ajouter");

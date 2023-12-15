@@ -43,32 +43,32 @@ public class GestionInsertionLocation implements ActionListener {
 			break;
 
 		case "Ajouter":
-			Louer location = null;
-			try {
-				DaoBien daoBien = new DaoBien();
-				Bien bien = daoBien.findById(null);
-
-				DaoLocataire daoLocataire = new DaoLocataire();
-				Locataire locataire = daoLocataire.findById(null);
-
-				location = new Louer(locataire, bien, this.fil.getTextField_date_arrivee().getText(), null, /*
-																											 * nb de
-																											 * mois
-																											 */
-						Double.parseDouble(this.fil.getTextField_loyer().getText()),
-						Double.parseDouble(this.fil.getTextField_provision_sur_charges().getText()),
-						Double.parseDouble(this.fil.getTextField_caution().getText()), null, /* bail */
-						null, /* etat des lieux */
-						null, /* date de départ */
-						null, /* loyer paye */
-						this.fil.getTable_liste_locataires().getModel().getRowCount(), null, /* montant reel payé */
-						null, /* trimestre */
-						null/* année */
-				);
-
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+//			Louer location = null;
+//			try {
+//				DaoBien daoBien = new DaoBien();
+//				Bien bien = daoBien.findById(null);
+//
+//				DaoLocataire daoLocataire = new DaoLocataire();
+//				Locataire locataire = daoLocataire.findById(null);
+//
+//				location = new Louer(locataire, bien, this.fil.getTextField_date_arrivee().getText(), null, /*
+//																											 * nb de
+//																											 * mois
+//																											 */
+//						Double.parseDouble(this.fil.getTextField_loyer().getText()),
+//						Double.parseDouble(this.fil.getTextField_provision_sur_charges().getText()),
+//						Double.parseDouble(this.fil.getTextField_caution().getText()), null, /* bail */
+//						null, /* etat des lieux */
+//						null, /* date de départ */
+//						null, /* loyer paye */
+//						this.fil.getTable_liste_locataires().getModel().getRowCount(), null, /* montant reel payé */
+//						null, /* trimestre */
+//						null/* année */
+//				);
+//
+//			} catch (Exception e1) {
+//				e1.printStackTrace();
+//			}
 			break;
 		case "Annuler":
 			this.fil.dispose();
