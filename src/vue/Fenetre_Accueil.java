@@ -138,7 +138,7 @@ public class Fenetre_Accueil extends JFrame {
 		JLabel logo = new JLabel("");
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
 
-		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png"))); 
+		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png")));
 		bandeAccueil.add(logo);
 		JPanel panelDuBtnAccueil = new JPanel();
 		panelDuBtnAccueil.setBackground(new Color(192, 192, 192));
@@ -965,6 +965,10 @@ public class Fenetre_Accueil extends JFrame {
 
 	public JTable getTableAssurances() {
 		return table_MesAssurances;
+	}
+
+	public JTable getTableTravaux() {
+		return table_MesTravaux;
 	}
 
 	public JTextField getTextField_loyer() {
