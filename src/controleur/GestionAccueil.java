@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import controleur.outils.Sauvegarde;
 import modele.Assurance;
 import modele.Bien;
+import modele.Charge;
 import modele.Echeance;
 import modele.Entreprise;
 import modele.Facture;
@@ -24,6 +25,7 @@ import modele.Immeuble;
 import modele.Louer;
 import modele.dao.DaoAssurance;
 import modele.dao.DaoBien;
+import modele.dao.DaoCharge;
 import modele.dao.DaoEcheance;
 import modele.dao.DaoEntreprise;
 import modele.dao.DaoFacture;
@@ -53,6 +55,7 @@ public class GestionAccueil implements ActionListener {
 	private DaoEcheance daoEcheance;
 	private DaoEntreprise daoEntreprise;
 	private DaoFacture daoFacture;
+	private DaoCharge daoCharge;
 
 	public GestionAccueil(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
@@ -63,6 +66,7 @@ public class GestionAccueil implements ActionListener {
 		this.daoEcheance = new DaoEcheance();
 		this.daoEntreprise = new DaoEntreprise();
 		this.daoFacture = new DaoFacture();
+		this.daoCharge = new DaoCharge();
 	}
 
 	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE
@@ -264,7 +268,31 @@ public class GestionAccueil implements ActionListener {
 			}
 		}
 	}
+	
+	// ------------------- TABLE CHARGES LOCATIVES ------------------- //
 
+	public void ecrireLigneTableChargesLocatives(int numeroLigne, Charge charge) {
+		JTable tableChargesLocatives = this.fenetreAccueil.getTableChargesLocatives();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableChargesLocatives.getModel();
+
+		modeleTable.setValueAt(charge.getNom(), numeroLigne, 0);
+		modeleTable.setValueAt(charge.getBien().getIdBien(), numeroLigne, 1);
+		modeleTable.setValueAt(charge.isDeductible(), numeroLigne, 2);
+		modeleTable.setValueAt(charge.getMontantReel(), numeroLigne, 3);	
+	}
+
+	private void chargerChargesLocatives() throws SQLException {
+		List<Charge> charges = this.daoCharge.findAll();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
+		modeleTable.setRowCount(charges.size());
+
+		for (int i = 0; i < charges.size(); i++) {
+			Charge c = charges.get(i);
+			this.ecrireLigneTableChargesLocatives(i,c);
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
@@ -475,6 +503,11 @@ public class GestionAccueil implements ActionListener {
 			// LAYERED MES CHARGES LOCATIVES
 			///////////////////////////////
 			case "btn_MesChargesLocatives_Charger":
+				try {
+					this.chargerChargesLocatives();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				break;
 			case "btn_MesChargesLocatives_Modifier":
 				break;
