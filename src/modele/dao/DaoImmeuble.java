@@ -2,12 +2,11 @@ package modele.dao;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
-
-
 import java.sql.SQLException;
 import java.util.List;
 
 import modele.Immeuble;
+import modele.dao.requetes.delete.RequeteDeleteImmeuble;
 import modele.dao.requetes.select.RequeteSelectImmeuble;
 import modele.dao.requetes.select.RequeteSelectImmeubleById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
@@ -19,26 +18,26 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 	@Override
 	public void create(Immeuble donnees) throws SQLException {
 		SousProgramme<Immeuble> sp = new SousProgrammeInsertImmeuble();
-    	CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
-    	sp.parametres(st, donnees);
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
 		st.execute();
 	}
 
 	@Override
 	public void update(Immeuble donnees) throws SQLException {
-		miseAJour(new RequeteUpdateImmeuble(), donnees);
+		this.miseAJour(new RequeteUpdateImmeuble(), donnees);
 
 	}
 
 	@Override
-	public void delete(Immeuble donnees) {
-		delete(donnees);
+	public void delete(Immeuble donnees) throws SQLException {
+		this.miseAJour(new RequeteDeleteImmeuble(), donnees);
 
 	}
 
 	@Override
 	public Immeuble findById(String... id) throws SQLException {
-		List<Immeuble> immeuble = find(new RequeteSelectImmeubleById(), id);
+		List<Immeuble> immeuble = this.find(new RequeteSelectImmeubleById(), id);
 		if (immeuble.isEmpty()) {
 			return null;
 		}
@@ -47,7 +46,7 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 
 	@Override
 	public List<Immeuble> findAll() throws SQLException {
-		return find(new RequeteSelectImmeuble());
+		return this.find(new RequeteSelectImmeuble());
 	}
 
 	@Override

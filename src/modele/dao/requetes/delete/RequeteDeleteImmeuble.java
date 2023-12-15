@@ -3,14 +3,14 @@ package modele.dao.requetes.delete;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import modele.Bien;
+import modele.Immeuble;
 import modele.dao.requetes.Requete;
 
-public class RequeteDeleteBien implements Requete<Bien> {
+public class RequeteDeleteImmeuble implements Requete<Immeuble> {
 
 	@Override
 	public String requete() {
-		return "DELETE FROM BIEN WHERE ID_Bien = ?";
+		return "DELETE FROM IMMEUBLE WHERE ID_Immeuble = ?";
 	}
 
 	@Override
@@ -20,7 +20,8 @@ public class RequeteDeleteBien implements Requete<Bien> {
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Bien donnee) throws SQLException {
+	public void parametres(PreparedStatement prSt, Immeuble donnee) throws SQLException {
+		prSt.setString(1, donnee.getImmeuble()); // cle primaire
 	}
 
 }

@@ -1,7 +1,6 @@
 package controleur;
 
 import java.awt.BorderLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -39,6 +38,7 @@ import vue.insertion.Fenetre_InsertionPaiementBien;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
 import vue.modification.Fenetre_ModificationBien;
 import vue.modification.Fenetre_ModificationLogement;
+import vue.suppression.Fenetre_SupprimerBien;
 
 public class GestionAccueil implements ActionListener {
 
@@ -92,7 +92,7 @@ public class GestionAccueil implements ActionListener {
 	// ------------------- TABLE BIENS ------------------- //
 
 	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) {
-		JTable tableImmeuble = fenetreAccueil.getTableBiens();
+		JTable tableImmeuble = this.fenetreAccueil.getTableBiens();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
 
 		modeleTable.setValueAt(immeuble.getImmeuble(), numeroLigne, 0);
@@ -102,22 +102,23 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	private void chargerBiens() throws SQLException {
-		List<Immeuble> immeubles = daoImmeuble.findAll();
 
-		DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableBiens().getModel();
+		List<Immeuble> immeubles = this.daoImmeuble.findAll();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableBiens().getModel();
 
 		modeleTable.setRowCount(immeubles.size());
 
 		for (int i = 0; i < immeubles.size(); i++) {
 			Immeuble immeuble = immeubles.get(i);
-			ecrireLigneTableBiens(i, immeuble);
+			this.ecrireLigneTableBiens(i, immeuble);
 		}
 	}
 
 	// ------------------- TABLE LOCATIONS ------------------- //
 
 	public void ecrireLigneTableLocations(int numeroLigne, Louer location, Bien bien) {
-		JTable tableLocations = fenetreAccueil.getTableLocations();
+		JTable tableLocations = this.fenetreAccueil.getTableLocations();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableLocations.getModel();
 
 		modeleTable.setValueAt(location.getIdLocataire(), numeroLigne, 0);
@@ -126,21 +127,21 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	private void chargerLocations() throws SQLException {
-		List<Bien> biens = daoBien.findAll();
+		List<Bien> biens = this.daoBien.findAll();
 		List<Louer> locations = new ArrayList<>();
 
 		for (Bien b : biens) {
-			locations.addAll(daoLouer.findLocationByBien(b.getIdBien())); // Ajouter toutes les locations du bien à la
-																			// liste
+			locations.addAll(this.daoLouer.findLocationByBien(b.getIdBien())); // Ajouter toutes les locations du bien à
+																				// la liste
 		}
 
-		DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableLocations().getModel();
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableLocations().getModel();
 		modeleTable.setRowCount(locations.size());
 
 		for (int i = 0; i < locations.size(); i++) {
 			Louer location = locations.get(i);
 			Bien bien = location.getIdBien();
-			ecrireLigneTableLocations(i, location, bien);
+			this.ecrireLigneTableLocations(i, location, bien);
 		}
 	}
 
@@ -148,7 +149,7 @@ public class GestionAccueil implements ActionListener {
 
 	public void ecrireLigneTableAssurances(int numeroLigne, Assurance assurance, Entreprise entreprise,
 			Echeance echeance) {
-		JTable tableAssurances = fenetreAccueil.getTableAssurances();
+		JTable tableAssurances = this.fenetreAccueil.getTableAssurances();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
 
 		modeleTable.setValueAt(assurance.getNuméroPolice(), numeroLigne, 0);
@@ -168,17 +169,17 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	private void chargerAssurances() throws SQLException {
-		List<Assurance> assurances = daoAssurance.findAll();
+		List<Assurance> assurances = this.daoAssurance.findAll();
 
-		DefaultTableModel modeleTable = (DefaultTableModel) fenetreAccueil.getTableAssurances().getModel();
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableAssurances().getModel();
 		modeleTable.setRowCount(assurances.size());
 
 		for (int i = 0; i < assurances.size(); i++) {
 			Assurance a = assurances.get(i);
-			Entreprise entreprise = daoEntreprise.findById(a.getEntreprise().getSiret());
-			Echeance echeance = daoEcheance.findById(a.getNuméroPolice());
+			Entreprise entreprise = this.daoEntreprise.findById(a.getEntreprise().getSiret());
+			Echeance echeance = this.daoEcheance.findById(a.getNuméroPolice());
 
-			ecrireLigneTableAssurances(i, a, entreprise, echeance);
+			this.ecrireLigneTableAssurances(i, a, entreprise, echeance);
 		}
 	}
 
@@ -220,12 +221,23 @@ public class GestionAccueil implements ActionListener {
 		///////////////////
 		case "btnMesBiens_Charger":
 			try {
-				chargerBiens();
+				this.chargerBiens();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 			break;
 		case "btnMesBiens_Supprimer":
+			if (Sauvegarde.onSave("Immeuble") == true) {
+				Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
+				Fenetre_SupprimerBien supp_bien = new Fenetre_SupprimerBien();
+				this.fenetreAccueil.getLayeredPane().add(supp_bien);
+				supp_bien.setVisible(true);
+				supp_bien.moveToFront();
+			} else {
+				JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien pour supprimer",
+						"Erreur", JOptionPane.ERROR_MESSAGE);
+			}
+
 			break;
 		case "btnMesBiens_Modifier":
 
@@ -235,6 +247,24 @@ public class GestionAccueil implements ActionListener {
 				this.fenetreAccueil.getLayeredPane().add(modif_logement);
 				modif_logement.setVisible(true);
 				modif_logement.moveToFront();
+
+				// On recupère le logement de la sauvegarde
+				Bien logementSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+				Bien logementCourant;
+
+				try {
+					logementCourant = this.daoBien.findById(logementSauvegarde.getIdBien());
+					modif_logement.getTextField_IdLogement().setText(logementCourant.getIdBien());
+					modif_logement.getTextField_SurfaceHabitable()
+							.setText(Double.toString(logementCourant.getSurfaceHabitable()));
+					modif_logement.getTextField_NbPièces().setText(Integer.toString(logementCourant.getNbPieces()));
+					modif_logement.getTextField_DateAcquisition().setText(logementCourant.getDateAcquisition());
+					modif_logement.getTextField_NumEtage().setText(Integer.toString(logementCourant.getNumEtage()));
+					modif_logement.getComboBox_typeDeLogement().setSelectedItem(logementCourant.getType_bien());
+					// voir comment potentiellement recuperer le compteur et les autres trucs
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 
 			} else {
 
@@ -256,7 +286,7 @@ public class GestionAccueil implements ActionListener {
 					try {
 						// A partir de l'ID de l'immeuble dans la sauvegarde on utilise la BD pour
 						// récupérer l'immeuble le plus récent correspondant
-						immeubleCourant = daoImmeuble.findById(immeubleSauvegarde.getImmeuble());
+						immeubleCourant = this.daoImmeuble.findById(immeubleSauvegarde.getImmeuble());
 						// afficher les infos dans la page
 						modif_bien.getTextField_IdImmeuble().setText(immeubleCourant.getImmeuble());
 						modif_bien.getTextField_adresse().setText(immeubleCourant.getAdresse());
@@ -268,7 +298,6 @@ public class GestionAccueil implements ActionListener {
 						modif_bien.getTextField_dateAcquisition().setText(immeubleCourant.getDateAcquisition());
 						modif_bien.getComboBox_typeDeBien().setSelectedItem(immeubleCourant.getType_immeuble());
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 
@@ -323,7 +352,7 @@ public class GestionAccueil implements ActionListener {
 		///////////////////////
 		case "btn_MesLocations_Charger":
 			try {
-				chargerLocations();
+				this.chargerLocations();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -355,12 +384,20 @@ public class GestionAccueil implements ActionListener {
 			break;
 
 		case "tglbtn_Travaux_immeubles":
-			// Permet de trier le tableau de travaux en n'affichant que ceux concernants les
-			// immeubles
+			// Permet de trier le tableau de travaux en n'affichant que ceux concernants les immeubles
+			try {
+				this.chargerTravauxImmeubles();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "tglbtn_Travaux_logements":
-			// Permet de trier le tableau de travaux en n'affichant que ceux concernants les
-			// logements
+			// Permet de trier le tableau de travaux en n'affichant que ceux concernants les logements
+			try {
+				this.chargerTravauxLogements();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		///////////////////////////////
 		// LAYERED MES CHARGES LOCATIVES
@@ -386,7 +423,7 @@ public class GestionAccueil implements ActionListener {
 		////////////////////////
 		case "btn_MesAssurances_Charger":
 			try {
-				chargerAssurances();
+				this.chargerAssurances();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
