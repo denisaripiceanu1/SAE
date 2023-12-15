@@ -139,7 +139,7 @@ public class Fenetre_Accueil extends JFrame {
 		JLabel logo = new JLabel("");
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
 
-		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png"))); 
+		logo.setIcon(new ImageIcon(Fenetre_Accueil.class.getResource("/icon/logo_appli.png")));
 		bandeAccueil.add(logo);
 		JPanel panelDuBtnAccueil = new JPanel();
 		panelDuBtnAccueil.setBackground(new Color(192, 192, 192));
@@ -661,7 +661,7 @@ public class Fenetre_Accueil extends JFrame {
 		// ComboBox
 		JComboBox comboBox_MesChargesLocatives = new JComboBox();
 		comboBox_MesChargesLocatives.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
-		comboBox_MesChargesLocatives.setBounds(55, 81, 130, 21);
+		comboBox_MesChargesLocatives.setBounds(55, 81, 130, 29);
 		panel_chargesLocatives.add(comboBox_MesChargesLocatives);
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
@@ -750,7 +750,7 @@ public class Fenetre_Accueil extends JFrame {
 		// ComboBox
 		JComboBox comboBox_MesAssurances = new JComboBox();
 		comboBox_MesAssurances.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
-		comboBox_MesAssurances.setBounds(55, 80, 130, 21);
+		comboBox_MesAssurances.setBounds(55, 80, 130, 29);
 		panel_MesAssurances.add(comboBox_MesAssurances);
 
 		// Remplir le JComboBox avec les identifiants des logements
@@ -809,7 +809,7 @@ public class Fenetre_Accueil extends JFrame {
 		// JComboBox
 		JComboBox comboBox_Regularisation = new JComboBox();
 		comboBox_Regularisation.setModel(new DefaultComboBoxModel(new String[] { "Locataire" }));
-		comboBox_Regularisation.setBounds(55, 81, 130, 21);
+		comboBox_Regularisation.setBounds(55, 81, 130, 29);
 		panel_RegularisationDesCharges.add(comboBox_Regularisation);
 
 		// Remplir le JComboBox avec les identifiants des locataires
@@ -968,6 +968,10 @@ public class Fenetre_Accueil extends JFrame {
 
 	public JTable getTableAssurances() {
 		return table_MesAssurances;
+	}
+
+	public JTable getTableTravaux() {
+		return table_MesTravaux;
 	}
 
 	public JTextField getTextField_loyer() {

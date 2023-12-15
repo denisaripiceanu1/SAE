@@ -35,7 +35,7 @@ public abstract class DaoModele<T> implements Dao<T> {
 		requete.parametres(st, donnee);
 		return st.executeUpdate(); // Nombre de lignes mise à jour
 	}
-
+	
 	public int delete(Requete<T> req, T data) throws SQLException {
 		return miseAJour(req, data);
 

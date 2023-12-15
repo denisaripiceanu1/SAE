@@ -8,11 +8,9 @@ import javax.swing.JButton;
 import controleur.outils.Sauvegarde;
 import modele.Compteur;
 import modele.Immeuble;
-import modele.dao.DaoBien;
 import modele.dao.DaoCompteur;
 import modele.dao.DaoImmeuble;
 import vue.Fenetre_Accueil;
-import vue.insertion.Fenetre_InsertionBien;
 import vue.insertion.Fenetre_InsertionCompteur;
 import vue.modification.Fenetre_ModificationBien;
 
@@ -34,7 +32,8 @@ public class GestionModificationBien implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationBien.getTopLevelAncestor(); // fenetre dans
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationBien.getTopLevelAncestor(); // fenetre
+																											// dans
 																											// laquelle
 																											// on ouvre
 																											// des
@@ -62,34 +61,32 @@ public class GestionModificationBien implements ActionListener {
 			fenetreCompteur.moveToFront();
 			break;
 		case "Modifier":
-			
+
 			try {
-				
-				Immeuble nouvelImmeuble = new Immeuble(
-						this.modificationBien.getTextField_IdImmeuble().getText(),
-						this.modificationBien.getTextField_adresse().getText(), 
-						this.modificationBien.getTextField_codePostal().getText(), 
-						this.modificationBien.getTextField_ville().getText(), 
-						this.modificationBien.getTextField_periodeDeConstruction().getText(), 
+
+				Immeuble nouvelImmeuble = new Immeuble(this.modificationBien.getTextField_IdImmeuble().getText(),
+						this.modificationBien.getTextField_adresse().getText(),
+						this.modificationBien.getTextField_codePostal().getText(),
+						this.modificationBien.getTextField_ville().getText(),
+						this.modificationBien.getTextField_periodeDeConstruction().getText(),
 						Integer.parseInt(this.modificationBien.getTextField_nbLogement().getText()),
 						this.modificationBien.getTextField_dateAcquisition().getText(),
-						this.modificationBien.getComboBox_typeDeBien().getSelectedItem().toString()
-				);
-				
+						this.modificationBien.getComboBox_typeDeBien().getSelectedItem().toString());
+
 				this.daoImmeuble.update(nouvelImmeuble);
-				
-				//Si il y a un compteur à ajouter
-				if(Sauvegarde.onSave("Compteur")) {
+
+				// Si il y a un compteur à ajouter
+				if (Sauvegarde.onSave("Compteur")) {
 					this.daoCompteur.create((Compteur) Sauvegarde.getItem("Compteur"));
 					Sauvegarde.clearSave();
 				}
-				
-				this.modificationBien.dispose(); //Fermer la page après l'ajout
-				
+
+				this.modificationBien.dispose(); // Fermer la page après l'ajout
+
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-				
+
 			break;
 		case "Annuler":
 			this.modificationBien.dispose();

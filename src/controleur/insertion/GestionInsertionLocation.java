@@ -2,15 +2,12 @@ package controleur.insertion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import controleur.outils.PDFImporter;
 import modele.Bien;
 import modele.Locataire;
 import modele.Louer;
@@ -81,6 +78,32 @@ public class GestionInsertionLocation implements ActionListener {
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
+//			Louer location = null;
+//			try {
+//				DaoBien daoBien = new DaoBien();
+//				Bien bien = daoBien.findById(null);
+//
+//				DaoLocataire daoLocataire = new DaoLocataire();
+//				Locataire locataire = daoLocataire.findById(null);
+//
+//				location = new Louer(locataire, bien, this.fil.getTextField_date_arrivee().getText(), null, /*
+//																											 * nb de
+//																											 * mois
+//																											 */
+//						Double.parseDouble(this.fil.getTextField_loyer().getText()),
+//						Double.parseDouble(this.fil.getTextField_provision_sur_charges().getText()),
+//						Double.parseDouble(this.fil.getTextField_caution().getText()), null, /* bail */
+//						null, /* etat des lieux */
+//						null, /* date de départ */
+//						null, /* loyer paye */
+//						this.fil.getTable_liste_locataires().getModel().getRowCount(), null, /* montant reel payé */
+//						null, /* trimestre */
+//						null/* année */
+//				);
+//
+//			} catch (Exception e1) {
+//				e1.printStackTrace();
+//			}
 			break;
 		case "Annuler":
 			this.fil.dispose();

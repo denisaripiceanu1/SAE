@@ -90,6 +90,7 @@ public class Fenetre_ModificationLogement extends JInternalFrame {
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		this.textField_IdLogement.setBounds(145, 118, 190, 40);
 		panel.add(this.textField_IdLogement);
+		this.textField_IdLogement.setEditable(false);
 
 		this.textField_SurfaceHabitable = new JTextField();
 		this.textField_SurfaceHabitable.setColumns(10);

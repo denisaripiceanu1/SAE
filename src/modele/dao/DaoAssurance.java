@@ -36,28 +36,27 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 
 	@Override
 	protected Assurance creerInstance(ResultSet curseur) throws SQLException {
-	    Assurance assurance = null;
-	    try {
-	        String numeroPolice = curseur.getString("numero_police");
-	        float montantInit = curseur.getFloat("montant");
+		Assurance assurance = null;
+		try {
+			String numeroPolice = curseur.getString("numero_police");
+			float montantInit = curseur.getFloat("montant");
 
-	        // Récupérer l'identifiant de l'immeuble
-	        String idImmeuble = curseur.getString("Id_Immeuble");
-	        DaoImmeuble daoImmeuble = new DaoImmeuble();
-	        Immeuble immeuble = daoImmeuble.findById(idImmeuble);
+			// Récupérer l'identifiant de l'immeuble
+			String idImmeuble = curseur.getString("Id_Immeuble");
+			DaoImmeuble daoImmeuble = new DaoImmeuble();
+			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
 
-	        // Récupérer l'identifiant de l'entreprise
-	        String siretEntreprise = curseur.getString("SIRET");
-	        DaoEntreprise daoEntreprise = new DaoEntreprise();
-	        Entreprise entreprise = daoEntreprise.findById(siretEntreprise);
+			// Récupérer l'identifiant de l'entreprise
+			String siretEntreprise = curseur.getString("SIRET");
+			DaoEntreprise daoEntreprise = new DaoEntreprise();
+			Entreprise entreprise = daoEntreprise.findById(siretEntreprise);
 
-	        assurance = new Assurance(numeroPolice, montantInit, immeuble, entreprise);
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	    return assurance;
+			assurance = new Assurance(numeroPolice, montantInit, immeuble, entreprise);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return assurance;
 	}
-
 
 	@Override
 	public List<Assurance> findAll() throws SQLException {
