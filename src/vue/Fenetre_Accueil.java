@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableModel;
 import controleur.GestionAccueil;
 import controleur.GestionBienLogement;
 import controleur.GestionLocations;
+import controleur.GestionTableCharges;
 import controleur.GestionTableLogement;
 import controleur.insertion.GestionInsertionBien;
 import controleur.outils.PDFListe;
@@ -83,6 +84,7 @@ public class Fenetre_Accueil extends JFrame {
 	private GestionAccueil gestionAccueil;
 	private GestionBienLogement gestionBienLogement;
 	private GestionTableLogement gestionTableLogement;
+	private GestionTableCharges gestionTableCharges;
 	private GestionLocations gestionLocations;
 
 	private DaoBien daoBien;
@@ -110,6 +112,7 @@ public class Fenetre_Accueil extends JFrame {
 	 */
 	public Fenetre_Accueil() {
 		this.gestionTableLogement = new GestionTableLogement(this);
+		this.gestionTableCharges = new GestionTableCharges(this);
 		this.gestionBienLogement = new GestionBienLogement(this);
 		this.gestionLocations = new GestionLocations(this);
 		this.gestionAccueil = new GestionAccueil(this);
@@ -618,6 +621,7 @@ public class Fenetre_Accueil extends JFrame {
 				new String[] { "Libell\u00E9", "Bien", "D\u00E9ductible", "Montant" }));
 		this.table_MesChargesLocatives.setBounds(40, 53, 668, 130);
 		scrollPane_MesChargesLocatives.setViewportView(this.table_MesChargesLocatives);
+		this.table_MesChargesLocatives.getSelectionModel().addListSelectionListener(this.gestionTableCharges);
 
 		// Labels
 		JLabel lbl_MesChargesLocatives = new JLabel("Mes Charges Locatives");

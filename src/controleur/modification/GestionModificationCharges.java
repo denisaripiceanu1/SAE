@@ -8,15 +8,9 @@ import javax.swing.JButton;
 import controleur.outils.Sauvegarde;
 import modele.Bien;
 import modele.Charge;
-import modele.Compteur;
-import modele.Immeuble;
 import modele.dao.DaoBien;
 import modele.dao.DaoCharge;
-import modele.dao.DaoCompteur;
-import modele.dao.DaoImmeuble;
 import vue.Fenetre_Accueil;
-import vue.insertion.Fenetre_InsertionCompteur;
-import vue.modification.Fenetre_ModificationBien;
 import vue.modification.Fenetre_ModificationCharges;
 
 public class GestionModificationCharges implements ActionListener {
@@ -44,7 +38,6 @@ public class GestionModificationCharges implements ActionListener {
 		case "Modifier":
 
 			try {
-
 				int deductibleValeur = 0; // Non déductible par défaut
 
 				// choix de la radio button
@@ -76,9 +69,4 @@ public class GestionModificationCharges implements ActionListener {
 			break;
 		}
 	}
-
-	public String getIdBien() {
-		return this.idBien;
-	}
-
 }

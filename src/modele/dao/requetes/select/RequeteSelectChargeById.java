@@ -11,7 +11,7 @@ public class RequeteSelectChargeById implements Requete<Charge> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Charge WHERE Id_Bien = ?";
+        return "SELECT * FROM Charge WHERE nom = ?";
 	}
 
 	@Override

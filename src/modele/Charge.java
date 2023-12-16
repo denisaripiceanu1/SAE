@@ -2,30 +2,31 @@ package modele;
 
 public class Charge {
 
-	//private String idCharge;
-	private String nom;
-	private double montantReel;
-	private double montantPrevisionnel;
-	private int deductible;
-	private Bien idBien;
+	 private static int compteurIdCharge = 1;
 
-	public Charge( String nom, double montantReel, double montantPrevisionnel, int deductible, Bien idBien) {
+	    private int idCharge;
+	    private String nom;
+	    private double montantReel;
+	    private double montantPrevisionnel;
+	    private int deductible;
+	    private Bien idBien;
 
-		// this.idCharge = idCharge;
-		this.nom = nom;
-		this.montantReel = montantReel;
-		this.montantPrevisionnel = montantPrevisionnel;
-		this.deductible = deductible;
-		this.idBien = idBien;
+	    public Charge(String nom, double montantReel, double montantPrevisionnel, int deductible, Bien idBien) {
+	        this.idCharge = compteurIdCharge++;
+	        this.nom = nom;
+	        this.montantReel = montantReel;
+	        this.montantPrevisionnel = montantPrevisionnel;
+	        this.deductible = deductible;
+	        this.idBien = idBien;
+	    }
+
+	public int getIdCharge() {
+		return this.idCharge;
 	}
 
-//	public String getIdCharge() {
-//		return this.idCharge;
-//	}
-//
-//	public void setIdCharge(String idCharge) {
-//		this.idCharge = idCharge;
-//	}
+	public void setIdCharge(int idCharge) {
+		this.idCharge = idCharge;
+	}
 
 	public String getNom() {
 		return this.nom;

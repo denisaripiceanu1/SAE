@@ -48,6 +48,7 @@ import vue.modification.Fenetre_ModificationBien;
 import vue.modification.Fenetre_ModificationCharges;
 import vue.modification.Fenetre_ModificationLogement;
 import vue.suppression.Fenetre_SupprimerBien;
+import vue.suppression.Fenetre_SupprimerCharge;
 
 public class GestionAccueil implements ActionListener {
 
@@ -624,48 +625,48 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesChargesLocatives_Modifier":
-				if (Sauvegarde.onSave("Charge") == true && Sauvegarde.onSave("Logement") == true) {
-					Fenetre_ModificationCharges modif_charge = new Fenetre_ModificationCharges();
-					this.fenetreAccueil.getLayeredPane().add(modif_charge);
-					modif_charge.setVisible(true);
-					modif_charge.moveToFront();
+			    if (Sauvegarde.onSave("Charge") && Sauvegarde.onSave("Logement")) {
+			        Fenetre_ModificationCharges modif_charge = new Fenetre_ModificationCharges();
+			        this.fenetreAccueil.getLayeredPane().add(modif_charge);
+			        modif_charge.setVisible(true);
+			        modif_charge.moveToFront();
 
-					// On recupère la charge de la sauvegarde
-					Charge chargeSauvegarde = (Charge) Sauvegarde.getItem("Charge");
-					Charge chargeCourante;
+			        // On recupère la charge de la sauvegarde
+			        Charge chargeSauvegarde = (Charge) Sauvegarde.getItem("Charge");
 
-					// On recupère le logement de la sauvegarde
-					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
-					Bien bienCourant;
+			        // On recupère le logement de la sauvegarde
+			        Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+			        
+			        try {
+			            Bien bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
 
-					try {
-						bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					int deductibleValeur = 0; // Non déductible par défaut
+			            int deductibleValeur = 0; // Non déductible par défaut
 
-					// choix de la radio button
-					if (modif_charge.getRdbtnAjouterChargeOui().isSelected()) {
-						deductibleValeur = 1;
-					} else if (modif_charge.getRdbtnAjouterChargeNon().isSelected()) {
-						deductibleValeur = 0;
-					}
+			            // choix de la radio button
+			            if (modif_charge.getRdbtnAjouterChargeOui().isSelected()) {
+			                deductibleValeur = 1;
+			            } else if (modif_charge.getRdbtnAjouterChargeNon().isSelected()) {
+			                deductibleValeur = 0;
+			            }
 
-					chargeCourante = chargeSauvegarde;
-					modif_charge.getTextField_nomCharge().setText(chargeCourante.getNom());
-					modif_charge.getTextField_montantPrevisionnel()
-							.setText(Double.toString(chargeCourante.getMontantPrevisionnel()));
-					modif_charge.getTextField_montantReel()
-					.setText(Double.toString(chargeCourante.getMontantReel()));
-					if (chargeCourante.isDeductible() == 1) {
-					    modif_charge.getRdbtnAjouterChargeNon().setSelected(true);
-					} else {
-					    modif_charge.getRdbtnAjouterChargeOui().setSelected(true);
-					}
-				}
-				break;
+			            modif_charge.getTextField_nomCharge().setText(chargeSauvegarde.getNom());
+			            modif_charge.getTextField_montantPrevisionnel().setText(Double.toString(chargeSauvegarde.getMontantPrevisionnel()));
+			            modif_charge.getTextField_montantReel().setText(Double.toString(chargeSauvegarde.getMontantReel()));
+
+			            // Mise à jour des boutons radio
+			            if (chargeSauvegarde.isDeductible() == 1) {
+			                modif_charge.getRdbtnAjouterChargeNon().setSelected(true);
+			            } else {
+			                modif_charge.getRdbtnAjouterChargeOui().setSelected(true);
+			            }
+
+			        } catch (SQLException e1) {
+			            // Gérer l'exception de manière appropriée (affichage d'un message à l'utilisateur, etc.)
+			            e1.printStackTrace();
+			        }
+			    }
+			    break;
+
 
 			case "btn_MesChargesLocatives_Inserer":
 				JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
@@ -679,6 +680,17 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesChargesLocatives_Supprimer":
+				
+				if (Sauvegarde.onSave("Charge") == true) {
+			        Charge chargeSauvegarde = (Charge) Sauvegarde.getItem("Charge");
+			        Fenetre_SupprimerCharge supp_charge = new Fenetre_SupprimerCharge();
+					this.fenetreAccueil.getLayeredPane().add(supp_charge);
+					supp_charge.setVisible(true);
+					supp_charge.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner une charge pour supprimer",
+							"Erreur", JOptionPane.ERROR_MESSAGE);
+				}
 				break;
 
 			////////////////////////
