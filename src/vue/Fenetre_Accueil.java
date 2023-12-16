@@ -667,7 +667,7 @@ public class Fenetre_Accueil extends JFrame {
 
 		// ComboBox
 		this.comboBox_MesChargesLocatives = new JComboBox<String>();
-		comboBox_MesChargesLocatives.setBounds(55, 81, 130, 29);
+		comboBox_MesChargesLocatives.setBounds(55, 81, 171, 29);
 		panel_chargesLocatives.add(comboBox_MesChargesLocatives);
 		comboBox_MesChargesLocatives.addActionListener(this.gestionAccueil);
 		// Remplir le JComboBox avec les identifiants des logements

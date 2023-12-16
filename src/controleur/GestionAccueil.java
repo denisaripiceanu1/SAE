@@ -452,8 +452,7 @@ public class GestionAccueil implements ActionListener {
 
 				break;
 			case "btnMesBiens_Modifier":
-
-				//////// POUR UN LOGEMENT/BIEN ///////////
+				//////// POUR UN LOGEMENT --> BIEN (dans notre BDD) ///////////
 				if (Sauvegarde.onSave("Logement") == true) {
 					Fenetre_ModificationLogement modif_logement = new Fenetre_ModificationLogement();
 					this.fenetreAccueil.getLayeredPane().add(modif_logement);
@@ -600,12 +599,10 @@ public class GestionAccueil implements ActionListener {
 						infos_locataire.getTextField_Telephone().setText(locataireCourant.getTelephone());
 						infos_locataire.getTextField_Mail().setText(locataireCourant.getMail());
 						infos_locataire.getTextField_DateN().setText(locataireCourant.getDateNaissance());
-
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
 				}
-
 				break;
 			/////////////////////
 			// LAYERED MES TRAVAUX
@@ -626,22 +623,48 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesChargesLocatives_Modifier":
-				break;
-			case "btn_MesChargesLocatives_Inserer":
+				
+				if (Sauvegarde.onSave("Charge") == true) {
+					Fenetre_ModificationLogement modif_logement = new Fenetre_ModificationLogement();
+					this.fenetreAccueil.getLayeredPane().add(modif_logement);
+					modif_logement.setVisible(true);
+					modif_logement.moveToFront();
 
-				if (Sauvegarde.onSave("Logement") == true) {
+					// On recupère le logement de la sauvegarde
+					Bien logementSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+					Bien logementCourant;
+
+					try {
+						logementCourant = this.daoBien.findById(logementSauvegarde.getIdBien());
+						modif_logement.getTextField_IdLogement().setText(logementCourant.getIdBien());
+						modif_logement.getTextField_SurfaceHabitable()
+								.setText(Double.toString(logementCourant.getSurfaceHabitable()));
+						modif_logement.getTextField_NbPièces().setText(Integer.toString(logementCourant.getNbPieces()));
+						modif_logement.getTextField_DateAcquisition().setText(logementCourant.getDateAcquisition());
+						modif_logement.getTextField_NumEtage().setText(Integer.toString(logementCourant.getNumEtage()));
+						modif_logement.getComboBox_typeDeLogement().setSelectedItem(logementCourant.getType_bien());
+						// voir comment potentiellement recuperer le compteur et les autres trucs
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+
+				}
+				break;
+				
+			case "btn_MesChargesLocatives_Inserer":
+				JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
+				String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
+				// La oage s'oyvre que si un Logement du JComboBox est selectionne
+				if (!idLogementSelectionne.equals("ID du logement") && Sauvegarde.onSave("Logement") == true) {
 					Fenetre_InsertionCharges fic = new Fenetre_InsertionCharges();
 					this.fenetreAccueil.getLayeredPane().add(fic);
 					fic.setVisible(true);
 					fic.moveToFront();
 				}
-
 				break;
 			case "btn_MesChargesLocatives_Supprimer":
 				break;
 
-			// Coder la cas de la selection d'un id logement
-			// parmi la liste présente dans le JComboBox "comboBox_MesChargesLocatives"
 
 			////////////////////////
 			// LAYERED MES ASSURANCES

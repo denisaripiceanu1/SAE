@@ -32,13 +32,7 @@ public class GestionModificationBien implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationBien.getTopLevelAncestor(); // fenetre
-																											// dans
-																											// laquelle
-																											// on ouvre
-																											// des
-																											// internal
-																											// frame
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationBien.getTopLevelAncestor(); 
 		switch (btn.getText()) {
 		case "Ajouter un compteur":
 			this.idBien = this.modificationBien.getTextField_IdImmeuble().getText();

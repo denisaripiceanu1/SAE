@@ -1,4 +1,4 @@
-package vue.insertion;
+package vue.modification;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,42 +15,19 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import controleur.insertion.GestionInsertionCharges;
+import controleur.modification.GestionModificationCharges;
 
-public class Fenetre_InsertionCharges extends JInternalFrame {
+public class Fenetre_ModificationCharges extends JInternalFrame {
 	private JTextField textField_nomCharge;
 	private JTextField textField_montantPrevisionnel;
-	private GestionInsertionCharges gestionClic;
+	private GestionModificationCharges gestionModification;
 	private JTextField textField_montantReel;
 	private JRadioButton rdbtnAjouterChargeOui;
 	private JRadioButton rdbtnAjouterChargeNon;
 
-	public JTextField getTextField_nomCharge() {
-		return this.textField_nomCharge;
-	}
+	public Fenetre_ModificationCharges() {
 
-	public JTextField getTextField_montantPrevisionnel() {
-		return this.textField_montantPrevisionnel;
-	}
-
-	public GestionInsertionCharges getGestionClic() {
-		return this.gestionClic;
-	}
-
-	public JTextField getTextField_montantReel() {
-		return this.textField_montantReel;
-	}
-
-	public JRadioButton getRdbtnAjouterChargeOui() {
-		return this.rdbtnAjouterChargeOui;
-	}
-
-	public JRadioButton getRdbtnAjouterChargeNon() {
-		return this.rdbtnAjouterChargeNon;
-	}
-
-	public Fenetre_InsertionCharges() {
-
-		this.gestionClic = new GestionInsertionCharges(this);
+		this.gestionModification = new GestionModificationCharges(this);
 
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
@@ -66,17 +43,16 @@ public class Fenetre_InsertionCharges extends JInternalFrame {
 		separator_titreAjouterCharge.setBounds(271, 72, 190, 2);
 		panel.add(separator_titreAjouterCharge);
 
-		JLabel lbl_InsererUneCharge = new JLabel("Ajouter une Charge");
+		JLabel lbl_InsererUneCharge = new JLabel("Modifier une Charge");
 		lbl_InsererUneCharge.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUneCharge.setBounds(288, 26, 160, 48);
 		panel.add(lbl_InsererUneCharge);
 
-		JButton btnAjouter = new JButton("Ajouter");
+		JButton btnAjouter = new JButton("Modifier");
 		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAjouter.setBounds(246, 447, 94, 31);
 		btnAjouter.setForeground(Color.WHITE);
 		btnAjouter.setBackground(new Color(0, 102, 204));
-		btnAjouter.addActionListener(this.gestionClic);
 		panel.add(btnAjouter);
 
 		JButton btnAnnuler = new JButton("Annuler");
@@ -84,7 +60,6 @@ public class Fenetre_InsertionCharges extends JInternalFrame {
 		btnAnnuler.setBounds(398, 447, 94, 31);
 		btnAnnuler.setForeground(Color.WHITE);
 		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.addActionListener(this.gestionClic);
 		panel.add(btnAnnuler);
 
 		this.textField_nomCharge = new JTextField();

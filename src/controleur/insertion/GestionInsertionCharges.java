@@ -60,6 +60,8 @@ public class GestionInsertionCharges implements ActionListener {
 							bienCourant);
 
 					this.daoCharge.create(charge);
+					Sauvegarde.deleteItem("Logement");
+
 				}
 			} catch (Exception e1) {
 				e1.printStackTrace();
