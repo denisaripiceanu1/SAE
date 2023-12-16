@@ -55,9 +55,8 @@ public class GestionModificationBien implements ActionListener {
 			fenetreCompteur.moveToFront();
 			break;
 		case "Modifier":
-
+			
 			try {
-
 				Immeuble nouvelImmeuble = new Immeuble(this.modificationBien.getTextField_IdImmeuble().getText(),
 						this.modificationBien.getTextField_adresse().getText(),
 						this.modificationBien.getTextField_codePostal().getText(),

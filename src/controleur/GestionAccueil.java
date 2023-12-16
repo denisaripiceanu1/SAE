@@ -45,6 +45,7 @@ import vue.insertion.Fenetre_InsertionLogement;
 import vue.insertion.Fenetre_InsertionPaiementBien;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
 import vue.modification.Fenetre_ModificationBien;
+import vue.modification.Fenetre_ModificationCharges;
 import vue.modification.Fenetre_ModificationLogement;
 import vue.suppression.Fenetre_SupprimerBien;
 
@@ -623,34 +624,49 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesChargesLocatives_Modifier":
-				
-				if (Sauvegarde.onSave("Charge") == true) {
-					Fenetre_ModificationLogement modif_logement = new Fenetre_ModificationLogement();
-					this.fenetreAccueil.getLayeredPane().add(modif_logement);
-					modif_logement.setVisible(true);
-					modif_logement.moveToFront();
+				if (Sauvegarde.onSave("Charge") == true && Sauvegarde.onSave("Logement") == true) {
+					Fenetre_ModificationCharges modif_charge = new Fenetre_ModificationCharges();
+					this.fenetreAccueil.getLayeredPane().add(modif_charge);
+					modif_charge.setVisible(true);
+					modif_charge.moveToFront();
+
+					// On recupère la charge de la sauvegarde
+					Charge chargeSauvegarde = (Charge) Sauvegarde.getItem("Charge");
+					Charge chargeCourante;
 
 					// On recupère le logement de la sauvegarde
-					Bien logementSauvegarde = (Bien) Sauvegarde.getItem("Logement");
-					Bien logementCourant;
+					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+					Bien bienCourant;
 
 					try {
-						logementCourant = this.daoBien.findById(logementSauvegarde.getIdBien());
-						modif_logement.getTextField_IdLogement().setText(logementCourant.getIdBien());
-						modif_logement.getTextField_SurfaceHabitable()
-								.setText(Double.toString(logementCourant.getSurfaceHabitable()));
-						modif_logement.getTextField_NbPièces().setText(Integer.toString(logementCourant.getNbPieces()));
-						modif_logement.getTextField_DateAcquisition().setText(logementCourant.getDateAcquisition());
-						modif_logement.getTextField_NumEtage().setText(Integer.toString(logementCourant.getNumEtage()));
-						modif_logement.getComboBox_typeDeLogement().setSelectedItem(logementCourant.getType_bien());
-						// voir comment potentiellement recuperer le compteur et les autres trucs
+						bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					int deductibleValeur = 0; // Non déductible par défaut
 
+					// choix de la radio button
+					if (modif_charge.getRdbtnAjouterChargeOui().isSelected()) {
+						deductibleValeur = 1;
+					} else if (modif_charge.getRdbtnAjouterChargeNon().isSelected()) {
+						deductibleValeur = 0;
+					}
+
+					chargeCourante = chargeSauvegarde;
+					modif_charge.getTextField_nomCharge().setText(chargeCourante.getNom());
+					modif_charge.getTextField_montantPrevisionnel()
+							.setText(Double.toString(chargeCourante.getMontantPrevisionnel()));
+					modif_charge.getTextField_montantReel()
+					.setText(Double.toString(chargeCourante.getMontantReel()));
+					if (chargeCourante.isDeductible() == 1) {
+					    modif_charge.getRdbtnAjouterChargeNon().setSelected(true);
+					} else {
+					    modif_charge.getRdbtnAjouterChargeOui().setSelected(true);
+					}
 				}
 				break;
-				
+
 			case "btn_MesChargesLocatives_Inserer":
 				JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
 				String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
@@ -664,7 +680,6 @@ public class GestionAccueil implements ActionListener {
 				break;
 			case "btn_MesChargesLocatives_Supprimer":
 				break;
-
 
 			////////////////////////
 			// LAYERED MES ASSURANCES

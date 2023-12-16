@@ -99,4 +99,25 @@ public class Fenetre_ModificationCharges extends JInternalFrame {
 		this.textField_montantReel.setBounds(398, 195, 190, 40);
 		panel.add(this.textField_montantReel);
 	}
+
+	public JTextField getTextField_nomCharge() {
+		return textField_nomCharge;
+	}
+
+	public JTextField getTextField_montantPrevisionnel() {
+		return textField_montantPrevisionnel;
+	}
+
+	public JTextField getTextField_montantReel() {
+		return textField_montantReel;
+	}
+
+	public JRadioButton getRdbtnAjouterChargeOui() {
+		return rdbtnAjouterChargeOui;
+	}
+
+	public JRadioButton getRdbtnAjouterChargeNon() {
+		return rdbtnAjouterChargeNon;
+	}
+	
 }
