@@ -319,10 +319,11 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	private void updateTableAssurancesForLogement(String idLogement) throws SQLException {
-		List<Assurance> assurancesLogement = daoAssurance.findByLogement(idLogement);
+	    System.out.println("updateTableAssurancesForLogement called with idLogement: " + idLogement);
 
-		JTable tableAssurances = this.fenetreAccueil.getTableAssurances();
-		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
+		List<Assurance> assurancesLogement = this.daoAssurance.findByLogement(idLogement);
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableAssurances().getModel();
 		modeleTable.setRowCount(assurancesLogement.size());
 
 		for (int i = 0; i < assurancesLogement.size(); i++) {
@@ -337,6 +338,8 @@ public class GestionAccueil implements ActionListener {
 //------------------------------------------------------------------------------------------------------------------------//
 	// Méthode pour gérer la sélection de l'ID du logement
 	private void handleLogementSelection() {
+	    System.out.println("handleLogementSelection called");
+
 		JComboBox<String> comboBox_MesAssurances = this.fenetreAccueil.getComboBox_MesAssurances();
 		String idLogementSelectionne = comboBox_MesAssurances.getSelectedItem().toString();
 
@@ -640,7 +643,7 @@ public class GestionAccueil implements ActionListener {
 			}
 		} else if (source instanceof JToggleButton) {
 			JToggleButton btnToggle = (JToggleButton) source;
-			switch (btnToggle.getName()) {
+			switch (btnToggle.getName()) { 
 
 			// ------------- MES TRAVAUX -------------//
 			case "tglbtn_Travaux_immeubles":
