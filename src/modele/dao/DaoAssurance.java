@@ -75,8 +75,8 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 	
 	// ---------------- AUTRES METHODES ----------------//
 
-	 public List<Assurance> findByLogement(String idImmeuble) throws SQLException {
-	        return this.find(new RequeteSelectAssuranceByLogement(), idImmeuble);
-	    }
+	public List<Assurance> findByLogement(String idImmeuble) throws SQLException {
+		return this.find(new RequeteSelectAssuranceByLogement(), idImmeuble);
+	}
 
 }

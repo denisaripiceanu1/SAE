@@ -58,7 +58,6 @@ public class GestionInsertionBien implements ActionListener {
 			break;
 		case "Ajouter":
 			try {
-
 				Immeuble nouvelImmeuble = new Immeuble(this.insertionBien.getTextField_IdImmeuble().getText(),
 						this.insertionBien.getTextField_adresse().getText(),
 						this.insertionBien.getTextField_codePostal().getText(),

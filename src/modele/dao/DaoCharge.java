@@ -5,10 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import modele.Assurance;
 import modele.Bien;
 import modele.Charge;
+import modele.dao.requetes.select.RequeteSelectAssuranceByLogement;
 import modele.dao.requetes.select.RequeteSelectCharge;
 import modele.dao.requetes.select.RequeteSelectChargeById;
+import modele.dao.requetes.select.RequeteSelectChargeByLogement;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertCharge;
 import modele.dao.requetes.update.RequeteUpdateCharge;
@@ -44,7 +47,7 @@ public class DaoCharge extends DaoModele<Charge> implements Dao<Charge> {
 			DaoBien daoBien = new DaoBien();
 			Bien bien = daoBien.findById(idBien);
 
-			charge = new Charge(/* idBien */ curseur.getString("nom"), curseur.getDouble("montant_reel"),
+			charge = new Charge( curseur.getString("nom"), curseur.getDouble("montant_reel"),
 					curseur.getDouble("montant_previsionnel"), curseur.getInt("deductible"), bien);
 
 		} catch (Exception e) {
@@ -67,4 +70,9 @@ public class DaoCharge extends DaoModele<Charge> implements Dao<Charge> {
 		return this.find(new RequeteSelectCharge());
 	}
 
+	// ---------------- AUTRES METHODES ----------------//
+
+	public List<Charge> findByLogement(String idImmeuble) throws SQLException {
+		return this.find(new RequeteSelectChargeByLogement(), idImmeuble);
+	}
 }

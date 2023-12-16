@@ -44,7 +44,7 @@ public class GestionLocations implements ListSelectionListener {
                     location = daoLouer.findById(tableLocations.getValueAt(selectedRow, 1).toString(),
                             tableLocations.getValueAt(selectedRow, 0).toString());
                     
-					// On recupère le locataire de la sauvegarde
+					// On ajoute le locataire a la sauvegarde
                      locataire = daoLocataire.findById(tableLocations.getValueAt(selectedRow, 0).toString());
                      Sauvegarde.deleteItem("Locataire");
                      Sauvegarde.addItem("Locataire", locataire);
@@ -84,7 +84,6 @@ public class GestionLocations implements ListSelectionListener {
 
                     JTextField provision = fenetreAccueil.getTextField_provisionCharges();
                     provision.setText(String.valueOf(location.getProvision_chargeMens_TTC()));
-                    
                     
                 }
             }

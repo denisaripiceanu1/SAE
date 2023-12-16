@@ -77,6 +77,8 @@ public class Fenetre_Accueil extends JFrame {
 	private JTable tableRegularisation;
 	
 	private JComboBox<String> comboBox_MesAssurances;
+	
+	private JComboBox<String> comboBox_MesChargesLocatives;
 
 	private GestionAccueil gestionAccueil;
 	private GestionBienLogement gestionBienLogement;
@@ -664,10 +666,10 @@ public class Fenetre_Accueil extends JFrame {
 		panel_chargesLocatives.add(btn_MesChargesLocatives_Supprimer);
 
 		// ComboBox
-		JComboBox comboBox_MesChargesLocatives = new JComboBox();
-		comboBox_MesChargesLocatives.setModel(new DefaultComboBoxModel(new String[] { "ID du logement" }));
+		this.comboBox_MesChargesLocatives = new JComboBox<String>();
 		comboBox_MesChargesLocatives.setBounds(55, 81, 130, 29);
 		panel_chargesLocatives.add(comboBox_MesChargesLocatives);
+		comboBox_MesChargesLocatives.addActionListener(this.gestionAccueil);
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
 			List<String> identifiantsLogements = daoBien.getAllIdBien();
@@ -1020,5 +1022,8 @@ public class Fenetre_Accueil extends JFrame {
 	public JComboBox<String> getComboBox_MesAssurances() {
         return comboBox_MesAssurances;
     }
-
+	
+	public JComboBox<String> getComboBox_MesChargesLocatives() {
+        return comboBox_MesChargesLocatives;
+    }
 }

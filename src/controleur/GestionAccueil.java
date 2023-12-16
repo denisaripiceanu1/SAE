@@ -261,7 +261,12 @@ public class GestionAccueil implements ActionListener {
 
 		modeleTable.setValueAt(charge.getNom(), numeroLigne, 0);
 		modeleTable.setValueAt(charge.getBien().getIdBien(), numeroLigne, 1);
-		modeleTable.setValueAt(charge.isDeductible(), numeroLigne, 2);
+		if (charge.isDeductible() == 1) {
+			modeleTable.setValueAt("Oui", numeroLigne, 2);
+		} else {
+			modeleTable.setValueAt("Non", numeroLigne, 2);
+		}
+
 		modeleTable.setValueAt(charge.getMontantReel(), numeroLigne, 3);
 	}
 
@@ -274,6 +279,18 @@ public class GestionAccueil implements ActionListener {
 		for (int i = 0; i < charges.size(); i++) {
 			Charge c = charges.get(i);
 			this.ecrireLigneTableChargesLocatives(i, c);
+		}
+	}
+
+	private void updateTableChargesForLogement(String idLogement) throws SQLException {
+		List<Charge> chargesLogement = this.daoCharge.findByLogement(idLogement);
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
+		modeleTable.setRowCount(chargesLogement.size());
+
+		for (int i = 0; i < chargesLogement.size(); i++) {
+			Charge c = chargesLogement.get(i);
+			ecrireLigneTableChargesLocatives(i, c);
 		}
 	}
 	///////////////////////////////////////////////////////////////////
@@ -319,7 +336,7 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	private void updateTableAssurancesForLogement(String idLogement) throws SQLException {
-	    System.out.println("updateTableAssurancesForLogement called with idLogement: " + idLogement);
+		System.out.println("updateTableAssurancesForLogement called with idLogement: " + idLogement);
 
 		List<Assurance> assurancesLogement = this.daoAssurance.findByLogement(idLogement);
 
@@ -336,9 +353,8 @@ public class GestionAccueil implements ActionListener {
 	}
 
 //------------------------------------------------------------------------------------------------------------------------//
-	// Méthode pour gérer la sélection de l'ID du logement
-	private void handleLogementSelection() {
-	    System.out.println("handleLogementSelection called");
+	// Méthode pour filtrer les Asurances par Id Logement
+	private void filtreAssuranceByLogement() {
 
 		JComboBox<String> comboBox_MesAssurances = this.fenetreAccueil.getComboBox_MesAssurances();
 		String idLogementSelectionne = comboBox_MesAssurances.getSelectedItem().toString();
@@ -351,7 +367,29 @@ public class GestionAccueil implements ActionListener {
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
-		} 
+		}
+	}
+
+	// Méthode pour filtrer les Charges par Id Logement
+	private void filtreChargesByLogement() {
+
+		JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
+		String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
+
+		// Si l'ID sélectionné est différent de "ID du logement", filtrez la table des
+		// assurances
+		if (!idLogementSelectionne.equals("ID du logement")) {
+			try {
+				// On ajoute le bien a la sauvegarde
+				Bien logement = daoBien.findById(idLogementSelectionne);
+				Sauvegarde.deleteItem("Logement");
+				Sauvegarde.addItem("Logement", logement);
+
+				updateTableChargesForLogement(idLogementSelectionne);
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
 
 	@Override
@@ -590,10 +628,14 @@ public class GestionAccueil implements ActionListener {
 			case "btn_MesChargesLocatives_Modifier":
 				break;
 			case "btn_MesChargesLocatives_Inserer":
-				Fenetre_InsertionCharges charges = new Fenetre_InsertionCharges();
-				this.fenetreAccueil.getLayeredPane().add(charges);
-				charges.setVisible(true);
-				charges.moveToFront();
+
+				if (Sauvegarde.onSave("Logement") == true) {
+					Fenetre_InsertionCharges fic = new Fenetre_InsertionCharges();
+					this.fenetreAccueil.getLayeredPane().add(fic);
+					fic.setVisible(true);
+					fic.moveToFront();
+				}
+
 				break;
 			case "btn_MesChargesLocatives_Supprimer":
 				break;
@@ -643,7 +685,7 @@ public class GestionAccueil implements ActionListener {
 			}
 		} else if (source instanceof JToggleButton) {
 			JToggleButton btnToggle = (JToggleButton) source;
-			switch (btnToggle.getName()) { 
+			switch (btnToggle.getName()) {
 
 			// ------------- MES TRAVAUX -------------//
 			case "tglbtn_Travaux_immeubles":
@@ -666,7 +708,8 @@ public class GestionAccueil implements ActionListener {
 				break;
 			}
 		}
-		handleLogementSelection();
-     
+		filtreAssuranceByLogement();
+		filtreChargesByLogement();
+
 	}
 }

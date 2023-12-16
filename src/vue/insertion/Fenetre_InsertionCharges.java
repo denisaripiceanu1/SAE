@@ -23,6 +23,7 @@ public class Fenetre_InsertionCharges extends JInternalFrame {
 	private JTextField textField_montantReel;
 	private JRadioButton rdbtnAjouterChargeOui;
 	private JRadioButton rdbtnAjouterChargeNon;
+	private JTextField textField_Id;
 
 	public JTextField getTextField_nomCharge() {
 		return this.textField_nomCharge;
@@ -91,7 +92,7 @@ public class Fenetre_InsertionCharges extends JInternalFrame {
 		this.textField_nomCharge.setColumns(10);
 		this.textField_nomCharge.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Nom",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_nomCharge.setBounds(271, 109, 190, 40);
+		this.textField_nomCharge.setBounds(398, 113, 190, 40);
 		panel.add(this.textField_nomCharge);
 
 		this.textField_montantPrevisionnel = new JTextField();
@@ -123,6 +124,11 @@ public class Fenetre_InsertionCharges extends JInternalFrame {
 				"Montant r\u00E9el", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		this.textField_montantReel.setBounds(398, 195, 190, 40);
 		panel.add(this.textField_montantReel);
+		
+		textField_Id = new JTextField();
+		textField_Id.setColumns(10);
+		textField_Id.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Identifient", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_Id.setBounds(135, 127, 190, 40);
+		panel.add(textField_Id);
 	}
-
 }

@@ -11,7 +11,7 @@ public class RequeteSelectBienById implements Requete<Bien> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Bien WHERE Id_Bien = ?";
+		return "SELECT * FROM Bien WHERE Id_Bien = ? ORDER BY Id_Bien";
 	}
 
 	@Override

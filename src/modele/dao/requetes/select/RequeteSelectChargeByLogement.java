@@ -3,21 +3,22 @@ package modele.dao.requetes.select;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import modele.Bien;
+import modele.Charge;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectBien implements Requete<Bien> {
+public class RequeteSelectChargeByLogement implements Requete<Charge> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Bien ORDER BY Id_Bien";
+		return "SELECT * FROM Charge WHERE Id_Bien = ?";
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
+		prSt.setString(1, id[0]);
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Bien data) throws SQLException {
+	public void parametres(PreparedStatement prSt, Charge data) throws SQLException {
 	}
 }
