@@ -337,8 +337,6 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	private void updateTableAssurancesForLogement(String idLogement) throws SQLException {
-		System.out.println("updateTableAssurancesForLogement called with idLogement: " + idLogement);
-
 		List<Assurance> assurancesLogement = this.daoAssurance.findByLogement(idLogement);
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableAssurances().getModel();
@@ -356,7 +354,6 @@ public class GestionAccueil implements ActionListener {
 //------------------------------------------------------------------------------------------------------------------------//
 	// Méthode pour filtrer les Asurances par Id Logement
 	private void filtreAssuranceByLogement() {
-
 		JComboBox<String> comboBox_MesAssurances = this.fenetreAccueil.getComboBox_MesAssurances();
 		String idLogementSelectionne = comboBox_MesAssurances.getSelectedItem().toString();
 
@@ -373,7 +370,6 @@ public class GestionAccueil implements ActionListener {
 
 	// Méthode pour filtrer les Charges par Id Logement
 	private void filtreChargesByLogement() {
-
 		JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
 		String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
 
@@ -439,6 +435,7 @@ public class GestionAccueil implements ActionListener {
 					e1.printStackTrace();
 				}
 				break;
+				
 			case "btnMesBiens_Supprimer":
 				if (Sauvegarde.onSave("Immeuble") == true) {
 					Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
@@ -452,6 +449,7 @@ public class GestionAccueil implements ActionListener {
 				}
 
 				break;
+				
 			case "btnMesBiens_Modifier":
 				//////// POUR UN LOGEMENT --> BIEN (dans notre BDD) ///////////
 				if (Sauvegarde.onSave("Logement") == true) {
@@ -515,7 +513,6 @@ public class GestionAccueil implements ActionListener {
 						}
 					}
 				}
-
 				break;
 
 			case "btnMesBiens_AjouterBien":
@@ -665,7 +662,6 @@ public class GestionAccueil implements ActionListener {
 			        }
 			    }
 			    break;
-
 
 			case "btn_MesChargesLocatives_Inserer":
 				JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();

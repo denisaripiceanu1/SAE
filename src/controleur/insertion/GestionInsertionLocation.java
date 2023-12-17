@@ -1,6 +1,13 @@
 package controleur.insertion;
 
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionListener;
 import java.io.File;
 
@@ -30,6 +37,21 @@ public class GestionInsertionLocation implements ActionListener {
 
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
+//		// Ajoutez un gestionnaire d'événements à lblNomEtatDesLieux
+//		this.fil.getLblNomEtatDesLieux().addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				ouvrirPDF(fil.getLblNomEtatDesLieux().getText());
+//			}
+//		});
+//
+//		// Ajoutez un gestionnaire d'événements à lblNomBail
+//		this.fil.getLblBail().addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				ouvrirPDF(fil.getLblBail().getText());
+//			}
+//		});
 	}
 
 	@Override
@@ -43,36 +65,40 @@ public class GestionInsertionLocation implements ActionListener {
 			fenetreColo.setVisible(true);
 			fenetreColo.moveToFront();
 			break;
+
 		case "Ajouter un bail":
 			try {
-				// Appeller importPDFCheminString une fois et stockez le résultat dans
-				// selectedFilePath
-				String bail = PDFImporter.getInstance().importPDFCheminString();
-
-				// Définisser le texte de lblBien avec le nom du fichier
-				fil.getLblBail().setText("Bail : " + new File(bail).getName());
+				// Appeler importPDFCheminString une fois et stocker le résultat dans
+				// cheminOrigine
+				String cheminOrigine = PDFImporter.getInstance().importPDFCheminString();
 
 				// Si aucune exception n'est levée, cela indique le succès
-				// Affichez un message de réussite
+				// Afficher un message de réussite
 				JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès",
 						JOptionPane.INFORMATION_MESSAGE);
+
+				// Mettre à jour le libellé pour permettre l'ouverture du fichier
+				fil.getLblBail().setText(cheminOrigine);
+
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 			break;
+
 		case "Ajouter l'état des lieux":
 			try {
-				// Appeller importPDFCheminString une fois et stockez le résultat dans
-				// selectedFilePath
-				String etatLieux = PDFImporter.getInstance().importPDFCheminString();
-
-				// Définisser le texte de lblNomEtatDesLieux avec le nom du fichier
-				fil.getLblNomEtatDesLieux().setText("État des lieux : " + new File(etatLieux).getName());
+				// Appeler importPDFCheminString une fois et stocker le résultat dans
+				// cheminOrigine
+				String cheminOrigine = PDFImporter.getInstance().importPDFCheminString();
 
 				// Si aucune exception n'est levée, cela indique le succès
-				// Affichez un message de réussite
+				// Afficher un message de réussite
 				JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès",
 						JOptionPane.INFORMATION_MESSAGE);
+
+				// Mettre à jour le libellé pour permettre l'ouverture du fichier
+				fil.getLblNomEtatDesLieux().setText(cheminOrigine);
+
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -138,6 +164,28 @@ public class GestionInsertionLocation implements ActionListener {
 		case "Annuler":
 			this.fil.dispose();
 			break;
+		}
+	}
+
+	private void ouvrirPDF(String label) {
+		// Récupérer le chemin complet du fichier PDF à partir du texte de l'étiquette
+		String cheminFichierPDF = label;
+
+		// Vérifier si le fichier existe
+		File fichierPDF = new File(cheminFichierPDF);
+
+		if (fichierPDF.exists()) {
+			// Ouvrez le fichier PDF
+			Desktop desktop = Desktop.getDesktop();
+			try {
+				desktop.open(fichierPDF);
+			} catch (IOException ex) {
+				JOptionPane.showMessageDialog(fil, "Erreur lors de l'ouverture du fichier PDF : " + ex.getMessage(),
+						"Erreur", JOptionPane.ERROR_MESSAGE);
+				ex.printStackTrace();
+			}
+		} else {
+			JOptionPane.showMessageDialog(fil, "Le fichier PDF n'existe pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
