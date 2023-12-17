@@ -41,9 +41,17 @@ public class GestionSuppressionCharge implements ActionListener {
 			Charge charge_supp = (Charge) Sauvegarde.getItem("Charge");
 			try {
 				Bien bien_supp = this.daoBien.findById(charge_supp.getBien().getIdBien());
-				//supprimer le bien, puis la charge
+				// supprimer le bien, puis la charge
+				// avant de supprimer le bien, faut suppriler les tables ou il est utilisee
+				// this.daoDiagnostic.delete(bien_supp);
 				this.daoBien.delete(bien_supp);
 				this.daoCharge.delete(charge_supp);
+//				Facture
+//				Louer
+//				Compteur
+//				Charge
+//				Quotter
+//				Imposer
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}

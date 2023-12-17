@@ -48,12 +48,14 @@ public class Fenetre_ModificationCharges extends JInternalFrame {
 		lbl_InsererUneCharge.setBounds(288, 26, 160, 48);
 		panel.add(lbl_InsererUneCharge);
 
-		JButton btnAjouter = new JButton("Modifier");
-		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAjouter.setBounds(246, 447, 94, 31);
-		btnAjouter.setForeground(Color.WHITE);
-		btnAjouter.setBackground(new Color(0, 102, 204));
-		panel.add(btnAjouter);
+		JButton btnModifier = new JButton("Modifier");
+		btnModifier.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnModifier.setBounds(246, 447, 94, 31);
+		btnModifier.setForeground(Color.WHITE);
+		btnModifier.setBackground(new Color(0, 102, 204));
+		panel.add(btnModifier);
+		btnModifier.addActionListener(this.gestionModification);
+
 
 		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -61,6 +63,8 @@ public class Fenetre_ModificationCharges extends JInternalFrame {
 		btnAnnuler.setForeground(Color.WHITE);
 		btnAnnuler.setBackground(new Color(0, 102, 204));
 		panel.add(btnAnnuler);
+		btnAnnuler.addActionListener(this.gestionModification);
+
 
 		this.textField_nomCharge = new JTextField();
 		this.textField_nomCharge.setColumns(10);

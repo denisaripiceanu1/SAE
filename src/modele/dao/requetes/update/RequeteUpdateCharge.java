@@ -10,7 +10,8 @@ public class RequeteUpdateCharge implements Requete<Charge> {
 
 	@Override
 	public String requete() {
-		return "UPDATE Charge SET nom = ?, montant_reel = ?, montant_previsionnel = ?, deductible = ?, Id_Bien = ? WHERE Id_Charge = ?";
+		// PROBLEME
+		return "UPDATE Charge SET nom = ?, montant_reel = ?, montant_previsionnel = ?, deductible = ? WHERE Id_Charge = ?";
 	}
 
 	@Override
@@ -25,7 +26,7 @@ public class RequeteUpdateCharge implements Requete<Charge> {
 		prSt.setDouble(2, data.getMontantReel());
 		prSt.setDouble(3, data.getMontantPrevisionnel());
 		prSt.setInt(4, data.isDeductible());
-		prSt.setString(5, data.getBien().toString());
+		prSt.setInt(5, data.getIdCharge());
 
 	}
 
