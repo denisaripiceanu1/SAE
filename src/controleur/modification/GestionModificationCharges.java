@@ -18,13 +18,11 @@ public class GestionModificationCharges implements ActionListener {
 	private Fenetre_ModificationCharges modificationCharge;
 	private DaoCharge daoCharge;
 	private DaoBien daoBien;
-	private String idBien;
 
 	public GestionModificationCharges(Fenetre_ModificationCharges modificationCharge) {
 		this.modificationCharge = modificationCharge;
 		this.daoCharge = new DaoCharge();
 		this.daoBien = new DaoBien();
-		this.idBien = null;
 		Sauvegarde.initializeSave();
 	}
 

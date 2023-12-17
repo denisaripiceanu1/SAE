@@ -74,7 +74,6 @@ public class GestionAccueil implements ActionListener {
 		this.daoFacture = new DaoFacture();
 		this.daoCharge = new DaoCharge();
 		this.daoLocataire = new DaoLocataire();
-
 	}
 
 	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE
@@ -231,7 +230,6 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 5);
 		modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
 				numeroLigne, 6);
-
 	}
 
 	private void chargerTravauxLogements() throws SQLException {
