@@ -44,25 +44,39 @@ public class GestionInsertionLocation implements ActionListener {
 			fenetreColo.moveToFront();
 			break;
 		case "Ajouter un bail":
-			this.gestionPDF.getInstance().importPDFChemin();
+			try {
+				// Appeller importPDFCheminString une fois et stockez le résultat dans
+				// selectedFilePath
+				String bail = PDFImporter.getInstance().importPDFCheminString();
+
+				// Définisser le texte de lblBien avec le nom du fichier
+				fil.getLblBail().setText("Bail : " + new File(bail).getName());
+
+				// Si aucune exception n'est levée, cela indique le succès
+				// Affichez un message de réussite
+				JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès",
+						JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 			break;
 		case "Ajouter l'état des lieux":
-		    try {
-		        // Appeller importPDFCheminString une fois et stockez le résultat dans selectedFilePath
-		        String selectedFilePath = PDFImporter.getInstance().importPDFCheminString();
+			try {
+				// Appeller importPDFCheminString une fois et stockez le résultat dans
+				// selectedFilePath
+				String etatLieux = PDFImporter.getInstance().importPDFCheminString();
 
-		        // Définisser le texte de lblNomEtatDesLieux avec le nom du fichier
-		        fil.getLblNomEtatDesLieux().setText("État des lieux : " + new File(selectedFilePath).getName());
+				// Définisser le texte de lblNomEtatDesLieux avec le nom du fichier
+				fil.getLblNomEtatDesLieux().setText("État des lieux : " + new File(etatLieux).getName());
 
-		        // Si aucune exception n'est levée, cela indique le succès
-		        // Affichez un message de réussite
-		        JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-		    } catch (Exception ex) {
-		        // Gérez l'exception (par exemple, affichez un message d'erreur)
-		        ex.printStackTrace();
-		    }
-		    break;
-
+				// Si aucune exception n'est levée, cela indique le succès
+				// Affichez un message de réussite
+				JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès",
+						JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			break;
 
 		case "Ajouter":
 			Louer location = null;
@@ -72,7 +86,7 @@ public class GestionInsertionLocation implements ActionListener {
 
 				DaoLocataire daoLocataire = new DaoLocataire();
 				Locataire locataire = daoLocataire.findById(null);
-				
+
 //				location = new Louer (
 //						locataire,
 //						bien,

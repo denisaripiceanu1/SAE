@@ -109,7 +109,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(0, 0, 755, 511);
+		panel.setBounds(6, 29, 755, 511);
 		panel.setLayout(null);
 		this.getContentPane().add(panel);
 
@@ -227,12 +227,12 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		scrollPane_table_id_logements.setViewportView(this.table_id_logements);
 
 		JButton btnAjouterBail = new JButton("Ajouter un bail");
-		btnAjouterBail.setBounds(534, 149, 154, 21);
+		btnAjouterBail.setBounds(533, 116, 154, 21);
 		btnAjouterBail.addActionListener(this.gestionClic);
 		panel.add(btnAjouterBail);
 
 		JButton btnAjouterEtatDesLieux = new JButton("Ajouter l'état des lieux");
-		btnAjouterEtatDesLieux.setBounds(534, 116, 154, 21);
+		btnAjouterEtatDesLieux.setBounds(533, 53, 154, 21);
 		btnAjouterEtatDesLieux.addActionListener(this.gestionClic);
 		panel.add(btnAjouterEtatDesLieux);
 
@@ -254,7 +254,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		this.textField_provision_sur_charges.setColumns(10);
 		this.textField_provision_sur_charges.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
 				"Provisions sur charges", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_provision_sur_charges.setBounds(548, 347, 120, 40);
+		this.textField_provision_sur_charges.setBounds(548, 347, 171, 40);
 		panel.add(this.textField_provision_sur_charges);
 
 		this.textField_loyer = new JTextField();
@@ -277,15 +277,14 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		JLabel lblNomEtatDesLieux = new JLabel("État des lieux : ");
 		this.lblNomEtatDesLieux = lblNomEtatDesLieux;
 		lblNomEtatDesLieux.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNomEtatDesLieux.setBounds(534, 80, 150, 20);
+		lblNomEtatDesLieux.setBounds(533, 86, 197, 20);
 		panel.add(lblNomEtatDesLieux);
 
 		JLabel lblNomBail = new JLabel("Bail : ");
 		this.lblBail = lblNomBail;
 		lblNomBail.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNomBail.setBounds(534, 116, 150, 20); // Adjust the position as needed
+		lblNomBail.setBounds(533, 147, 150, 20); // Adjust the position as needed
 		panel.add(lblNomBail);
 
 	}
-
 }
