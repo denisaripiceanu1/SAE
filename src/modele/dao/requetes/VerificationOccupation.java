@@ -28,7 +28,7 @@ public class VerificationOccupation implements Requete<Boolean> {
 
     @Override
     public void parametres(PreparedStatement prSt, Boolean data) throws SQLException {
-        // Cette méthode n'est pas utilisée dans ce contexte, vous pouvez laisser vide
+        // Cette méthode n'est pas utilisée dans ce contexte
     }
 
     // Méthode pour exécuter la requête
