@@ -283,7 +283,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		JLabel lblNomBail = new JLabel("Bail : ");
 		this.lblBail = lblNomBail;
 		lblNomBail.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNomBail.setBounds(533, 147, 150, 20); // Adjust the position as needed
+		lblNomBail.setBounds(533, 147, 197, 20); // Adjust the position as needed
 		panel.add(lblNomBail);
 
 	}

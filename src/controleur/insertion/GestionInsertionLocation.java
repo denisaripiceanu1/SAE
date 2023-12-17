@@ -95,8 +95,8 @@ public class GestionInsertionLocation implements ActionListener {
 //						Double.parseDouble(this.fil.getTextField_loyer().getText()),
 //						Double.parseDouble(this.fil.getTextField_provision_sur_charges().getText()),
 //						Double.parseDouble(this.fil.getTextField_caution().getText()),
-//						null,/*bail*/
-//						null,/*etat des lieux*/
+//						bail,/*bail*/
+//						etatLieux,/*etat des lieux*/
 //						null,/*date de départ*/
 //						null, /* loyer paye*/
 //						this.fil.getTable_liste_locataires().getModel().getRowCount(),
