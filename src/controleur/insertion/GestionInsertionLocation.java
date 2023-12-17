@@ -2,6 +2,7 @@ package controleur.insertion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -14,6 +15,7 @@ import modele.Louer;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controleur.outils.PDFImporter;
@@ -45,8 +47,22 @@ public class GestionInsertionLocation implements ActionListener {
 			this.gestionPDF.getInstance().importPDFChemin();
 			break;
 		case "Ajouter l'état des lieux":
-			this.gestionPDF.getInstance().importPDFChemin();
-			break;
+		    try {
+		        // Appeller importPDFCheminString une fois et stockez le résultat dans selectedFilePath
+		        String selectedFilePath = PDFImporter.getInstance().importPDFCheminString();
+
+		        // Définisser le texte de lblNomEtatDesLieux avec le nom du fichier
+		        fil.getLblNomEtatDesLieux().setText("État des lieux : " + new File(selectedFilePath).getName());
+
+		        // Si aucune exception n'est levée, cela indique le succès
+		        // Affichez un message de réussite
+		        JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+		    } catch (Exception ex) {
+		        // Gérez l'exception (par exemple, affichez un message d'erreur)
+		        ex.printStackTrace();
+		    }
+		    break;
+
 
 		case "Ajouter":
 			Louer location = null;

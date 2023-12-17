@@ -51,6 +51,17 @@ public class PDFImporter extends JFrame {
         }
     }
 
+    public String importPDFCheminString() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf"));
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            return selectedFile.getAbsolutePath();
+        }
+        return null; // Return null if no file is selected
+    }
+
     public String getSelectedFilePath() {
         return selectedFilePath;
     }

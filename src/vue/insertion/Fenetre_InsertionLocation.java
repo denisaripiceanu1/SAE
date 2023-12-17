@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionInsertionLocation;
 
-public class Fenetre_InsertionLocation extends JInternalFrame implements ActionListener {
+public class Fenetre_InsertionLocation extends JInternalFrame {
 	private JTextField textField_IdLocataire;
 	private JTextField textField_Nom;
 	private JTextField textField_Prenom;
@@ -33,6 +33,8 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 	private JTextField textField_caution;
 	private JTextField textField_date_arrivee;
 	private JTextField textField_provision_sur_charges;
+	private JLabel lblNomEtatDesLieux;
+	private JLabel lblBail;
 
 	public JTextField getTextField_IdLocataire() {
 		return this.textField_IdLocataire;
@@ -80,6 +82,14 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 
 	public JTable getTable_liste_locataires() {
 		return this.table_liste_locataires;
+	}
+
+	public JLabel getLblNomEtatDesLieux() {
+		return this.lblNomEtatDesLieux;
+	}
+
+	public JLabel getLblBail() {
+		return this.lblBail;
 	}
 
 	public GestionInsertionLocation getGestionClic() {
@@ -264,11 +274,17 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 		this.table_liste_locataires.setBounds(0, 0, 1, 1);
 		scrollPane_table_locataires.setViewportView(this.table_liste_locataires);
 
-	}
+		JLabel lblNomEtatDesLieux = new JLabel("État des lieux : ");
+		this.lblNomEtatDesLieux = lblNomEtatDesLieux;
+		lblNomEtatDesLieux.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNomEtatDesLieux.setBounds(534, 80, 150, 20);
+		panel.add(lblNomEtatDesLieux);
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		JLabel lblNomBail = new JLabel("Bail : ");
+		this.lblBail = lblNomBail;
+		lblNomBail.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNomBail.setBounds(534, 116, 150, 20); // Adjust the position as needed
+		panel.add(lblNomBail);
 
 	}
 
