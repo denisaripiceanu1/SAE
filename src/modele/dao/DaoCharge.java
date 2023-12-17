@@ -10,6 +10,7 @@ import modele.Bien;
 import modele.Charge;
 import modele.dao.requetes.select.RequeteSelectAssuranceByLogement;
 import modele.dao.requetes.select.RequeteSelectCharge;
+import modele.dao.requetes.select.RequeteSelectChargeAll;
 import modele.dao.requetes.select.RequeteSelectChargeById;
 import modele.dao.requetes.select.RequeteSelectChargeByLogement;
 import modele.dao.requetes.sousProgramme.SousProgramme;
@@ -74,5 +75,13 @@ public class DaoCharge extends DaoModele<Charge> implements Dao<Charge> {
 
 	public List<Charge> findByLogement(String idImmeuble) throws SQLException {
 		return this.find(new RequeteSelectChargeByLogement(), idImmeuble);
+	}
+	
+	public Charge findByAll(String... id) throws SQLException {
+		List<Charge> charges = this.find(new RequeteSelectChargeAll(), id);
+		if (charges.isEmpty()) {
+			return null;
+		}
+		return charges.get(0);
 	}
 }

@@ -30,21 +30,30 @@ public class GestionTableCharges implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
-            
-                int selectedRowCharge = fenetreAccueil.getTableChargesLocatives().getSelectedRow();
+            int selectedRowCharge = fenetreAccueil.getTableChargesLocatives().getSelectedRow();
 
-                if (selectedRowCharge > -1) {
-                    JTable tableCharges = fenetreAccueil.getTableChargesLocatives();
-                    Charge charge = null;
-                    try {
-                    	//!!!!!!!!!!!!!!!! PROBLEME !!!!!!!!!!!!!!!!!!!!!!!!
-                    	charge = daoCharge.findById(tableCharges.getValueAt(selectedRowCharge, 1).toString());
-                    } catch (SQLException e1) {
-                        e1.printStackTrace();
-                    }
-                    Sauvegarde.deleteItem("Charge");
-                	Sauvegarde.addItem("Charge", charge);
+            if (selectedRowCharge > -1) {
+                JTable tableCharges = fenetreAccueil.getTableChargesLocatives();
+                Charge charge = null;
+                try {
+                    // Correction : Utilisez les entiers 1 et 0 pour deductible
+                    int deductible = "Oui".equalsIgnoreCase(tableCharges.getValueAt(selectedRowCharge, 2).toString()) ? 1 : 0;
+                    
+                    charge = daoCharge.findByAll(
+                    	    tableCharges.getValueAt(selectedRowCharge, 0).toString(), // nom
+                    	    tableCharges.getValueAt(selectedRowCharge, 3).toString(), // montant_reel
+                    	    tableCharges.getValueAt(selectedRowCharge, 4).toString(), // montant_previsionnel
+                    	    tableCharges.getValueAt(selectedRowCharge, 2).toString(), // deductible
+                    	    tableCharges.getValueAt(selectedRowCharge, 1).toString()  // Id_Bien
+                    	);
+
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
                 }
+                Sauvegarde.deleteItem("Charge");
+                Sauvegarde.addItem("Charge", charge);
             }
         }
+    }
+
 }  

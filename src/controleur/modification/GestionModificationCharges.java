@@ -36,7 +36,6 @@ public class GestionModificationCharges implements ActionListener {
 		switch (btn.getText()) {
 
 		case "Modifier":
-
 			try {
 				int deductibleValeur = 0; // Non déductible par défaut
 
@@ -65,8 +64,14 @@ public class GestionModificationCharges implements ActionListener {
 			}
 			break;
 		case "Annuler":
-			this.modificationCharge.dispose();
-			break;
-		}
-	}
-}
+            // Vérifier si l'élément "Logement" est présent dans la sauvegarde
+            if (Sauvegarde.onSave("Logement")==true) {
+                // Si oui, fermer la fenêtre de modification
+                this.modificationCharge.dispose();
+            } else {
+                // Si non, afficher un message d'avertissement ou prendre une autre action
+                System.out.println("Aucun élément 'Logement' trouvé dans la sauvegarde.");
+            }
+            break;
+    }
+}}

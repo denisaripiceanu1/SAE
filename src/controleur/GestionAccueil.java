@@ -270,6 +270,7 @@ public class GestionAccueil implements ActionListener {
 		}
 
 		modeleTable.setValueAt(charge.getMontantReel(), numeroLigne, 3);
+		modeleTable.setValueAt(charge.getMontantPrevisionnel(), numeroLigne, 4);
 	}
 
 	private void chargerChargesLocatives() throws SQLException {
