@@ -20,6 +20,6 @@ public class RequeteSelectAssuranceByLogement implements Requete<Assurance> {
 
     @Override
     public void parametres(PreparedStatement prSt, Assurance data) throws SQLException {
-        prSt.setString(1, data.getNuméroPolice());
+        prSt.setString(1, data.getBien().getIdBien());
     }
 }
