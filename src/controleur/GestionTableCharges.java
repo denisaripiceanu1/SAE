@@ -39,7 +39,7 @@ public class GestionTableCharges implements ListSelectionListener {
                     // Correction : Utilisez les entiers 1 et 0 pour deductible
                     int deductible = "Oui".equalsIgnoreCase(tableCharges.getValueAt(selectedRowCharge, 2).toString()) ? 1 : 0;
                     
-                    charge = daoCharge.findByAll(
+                    charge = daoCharge.findById(
                     	    tableCharges.getValueAt(selectedRowCharge, 0).toString(), // nom
                     	    tableCharges.getValueAt(selectedRowCharge, 3).toString(), // montant_reel
                     	    tableCharges.getValueAt(selectedRowCharge, 4).toString(), // montant_previsionnel
