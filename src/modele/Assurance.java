@@ -7,9 +7,9 @@ public class Assurance {
 	private Bien bien;
 	private Entreprise entreprise;
 
-	public Assurance(String numéroPolice, float montantInit, Bien bien, Entreprise entreprise) {
+	public Assurance(String numéroPolice, float montant, Bien bien, Entreprise entreprise) {
 		this.numéroPolice = numéroPolice;
-		this.montant = montantInit;
+		this.montant = montant;
 		this.bien = bien;
 		this.entreprise = entreprise;
 	}
@@ -30,11 +30,11 @@ public class Assurance {
 		this.numéroPolice = numéroPolice;
 	}
 
-	public float getMontantInit() {
+	public float getMontant() {
 		return this.montant;
 	}
 
-	public void setMontantInit(float montantInit) {
+	public void setMontant(float montantInit) {
 		this.montant = montantInit;
 	}
 

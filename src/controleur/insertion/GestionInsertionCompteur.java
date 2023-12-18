@@ -35,6 +35,7 @@ public class GestionInsertionCompteur implements ActionListener {
 				Compteur compteur = new Compteur(
 						this.fic.getTextField_IdCompteur().getText(),
 						this.fic.getComboBox_typeDeCompteur().getSelectedItem().toString(),
+						this.fic//manque le prix de l'abonnement sur la fenetre
 						(Bien) Sauvegarde.getItem("Bien"),
 						(Immeuble) Sauvegarde.getItem("Immeuble")
 				);

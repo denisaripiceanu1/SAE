@@ -2,7 +2,7 @@ package modele;
 
 public class Impôt {
 
-	private int idImpot;
+	private int idImpot; //AUTO INCREMENT
 	private String nom;
 	private double montant;
 

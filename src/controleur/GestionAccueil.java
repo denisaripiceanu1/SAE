@@ -271,7 +271,7 @@ public class GestionAccueil implements ActionListener {
 		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
 
 		modeleTable.setValueAt(assurance.getNuméroPolice(), numeroLigne, 0);
-		modeleTable.setValueAt(assurance.getMontantInit(), numeroLigne, 1);
+		modeleTable.setValueAt(assurance.getMontant(), numeroLigne, 1);
 		modeleTable.setValueAt(echeance.getDateEcheance(), numeroLigne, 2);
 		if (entreprise != null) {
 			modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 3);

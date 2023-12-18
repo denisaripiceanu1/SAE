@@ -20,7 +20,7 @@ public class RequeteSelectLocationParBien implements Requete<Louer>{
 
     @Override
     public void parametres(PreparedStatement prSt, Louer data) throws SQLException {
-        prSt.setString(1, data.getIdBien().toString());
+        prSt.setString(1, data.getBien().toString());
     }
 }
 

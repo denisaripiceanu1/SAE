@@ -7,7 +7,7 @@ public class Immeuble {
 	private String cp;
 	private String ville;
 	private String periodeConstruction;
-	private int nbLogement;
+	private int nbLogement; //Calculable
 	private String type_immeuble;
 
 	public Immeuble(String idImmeuble, String adresse, String cp, String ville, String periodeConstruction,
