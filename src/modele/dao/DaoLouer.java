@@ -71,7 +71,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 			DaoBien daoBien = new DaoBien();
 			Bien bien = daoBien.findById(idBien);
 
-			// Récupérer l'identifiant de l'Annee
+			// Récupérer l'identifiant du ICC
 			String annee = curseur.getString("annee");
 			String trimestre = curseur.getString("trimestre");
 			DaoICC daoICC = new DaoICC();
@@ -88,8 +88,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 			louer = new Louer(locataire, bien, dateDebutStr, curseur.getInt("nb_mois"), curseur.getDouble("loyer_TTC"),
 					curseur.getDouble("provision_chargeMens_TTC"), curseur.getDouble("caution_TTC"),
 					curseur.getString("bail"), curseur.getString("etat_lieux"), dateDepartStr,
-					curseur.getInt("loyer_paye"), curseur.getInt("colocation"), curseur.getDouble("montant_reel_paye"),
-					icc.getAnnee(), icc.getTrimestre());
+					curseur.getInt("loyer_paye"), icc , curseur.getDouble("montant_reel_paye"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
