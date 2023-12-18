@@ -36,7 +36,7 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 		Echeance echeance = null;
 		try {
 			// Récupérer l'identifiant de l'Assurance
-			String numeroPolice = curseur.getString("numero");
+			String numeroPolice = curseur.getString("numero_police");
 			DaoAssurance daoAssurance = new DaoAssurance();
 			Assurance a = daoAssurance.findById(numeroPolice);
 

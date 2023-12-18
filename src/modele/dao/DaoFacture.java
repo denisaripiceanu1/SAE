@@ -11,7 +11,6 @@ import modele.Bien;
 import modele.Entreprise;
 import modele.Facture;
 import modele.Immeuble;
-import modele.dao.requetes.delete.RequeteDeleteFactureTravaux;
 import modele.dao.requetes.select.RequeteSelectFacture;
 import modele.dao.requetes.select.RequeteSelectFactureByBien;
 import modele.dao.requetes.select.RequeteSelectFactureById;
@@ -35,8 +34,8 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	}
 
 	@Override
-	public void delete(Facture donnees) throws SQLException {
-		this.miseAJour(new RequeteDeleteFactureTravaux(), donnees);
+	public void delete(Facture donnees) {
+		this.delete(donnees);
 
 	}
 
@@ -78,8 +77,15 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 			java.sql.Date datePaiement = curseur.getDate("date_paiement");
 
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			String dateEmissionStr = dateFormat.format(dateEmission);
-			String datePaiementStr = dateFormat.format(datePaiement);
+			String dateEmissionStr = "N/A";
+			if (dateEmission != null) {
+				dateEmissionStr = dateFormat.format(dateEmission);
+			}
+
+			String datePaiementStr = "N/A";
+			if (datePaiement != null) {
+				datePaiementStr = dateFormat.format(datePaiement);
+			}
 
 			facture = new Facture(curseur.getString("numero"), dateEmissionStr, datePaiementStr,
 					curseur.getString("mode_paiement"), curseur.getString("numero_devis"),
@@ -116,7 +122,6 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 			Facture f = this.creerInstance(res);
 			factures.add(f);
 		}
-
 		return factures;
 	}
 

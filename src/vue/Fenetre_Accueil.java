@@ -773,7 +773,6 @@ public class Fenetre_Accueil extends JFrame {
 					identifiantsLogements.toArray(new String[0]));
 
 			this.comboBox_MesAssurances.setModel(modelComboBox);
-			this.comboBox_MesAssurances.setModel(modelComboBox);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
