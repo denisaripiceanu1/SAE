@@ -10,6 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import vue.insertion.Fenetre_InsertionLocation;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -24,6 +27,7 @@ public class InsertionPDF extends JInternalFrame {
 	private PDFImporter pdf;
 	private int id;
 	private String nom;
+	private Fenetre_InsertionLocation fil;
 
 	/**
 	 * Create the frame.
@@ -108,7 +112,16 @@ public class InsertionPDF extends JInternalFrame {
 				}
 			}
 		});
-		btnNewButton_1.setBounds(173, 210, 85, 21);
+		btnNewButton_1.setBounds(79, 211, 85, 21);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fil.dispose();
+			}
+		});
+		btnAnnuler.setBounds(270, 211, 85, 21);
+		contentPane.add(btnAnnuler);
 	}
 }
