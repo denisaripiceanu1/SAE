@@ -1,40 +1,21 @@
 package controleur.insertion;
 
 import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
 import java.awt.event.ActionListener;
-import java.io.File;
-
 import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 
-import controleur.outils.PDFImporter;
 import modele.Bien;
 import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import controleur.outils.InsertionPDF;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionLocation;
-import vue.modification.Fenetre_ModificationLogement;
 
 public class GestionInsertionLocation implements ActionListener {
 
 	private Fenetre_InsertionLocation fil;
-	private InsertionPDF gestionPDF;
 
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
@@ -138,25 +119,4 @@ public class GestionInsertionLocation implements ActionListener {
 		}
 	}
 
-	private void ouvrirPDF(String label) {
-		// Récupérer le chemin complet du fichier PDF à partir du texte de l'étiquette
-		String cheminFichierPDF = label;
-
-		// Vérifier si le fichier existe
-		File fichierPDF = new File(cheminFichierPDF);
-
-		if (fichierPDF.exists()) {
-			// Ouvrez le fichier PDF
-			Desktop desktop = Desktop.getDesktop();
-			try {
-				desktop.open(fichierPDF);
-			} catch (IOException ex) {
-				JOptionPane.showMessageDialog(fil, "Erreur lors de l'ouverture du fichier PDF : " + ex.getMessage(),
-						"Erreur", JOptionPane.ERROR_MESSAGE);
-				ex.printStackTrace();
-			}
-		} else {
-			JOptionPane.showMessageDialog(fil, "Le fichier PDF n'existe pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
-		}
-	}
 }

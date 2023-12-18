@@ -45,8 +45,7 @@ public class Fenetre_InsertionDiagnostic extends JInternalFrame {
 
 		this.textField_Date_Validite = new JTextField();
 		this.textField_Date_Validite.setColumns(10);
-		this.textField_Date_Validite.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date Validite",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		this.textField_Date_Validite.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date validit\u00E9", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		this.textField_Date_Validite.setBounds(263, 232, 190, 40);
 		panel.add(this.textField_Date_Validite);
 

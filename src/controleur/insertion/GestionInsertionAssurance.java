@@ -34,7 +34,7 @@ public class GestionInsertionAssurance implements ActionListener {
 			try {
 				DaoBien daoBien = new DaoBien();
 				DaoEntreprise daoEntreprise = new DaoEntreprise();
-				Bien bien = daoBien.findById(this.fia.getTextField_IDImmeuble().getText());
+				Bien bien = daoBien.findById(/*a completer*/);
 				Entreprise entreprise = daoEntreprise.findById(this.fia.getTextField_SIRET().getText());
 
 				assurance = new Assurance(this.fia.getTextField_numPolice().getText(),
