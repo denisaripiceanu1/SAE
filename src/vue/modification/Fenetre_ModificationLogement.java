@@ -46,7 +46,7 @@ public class Fenetre_ModificationLogement extends JInternalFrame {
 	private JTextField textField_NbPièces;
 	private JTextField textField_DateAcquisition;
 	private JTextField textField_NumEtage;
-	private JButton btnAjouter;
+	private JButton btnModifier;
 	private JButton btnAnnuler;
 	private JButton btnAjouterCompteur;
 	private JButton btnAjouterQuotite;
@@ -120,15 +120,15 @@ public class Fenetre_ModificationLogement extends JInternalFrame {
 		this.textField_NumEtage.setBounds(375, 269, 190, 40);
 		panel.add(this.textField_NumEtage);
 
-		this.btnAjouter = new JButton("Ajouter");
-		this.btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.btnAjouter.setBounds(235, 445, 94, 31);
-		this.btnAjouter.setForeground(Color.WHITE);
-		this.btnAjouter.setBackground(new Color(0, 102, 204));
-		this.btnAjouter.addActionListener(this.gestionClic);
-		panel.add(this.btnAjouter);
+		this.btnModifier = new JButton("Modifier");
+		this.btnModifier.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.btnModifier.setBounds(235, 445, 94, 31);
+		this.btnModifier.setForeground(Color.WHITE);
+		this.btnModifier.setBackground(new Color(0, 102, 204));
+		this.btnModifier.addActionListener(this.gestionClic);
+		panel.add(this.btnModifier);
 
-		this.btnAnnuler = new JButton("Modifier");
+		this.btnAnnuler = new JButton("Annuler");
 		this.btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.btnAnnuler.setBounds(394, 445, 94, 31);
 		this.btnAnnuler.setForeground(Color.WHITE);

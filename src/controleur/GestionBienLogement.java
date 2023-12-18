@@ -64,6 +64,9 @@ public class GestionBienLogement implements ListSelectionListener {
 
                     JTable logements = fenetreAccueil.getTableLogementsParBien();
                     GestionAccueil.viderTable(logements);
+                    
+                    // Déselectionner la ligne de la table logement quand on change de bien
+                    logements.clearSelection();
 
                     DefaultTableModel model = (DefaultTableModel) logements.getModel();
 
