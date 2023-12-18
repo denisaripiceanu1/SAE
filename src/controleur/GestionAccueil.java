@@ -43,8 +43,10 @@ import vue.insertion.Fenetre_InsertionPaiementBien;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
 import vue.modification.Fenetre_ModificationBien;
 import vue.modification.Fenetre_ModificationLogement;
+import vue.suppression.Fenetre_SupprimerAssurance;
 import vue.suppression.Fenetre_SupprimerBien;
 import vue.suppression.Fenetre_SupprimerFactureCharge;
+import vue.suppression.Fenetre_SupprimerTravaux;
 
 public class GestionAccueil implements ActionListener {
 
@@ -574,6 +576,10 @@ public class GestionAccueil implements ActionListener {
 			case "btn_Travaux_Modifier":
 				break;
 			case "btn_Travaux_Supprimer":
+				Fenetre_SupprimerTravaux supp_travaux = new Fenetre_SupprimerTravaux();
+				this.fenetreAccueil.getLayeredPane().add(supp_travaux);
+				supp_travaux.setVisible(true);
+				supp_travaux.moveToFront();
 				break;
 
 			///////////////////////////////
@@ -654,6 +660,10 @@ public class GestionAccueil implements ActionListener {
 				insertion_assurance.moveToFront();
 				break;
 			case "btn_MesAssurances_Supprimer":
+				Fenetre_SupprimerAssurance supp_assurance = new Fenetre_SupprimerAssurance();
+				this.fenetreAccueil.getLayeredPane().add(supp_assurance);
+				supp_assurance.setVisible(true);
+				supp_assurance.moveToFront();
 				break;
 
 			// Coder la cas de la selection d'un id logement
