@@ -69,8 +69,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
 		textField_Prenom = new JTextField();
 		textField_Prenom.setColumns(10);
-		textField_Prenom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Prenom",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_Prenom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Pr\u00E9nom ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_Prenom.setBounds(248, 182, 190, 40);
 		panel.add(textField_Prenom);
 
