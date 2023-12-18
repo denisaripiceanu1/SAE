@@ -538,9 +538,10 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesTravaux = new JTable();
 		this.table_MesTravaux.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesTravaux.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null, null }, }, new String[] { "Bien/Logement",
-						"D\u00E9signation", "Date \u00E9mission", "Montant", "Pay\u00E9", "Prestataire", "Adresse" }));
+		this.table_MesTravaux
+				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
+						new String[] { "Numéro", "Bien/Logement", "D\u00E9signation", "Date \u00E9mission", "Montant",
+								"Pay\u00E9", "Prestataire", "Adresse" }));
 		this.table_MesTravaux.setBounds(40, 53, 668, 130);
 		scrollPane_MesTravaux.setViewportView(this.table_MesTravaux);
 
