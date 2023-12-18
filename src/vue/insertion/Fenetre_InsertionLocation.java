@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionInsertionLocation;
 import modele.dao.DaoBien;
+import modele.dao.DaoImmeuble;
 
 public class Fenetre_InsertionLocation extends JInternalFrame {
 	private JTextField textField_IdLocataire;
@@ -47,13 +48,13 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	private JTable table_liste_locataires;
 	private JComboBox<String> comboBox_bien;
 
-	private DaoBien daoBien;
+	private DaoImmeuble daoImmeuble;
 	private GestionInsertionLocation gestionClic;
 
 	public Fenetre_InsertionLocation() {
 
 		this.gestionClic = new GestionInsertionLocation(this);
-		this.daoBien = new DaoBien();
+		this.daoImmeuble = new DaoImmeuble();
 
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
@@ -168,7 +169,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
-			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
+			List<String> identifiantsBien = this.daoImmeuble.findAll();
 			identifiantsLogements.add(0, "ID du logement");
 
 			// Ajouter les identifiants au modèle du JComboBox
@@ -343,6 +344,10 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		return this.table_liste_locataires;
 	}
 
+	public JTable getTable_liste_logements() {
+		return this.table_id_logements;
+	}
+
 	public JLabel getLblNomEtatDesLieux() {
 		return this.lblNomEtatDesLieux;
 	}
@@ -355,4 +360,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		return this.gestionClic;
 	}
 
+	public JComboBox<String> getComboBox_bien() {
+		return comboBox_bien;
+	}
 }
