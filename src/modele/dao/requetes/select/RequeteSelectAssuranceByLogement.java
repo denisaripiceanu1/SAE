@@ -10,9 +10,7 @@ public class RequeteSelectAssuranceByLogement implements Requete<Assurance> {
 
     @Override
     public String requete() {
-        return "SELECT * FROM ASSURANCE A " +
-               "JOIN BIEN B ON A.Id_Immeuble = B.Id_Immeuble " +
-               "WHERE B.Id_Bien = ?";
+        return "SELECT * FROM ASSURANCE WHERE Id_Bien = ?";
     }
 
     @Override
