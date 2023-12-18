@@ -62,7 +62,7 @@ public class GestionInsertionLocation implements ActionListener {
 	}
 
 	private void updateTableLogementForBien(String idLogement) throws SQLException {
-		List<String> biens = this.daoBien.findById(idLogement);
+		List<Bien> biens = this.daoBien.findBiensparImmeuble(idLogement);
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fil.getTable_liste_logements().getModel();
 		modeleTable.setRowCount(biens.size());
