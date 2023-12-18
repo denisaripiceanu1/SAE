@@ -18,7 +18,6 @@ import controleur.insertion.GestionInsertionAssurance;
 public class Fenetre_InsertionAssurance extends JInternalFrame {
 	private JTextField textField_numPolice;
 	private JTextField textField_montant;
-	private JTextField textField_IDImmeuble;
 	private JTextField textField_SIRET;
 	private GestionInsertionAssurance gestionClic;
 	private JTextField textField_Nom;
@@ -59,13 +58,6 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		this.textField_montant.setBounds(70, 169, 163, 40);
 		panel.add(this.textField_montant);
-
-		this.textField_IDImmeuble = new JTextField();
-		this.textField_IDImmeuble.setColumns(10);
-		this.textField_IDImmeuble.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Identifiant immeuble", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_IDImmeuble.setBounds(70, 250, 163, 40);
-		panel.add(this.textField_IDImmeuble);
 
 		this.textField_SIRET = new JTextField();
 		this.textField_SIRET.setColumns(10);
@@ -112,7 +104,7 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		this.textField_Adresse.setColumns(10);
 		this.textField_Adresse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Adresse",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Adresse.setBounds(359, 200, 298, 40);
+		this.textField_Adresse.setBounds(359, 200, 329, 40);
 		panel.add(this.textField_Adresse);
 
 		this.textField_CodePostal = new JTextField();
@@ -126,7 +118,7 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		this.textField_Ville.setColumns(10);
 		this.textField_Ville.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Ville",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Ville.setBounds(487, 250, 163, 40);
+		this.textField_Ville.setBounds(487, 250, 201, 40);
 		panel.add(this.textField_Ville);
 
 		this.textField_Mail = new JTextField();
@@ -147,7 +139,7 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		this.textField_IBAN.setColumns(10);
 		this.textField_IBAN.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "IBAN",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_IBAN.setBounds(359, 350, 163, 40);
+		this.textField_IBAN.setBounds(359, 350, 329, 40);
 		panel.add(this.textField_IBAN);
 
 	}
@@ -159,11 +151,7 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 	public JTextField getTextField_montant() {
 		return this.textField_montant;
 	}
-
-	public JTextField getTextField_IDImmeuble() {
-		return this.textField_IDImmeuble;
-	}
-
+	
 	public JTextField getTextField_SIRET() {
 		return this.textField_SIRET;
 	}

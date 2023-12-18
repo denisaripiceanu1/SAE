@@ -41,6 +41,7 @@ public class GestionTableLogement implements ListSelectionListener {
                     }
                     Sauvegarde.deleteItem("Logement");
                 	Sauvegarde.addItem("Logement", bien);
+                	
                 }
             }
         }

@@ -261,7 +261,6 @@ public class Fenetre_Accueil extends JFrame {
 		panelMesBiens.add(scrollPaneMesBiens);
 
 		this.tableMesBiens = new JTable();
-		this.tableMesBiens.setSelectionBackground(new Color(0, 102, 204));
 		this.tableMesBiens.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
 				new String[] { "Nom du bien", "Adresse", "Nb de logements" }));
 		this.tableMesBiens.setBounds(40, 53, 668, 130);
