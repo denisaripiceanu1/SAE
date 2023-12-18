@@ -5,10 +5,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import controleur.outils.Sauvegarde;
 import modele.Bien;
+import modele.Compteur;
 import modele.Diagnostics;
+import modele.Immeuble;
 import modele.dao.DaoBien;
 import modele.dao.DaoDiagnostic;
+import modele.dao.DaoImmeuble;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionDiagnostic;
 
@@ -31,21 +35,20 @@ public class GestionInsertionDiagnostic implements ActionListener {
 		switch (btn.getText()) {
 		case "Ajouter":
 			Diagnostics diagnostic = null;
-			/*
+			Bien bienSauvegarde  = (Bien) Sauvegarde.getItem("Logement");
 			try {
-				DaoBien daoBien = new DaoBien();
-			    //Bien bien = this.daoDiagnostic.findById();//recuperer id bien du bien selectionné juste avant);
-
-
+				
 				diagnostic = new Diagnostics(this.fid.getTextField_Date_Validite().getText(),
-						this.fid.getTextField_Type().getText(), bien);
+						this.fid.getTextField_Type().getText(), bienSauvegarde);
 
 				this.daoDiagnostic.create(diagnostic);
+				
+				this.fid.dispose();
 
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-			*/
+			
 			this.fid.dispose();
 			break;
 

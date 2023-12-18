@@ -343,15 +343,9 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesBiens_AjouterBien.setName("btnMesBiens_AjouterBien");
 		panelMesBiens.add(btnMesBiens_AjouterBien);
 
-		JButton btnMesBiens_AjouterDiagnostic = new JButton("Ajouter un diagnostic");
-		btnMesBiens_AjouterDiagnostic.setBounds(551, 158, 161, 23);
-		btnMesBiens_AjouterDiagnostic.addActionListener(this.gestionAccueil);
-		btnMesBiens_AjouterDiagnostic.setName("btnMesBiens_AjouterDiagnostic");
-		panelMesBiens.add(btnMesBiens_AjouterDiagnostic);
-
 		JButton btnMesBiens_AjouterPaiements = new JButton("Ajouter des factures");
 		btnMesBiens_AjouterPaiements.addActionListener(this.gestionAccueil);
-		btnMesBiens_AjouterPaiements.setBounds(551, 192, 161, 23);
+		btnMesBiens_AjouterPaiements.setBounds(551, 158, 161, 23);
 		btnMesBiens_AjouterPaiements.setName("btnMesBiens_AjouterPaiements");
 		panelMesBiens.add(btnMesBiens_AjouterPaiements);
 
