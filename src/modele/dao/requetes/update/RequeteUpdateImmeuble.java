@@ -12,7 +12,7 @@ public class RequeteUpdateImmeuble implements Requete<Immeuble> {
 	@Override
 	public String requete() {
 		return "UPDATE Immeuble SET adresse = ?, cp = ?, "
-				+ "ville = ?, periode_construction = ?, nb_logement = ?, date_acquisition = ?, type_immeuble = ?"
+				+ "ville = ?, periode_construction = ?, nb_logement = ?, type_immeuble = ?"
 				+ "WHERE Id_Immeuble = ?";
 	}
 
@@ -30,9 +30,8 @@ public class RequeteUpdateImmeuble implements Requete<Immeuble> {
 		prSt.setString(3, data.getVille());
 		prSt.setString(4, data.getPeriodeConstruction());
 		prSt.setInt(5, data.getNbLogement());
-		prSt.setDate(6, Date.valueOf(data.getDateAcquisition()));
-		prSt.setString(7, data.getType_immeuble());
-		prSt.setString(8, data.getImmeuble()); // cle primaire
+		prSt.setString(6, data.getType_immeuble());
+		prSt.setString(7, data.getImmeuble()); // cle primaire
 
 	}
 

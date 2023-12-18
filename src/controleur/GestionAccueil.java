@@ -471,7 +471,6 @@ public class GestionAccueil implements ActionListener {
 									.setText(immeubleCourant.getPeriodeConstruction());
 							modif_bien.getTextField_nbLogement()
 									.setText(Integer.toString(immeubleCourant.getNbLogement()));
-							modif_bien.getTextField_dateAcquisition().setText(immeubleCourant.getDateAcquisition());
 							modif_bien.getComboBox_typeDeBien().setSelectedItem(immeubleCourant.getType_immeuble());
 						} catch (SQLException e1) {
 							e1.printStackTrace();

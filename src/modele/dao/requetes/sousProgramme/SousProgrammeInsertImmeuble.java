@@ -31,8 +31,7 @@ public class SousProgrammeInsertImmeuble implements SousProgramme<Immeuble> {
 		prSt.setString(4, donnee.getVille());
 		prSt.setString(5, donnee.getPeriodeConstruction());
 		prSt.setInt(6, donnee.getNbLogement());
-		prSt.setDate(7, java.sql.Date.valueOf(donnee.getDateAcquisition()));// Pour la date
-		prSt.setString(8, donnee.getType_immeuble());
+		prSt.setString(7, donnee.getType_immeuble());
 	}
 
 }

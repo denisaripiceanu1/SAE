@@ -47,7 +47,6 @@ public class GestionInsertionBien implements ActionListener {
 					this.insertionBien.getTextField_ville().getText(),
 					this.insertionBien.getTextField_periodeDeConstruction().getText(),
 					Integer.parseInt(this.insertionBien.getTextField_nbLogement().getText()),
-					this.insertionBien.getTextField_dateAcquisition().getText(),
 					this.insertionBien.getComboBox_typeDeBien().getSelectedItem().toString());
 			// J'ajoute l'immeuble dans la sauvegarde pour réutiliser
 			Sauvegarde.deleteItem("Immeuble");
@@ -64,7 +63,6 @@ public class GestionInsertionBien implements ActionListener {
 						this.insertionBien.getTextField_ville().getText(),
 						this.insertionBien.getTextField_periodeDeConstruction().getText(),
 						Integer.parseInt(this.insertionBien.getTextField_nbLogement().getText()),
-						this.insertionBien.getTextField_dateAcquisition().getText(),
 						this.insertionBien.getComboBox_typeDeBien().getSelectedItem().toString());
 
 				this.daoImmeuble.create(nouvelImmeuble);
