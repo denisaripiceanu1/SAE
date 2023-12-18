@@ -167,6 +167,8 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		comboBox_bien.setModel(new DefaultComboBoxModel(new String[] { "Biens" }));
 		comboBox_bien.setBounds(267, 131, 94, 21);
 		panel.add(comboBox_bien);
+		this.comboBox_bien.addActionListener(this.gestionClic);
+
 
 		// Remplir le JComboBox avec les identifiants des logements
 		try {

@@ -9,19 +9,13 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-import modele.Assurance;
 import modele.Bien;
-import modele.Echeance;
-import modele.Entreprise;
-import modele.Immeuble;
 import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoBien;
+import modele.dao.DaoImmeuble;
 import modele.dao.DaoLocataire;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.GestionPDF;
@@ -32,10 +26,12 @@ public class GestionInsertionLocation implements ActionListener {
 
 	private Fenetre_InsertionLocation fil;
 	private DaoBien daoBien;
+	private DaoImmeuble daoImmeuble;
 
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
 		this.daoBien = new DaoBien();
+		this.daoImmeuble = new DaoImmeuble();
 //		// Ajoutez un gestionnaire d'événements à lblNomEtatDesLieux
 //		this.fil.getLblNomEtatDesLieux().addMouseListener(new MouseAdapter() {
 //			@Override
@@ -53,7 +49,7 @@ public class GestionInsertionLocation implements ActionListener {
 //		});
 	}
 
-	public void ecrireLigneTableLogements(int numeroLigne, Bien bien, Immeuble immeuble) {
+	public void ecrireLigneTableLogements(int numeroLigne, Bien bien) {
 		JTable tableLogements = this.fil.getTable_liste_logements();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableLogements.getModel();
 
@@ -69,50 +65,55 @@ public class GestionInsertionLocation implements ActionListener {
 
 		for (int i = 0; i < biens.size(); i++) {
 			Bien b = biens.get(i);
-			
-			this.ecrireLigneTableLogements(i, b, i);
+			this.ecrireLigneTableLogements(i, b);
 		}
 	}
+
 	private void filtreLogementByImmeuble() {
 		JComboBox<String> comboBox_MesBiens = this.fil.getComboBox_bien();
-		String idLogementSelectionne = comboBox_MesBiens.getSelectedItem().toString();
+		String idImmeubleSelectionne = (String) comboBox_MesBiens.getSelectedItem(); // Corrected line
 
-		if (!idLogementSelectionne.equals("Biens")) {
+		if (!idImmeubleSelectionne.equals("Biens")) {
 			try {
-				this.updateTableLogementForBien(idLogementSelectionne);
+				this.updateTableLogementForBien(idImmeubleSelectionne);
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
 		}
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor();
-		switch (btn.getText()) {
-		
-		case "Ajouter un bail":
-			GestionPDF insertBail = new GestionPDF(this.fil);
-			this.fil.getLayeredPane().add(insertBail);
-			insertBail.setVisible(true);
-			insertBail.moveToFront();
-			break;
+		Object source = e.getSource();
 
-		case "Ajouter l'état des lieux":
-			GestionPDF insertEtat = new GestionPDF(this.fil);
-			this.fil.getLayeredPane().add(insertEtat);
-			insertEtat.setVisible(true);
-			insertEtat.moveToFront();
-			break;
+		if (source instanceof JButton) {
+			JButton btn = (JButton) source;
 
-		case "Ajouter":
-			Louer location = null;
-			try {
-				DaoBien daoBien = new DaoBien();
-				Bien bien = daoBien.findById(null);
+			Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor();
+			switch (btn.getText()) {
 
-				DaoLocataire daoLocataire = new DaoLocataire();
-				Locataire locataire = daoLocataire.findById(null);
+			case "Ajouter un bail":
+				GestionPDF insertBail = new GestionPDF(this.fil);
+				this.fil.getLayeredPane().add(insertBail);
+				insertBail.setVisible(true);
+				insertBail.moveToFront();
+				break;
+
+			case "Ajouter l'état des lieux":
+				GestionPDF insertEtat = new GestionPDF(this.fil);
+				this.fil.getLayeredPane().add(insertEtat);
+				insertEtat.setVisible(true);
+				insertEtat.moveToFront();
+				break;
+
+			case "Ajouter":
+				Louer location = null;
+				try {
+					DaoBien daoBien = new DaoBien();
+					Bien bien = daoBien.findById(null);
+
+					DaoLocataire daoLocataire = new DaoLocataire();
+					Locataire locataire = daoLocataire.findById(null);
 
 //				location = new Louer (
 //						locataire,
@@ -132,16 +133,20 @@ public class GestionInsertionLocation implements ActionListener {
 //						null/*année*/
 //						);
 
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 
-			break;
-		case "Annuler":
-			this.fil.dispose();
-			break;
+				break;
+			case "Annuler":
+				this.fil.dispose();
+				break;
+			}
+		} else if (source instanceof JComboBox) {
+			this.filtreLogementByImmeuble();
+
 		}
-		filtreLogementByImmeuble();
+
 	}
 
 }
