@@ -76,10 +76,8 @@ public class Fenetre_Accueil extends JFrame {
 	private JTextField textField_paye;
 	private JTextField textField_restantDu;
 	private JTable tableRegularisation;
-	
+
 	private JComboBox<String> comboBox_MesAssurances;
-	
-	private JComboBox<String> comboBox_MesChargesLocatives;
 
 	private GestionAccueil gestionAccueil;
 	private GestionBienLogement gestionBienLogement;
@@ -232,9 +230,9 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesDocuments.setName("btnMesDocuments");
 		panel_Menu_Boutons.add(btnMesDocuments);
 
-		///////////////////////////////////////////////////////////////////
-		// LAYERED ACCUEIL
-		// ////////////////////////////////////////////////////////////////
+//		///////////////////////////////////////////////////////////////////
+//		// LAYERED ACCUEIL
+//		// ////////////////////////////////////////////////////////////////
 
 		this.layeredPane_Accueil = new JLayeredPane();
 		this.layeredPane_Accueil.setBackground(new Color(255, 255, 255));
@@ -291,7 +289,7 @@ public class Fenetre_Accueil extends JFrame {
 		scrollPaneMesBiens_Logements.setViewportView(this.tableMesBiens_Logements);
 		// Pour action listener sur table logement
 		this.tableMesBiens_Logements.getSelectionModel().addListSelectionListener(this.gestionTableLogement);
-		
+
 		// Labels
 		JLabel lblMesBiens = new JLabel("Mes Biens");
 		lblMesBiens.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -617,8 +615,9 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesChargesLocatives = new JTable();
 		this.table_MesChargesLocatives.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesChargesLocatives.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
-				new String[] { "Numero", "Designation", "Date d'emission", "Date de paiement", "Imputable", "Montant", "Accompte", "Restant du"}));
+		this.table_MesChargesLocatives.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null, null, null }, }, new String[] { "Bien/Logement", "Numero", "Designation",
+						"Date d'emission", "Date de paiement", "Imputable", "Montant", "Accompte", "Restant du" }));
 		this.table_MesChargesLocatives.setBounds(40, 53, 668, 130);
 		scrollPane_MesChargesLocatives.setViewportView(this.table_MesChargesLocatives);
 		this.table_MesChargesLocatives.getSelectionModel().addListSelectionListener(this.gestionTableCharges);
@@ -637,14 +636,6 @@ public class Fenetre_Accueil extends JFrame {
 		panel_chargesLocatives.add(separator_mesChargesLocatives);
 
 		// Boutons généraux
-		JButton btn_MesChargesLocatives_Charger = new JButton("Charger");
-		btn_MesChargesLocatives_Charger.setForeground(Color.WHITE);
-		btn_MesChargesLocatives_Charger.setBackground(new Color(0, 102, 204));
-		btn_MesChargesLocatives_Charger.setBounds(118, 449, 94, 31);
-		btn_MesChargesLocatives_Charger.addActionListener(this.gestionAccueil);
-		btn_MesChargesLocatives_Charger.setName("btn_MesChargesLocatives_Charger");
-		panel_chargesLocatives.add(btn_MesChargesLocatives_Charger);
-
 		JButton btn_MesChargesLocatives_Modifier = new JButton("Modifier");
 		btn_MesChargesLocatives_Modifier.setForeground(Color.WHITE);
 		btn_MesChargesLocatives_Modifier.setBackground(new Color(0, 102, 204));
@@ -661,22 +652,12 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesChargesLocatives_Supprimer.setName("btn_MesChargesLocatives_Supprimer");
 		panel_chargesLocatives.add(btn_MesChargesLocatives_Supprimer);
 
-		// ComboBox
-		this.comboBox_MesChargesLocatives = new JComboBox<String>();
-		comboBox_MesChargesLocatives.setBounds(55, 81, 171, 29);
-		panel_chargesLocatives.add(comboBox_MesChargesLocatives);
-		comboBox_MesChargesLocatives.addActionListener(this.gestionAccueil);
-		// Remplir le JComboBox avec les identifiants des logements
-		try {
-			List<String> identifiantsLogements = daoBien.getAllIdBien();
-			identifiantsLogements.add(0, "ID du logement");
-			// Ajouter les identifiants au modèle du JComboBox
-			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-					identifiantsLogements.toArray(new String[0]));
-			comboBox_MesChargesLocatives.setModel(modelComboBox);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		// Boutons propres à la page
+		JToggleButton tglbtn_FactureCharge_biens = new JToggleButton("Charges pour mes logements");
+		tglbtn_FactureCharge_biens.setBounds(143, 453, 208, 23);
+		tglbtn_FactureCharge_biens.addActionListener(this.gestionAccueil);
+		tglbtn_FactureCharge_biens.setName("tglbtn_FactureCharge_biens");
+		panel_chargesLocatives.add(tglbtn_FactureCharge_biens);
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES ASSURANCES
@@ -758,18 +739,19 @@ public class Fenetre_Accueil extends JFrame {
 
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
-		    List<String> identifiantsLogements = daoBien.getAllIdBien();
-		    identifiantsLogements.add(0, "ID du logement");
+			List<String> identifiantsLogements = daoBien.getAllIdBien();
+			identifiantsLogements.add(0, "ID du logement");
 
-		    // Ajouter les identifiants au modèle du JComboBox
-		    DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-		            identifiantsLogements.toArray(new String[0]));
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsLogements.toArray(new String[0]));
 
-		    comboBox_MesAssurances.setModel(modelComboBox);
+			comboBox_MesAssurances.setModel(modelComboBox);
 		} catch (SQLException e) {
-		    e.printStackTrace();
-		    // Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
-		    JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.", "Erreur", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
+			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
+					"Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 
 		///////////////////////////////////////////////////////////////////
@@ -831,7 +813,6 @@ public class Fenetre_Accueil extends JFrame {
 			e.printStackTrace();
 		}
 
-
 		/////////////////////////////////////////////////////////////////////////
 		// LAYERED SOLDE DE TOUT
 		// COMPTE////////////////////////////////////////////////////////////////
@@ -886,7 +867,6 @@ public class Fenetre_Accueil extends JFrame {
 //		JLabel lbl_SoldeDeToutCompte_Locataires = new JLabel("Locataires");
 //		lbl_SoldeDeToutCompte_Locataires.setBounds(56, 69, 82, 13);
 //		panel_SoldeDeToutCompte.add(lbl_SoldeDeToutCompte_Locataires);
-
 
 //		// A faire éventuellement à la fin
 //		////////////////////////////////////////////////////////////////////////////
@@ -982,7 +962,7 @@ public class Fenetre_Accueil extends JFrame {
 	public JTable getTableTravaux() {
 		return table_MesTravaux;
 	}
-	
+
 	public JTable getTableChargesLocatives() {
 		return table_MesChargesLocatives;
 	}
@@ -1014,12 +994,9 @@ public class Fenetre_Accueil extends JFrame {
 	public JTextField getTextField_restantDu() {
 		return textField_restantDu;
 	}
-	
+
 	public JComboBox<String> getComboBox_MesAssurances() {
-        return comboBox_MesAssurances;
-    }
-	
-	public JComboBox<String> getComboBox_MesChargesLocatives() {
-        return comboBox_MesChargesLocatives;
-    }
+		return comboBox_MesAssurances;
+	}
+
 }
