@@ -10,9 +10,7 @@ public class RequeteSelectAssuranceByLogement implements Requete<Assurance> {
 
     @Override
     public String requete() {
-        return "SELECT * FROM ASSURANCE A " +
-               "JOIN BIEN B ON A.Id_Immeuble = B.Id_Immeuble " +
-               "WHERE B.Id_Bien = ?";
+        return "SELECT * FROM ASSURANCE WHERE Id_Bien = ?";
     }
 
     @Override
@@ -22,6 +20,6 @@ public class RequeteSelectAssuranceByLogement implements Requete<Assurance> {
 
     @Override
     public void parametres(PreparedStatement prSt, Assurance data) throws SQLException {
-        prSt.setString(1, data.getNuméroPolice());
+        prSt.setString(1, data.getBien().getIdBien());
     }
 }
