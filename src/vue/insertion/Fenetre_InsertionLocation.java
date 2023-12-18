@@ -7,6 +7,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -25,7 +27,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionInsertionLocation;
-
+import modele.Immeuble;
+import modele.dao.DaoBien;
+import modele.dao.DaoImmeuble;
 
 public class Fenetre_InsertionLocation extends JInternalFrame {
 	private JTextField textField_IdLocataire;
@@ -43,11 +47,15 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	private JPanel panel;
 	private JTextField textField_loyer;
 	private JTable table_liste_locataires;
+	private JComboBox<String> comboBox_bien;
+
+	private DaoImmeuble daoImmeuble;
 	private GestionInsertionLocation gestionClic;
 
 	public Fenetre_InsertionLocation() {
 
 		this.gestionClic = new GestionInsertionLocation(this);
+		this.daoImmeuble = new DaoImmeuble();
 
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
@@ -154,11 +162,31 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		btn_annuler_location.addActionListener(this.gestionClic);
 		panel.add(btn_annuler_location);
 
-		JComboBox comboBox_bien = new JComboBox();
+		this.comboBox_bien = new JComboBox<String>();
 		comboBox_bien.setBorder(new LineBorder(new Color(0, 102, 204)));
 		comboBox_bien.setModel(new DefaultComboBoxModel(new String[] { "Biens" }));
 		comboBox_bien.setBounds(267, 131, 94, 21);
 		panel.add(comboBox_bien);
+		this.comboBox_bien.addActionListener(this.gestionClic);
+
+
+		// Remplir le JComboBox avec les identifiants des logements
+		try {
+			List<String> identifiantsImmeuble = this.daoImmeuble.getAllIdImmeuble();
+			identifiantsImmeuble.add(0, "Biens");
+
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsImmeuble.toArray(new String[0]));
+
+			this.comboBox_bien.setModel(modelComboBox);
+			this.comboBox_bien.setModel(modelComboBox);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
+			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
+					"Erreur", JOptionPane.ERROR_MESSAGE);
+		}
 
 		JScrollPane scrollPane_table_id_logements = new JScrollPane();
 		scrollPane_table_id_logements.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
@@ -270,7 +298,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 			JOptionPane.showMessageDialog(panel, "Le fichier PDF n'existe pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	////////
+
 	public JTextField getTextField_IdLocataire() {
 		return this.textField_IdLocataire;
 	}
@@ -319,6 +347,10 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		return this.table_liste_locataires;
 	}
 
+	public JTable getTable_liste_logements() {
+		return this.table_id_logements;
+	}
+
 	public JLabel getLblNomEtatDesLieux() {
 		return this.lblNomEtatDesLieux;
 	}
@@ -331,4 +363,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		return this.gestionClic;
 	}
 
+	public JComboBox<String> getComboBox_bien() {
+		return comboBox_bien;
+	}
 }

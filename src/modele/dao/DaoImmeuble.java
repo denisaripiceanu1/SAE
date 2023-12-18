@@ -1,8 +1,10 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import modele.Immeuble;
@@ -61,5 +63,23 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 		}
 		return immeuble;
 	}
+	
+	public List<String> getAllIdImmeuble() throws SQLException {
+		List<String> identifiants = new ArrayList<>();
+
+		String sql = "SELECT ID_Immeuble FROM Immeuble";
+
+		try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(sql);
+				ResultSet resultSet = st.executeQuery()) {
+
+			while (resultSet.next()) {
+				identifiants.add(resultSet.getString("ID_Immeuble"));
+			}
+			resultSet.close();
+		}
+
+		return identifiants;
+	}
+	
 
 }
