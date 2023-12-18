@@ -125,7 +125,6 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 			Facture f = creerInstance(res);
 			factures.add(f);
 		}
-
 		return factures;
 	}
 

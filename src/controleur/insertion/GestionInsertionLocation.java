@@ -9,7 +9,15 @@ import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
+<<<<<<< HEAD
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import controleur.GestionPDF;
+=======
 import controleur.outils.InsertionPDF;
+>>>>>>> 9aa35743a2a83c4b367ed15c2dabefda80b22da2
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionLocation;
 
@@ -43,14 +51,14 @@ public class GestionInsertionLocation implements ActionListener {
 		switch (btn.getText()) {
 		
 		case "Ajouter un bail":
-			InsertionPDF insertBail = new InsertionPDF();
+			GestionPDF insertBail = new GestionPDF(this.fil);
 			this.fil.getLayeredPane().add(insertBail);
 			insertBail.setVisible(true);
 			insertBail.moveToFront();
 			break;
 
 		case "Ajouter l'état des lieux":
-			InsertionPDF insertEtat = new InsertionPDF();
+			GestionPDF insertEtat = new GestionPDF(this.fil);
 			this.fil.getLayeredPane().add(insertEtat);
 			insertEtat.setVisible(true);
 			insertEtat.moveToFront();
