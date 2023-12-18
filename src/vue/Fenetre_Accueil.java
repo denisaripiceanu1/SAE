@@ -5,14 +5,13 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -22,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -33,17 +33,8 @@ import controleur.GestionBienLogement;
 import controleur.GestionLocations;
 import controleur.GestionTableCharges;
 import controleur.GestionTableLogement;
-import controleur.insertion.GestionInsertionBien;
-import controleur.outils.PDFListe;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
-import vue.insertion.Fenetre_InsertionAssurance;
-import vue.insertion.Fenetre_InsertionBien;
-import javax.swing.JTextPane;
-import javax.swing.JComboBox;
-import javax.swing.JToggleButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Fenetre_Accueil extends JFrame {
 
@@ -76,9 +67,9 @@ public class Fenetre_Accueil extends JFrame {
 	private JTextField textField_paye;
 	private JTextField textField_restantDu;
 	private JTable tableRegularisation;
-	
+
 	private JComboBox<String> comboBox_MesAssurances;
-	
+
 	private JComboBox<String> comboBox_MesChargesLocatives;
 
 	private GestionAccueil gestionAccueil;
@@ -89,6 +80,7 @@ public class Fenetre_Accueil extends JFrame {
 
 	private DaoBien daoBien;
 	private DaoLocataire daoLocataire;
+	private JComboBox<String> comboBox_Regularisation;
 
 	/**
 	 * Launch the application.
@@ -291,7 +283,7 @@ public class Fenetre_Accueil extends JFrame {
 		scrollPaneMesBiens_Logements.setViewportView(this.tableMesBiens_Logements);
 		// Pour action listener sur table logement
 		this.tableMesBiens_Logements.getSelectionModel().addListSelectionListener(this.gestionTableLogement);
-		
+
 		// Labels
 		JLabel lblMesBiens = new JLabel("Mes Biens");
 		lblMesBiens.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -617,8 +609,9 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesChargesLocatives = new JTable();
 		this.table_MesChargesLocatives.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesChargesLocatives.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
-				new String[] { "Libell\u00E9", "Bien", "D\u00E9ductible", "Montant réel", "Montant provisionnel"}));
+		this.table_MesChargesLocatives.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null, null, null }, },
+				new String[] { "Libell\u00E9", "Bien", "D\u00E9ductible", "Montant réel", "Montant provisionnel" }));
 		this.table_MesChargesLocatives.setBounds(40, 53, 668, 130);
 		scrollPane_MesChargesLocatives.setViewportView(this.table_MesChargesLocatives);
 		this.table_MesChargesLocatives.getSelectionModel().addListSelectionListener(this.gestionTableCharges);
@@ -671,17 +664,17 @@ public class Fenetre_Accueil extends JFrame {
 
 		// ComboBox
 		this.comboBox_MesChargesLocatives = new JComboBox<String>();
-		comboBox_MesChargesLocatives.setBounds(55, 81, 171, 29);
-		panel_chargesLocatives.add(comboBox_MesChargesLocatives);
-		comboBox_MesChargesLocatives.addActionListener(this.gestionAccueil);
+		this.comboBox_MesChargesLocatives.setBounds(55, 81, 171, 29);
+		panel_chargesLocatives.add(this.comboBox_MesChargesLocatives);
+		this.comboBox_MesChargesLocatives.addActionListener(this.gestionAccueil);
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
-			List<String> identifiantsLogements = daoBien.getAllIdBien();
+			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
 			identifiantsLogements.add(0, "ID du logement");
 			// Ajouter les identifiants au modèle du JComboBox
 			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
 					identifiantsLogements.toArray(new String[0]));
-			comboBox_MesChargesLocatives.setModel(modelComboBox);
+			this.comboBox_MesChargesLocatives.setModel(modelComboBox);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -760,24 +753,25 @@ public class Fenetre_Accueil extends JFrame {
 
 		// ComboBox
 		this.comboBox_MesAssurances = new JComboBox<String>();
-		comboBox_MesAssurances.setBounds(55, 80, 130, 29);
-		panel_MesAssurances.add(comboBox_MesAssurances);
-		comboBox_MesAssurances.addActionListener(this.gestionAccueil);
+		this.comboBox_MesAssurances.setBounds(55, 80, 130, 29);
+		panel_MesAssurances.add(this.comboBox_MesAssurances);
+		this.comboBox_MesAssurances.addActionListener(this.gestionAccueil);
 
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
-		    List<String> identifiantsLogements = daoBien.getAllIdBien();
-		    identifiantsLogements.add(0, "ID du logement");
+			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
+			identifiantsLogements.add(0, "ID du logement");
 
-		    // Ajouter les identifiants au modèle du JComboBox
-		    DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-		            identifiantsLogements.toArray(new String[0]));
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsLogements.toArray(new String[0]));
 
-		    comboBox_MesAssurances.setModel(modelComboBox);
+			this.comboBox_MesAssurances.setModel(modelComboBox);
 		} catch (SQLException e) {
-		    e.printStackTrace();
-		    // Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
-		    JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.", "Erreur", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
+			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
+					"Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 
 		///////////////////////////////////////////////////////////////////
@@ -798,13 +792,14 @@ public class Fenetre_Accueil extends JFrame {
 		scrollPane_Regularisation.setBounds(28, 121, 697, 303);
 		panel_RegularisationDesCharges.add(scrollPane_Regularisation);
 
-		tableRegularisation = new JTable();
-		tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
-		tableRegularisation.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
-				new String[] { "Date entr\u00E9e", "Date sortie", "Total charges", "Travaux imputables",
-						"Charges garage", "Total des provisions" }));
-		tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(65);
-		tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(65);
+		this.tableRegularisation = new JTable();
+		this.tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
+		this.tableRegularisation
+				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
+						new String[] { "Date entr\u00E9e", "Date sortie", "Total charges", "Travaux imputables",
+								"Charges garage", "Total des provisions" }));
+		this.tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(65);
+		this.tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(65);
 		this.tableRegularisation.setBounds(40, 53, 668, 130);
 		scrollPane_Regularisation.setViewportView(this.tableRegularisation);
 
@@ -829,7 +824,7 @@ public class Fenetre_Accueil extends JFrame {
 
 		// Remplir le JComboBox avec les identifiants des locataires
 		try {
-			List<String> identifiantsLocataires = daoLocataire.getAllIdLocataire();
+			List<String> identifiantsLocataires = this.daoLocataire.getAllIdLocataire();
 			identifiantsLocataires.add(0, "ID locataire");
 			// Ajouter les identifiants au modèle du JComboBox
 			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
@@ -838,7 +833,6 @@ public class Fenetre_Accueil extends JFrame {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 
 		/////////////////////////////////////////////////////////////////////////
 		// LAYERED SOLDE DE TOUT
@@ -895,7 +889,6 @@ public class Fenetre_Accueil extends JFrame {
 //		lbl_SoldeDeToutCompte_Locataires.setBounds(56, 69, 82, 13);
 //		panel_SoldeDeToutCompte.add(lbl_SoldeDeToutCompte_Locataires);
 
-
 //		// A faire éventuellement à la fin
 //		////////////////////////////////////////////////////////////////////////////
 //		// LAYERED
@@ -931,103 +924,112 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JLayeredPane getLayeredPane_MesDocuments() {
-		return layeredPane_MesDocuments;
+		return this.layeredPane_MesDocuments;
 	}
 
 	public JLayeredPane getLayeredPane_Accueil() {
-		return layeredPane_Accueil;
+		return this.layeredPane_Accueil;
 	}
 
 	public JLayeredPane getLayeredPane_MesLocations() {
-		return layeredPane_MesLocations;
+		return this.layeredPane_MesLocations;
 	}
 
 	public JLayeredPane getLayeredPane_MesBiens() {
-		return layeredPane_MesBiens;
+		return this.layeredPane_MesBiens;
 	}
 
 	public JLayeredPane getLayeredPane_MesTravaux() {
-		return layeredPane_MesTravaux;
+		return this.layeredPane_MesTravaux;
 	}
 
 	public JLayeredPane getLayeredPane_MesChargesLocatives() {
-		return layeredPane_MesChargesLocatives;
+		return this.layeredPane_MesChargesLocatives;
 	}
 
 	public JLayeredPane getLayeredPane_MesAssurances() {
-		return layeredPane_MesAssurances;
+		return this.layeredPane_MesAssurances;
 	}
 
 	public JLayeredPane getLayeredPane_RegularisationDesCharges() {
-		return layeredPane_RegularisationDesCharges;
+		return this.layeredPane_RegularisationDesCharges;
 	}
 
 	public JLayeredPane getLayeredPane_SoldeDeToutCompte() {
-		return layeredPane_SoldeDeToutCompte;
+		return this.layeredPane_SoldeDeToutCompte;
 	}
 
+	@Override
 	public JPanel getContentPane() {
-		return contentPane;
+		return this.contentPane;
 	}
 
 	// --------- GETTERS --------//
 	public JTable getTableBiens() {
-		return tableMesBiens;
+		return this.tableMesBiens;
 	}
 
 	public JTable getTableLogementsParBien() {
-		return tableMesBiens_Logements;
+		return this.tableMesBiens_Logements;
 	}
 
 	public JTable getTableLocations() {
-		return table_MesLocations;
+		return this.table_MesLocations;
 	}
 
 	public JTable getTableAssurances() {
-		return table_MesAssurances;
+		return this.table_MesAssurances;
 	}
 
 	public JTable getTableTravaux() {
-		return table_MesTravaux;
+		return this.table_MesTravaux;
 	}
-	
+
 	public JTable getTableChargesLocatives() {
-		return table_MesChargesLocatives;
+		return this.table_MesChargesLocatives;
 	}
 
 	public JTextField getTextField_loyer() {
-		return textField_loyer;
+		return this.textField_loyer;
 	}
 
 	public JTextField getTextField_provisionCharges() {
-		return textField_provisionCharges;
+		return this.textField_provisionCharges;
 	}
 
 	public JTextField getTextField_caution() {
-		return textField_caution;
+		return this.textField_caution;
 	}
 
 	public JTextField getTextField_dateEmission() {
-		return textField_dateEmission;
+		return this.textField_dateEmission;
 	}
 
 	public JTextField getTextField_dateEcheance() {
-		return textField_dateEcheance;
+		return this.textField_dateEcheance;
 	}
 
 	public JTextField getTextField_paye() {
-		return textField_paye;
+		return this.textField_paye;
 	}
 
 	public JTextField getTextField_restantDu() {
-		return textField_restantDu;
+		return this.textField_restantDu;
 	}
-	
+
+	public JTable getTableRegularisation() {
+		return this.tableRegularisation;
+	}
+
+	public JComboBox<String> getComboBox_Regularisation() {
+		return this.comboBox_Regularisation;
+	}
+
 	public JComboBox<String> getComboBox_MesAssurances() {
-        return comboBox_MesAssurances;
-    }
-	
+		return this.comboBox_MesAssurances;
+	}
+
 	public JComboBox<String> getComboBox_MesChargesLocatives() {
-        return comboBox_MesChargesLocatives;
-    }
+		return this.comboBox_MesChargesLocatives;
+	}
 }

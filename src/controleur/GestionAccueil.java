@@ -291,7 +291,7 @@ public class GestionAccueil implements ActionListener {
 
 		for (int i = 0; i < chargesLogement.size(); i++) {
 			Charge c = chargesLogement.get(i);
-			ecrireLigneTableChargesLocatives(i, c);
+			this.ecrireLigneTableChargesLocatives(i, c);
 		}
 	}
 	///////////////////////////////////////////////////////////////////
@@ -344,10 +344,10 @@ public class GestionAccueil implements ActionListener {
 
 		for (int i = 0; i < assurancesLogement.size(); i++) {
 			Assurance assurance = assurancesLogement.get(i);
-			Entreprise entreprise = daoEntreprise.findById(assurance.getEntreprise().getSiret());
-			Echeance echeance = daoEcheance.findById(assurance.getNuméroPolice());
+			Entreprise entreprise = this.daoEntreprise.findById(assurance.getEntreprise().getSiret());
+			Echeance echeance = this.daoEcheance.findById(assurance.getNuméroPolice());
 
-			ecrireLigneTableAssurances(i, assurance, entreprise, echeance);
+			this.ecrireLigneTableAssurances(i, assurance, entreprise, echeance);
 		}
 	}
 
@@ -361,7 +361,7 @@ public class GestionAccueil implements ActionListener {
 		// assurances
 		if (!idLogementSelectionne.equals("ID du logement")) {
 			try {
-				updateTableAssurancesForLogement(idLogementSelectionne);
+				this.updateTableAssurancesForLogement(idLogementSelectionne);
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
@@ -378,11 +378,11 @@ public class GestionAccueil implements ActionListener {
 		if (!idLogementSelectionne.equals("ID du logement")) {
 			try {
 				// On ajoute le bien a la sauvegarde
-				Bien logement = daoBien.findById(idLogementSelectionne);
+				Bien logement = this.daoBien.findById(idLogementSelectionne);
 				Sauvegarde.deleteItem("Logement");
 				Sauvegarde.addItem("Logement", logement);
 
-				updateTableChargesForLogement(idLogementSelectionne);
+				this.updateTableChargesForLogement(idLogementSelectionne);
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
@@ -435,7 +435,7 @@ public class GestionAccueil implements ActionListener {
 					e1.printStackTrace();
 				}
 				break;
-				
+
 			case "btnMesBiens_Supprimer":
 				if (Sauvegarde.onSave("Immeuble") == true) {
 					Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
@@ -449,7 +449,7 @@ public class GestionAccueil implements ActionListener {
 				}
 
 				break;
-				
+
 			case "btnMesBiens_Modifier":
 				//////// POUR UN LOGEMENT --> BIEN (dans notre BDD) ///////////
 				if (Sauvegarde.onSave("Logement") == true) {
@@ -621,47 +621,50 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesChargesLocatives_Modifier":
-			    if (Sauvegarde.onSave("Charge") && Sauvegarde.onSave("Logement")) {
-			        Fenetre_ModificationCharges modif_charge = new Fenetre_ModificationCharges();
-			        this.fenetreAccueil.getLayeredPane().add(modif_charge);
-			        modif_charge.setVisible(true);
-			        modif_charge.moveToFront();
+				if (Sauvegarde.onSave("Charge") && Sauvegarde.onSave("Logement")) {
+					Fenetre_ModificationCharges modif_charge = new Fenetre_ModificationCharges();
+					this.fenetreAccueil.getLayeredPane().add(modif_charge);
+					modif_charge.setVisible(true);
+					modif_charge.moveToFront();
 
-			        // On recupère la charge de la sauvegarde
-			        Charge chargeSauvegarde = (Charge) Sauvegarde.getItem("Charge");
+					// On recupère la charge de la sauvegarde
+					Charge chargeSauvegarde = (Charge) Sauvegarde.getItem("Charge");
 
-			        // On recupère le logement de la sauvegarde
-			        Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
-			        
-			        try {
-			            Bien bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
+					// On recupère le logement de la sauvegarde
+					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
 
-			            int deductibleValeur = 0; // Non déductible par défaut
+					try {
+						Bien bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
 
-			            // choix de la radio button
-			            if (modif_charge.getRdbtnAjouterChargeOui().isSelected()) {
-			                deductibleValeur = 1;
-			            } else if (modif_charge.getRdbtnAjouterChargeNon().isSelected()) {
-			                deductibleValeur = 0;
-			            }
+						int deductibleValeur = 0; // Non déductible par défaut
 
-			            modif_charge.getTextField_nomCharge().setText(chargeSauvegarde.getNom());
-			            modif_charge.getTextField_montantPrevisionnel().setText(Double.toString(chargeSauvegarde.getMontantPrevisionnel()));
-			            modif_charge.getTextField_montantReel().setText(Double.toString(chargeSauvegarde.getMontantReel()));
+						// choix de la radio button
+						if (modif_charge.getRdbtnAjouterChargeOui().isSelected()) {
+							deductibleValeur = 1;
+						} else if (modif_charge.getRdbtnAjouterChargeNon().isSelected()) {
+							deductibleValeur = 0;
+						}
 
-			            // Mise à jour des boutons radio
-			            if (chargeSauvegarde.isDeductible() == 1) {
-			                modif_charge.getRdbtnAjouterChargeNon().setSelected(true);
-			            } else {
-			                modif_charge.getRdbtnAjouterChargeOui().setSelected(true);
-			            }
+						modif_charge.getTextField_nomCharge().setText(chargeSauvegarde.getNom());
+						modif_charge.getTextField_montantPrevisionnel()
+								.setText(Double.toString(chargeSauvegarde.getMontantPrevisionnel()));
+						modif_charge.getTextField_montantReel()
+								.setText(Double.toString(chargeSauvegarde.getMontantReel()));
 
-			        } catch (SQLException e1) {
-			            // Gérer l'exception de manière appropriée (affichage d'un message à l'utilisateur, etc.)
-			            e1.printStackTrace();
-			        }
-			    }
-			    break;
+						// Mise à jour des boutons radio
+						if (chargeSauvegarde.isDeductible() == 1) {
+							modif_charge.getRdbtnAjouterChargeNon().setSelected(true);
+						} else {
+							modif_charge.getRdbtnAjouterChargeOui().setSelected(true);
+						}
+
+					} catch (SQLException e1) {
+						// Gérer l'exception de manière appropriée (affichage d'un message à
+						// l'utilisateur, etc.)
+						e1.printStackTrace();
+					}
+				}
+				break;
 
 			case "btn_MesChargesLocatives_Inserer":
 				JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
@@ -675,16 +678,16 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesChargesLocatives_Supprimer":
-				
+
 				if (Sauvegarde.onSave("Charge") == true) {
-			        Charge chargeSauvegarde = (Charge) Sauvegarde.getItem("Charge");
-			        Fenetre_SupprimerCharge supp_charge = new Fenetre_SupprimerCharge();
+					Charge chargeSauvegarde = (Charge) Sauvegarde.getItem("Charge");
+					Fenetre_SupprimerCharge supp_charge = new Fenetre_SupprimerCharge();
 					this.fenetreAccueil.getLayeredPane().add(supp_charge);
 					supp_charge.setVisible(true);
 					supp_charge.moveToFront();
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner une charge pour supprimer",
-							"Erreur", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this.fenetreAccueil,
+							"Veuillez sélectionner une charge pour supprimer", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
@@ -753,8 +756,8 @@ public class GestionAccueil implements ActionListener {
 				break;
 			}
 		}
-		filtreAssuranceByLogement();
-		filtreChargesByLogement();
+		this.filtreAssuranceByLogement();
+		this.filtreChargesByLogement();
 
 	}
 }

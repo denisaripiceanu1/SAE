@@ -2,23 +2,23 @@ package modele;
 
 public class Charge {
 
-	 private static int compteurIdCharge = 1;
+	private static int compteurIdCharge = 1;
 
-	    private int idCharge;
-	    private String nom;
-	    private double montantReel;
-	    private double montantPrevisionnel;
-	    private int deductible;
-	    private Bien idBien;
+	private int idCharge;
+	private String nom;
+	private double montantReel;
+	private double montantPrevisionnel;
+	private int deductible;
+	private Bien idBien;
 
-	    public Charge(String nom, double montantReel, double montantPrevisionnel, int deductible, Bien idBien) {
-	        this.idCharge = compteurIdCharge++;
-	        this.nom = nom;
-	        this.montantReel = montantReel;
-	        this.montantPrevisionnel = montantPrevisionnel;
-	        this.deductible = deductible;
-	        this.idBien = idBien;
-	    }
+	public Charge(String nom, double montantReel, double montantPrevisionnel, int deductible, Bien idBien) {
+		this.idCharge = compteurIdCharge++;
+		this.nom = nom;
+		this.montantReel = montantReel;
+		this.montantPrevisionnel = montantPrevisionnel;
+		this.deductible = deductible;
+		this.idBien = idBien;
+	}
 
 	public int getIdCharge() {
 		return this.idCharge;
