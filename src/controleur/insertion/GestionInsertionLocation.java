@@ -42,6 +42,7 @@ public class GestionInsertionLocation implements ActionListener {
 			fenetreColo.moveToFront();
 			break;
 		case "Ajouter un bail":
+			
 			this.gestionPDF.getInstance().importPDFChemin();
 			break;
 		case "Ajouter l'état des lieux":
