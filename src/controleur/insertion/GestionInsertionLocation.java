@@ -26,7 +26,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import controleur.outils.InsertionPDF;
+import controleur.GestionPDF;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionLocation;
 import vue.modification.Fenetre_ModificationLogement;
@@ -34,7 +34,6 @@ import vue.modification.Fenetre_ModificationLogement;
 public class GestionInsertionLocation implements ActionListener {
 
 	private Fenetre_InsertionLocation fil;
-	private InsertionPDF gestionPDF;
 
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
@@ -62,14 +61,14 @@ public class GestionInsertionLocation implements ActionListener {
 		switch (btn.getText()) {
 		
 		case "Ajouter un bail":
-			InsertionPDF insertBail = new InsertionPDF();
+			GestionPDF insertBail = new GestionPDF(this.fil);
 			this.fil.getLayeredPane().add(insertBail);
 			insertBail.setVisible(true);
 			insertBail.moveToFront();
 			break;
 
 		case "Ajouter l'état des lieux":
-			InsertionPDF insertEtat = new InsertionPDF();
+			GestionPDF insertEtat = new GestionPDF(this.fil);
 			this.fil.getLayeredPane().add(insertEtat);
 			insertEtat.setVisible(true);
 			insertEtat.moveToFront();

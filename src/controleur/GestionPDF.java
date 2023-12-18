@@ -1,4 +1,4 @@
-package controleur.outils;
+package controleur;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -11,28 +11,30 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controleur.outils.PDFImporter;
 import vue.insertion.Fenetre_InsertionLocation;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class InsertionPDF extends JInternalFrame {
+public class GestionPDF extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JButton btnNewButton;
 	private JLabel nomPdf;
-	private PDFImporter pdf;
 	private int id;
 	private String nom;
 	private Fenetre_InsertionLocation fil;
+	private PDFImporter pdf;
 
 	/**
 	 * Create the frame.
 	 */
-	public InsertionPDF() {
+	public GestionPDF(Fenetre_InsertionLocation fil) {
+		this.fil = fil;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -66,15 +68,13 @@ public class InsertionPDF extends JInternalFrame {
 
 		            // Assurez-vous que l'instance pdf est correctement initialisée
 		            if (pdf == null) {
-		                pdf = PDFImporter.getInstance();
+		            	 pdf = PDFImporter.getInstance();
 		            }
 		            pdf.importPDFChemin();
 		            
 		            if(pdf.getPDFFileName() != null) {
 		            	nomPdf.setText(pdf.getPDFFileName());
 		            }
-
-		            // Autres opérations après l'importation du chemin du PDF
 
 		        } catch (NumberFormatException ex) {
 		            // Gérer l'exception si l'ID n'est pas un entier
@@ -101,7 +101,6 @@ public class InsertionPDF extends JInternalFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					System.out.println("id : " + id + "nom : " + nom + "fichier : " + pdf.getSelectedFilePath().toString());
 					pdf.getInstance().importPDFBD(id, nom);
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
@@ -118,7 +117,7 @@ public class InsertionPDF extends JInternalFrame {
 		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fil.dispose();
+				dispose();
 			}
 		});
 		btnAnnuler.setBounds(270, 211, 85, 21);
