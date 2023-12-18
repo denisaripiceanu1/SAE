@@ -114,7 +114,7 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(immeuble.getImmeuble(), numeroLigne, 0);
 		modeleTable.setValueAt(immeuble.getAdresse() + "\n" + immeuble.getCp() + " " + immeuble.getVille(), numeroLigne,
 				1);
-		modeleTable.setValueAt(immeuble.getNbLogement(), numeroLigne, 2);
+		modeleTable.setValueAt(immeuble, numeroLigne, 2);//rajouter une méthode count pour le nb logement
 	}
 
 	private void chargerBiens() throws SQLException {
@@ -447,7 +447,7 @@ public class GestionAccueil implements ActionListener {
 
 				} else {
 					//////// POUR MODIFIER UN IMMEUBLE///////////
-					// Premier test si il n'y a aucun immeuble sÃ©lectionnÃ© alors erreur
+					// Premier test si il n'y a aucun immeuble sélectionné alors erreur
 					if (Sauvegarde.onSave("Immeuble") == false) {
 						JOptionPane.showMessageDialog(this.fenetreAccueil,
 								"Veuillez sÃ©lectionner un bien pour modifier", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -458,12 +458,12 @@ public class GestionAccueil implements ActionListener {
 						modif_bien.setVisible(true);
 						modif_bien.moveToFront();
 						// permet de recuperer les infos sur l'immeuble courant pour les afficher
-						// On rÃ©cupÃ¨re l'immeuble de la sauvegarde
+						// On récupère l'immeuble de la sauvegarde
 						Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
 						Immeuble immeubleCourant;
 						try {
 							// A partir de l'ID de l'immeuble dans la sauvegarde on utilise la BD pour
-							// rÃ©cupÃ©rer l'immeuble le plus rÃ©cent correspondant
+							// récuperer l'immeuble le plus récent correspondant
 							immeubleCourant = this.daoImmeuble.findById(immeubleSauvegarde.getImmeuble());
 							// afficher les infos dans la page
 							modif_bien.getTextField_IdImmeuble().setText(immeubleCourant.getImmeuble());
@@ -472,8 +472,6 @@ public class GestionAccueil implements ActionListener {
 							modif_bien.getTextField_ville().setText(immeubleCourant.getVille());
 							modif_bien.getTextField_periodeDeConstruction()
 									.setText(immeubleCourant.getPeriodeConstruction());
-							modif_bien.getTextField_nbLogement()
-									.setText(Integer.toString(immeubleCourant.getNbLogement()));
 							modif_bien.getComboBox_typeDeBien().setSelectedItem(immeubleCourant.getType_immeuble());
 						} catch (SQLException e1) {
 							e1.printStackTrace();
