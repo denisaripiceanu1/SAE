@@ -3,11 +3,11 @@ package modele;
 public class Compteur {
 	private String idCompteur;
 	private String typeComp;
-	private int prix_abonnement; //fixé par défaut ?
+	private double prix_abonnement;
 	private Bien bien;
 	private Immeuble immeuble;
 
-	public Compteur(String idCompteur, String typeComp,int prix_abonnement,Bien bien, Immeuble immeuble) {
+	public Compteur(String idCompteur, String typeComp,double prix_abonnement,Bien bien, Immeuble immeuble) {
 		this.idCompteur = idCompteur;
 		this.typeComp = typeComp;
 		this.prix_abonnement = prix_abonnement;
@@ -31,11 +31,11 @@ public class Compteur {
 		this.typeComp = typeComp;
 	}
 
-	public int getPrix_abonnement() {
+	public double getPrix_abonnement() {
 		return prix_abonnement;
 	}
 
-	public void setPrix_abonnement(int prix_abonnement) {
+	public void setPrix_abonnement(double prix_abonnement) {
 		this.prix_abonnement = prix_abonnement;
 	}
 
