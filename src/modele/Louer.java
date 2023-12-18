@@ -13,14 +13,12 @@ public class Louer {
 	private String etat_lieux;
 	private String dateDepart;
 	private int loyerPaye;
-	private int colocation;
-	private String annee;
-	private String trimestre;
+	private ICC icc; //anciennement (trimestre,année) en string : DOIT ETRE DE TYPE ICC !!!!!!!!!
 	private double montantReelPaye;
 
 	public Louer(Locataire locataire, Bien bien, String dateDebut, int nbMois, double loyerTTC,
 			double provision_chargeMens_TTC, double cautionTTC, String bail, String etat_lieux, String dateDepart,
-			int loyerPaye, int colocation, double montantReelPaye, String trimestre, String annee) {
+			int loyerPaye,ICC icc, double montantReelPaye) {
 		this.locataire = locataire;
 		this.bien = bien;
 		this.dateDebut = dateDebut;
@@ -32,26 +30,24 @@ public class Louer {
 		this.etat_lieux = etat_lieux;
 		this.dateDepart = dateDepart;
 		this.loyerPaye = loyerPaye;
-		this.colocation = colocation;
-		this.annee = annee;
-		this.trimestre = trimestre;
+		this.icc = icc;
 		this.montantReelPaye = montantReelPaye;
 	}
 
-	public Locataire getIdLocataire() {
+	public Locataire getLocataire() {
 		return locataire;
 	}
 
-	public void setIdLocataire(Locataire idLocataire) {
-		this.locataire = idLocataire;
+	public void setLocataire(Locataire locataire) {
+		this.locataire = locataire;
 	}
 
-	public Bien getIdBien() {
+	public Bien getBien() {
 		return bien;
 	}
 
-	public void setIdBien(Bien idBien) {
-		this.bien = idBien;
+	public void setBien(Bien bien) {
+		this.bien = bien;
 	}
 
 	public String getDateDebut() {
@@ -78,6 +74,14 @@ public class Louer {
 		this.loyerTTC = loyerTTC;
 	}
 
+	public double getProvision_chargeMens_TTC() {
+		return provision_chargeMens_TTC;
+	}
+
+	public void setProvision_chargeMens_TTC(double provision_chargeMens_TTC) {
+		this.provision_chargeMens_TTC = provision_chargeMens_TTC;
+	}
+
 	public double getCautionTTC() {
 		return cautionTTC;
 	}
@@ -92,6 +96,14 @@ public class Louer {
 
 	public void setBail(String bail) {
 		this.bail = bail;
+	}
+
+	public String getEtat_lieux() {
+		return etat_lieux;
+	}
+
+	public void setEtat_lieux(String etat_lieux) {
+		this.etat_lieux = etat_lieux;
 	}
 
 	public String getDateDepart() {
@@ -110,28 +122,12 @@ public class Louer {
 		this.loyerPaye = loyerPaye;
 	}
 
-	public int getColocation() {
-		return colocation;
+	public ICC getIcc() {
+		return icc;
 	}
 
-	public void setColocation(int colocation) {
-		this.colocation = colocation;
-	}
-
-	public String getAnnee() {
-		return annee;
-	}
-
-	public void setAnnee(String annee) {
-		this.annee = annee;
-	}
-
-	public String getTrimestre() {
-		return trimestre;
-	}
-
-	public void setTrimestre(String trimestre) {
-		this.trimestre = trimestre;
+	public void setIcc(ICC icc) {
+		this.icc = icc;
 	}
 
 	public double getMontantReelPaye() {
@@ -141,23 +137,5 @@ public class Louer {
 	public void setMontantReelPaye(double montantReelPaye) {
 		this.montantReelPaye = montantReelPaye;
 	}
-
-	public double getProvision_chargeMens_TTC() {
-		return provision_chargeMens_TTC;
-	}
-
-	public void setProvision_chargeMens_TTC(double provision_chargeMens_TTC) {
-		this.provision_chargeMens_TTC = provision_chargeMens_TTC;
-	}
-
-	public String getEtat_lieux() {
-		return etat_lieux;
-	}
-
-	public void setEtat_lieux(String etat_lieux) {
-		this.etat_lieux = etat_lieux;
-	}
-
-	
 	
 }

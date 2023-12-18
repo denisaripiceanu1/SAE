@@ -12,7 +12,7 @@ public class RequeteUpdateLouer implements Requete<Louer>{
 	@Override
 	public String requete() {
 		// TODO Auto-generated method stub
-		return "UPDATE Louer SET nb_mois= ?, loyer_TTC = ? , caution_TTC = ?, bail = ?, date_depart = ?, loyer_paye = ?, colocation = ?, montant_reel_paye = ?, "
+		return "UPDATE Louer SET nb_mois= ?, loyer_TTC = ? , caution_TTC = ?, bail = ?, date_depart = ?, loyer_paye = ?, montant_reel_paye = ?, "
 				+ "annee = ?, trimestre = ?,provision_chargeMens_TTC = ?, etat_lieux = ? "
 				+ " WHERE Id_Locataire = ?, Id_Bien = ?, Date_Debut = ?";
 	}
@@ -29,15 +29,14 @@ public class RequeteUpdateLouer implements Requete<Louer>{
 		prSt.setString(4, data.getBail());
 		prSt.setDate(5, Date.valueOf(data.getDateDepart()));
 		prSt.setInt(6,data.getLoyerPaye());
-		prSt.setInt(7, data.getColocation());
-		prSt.setDouble(8, data.getMontantReelPaye());
-		prSt.setString(9, data.getAnnee());
-		prSt.setString(10, data.getTrimestre());
-		prSt.setDouble(11, data.getProvision_chargeMens_TTC());
-		prSt.setString(12, data.getEtat_lieux());
-		prSt.setString(13, data.getIdLocataire().getIdLocataire());
-		prSt.setString(14, data.getIdBien().getIdBien());
-		prSt.setDate(15,Date.valueOf(data.getDateDebut()));
+		prSt.setDouble(7, data.getMontantReelPaye());
+		prSt.setString(8, data.getIcc().getAnnee());
+		prSt.setString(9, data.getIcc().getTrimestre());
+		prSt.setDouble(10, data.getProvision_chargeMens_TTC());
+		prSt.setString(11, data.getEtat_lieux());
+		prSt.setString(12, data.getLocataire().getIdLocataire());
+		prSt.setString(13, data.getBien().getIdBien());
+		prSt.setDate(14,Date.valueOf(data.getDateDebut()));
 	}
 
 }

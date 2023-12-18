@@ -69,7 +69,6 @@ public class Fenetre_Accueil extends JFrame {
 	private JTable tableRegularisation;
 
 	private JComboBox<String> comboBox_MesAssurances;
-
 	private JComboBox<String> comboBox_MesChargesLocatives;
 
 	private GestionAccueil gestionAccueil;
@@ -224,9 +223,9 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesDocuments.setName("btnMesDocuments");
 		panel_Menu_Boutons.add(btnMesDocuments);
 
-		///////////////////////////////////////////////////////////////////
-		// LAYERED ACCUEIL
-		// ////////////////////////////////////////////////////////////////
+//		///////////////////////////////////////////////////////////////////
+//		// LAYERED ACCUEIL
+//		// ////////////////////////////////////////////////////////////////
 
 		this.layeredPane_Accueil = new JLayeredPane();
 		this.layeredPane_Accueil.setBackground(new Color(255, 255, 255));
@@ -609,9 +608,10 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesChargesLocatives = new JTable();
 		this.table_MesChargesLocatives.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesChargesLocatives.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null }, },
-				new String[] { "Libell\u00E9", "Bien", "D\u00E9ductible", "Montant réel", "Montant provisionnel" }));
+		this.table_MesChargesLocatives
+				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
+						new String[] { "Bien/Logement", "Numero", "Designation", "Date d'emission", "Date de paiement",
+								"Imputable", "Montant", "Accompte", "Restant du" }));
 		this.table_MesChargesLocatives.setBounds(40, 53, 668, 130);
 		scrollPane_MesChargesLocatives.setViewportView(this.table_MesChargesLocatives);
 		this.table_MesChargesLocatives.getSelectionModel().addListSelectionListener(this.gestionTableCharges);
@@ -630,14 +630,6 @@ public class Fenetre_Accueil extends JFrame {
 		panel_chargesLocatives.add(separator_mesChargesLocatives);
 
 		// Boutons généraux
-		JButton btn_MesChargesLocatives_Charger = new JButton("Charger");
-		btn_MesChargesLocatives_Charger.setForeground(Color.WHITE);
-		btn_MesChargesLocatives_Charger.setBackground(new Color(0, 102, 204));
-		btn_MesChargesLocatives_Charger.setBounds(118, 449, 94, 31);
-		btn_MesChargesLocatives_Charger.addActionListener(this.gestionAccueil);
-		btn_MesChargesLocatives_Charger.setName("btn_MesChargesLocatives_Charger");
-		panel_chargesLocatives.add(btn_MesChargesLocatives_Charger);
-
 		JButton btn_MesChargesLocatives_Modifier = new JButton("Modifier");
 		btn_MesChargesLocatives_Modifier.setForeground(Color.WHITE);
 		btn_MesChargesLocatives_Modifier.setBackground(new Color(0, 102, 204));
@@ -645,14 +637,6 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesChargesLocatives_Modifier.addActionListener(this.gestionAccueil);
 		btn_MesChargesLocatives_Modifier.setName("btn_MesChargesLocatives_Modifier");
 		panel_chargesLocatives.add(btn_MesChargesLocatives_Modifier);
-
-		JButton btn_MesChargesLocatives_Inserer = new JButton("Insérer");
-		btn_MesChargesLocatives_Inserer.setForeground(Color.WHITE);
-		btn_MesChargesLocatives_Inserer.setBackground(new Color(0, 102, 204));
-		btn_MesChargesLocatives_Inserer.setBounds(258, 449, 94, 31);
-		btn_MesChargesLocatives_Inserer.addActionListener(this.gestionAccueil);
-		btn_MesChargesLocatives_Inserer.setName("btn_MesChargesLocatives_Inserer");
-		panel_chargesLocatives.add(btn_MesChargesLocatives_Inserer);
 
 		JButton btn_MesChargesLocatives_Supprimer = new JButton("Supprimer");
 		btn_MesChargesLocatives_Supprimer.setForeground(Color.WHITE);
@@ -662,7 +646,29 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesChargesLocatives_Supprimer.setName("btn_MesChargesLocatives_Supprimer");
 		panel_chargesLocatives.add(btn_MesChargesLocatives_Supprimer);
 
+		// Boutons propres à la page
+		JToggleButton tglbtn_FactureCharge_biens = new JToggleButton("Charges pour mes logements");
+		tglbtn_FactureCharge_biens.setBounds(143, 453, 208, 23);
+		tglbtn_FactureCharge_biens.addActionListener(this.gestionAccueil);
+		tglbtn_FactureCharge_biens.setName("tglbtn_FactureCharge_biens");
+		panel_chargesLocatives.add(tglbtn_FactureCharge_biens);
+
 		// ComboBox
+		this.comboBox_MesChargesLocatives = new JComboBox<String>();
+		this.comboBox_MesChargesLocatives.setBounds(55, 81, 171, 29);
+		panel_chargesLocatives.add(this.comboBox_MesChargesLocatives);
+		this.comboBox_MesChargesLocatives.addActionListener(this.gestionAccueil);
+		// Remplir le JComboBox avec les identifiants des logements
+		try {
+			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
+			identifiantsLogements.add(0, "ID du logement");
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsLogements.toArray(new String[0]));
+			this.comboBox_MesChargesLocatives.setModel(modelComboBox);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		this.comboBox_MesChargesLocatives = new JComboBox<String>();
 		this.comboBox_MesChargesLocatives.setBounds(55, 81, 171, 29);
 		panel_chargesLocatives.add(this.comboBox_MesChargesLocatives);
@@ -767,6 +773,7 @@ public class Fenetre_Accueil extends JFrame {
 					identifiantsLogements.toArray(new String[0]));
 
 			this.comboBox_MesAssurances.setModel(modelComboBox);
+			this.comboBox_MesAssurances.setModel(modelComboBox);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
@@ -794,10 +801,9 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.tableRegularisation = new JTable();
 		this.tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
-		this.tableRegularisation
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
-						new String[] { "Date entr\u00E9e", "Date sortie", "Total charges", "Travaux imputables",
-								"Charges garage", "Total des provisions" }));
+		this.tableRegularisation.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null, null, null, null }, }, new String[] { "Date entree", "Date sortie",
+						"Total charges", "Travaux imputables", "Charges garage", "Total des provisions" }));
 		this.tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(65);
 		this.tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(65);
 		this.tableRegularisation.setBounds(40, 53, 668, 130);
@@ -1032,4 +1038,5 @@ public class Fenetre_Accueil extends JFrame {
 	public JComboBox<String> getComboBox_MesChargesLocatives() {
 		return this.comboBox_MesChargesLocatives;
 	}
+
 }

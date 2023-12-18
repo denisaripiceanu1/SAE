@@ -24,8 +24,8 @@ public class RequeteSelectLouerById implements Requete<Louer> {
     @Override
     public void parametres(PreparedStatement prSt, Louer data) throws SQLException {
         // Assurez-vous de convertir les types appropriés pour la base de données
-        prSt.setString(1, data.getIdBien().toString());
-        prSt.setString(2, data.getIdLocataire().toString());
+        prSt.setString(1, data.getBien().toString());
+        prSt.setString(2, data.getLocataire().toString());
         
         /*
         // Convertir la date au format AAAA-MM-JJ

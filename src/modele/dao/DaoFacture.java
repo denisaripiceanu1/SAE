@@ -13,9 +13,13 @@ import modele.Bien;
 import modele.Entreprise;
 import modele.Facture;
 import modele.Immeuble;
+import modele.dao.requetes.select.RequeteSelectAssuranceByLogement;
 import modele.dao.requetes.select.RequeteSelectFacture;
 import modele.dao.requetes.select.RequeteSelectFactureByBien;
 import modele.dao.requetes.select.RequeteSelectFactureById;
+import modele.dao.requetes.select.RequeteSelectFactureByLogement;
+import modele.dao.requetes.select.RequeteSelectFactureCharge;
+import modele.dao.requetes.select.RequeteSelectFactureTravaux;
 import modele.dao.requetes.update.RequeteUpdateFacture;
 
 public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
@@ -79,7 +83,7 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	        String dateEmissionStr = dateFormat.format(dateEmission);
 	        String datePaiementStr = dateFormat.format(datePaiement);
 
-			facture = new Facture(curseur.getInt("Id_Facture"), curseur.getString("numero"), dateEmissionStr,
+			facture = new Facture(curseur.getString("numero"), dateEmissionStr,
 					datePaiementStr, curseur.getString("mode_paiement"), curseur.getString("numero_devis"),
 					curseur.getString("designation"), curseur.getDouble("accompte_verse"),curseur.getDouble("montant"),
 					curseur.getInt("imputable_locataire"), immeuble, bien, entreprise);
@@ -118,4 +122,15 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		return factures;
 	}
 
+	public List<Facture> findFactureChargeByLogement(String idLogement ) throws SQLException {
+		return this.find(new RequeteSelectFactureByLogement(), idLogement);
+	}
+	
+	public List<Facture> findFactureCharge() throws SQLException {
+		return this.find(new RequeteSelectFactureCharge());
+	}
+	
+	public List<Facture> findFactureTravaux() throws SQLException {
+		return this.find(new RequeteSelectFactureTravaux());
+	}
 }
