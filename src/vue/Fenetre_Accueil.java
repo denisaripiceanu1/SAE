@@ -78,6 +78,7 @@ public class Fenetre_Accueil extends JFrame {
 	private JTable tableRegularisation;
 
 	private JComboBox<String> comboBox_MesAssurances;
+	private JComboBox<String> comboBox_MesChargesLocatives;
 
 	private GestionAccueil gestionAccueil;
 	private GestionBienLogement gestionBienLogement;
@@ -658,6 +659,23 @@ public class Fenetre_Accueil extends JFrame {
 		tglbtn_FactureCharge_biens.addActionListener(this.gestionAccueil);
 		tglbtn_FactureCharge_biens.setName("tglbtn_FactureCharge_biens");
 		panel_chargesLocatives.add(tglbtn_FactureCharge_biens);
+		
+		// ComboBox
+        this.comboBox_MesChargesLocatives = new JComboBox<String>();
+        comboBox_MesChargesLocatives.setBounds(55, 81, 171, 29);
+        panel_chargesLocatives.add(comboBox_MesChargesLocatives);
+        comboBox_MesChargesLocatives.addActionListener(this.gestionAccueil);
+        // Remplir le JComboBox avec les identifiants des logements
+        try {
+            List<String> identifiantsLogements = daoBien.getAllIdBien();
+            identifiantsLogements.add(0, "ID du logement");
+            // Ajouter les identifiants au modèle du JComboBox
+            DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+                    identifiantsLogements.toArray(new String[0]));
+            comboBox_MesChargesLocatives.setModel(modelComboBox);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES ASSURANCES
@@ -997,6 +1015,10 @@ public class Fenetre_Accueil extends JFrame {
 
 	public JComboBox<String> getComboBox_MesAssurances() {
 		return comboBox_MesAssurances;
+	}
+	
+	public JComboBox<String> getComboBox_MesChargesLocatives() {
+		return comboBox_MesChargesLocatives;
 	}
 
 }

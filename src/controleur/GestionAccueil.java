@@ -171,7 +171,7 @@ public class GestionAccueil implements ActionListener {
 	// ------------------- TABLE TRAVAUX pour un IMMEUBLE ------------------- //
 
 	private void chargerTravauxImmeubles() throws SQLException {
-		List<Facture> factures = this.daoFacture.findAll();
+		List<Facture> factures = this.daoFacture.findFactureTravaux();
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableTravaux().getModel();
 		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
@@ -190,7 +190,7 @@ public class GestionAccueil implements ActionListener {
 	// ------------------- TABLE TRAVAUX pour un LOGEMENT ------------------- //
 
 	private void chargerTravauxLogements() throws SQLException {
-		List<Facture> factures = this.daoFacture.findAll();
+		List<Facture> factures = this.daoFacture.findFactureTravaux();
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableTravaux().getModel();
 		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
@@ -210,7 +210,6 @@ public class GestionAccueil implements ActionListener {
 	// LAYERED MES CHARGES LOCATIVES
 	// ////////////////////////////////////////////////////////////////
 
-
 	// ------------------- TABLE CHARGES pour un LOGEMENT ------------------- //
 	private void chargerChargesLogement() throws SQLException {
 		List<Facture> factures = this.daoFacture.findFactureCharge();
@@ -224,8 +223,39 @@ public class GestionAccueil implements ActionListener {
 				modeleTable.addRow(new Object[] { f.getBien().getIdBien(), f.getNumero(), f.getDesignation(),
 						f.getDateEmission(), f.getDatePaiement(), f.getImputableLocataire(), f.getMontant(),
 						f.getAccompteVerse(), f.getMontant() - f.getAccompteVerse(), });
-
 			}
+		}
+	}
+
+	// POUR FILTRER AVEC LE COMBOBOX
+	public void ecrireLigneTableChargesLocatives(int numeroLigne, Facture charge) {
+		JTable tableChargesLocatives = this.fenetreAccueil.getTableChargesLocatives();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableChargesLocatives.getModel();
+
+		modeleTable.setValueAt(charge.getNumero(), numeroLigne, 0);
+		modeleTable.setValueAt(charge.getDesignation(), numeroLigne, 1);
+		modeleTable.setValueAt(charge.getDateEmission(), numeroLigne, 2);
+		modeleTable.setValueAt(charge.getDatePaiement(), numeroLigne, 3);
+		if (charge.getImputableLocataire() == 1) {
+			modeleTable.setValueAt("Oui", numeroLigne, 4);
+		} else {
+			modeleTable.setValueAt("Non", numeroLigne, 4);
+		}
+
+		modeleTable.setValueAt(charge.getMontant(), numeroLigne, 5);
+		modeleTable.setValueAt(charge.getAccompteVerse(), numeroLigne, 6);
+		modeleTable.setValueAt(charge.getMontant() - charge.getAccompteVerse(), numeroLigne, 7);
+	}
+
+	private void updateTableChargesForLogement(String idLogement) throws SQLException {
+		List<Facture> factures = this.daoFacture.findFactureChargeByLogement(idLogement);
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
+		modeleTable.setRowCount(factures.size());
+
+		for (int i = 0; i < factures.size(); i++) {
+			Facture f = factures.get(i);
+			ecrireLigneTableChargesLocatives(i, f);
 		}
 	}
 
@@ -297,6 +327,27 @@ public class GestionAccueil implements ActionListener {
 		if (!idLogementSelectionne.equals("ID du logement")) {
 			try {
 				updateTableAssurancesForLogement(idLogementSelectionne);
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
+	// Méthode pour filtrer les Charges par Id Logement
+	private void filtreChargesByLogement() {
+		JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
+		String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
+
+		// Si l'ID sélectionné est différent de "ID du logement", filtrez la table des
+		// assurances
+		if (!idLogementSelectionne.equals("ID du logement")) {
+			try {
+				// On ajoute le bien a la sauvegarde
+				Bien logement = daoBien.findById(idLogementSelectionne);
+				Sauvegarde.deleteItem("Logement");
+				Sauvegarde.addItem("Logement", logement);
+
+				updateTableChargesForLogement(idLogementSelectionne);
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
@@ -471,7 +522,7 @@ public class GestionAccueil implements ActionListener {
 				paiement_logement.setVisible(true);
 				paiement_logement.moveToFront();
 				break;
-				
+
 			///////////////////////
 			// LAYERED MES LOCATIONS
 			///////////////////////
@@ -649,7 +700,7 @@ public class GestionAccueil implements ActionListener {
 				break;
 
 			// ------------- MES CHARGES -------------//
-			
+
 			case "tglbtn_FactureCharge_biens":
 				// Permet de trier le tableau de charges en n'affichant que ceux concernants les
 				// immeubles
@@ -663,6 +714,7 @@ public class GestionAccueil implements ActionListener {
 			}
 
 			filtreAssuranceByLogement();
+			filtreChargesByLogement();
 
 		}
 	}
