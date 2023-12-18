@@ -1,13 +1,9 @@
 package controleur.outils;
 
-import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,7 +11,6 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import modele.dao.CictOracleDataSource;
@@ -52,22 +47,35 @@ public class PDFImporter extends JFrame {
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            selectedFilePath = selectedFile.getAbsolutePath();  // utilisez getAbsolutePath pour être cohérent
+            selectedFilePath = selectedFile.getAbsolutePath();  // on stock le chemin pour le mettre dans la bd 
         }
-    }
-
-    public String importPDFCheminString() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf"));
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            return selectedFile.getAbsolutePath();  // utilisez getAbsolutePath pour être cohérent
-        }
-        return null; // Return null if no file is selected
     }
 
     public String getSelectedFilePath() {
         return selectedFilePath;
+    }
+    
+    public void importPDFBD(int id,String nom) throws FileNotFoundException, SQLException {
+    	
+    	Connection cn = CictOracleDataSource.getConnectionBD();
+    	
+        String sql = "INSERT INTO documents (id, nom, fichier_pdf) VALUES (?, ?, ?)";
+        PreparedStatement pstmt = cn.prepareStatement(sql);
+
+        File pdfFile = new File(this.getSelectedFilePath());
+        FileInputStream input = new FileInputStream(pdfFile);
+
+        pstmt.setInt(1, id);
+        pstmt.setString(2, nom);
+        pstmt.setBinaryStream(3, input, (int) pdfFile.length());
+        pstmt.executeUpdate();
+        pstmt.close();
+    }
+    
+    public String getPDFFileName() {
+        if (selectedFilePath != null && !selectedFilePath.isEmpty()) {
+            return new File(selectedFilePath).getName();
+        }
+        return null;
     }
 }
