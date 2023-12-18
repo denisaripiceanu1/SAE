@@ -1,12 +1,10 @@
 package vue.insertion;
 
 import java.awt.Color;
-import java.awt.Desktop;
+
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -27,8 +25,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionInsertionLocation;
-import modele.Immeuble;
-import modele.dao.DaoBien;
 import modele.dao.DaoImmeuble;
 
 public class Fenetre_InsertionLocation extends JInternalFrame {
@@ -169,7 +165,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		panel.add(comboBox_bien);
 		this.comboBox_bien.addActionListener(this.gestionClic);
 
-
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
 			List<String> identifiantsImmeuble = this.daoImmeuble.getAllIdImmeuble();
@@ -259,44 +254,23 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		lblNomBail.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNomBail.setBounds(533, 147, 197, 20); // Adjust the position as needed
 		panel.add(lblNomBail);
-////////// A DEPLACER 
-		// Ajoutez un gestionnaire d'événements à lblNomEtatDesLieux
+
+		// Ajout d'un événement de clic pour l'état des lieux qui nous permetra d ouvrir
+		// le PDF
 		lblNomEtatDesLieux.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ouvrirPDF(lblNomEtatDesLieux.getText());
+				gestionClic.ouvrirPDF(lblNomEtatDesLieux.getText());
 			}
 		});
 
-		// Ajoutez un gestionnaire d'événements à lblNomBail
-		lblNomBail.addMouseListener(new MouseAdapter() {
+		// Ajout d'un événement de clic pour le bail qui nous permetra d ouvrir le PDF
+		lblBail.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ouvrirPDF(lblNomBail.getText());
+				gestionClic.ouvrirPDF(lblBail.getText());
 			}
 		});
-	}
-
-	private void ouvrirPDF(String label) {
-		// Récupérer le chemin complet du fichier PDF à partir du texte de l'étiquette
-		String cheminFichierPDF = label;
-
-		// Vérifier si le fichier existe
-		File fichierPDF = new File(cheminFichierPDF);
-
-		if (fichierPDF.exists()) {
-			// Ouvrez le fichier PDF
-			Desktop desktop = Desktop.getDesktop();
-			try {
-				desktop.open(fichierPDF);
-			} catch (IOException ex) {
-				JOptionPane.showMessageDialog(panel, "Erreur lors de l'ouverture du fichier PDF : " + ex.getMessage(),
-						"Erreur", JOptionPane.ERROR_MESSAGE);
-				ex.printStackTrace();
-			}
-		} else {
-			JOptionPane.showMessageDialog(panel, "Le fichier PDF n'existe pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
-		}
 	}
 
 	public JTextField getTextField_IdLocataire() {
@@ -366,4 +340,9 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	public JComboBox<String> getComboBox_bien() {
 		return comboBox_bien;
 	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
 }

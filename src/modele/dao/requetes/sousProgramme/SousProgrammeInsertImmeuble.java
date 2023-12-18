@@ -9,7 +9,7 @@ public class SousProgrammeInsertImmeuble implements SousProgramme<Immeuble> {
 
 	@Override
 	public String appelSousProgramme() {
-		return "{call Insert_Immeuble(?, ?, ?, ?, ?, ?, ?)}";
+		return "{call Inserer_Immeuble(?, ?, ?, ?, ?, ?)}";
 	}
 
 	@Override

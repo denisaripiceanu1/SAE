@@ -1,5 +1,6 @@
 package modele.dao;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -7,16 +8,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import modele.Bien;
 import modele.Locataire;
 import modele.dao.requetes.select.RequeteSelectLocataire;
 import modele.dao.requetes.select.RequeteSelectLocataireById;
+import modele.dao.requetes.sousProgramme.SousProgramme;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertBien;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocataire;
 import modele.dao.requetes.update.RequeteUpdateLocataire;
 
 public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire> {
 
 	@Override
-	public void create(Locataire donnees) {
-		// TODO Auto-generated method stub
+	public void create(Locataire donnees) throws SQLException {
+		SousProgramme<Locataire> sp = new SousProgrammeInsertLocataire();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
+		st.execute();
 
 	}
 

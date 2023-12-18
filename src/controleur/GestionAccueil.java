@@ -107,14 +107,16 @@ public class GestionAccueil implements ActionListener {
 
 	// ------------------- TABLE BIENS ------------------- //
 
-	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) {
+	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) throws SQLException {
 		JTable tableImmeuble = this.fenetreAccueil.getTableBiens();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
 
 		modeleTable.setValueAt(immeuble.getImmeuble(), numeroLigne, 0);
 		modeleTable.setValueAt(immeuble.getAdresse() + "\n" + immeuble.getCp() + " " + immeuble.getVille(), numeroLigne,
 				1);
-		modeleTable.setValueAt(immeuble, numeroLigne, 2);//rajouter une méthode count pour le nb logement
+		
+		int nb = this.daoImmeuble.getNombreLogementsDansImmeuble(immeuble.getImmeuble());
+		modeleTable.setValueAt(nb, numeroLigne, 2);//rajouter une méthode count pour le nb logement
 	}
 
 	private void chargerBiens() throws SQLException {

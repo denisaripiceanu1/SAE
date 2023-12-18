@@ -12,7 +12,7 @@ public class SousProgrammeInsertCompteur implements SousProgramme<Compteur>{
 
 	@Override
 	public String appelSousProgramme() {
-		return "{call Insert_Compteur(?, ?, ?, ?, ?)}";
+		return "{call Inserer_Compteur(?, ?, ?, ?, ?)}";
 	}
 
 	@Override

@@ -22,7 +22,6 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 		SousProgramme<Immeuble> sp = new SousProgrammeInsertImmeuble();
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
-		st.execute();
 	}
 
 	@Override
@@ -80,6 +79,25 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 
 		return identifiants;
 	}
+	
+	 public int getNombreLogementsDansImmeuble(String idImmeuble) throws SQLException {
+	        int nombreLogements = 0;
+
+	        String sql = "SELECT COUNT(*) FROM Bien WHERE Id_Immeuble = ?";
+
+	        try (PreparedStatement pstmt = CictOracleDataSource.getConnectionBD().prepareStatement(sql)) {
+	            pstmt.setString(1, idImmeuble);
+
+	            try (ResultSet rs = pstmt.executeQuery()) {
+	                if (rs.next()) {
+	                    nombreLogements = rs.getInt(1);
+	                }
+	            }
+	        }
+
+	        return nombreLogements;
+	    }
+
 	
 
 }

@@ -1,22 +1,35 @@
 package controleur.insertion;
 
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
-import controleur.GestionPDF;
+import modele.Assurance;
 import modele.Bien;
+
 import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoBien;
 import modele.dao.DaoImmeuble;
 import modele.dao.DaoLocataire;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+
+import controleur.GestionPDF;
+import controleur.outils.Sauvegarde;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionLocation;
 
@@ -25,26 +38,55 @@ public class GestionInsertionLocation implements ActionListener {
 	private Fenetre_InsertionLocation fil;
 	private DaoBien daoBien;
 	private DaoImmeuble daoImmeuble;
+	private DaoLocataire daoLocataire;
 
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
 		this.daoBien = new DaoBien();
 		this.daoImmeuble = new DaoImmeuble();
-//		// Ajoutez un gestionnaire d'événements à lblNomEtatDesLieux
-//		this.fil.getLblNomEtatDesLieux().addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				ouvrirPDF(fil.getLblNomEtatDesLieux().getText());
-//			}
-//		});
-//
-//		// Ajoutez un gestionnaire d'événements à lblNomBail
-//		this.fil.getLblBail().addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				ouvrirPDF(fil.getLblBail().getText());
-//			}
-//		});
+		this.daoLocataire = new DaoLocataire();
+
+	}
+
+	public void ouvrirPDF(String label) {
+		// Récupérer le chemin complet du fichier PDF à partir du texte de l'étiquette
+		String cheminFichierPDF = label;
+
+		// Vérifier si le fichier existe
+		File fichierPDF = new File(cheminFichierPDF);
+
+		if (fichierPDF.exists()) {
+			// Ouvrez le fichier PDF
+			Desktop desktop = Desktop.getDesktop();
+			try {
+				desktop.open(fichierPDF);
+			} catch (IOException ex) {
+				JOptionPane.showMessageDialog(fil.getPanel(),
+						"Erreur lors de l'ouverture du fichier PDF : " + ex.getMessage(), "Erreur",
+						JOptionPane.ERROR_MESSAGE);
+				ex.printStackTrace();
+			}
+		} else {
+			JOptionPane.showMessageDialog(fil.getPanel(), "Le fichier PDF n'existe pas.", "Erreur",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	// Add these methods to set mouse click event handlers
+	public void addClickEventToNomEtatDesLieux() {
+		this.fil.getLblNomEtatDesLieux().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				ouvrirPDF(fil.getLblNomEtatDesLieux().getText());
+			}
+		});
+	}
+
+	public void addClickEventToNomBail() {
+		this.fil.getLblBail().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				ouvrirPDF(fil.getLblBail().getText());
+			}
+		});
 	}
 
 	public void ecrireLigneTableLogements(int numeroLigne, Bien bien) {
@@ -82,78 +124,70 @@ public class GestionInsertionLocation implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor();
-		switch (btn.getText()) {
+		Object source = e.getSource();
 
-		case "Ajouter un bail":
-			GestionPDF insertBail = new GestionPDF(this.fil);
-			this.fil.getLayeredPane().add(insertBail);
-			insertBail.setVisible(true);
-			insertBail.moveToFront();
-			break;
-			Object source = e.getSource();
-			if (source instanceof JButton) {
-				JButton btn = (JButton) source;
+		if (source instanceof JButton) {
+			JButton btn = (JButton) source;
 
-				Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor();
-				switch (btn.getText()) {
+			Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor();
+			switch (btn.getText()) {
 
-				case "Ajouter un bail":
-					GestionPDF insertBail = new GestionPDF(this.fil);
-					this.fil.getLayeredPane().add(insertBail);
-					insertBail.setVisible(true);
-					insertBail.moveToFront();
-					break;
+			case "Ajouter un bail":
+				GestionPDF insertBail = new GestionPDF(this.fil);
+				this.fil.getLayeredPane().add(insertBail);
+				insertBail.setVisible(true);
+				insertBail.moveToFront();
+				break;
 
-				case "Ajouter l'état des lieux":
-					GestionPDF insertEtat = new GestionPDF(this.fil);
-					this.fil.getLayeredPane().add(insertEtat);
-					insertEtat.setVisible(true);
-					insertEtat.moveToFront();
-					break;
+			case "Ajouter l'état des lieux":
+				GestionPDF insertEtat = new GestionPDF(this.fil);
+				this.fil.getLayeredPane().add(insertEtat);
+				insertEtat.setVisible(true);
+				insertEtat.moveToFront();
+				break;
 
-				case "Ajouter":
-					Louer location = null;
-					try {
-						DaoBien daoBien = new DaoBien();
-						Bien bien = daoBien.findById(null);
+			case "Ajouter":
+				Louer location = null;
+				try {
+					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
 
-						DaoLocataire daoLocataire = new DaoLocataire();
-						Locataire locataire = daoLocataire.findById(null);
+					Locataire nouveauLocataire = new Locataire(this.fil.getTextField_IdLocataire().getText(),
+							this.fil.getTextField_Nom().getText(), this.fil.getTextField_Prenom().getText(),
+							this.fil.getTextField_tel().getText(), this.fil.getTextField_e_mail().getText(),
+							this.fil.getTextField_Date_de_naissance().getText());
 
-//				location = new Louer (
-//						locataire,
-//						bien,
-//						this.fil.getTextField_date_arrivee().getText(),
-//						null,/*nb de mois*/
-//						Double.parseDouble(this.fil.getTextField_loyer().getText()),
-//						Double.parseDouble(this.fil.getTextField_provision_sur_charges().getText()),
-//						Double.parseDouble(this.fil.getTextField_caution().getText()),
-//						bail,/*bail*/
-//						etatLieux,/*etat des lieux*/
-//						null,/*date de départ*/
-//						null, /* loyer paye*/
-//						this.fil.getTable_liste_locataires().getModel().getRowCount(),
-//						null,/*montant reel payé*/
-//						null,/*trimestre*/
-//						null/*année*/
-//						);
+					this.daoLocataire.create(nouveauLocataire);
+					
+				location = new Louer (
+						nouveauLocataire,
+						bienSauvegarde,
+						this.fil.getTextField_date_arrivee().getText(),
+						null,/*nb de mois*/
+						Double.parseDouble(this.fil.getTextField_loyer().getText()),
+						Double.parseDouble(this.fil.getTextField_provision_sur_charges().getText()),
+						Double.parseDouble(this.fil.getTextField_caution().getText()),
+						bail,
+						etatLieux,
+						null,/*date de départ*/
+						null, /* loyer paye*/
+						null, /* icc*/
+						null/*montant reel payé*/
+						);
 
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-
-					break;
-				case "Annuler":
-					this.fil.dispose();
-					break;
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
-			} else if (source instanceof JComboBox) {
-				this.filtreLogementByImmeuble();
 
+				break;
+			case "Annuler":
+				this.fil.dispose();
+				break;
 			}
+		} else if (source instanceof JComboBox) {
+			this.filtreLogementByImmeuble();
 
 		}
+
 	}
+
 }
