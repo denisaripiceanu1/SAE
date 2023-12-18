@@ -170,12 +170,12 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
-			List<String> identifiantsImmeuble = this.daoImmeuble.findAll();
-			identifiantsBien.add(0, "ID du logement");
+			List<String> identifiantsImmeuble = this.daoImmeuble.getAllIdImmeuble();
+			identifiantsImmeuble.add(0, "Biens");
 
 			// Ajouter les identifiants au modèle du JComboBox
 			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-					identifiantsBien.toArray(new String[0]));
+					identifiantsImmeuble.toArray(new String[0]));
 
 			this.comboBox_bien.setModel(modelComboBox);
 			this.comboBox_bien.setModel(modelComboBox);
