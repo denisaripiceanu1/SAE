@@ -1,7 +1,6 @@
 package controleur;
 
 import java.awt.BorderLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -150,7 +149,7 @@ public class GestionAccueil implements ActionListener {
 		List<Louer> locations = new ArrayList<>();
 
 		for (Bien b : biens) {
-			locations.addAll(this.daoLouer.findLocationByBien(b.getIdBien())); // Ajouter toutes les locations du bien à
+			locations.addAll(this.daoLouer.findLocationByBien(b.getIdBien())); // Ajouter toutes les locations du bien Ã
 																				// la liste
 		}
 
@@ -253,9 +252,6 @@ public class GestionAccueil implements ActionListener {
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
 		modeleTable.setRowCount(factures.size());
 
-		for (int i = 0; i < chargesLogement.size(); i++) {
-			Charge c = chargesLogement.get(i);
-			this.ecrireLigneTableChargesLocatives(i, c);
 		for (int i = 0; i < factures.size(); i++) {
 			Facture f = factures.get(i);
 			this.ecrireLigneTableChargesLocatives(i, f);
@@ -320,12 +316,13 @@ public class GestionAccueil implements ActionListener {
 	}
 
 //------------------------------------------------------------------------------------------------------------------------//
-	// Méthode pour filtrer les Asurances par Id Logement
+	// MÃ©thode pour filtrer les Asurances par Id Logement
 	private void filtreAssuranceByLogement() {
 		JComboBox<String> comboBox_MesAssurances = this.fenetreAccueil.getComboBox_MesAssurances();
 		String idLogementSelectionne = comboBox_MesAssurances.getSelectedItem().toString();
 
-		// Si l'ID sélectionné est différent de "ID du logement", filtrez la table des
+		// Si l'ID sÃ©lectionnÃ© est diffÃ©rent de "ID du logement", filtrez la table
+		// des
 		// assurances
 		if (!idLogementSelectionne.equals("ID du logement")) {
 			try {
@@ -336,12 +333,13 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	// Méthode pour filtrer les Charges par Id Logement
+	// MÃ©thode pour filtrer les Charges par Id Logement
 	private void filtreChargesByLogement() {
 		JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
 		String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
 
-		// Si l'ID sélectionné est différent de "ID du logement", filtrez la table des
+		// Si l'ID sÃ©lectionnÃ© est diffÃ©rent de "ID du logement", filtrez la table
+		// des
 		// assurances
 		if (!idLogementSelectionne.equals("ID du logement")) {
 			try {
@@ -413,7 +411,7 @@ public class GestionAccueil implements ActionListener {
 					supp_bien.setVisible(true);
 					supp_bien.moveToFront();
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien pour supprimer",
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sÃ©lectionner un bien pour supprimer",
 							"Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 
@@ -427,7 +425,7 @@ public class GestionAccueil implements ActionListener {
 					modif_logement.setVisible(true);
 					modif_logement.moveToFront();
 
-					// On recupère le logement de la sauvegarde
+					// On recupÃ¨re le logement de la sauvegarde
 					Bien logementSauvegarde = (Bien) Sauvegarde.getItem("Logement");
 					Bien logementCourant;
 
@@ -447,23 +445,23 @@ public class GestionAccueil implements ActionListener {
 
 				} else {
 					//////// POUR MODIFIER UN IMMEUBLE///////////
-					// Premier test si il n'y a aucun immeuble sélectionné alors erreur
+					// Premier test si il n'y a aucun immeuble sÃ©lectionnÃ© alors erreur
 					if (Sauvegarde.onSave("Immeuble") == false) {
 						JOptionPane.showMessageDialog(this.fenetreAccueil,
-								"Veuillez sélectionner un bien pour modifier", "Erreur", JOptionPane.ERROR_MESSAGE);
+								"Veuillez sÃ©lectionner un bien pour modifier", "Erreur", JOptionPane.ERROR_MESSAGE);
 					} else {
-						// On ouvre la fenêtre
+						// On ouvre la fenÃªtre
 						Fenetre_ModificationBien modif_bien = new Fenetre_ModificationBien();
 						this.fenetreAccueil.getLayeredPane().add(modif_bien);
 						modif_bien.setVisible(true);
 						modif_bien.moveToFront();
 						// permet de recuperer les infos sur l'immeuble courant pour les afficher
-						// On récupère l'immeuble de la sauvegarde
+						// On rÃ©cupÃ¨re l'immeuble de la sauvegarde
 						Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
 						Immeuble immeubleCourant;
 						try {
 							// A partir de l'ID de l'immeuble dans la sauvegarde on utilise la BD pour
-							// récupérer l'immeuble le plus récent correspondant
+							// rÃ©cupÃ©rer l'immeuble le plus rÃ©cent correspondant
 							immeubleCourant = this.daoImmeuble.findById(immeubleSauvegarde.getImmeuble());
 							// afficher les infos dans la page
 							modif_bien.getTextField_IdImmeuble().setText(immeubleCourant.getImmeuble());
@@ -553,7 +551,7 @@ public class GestionAccueil implements ActionListener {
 					infos_locataire.setVisible(true);
 					infos_locataire.moveToFront();
 
-					// On recupère le locataire de la sauvegarde
+					// On recupÃ¨re le locataire de la sauvegarde
 					Locataire locataireSauvgarde = (Locataire) Sauvegarde.getItem("Locataire");
 					Locataire locataireCourant;
 
@@ -582,77 +580,22 @@ public class GestionAccueil implements ActionListener {
 			// LAYERED MES CHARGES LOCATIVES
 			///////////////////////////////
 			case "btn_MesChargesLocatives_Modifier":
-				if (Sauvegarde.onSave("Charge") && Sauvegarde.onSave("Logement")) {
-					Fenetre_ModificationCharges modif_charge = new Fenetre_ModificationCharges();
-					this.fenetreAccueil.getLayeredPane().add(modif_charge);
-					modif_charge.setVisible(true);
-					modif_charge.moveToFront();
-
-					// On recupère la charge de la sauvegarde
-					Charge chargeSauvegarde = (Charge) Sauvegarde.getItem("Charge");
-
-					// On recupère le logement de la sauvegarde
-					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
-
-					try {
-						Bien bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
-
-						int deductibleValeur = 0; // Non déductible par défaut
-
-						// choix de la radio button
-						if (modif_charge.getRdbtnAjouterChargeOui().isSelected()) {
-							deductibleValeur = 1;
-						} else if (modif_charge.getRdbtnAjouterChargeNon().isSelected()) {
-							deductibleValeur = 0;
-						}
-
-						modif_charge.getTextField_nomCharge().setText(chargeSauvegarde.getNom());
-						modif_charge.getTextField_montantPrevisionnel()
-								.setText(Double.toString(chargeSauvegarde.getMontantPrevisionnel()));
-						modif_charge.getTextField_montantReel()
-								.setText(Double.toString(chargeSauvegarde.getMontantReel()));
-
-						// Mise à jour des boutons radio
-						if (chargeSauvegarde.isDeductible() == 1) {
-							modif_charge.getRdbtnAjouterChargeNon().setSelected(true);
-						} else {
-							modif_charge.getRdbtnAjouterChargeOui().setSelected(true);
-						}
-
-					} catch (SQLException e1) {
-						// Gérer l'exception de manière appropriée (affichage d'un message à
-						// l'utilisateur, etc.)
-						e1.printStackTrace();
-					}
-				}
-				break;
-
-			case "btn_MesChargesLocatives_Inserer":
-				JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
-				String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
-				// La oage s'oyvre que si un Logement du JComboBox est selectionne
-				if (!idLogementSelectionne.equals("ID du logement") && Sauvegarde.onSave("Logement") == true) {
-					Fenetre_InsertionCharges fic = new Fenetre_InsertionCharges();
-					this.fenetreAccueil.getLayeredPane().add(fic);
-					fic.setVisible(true);
-					fic.moveToFront();
-				}
 //			    if (Sauvegarde.onSave("Charge") && Sauvegarde.onSave("Logement")) {
 //			        Fenetre_ModificationCharges modif_charge = new Fenetre_ModificationCharges();
 //			        this.fenetreAccueil.getLayeredPane().add(modif_charge);
 //			        modif_charge.setVisible(true);
 //			        modif_charge.moveToFront();
 //
-//			        // On recupère la charge de la sauvegarde
+//			        // On recupÃ¨re la charge de la sauvegarde
 //			        Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Facture");
 //
-//			        // On recupère le logement de la sauvegarde
+//			        // On recupÃ¨re le logement de la sauvegarde
 //			        Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
 //			        
 //			        try {
 //			            Bien bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
 //
-//			            int deductibleValeur = 0; // Non déductible par défaut
+//			            int deductibleValeur = 0; // Non dÃ©ductible par dÃ©faut
 //
 //			            // choix de la radio button
 //			            if (modif_charge.getRdbtnAjouterChargeOui().isSelected()) {
@@ -665,7 +608,7 @@ public class GestionAccueil implements ActionListener {
 //			            modif_charge.getTextField_montantPrevisionnel().setText(Double.toString(chargeSauvegarde.getMontantPrevisionnel()));
 //			            modif_charge.getTextField_montantReel().setText(Double.toString(chargeSauvegarde.getMontantReel()));
 //
-//			            // Mise à jour des boutons radio
+//			            // Mise Ã  jour des boutons radio
 //			            if (chargeSauvegarde.getImputableLocataire() == 1) {
 //			                modif_charge.getRdbtnAjouterChargeNon().setSelected(true);
 //			            } else {
@@ -673,17 +616,13 @@ public class GestionAccueil implements ActionListener {
 //			            }
 //
 //			        } catch (SQLException e1) {
-//			            // Gérer l'exception de manière appropriée (affichage d'un message à l'utilisateur, etc.)
+//			            // GÃ©rer l'exception de maniÃ¨re appropriÃ©e (affichage d'un message Ã  l'utilisateur, etc.)
 //			            e1.printStackTrace();
 //			        }
 //			    }
 				break;
 
 			case "btn_MesChargesLocatives_Supprimer":
-
-				if (Sauvegarde.onSave("Charge") == true) {
-					Charge chargeSauvegarde = (Charge) Sauvegarde.getItem("Charge");
-					Fenetre_SupprimerCharge supp_charge = new Fenetre_SupprimerCharge();
 				if (Sauvegarde.onSave("Charge") == true) {
 					Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Facture");
 					Fenetre_SupprimerFactureCharge supp_charge = new Fenetre_SupprimerFactureCharge();
@@ -692,7 +631,7 @@ public class GestionAccueil implements ActionListener {
 					supp_charge.moveToFront();
 				} else {
 					JOptionPane.showMessageDialog(this.fenetreAccueil,
-							"Veuillez sélectionner une charge pour supprimer", "Erreur", JOptionPane.ERROR_MESSAGE);
+							"Veuillez sÃ©lectionner une charge pour supprimer", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
@@ -718,14 +657,14 @@ public class GestionAccueil implements ActionListener {
 				break;
 
 			// Coder la cas de la selection d'un id logement
-			// parmi la liste présente dans le JComboBox "comboBox_MesAssurances"
+			// parmi la liste prÃ©sente dans le JComboBox "comboBox_MesAssurances"
 
 			////////////////////////////////////
 			// LAYERED REGULARISATION DES CHARGES
 			////////////////////////////////////
 
 			// Coder la cas de la selection d'un locataire
-			// parmi la liste présente dans le JComboBox "comboBox_Regularisation"
+			// parmi la liste prÃ©sente dans le JComboBox "comboBox_Regularisation"
 
 			///////////////////////////
 			// LAYERED SOLDE TOUT COMPTE
@@ -759,10 +698,6 @@ public class GestionAccueil implements ActionListener {
 					e1.printStackTrace();
 				}
 				break;
-			}
-		}
-		this.filtreAssuranceByLogement();
-		this.filtreChargesByLogement();
 
 			// ------------- MES CHARGES -------------//
 
@@ -778,8 +713,8 @@ public class GestionAccueil implements ActionListener {
 
 			}
 
-			filtreAssuranceByLogement();
-			filtreChargesByLogement();
+			this.filtreAssuranceByLogement();
+			this.filtreChargesByLogement();
 
 		}
 	}
