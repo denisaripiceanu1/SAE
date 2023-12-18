@@ -55,7 +55,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(6, 29, 755, 511);
+		panel.setBounds(0, 0, 755, 511);
 		panel.setLayout(null);
 		this.getContentPane().add(panel);
 
