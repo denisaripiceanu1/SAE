@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import modele.Assurance;
+import modele.Bien;
 import modele.Entreprise;
 import modele.Immeuble;
 import modele.dao.requetes.select.RequeteSelectAssurance;
@@ -43,16 +44,16 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 			float montantInit = curseur.getFloat("montant");
 
 			// Récupérer l'identifiant de l'immeuble
-			String idImmeuble = curseur.getString("Id_Immeuble");
-			DaoImmeuble daoImmeuble = new DaoImmeuble();
-			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
+			String idBien = curseur.getString("Id_Bien");
+			DaoBien daoBien = new DaoBien();
+			Bien bien = daoBien.findById(idBien);
 
 			// Récupérer l'identifiant de l'entreprise
 			String siretEntreprise = curseur.getString("SIRET");
 			DaoEntreprise daoEntreprise = new DaoEntreprise();
 			Entreprise entreprise = daoEntreprise.findById(siretEntreprise);
 
-			assurance = new Assurance(numeroPolice, montantInit, immeuble, entreprise);
+			assurance = new Assurance(numeroPolice, montantInit, bien, entreprise);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

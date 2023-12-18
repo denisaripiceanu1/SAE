@@ -1,12 +1,12 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import modele.Quotite;
-import modele.Quotter;
 import modele.dao.requetes.select.RequeteSelectQuotite;
 import modele.dao.requetes.select.RequeteSelectQuotiteById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
@@ -52,14 +52,7 @@ public class DaoQuotite extends DaoModele<Quotite> implements Dao<Quotite> {
 	protected Quotite creerInstance(ResultSet curseur) throws SQLException {
 		Quotite quotite = null;
 		try {
-
-			Double pourcentage_q = curseur.getDouble("pourcentage");
-			String pourcentage_q_Str = pourcentage_q.toString();
-			DaoQuotter daoQuotter = new DaoQuotter();
-			Quotter pourcentage = daoQuotter.findById(pourcentage_q_Str);
-
-			quotite = new Quotite(curseur.getString("type_quotite"), pourcentage);
-
+			quotite = new Quotite(curseur.getString("type_quotite"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
