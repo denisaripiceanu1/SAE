@@ -34,7 +34,7 @@ public class GestionInsertionQuotite implements ActionListener {
 
 				String typeQuotite = (String) this.fiq.getComboBox_typeDeCompteur().getSelectedItem();
 
-				quotite = new Quotite(typeQuotite, pourcentage);
+				quotite = new Quotite(typeQuotite);
 
 				this.daoQuotite.create(quotite);
 
