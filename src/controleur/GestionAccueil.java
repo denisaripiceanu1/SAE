@@ -721,9 +721,8 @@ public class GestionAccueil implements ActionListener {
 
 			}
 
-			this.filtreAssuranceByLogement();
-			this.filtreChargesByLogement();
-
 		}
+		this.filtreAssuranceByLogement();
+		this.filtreChargesByLogement();
 	}
 }
