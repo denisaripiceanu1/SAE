@@ -618,7 +618,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesChargesLocatives = new JTable();
 		this.table_MesChargesLocatives.setSelectionBackground(new Color(0, 102, 204));
 		this.table_MesChargesLocatives.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
-				new String[] { "Libell\u00E9", "Bien", "D\u00E9ductible", "Montant réel", "Montant provisionnel"}));
+				new String[] { "Numero", "Designation", "Date d'emission", "Date de paiement", "Imputable", "Montant", "Accompte", "Restant du"}));
 		this.table_MesChargesLocatives.setBounds(40, 53, 668, 130);
 		scrollPane_MesChargesLocatives.setViewportView(this.table_MesChargesLocatives);
 		this.table_MesChargesLocatives.getSelectionModel().addListSelectionListener(this.gestionTableCharges);
@@ -652,14 +652,6 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesChargesLocatives_Modifier.addActionListener(this.gestionAccueil);
 		btn_MesChargesLocatives_Modifier.setName("btn_MesChargesLocatives_Modifier");
 		panel_chargesLocatives.add(btn_MesChargesLocatives_Modifier);
-
-		JButton btn_MesChargesLocatives_Inserer = new JButton("Insérer");
-		btn_MesChargesLocatives_Inserer.setForeground(Color.WHITE);
-		btn_MesChargesLocatives_Inserer.setBackground(new Color(0, 102, 204));
-		btn_MesChargesLocatives_Inserer.setBounds(258, 449, 94, 31);
-		btn_MesChargesLocatives_Inserer.addActionListener(this.gestionAccueil);
-		btn_MesChargesLocatives_Inserer.setName("btn_MesChargesLocatives_Inserer");
-		panel_chargesLocatives.add(btn_MesChargesLocatives_Inserer);
 
 		JButton btn_MesChargesLocatives_Supprimer = new JButton("Supprimer");
 		btn_MesChargesLocatives_Supprimer.setForeground(Color.WHITE);

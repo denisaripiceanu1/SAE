@@ -13,9 +13,12 @@ import modele.Bien;
 import modele.Entreprise;
 import modele.Facture;
 import modele.Immeuble;
+import modele.dao.requetes.select.RequeteSelectAssuranceByLogement;
 import modele.dao.requetes.select.RequeteSelectFacture;
 import modele.dao.requetes.select.RequeteSelectFactureByBien;
 import modele.dao.requetes.select.RequeteSelectFactureById;
+import modele.dao.requetes.select.RequeteSelectFactureByLogement;
+import modele.dao.requetes.select.RequeteSelectFactureCharge;
 import modele.dao.requetes.update.RequeteUpdateFacture;
 
 public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
@@ -118,4 +121,11 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		return factures;
 	}
 
+	public List<Facture> findFactureChargeByLogement(String idLogement ) throws SQLException {
+		return this.find(new RequeteSelectFactureByLogement(), idLogement);
+	}
+	
+	public List<Facture> findFactureCharge() throws SQLException {
+		return this.find(new RequeteSelectFactureCharge());
+	}
 }

@@ -1,6 +1,7 @@
 package controleur;
 
 import java.awt.BorderLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -18,7 +19,6 @@ import javax.swing.table.DefaultTableModel;
 import controleur.outils.Sauvegarde;
 import modele.Assurance;
 import modele.Bien;
-import modele.Charge;
 import modele.Echeance;
 import modele.Entreprise;
 import modele.Facture;
@@ -27,7 +27,6 @@ import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoAssurance;
 import modele.dao.DaoBien;
-import modele.dao.DaoCharge;
 import modele.dao.DaoEcheance;
 import modele.dao.DaoEntreprise;
 import modele.dao.DaoFacture;
@@ -38,17 +37,15 @@ import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
-import vue.insertion.Fenetre_InsertionCharges;
 import vue.insertion.Fenetre_InsertionDiagnostic;
 import vue.insertion.Fenetre_InsertionLocation;
 import vue.insertion.Fenetre_InsertionLogement;
 import vue.insertion.Fenetre_InsertionPaiementBien;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
 import vue.modification.Fenetre_ModificationBien;
-import vue.modification.Fenetre_ModificationCharges;
 import vue.modification.Fenetre_ModificationLogement;
 import vue.suppression.Fenetre_SupprimerBien;
-import vue.suppression.Fenetre_SupprimerCharge;
+import vue.suppression.Fenetre_SupprimerFactureCharge;
 
 public class GestionAccueil implements ActionListener {
 
@@ -60,7 +57,6 @@ public class GestionAccueil implements ActionListener {
 	private DaoEcheance daoEcheance;
 	private DaoEntreprise daoEntreprise;
 	private DaoFacture daoFacture;
-	private DaoCharge daoCharge;
 	private DaoLocataire daoLocataire;
 
 	public GestionAccueil(Fenetre_Accueil fenetreAccueil) {
@@ -72,7 +68,6 @@ public class GestionAccueil implements ActionListener {
 		this.daoEcheance = new DaoEcheance();
 		this.daoEntreprise = new DaoEntreprise();
 		this.daoFacture = new DaoFacture();
-		this.daoCharge = new DaoCharge();
 		this.daoLocataire = new DaoLocataire();
 	}
 
@@ -255,42 +250,45 @@ public class GestionAccueil implements ActionListener {
 
 	// ------------------- TABLE CHARGES LOCATIVES ------------------- //
 
-	public void ecrireLigneTableChargesLocatives(int numeroLigne, Charge charge) {
+	public void ecrireLigneTableChargesLocatives(int numeroLigne, Facture charge) {
 		JTable tableChargesLocatives = this.fenetreAccueil.getTableChargesLocatives();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableChargesLocatives.getModel();
 
-		modeleTable.setValueAt(charge.getNom(), numeroLigne, 0);
-		modeleTable.setValueAt(charge.getBien().getIdBien(), numeroLigne, 1);
-		if (charge.isDeductible() == 1) {
-			modeleTable.setValueAt("Oui", numeroLigne, 2);
+		modeleTable.setValueAt(charge.getNumero(), numeroLigne, 0);
+		modeleTable.setValueAt(charge.getDesignation(), numeroLigne, 1);
+		modeleTable.setValueAt(charge.getDateEmission(), numeroLigne, 2);
+		modeleTable.setValueAt(charge.getDatePaiement(), numeroLigne, 3);
+		if (charge.getImputableLocataire() == 1) {
+			modeleTable.setValueAt("Oui", numeroLigne, 4);
 		} else {
-			modeleTable.setValueAt("Non", numeroLigne, 2);
+			modeleTable.setValueAt("Non", numeroLigne, 4);
 		}
 
-		modeleTable.setValueAt(charge.getMontantReel(), numeroLigne, 3);
-		modeleTable.setValueAt(charge.getMontantPrevisionnel(), numeroLigne, 4);
+		modeleTable.setValueAt(charge.getMontant(), numeroLigne, 5);
+		modeleTable.setValueAt(charge.getAccompteVerse(), numeroLigne, 6);
+		modeleTable.setValueAt(charge.getMontant()-charge.getAccompteVerse(), numeroLigne, 7);
 	}
 
 	private void chargerChargesLocatives() throws SQLException {
-		List<Charge> charges = this.daoCharge.findAll();
+		List<Facture> charges = this.daoFacture.findFactureCharge();
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
 		modeleTable.setRowCount(charges.size());
 
 		for (int i = 0; i < charges.size(); i++) {
-			Charge c = charges.get(i);
+			Facture c = charges.get(i);
 			this.ecrireLigneTableChargesLocatives(i, c);
 		}
 	}
 
 	private void updateTableChargesForLogement(String idLogement) throws SQLException {
-		List<Charge> chargesLogement = this.daoCharge.findByLogement(idLogement);
+		List<Facture> chargesLogement = this.daoFacture.findFactureChargeByLogement(idLogement);
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
 		modeleTable.setRowCount(chargesLogement.size());
 
 		for (int i = 0; i < chargesLogement.size(); i++) {
-			Charge c = chargesLogement.get(i);
+			Facture c = chargesLogement.get(i);
 			ecrireLigneTableChargesLocatives(i, c);
 		}
 	}
@@ -621,64 +619,54 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesChargesLocatives_Modifier":
-			    if (Sauvegarde.onSave("Charge") && Sauvegarde.onSave("Logement")) {
-			        Fenetre_ModificationCharges modif_charge = new Fenetre_ModificationCharges();
-			        this.fenetreAccueil.getLayeredPane().add(modif_charge);
-			        modif_charge.setVisible(true);
-			        modif_charge.moveToFront();
-
-			        // On recupère la charge de la sauvegarde
-			        Charge chargeSauvegarde = (Charge) Sauvegarde.getItem("Charge");
-
-			        // On recupère le logement de la sauvegarde
-			        Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
-			        
-			        try {
-			            Bien bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
-
-			            int deductibleValeur = 0; // Non déductible par défaut
-
-			            // choix de la radio button
-			            if (modif_charge.getRdbtnAjouterChargeOui().isSelected()) {
-			                deductibleValeur = 1;
-			            } else if (modif_charge.getRdbtnAjouterChargeNon().isSelected()) {
-			                deductibleValeur = 0;
-			            }
-
-			            modif_charge.getTextField_nomCharge().setText(chargeSauvegarde.getNom());
-			            modif_charge.getTextField_montantPrevisionnel().setText(Double.toString(chargeSauvegarde.getMontantPrevisionnel()));
-			            modif_charge.getTextField_montantReel().setText(Double.toString(chargeSauvegarde.getMontantReel()));
-
-			            // Mise à jour des boutons radio
-			            if (chargeSauvegarde.isDeductible() == 1) {
-			                modif_charge.getRdbtnAjouterChargeNon().setSelected(true);
-			            } else {
-			                modif_charge.getRdbtnAjouterChargeOui().setSelected(true);
-			            }
-
-			        } catch (SQLException e1) {
-			            // Gérer l'exception de manière appropriée (affichage d'un message à l'utilisateur, etc.)
-			            e1.printStackTrace();
-			        }
-			    }
+//			    if (Sauvegarde.onSave("Charge") && Sauvegarde.onSave("Logement")) {
+//			        Fenetre_ModificationCharges modif_charge = new Fenetre_ModificationCharges();
+//			        this.fenetreAccueil.getLayeredPane().add(modif_charge);
+//			        modif_charge.setVisible(true);
+//			        modif_charge.moveToFront();
+//
+//			        // On recupère la charge de la sauvegarde
+//			        Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Facture");
+//
+//			        // On recupère le logement de la sauvegarde
+//			        Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+//			        
+//			        try {
+//			            Bien bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
+//
+//			            int deductibleValeur = 0; // Non déductible par défaut
+//
+//			            // choix de la radio button
+//			            if (modif_charge.getRdbtnAjouterChargeOui().isSelected()) {
+//			                deductibleValeur = 1;
+//			            } else if (modif_charge.getRdbtnAjouterChargeNon().isSelected()) {
+//			                deductibleValeur = 0;
+//			            }
+//
+//			            modif_charge.getTextField_nomCharge().setText(chargeSauvegarde.getNom());
+//			            modif_charge.getTextField_montantPrevisionnel().setText(Double.toString(chargeSauvegarde.getMontantPrevisionnel()));
+//			            modif_charge.getTextField_montantReel().setText(Double.toString(chargeSauvegarde.getMontantReel()));
+//
+//			            // Mise à jour des boutons radio
+//			            if (chargeSauvegarde.getImputableLocataire() == 1) {
+//			                modif_charge.getRdbtnAjouterChargeNon().setSelected(true);
+//			            } else {
+//			                modif_charge.getRdbtnAjouterChargeOui().setSelected(true);
+//			            }
+//
+//			        } catch (SQLException e1) {
+//			            // Gérer l'exception de manière appropriée (affichage d'un message à l'utilisateur, etc.)
+//			            e1.printStackTrace();
+//			        }
+//			    }
 			    break;
 
-			case "btn_MesChargesLocatives_Inserer":
-				JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
-				String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
-				// La oage s'oyvre que si un Logement du JComboBox est selectionne
-				if (!idLogementSelectionne.equals("ID du logement") && Sauvegarde.onSave("Logement") == true) {
-					Fenetre_InsertionCharges fic = new Fenetre_InsertionCharges();
-					this.fenetreAccueil.getLayeredPane().add(fic);
-					fic.setVisible(true);
-					fic.moveToFront();
-				}
-				break;
+			
 			case "btn_MesChargesLocatives_Supprimer":
 				
 				if (Sauvegarde.onSave("Charge") == true) {
-			        Charge chargeSauvegarde = (Charge) Sauvegarde.getItem("Charge");
-			        Fenetre_SupprimerCharge supp_charge = new Fenetre_SupprimerCharge();
+			        Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Facture");
+			        Fenetre_SupprimerFactureCharge supp_charge = new Fenetre_SupprimerFactureCharge();
 					this.fenetreAccueil.getLayeredPane().add(supp_charge);
 					supp_charge.setVisible(true);
 					supp_charge.moveToFront();

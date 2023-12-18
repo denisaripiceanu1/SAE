@@ -1,30 +1,24 @@
 package controleur;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 
 import controleur.outils.Sauvegarde;
-import modele.Bien;
-import modele.Charge;
-import modele.Immeuble;
-import modele.dao.DaoBien;
-import modele.dao.DaoCharge;
-import modele.dao.DaoImmeuble;
+import modele.Facture;
+import modele.dao.DaoFacture;
 import vue.Fenetre_Accueil;
 
 public class GestionTableCharges implements ListSelectionListener {
 
     private Fenetre_Accueil fenetreAccueil;
-    private DaoCharge daoCharge;
+    private DaoFacture daoFacture;
 
     public GestionTableCharges(Fenetre_Accueil fenetreAccueil) {
         this.fenetreAccueil = fenetreAccueil;
-        this.daoCharge = new DaoCharge();
+        this.daoFacture = new DaoFacture();
     }
 
     @Override
@@ -33,25 +27,21 @@ public class GestionTableCharges implements ListSelectionListener {
             int selectedRowCharge = fenetreAccueil.getTableChargesLocatives().getSelectedRow();
 
             if (selectedRowCharge > -1) {
-                JTable tableCharges = fenetreAccueil.getTableChargesLocatives();
-                Charge charge = null;
+                JTable tableFacturesCharges = fenetreAccueil.getTableChargesLocatives();
+                Facture facture = null;
                 try {
                     // Correction : Utilisez les entiers 1 et 0 pour deductible
-                    int deductible = "Oui".equalsIgnoreCase(tableCharges.getValueAt(selectedRowCharge, 2).toString()) ? 1 : 0;
+                    int deductible = "Oui".equalsIgnoreCase(tableFacturesCharges.getValueAt(selectedRowCharge, 2).toString()) ? 1 : 0;
                     
-                    charge = daoCharge.findById(
-                    	    tableCharges.getValueAt(selectedRowCharge, 0).toString(), // nom
-                    	    tableCharges.getValueAt(selectedRowCharge, 3).toString(), // montant_reel
-                    	    tableCharges.getValueAt(selectedRowCharge, 4).toString(), // montant_previsionnel
-                    	    tableCharges.getValueAt(selectedRowCharge, 2).toString(), // deductible
-                    	    tableCharges.getValueAt(selectedRowCharge, 1).toString()  // Id_Bien
+                    facture = daoFacture.findById(
+                    	    tableFacturesCharges.getValueAt(selectedRowCharge, 0).toString() // numero
                     	);
 
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
-                Sauvegarde.deleteItem("Charge");
-                Sauvegarde.addItem("Charge", charge);
+                Sauvegarde.deleteItem("Facture");
+                Sauvegarde.addItem("Facture", facture);
             }
         }
     }
