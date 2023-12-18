@@ -76,16 +76,23 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 			Entreprise entreprise = daoEntreprise.findById(siret);
 
 			// Convertir les dates en chaînes de caractères avec un format spécifique
-	        java.sql.Date dateEmission = curseur.getDate("date_emission");
-	        java.sql.Date datePaiement = curseur.getDate("date_paiement");
+			java.sql.Date dateEmission = curseur.getDate("date_emission");
+			java.sql.Date datePaiement = curseur.getDate("date_paiement");
 
-	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	        String dateEmissionStr = dateFormat.format(dateEmission);
-	        String datePaiementStr = dateFormat.format(datePaiement);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String dateEmissionStr = "N/A";
+			if (dateEmission != null) {
+				dateEmissionStr = dateFormat.format(dateEmission);
+			}
 
-			facture = new Facture(curseur.getString("numero"), dateEmissionStr,
-					datePaiementStr, curseur.getString("mode_paiement"), curseur.getString("numero_devis"),
-					curseur.getString("designation"), curseur.getDouble("accompte_verse"),curseur.getDouble("montant"),
+			String datePaiementStr = "N/A";
+			if (datePaiement != null) {
+				datePaiementStr = dateFormat.format(datePaiement);
+			}
+
+			facture = new Facture(curseur.getString("numero"), dateEmissionStr, datePaiementStr,
+					curseur.getString("mode_paiement"), curseur.getString("numero_devis"),
+					curseur.getString("designation"), curseur.getDouble("accompte_verse"), curseur.getDouble("montant"),
 					curseur.getInt("imputable_locataire"), immeuble, bien, entreprise);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -95,20 +102,20 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 
 	// ---------------- AUTRES METHODES ----------------//
 	public Facture findDerniereFactureLoyer(Bien bien) throws SQLException {
-	    List<Facture> factures = null;
-	    String b = bien.getIdBien();
-	    try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
-	            .prepareStatement(new RequeteSelectFactureByBien().requete())) {
-	        new RequeteSelectFactureByBien().parametres(st, b);
-	        ResultSet res = st.executeQuery();
-	        factures = convertirResultSetEnListe(res);
-	        st.close();
-	    }
-	    if (!factures.isEmpty()) {
-	        return factures.get(0);
-	    } else {
-	        return null;
-	    }
+		List<Facture> factures = null;
+		String b = bien.getIdBien();
+		try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectFactureByBien().requete())) {
+			new RequeteSelectFactureByBien().parametres(st, b);
+			ResultSet res = st.executeQuery();
+			factures = convertirResultSetEnListe(res);
+			st.close();
+		}
+		if (!factures.isEmpty()) {
+			return factures.get(0);
+		} else {
+			return null;
+		}
 	}
 
 	private List<Facture> convertirResultSetEnListe(ResultSet res) throws SQLException {
@@ -122,14 +129,14 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		return factures;
 	}
 
-	public List<Facture> findFactureChargeByLogement(String idLogement ) throws SQLException {
+	public List<Facture> findFactureChargeByLogement(String idLogement) throws SQLException {
 		return this.find(new RequeteSelectFactureByLogement(), idLogement);
 	}
-	
+
 	public List<Facture> findFactureCharge() throws SQLException {
 		return this.find(new RequeteSelectFactureCharge());
 	}
-	
+
 	public List<Facture> findFactureTravaux() throws SQLException {
 		return this.find(new RequeteSelectFactureTravaux());
 	}

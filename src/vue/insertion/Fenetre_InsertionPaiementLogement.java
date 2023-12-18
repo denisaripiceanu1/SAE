@@ -66,16 +66,14 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 
 		// Champs de saisie
 		textField_Numero = new JTextField();
-		textField_Numero.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Numero",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_Numero.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_Numero.setBounds(110, 104, 190, 40);
 		panel.add(textField_Numero);
 		textField_Numero.setColumns(10);
 
 		textField_date_emission = new JTextField();
 		textField_date_emission.setColumns(10);
-		textField_date_emission.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date Emission",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_date_emission.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9mission", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_date_emission.setBounds(110, 168, 190, 40);
 		panel.add(textField_date_emission);
 
@@ -88,15 +86,13 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 
 		textField_ville = new JTextField();
 		textField_ville.setColumns(10);
-		textField_ville.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Numero Devis",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_ville.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro devis", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_ville.setBounds(110, 228, 190, 40);
 		panel.add(textField_ville);
 
 		// Menu déroulant pour la designation de la facture
 		JComboBox<String> comboBox_Designation = new JComboBox<>();
-		comboBox_Designation.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Designation",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		comboBox_Designation.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "D\u00E9signation", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		comboBox_Designation.setBounds(427, 105, 190, 40);
 
 		DefaultComboBoxModel<String> designationModel = new DefaultComboBoxModel<>();
@@ -118,8 +114,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 
 		textField_dateAcquisition = new JTextField();
 		textField_dateAcquisition.setColumns(10);
-		textField_dateAcquisition.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Accompte verse",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_dateAcquisition.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Acompte vers\u00E9 ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_dateAcquisition.setBounds(427, 294, 190, 40);
 		panel.add(textField_dateAcquisition);
 
