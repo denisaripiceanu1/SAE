@@ -543,7 +543,7 @@ public class GestionAccueil implements ActionListener {
 					infos_locataire.setVisible(true);
 					infos_locataire.moveToFront();
 
-					// On recupÃ¨re le locataire de la sauvegarde
+					// On recupere le locataire de la sauvegarde
 					Locataire locataireSauvgarde = (Locataire) Sauvegarde.getItem("Locataire");
 					Locataire locataireCourant;
 
