@@ -1,22 +1,21 @@
 package controleur;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import controleur.outils.ImportChemin;
 import controleur.outils.PDFImporter;
 import vue.insertion.Fenetre_InsertionLocation;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 
 public class GestionPDF extends JInternalFrame {
 
@@ -29,6 +28,7 @@ public class GestionPDF extends JInternalFrame {
 	private String nom;
 	private Fenetre_InsertionLocation fil;
 	private PDFImporter pdf;
+	private ImportChemin chemin;
 
 	/**
 	 * Create the frame.
@@ -42,63 +42,66 @@ public class GestionPDF extends JInternalFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("id");
 		lblNewLabel.setBounds(55, 14, 8, 13);
 		contentPane.add(lblNewLabel);
-		
+
 		textField = new JTextField();
 		textField.setBounds(68, 11, 96, 19);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
+
 		nomPdf = new JLabel("");
 		nomPdf.setBounds(163, 81, 200, 13); // Ajustez la taille si nécessaire
 		contentPane.add(nomPdf);
-		
+
 		btnNewButton = new JButton("pdf");
 		btnNewButton.setBounds(68, 77, 85, 21);
 		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        try {
-		            // Déclarez id et nom comme variables locales si elles ne sont pas des variables d'instance
-		            id = Integer.parseInt(textField.getText()); // Assurez-vous que le champ textField contient un entier
-		            nom = textField_1.getText();
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					// Déclarez id et nom comme variables locales si elles ne sont pas des variables
+					// d'instance
+					id = Integer.parseInt(textField.getText()); // Assurez-vous que le champ textField contient un
+																// entier
+					nom = textField_1.getText();
 
-		            // Assurez-vous que l'instance pdf est correctement initialisée
-		            if (pdf == null) {
-		            	 pdf = PDFImporter.getInstance();
-		            }
-		            pdf.importPDFChemin();
-		            
-		            if(pdf.getPDFFileName() != null) {
-		            	nomPdf.setText(pdf.getPDFFileName());
-		            }
+					// Assurez-vous que l'instance pdf est correctement initialisée
+					if (pdf == null) {
+						pdf = PDFImporter.getInstance();
+					}
+					chemin.choisirChemin();
 
-		        } catch (NumberFormatException ex) {
-		            // Gérer l'exception si l'ID n'est pas un entier
-		            ex.printStackTrace();
-		        }
-		    }
+					if (pdf.getPDFFileName() != null) {
+						nomPdf.setText(pdf.getPDFFileName());
+					}
+
+				} catch (NumberFormatException ex) {
+					// Gérer l'exception si l'ID n'est pas un entier
+					ex.printStackTrace();
+				}
+			}
 		});
 
-		
 		JLabel lblNewLabel_1 = new JLabel("Nom");
 		lblNewLabel_1.setBounds(259, 14, 21, 13);
 		contentPane.add(lblNewLabel_1);
-		
+
 		textField_1 = new JTextField();
 		textField_1.setBounds(285, 11, 96, 19);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
-		
+
 		nomPdf = new JLabel("");
 		nomPdf.setBounds(163, 81, 200, 13); // Ajustez la taille si nécessaire
 		contentPane.add(nomPdf);
-		
+
 		JButton btnNewButton_1 = new JButton("Ajoutez");
 		btnNewButton_1.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					pdf.getInstance().importPDFBD(id, nom);
@@ -113,9 +116,10 @@ public class GestionPDF extends JInternalFrame {
 		});
 		btnNewButton_1.setBounds(79, 211, 85, 21);
 		contentPane.add(btnNewButton_1);
-		
+
 		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}

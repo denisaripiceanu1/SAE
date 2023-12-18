@@ -2,22 +2,15 @@ package controleur.insertion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
+import controleur.GestionPDF;
 import modele.Bien;
 import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
-<<<<<<< HEAD
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import controleur.GestionPDF;
-=======
-import controleur.outils.InsertionPDF;
->>>>>>> 9aa35743a2a83c4b367ed15c2dabefda80b22da2
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionLocation;
 
@@ -49,7 +42,7 @@ public class GestionInsertionLocation implements ActionListener {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor();
 		switch (btn.getText()) {
-		
+
 		case "Ajouter un bail":
 			GestionPDF insertBail = new GestionPDF(this.fil);
 			this.fil.getLayeredPane().add(insertBail);
