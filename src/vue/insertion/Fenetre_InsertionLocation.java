@@ -27,6 +27,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionInsertionLocation;
+import modele.Immeuble;
 import modele.dao.DaoBien;
 import modele.dao.DaoImmeuble;
 
@@ -170,11 +171,11 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
 			List<String> identifiantsBien = this.daoImmeuble.findAll();
-			identifiantsLogements.add(0, "ID du logement");
+			identifiantsBien.add(0, "ID du logement");
 
 			// Ajouter les identifiants au modèle du JComboBox
 			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-					identifiantsLogements.toArray(new String[0]));
+					identifiantsBien.toArray(new String[0]));
 
 			this.comboBox_bien.setModel(modelComboBox);
 			this.comboBox_bien.setModel(modelComboBox);
