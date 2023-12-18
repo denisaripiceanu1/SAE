@@ -28,7 +28,6 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 	private JTextField textField_codePostal;
 	private JTextField textField_ville;
 	private JTextField textField_periodeDeConstruction;
-	private JTextField textField_nbLogement;
 	private JTextField textField_dateAcquisition;
 	private JSeparator separator_Compteur;
 	private JButton btn_ajouterCompteur;
@@ -88,16 +87,10 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		textField_periodeDeConstruction.setBounds(427, 228, 190, 40);
 		panel.add(textField_periodeDeConstruction);
 		
-		textField_nbLogement = new JTextField();
-		textField_nbLogement.setColumns(10);
-		textField_nbLogement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Nombre de logements", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_nbLogement.setBounds(110, 294, 190, 40);
-		panel.add(textField_nbLogement);
-		
 		textField_dateAcquisition = new JTextField();
 		textField_dateAcquisition.setColumns(10);
 		textField_dateAcquisition.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date d'acquisition", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_dateAcquisition.setBounds(427, 294, 190, 40);
+		textField_dateAcquisition.setBounds(271, 293, 190, 40);
 		panel.add(textField_dateAcquisition);
 		
 		comboBox_typeDeBien = new JComboBox();
@@ -158,10 +151,6 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 
 	public JTextField getTextField_periodeDeConstruction() {
 		return textField_periodeDeConstruction;
-	}
-
-	public JTextField getTextField_nbLogement() {
-		return textField_nbLogement;
 	}
 
 	public JTextField getTextField_dateAcquisition() {

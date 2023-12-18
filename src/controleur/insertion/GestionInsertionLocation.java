@@ -28,7 +28,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controleur.outils.InsertionPDF;
 import vue.Fenetre_Accueil;
-import vue.insertion.Fenetre_InsertionColocataire;
 import vue.insertion.Fenetre_InsertionLocation;
 import vue.modification.Fenetre_ModificationLogement;
 
@@ -61,13 +60,7 @@ public class GestionInsertionLocation implements ActionListener {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor();
 		switch (btn.getText()) {
-		case "Ajouter un colocataire":
-			Fenetre_InsertionColocataire fenetreColo = new Fenetre_InsertionColocataire();
-			fenetre_Principale.getLayeredPane().add(fenetreColo);
-			fenetreColo.setVisible(true);
-			fenetreColo.moveToFront();
-			break;
-
+		
 		case "Ajouter un bail":
 			InsertionPDF insertBail = new InsertionPDF();
 			this.fil.getLayeredPane().add(insertBail);
