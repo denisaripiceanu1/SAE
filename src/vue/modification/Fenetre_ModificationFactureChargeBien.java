@@ -1,26 +1,27 @@
-package vue.insertion;
+package vue.modification;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import java.awt.Color;
-import javax.swing.JLabel;
+
 import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
 
-import controleur.insertion.GestionInsertionPaiementBien;
-import controleur.insertion.GestionInsertionPaiementLogement;
-
-import javax.swing.border.LineBorder;
-import javax.swing.JComboBox;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
-public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
+import controleur.insertion.GestionInsertionPaiementBien;
+import controleur.modification.GestionModificationFacturesCharges;
+
+public class Fenetre_ModificationFactureChargeBien extends JInternalFrame {
 	private JTextField textField_Numero;
 	private JTextField textField_date_emission;
 	private JTextField textField_date_paiement;
@@ -31,11 +32,11 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 	JRadioButton rdbtnOui = new JRadioButton("Oui");
 	JRadioButton rdbtnNon = new JRadioButton("Non");
 
-	private GestionInsertionPaiementLogement gestionClic;
+	private GestionModificationFacturesCharges gestionModification; 
+	
+	public Fenetre_ModificationFactureChargeBien() {
 
-	public Fenetre_InsertionPaiementLogement() {
-
-		this.gestionClic = new GestionInsertionPaiementLogement(this);
+		this.gestionModification = new GestionModificationFacturesCharges(this);
 
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
@@ -100,10 +101,8 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		comboBox_Designation.setBounds(427, 105, 190, 40);
 
 		DefaultComboBoxModel<String> designationModel = new DefaultComboBoxModel<>();
-		designationModel.addElement("Loayer");
 		designationModel.addElement("Travaux");
 		designationModel.addElement("Eau");
-		designationModel.addElement("Ordures ménagères ");
 		designationModel.addElement("Électricité parties communes ");
 		designationModel.addElement("....");
 		comboBox_Designation.setModel(designationModel);
@@ -145,7 +144,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.rdbtnOui.setHorizontalTextPosition(SwingConstants.LEADING);
 		this.rdbtnOui.setBounds(286, 374, 54, 21);
 		panel.add(this.rdbtnOui);
-		this.rdbtnNon.setBounds(389, 374, 94, 21);
+		this.rdbtnNon.setBounds(389, 374, 112, 21);
 		panel.add(this.rdbtnNon);
 		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.add(this.rdbtnOui);
@@ -156,15 +155,17 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		btnAjouter.setForeground(Color.WHITE);
 		btnAjouter.setBackground(new Color(0, 102, 204));
 		btnAjouter.setBounds(248, 437, 94, 31);
-		btnAjouter.addActionListener(gestionClic);
+		btnAjouter.addActionListener(gestionModification);
 		panel.add(btnAjouter);
 
 		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setForeground(Color.WHITE);
 		btnAnnuler.setBackground(new Color(0, 102, 204));
 		btnAnnuler.setBounds(389, 437, 94, 31);
-		btnAnnuler.addActionListener(gestionClic);
+		btnAnnuler.addActionListener(gestionModification);
 		panel.add(btnAnnuler);
-
 	}
+
+	
+	
 }

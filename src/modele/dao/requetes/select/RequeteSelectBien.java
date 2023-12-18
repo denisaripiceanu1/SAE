@@ -10,7 +10,7 @@ public class RequeteSelectBien implements Requete<Bien> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Bien";
+		return "SELECT * FROM Bien ORDER BY Id_Bien";
 	}
 
 	@Override

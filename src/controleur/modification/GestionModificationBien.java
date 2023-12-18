@@ -32,13 +32,7 @@ public class GestionModificationBien implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationBien.getTopLevelAncestor(); // fenetre
-																											// dans
-																											// laquelle
-																											// on ouvre
-																											// des
-																											// internal
-																											// frame
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationBien.getTopLevelAncestor(); 
 		switch (btn.getText()) {
 		case "Ajouter un compteur":
 			this.idBien = this.modificationBien.getTextField_IdImmeuble().getText();
@@ -51,7 +45,6 @@ public class GestionModificationBien implements ActionListener {
 					this.modificationBien.getTextField_ville().getText(),
 					this.modificationBien.getTextField_periodeDeConstruction().getText(),
 					Integer.parseInt(this.modificationBien.getTextField_nbLogement().getText()),
-					this.modificationBien.getTextField_dateAcquisition().getText(),
 					this.modificationBien.getComboBox_typeDeBien().getSelectedItem().toString());
 			// J'ajoute l'immeuble dans la sauvegarde pour réutiliser
 			Sauvegarde.deleteItem("Immeuble");
@@ -61,16 +54,14 @@ public class GestionModificationBien implements ActionListener {
 			fenetreCompteur.moveToFront();
 			break;
 		case "Modifier":
-
+			
 			try {
-
 				Immeuble nouvelImmeuble = new Immeuble(this.modificationBien.getTextField_IdImmeuble().getText(),
 						this.modificationBien.getTextField_adresse().getText(),
 						this.modificationBien.getTextField_codePostal().getText(),
 						this.modificationBien.getTextField_ville().getText(),
 						this.modificationBien.getTextField_periodeDeConstruction().getText(),
 						Integer.parseInt(this.modificationBien.getTextField_nbLogement().getText()),
-						this.modificationBien.getTextField_dateAcquisition().getText(),
 						this.modificationBien.getComboBox_typeDeBien().getSelectedItem().toString());
 
 				this.daoImmeuble.update(nouvelImmeuble);

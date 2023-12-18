@@ -10,7 +10,7 @@ public class RequeteSelectImmeuble implements Requete<Immeuble> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Immeuble";
+		return "SELECT * FROM Immeuble ORDER BY Id_Immeuble";
 	}
 
 	@Override

@@ -21,8 +21,8 @@ public class SousProgrammeInsertAssurance implements SousProgramme<Assurance> {
 	@Override
 	public void parametres(PreparedStatement prSt, Assurance donnee) throws SQLException {
 		prSt.setString(1, donnee.getNuméroPolice());
-		prSt.setFloat(2, donnee.getMontantInit());
-		prSt.setString(3, donnee.getImmeuble().getImmeuble());
+		prSt.setFloat(2, donnee.getMontant());
+		prSt.setString(3, donnee.getBien().getIdBien());
 		prSt.setString(4, donnee.getEntreprise().getSiret());
 	}
 

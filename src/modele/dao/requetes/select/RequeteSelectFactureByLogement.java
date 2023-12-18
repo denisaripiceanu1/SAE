@@ -3,14 +3,13 @@ package modele.dao.requetes.select;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import modele.Louer;
+import modele.Facture;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectLocationParBien implements Requete<Louer>{
+public class RequeteSelectFactureByLogement implements Requete<Facture> {
 
-    @Override
     public String requete() {
-        return "SELECT * FROM Louer WHERE Id_Bien = ?";
+        return "SELECT * FROM Facture WHERE designation NOT IN ('Travaux', 'Loyer') AND Id_Bien = ? ORDER BY date_emission DESC";
     }
 
     @Override
@@ -19,8 +18,6 @@ public class RequeteSelectLocationParBien implements Requete<Louer>{
     }
 
     @Override
-    public void parametres(PreparedStatement prSt, Louer data) throws SQLException {
-        prSt.setString(1, data.getBien().toString());
+    public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
     }
 }
-

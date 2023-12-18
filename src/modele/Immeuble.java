@@ -7,19 +7,17 @@ public class Immeuble {
 	private String cp;
 	private String ville;
 	private String periodeConstruction;
-	private int nbLogement;
-	private String dateAcquisition;
+	private int nbLogement; //Calculable
 	private String type_immeuble;
 
 	public Immeuble(String idImmeuble, String adresse, String cp, String ville, String periodeConstruction,
-			int nbLogement, String dateAcquisition, String type_immeuble) {
+			int nbLogement, String type_immeuble) {
 		this.idImmeuble = idImmeuble;
 		this.adresse = adresse;
 		this.cp = cp;
 		this.ville = ville;
 		this.periodeConstruction = periodeConstruction;
 		this.nbLogement = nbLogement;
-		this.dateAcquisition = dateAcquisition;
 		this.type_immeuble = type_immeuble;
 	}
 
@@ -71,14 +69,6 @@ public class Immeuble {
 		this.nbLogement = nbLogement;
 	}
 
-	public String getDateAcquisition() {
-		return dateAcquisition;
-	}
-
-	public void setDateAcquisition(String dateAcquisition) {
-		this.dateAcquisition = dateAcquisition;
-	}
-	
 	public String getType_immeuble() {
 		return type_immeuble;
 	}

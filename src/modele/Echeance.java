@@ -2,21 +2,19 @@ package modele;
 
 public class Echeance {
 
-	private String numeroPolice;
+	private Assurance numeroPolice; //anciennement String : DOIT ETRE DE TYPE ASSURANCE !!!!!!!!!
 	private String dateEcheance;
-	private double montantEcheance;
 
-	public Echeance(String numeroPolice, String dateEcheance, double montantEcheance) {
+	public Echeance(Assurance numeroPolice, String dateEcheance) {
 		this.numeroPolice = numeroPolice;
 		this.dateEcheance = dateEcheance;
-		this.montantEcheance = montantEcheance;
 	}
 
-	public String getNumeroPolice() {
+	public Assurance getAssurance() {
 		return numeroPolice;
 	}
 
-	public void setNumeroPolice(String numeroPolice) {
+	public void setAssurance(Assurance numeroPolice) {
 		this.numeroPolice = numeroPolice;
 	}
 
@@ -26,13 +24,5 @@ public class Echeance {
 
 	public void setDateEcheance(String dateEcheance) {
 		this.dateEcheance = dateEcheance;
-	}
-
-	public double getMontantEcheance() {
-		return montantEcheance;
-	}
-
-	public void setMontantEcheance(double montantEcheance) {
-		this.montantEcheance = montantEcheance;
 	}
 }

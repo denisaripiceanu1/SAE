@@ -10,7 +10,7 @@ public class RequeteSelectBienparImmeuble implements Requete<Bien>{
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Bien WHERE Id_Immeuble = ?";
+		return "SELECT * FROM Bien WHERE Id_Immeuble = ? ORDER BY Id_Bien";
 	}
 
 	@Override

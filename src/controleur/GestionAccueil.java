@@ -1,6 +1,7 @@
 package controleur;
 
 import java.awt.BorderLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -17,25 +19,24 @@ import javax.swing.table.DefaultTableModel;
 import controleur.outils.Sauvegarde;
 import modele.Assurance;
 import modele.Bien;
-import modele.Charge;
 import modele.Echeance;
 import modele.Entreprise;
 import modele.Facture;
 import modele.Immeuble;
+import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoAssurance;
 import modele.dao.DaoBien;
-import modele.dao.DaoCharge;
 import modele.dao.DaoEcheance;
 import modele.dao.DaoEntreprise;
 import modele.dao.DaoFacture;
 import modele.dao.DaoImmeuble;
+import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
-import vue.insertion.Fenetre_InsertionCharges;
 import vue.insertion.Fenetre_InsertionDiagnostic;
 import vue.insertion.Fenetre_InsertionLocation;
 import vue.insertion.Fenetre_InsertionLogement;
@@ -44,6 +45,7 @@ import vue.insertion.Fenetre_InsertionPaiementLogement;
 import vue.modification.Fenetre_ModificationBien;
 import vue.modification.Fenetre_ModificationLogement;
 import vue.suppression.Fenetre_SupprimerBien;
+import vue.suppression.Fenetre_SupprimerFactureCharge;
 
 public class GestionAccueil implements ActionListener {
 
@@ -55,7 +57,7 @@ public class GestionAccueil implements ActionListener {
 	private DaoEcheance daoEcheance;
 	private DaoEntreprise daoEntreprise;
 	private DaoFacture daoFacture;
-	private DaoCharge daoCharge;
+	private DaoLocataire daoLocataire;
 
 	public GestionAccueil(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
@@ -66,7 +68,7 @@ public class GestionAccueil implements ActionListener {
 		this.daoEcheance = new DaoEcheance();
 		this.daoEntreprise = new DaoEntreprise();
 		this.daoFacture = new DaoFacture();
-		this.daoCharge = new DaoCharge();
+		this.daoLocataire = new DaoLocataire();
 	}
 
 	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE
@@ -98,6 +100,10 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
+	///////////////////////////////////////////////////////////////////
+	// LAYERED MES BIENS
+	///////////////////////////////////////////////////////////////////
+
 	// ------------------- TABLE BIENS ------------------- //
 
 	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) {
@@ -123,6 +129,10 @@ public class GestionAccueil implements ActionListener {
 			this.ecrireLigneTableBiens(i, immeuble);
 		}
 	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// LAYERED MES
+	// LOCATIONS////////////////////////////////////////////////////////////////
 
 	// ------------------- TABLE LOCATIONS ------------------- //
 
@@ -154,6 +164,105 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+	// LAYERED MES
+	// TRAVAUX////////////////////////////////////////////////////////////////
+
+	// ------------------- TABLE TRAVAUX pour un IMMEUBLE ------------------- //
+
+	private void chargerTravauxImmeubles() throws SQLException {
+		List<Facture> factures = this.daoFacture.findFactureTravaux();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableTravaux().getModel();
+		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
+
+		for (int i = 0; i < factures.size(); i++) {
+			Facture f = factures.get(i);
+			if (f != null && f.getImmeuble() != null) {
+				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
+				modeleTable.addRow(new Object[] { f.getImmeuble().getImmeuble(), f.getDesignation(),
+						f.getDateEmission(), f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
+						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
+			}
+		}
+	}
+
+	// ------------------- TABLE TRAVAUX pour un LOGEMENT ------------------- //
+
+	private void chargerTravauxLogements() throws SQLException {
+		List<Facture> factures = this.daoFacture.findFactureTravaux();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableTravaux().getModel();
+		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
+
+		for (int i = 0; i < factures.size(); i++) {
+			Facture f = factures.get(i);
+			if (f != null && f.getBien() != null) {
+				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
+				modeleTable.addRow(new Object[] { f.getBien().getIdBien(), f.getDesignation(), f.getDateEmission(),
+						f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
+						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
+			}
+		}
+	}
+
+	///////////////////////////////////////////////////////////////////
+	// LAYERED MES CHARGES LOCATIVES
+	// ////////////////////////////////////////////////////////////////
+
+	// ------------------- TABLE CHARGES pour un LOGEMENT ------------------- //
+	private void chargerChargesLogement() throws SQLException {
+		List<Facture> factures = this.daoFacture.findFactureCharge();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
+		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
+
+		for (int i = 0; i < factures.size(); i++) {
+			Facture f = factures.get(i);
+			if (f != null && f.getBien() != null) {
+				modeleTable.addRow(new Object[] { f.getBien().getIdBien(), f.getNumero(), f.getDesignation(),
+						f.getDateEmission(), f.getDatePaiement(), f.getImputableLocataire(), f.getMontant(),
+						f.getAccompteVerse(), f.getMontant() - f.getAccompteVerse(), });
+			}
+		}
+	}
+
+	// POUR FILTRER AVEC LE COMBOBOX
+	public void ecrireLigneTableChargesLocatives(int numeroLigne, Facture charge) {
+		JTable tableChargesLocatives = this.fenetreAccueil.getTableChargesLocatives();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableChargesLocatives.getModel();
+
+		modeleTable.setValueAt(charge.getNumero(), numeroLigne, 0);
+		modeleTable.setValueAt(charge.getDesignation(), numeroLigne, 1);
+		modeleTable.setValueAt(charge.getDateEmission(), numeroLigne, 2);
+		modeleTable.setValueAt(charge.getDatePaiement(), numeroLigne, 3);
+		if (charge.getImputableLocataire() == 1) {
+			modeleTable.setValueAt("Oui", numeroLigne, 4);
+		} else {
+			modeleTable.setValueAt("Non", numeroLigne, 4);
+		}
+
+		modeleTable.setValueAt(charge.getMontant(), numeroLigne, 5);
+		modeleTable.setValueAt(charge.getAccompteVerse(), numeroLigne, 6);
+		modeleTable.setValueAt(charge.getMontant() - charge.getAccompteVerse(), numeroLigne, 7);
+	}
+
+	private void updateTableChargesForLogement(String idLogement) throws SQLException {
+		List<Facture> factures = this.daoFacture.findFactureChargeByLogement(idLogement);
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
+		modeleTable.setRowCount(factures.size());
+
+		for (int i = 0; i < factures.size(); i++) {
+			Facture f = factures.get(i);
+			ecrireLigneTableChargesLocatives(i, f);
+		}
+	}
+
+	///////////////////////////////////////////////////////////////////
+	// LAYERED MES ASSURANCES
+	// ////////////////////////////////////////////////////////////////
+
 	// ------------------- TABLE ASSURANCES ------------------- //
 
 	public void ecrireLigneTableAssurances(int numeroLigne, Assurance assurance, Entreprise entreprise,
@@ -162,7 +271,7 @@ public class GestionAccueil implements ActionListener {
 		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
 
 		modeleTable.setValueAt(assurance.getNuméroPolice(), numeroLigne, 0);
-		modeleTable.setValueAt(assurance.getMontantInit(), numeroLigne, 1);
+		modeleTable.setValueAt(assurance.getMontant(), numeroLigne, 1);
 		modeleTable.setValueAt(echeance.getDateEcheance(), numeroLigne, 2);
 		if (entreprise != null) {
 			modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 3);
@@ -192,107 +301,59 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	// ------------------- TABLE TRAVAUX pour un IMMEUBLE ------------------- //
+	private void updateTableAssurancesForLogement(String idLogement) throws SQLException {
+		List<Assurance> assurancesLogement = this.daoAssurance.findByLogement(idLogement);
 
-	public void ecrireLigneTableTravauxImmeubles(int numeroLigne, Facture facture, Entreprise entreprise) {
-		JTable tableTravauxImmeuble = this.fenetreAccueil.getTableTravaux();
-		DefaultTableModel modeleTable = (DefaultTableModel) tableTravauxImmeuble.getModel();
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableAssurances().getModel();
+		modeleTable.setRowCount(assurancesLogement.size());
 
-		// Vérifiez si l'immeuble de la facture est null
-		if (facture.getImmeuble() == null) {
-			return; // Quittez la méthode si l'immeuble est null
+		for (int i = 0; i < assurancesLogement.size(); i++) {
+			Assurance assurance = assurancesLogement.get(i);
+			Entreprise entreprise = daoEntreprise.findById(assurance.getEntreprise().getSiret());
+			Echeance echeance = daoEcheance.findById(assurance.getNuméroPolice());
+
+			ecrireLigneTableAssurances(i, assurance, entreprise, echeance);
 		}
-
-		modeleTable.setValueAt(facture.getImmeuble().getImmeuble(), numeroLigne, 0);
-		modeleTable.setValueAt(facture.getDesignation(), numeroLigne, 1);
-		modeleTable.setValueAt(facture.getDateEmission(), numeroLigne, 2);
-		modeleTable.setValueAt(facture.getMontant(), numeroLigne, 3);
-		modeleTable.setValueAt(facture.getAccompteVerse(), numeroLigne, 4);
-		modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 5);
-		modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
-				numeroLigne, 6);
 	}
 
-	private void chargerTravauxImmeubles() throws SQLException {
-		List<Facture> factures = this.daoFacture.findAll();
+//------------------------------------------------------------------------------------------------------------------------//
+	// Méthode pour filtrer les Asurances par Id Logement
+	private void filtreAssuranceByLogement() {
+		JComboBox<String> comboBox_MesAssurances = this.fenetreAccueil.getComboBox_MesAssurances();
+		String idLogementSelectionne = comboBox_MesAssurances.getSelectedItem().toString();
 
-		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableTravaux().getModel();
-		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
-
-		for (int i = 0; i < factures.size(); i++) {
-			Facture f = factures.get(i);
-			if (f != null && f.getImmeuble() != null) {
-				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-				modeleTable.addRow(new Object[] { f.getImmeuble().getImmeuble(), f.getDesignation(),
-						f.getDateEmission(), f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
-						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
+		// Si l'ID sélectionné est différent de "ID du logement", filtrez la table des
+		// assurances
+		if (!idLogementSelectionne.equals("ID du logement")) {
+			try {
+				updateTableAssurancesForLogement(idLogementSelectionne);
+			} catch (SQLException ex) {
+				ex.printStackTrace();
 			}
 		}
 	}
 
-	// ------------------- TABLE TRAVAUX pour un LOGEMENT ------------------- //
+	// Méthode pour filtrer les Charges par Id Logement
+	private void filtreChargesByLogement() {
+		JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
+		String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
 
-	public void ecrireLigneTableTravauxLogement(int numeroLigne, Facture facture, Entreprise entreprise) {
-		JTable tableTravauxImmeuble = this.fenetreAccueil.getTableTravaux();
-		DefaultTableModel modeleTable = (DefaultTableModel) tableTravauxImmeuble.getModel();
+		// Si l'ID sélectionné est différent de "ID du logement", filtrez la table des
+		// assurances
+		if (!idLogementSelectionne.equals("ID du logement")) {
+			try {
+				// On ajoute le bien a la sauvegarde
+				Bien logement = daoBien.findById(idLogementSelectionne);
+				Sauvegarde.deleteItem("Logement");
+				Sauvegarde.addItem("Logement", logement);
 
-		// Vérifiez si l'immeuble de la facture est null
-		if (facture.getBien() == null) {
-			return; // Quittez la méthode si l'immeuble est null
-		}
-
-		modeleTable.setValueAt(facture.getBien().getIdBien(), numeroLigne, 0);
-		modeleTable.setValueAt(facture.getDesignation(), numeroLigne, 1);
-		modeleTable.setValueAt(facture.getDateEmission(), numeroLigne, 2);
-		modeleTable.setValueAt(facture.getMontant(), numeroLigne, 3);
-		modeleTable.setValueAt(facture.getAccompteVerse(), numeroLigne, 4);
-		modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 5);
-		modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
-				numeroLigne, 6);
-
-	}
-
-	private void chargerTravauxLogements() throws SQLException {
-		List<Facture> factures = this.daoFacture.findAll();
-
-		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableTravaux().getModel();
-		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
-
-		for (int i = 0; i < factures.size(); i++) {
-			Facture f = factures.get(i);
-			if (f != null && f.getBien() != null) {
-				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-				modeleTable.addRow(new Object[] { f.getBien().getIdBien(), f.getDesignation(), f.getDateEmission(),
-						f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
-						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
+				updateTableChargesForLogement(idLogementSelectionne);
+			} catch (SQLException ex) {
+				ex.printStackTrace();
 			}
 		}
 	}
-	
-	// ------------------- TABLE CHARGES LOCATIVES ------------------- //
 
-	public void ecrireLigneTableChargesLocatives(int numeroLigne, Charge charge) {
-		JTable tableChargesLocatives = this.fenetreAccueil.getTableChargesLocatives();
-		DefaultTableModel modeleTable = (DefaultTableModel) tableChargesLocatives.getModel();
-
-		modeleTable.setValueAt(charge.getNom(), numeroLigne, 0);
-		modeleTable.setValueAt(charge.getBien().getIdBien(), numeroLigne, 1);
-		modeleTable.setValueAt(charge.isDeductible(), numeroLigne, 2);
-		modeleTable.setValueAt(charge.getMontantReel(), numeroLigne, 3);	
-	}
-
-	private void chargerChargesLocatives() throws SQLException {
-		List<Charge> charges = this.daoCharge.findAll();
-
-		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
-		modeleTable.setRowCount(charges.size());
-
-		for (int i = 0; i < charges.size(); i++) {
-			Charge c = charges.get(i);
-			this.ecrireLigneTableChargesLocatives(i,c);
-		}
-	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
@@ -329,6 +390,7 @@ public class GestionAccueil implements ActionListener {
 			case "btnMesDocuments":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesDocuments());
 				break;
+
 			///////////////////
 			// LAYERED MES BIENS
 			///////////////////
@@ -339,6 +401,7 @@ public class GestionAccueil implements ActionListener {
 					e1.printStackTrace();
 				}
 				break;
+
 			case "btnMesBiens_Supprimer":
 				if (Sauvegarde.onSave("Immeuble") == true) {
 					Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
@@ -352,9 +415,9 @@ public class GestionAccueil implements ActionListener {
 				}
 
 				break;
-			case "btnMesBiens_Modifier":
 
-				//////// POUR UN LOGEMENT/BIEN ///////////
+			case "btnMesBiens_Modifier":
+				//////// POUR UN LOGEMENT --> BIEN (dans notre BDD) ///////////
 				if (Sauvegarde.onSave("Logement") == true) {
 					Fenetre_ModificationLogement modif_logement = new Fenetre_ModificationLogement();
 					this.fenetreAccueil.getLayeredPane().add(modif_logement);
@@ -380,7 +443,6 @@ public class GestionAccueil implements ActionListener {
 					}
 
 				} else {
-
 					//////// POUR MODIFIER UN IMMEUBLE///////////
 					// Premier test si il n'y a aucun immeuble sélectionné alors erreur
 					if (Sauvegarde.onSave("Immeuble") == false) {
@@ -409,15 +471,12 @@ public class GestionAccueil implements ActionListener {
 									.setText(immeubleCourant.getPeriodeConstruction());
 							modif_bien.getTextField_nbLogement()
 									.setText(Integer.toString(immeubleCourant.getNbLogement()));
-							modif_bien.getTextField_dateAcquisition().setText(immeubleCourant.getDateAcquisition());
 							modif_bien.getComboBox_typeDeBien().setSelectedItem(immeubleCourant.getType_immeuble());
 						} catch (SQLException e1) {
 							e1.printStackTrace();
 						}
-
 					}
 				}
-
 				break;
 
 			case "btnMesBiens_AjouterBien":
@@ -462,6 +521,7 @@ public class GestionAccueil implements ActionListener {
 				paiement_logement.setVisible(true);
 				paiement_logement.moveToFront();
 				break;
+
 			///////////////////////
 			// LAYERED MES LOCATIONS
 			///////////////////////
@@ -483,13 +543,29 @@ public class GestionAccueil implements ActionListener {
 			case "btn_MesLocations_Supprimer":
 				break;
 
-			case "btn_mesLocations_InfoLocataire": // A MODIFIER POUR QUE L'OUVERTURE SOIT FAITES APRES LA SELECTION
-													// D'UNE
-													// LIGNE DU TABLEAU
-				Fenetre_AffichageInfoLocataire infos_locataire = new Fenetre_AffichageInfoLocataire();
-				this.fenetreAccueil.getLayeredPane().add(infos_locataire);
-				infos_locataire.setVisible(true);
-				infos_locataire.moveToFront();
+			case "btn_mesLocations_InfoLocataire":
+				if (Sauvegarde.onSave("Locataire") == true) {
+					Fenetre_AffichageInfoLocataire infos_locataire = new Fenetre_AffichageInfoLocataire();
+					this.fenetreAccueil.getLayeredPane().add(infos_locataire);
+					infos_locataire.setVisible(true);
+					infos_locataire.moveToFront();
+
+					// On recupère le locataire de la sauvegarde
+					Locataire locataireSauvgarde = (Locataire) Sauvegarde.getItem("Locataire");
+					Locataire locataireCourant;
+
+					try {
+						locataireCourant = this.daoLocataire.findById(locataireSauvgarde.getIdLocataire());
+						infos_locataire.getTextField_Id().setText(locataireCourant.getIdLocataire());
+						infos_locataire.getTextField_Nom().setText(locataireCourant.getNom());
+						infos_locataire.getTextField_Prenom().setText(locataireCourant.getPrenom());
+						infos_locataire.getTextField_Telephone().setText(locataireCourant.getTelephone());
+						infos_locataire.getTextField_Mail().setText(locataireCourant.getMail());
+						infos_locataire.getTextField_DateN().setText(locataireCourant.getDateNaissance());
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
 				break;
 			/////////////////////
 			// LAYERED MES TRAVAUX
@@ -502,26 +578,61 @@ public class GestionAccueil implements ActionListener {
 			///////////////////////////////
 			// LAYERED MES CHARGES LOCATIVES
 			///////////////////////////////
-			case "btn_MesChargesLocatives_Charger":
-				try {
-					this.chargerChargesLocatives();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				break;
 			case "btn_MesChargesLocatives_Modifier":
-				break;
-			case "btn_MesChargesLocatives_Inserer":
-				Fenetre_InsertionCharges charges = new Fenetre_InsertionCharges();
-				this.fenetreAccueil.getLayeredPane().add(charges);
-				charges.setVisible(true);
-				charges.moveToFront();
-				break;
-			case "btn_MesChargesLocatives_Supprimer":
+//			    if (Sauvegarde.onSave("Charge") && Sauvegarde.onSave("Logement")) {
+//			        Fenetre_ModificationCharges modif_charge = new Fenetre_ModificationCharges();
+//			        this.fenetreAccueil.getLayeredPane().add(modif_charge);
+//			        modif_charge.setVisible(true);
+//			        modif_charge.moveToFront();
+//
+//			        // On recupère la charge de la sauvegarde
+//			        Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Facture");
+//
+//			        // On recupère le logement de la sauvegarde
+//			        Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+//			        
+//			        try {
+//			            Bien bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
+//
+//			            int deductibleValeur = 0; // Non déductible par défaut
+//
+//			            // choix de la radio button
+//			            if (modif_charge.getRdbtnAjouterChargeOui().isSelected()) {
+//			                deductibleValeur = 1;
+//			            } else if (modif_charge.getRdbtnAjouterChargeNon().isSelected()) {
+//			                deductibleValeur = 0;
+//			            }
+//
+//			            modif_charge.getTextField_nomCharge().setText(chargeSauvegarde.getNom());
+//			            modif_charge.getTextField_montantPrevisionnel().setText(Double.toString(chargeSauvegarde.getMontantPrevisionnel()));
+//			            modif_charge.getTextField_montantReel().setText(Double.toString(chargeSauvegarde.getMontantReel()));
+//
+//			            // Mise à jour des boutons radio
+//			            if (chargeSauvegarde.getImputableLocataire() == 1) {
+//			                modif_charge.getRdbtnAjouterChargeNon().setSelected(true);
+//			            } else {
+//			                modif_charge.getRdbtnAjouterChargeOui().setSelected(true);
+//			            }
+//
+//			        } catch (SQLException e1) {
+//			            // Gérer l'exception de manière appropriée (affichage d'un message à l'utilisateur, etc.)
+//			            e1.printStackTrace();
+//			        }
+//			    }
 				break;
 
-			// Coder la cas de la selection d'un id logement
-			// parmi la liste présente dans le JComboBox "comboBox_MesChargesLocatives"
+			case "btn_MesChargesLocatives_Supprimer":
+				if (Sauvegarde.onSave("Charge") == true) {
+					Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Facture");
+					Fenetre_SupprimerFactureCharge supp_charge = new Fenetre_SupprimerFactureCharge();
+					this.fenetreAccueil.getLayeredPane().add(supp_charge);
+					supp_charge.setVisible(true);
+					supp_charge.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil,
+							"Veuillez sélectionner une charge pour supprimer", "Erreur", JOptionPane.ERROR_MESSAGE);
+				}
+				break;
 
 			////////////////////////
 			// LAYERED MES ASSURANCES
@@ -586,8 +697,24 @@ public class GestionAccueil implements ActionListener {
 					e1.printStackTrace();
 				}
 				break;
+
+			// ------------- MES CHARGES -------------//
+
+			case "tglbtn_FactureCharge_biens":
+				// Permet de trier le tableau de charges en n'affichant que ceux concernants les
+				// immeubles
+				try {
+					this.chargerChargesLogement();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				break;
+
 			}
+
+			filtreAssuranceByLogement();
+			filtreChargesByLogement();
+
 		}
 	}
-
 }

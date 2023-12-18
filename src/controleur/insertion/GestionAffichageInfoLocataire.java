@@ -51,7 +51,6 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		// on cree un locataire juste pour pouvoir update dans la BD car on a seuelemenet la methode avec le parametre Locataire 
 		// On recupere les infos des libellé pour les mettre dans notre locataire
         Locataire locataire = new Locataire(null,null,null,null,null,null);
-        locataire.setIdLocataire(this.fail.getTextField_Adresse().getText());
         locataire.setNom(this.fail.getTextField_Nom().getText());
         locataire.setPrenom(this.fail.getTextField_Prenom().getText());
         locataire.setTelephone(this.fail.getTextField_Telephone().getText());

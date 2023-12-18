@@ -16,6 +16,8 @@ public class Entreprise {
 		this.siret = siret;
 		this.nom = nom;
 		this.adresse = adresse;
+		this.cp = cp;
+		this.ville = ville;
 		this.mail = mail;
 		this.telephone = telephone;
 		this.iban = iban;

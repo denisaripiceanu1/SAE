@@ -20,8 +20,7 @@ public class RequeteSelectFactureByBien implements Requete<Facture> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
-		prSt.setString(1, data.getDesignation());
-		prSt.setString(2, data.getBien().getIdBien());
+		prSt.setString(1, data.getBien().getIdBien());
 		
 	}
 }

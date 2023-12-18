@@ -1,15 +1,19 @@
 package vue.insertion;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -22,7 +26,8 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionInsertionLocation;
 
-public class Fenetre_InsertionLocation extends JInternalFrame implements ActionListener {
+
+public class Fenetre_InsertionLocation extends JInternalFrame {
 	private JTextField textField_IdLocataire;
 	private JTextField textField_Nom;
 	private JTextField textField_Prenom;
@@ -33,64 +38,15 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 	private JTextField textField_caution;
 	private JTextField textField_date_arrivee;
 	private JTextField textField_provision_sur_charges;
-
-	public JTextField getTextField_IdLocataire() {
-		return this.textField_IdLocataire;
-	}
-
-	public JTextField getTextField_Nom() {
-		return this.textField_Nom;
-	}
-
-	public JTextField getTextField_Prenom() {
-		return this.textField_Prenom;
-	}
-
-	public JTextField getTextField_tel() {
-		return this.textField_tel;
-	}
-
-	public JTextField getTextField_e_mail() {
-		return this.textField_e_mail;
-	}
-
-	public JTextField getTextField_Date_de_naissance() {
-		return this.textField_Date_de_naissance;
-	}
-
-	public JTable getTable_id_logements() {
-		return this.table_id_logements;
-	}
-
-	public JTextField getTextField_caution() {
-		return this.textField_caution;
-	}
-
-	public JTextField getTextField_date_arrivee() {
-		return this.textField_date_arrivee;
-	}
-
-	public JTextField getTextField_provision_sur_charges() {
-		return this.textField_provision_sur_charges;
-	}
-
-	public JTextField getTextField_loyer() {
-		return this.textField_loyer;
-	}
-
-	public JTable getTable_liste_locataires() {
-		return this.table_liste_locataires;
-	}
-
-	public GestionInsertionLocation getGestionClic() {
-		return this.gestionClic;
-	}
-
+	private JLabel lblNomEtatDesLieux;
+	private JLabel lblBail;
+	private JPanel panel;
 	private JTextField textField_loyer;
 	private JTable table_liste_locataires;
 	private GestionInsertionLocation gestionClic;
 
 	public Fenetre_InsertionLocation() {
+
 		this.gestionClic = new GestionInsertionLocation(this);
 
 		this.setBounds(100, 100, 762, 541);
@@ -217,12 +173,12 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 		scrollPane_table_id_logements.setViewportView(this.table_id_logements);
 
 		JButton btnAjouterBail = new JButton("Ajouter un bail");
-		btnAjouterBail.setBounds(534, 149, 154, 21);
+		btnAjouterBail.setBounds(533, 116, 154, 21);
 		btnAjouterBail.addActionListener(this.gestionClic);
 		panel.add(btnAjouterBail);
 
 		JButton btnAjouterEtatDesLieux = new JButton("Ajouter l'état des lieux");
-		btnAjouterEtatDesLieux.setBounds(534, 116, 154, 21);
+		btnAjouterEtatDesLieux.setBounds(533, 53, 154, 21);
 		btnAjouterEtatDesLieux.addActionListener(this.gestionClic);
 		panel.add(btnAjouterEtatDesLieux);
 
@@ -244,7 +200,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 		this.textField_provision_sur_charges.setColumns(10);
 		this.textField_provision_sur_charges.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
 				"Provisions sur charges", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_provision_sur_charges.setBounds(548, 347, 120, 40);
+		this.textField_provision_sur_charges.setBounds(548, 347, 171, 40);
 		panel.add(this.textField_provision_sur_charges);
 
 		this.textField_loyer = new JTextField();
@@ -264,12 +220,115 @@ public class Fenetre_InsertionLocation extends JInternalFrame implements ActionL
 		this.table_liste_locataires.setBounds(0, 0, 1, 1);
 		scrollPane_table_locataires.setViewportView(this.table_liste_locataires);
 
+		JLabel lblNomEtatDesLieux = new JLabel("État des lieux : ");
+		this.lblNomEtatDesLieux = lblNomEtatDesLieux;
+		lblNomEtatDesLieux.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNomEtatDesLieux.setBounds(533, 86, 197, 20);
+		panel.add(lblNomEtatDesLieux);
+
+		JLabel lblNomBail = new JLabel("Bail : ");
+		this.lblBail = lblNomBail;
+		lblNomBail.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNomBail.setBounds(533, 147, 197, 20); // Adjust the position as needed
+		panel.add(lblNomBail);
+////////// A DEPLACER 
+		// Ajoutez un gestionnaire d'événements à lblNomEtatDesLieux
+		lblNomEtatDesLieux.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ouvrirPDF(lblNomEtatDesLieux.getText());
+			}
+		});
+
+		// Ajoutez un gestionnaire d'événements à lblNomBail
+		lblNomBail.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ouvrirPDF(lblNomBail.getText());
+			}
+		});
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	private void ouvrirPDF(String label) {
+		// Récupérer le chemin complet du fichier PDF à partir du texte de l'étiquette
+		String cheminFichierPDF = label;
 
+		// Vérifier si le fichier existe
+		File fichierPDF = new File(cheminFichierPDF);
+
+		if (fichierPDF.exists()) {
+			// Ouvrez le fichier PDF
+			Desktop desktop = Desktop.getDesktop();
+			try {
+				desktop.open(fichierPDF);
+			} catch (IOException ex) {
+				JOptionPane.showMessageDialog(panel, "Erreur lors de l'ouverture du fichier PDF : " + ex.getMessage(),
+						"Erreur", JOptionPane.ERROR_MESSAGE);
+				ex.printStackTrace();
+			}
+		} else {
+			JOptionPane.showMessageDialog(panel, "Le fichier PDF n'existe pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	////////
+	public JTextField getTextField_IdLocataire() {
+		return this.textField_IdLocataire;
+	}
+
+	public JTextField getTextField_Nom() {
+		return this.textField_Nom;
+	}
+
+	public JTextField getTextField_Prenom() {
+		return this.textField_Prenom;
+	}
+
+	public JTextField getTextField_tel() {
+		return this.textField_tel;
+	}
+
+	public JTextField getTextField_e_mail() {
+		return this.textField_e_mail;
+	}
+
+	public JTextField getTextField_Date_de_naissance() {
+		return this.textField_Date_de_naissance;
+	}
+
+	public JTable getTable_id_logements() {
+		return this.table_id_logements;
+	}
+
+	public JTextField getTextField_caution() {
+		return this.textField_caution;
+	}
+
+	public JTextField getTextField_date_arrivee() {
+		return this.textField_date_arrivee;
+	}
+
+	public JTextField getTextField_provision_sur_charges() {
+		return this.textField_provision_sur_charges;
+	}
+
+	public JTextField getTextField_loyer() {
+		return this.textField_loyer;
+	}
+
+	public JTable getTable_liste_locataires() {
+		return this.table_liste_locataires;
+	}
+
+	public JLabel getLblNomEtatDesLieux() {
+		return this.lblNomEtatDesLieux;
+	}
+
+	public JLabel getLblBail() {
+		return this.lblBail;
+	}
+
+	public GestionInsertionLocation getGestionClic() {
+		return this.gestionClic;
 	}
 
 }

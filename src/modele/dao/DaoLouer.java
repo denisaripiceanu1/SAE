@@ -34,8 +34,8 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 
 	@Override
 	public void delete(Louer donnees) throws SQLException {
-		SousProgrammeDeleteLocation sousProgramme = new SousProgrammeDeleteLocation(donnees.getIdLocataire(),
-				donnees.getIdBien(), donnees.getDateDebut());
+		SousProgrammeDeleteLocation sousProgramme = new SousProgrammeDeleteLocation(donnees.getLocataire(),
+				donnees.getBien(), donnees.getDateDebut());
 
 		try (CallableStatement st = connection.prepareCall(sousProgramme.appelSousProgramme())) {
 			sousProgramme.parametres(st);

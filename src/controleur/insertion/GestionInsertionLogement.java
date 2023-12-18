@@ -59,7 +59,7 @@ public class GestionInsertionLogement implements ActionListener {
 				
 				this.daoBien.create(logement);
 				//Potentiellement supprimer l'immeuble de la sauvegarde
-
+				
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}

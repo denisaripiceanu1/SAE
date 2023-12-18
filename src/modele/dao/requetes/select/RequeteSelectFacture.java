@@ -10,7 +10,7 @@ public class RequeteSelectFacture implements Requete<Facture> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Facture";
+		return "SELECT * FROM Facture ";
 	}
 
 	@Override

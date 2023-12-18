@@ -11,8 +11,10 @@ import javax.swing.table.DefaultTableModel;
 import controleur.outils.Sauvegarde;
 import modele.Bien;
 import modele.Immeuble;
+import modele.dao.CictOracleDataSource;
 import modele.dao.DaoBien;
 import modele.dao.DaoImmeuble;
+import modele.dao.requetes.VerificationOccupation;
 import vue.Fenetre_Accueil;
 
 public class GestionBienLogement implements ListSelectionListener {
@@ -20,11 +22,13 @@ public class GestionBienLogement implements ListSelectionListener {
     private Fenetre_Accueil fenetreAccueil;
     private DaoImmeuble daoImmeuble;
     private DaoBien daoBien;
+    private VerificationOccupation verificationOccupation;
 
     public GestionBienLogement(Fenetre_Accueil fenetreAccueil) {
         this.fenetreAccueil = fenetreAccueil;
         this.daoImmeuble = new DaoImmeuble();
         this.daoBien = new DaoBien();
+        this.verificationOccupation = new VerificationOccupation(CictOracleDataSource.getConnectionBD());
         Sauvegarde.initializeSave();
     }
 
@@ -37,7 +41,7 @@ public class GestionBienLogement implements ListSelectionListener {
                 JTable tableBiens = fenetreAccueil.getTableBiens();
                 Immeuble immeuble = null;
                 try {
-                	//On peut enlever les deux autres paramètres ci-dessous 
+                    // On peut enlever les deux autres paramètres ci-dessous 
                     immeuble = daoImmeuble.findById(tableBiens.getValueAt(selectedRow, 0).toString(),
                             tableBiens.getValueAt(selectedRow, 1).toString(),
                             tableBiens.getValueAt(selectedRow, 2).toString());
@@ -46,11 +50,11 @@ public class GestionBienLogement implements ListSelectionListener {
                 }
 
                 if (immeuble != null) {
-                	//Ajout de l'immeuble qui concerne les logements dans le tableau pour pouvoir en ajouter un
-                	Sauvegarde.deleteItem("Logement");
-                	Sauvegarde.deleteItem("Immeuble");
-                	Sauvegarde.addItem("Immeuble", immeuble);
-                	
+                    // Ajout de l'immeuble qui concerne les logements dans le tableau pour pouvoir en ajouter un
+                    Sauvegarde.deleteItem("Logement");
+                    Sauvegarde.deleteItem("Immeuble");
+                    Sauvegarde.addItem("Immeuble", immeuble);
+
                     List<Bien> biens = null;
                     try {
                         biens = daoBien.findBiensparImmeuble(immeuble.getImmeuble());
@@ -63,15 +67,15 @@ public class GestionBienLogement implements ListSelectionListener {
 
                     DefaultTableModel model = (DefaultTableModel) logements.getModel();
 
-                    int numColonnes = 6; //Nombre de colonnes
-                    int numLignesNecessaires = biens.size(); //Nombre de lignes
+                    int numColonnes = 6; // Nombre de colonnes
+                    int numLignesNecessaires = biens.size(); // Nombre de lignes
                     int numLigneActuel = model.getRowCount();
 
                     for (int i = 0; i < numLignesNecessaires - numLigneActuel; i++) {
                         model.addRow(new Object[numColonnes]);
                     }
 
-                    //Remplissage du tableau de logements
+                    // Remplissage du tableau de logements
                     for (int i = 0; i < biens.size(); i++) {
                         Bien bien = biens.get(i);
                         if (bien != null) {
@@ -80,7 +84,16 @@ public class GestionBienLogement implements ListSelectionListener {
                             int nbPieces = bien.getNbPieces();
                             int etage = bien.getNumEtage();
                             String date = bien.getDateAcquisition();
-                            int occupe = 0; // Traitement à faire plus tard avec requete jdbc 
+
+                            // Utilisez la méthode estLoue pour vérifier si le logement est loué
+                            boolean estLoue = false;
+                            try {
+                                estLoue = verificationOccupation.estLoue(bien.getIdBien());
+                            } catch (SQLException e1) {
+                                e1.printStackTrace();
+                            }
+                            // Mettez à jour la colonne "occupe" en fonction de l'état de location
+                            int occupe = estLoue ? 1 : 0;
 
                             model.setValueAt(nom, i, 0);
                             model.setValueAt(surface, i, 1);
