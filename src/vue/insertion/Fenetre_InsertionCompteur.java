@@ -24,6 +24,7 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 	private JTextField textField_IndiceCompteur;
 	private GestionInsertionCompteur gestionClic;
 	private JComboBox comboBox_typeDeCompteur;
+	private JTextField textFieldPrixAbo;
 
 	public Fenetre_InsertionCompteur() {
 		this.gestionClic = new GestionInsertionCompteur(this);
@@ -58,14 +59,14 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 		textField_IdCompteur.setColumns(10);
 		textField_IdCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Compteur",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_IdCompteur.setBounds(270, 217, 190, 40);
+		textField_IdCompteur.setBounds(270, 207, 190, 40);
 		panel.add(textField_IdCompteur);
 
 		textField_IndiceCompteur = new JTextField();
 		textField_IndiceCompteur.setColumns(10);
 		textField_IndiceCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
 				"Indice du Compteur", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_IndiceCompteur.setBounds(270, 296, 190, 40);
+		textField_IndiceCompteur.setBounds(270, 273, 190, 40);
 		panel.add(textField_IndiceCompteur);
 
 		JButton btnAjouter = new JButton("Ajouter");
@@ -83,11 +84,22 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 		btnAnnuler.setBackground(new Color(0, 102, 204));
 		btnAnnuler.addActionListener(this.gestionClic);
 		panel.add(btnAnnuler);
+		
+		textFieldPrixAbo = new JTextField();
+		textFieldPrixAbo.setColumns(10);
+		textFieldPrixAbo.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
+				"Prix de l'abonnement", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textFieldPrixAbo.setBounds(270, 343, 190, 40);
+		panel.add(textFieldPrixAbo);
 
 	}
 
 	public JTextField getTextField_IdCompteur() {
 		return textField_IdCompteur;
+	}
+	
+	public JTextField getTextField_textFieldPrixAbo() {
+		return textFieldPrixAbo;
 	}
 
 	public JTextField getTextField_IndiceCompteur() {
@@ -97,7 +109,4 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
 	public JComboBox getComboBox_typeDeCompteur() {
 		return comboBox_typeDeCompteur;
 	}
-	
-	
-	
 }

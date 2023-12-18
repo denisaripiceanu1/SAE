@@ -3,6 +3,7 @@ package controleur.insertion;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -25,15 +26,16 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import controleur.outils.PDFImporter;
+import controleur.outils.InsertionPDF;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionColocataire;
 import vue.insertion.Fenetre_InsertionLocation;
+import vue.modification.Fenetre_ModificationLogement;
 
 public class GestionInsertionLocation implements ActionListener {
 
 	private Fenetre_InsertionLocation fil;
-	private PDFImporter gestionPDF;
+	private InsertionPDF gestionPDF;
 
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
@@ -67,41 +69,17 @@ public class GestionInsertionLocation implements ActionListener {
 			break;
 
 		case "Ajouter un bail":
-			try {
-				// Appeler importPDFCheminString une fois et stocker le résultat dans
-				// cheminOrigine
-				String cheminOrigine = PDFImporter.getInstance().importPDFCheminString();
-
-				// Si aucune exception n'est levée, cela indique le succès
-				// Afficher un message de réussite
-				JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès",
-						JOptionPane.INFORMATION_MESSAGE);
-
-				// Mettre à jour le libellé pour permettre l'ouverture du fichier
-				fil.getLblBail().setText(cheminOrigine);
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+			InsertionPDF insertBail = new InsertionPDF();
+			this.fil.getLayeredPane().add(insertBail);
+			insertBail.setVisible(true);
+			insertBail.moveToFront();
 			break;
 
 		case "Ajouter l'état des lieux":
-			try {
-				// Appeler importPDFCheminString une fois et stocker le résultat dans
-				// cheminOrigine
-				String cheminOrigine = PDFImporter.getInstance().importPDFCheminString();
-
-				// Si aucune exception n'est levée, cela indique le succès
-				// Afficher un message de réussite
-				JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès",
-						JOptionPane.INFORMATION_MESSAGE);
-
-				// Mettre à jour le libellé pour permettre l'ouverture du fichier
-				fil.getLblNomEtatDesLieux().setText(cheminOrigine);
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+			InsertionPDF insertEtat = new InsertionPDF();
+			this.fil.getLayeredPane().add(insertEtat);
+			insertEtat.setVisible(true);
+			insertEtat.moveToFront();
 			break;
 
 		case "Ajouter":
