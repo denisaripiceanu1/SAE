@@ -55,7 +55,7 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 		try {
 			immeuble = new Immeuble(curseur.getString("Id_Immeuble"), curseur.getString("adresse"),
 					curseur.getString("cp"), curseur.getString("ville"), curseur.getString("periode_construction"),
-					curseur.getInt("nb_logement"), curseur.getString("type_immeuble"));
+					 curseur.getString("type_immeuble"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
