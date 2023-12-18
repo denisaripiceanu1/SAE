@@ -7,17 +7,15 @@ public class Immeuble {
 	private String cp;
 	private String ville;
 	private String periodeConstruction;
-	private int nbLogement; //Calculable
 	private String type_immeuble;
 
 	public Immeuble(String idImmeuble, String adresse, String cp, String ville, String periodeConstruction,
-			int nbLogement, String type_immeuble) {
+			 String type_immeuble) {
 		this.idImmeuble = idImmeuble;
 		this.adresse = adresse;
 		this.cp = cp;
 		this.ville = ville;
 		this.periodeConstruction = periodeConstruction;
-		this.nbLogement = nbLogement;
 		this.type_immeuble = type_immeuble;
 	}
 
@@ -59,14 +57,6 @@ public class Immeuble {
 
 	public void setPeriodeConstruction(String periodeConstruction) {
 		this.periodeConstruction = periodeConstruction;
-	}
-
-	public int getNbLogement() {
-		return nbLogement;
-	}
-
-	public void setNbLogement(int nbLogement) {
-		this.nbLogement = nbLogement;
 	}
 
 	public String getType_immeuble() {
