@@ -9,7 +9,7 @@ public class SousProgrammeInsertImmeuble implements SousProgramme<Immeuble> {
 
 	@Override
 	public String appelSousProgramme() {
-		return "{call Insert_Immeuble(?, ?, ?, ?, ?, ?, ?, ?)}";
+		return "{call Insert_Immeuble(?, ?, ?, ?, ?, ?, ?)}";
 	}
 
 	@Override
@@ -30,8 +30,7 @@ public class SousProgrammeInsertImmeuble implements SousProgramme<Immeuble> {
 		prSt.setString(3, donnee.getCp());
 		prSt.setString(4, donnee.getVille());
 		prSt.setString(5, donnee.getPeriodeConstruction());
-		prSt.setInt(6, donnee.getNbLogement());
-		prSt.setString(7, donnee.getType_immeuble());
+		prSt.setString(6, donnee.getType_immeuble());
 	}
 
 }

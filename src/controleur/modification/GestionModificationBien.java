@@ -44,7 +44,6 @@ public class GestionModificationBien implements ActionListener {
 					this.modificationBien.getTextField_codePostal().getText(),
 					this.modificationBien.getTextField_ville().getText(),
 					this.modificationBien.getTextField_periodeDeConstruction().getText(),
-					Integer.parseInt(this.modificationBien.getTextField_nbLogement().getText()),
 					this.modificationBien.getComboBox_typeDeBien().getSelectedItem().toString());
 			// J'ajoute l'immeuble dans la sauvegarde pour réutiliser
 			Sauvegarde.deleteItem("Immeuble");
@@ -61,7 +60,6 @@ public class GestionModificationBien implements ActionListener {
 						this.modificationBien.getTextField_codePostal().getText(),
 						this.modificationBien.getTextField_ville().getText(),
 						this.modificationBien.getTextField_periodeDeConstruction().getText(),
-						Integer.parseInt(this.modificationBien.getTextField_nbLogement().getText()),
 						this.modificationBien.getComboBox_typeDeBien().getSelectedItem().toString());
 
 				this.daoImmeuble.update(nouvelImmeuble);
