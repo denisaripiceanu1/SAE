@@ -2,7 +2,6 @@ package modele;
 
 public class Facture {
 
-	private int idFacture;
 	private String numero;
 	private String dateEmission;
 	private String datePaiement;
@@ -16,10 +15,9 @@ public class Facture {
 	private Bien bien;
 	private Entreprise entreprise;
 
-	public Facture(int idFacture, String numero, String dateEmission, String datePaiement, String modePaiement,
+	public Facture(String numero, String dateEmission, String datePaiement, String modePaiement,
 			String numeroDevis, String designation, double accompteVerse, double montant, int imputableLocataire,
 			Immeuble immeuble, Bien bien, Entreprise entreprise) {
-		this.idFacture = idFacture;
 		this.numero = numero;
 		this.dateEmission = dateEmission;
 		this.datePaiement = datePaiement;
@@ -40,14 +38,6 @@ public class Facture {
 
 	public void setMontant(double montant) {
 		this.montant = montant;
-	}
-
-	public int getIdFacture() {
-		return idFacture;
-	}
-
-	public void setIdFacture(int idFacture) {
-		this.idFacture = idFacture;
 	}
 
 	public String getNumero() {

@@ -38,11 +38,11 @@ public class Assurance {
 		this.montant = montantInit;
 	}
 
-	public Bien getImmeuble() {
+	public Bien getBien() {
 		return this.bien;
 	}
 
-	public void setImmeuble(Bien bien) {
+	public void setBien(Bien bien) {
 		this.bien = bien;
 	}
 }

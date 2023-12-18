@@ -7,10 +7,10 @@ import javax.swing.JButton;
 
 import modele.Assurance;
 import modele.Entreprise;
-import modele.Immeuble;
+import modele.Bien;
 import modele.dao.DaoAssurance;
 import modele.dao.DaoEntreprise;
-import modele.dao.DaoImmeuble;
+import modele.dao.DaoBien;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionAssurance;
 
@@ -32,13 +32,13 @@ public class GestionInsertionAssurance implements ActionListener {
 		case "Ajouter":
 			Assurance assurance = null;
 			try {
-				DaoImmeuble daoImmeuble = new DaoImmeuble();
+				DaoBien daoBien = new DaoBien();
 				DaoEntreprise daoEntreprise = new DaoEntreprise();
-				Immeuble immeuble = daoImmeuble.findById(this.fia.getTextField_IDImmeuble().getText());
+				Bien bien = daoBien.findById(this.fia.getTextField_IDImmeuble().getText());
 				Entreprise entreprise = daoEntreprise.findById(this.fia.getTextField_SIRET().getText());
 
 				assurance = new Assurance(this.fia.getTextField_numPolice().getText(),
-						Float.parseFloat(this.fia.getTextField_montant().getText()), immeuble, entreprise);
+						Float.parseFloat(this.fia.getTextField_montant().getText()), bien, entreprise);
 
 				this.daoAssurance.create(assurance);
 

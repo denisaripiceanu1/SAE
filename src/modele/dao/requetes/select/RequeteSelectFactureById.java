@@ -10,7 +10,7 @@ public class RequeteSelectFactureById implements Requete<Facture> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Facture WHERE Id_Facture = ?";
+		return "SELECT * FROM Facture WHERE numero = ?";
 
 	}
 
@@ -22,7 +22,7 @@ public class RequeteSelectFactureById implements Requete<Facture> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
-		prSt.setInt(1, data.getIdFacture());
+		prSt.setString(1, data.getNumero());
 
 	}
 

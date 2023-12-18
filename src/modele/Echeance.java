@@ -4,12 +4,10 @@ public class Echeance {
 
 	private String numeroPolice;
 	private String dateEcheance;
-	private double montantEcheance;
 
-	public Echeance(String numeroPolice, String dateEcheance, double montantEcheance) {
+	public Echeance(String numeroPolice, String dateEcheance) {
 		this.numeroPolice = numeroPolice;
 		this.dateEcheance = dateEcheance;
-		this.montantEcheance = montantEcheance;
 	}
 
 	public String getNumeroPolice() {
@@ -26,13 +24,5 @@ public class Echeance {
 
 	public void setDateEcheance(String dateEcheance) {
 		this.dateEcheance = dateEcheance;
-	}
-
-	public double getMontantEcheance() {
-		return montantEcheance;
-	}
-
-	public void setMontantEcheance(double montantEcheance) {
-		this.montantEcheance = montantEcheance;
 	}
 }
