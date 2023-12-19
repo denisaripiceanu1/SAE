@@ -9,15 +9,11 @@ import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
-<<<<<<< HEAD
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controleur.GestionPDF;
-=======
-import controleur.outils.InsertionPDF;
->>>>>>> 9aa35743a2a83c4b367ed15c2dabefda80b22da2
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionLocation;
 
