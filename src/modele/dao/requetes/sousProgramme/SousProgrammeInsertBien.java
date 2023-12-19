@@ -9,7 +9,7 @@ public class SousProgrammeInsertBien implements SousProgramme<Bien> {
 
 	@Override
 	public String appelSousProgramme() {
-		return "{call Insert_Bien(?,?,?,?,?,?,?)}";
+		return "{call Inserer_Bien(?,?,?,?,?,?,?)}";
 	}
 
 	@Override
@@ -25,8 +25,8 @@ public class SousProgrammeInsertBien implements SousProgramme<Bien> {
 		prSt.setInt(3, donnee.getNbPieces());
 		prSt.setInt(4, donnee.getNumEtage());
 		prSt.setDate(5, java.sql.Date.valueOf(donnee.getDateAcquisition()));
-		prSt.setString(6, donnee.getType_bien());
-		prSt.setString(7, donnee.getImmeuble().getImmeuble());
+		prSt.setString(6, donnee.getImmeuble().getImmeuble());
+		prSt.setString(7, donnee.getType_bien());
 
 	}
 }

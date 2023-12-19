@@ -1,12 +1,9 @@
 package modele.dao.requetes.sousProgramme;
 
-import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import modele.Bien;
 import modele.Compteur;
-import modele.Immeuble;
 
 public class SousProgrammeInsertCompteur implements SousProgramme<Compteur>{
 
