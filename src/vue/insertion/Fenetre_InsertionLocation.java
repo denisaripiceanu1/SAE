@@ -38,6 +38,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	private JTextField textField_e_mail;
 	private JTextField textField_Date_de_naissance;
 	private JTable table_id_logements;
+	private JTable table_icc;
 	private JTextField textField_caution;
 	private JTextField textField_date_arrivee;
 	private JTextField textField_provision_sur_charges;
@@ -125,13 +126,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		this.textField_Date_de_naissance.setBounds(24, 215, 190, 40);
 		panel.add(this.textField_Date_de_naissance);
 
-		JButton btn_ajouter_coloc = new JButton("Ajouter un colocataire");
-		btn_ajouter_coloc.setForeground(new Color(255, 255, 255));
-		btn_ajouter_coloc.setBackground(new Color(0, 102, 204));
-		btn_ajouter_coloc.setBounds(47, 479, 139, 21);
-		btn_ajouter_coloc.addActionListener(this.gestionClic);
-		panel.add(btn_ajouter_coloc);
-
 		JLabel lbl_titre_locataire = new JLabel("Locataire");
 		lbl_titre_locataire.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_titre_locataire.setHorizontalAlignment(SwingConstants.CENTER);
@@ -189,7 +183,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 
 		JScrollPane scrollPane_table_id_logements = new JScrollPane();
 		scrollPane_table_id_logements.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
-		scrollPane_table_id_logements.setBounds(271, 182, 223, 222);
+		scrollPane_table_id_logements.setBounds(271, 197, 223, 222);
 		panel.add(scrollPane_table_id_logements);
 
 		this.table_id_logements = new JTable();
@@ -200,14 +194,13 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		scrollPane_table_id_logements.setViewportView(this.table_id_logements);
 		this.table_id_logements.getSelectionModel().addListSelectionListener(this.gtfl);
 
-
 		JButton btnAjouterBail = new JButton("Ajouter un bail");
-		btnAjouterBail.setBounds(533, 116, 154, 21);
+		btnAjouterBail.setBounds(24, 429, 154, 21);
 		btnAjouterBail.addActionListener(this.gestionClic);
 		panel.add(btnAjouterBail);
 
 		JButton btnAjouterEtatDesLieux = new JButton("Ajouter l'état des lieux");
-		btnAjouterEtatDesLieux.setBounds(533, 53, 154, 21);
+		btnAjouterEtatDesLieux.setBounds(24, 364, 154, 21);
 		btnAjouterEtatDesLieux.addActionListener(this.gestionClic);
 		panel.add(btnAjouterEtatDesLieux);
 
@@ -239,23 +232,39 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		this.textField_loyer.setBounds(548, 197, 120, 40);
 		panel.add(this.textField_loyer);
 
-		JScrollPane scrollPane_table_locataires = new JScrollPane();
-		scrollPane_table_locataires.setBounds(24, 375, 190, 93);
-		panel.add(scrollPane_table_locataires);
-
 		JLabel lblNomEtatDesLieux = new JLabel("État des lieux : ");
 		this.lblNomEtatDesLieux = lblNomEtatDesLieux;
 		lblNomEtatDesLieux.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNomEtatDesLieux.setBounds(533, 86, 197, 20);
+		lblNomEtatDesLieux.setBounds(24, 397, 233, 20);
 		panel.add(lblNomEtatDesLieux);
 		lblNomEtatDesLieux.addMouseListener(this.gestionClic);
 
 		JLabel lblNomBail = new JLabel("Bail : ");
 		this.lblBail = lblNomBail;
 		lblNomBail.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNomBail.setBounds(533, 147, 197, 20); // Adjust the position as needed
+		lblNomBail.setBounds(34, 457, 223, 20); // Adjust the position as needed
 		panel.add(lblNomBail);
+		
+		JScrollPane scrollPane_table_icc = new JScrollPane();
+		scrollPane_table_icc.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
+		scrollPane_table_icc.setBounds(548, 80, 137, 97);
+		panel.add(scrollPane_table_icc);
 		lblNomBail.addMouseListener(this.gestionClic);
+		
+		JButton btn_ajouter_icc = new JButton("Ajouter ICC");
+		btn_ajouter_icc.setForeground(Color.WHITE);
+		btn_ajouter_icc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btn_ajouter_icc.setBackground(new Color(0, 102, 204));
+		btn_ajouter_icc.setBounds(549, 39, 94, 31);
+		panel.add(btn_ajouter_icc);
+		
+		this.table_icc = new JTable();
+		panel.add(table_icc);
+		this.table_icc.setCellSelectionEnabled(true);
+		this.table_icc
+				.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "ID de l'ICC" }));
+		this.table_icc.setBounds(548, 61, 135, 16);
+		this.table_icc.getSelectionModel().addListSelectionListener(this.gtfl);
 
 	}
 
@@ -326,5 +335,4 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	public JPanel getPanel() {
 		return panel;
 	}
-
 }
