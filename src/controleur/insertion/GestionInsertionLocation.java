@@ -29,6 +29,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.GestionPDF;
+import controleur.outils.PDFImporter;
 import controleur.outils.Sauvegarde;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionLocation;
@@ -61,36 +62,21 @@ public class GestionInsertionLocation implements ActionListener {
 			try {
 				desktop.open(fichierPDF);
 			} catch (IOException ex) {
-				JOptionPane.showMessageDialog(fil.getPanel(),
+				JOptionPane.showMessageDialog(fil,
 						"Erreur lors de l'ouverture du fichier PDF : " + ex.getMessage(), "Erreur",
 						JOptionPane.ERROR_MESSAGE);
 				ex.printStackTrace();
 			}
 		} else {
-			JOptionPane.showMessageDialog(fil.getPanel(), "Le fichier PDF n'existe pas.", "Erreur",
+			JOptionPane.showMessageDialog(fil, "Le fichier PDF n'existe pas.", "Erreur",
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
-	// Add these methods to set mouse click event handlers
-	public void addClickEventToNomEtatDesLieux() {
-		this.fil.getLblNomEtatDesLieux().addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				ouvrirPDF(fil.getLblNomEtatDesLieux().getText());
-			}
-		});
-	}
-
-	public void addClickEventToNomBail() {
-		this.fil.getLblBail().addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				ouvrirPDF(fil.getLblBail().getText());
-			}
-		});
-	}
+	
 
 	public void ecrireLigneTableLogements(int numeroLigne, Bien bien) {
-		JTable tableLogements = this.fil.getTable_liste_logements();
+		JTable tableLogements = this.fil.getTable_id_logements();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableLogements.getModel();
 
 		modeleTable.setValueAt(bien.getIdBien(), numeroLigne, 0);
@@ -100,7 +86,7 @@ public class GestionInsertionLocation implements ActionListener {
 	private void updateTableLogementForBien(String idLogement) throws SQLException {
 		List<Bien> biens = this.daoBien.findBiensparImmeuble(idLogement);
 
-		DefaultTableModel modeleTable = (DefaultTableModel) this.fil.getTable_liste_logements().getModel();
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fil.getTable_id_logements().getModel();
 		modeleTable.setRowCount(biens.size());
 
 		for (int i = 0; i < biens.size(); i++) {
@@ -133,18 +119,42 @@ public class GestionInsertionLocation implements ActionListener {
 			switch (btn.getText()) {
 
 			case "Ajouter un bail":
-				GestionPDF insertBail = new GestionPDF(this.fil);
-				this.fil.getLayeredPane().add(insertBail);
-				insertBail.setVisible(true);
-				insertBail.moveToFront();
-				break;
+	            try {
+	                // Appeler importPDFCheminString une fois et stocker le résultat dans
+	                // cheminOrigine
+	                String cheminOrigine = PDFImporter.getInstance().importPDFCheminString();
 
-			case "Ajouter l'état des lieux":
-				GestionPDF insertEtat = new GestionPDF(this.fil);
-				this.fil.getLayeredPane().add(insertEtat);
-				insertEtat.setVisible(true);
-				insertEtat.moveToFront();
-				break;
+	                // Si aucune exception n'est levée, cela indique le succès
+	                // Afficher un message de réussite
+	                JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès",
+	                        JOptionPane.INFORMATION_MESSAGE);
+
+	                // Mettre à jour le libellé pour permettre l'ouverture du fichier
+	                fil.getLblBail().setText(cheminOrigine);
+
+	            } catch (Exception ex) {
+	                ex.printStackTrace();
+	            }
+	            break;
+
+	        case "Ajouter l'état des lieux":
+	            try {
+	                // Appeler importPDFCheminString une fois et stocker le résultat dans
+	                // cheminOrigine
+	                String cheminOrigine = PDFImporter.getInstance().importPDFCheminString();
+
+	                // Si aucune exception n'est levée, cela indique le succès
+	                // Afficher un message de réussite
+	                JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès",
+	                        JOptionPane.INFORMATION_MESSAGE);
+
+	                // Mettre à jour le libellé pour permettre l'ouverture du fichier
+	                fil.getLblNomEtatDesLieux().setText(cheminOrigine);
+
+	            } catch (Exception ex) {
+	                ex.printStackTrace();
+	            }
+	            break;
 
 			case "Ajouter":
 				Louer location = null;
@@ -158,21 +168,21 @@ public class GestionInsertionLocation implements ActionListener {
 
 					this.daoLocataire.create(nouveauLocataire);
 					
-				location = new Louer (
-						nouveauLocataire,
-						bienSauvegarde,
-						this.fil.getTextField_date_arrivee().getText(),
-						null,/*nb de mois*/
-						Double.parseDouble(this.fil.getTextField_loyer().getText()),
-						Double.parseDouble(this.fil.getTextField_provision_sur_charges().getText()),
-						Double.parseDouble(this.fil.getTextField_caution().getText()),
-						bail,
-						etatLieux,
-						null,/*date de départ*/
-						null, /* loyer paye*/
-						null, /* icc*/
-						null/*montant reel payé*/
-						);
+//				location = new Louer (
+//						nouveauLocataire,
+//						bienSauvegarde,
+//						this.fil.getTextField_date_arrivee().getText(),
+//						null,/*nb de mois*/
+//						Double.parseDouble(this.fil.getTextField_loyer().getText()),
+//						Double.parseDouble(this.fil.getTextField_provision_sur_charges().getText()),
+//						Double.parseDouble(this.fil.getTextField_caution().getText()),
+//						bail,
+//						etatLieux,
+//						null,/*date de départ*/
+//						null, /* loyer paye*/
+//						null, /* icc*/
+//						null/*montant reel payé*/
+//						);
 
 				} catch (Exception e1) {
 					e1.printStackTrace();
