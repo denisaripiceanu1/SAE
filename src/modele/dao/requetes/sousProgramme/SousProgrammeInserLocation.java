@@ -25,16 +25,13 @@ public class SousProgrammeInserLocation implements SousProgramme<Louer> {
 	    prSt.setDate(3, java.sql.Date.valueOf(donnee.getDateDebut()));
 
 	    // Paramètre potentiellement nul
-	    if (donnee.getNbMois() == 0) {
-	        prSt.setNull(4, java.sql.Types.INTEGER);
-	    } else {
-	        prSt.setInt(4, donnee.getNbMois());
-	    }
 
+	        prSt.setNull(4, java.sql.Types.INTEGER);
+	
 	    prSt.setDouble(5, donnee.getLoyerTTC());
-	    prSt.setDouble(6, donnee.getProvision_chargeMens_TTC());
-	    prSt.setDouble(7, donnee.getCautionTTC());
-	    prSt.setString(8, donnee.getBail());
+	    prSt.setDouble(6, 0.0);
+	    prSt.setDouble(7, 0.0);
+	    prSt.setString(8, "");
 	    prSt.setString(9, donnee.getEtat_lieux());
 
 	    // Paramètres potentiellement nuls

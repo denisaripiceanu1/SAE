@@ -55,6 +55,8 @@ public class GestionInsertionLocation implements ActionListener, MouseListener {
 		this.daoImmeuble = new DaoImmeuble();
 		this.daoLocataire = new DaoLocataire();
 		this.daoLouer = new DaoLouer();
+		this.bail = " ";
+		this.etatLieux = " ";
 	}
 
 	public void ecrireLigneTableLogements(int numeroLigne, Bien bien) {
@@ -100,14 +102,12 @@ public class GestionInsertionLocation implements ActionListener, MouseListener {
 			Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fil.getTopLevelAncestor();
 			switch (btn.getText()) {
 
-			// Vos importations existantes...
-
 			case "Ajouter un bail":
 				try {
 					// Appeler importPDFCheminString une fois et stocker le résultat dans
 					// cheminOrigineBail
 					String cheminOrigineBail = PDFImporter.getInstance().importPDFCheminString();
-
+					this.bail = cheminOrigineBail;
 					// Si le cheminOrigine n'est pas vide
 					if (cheminOrigineBail != null && !cheminOrigineBail.isEmpty()) {
 						// Afficher un message de réussite
