@@ -107,14 +107,16 @@ public class GestionAccueil implements ActionListener {
 
 	// ------------------- TABLE BIENS ------------------- //
 
-	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) {
+	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) throws SQLException {
 		JTable tableImmeuble = this.fenetreAccueil.getTableBiens();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
 
 		modeleTable.setValueAt(immeuble.getImmeuble(), numeroLigne, 0);
 		modeleTable.setValueAt(immeuble.getAdresse() + "\n" + immeuble.getCp() + " " + immeuble.getVille(), numeroLigne,
 				1);
-		modeleTable.setValueAt(immeuble, numeroLigne, 2);//rajouter une méthode count pour le nb logement
+		
+		int nb = this.daoImmeuble.getNombreLogementsDansImmeuble(immeuble.getImmeuble());
+		modeleTable.setValueAt(nb, numeroLigne, 2);//rajouter une méthode count pour le nb logement
 	}
 
 	private void chargerBiens() throws SQLException {
@@ -486,14 +488,6 @@ public class GestionAccueil implements ActionListener {
 				insertion_bien.setVisible(true);
 				insertion_bien.moveToFront();
 				break;
-			case "btnMesBiens_AjouterDiagnostic": // A MODIFIER POUR QUE L'OUVERTURE SOIT FAITES APRES LA SELECTION
-													// D'UNE
-													// LIGNE DU TABLEAU
-				Fenetre_InsertionDiagnostic diagnostic_bien = new Fenetre_InsertionDiagnostic();
-				this.fenetreAccueil.getLayeredPane().add(diagnostic_bien);
-				diagnostic_bien.setVisible(true);
-				diagnostic_bien.moveToFront();
-				break;
 			case "btnMesBiens_AjouterPaiements": // A MODIFIER POUR QUE L'OUVERTURE SOIT FAITES APRES LA SELECTION D'UNE
 													// LIGNE DU TABLEAU
 				Fenetre_InsertionPaiementBien paiement_bien = new Fenetre_InsertionPaiementBien();
@@ -551,7 +545,7 @@ public class GestionAccueil implements ActionListener {
 					infos_locataire.setVisible(true);
 					infos_locataire.moveToFront();
 
-					// On recupÃ¨re le locataire de la sauvegarde
+					// On recupere le locataire de la sauvegarde
 					Locataire locataireSauvgarde = (Locataire) Sauvegarde.getItem("Locataire");
 					Locataire locataireCourant;
 
@@ -721,9 +715,8 @@ public class GestionAccueil implements ActionListener {
 
 			}
 
-			this.filtreAssuranceByLogement();
-			this.filtreChargesByLogement();
-
 		}
+		this.filtreAssuranceByLogement();
+		this.filtreChargesByLogement();
 	}
 }

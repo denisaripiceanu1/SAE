@@ -1,27 +1,23 @@
 package controleur;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 
 import controleur.outils.Sauvegarde;
 import modele.Bien;
-import modele.Immeuble;
 import modele.dao.DaoBien;
-import modele.dao.DaoImmeuble;
-import vue.Fenetre_Accueil;
+import vue.insertion.Fenetre_InsertionLocation;
 
-public class GestionTableLogement implements ListSelectionListener {
+public class GestionTableFenetreLocation implements ListSelectionListener {
 
-    private Fenetre_Accueil fenetreAccueil;
+    private Fenetre_InsertionLocation fil;
     private DaoBien daoBien;
 
-    public GestionTableLogement(Fenetre_Accueil fenetreAccueil) {
-        this.fenetreAccueil = fenetreAccueil;
+    public GestionTableFenetreLocation(Fenetre_InsertionLocation fil) {
+        this.fil = fil;
         this.daoBien = new DaoBien();
     }
 
@@ -29,10 +25,10 @@ public class GestionTableLogement implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
             
-                int selectedRowLogement = fenetreAccueil.getTableLogementsParBien().getSelectedRow();
+                int selectedRowLogement = fil.getTable_liste_logements().getSelectedRow();
 
                 if (selectedRowLogement > -1) {
-                    JTable tableLogement = fenetreAccueil.getTableLogementsParBien();
+                    JTable tableLogement = fil.getTable_liste_logements();
                     Bien bien = null;
                     try {
                         bien = daoBien.findById(tableLogement.getValueAt(selectedRowLogement, 0).toString());

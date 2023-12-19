@@ -2,26 +2,25 @@ package controleur.suppression;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 
 import controleur.outils.Sauvegarde;
-import modele.dao.DaoCompteur;
-import modele.dao.DaoImmeuble;
+import modele.Facture;
+import modele.dao.DaoFacture;
 import vue.Fenetre_Accueil;
 import vue.suppression.Fenetre_SupprimerTravaux;
 
 public class GestionSuppressionTravaux implements ActionListener {
 
 	private Fenetre_SupprimerTravaux supprimerTravaux;
-	private DaoImmeuble daoImmeuble;
-	private DaoCompteur daoCompteur;
 	private String idBien;
+	private DaoFacture daoFacture;
 
 	public GestionSuppressionTravaux(Fenetre_SupprimerTravaux supprimerTravaux) {
 		this.supprimerTravaux = this.supprimerTravaux;
-		this.daoImmeuble = new DaoImmeuble();
-		this.daoCompteur = new DaoCompteur();
+		this.daoFacture = new DaoFacture();
 		this.idBien = null;
 		Sauvegarde.initializeSave();
 	}
@@ -32,7 +31,13 @@ public class GestionSuppressionTravaux implements ActionListener {
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.supprimerTravaux.getTopLevelAncestor();
 		switch (btn.getText()) {
 		case "Supprimer":
-
+			Facture travaux_supp = (Facture) Sauvegarde.getItem("Travaux");
+			try {
+				Facture travaux = this.daoFacture.findById(travaux_supp.getNumero());
+				this.daoFacture.delete(travaux);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			this.supprimerTravaux.dispose();
 			break;
 		case "Annuler":

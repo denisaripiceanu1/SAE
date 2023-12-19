@@ -36,7 +36,7 @@ public class GestionInsertionCompteur implements ActionListener {
 						this.fic.getTextField_IdCompteur().getText(),
 						this.fic.getComboBox_typeDeCompteur().getSelectedItem().toString(),
 						Double.parseDouble(this.fic.getTextField_textFieldPrixAbo().getText()),
-						(Bien) Sauvegarde.getItem("Bien"),
+						(Bien) Sauvegarde.getItem("Logement"),
 						(Immeuble) Sauvegarde.getItem("Immeuble")
 				);
 				Sauvegarde.deleteItem("Compteur");

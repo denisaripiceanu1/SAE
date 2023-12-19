@@ -1,9 +1,7 @@
 package modele.dao;
 
 import java.sql.PreparedStatement;
-
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,7 +11,6 @@ import modele.Bien;
 import modele.Entreprise;
 import modele.Facture;
 import modele.Immeuble;
-import modele.dao.requetes.select.RequeteSelectAssuranceByLogement;
 import modele.dao.requetes.select.RequeteSelectFacture;
 import modele.dao.requetes.select.RequeteSelectFactureByBien;
 import modele.dao.requetes.select.RequeteSelectFactureById;
@@ -32,19 +29,19 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 
 	@Override
 	public void update(Facture donnees) throws SQLException {
-		miseAJour(new RequeteUpdateFacture(), donnees);
+		this.miseAJour(new RequeteUpdateFacture(), donnees);
 
 	}
 
 	@Override
 	public void delete(Facture donnees) {
-		delete(donnees);
+		this.delete(donnees);
 
 	}
 
 	@Override
 	public Facture findById(String... id) throws SQLException {
-		List<Facture> factures = find(new RequeteSelectFactureById(), id);
+		List<Facture> factures = this.find(new RequeteSelectFactureById(), id);
 		if (factures.isEmpty()) {
 			return null;
 		}
@@ -53,7 +50,7 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 
 	@Override
 	public List<Facture> findAll() throws SQLException {
-		return find(new RequeteSelectFacture());
+		return this.find(new RequeteSelectFacture());
 	}
 
 	@Override
@@ -108,7 +105,7 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 				.prepareStatement(new RequeteSelectFactureByBien().requete())) {
 			new RequeteSelectFactureByBien().parametres(st, b);
 			ResultSet res = st.executeQuery();
-			factures = convertirResultSetEnListe(res);
+			factures = this.convertirResultSetEnListe(res);
 			st.close();
 		}
 		if (!factures.isEmpty()) {
@@ -122,10 +119,9 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		List<Facture> factures = new ArrayList<>();
 
 		while (res.next()) {
-			Facture f = creerInstance(res);
+			Facture f = this.creerInstance(res);
 			factures.add(f);
 		}
-
 		return factures;
 	}
 
