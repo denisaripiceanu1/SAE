@@ -9,7 +9,7 @@ public class SousProgrammeInserLocation implements SousProgramme<Louer> {
 
 	@Override
 	public String appelSousProgramme() {
-		return "{call Inserer_Louer(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+		return "{call Inserer_Louer(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class SousProgrammeInserLocation implements SousProgramme<Louer> {
 	    prSt.setDouble(5, donnee.getLoyerTTC());
 	    prSt.setDouble(6, 0.0);
 	    prSt.setDouble(7, 0.0);
-	    prSt.setString(8, "");
+	    prSt.setString(8, donnee.getBail());
 	    prSt.setString(9, donnee.getEtat_lieux());
 
 	    // Paramètres potentiellement nuls
@@ -43,14 +43,12 @@ public class SousProgrammeInserLocation implements SousProgramme<Louer> {
 
 	    prSt.setInt(11, donnee.getLoyerPaye());
 
-	    if (donnee.getIcc() == null) {
-	        prSt.setNull(12, java.sql.Types.DOUBLE);
-	    } else {
-	        // Remplacez ce qui suit par le véritable code pour obtenir la valeur de l'objet ICC
-	        prSt.setDouble(12, donnee.getIcc().getIndice());
-	    }
+	   
+	        prSt.setString(12, "2023");
+	    
+	        prSt.setString(13, "1");
 
-	    prSt.setDouble(13, donnee.getMontantReelPaye());
+	    prSt.setDouble(14, donnee.getMontantReelPaye());
 	}
 
 
