@@ -27,8 +27,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionInsertionLocation;
-import modele.Immeuble;
-import modele.dao.DaoBien;
 import modele.dao.DaoImmeuble;
 
 public class Fenetre_InsertionLocation extends JInternalFrame {
@@ -167,6 +165,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		comboBox_bien.setModel(new DefaultComboBoxModel(new String[] { "Biens" }));
 		comboBox_bien.setBounds(267, 131, 94, 21);
 		panel.add(comboBox_bien);
+		this.comboBox_bien.addActionListener(this.gestionClic);
 
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
@@ -296,6 +295,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 			JOptionPane.showMessageDialog(panel, "Le fichier PDF n'existe pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	////////
 
 	public JTextField getTextField_IdLocataire() {
 		return this.textField_IdLocataire;
@@ -364,4 +364,9 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	public JComboBox<String> getComboBox_bien() {
 		return comboBox_bien;
 	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
 }
