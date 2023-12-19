@@ -26,6 +26,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controleur.GestionTableFenetreLocation;
 import controleur.insertion.GestionInsertionLocation;
 import modele.dao.DaoImmeuble;
 
@@ -44,15 +45,16 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	private JLabel lblBail;
 	private JPanel panel;
 	private JTextField textField_loyer;
-	private JTable table_liste_locataires;
 	private JComboBox<String> comboBox_bien;
 
 	private DaoImmeuble daoImmeuble;
 	private GestionInsertionLocation gestionClic;
+	private GestionTableFenetreLocation gtfl;
 
 	public Fenetre_InsertionLocation() {
 
 		this.gestionClic = new GestionInsertionLocation(this);
+		this.gtfl = new GestionTableFenetreLocation(this);
 		this.daoImmeuble = new DaoImmeuble();
 
 		this.setBounds(100, 100, 762, 541);
@@ -196,6 +198,8 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 				.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "ID des logements" }));
 		this.table_id_logements.setBounds(0, 0, 1, 1);
 		scrollPane_table_id_logements.setViewportView(this.table_id_logements);
+		this.table_id_logements.getSelectionModel().addListSelectionListener(this.gtfl);
+
 
 		JButton btnAjouterBail = new JButton("Ajouter un bail");
 		btnAjouterBail.setBounds(533, 116, 154, 21);
@@ -239,63 +243,21 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		scrollPane_table_locataires.setBounds(24, 375, 190, 93);
 		panel.add(scrollPane_table_locataires);
 
-		this.table_liste_locataires = new JTable();
-		this.table_liste_locataires.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
-				new String[] { "ID Locataire", "Nom", "Prenom" }));
-		this.table_liste_locataires.setBounds(0, 0, 1, 1);
-		scrollPane_table_locataires.setViewportView(this.table_liste_locataires);
-
 		JLabel lblNomEtatDesLieux = new JLabel("État des lieux : ");
 		this.lblNomEtatDesLieux = lblNomEtatDesLieux;
 		lblNomEtatDesLieux.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNomEtatDesLieux.setBounds(533, 86, 197, 20);
 		panel.add(lblNomEtatDesLieux);
+		lblNomEtatDesLieux.addMouseListener(this.gestionClic);
 
 		JLabel lblNomBail = new JLabel("Bail : ");
 		this.lblBail = lblNomBail;
 		lblNomBail.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNomBail.setBounds(533, 147, 197, 20); // Adjust the position as needed
 		panel.add(lblNomBail);
-////////// A DEPLACER 
-		// Ajoutez un gestionnaire d'événements à lblNomEtatDesLieux
-		lblNomEtatDesLieux.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ouvrirPDF(lblNomEtatDesLieux.getText());
-			}
-		});
+		lblNomBail.addMouseListener(this.gestionClic);
 
-		// Ajoutez un gestionnaire d'événements à lblNomBail
-		lblNomBail.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ouvrirPDF(lblNomBail.getText());
-			}
-		});
 	}
-
-	private void ouvrirPDF(String label) {
-		// Récupérer le chemin complet du fichier PDF à partir du texte de l'étiquette
-		String cheminFichierPDF = label;
-
-		// Vérifier si le fichier existe
-		File fichierPDF = new File(cheminFichierPDF);
-
-		if (fichierPDF.exists()) {
-			// Ouvrez le fichier PDF
-			Desktop desktop = Desktop.getDesktop();
-			try {
-				desktop.open(fichierPDF);
-			} catch (IOException ex) {
-				JOptionPane.showMessageDialog(panel, "Erreur lors de l'ouverture du fichier PDF : " + ex.getMessage(),
-						"Erreur", JOptionPane.ERROR_MESSAGE);
-				ex.printStackTrace();
-			}
-		} else {
-			JOptionPane.showMessageDialog(panel, "Le fichier PDF n'existe pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
-		}
-	}
-	////////
 
 	public JTextField getTextField_IdLocataire() {
 		return this.textField_IdLocataire;
@@ -339,10 +301,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 
 	public JTextField getTextField_loyer() {
 		return this.textField_loyer;
-	}
-
-	public JTable getTable_liste_locataires() {
-		return this.table_liste_locataires;
 	}
 
 	public JTable getTable_liste_logements() {
