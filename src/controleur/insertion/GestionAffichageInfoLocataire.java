@@ -28,26 +28,26 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fail.getTopLevelAncestor(); 
-		
-		switch (btn.getText()) {
-		case "Modifier":
-			Locataire locataire = creationLocataire();
-			try {
-				RequeteUpdateLocataire updateLocataire = new RequeteUpdateLocataire();
-				this.daoLocataire.update(locataire);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			break;
+	    JButton btn = (JButton) e.getSource();
+	    Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fail.getTopLevelAncestor(); 
+	    
+	    switch (btn.getText()) {
+	        case "Modifier":
+	            Locataire locataire = creationLocataire();
+	            try {
+	                RequeteUpdateLocataire updateLocataire = new RequeteUpdateLocataire();
+	                this.daoLocataire.update(locataire);
+	            } catch (SQLException e1) {
+	                e1.printStackTrace();
+	            }
+	            break;
 
-		case "Retour":
-			((Fenetre_Accueil) SwingUtilities.getWindowAncestor(this.fail)).getLayeredPane().remove(this.fail);
-			((Fenetre_Accueil) SwingUtilities.getWindowAncestor(this.fail)).repaint();
-			break;
-		}
+	        case "Retour":
+	            this.fail.dispose();
+	            break;
+	    }
 	}
+
 	
 	private Locataire creationLocataire() {
 		// on cree un locataire juste pour pouvoir update dans la BD car on a seuelemenet la methode avec le parametre Locataire 
