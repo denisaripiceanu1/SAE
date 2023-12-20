@@ -447,6 +447,11 @@ public class Fenetre_Accueil extends JFrame {
 		btn_mesLocations_InfoLocataire.addActionListener(this.gestionAccueil);
 		btn_mesLocations_InfoLocataire.setName("btn_mesLocations_InfoLocataire");
 		panel_MesLocations.add(btn_mesLocations_InfoLocataire);
+		
+		JButton btn_mesLocations_AjouterFacture = new JButton("Ajouter une facture");
+		btn_mesLocations_AjouterFacture.setName("btn_mesLocations_AjouterFacture");
+		btn_mesLocations_AjouterFacture.setBounds(510, 373, 152, 23);
+		panel_MesLocations.add(btn_mesLocations_AjouterFacture);
 
 		// Champs de saisie
 		this.textField_loyer = new JTextField();
@@ -512,10 +517,6 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_restantDu.setBounds(510, 196, 152, 40);
 		panel_MesLocations.add(this.textField_restantDu);
 		
-		JButton btn_mesLocations_AjouterFacture = new JButton("Ajouter une facture");
-		btn_mesLocations_AjouterFacture.setName("btn_mesLocations_AjouterFacture");
-		btn_mesLocations_AjouterFacture.setBounds(510, 373, 152, 23);
-		panel_MesLocations.add(btn_mesLocations_AjouterFacture);
 
 		//////////////////////////////////////////////////////////////////////////
 		// LAYERED MES

@@ -564,6 +564,10 @@ public class GestionAccueil implements ActionListener {
 					}
 				}
 			case "btn_mesLocations_AjouterFacture":
+				Fenetre_InsertionPaiementBien insertion_facture = new Fenetre_InsertionPaiementBien();
+				this.fenetreAccueil.getLayeredPane().add(insertion_facture);
+				insertion_facture.setVisible(true);
+				insertion_facture.moveToFront();
 				
 				break;
 			/////////////////////
