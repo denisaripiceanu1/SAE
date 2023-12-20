@@ -84,8 +84,21 @@ public class Fenetre_InsertionICC extends JInternalFrame {
 
 	}
 
-	public JTextField getTextField_Pourcentage() {
-		return this.textField_Annee;
+	public JTextField getTextField_Annee() {
+		return textField_Annee;
 	}
+
+	public GestionInsertionICC getGestionClic() {
+		return gestionClic;
+	}
+
+	public JTextField getTextField_Trimestre() {
+		return textField_Trimestre;
+	}
+
+	public JTextField getTextField_indice() {
+		return textField_indice;
+	}
+	
 
 }

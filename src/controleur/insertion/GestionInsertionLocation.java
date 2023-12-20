@@ -18,10 +18,12 @@ import javax.swing.JComboBox;
 
 import modele.Assurance;
 import modele.Bien;
-
+import modele.ICC;
+import modele.Immeuble;
 import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoBien;
+import modele.dao.DaoICC;
 import modele.dao.DaoImmeuble;
 import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
@@ -37,13 +39,15 @@ import controleur.GestionPDF;
 import controleur.outils.PDFImporter;
 import controleur.outils.Sauvegarde;
 import vue.Fenetre_Accueil;
+import vue.insertion.Fenetre_InsertionCompteur;
+import vue.insertion.Fenetre_InsertionICC;
 import vue.insertion.Fenetre_InsertionLocation;
 
 public class GestionInsertionLocation implements ActionListener, MouseListener {
 
 	private Fenetre_InsertionLocation fil;
 	private DaoBien daoBien;
-	private DaoImmeuble daoImmeuble;
+	private DaoICC daoICC;
 	private DaoLocataire daoLocataire;
 	private DaoLouer daoLouer;
 	private String bail;
@@ -52,7 +56,7 @@ public class GestionInsertionLocation implements ActionListener, MouseListener {
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
 		this.daoBien = new DaoBien();
-		this.daoImmeuble = new DaoImmeuble();
+		this.daoICC = new DaoICC();
 		this.daoLocataire = new DaoLocataire();
 		this.daoLouer = new DaoLouer();
 		this.bail = " ";
@@ -175,13 +179,10 @@ public class GestionInsertionLocation implements ActionListener, MouseListener {
 					this.daoLocataire.create(nouveauLocataire);
 
 					location = new Louer(nouveauLocataire, bienSauvegarde,
-							this.fil.getTextField_date_arrivee().getText(), 
-							0, /* nb de mois */
+							this.fil.getTextField_date_arrivee().getText(), 0, /* nb de mois */
 							Double.parseDouble(this.fil.getTextField_loyer().getText()),
 							Double.parseDouble(this.fil.getTextField_provision_sur_charges().getText()),
-							Double.parseDouble(this.fil.getTextField_caution().getText()), 
-							this.bail, 
-							this.etatLieux,
+							Double.parseDouble(this.fil.getTextField_caution().getText()), this.bail, this.etatLieux,
 							null, /* date de départ */
 							0, /* loyer paye */
 							null, /* icc */
@@ -194,6 +195,20 @@ public class GestionInsertionLocation implements ActionListener, MouseListener {
 				}
 				this.fil.dispose();
 				break;
+			case "Ajouter ICC":
+				Fenetre_InsertionICC insertionICC = new Fenetre_InsertionICC();
+				fenetre_Principale.getLayeredPane().add(insertionICC);
+				insertionICC.setVisible(true);
+				insertionICC.moveToFront();
+				break;
+			case "Charger ICC":
+				try {
+					this.chargerICC();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				break;
+
 			case "Annuler":
 				this.fil.dispose();
 				break;
@@ -235,7 +250,8 @@ public class GestionInsertionLocation implements ActionListener, MouseListener {
 		}
 	}
 
-	// PAS UTILISEES mais faut les laiser parce que la fenetre implements MouseListener
+	// PAS UTILISEES mais faut les laiser parce que la fenetre implements
+	// MouseListener
 	@Override
 	public void mousePressed(MouseEvent e) {
 	}
@@ -250,6 +266,30 @@ public class GestionInsertionLocation implements ActionListener, MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+	}
+	
+	// Table ICC
+	public void ecrireLigneTableICC(int numeroLigne, ICC icc) throws SQLException {
+		JTable tableImmeuble = this.fil.getTable_liste_ICC();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
+
+		modeleTable.setValueAt(icc.getAnnee(), numeroLigne, 0);
+		modeleTable.setValueAt(icc.getTrimestre(), numeroLigne, 1);
+		modeleTable.setValueAt(icc.getIndice(), numeroLigne, 2);
+	}
+
+	private void chargerICC() throws SQLException {
+
+		List<ICC> iccs = this.daoICC.findAll();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fil.getTable_liste_ICC().getModel();
+
+		modeleTable.setRowCount(iccs.size());
+
+		for (int i = 0; i < iccs.size(); i++) {
+			ICC icc = iccs.get(i);
+			this.ecrireLigneTableICC(i, icc);
+		}
 	}
 
 }
