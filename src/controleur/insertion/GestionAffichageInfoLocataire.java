@@ -28,38 +28,38 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	    JButton btn = (JButton) e.getSource();
-	    Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fail.getTopLevelAncestor(); 
-	    
-	    switch (btn.getText()) {
-	        case "Modifier":
-	            Locataire locataire = creationLocataire();
-	            try {
-	                RequeteUpdateLocataire updateLocataire = new RequeteUpdateLocataire();
-	                this.daoLocataire.update(locataire);
-	            } catch (SQLException e1) {
-	                e1.printStackTrace();
-	            }
-	            break;
+		JButton btn = (JButton) e.getSource();
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fail.getTopLevelAncestor();
 
-	        case "Retour":
-	            this.fail.dispose();
-	            break;
-	    }
+		switch (btn.getText()) {
+		case "Modifier":
+			Locataire locataire = creationLocataire();
+			try {
+				RequeteUpdateLocataire updateLocataire = new RequeteUpdateLocataire();
+				this.daoLocataire.update(locataire);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			break;
+
+		case "Retour":
+			this.fail.dispose();
+			break;
+		}
 	}
 
-	
 	private Locataire creationLocataire() {
-		// on cree un locataire juste pour pouvoir update dans la BD car on a seuelemenet la methode avec le parametre Locataire 
+		// on cree un locataire juste pour pouvoir update dans la BD car on a
+		// seuelemenet la methode avec le parametre Locataire
 		// On recupere les infos des libellé pour les mettre dans notre locataire
-        Locataire locataire = new Locataire(null,null,null,null,null,null);
-        locataire.setNom(this.fail.getTextField_Nom().getText());
-        locataire.setPrenom(this.fail.getTextField_Prenom().getText());
-        locataire.setTelephone(this.fail.getTextField_Telephone().getText());
-        locataire.setMail(this.fail.getTextField_Mail().getText());
-        locataire.setDateNaissance(this.fail.getTextField_DateN().getText());
-        locataire.setIdLocataire(this.fail.getTextField_Id().getText());
+		Locataire locataire = new Locataire(null, null, null, null, null, null);
+		locataire.setNom(this.fail.getTextField_Nom().getText());
+		locataire.setPrenom(this.fail.getTextField_Prenom().getText());
+		locataire.setTelephone(this.fail.getTextField_Telephone().getText());
+		locataire.setMail(this.fail.getTextField_Mail().getText());
+		locataire.setDateNaissance(this.fail.getTextField_DateN().getText());
+		locataire.setIdLocataire(this.fail.getTextField_Id().getText());
 
-        return locataire;
+		return locataire;
 	}
 }
