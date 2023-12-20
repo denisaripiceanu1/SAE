@@ -26,8 +26,17 @@ public class SousProgrammeInsertCompteur implements SousProgramme<Compteur>{
 		prSt.setString(1, donnee.getIdCompteur());
 		prSt.setString(2, donnee.getTypeComp());
 		prSt.setDouble(3, 1.0); //Changer la valeur de l'abonnement par défaut
-		prSt.setString(4, donnee.getImmeuble().getImmeuble());
+		
+		//Si on entre pas d'immeuble pour le compteur
+		//Sinon inserer l'immeuble
+		if(donnee.getImmeuble() == null) {
+			prSt.setString(4, null);
+		} else {
+			prSt.setString(4, donnee.getImmeuble().getImmeuble());
+		}
+				
 		//Si on entre pas de bien pour le compteur
+		//Sinon inserer le bien
 		if(donnee.getBien() == null) {
 			prSt.setString(5, null);
 		} else {
