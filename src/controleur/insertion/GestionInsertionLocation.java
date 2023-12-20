@@ -171,6 +171,7 @@ public class GestionInsertionLocation implements ActionListener, MouseListener {
 				try {
 					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
 
+					ICC icc = (ICC) Sauvegarde.getItem("ICC");
 					Locataire nouveauLocataire = new Locataire(this.fil.getTextField_IdLocataire().getText(),
 							this.fil.getTextField_Nom().getText(), this.fil.getTextField_Prenom().getText(),
 							this.fil.getTextField_tel().getText(), this.fil.getTextField_e_mail().getText(),
@@ -185,7 +186,7 @@ public class GestionInsertionLocation implements ActionListener, MouseListener {
 							Double.parseDouble(this.fil.getTextField_caution().getText()), this.bail, this.etatLieux,
 							null, /* date de départ */
 							0, /* loyer paye */
-							null, /* icc */
+							icc,
 							0/* montant reel payé */
 					);
 
