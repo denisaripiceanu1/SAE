@@ -19,6 +19,7 @@ public class GestionTableTravaux implements ListSelectionListener {
 	public GestionTableTravaux(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
 		this.daoFacture = new DaoFacture();
+		Sauvegarde.initializeSave();
 	}
 
 	@Override

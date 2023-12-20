@@ -1,6 +1,7 @@
 package controleur;
 
 import java.sql.SQLException;
+
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
@@ -32,33 +33,34 @@ public class GestionLocations implements ListSelectionListener {
 		this.daoLouer = new DaoLouer();
 		this.daoFacture = new DaoFacture();
 		this.daoLocataire = new DaoLocataire();
+		Sauvegarde.initializeSave();
 		this.daoBien = new DaoBien();
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		if (!e.getValueIsAdjusting()) {
-			int selectedRow = fenetreAccueil.getTableLocations().getSelectedRow();
+			int selectedRow = this.fenetreAccueil.getTableLocations().getSelectedRow();
 
 			if (selectedRow > -1) {
-				JTable tableLocations = fenetreAccueil.getTableLocations();
+				JTable tableLocations = this.fenetreAccueil.getTableLocations();
 				Louer location = null;
 				Locataire locataire = null;
 				Bien bien = null;
 				try {
 					// On va extraire le locataire de la location pour pouvoir ensuite afficher
 					// plusieurs inforamtions qui le concerne
-					location = daoLouer.findById(tableLocations.getValueAt(selectedRow, 1).toString(),
+					location = this.daoLouer.findById(tableLocations.getValueAt(selectedRow, 1).toString(),
 							tableLocations.getValueAt(selectedRow, 0).toString());
 
 					// On ajoute le locataire a la sauvegarde
-					locataire = daoLocataire.findById(tableLocations.getValueAt(selectedRow, 0).toString());
+					locataire = this.daoLocataire.findById(tableLocations.getValueAt(selectedRow, 0).toString());
 					Sauvegarde.deleteItem("Locataire");
 					Sauvegarde.addItem("Locataire", locataire);
 
 					// On va extraire le bien de la location pour pouvoir ensuite ajouter une
 					// facture pour ce bien
-					bien = daoBien.findById(tableLocations.getValueAt(selectedRow, 1).toString());
+					bien = this.daoBien.findById(tableLocations.getValueAt(selectedRow, 1).toString());
 					// On ajoute le bien a la sauvegarde
 					Sauvegarde.deleteItem("Logement");
 					Sauvegarde.addItem("Logement", locataire);
@@ -70,17 +72,17 @@ public class GestionLocations implements ListSelectionListener {
 					Facture derniereFactureLoyer = null;
 
 					try {
-						derniereFactureLoyer = daoFacture.findDerniereFactureLoyer(location.getBien());
+						derniereFactureLoyer = this.daoFacture.findDerniereFactureLoyer(location.getBien());
 
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
 
-					JTextField loyer = fenetreAccueil.getTextField_loyer();
+					JTextField loyer = this.fenetreAccueil.getTextField_loyer();
 					loyer.setText(String.valueOf(location.getLoyerTTC()));
 
-					JTextField dateEmission = fenetreAccueil.getTextField_dateEmission();
-					JTextField dateEcheance = fenetreAccueil.getTextField_dateEcheance();
+					JTextField dateEmission = this.fenetreAccueil.getTextField_dateEmission();
+					JTextField dateEcheance = this.fenetreAccueil.getTextField_dateEcheance();
 
 					// Vérification si la facture et sa date d'émission ne sont pas null
 					if (derniereFactureLoyer != null) {
@@ -91,17 +93,17 @@ public class GestionLocations implements ListSelectionListener {
 						dateEcheance.setText("N/A");
 					}
 
-					JTextField paye = fenetreAccueil.getTextField_paye();
+					JTextField paye = this.fenetreAccueil.getTextField_paye();
 					paye.setText(String.valueOf(location.getMontantReelPaye()));
 
-					JTextField restantDu = fenetreAccueil.getTextField_restantDu();
+					JTextField restantDu = this.fenetreAccueil.getTextField_restantDu();
 					restantDu.setText(String.valueOf(location.getLoyerTTC() + location.getProvision_chargeMens_TTC()
 							- location.getMontantReelPaye()));
 
-					JTextField caution = fenetreAccueil.getTextField_caution();
+					JTextField caution = this.fenetreAccueil.getTextField_caution();
 					caution.setText(String.valueOf(location.getCautionTTC()));
 
-					JTextField provision = fenetreAccueil.getTextField_provisionCharges();
+					JTextField provision = this.fenetreAccueil.getTextField_provisionCharges();
 					provision.setText(String.valueOf(location.getProvision_chargeMens_TTC()));
 
 				}

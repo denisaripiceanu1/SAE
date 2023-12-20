@@ -8,22 +8,22 @@ import javax.swing.JButton;
 
 import controleur.outils.Sauvegarde;
 import modele.Assurance;
+import modele.Echeance;
 import modele.dao.DaoAssurance;
-import modele.dao.DaoBien;
+import modele.dao.DaoEcheance;
 import vue.Fenetre_Accueil;
 import vue.suppression.Fenetre_SupprimerAssurance;
 
 public class GestionSuppressionAssurance implements ActionListener {
 
 	private Fenetre_SupprimerAssurance supprimerAssurance;
-	private String idBien;
-	private DaoBien daoBien;
 	private DaoAssurance daoAssurance;
+	private DaoEcheance daoEcheance;
 
 	public GestionSuppressionAssurance(Fenetre_SupprimerAssurance supprimerAssurance) {
-		this.supprimerAssurance = this.supprimerAssurance;
+		this.supprimerAssurance = supprimerAssurance;
 		this.daoAssurance = new DaoAssurance();
-		this.idBien = null;
+		this.daoEcheance = new DaoEcheance();
 		Sauvegarde.initializeSave();
 	}
 
@@ -33,10 +33,15 @@ public class GestionSuppressionAssurance implements ActionListener {
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.supprimerAssurance.getTopLevelAncestor();
 		switch (btn.getText()) {
 		case "Supprimer":
-			Assurance assurance_supp = (Assurance) Sauvegarde.getItem("Assurance");
+			Assurance assurance_sauvegarde = (Assurance) Sauvegarde.getItem("Assurance");
+			Echeance echeance_sauvegarde = (Echeance) Sauvegarde.getItem("Echeance");
 			try {
-				Assurance assurance = this.daoAssurance.findById(assurance_supp.getNuméroPolice());
-				this.daoAssurance.delete(assurance);
+				Assurance assurance_supp = this.daoAssurance.findById(assurance_sauvegarde.getNuméroPolice());
+				Echeance echeance_supp = this.daoEcheance.findById(echeance_sauvegarde.getAssurance().getNuméroPolice(),
+						echeance_sauvegarde.getDateEcheance());
+
+				this.daoEcheance.delete(echeance_supp);
+				this.daoAssurance.delete(assurance_supp);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -47,5 +52,4 @@ public class GestionSuppressionAssurance implements ActionListener {
 			break;
 		}
 	}
-
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import modele.Assurance;
 import modele.Bien;
 import modele.Entreprise;
-import modele.Immeuble;
+import modele.dao.requetes.delete.RequeteDeleteAssurance;
 import modele.dao.requetes.select.RequeteSelectAssurance;
 import modele.dao.requetes.select.RequeteSelectAssuranceById;
 import modele.dao.requetes.select.RequeteSelectAssuranceByLogement;
@@ -32,8 +32,8 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 	}
 
 	@Override
-	public void delete(Assurance donnees) {
-		this.delete(donnees);
+	public void delete(Assurance donnees) throws SQLException {
+		this.miseAJour(new RequeteDeleteAssurance(), donnees);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 		}
 		return assurances.get(0);
 	}
-	
+
 	// ---------------- AUTRES METHODES ----------------//
 
 	public List<Assurance> findByLogement(String idImmeuble) throws SQLException {
