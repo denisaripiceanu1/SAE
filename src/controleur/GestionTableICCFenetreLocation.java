@@ -8,37 +8,35 @@ import javax.swing.event.ListSelectionListener;
 
 import controleur.outils.Sauvegarde;
 import modele.Bien;
-import modele.ICC;
 import modele.dao.DaoBien;
-import modele.dao.DaoICC;
 import vue.insertion.Fenetre_InsertionLocation;
 
-public class GestionTableLogementsFenetreLocation implements ListSelectionListener {
+public class GestionTableICCFenetreLocation implements ListSelectionListener {
 
     private Fenetre_InsertionLocation fil;
-    private DaoICC daoICC;
+    private DaoBien daoBien;
 
-    public GestionTableLogementsFenetreLocation(Fenetre_InsertionLocation fil) {
+    public GestionTableICCFenetreLocation(Fenetre_InsertionLocation fil) {
         this.fil = fil;
-        this.daoICC = new DaoICC();
+        this.daoBien = new DaoBien();
     }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
             
-                int selectedRowLogement = fil.getTable_liste_ICC().getSelectedRow();
+                int selectedRowLogement = fil.getTable_liste_logements().getSelectedRow();
 
                 if (selectedRowLogement > -1) {
-                    JTable tableICC = fil.getTable_liste_ICC();
-                    ICC icc = null;
+                    JTable tableLogement = fil.getTable_liste_logements();
+                    Bien bien = null;
                     try {
-                    	icc = daoICC.findById(tableICC.getValueAt(selectedRowLogement, 0).toString());
+                        bien = daoBien.findById(tableLogement.getValueAt(selectedRowLogement, 0).toString());
                     } catch (SQLException e1) {
                         e1.printStackTrace();
                     }
-                    Sauvegarde.deleteItem("ICC");
-                	Sauvegarde.addItem("ICC", icc);
+                    Sauvegarde.deleteItem("Logement");
+                	Sauvegarde.addItem("Logement", bien);
                 }
             }
         }
