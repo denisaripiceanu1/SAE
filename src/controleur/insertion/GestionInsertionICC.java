@@ -20,6 +20,7 @@ public class GestionInsertionICC implements ActionListener {
 
 	public GestionInsertionICC(Fenetre_InsertionICC fii) {
 		this.fii = fii;
+		this.daoICC = new DaoICC();
 	}
 
 	@Override

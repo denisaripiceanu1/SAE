@@ -11,12 +11,12 @@ import modele.Bien;
 import modele.dao.DaoBien;
 import vue.insertion.Fenetre_InsertionLocation;
 
-public class GestionTableFenetreLocation implements ListSelectionListener {
+public class GestionTableLogementsFenetreLocation implements ListSelectionListener {
 
     private Fenetre_InsertionLocation fil;
     private DaoBien daoBien;
 
-    public GestionTableFenetreLocation(Fenetre_InsertionLocation fil) {
+    public GestionTableLogementsFenetreLocation(Fenetre_InsertionLocation fil) {
         this.fil = fil;
         this.daoBien = new DaoBien();
     }

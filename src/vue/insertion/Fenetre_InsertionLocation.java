@@ -26,7 +26,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import controleur.GestionTableFenetreLocation;
+import controleur.GestionTableLogementsFenetreLocation;
 import controleur.insertion.GestionInsertionICC;
 import controleur.insertion.GestionInsertionLocation;
 import modele.dao.DaoImmeuble;
@@ -51,13 +51,13 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 
 	private DaoImmeuble daoImmeuble;
 	private GestionInsertionLocation gestionClic;
-	private GestionTableFenetreLocation gtfl;
+	private GestionTableLogementsFenetreLocation gtfl;
 	private GestionInsertionICC gii;
 
 	public Fenetre_InsertionLocation() {
 
 		this.gestionClic = new GestionInsertionLocation(this);
-		this.gtfl = new GestionTableFenetreLocation(this);
+		this.gtfl = new GestionTableLogementsFenetreLocation(this);
 		this.daoImmeuble = new DaoImmeuble();
 
 		this.setBounds(100, 100, 762, 541);

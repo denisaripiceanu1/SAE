@@ -1,17 +1,16 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
+
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import modele.Bien;
 import modele.ICC;
 import modele.dao.requetes.select.RequeteSelectICC;
 import modele.dao.requetes.select.RequeteSelectICCById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
-import modele.dao.requetes.sousProgramme.SousProgrammeInsertBien;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertICC;
 
 public class DaoICC extends DaoModele<ICC> implements Dao<ICC> {
