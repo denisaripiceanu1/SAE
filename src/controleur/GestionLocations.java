@@ -7,9 +7,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import controleur.outils.Sauvegarde;
+import modele.Bien;
 import modele.Facture;
 import modele.Locataire;
 import modele.Louer;
+import modele.dao.DaoBien;
 import modele.dao.DaoFacture;
 import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
@@ -23,12 +25,14 @@ public class GestionLocations implements ListSelectionListener {
 	private DaoLouer daoLouer;
 	private DaoFacture daoFacture;
 	private DaoLocataire daoLocataire;
+	private DaoBien daoBien;
 
 	public GestionLocations(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
 		this.daoLouer = new DaoLouer();
 		this.daoFacture = new DaoFacture();
 		this.daoLocataire = new DaoLocataire();
+		this.daoBien = new DaoBien();
 	}
 
 	@Override
@@ -40,7 +44,10 @@ public class GestionLocations implements ListSelectionListener {
 				JTable tableLocations = fenetreAccueil.getTableLocations();
 				Louer location = null;
 				Locataire locataire = null;
+				Bien bien = null;
 				try {
+					// On va extraire le locataire de la location pour pouvoir ensuite afficher
+					// plusieurs inforamtions qui le concerne
 					location = daoLouer.findById(tableLocations.getValueAt(selectedRow, 1).toString(),
 							tableLocations.getValueAt(selectedRow, 0).toString());
 
@@ -48,6 +55,13 @@ public class GestionLocations implements ListSelectionListener {
 					locataire = daoLocataire.findById(tableLocations.getValueAt(selectedRow, 0).toString());
 					Sauvegarde.deleteItem("Locataire");
 					Sauvegarde.addItem("Locataire", locataire);
+
+					// On va extraire le bien de la location pour pouvoir ensuite ajouter une
+					// facture pour ce bien
+					bien = daoBien.findById(tableLocations.getValueAt(selectedRow, 1).toString());
+					// On ajoute le bien a la sauvegarde
+					Sauvegarde.deleteItem("Logement");
+					Sauvegarde.addItem("Logement", locataire);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}

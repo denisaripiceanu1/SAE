@@ -114,9 +114,9 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(immeuble.getImmeuble(), numeroLigne, 0);
 		modeleTable.setValueAt(immeuble.getAdresse() + "\n" + immeuble.getCp() + " " + immeuble.getVille(), numeroLigne,
 				1);
-		
+
 		int nb = this.daoImmeuble.getNombreLogementsDansImmeuble(immeuble.getImmeuble());
-		modeleTable.setValueAt(nb, numeroLigne, 2);//rajouter une méthode count pour le nb logement
+		modeleTable.setValueAt(nb, numeroLigne, 2);// rajouter une méthode count pour le nb logement
 	}
 
 	private void chargerBiens() throws SQLException {
@@ -202,8 +202,8 @@ public class GestionAccueil implements ActionListener {
 			Facture f = factures.get(i);
 			if (f != null && f.getBien() != null) {
 				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-				modeleTable.addRow(new Object[] {f.getNumero(), f.getBien().getIdBien(), f.getDesignation(), f.getDateEmission(),
-						f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
+				modeleTable.addRow(new Object[] { f.getNumero(), f.getBien().getIdBien(), f.getDesignation(),
+						f.getDateEmission(), f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
 						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
 			}
 		}
@@ -214,7 +214,7 @@ public class GestionAccueil implements ActionListener {
 	// ////////////////////////////////////////////////////////////////
 
 	// ------------------- TABLE CHARGES pour un LOGEMENT ------------------- //
-	
+
 	public void ecrireLigneTableChargesLocatives(int numeroLigne, Facture charge) {
 		JTable tableChargesLocatives = this.fenetreAccueil.getTableChargesLocatives();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableChargesLocatives.getModel();
@@ -233,8 +233,7 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(charge.getAccompteVerse(), numeroLigne, 6);
 		modeleTable.setValueAt(charge.getMontant() - charge.getAccompteVerse(), numeroLigne, 7);
 	}
-	
-	
+
 	private void chargerChargesLogement() throws SQLException {
 		List<Facture> factures = this.daoFacture.findFactureCharge();
 
@@ -262,8 +261,8 @@ public class GestionAccueil implements ActionListener {
 			this.ecrireLigneTableChargesLocatives(i, f);
 		}
 	}
-	
-	//---------------------------------------------------------//
+
+	// ---------------------------------------------------------//
 	// Méthode pour filtrer les Charges par Id Logement
 	private void filtreChargesByLogement() {
 		JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
@@ -279,7 +278,6 @@ public class GestionAccueil implements ActionListener {
 			}
 		}
 	}
-	
 
 	///////////////////////////////////////////////////////////////////
 	// LAYERED MES ASSURANCES
@@ -338,7 +336,7 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	//---------------------------------------------------------------//
+	// ---------------------------------------------------------------//
 	// Methode pour filtrer les Asurances par Id Logement
 	private void filtreAssuranceByLogement() {
 		JComboBox<String> comboBox_MesAssurances = this.fenetreAccueil.getComboBox_MesAssurances();
@@ -355,10 +353,8 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	
-	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//NAVIGATION
+	// NAVIGATION
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
@@ -564,7 +560,12 @@ public class GestionAccueil implements ActionListener {
 					}
 				}
 			case "btn_mesLocations_AjouterFacture":
-				
+				if (Sauvegarde.onSave("Logement") == true) {
+					Fenetre_InsertionPaiementBien insertion_facture = new Fenetre_InsertionPaiementBien();
+					this.fenetreAccueil.getLayeredPane().add(insertion_facture);
+					insertion_facture.setVisible(true);
+					insertion_facture.moveToFront();
+				}
 				break;
 			/////////////////////
 			// LAYERED MES TRAVAUX
