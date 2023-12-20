@@ -19,5 +19,6 @@ public class RequeteSelectFactureByLogement implements Requete<Facture> {
 
     @Override
     public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
+    	prSt.setString(1, data.getBien().getIdBien());
     }
 }

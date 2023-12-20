@@ -183,7 +183,7 @@ public class GestionAccueil implements ActionListener {
 			Facture f = factures.get(i);
 			if (f != null && f.getImmeuble() != null) {
 				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-				modeleTable.addRow(new Object[] { f.getImmeuble().getImmeuble(), f.getDesignation(),
+				modeleTable.addRow(new Object[] { f.getNumero(), f.getImmeuble().getImmeuble(), f.getDesignation(),
 						f.getDateEmission(), f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
 						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
 			}
@@ -202,7 +202,7 @@ public class GestionAccueil implements ActionListener {
 			Facture f = factures.get(i);
 			if (f != null && f.getBien() != null) {
 				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-				modeleTable.addRow(new Object[] { f.getBien().getIdBien(), f.getDesignation(), f.getDateEmission(),
+				modeleTable.addRow(new Object[] {f.getNumero(), f.getBien().getIdBien(), f.getDesignation(), f.getDateEmission(),
 						f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
 						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
 			}
@@ -214,23 +214,7 @@ public class GestionAccueil implements ActionListener {
 	// ////////////////////////////////////////////////////////////////
 
 	// ------------------- TABLE CHARGES pour un LOGEMENT ------------------- //
-	private void chargerChargesLogement() throws SQLException {
-		List<Facture> factures = this.daoFacture.findFactureCharge();
-
-		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
-		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
-
-		for (int i = 0; i < factures.size(); i++) {
-			Facture f = factures.get(i);
-			if (f != null && f.getBien() != null) {
-				modeleTable.addRow(new Object[] { f.getBien().getIdBien(), f.getNumero(), f.getDesignation(),
-						f.getDateEmission(), f.getDatePaiement(), f.getImputableLocataire(), f.getMontant(),
-						f.getAccompteVerse(), f.getMontant() - f.getAccompteVerse(), });
-			}
-		}
-	}
-
-	// POUR FILTRER AVEC LE COMBOBOX
+	
 	public void ecrireLigneTableChargesLocatives(int numeroLigne, Facture charge) {
 		JTable tableChargesLocatives = this.fenetreAccueil.getTableChargesLocatives();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableChargesLocatives.getModel();
@@ -249,6 +233,23 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(charge.getAccompteVerse(), numeroLigne, 6);
 		modeleTable.setValueAt(charge.getMontant() - charge.getAccompteVerse(), numeroLigne, 7);
 	}
+	
+	
+	private void chargerChargesLogement() throws SQLException {
+		List<Facture> factures = this.daoFacture.findFactureCharge();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
+		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
+
+		for (int i = 0; i < factures.size(); i++) {
+			Facture f = factures.get(i);
+			if (f != null && f.getBien() != null) {
+				modeleTable.addRow(new Object[] { f.getBien().getIdBien(), f.getNumero(), f.getDesignation(),
+						f.getDateEmission(), f.getDatePaiement(), f.getImputableLocataire(), f.getMontant(),
+						f.getAccompteVerse(), f.getMontant() - f.getAccompteVerse(), });
+			}
+		}
+	}
 
 	private void updateTableChargesForLogement(String idLogement) throws SQLException {
 		List<Facture> factures = this.daoFacture.findFactureChargeByLogement(idLogement);
@@ -261,6 +262,24 @@ public class GestionAccueil implements ActionListener {
 			this.ecrireLigneTableChargesLocatives(i, f);
 		}
 	}
+	
+	//---------------------------------------------------------//
+	// Méthode pour filtrer les Charges par Id Logement
+	private void filtreChargesByLogement() {
+		JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
+		String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
+
+		// Si l'ID selectionne est different de "ID du logement", filtrez la table
+		// des charges
+		if (!idLogementSelectionne.equals("ID du logement")) {
+			try {
+				this.updateTableChargesForLogement(idLogementSelectionne);
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
 
 	///////////////////////////////////////////////////////////////////
 	// LAYERED MES ASSURANCES
@@ -319,15 +338,14 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-//------------------------------------------------------------------------------------------------------------------------//
-	// MÃ©thode pour filtrer les Asurances par Id Logement
+	//---------------------------------------------------------------//
+	// Methode pour filtrer les Asurances par Id Logement
 	private void filtreAssuranceByLogement() {
 		JComboBox<String> comboBox_MesAssurances = this.fenetreAccueil.getComboBox_MesAssurances();
 		String idLogementSelectionne = comboBox_MesAssurances.getSelectedItem().toString();
 
-		// Si l'ID sÃ©lectionnÃ© est diffÃ©rent de "ID du logement", filtrez la table
-		// des
-		// assurances
+		// Si l'ID selectionne est diffÃ©rent de "ID du logement", filtrez la table
+		// des assurances
 		if (!idLogementSelectionne.equals("ID du logement")) {
 			try {
 				this.updateTableAssurancesForLogement(idLogementSelectionne);
@@ -337,27 +355,11 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	// MÃ©thode pour filtrer les Charges par Id Logement
-	private void filtreChargesByLogement() {
-		JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
-		String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
-
-		// Si l'ID sÃ©lectionnÃ© est diffÃ©rent de "ID du logement", filtrez la table
-		// des
-		// assurances
-		if (!idLogementSelectionne.equals("ID du logement")) {
-			try {
-				// On ajoute le bien a la sauvegarde
-				Bien logement = this.daoBien.findById(idLogementSelectionne);
-				Sauvegarde.deleteItem("Logement");
-				Sauvegarde.addItem("Logement", logement);
-
-				this.updateTableChargesForLogement(idLogementSelectionne);
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
-	}
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//NAVIGATION
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

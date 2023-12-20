@@ -9,7 +9,7 @@ import modele.dao.requetes.Requete;
 public class RequeteSelectFactureByBien implements Requete<Facture> {
 
 	public String requete() {
-		return "SELECT * FROM Facture WHERE designation = 'Loyer' and Id_Bien = ? ORDER BY date_emission DESC";
+		return "SELECT * FROM Facture WHERE Id_Immeuble = ? ORDER BY date_emission DESC";
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class RequeteSelectFactureByBien implements Requete<Facture> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
-		prSt.setString(1, data.getBien().getIdBien());
+		prSt.setString(1, data.getImmeuble().getImmeuble());
 		
 	}
 }

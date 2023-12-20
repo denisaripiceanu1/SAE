@@ -24,6 +24,7 @@ public class GestionTableCharges implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
+        	
             int selectedRowCharge = fenetreAccueil.getTableChargesLocatives().getSelectedRow();
 
             if (selectedRowCharge > -1) {
