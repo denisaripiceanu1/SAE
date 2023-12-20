@@ -252,12 +252,12 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		// Table ICC
 		JScrollPane scrollPane_table_icc = new JScrollPane();
 		scrollPane_table_icc.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
-		scrollPane_table_icc.setBounds(548, 80, 137, 97);
+		scrollPane_table_icc.setBounds(524, 80, 195, 97);
 		panel.add(scrollPane_table_icc);
 
 		this.table_icc = new JTable();
 		this.table_icc.setCellSelectionEnabled(true);
-		this.table_icc.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "ID de l'ICC" }));
+		this.table_icc.setModel(new DefaultTableModel(new Object[][] { {  null, null, null }, }, new String[] { "Annee", "Trimestre", "ICC" }));
 		this.table_icc.setBounds(499, 80, 135, 16);
 		scrollPane_table_icc.setViewportView(this.table_icc);
 		this.table_icc.getSelectionModel().addListSelectionListener(this.gtfl);
@@ -268,15 +268,15 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		btn_ajouter_icc.setBackground(new Color(0, 102, 204));
 		btn_ajouter_icc.setBounds(514, 39, 94, 31);
 		panel.add(btn_ajouter_icc);
-		
+		btn_ajouter_icc.addActionListener(this.gestionClic);
+
 		JButton btn_charger_icc = new JButton("Charger ICC");
 		btn_charger_icc.setForeground(Color.WHITE);
 		btn_charger_icc.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_charger_icc.setBackground(new Color(0, 102, 204));
 		btn_charger_icc.setBounds(620, 40, 94, 31);
 		panel.add(btn_charger_icc);
-		this.table_icc.getSelectionModel().addListSelectionListener(this.gtfl);
-
+		btn_charger_icc.addActionListener(this.gestionClic);
 	}
 
 	public JTextField getTextField_IdLocataire() {
