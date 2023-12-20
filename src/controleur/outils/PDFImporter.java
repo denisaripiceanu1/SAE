@@ -38,6 +38,32 @@ public class PDFImporter extends JFrame {
         }
         return instance;
     }
+    
+    
+    public void importPDFBD(int id,String nom) throws FileNotFoundException, SQLException {
+    	
+    	Connection cn = CictOracleDataSource.getConnectionBD();
+    	
+        String sql = "INSERT INTO documents (id, nom, fichier_pdf) VALUES (?, ?, ?)";
+        PreparedStatement pstmt = cn.prepareStatement(sql);
+
+        File pdfFile = new File(this.getSelectedFilePath());
+        FileInputStream input = new FileInputStream(pdfFile);
+
+        pstmt.setInt(1, id);
+        pstmt.setString(2, nom);
+        pstmt.setBinaryStream(3, input, (int) pdfFile.length());
+        pstmt.executeUpdate();
+        pstmt.close();
+    }
+    
+    public String getPDFFileName() {
+        if (selectedFilePath != null && !selectedFilePath.isEmpty()) {
+            return new File(selectedFilePath).getName();
+        }
+        return null;
+    }
+    
 
     private void initializeComponents() {
         JButton btnImportPDF = new JButton("Import PDF");
