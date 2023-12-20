@@ -8,6 +8,7 @@ import modele.Assurance;
 import modele.Echeance;
 import modele.dao.requetes.delete.RequeteDeleteEcheance;
 import modele.dao.requetes.select.RequeteSelectEcheance;
+import modele.dao.requetes.select.RequeteSelectEcheanceByAssuranceNumPolice;
 import modele.dao.requetes.select.RequeteSelectEcheanceById;
 
 public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
@@ -49,6 +50,14 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 	@Override
 	public Echeance findById(String... id) throws SQLException {
 		List<Echeance> echeances = this.find(new RequeteSelectEcheanceById(), id);
+		if (echeances.isEmpty()) {
+			return null;
+		}
+		return echeances.get(0);
+	}
+
+	public Echeance findByAssuranceNumPolice(String... id) throws SQLException {
+		List<Echeance> echeances = this.find(new RequeteSelectEcheanceByAssuranceNumPolice(), id);
 		if (echeances.isEmpty()) {
 			return null;
 		}

@@ -315,7 +315,7 @@ public class GestionAccueil implements ActionListener {
 		for (int i = 0; i < assurances.size(); i++) {
 			Assurance a = assurances.get(i);
 			Entreprise entreprise = this.daoEntreprise.findById(a.getEntreprise().getSiret());
-			Echeance echeance = this.daoEcheance.findById(a.getNuméroPolice());
+			Echeance echeance = this.daoEcheance.findByAssuranceNumPolice(a.getNuméroPolice());
 
 			this.ecrireLigneTableAssurances(i, a, entreprise, echeance);
 		}
