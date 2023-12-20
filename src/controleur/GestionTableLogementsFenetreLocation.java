@@ -33,7 +33,9 @@ public class GestionTableLogementsFenetreLocation implements ListSelectionListen
                     JTable tableICC = fil.getTable_liste_ICC();
                     ICC icc = null;
                     try {
-                    	icc = daoICC.findById(tableICC.getValueAt(selectedRowLogement, 0).toString());
+                    	icc = daoICC.findById(tableICC.getValueAt(selectedRowLogement, 0).toString(), 
+                    			tableICC.getValueAt(selectedRowLogement, 1).toString(),
+                    			tableICC.getValueAt(selectedRowLogement, 2).toString());
                     } catch (SQLException e1) {
                         e1.printStackTrace();
                     }
