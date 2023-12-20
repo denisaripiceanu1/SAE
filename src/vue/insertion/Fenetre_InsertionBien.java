@@ -30,8 +30,9 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 	private JTextField textField_periodeDeConstruction;
 	private JSeparator separator_Compteur;
 	private JButton btn_ajouterCompteur;
-	private GestionInsertionBien gestionInsertionBien;
 	private JComboBox comboBox_typeDeBien;
+	private GestionInsertionBien gestionInsertionBien;
+	
 
 	public Fenetre_InsertionBien() {
 		
