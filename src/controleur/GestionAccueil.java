@@ -43,6 +43,7 @@ import vue.insertion.Fenetre_InsertionPaiementBien;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
 import vue.modification.Fenetre_ModificationBien;
 import vue.modification.Fenetre_ModificationLogement;
+import vue.modification.Fenetre_ModificationTravauxImmeuble;
 import vue.suppression.Fenetre_SupprimerAssurance;
 import vue.suppression.Fenetre_SupprimerBien;
 import vue.suppression.Fenetre_SupprimerFactureCharge;
@@ -572,6 +573,32 @@ public class GestionAccueil implements ActionListener {
 			// LAYERED MES TRAVAUX
 			/////////////////////
 			case "btn_Travaux_Modifier":
+				// Assume you have a method to check if there's saved data for "Travaux"
+				if (Sauvegarde.onSave("Facture")) {
+					Fenetre_ModificationTravauxImmeuble modif_travaux = new Fenetre_ModificationTravauxImmeuble();
+					this.fenetreAccueil.getLayeredPane().add(modif_travaux);
+					modif_travaux.setVisible(true);
+					modif_travaux.moveToFront();
+
+					// Retrieve the saved "Travaux" data
+					Facture travauxSauvegarde = (Facture) Sauvegarde.getItem("Facture");
+					Facture travauxCourant;
+
+					try {
+						travauxCourant = this.daoFacture.findById(travauxSauvegarde.getNumero());
+						modif_travaux.getTextField_Numero().setText(travauxCourant.getNumero());
+						modif_travaux.getTextField_designation().setText(travauxCourant.getDesignation());
+						modif_travaux.getTextField_dateEmission().setText(travauxCourant.getDateEmission());
+						modif_travaux.getTextField_montant().setText(Double.toString(travauxCourant.getMontant()));
+						modif_travaux.getTextField_paye().setText(Double.toString(travauxCourant.getAccompteVerse()));
+						modif_travaux.getTextField_prestataire().setText(travauxCourant.getEntreprise().getNom());
+						modif_travaux.getTextField_adresse().setText(travauxCourant.getEntreprise().getAdresse());
+						// Set any other fields as needed
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+
 				break;
 			case "btn_Travaux_Supprimer":
 				Fenetre_SupprimerTravaux supp_travaux = new Fenetre_SupprimerTravaux();
@@ -595,7 +622,7 @@ public class GestionAccueil implements ActionListener {
 //
 //			        // On recupÃ¨re le logement de la sauvegarde
 //			        Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
-//			        
+//
 //			        try {
 //			            Bien bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
 //
