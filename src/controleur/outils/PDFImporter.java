@@ -78,7 +78,7 @@ public class PDFImporter extends JFrame {
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            selectedFilePath = selectedFile.getAbsolutePath();  // utilisez getAbsolutePath pour être cohérent
+            selectedFilePath = selectedFile.getAbsolutePath();  
         }
     }
 
@@ -88,9 +88,9 @@ public class PDFImporter extends JFrame {
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            return selectedFile.getAbsolutePath();  // utilisez getAbsolutePath pour être cohérent
+            return selectedFile.getAbsolutePath(); 
         }
-        return null; // Return null if no file is selected
+        return null; 
     }
 
     public String getSelectedFilePath() {

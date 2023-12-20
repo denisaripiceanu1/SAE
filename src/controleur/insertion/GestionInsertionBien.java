@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import controleur.outils.Sauvegarde;
 import modele.Compteur;
@@ -21,13 +22,11 @@ public class GestionInsertionBien implements ActionListener {
 	private Fenetre_InsertionBien insertionBien;
 	private DaoImmeuble daoImmeuble;
 	private DaoCompteur daoCompteur;
-	private String idBien;
 
 	public GestionInsertionBien(Fenetre_InsertionBien insertionBien) {
 		this.insertionBien = insertionBien;
 		this.daoImmeuble = new DaoImmeuble();
 		this.daoCompteur = new DaoCompteur();
-		this.idBien = null;
 		Sauvegarde.initializeSave();
 	}
 
@@ -37,7 +36,6 @@ public class GestionInsertionBien implements ActionListener {
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.insertionBien.getTopLevelAncestor();
 		switch (btn.getText()) {
 		case "Ajouter un compteur":
-			this.idBien = insertionBien.getTextField_IdImmeuble().getText();
 			Fenetre_InsertionCompteur fenetreCompteur = new Fenetre_InsertionCompteur();
 			// Je créer temporairement le bien pour pouvoir récupérer l'ID quand je vais
 			// créer le compteur
@@ -55,35 +53,42 @@ public class GestionInsertionBien implements ActionListener {
 			fenetreCompteur.moveToFront();
 			break;
 		case "Ajouter":
+			
 			try {
-				Immeuble nouvelImmeuble = new Immeuble(this.insertionBien.getTextField_IdImmeuble().getText(),
+				Immeuble nouvelImmeuble = new Immeuble(
+						this.insertionBien.getTextField_IdImmeuble().getText(),
 						this.insertionBien.getTextField_adresse().getText(),
 						this.insertionBien.getTextField_codePostal().getText(),
 						this.insertionBien.getTextField_ville().getText(),
 						this.insertionBien.getTextField_periodeDeConstruction().getText(),
 						this.insertionBien.getComboBox_typeDeBien().getSelectedItem().toString());
 
+				//On ajoute l'immeuble avant d'ajouter le compteur, sinon on ne peut pas créer un compteur sur un immeuble inexistant
 				this.daoImmeuble.create(nouvelImmeuble);
-
+				
+				//On ajoute le compteur de la sauvegarde qui est déjà relié à l'immeuble courant (il à été créée avec l'ID de cet immeuble)
 				if (Sauvegarde.onSave("Compteur")) {
 					this.daoCompteur.create((Compteur) Sauvegarde.getItem("Compteur"));
 					Sauvegarde.clearSave();
 				}
+				
 				this.insertionBien.dispose(); // Fermer la page après l'ajout
+				
+				// Afficher un message de réussite
+				JOptionPane.showMessageDialog(insertionBien, "Le bien a été bien ajouté.", "Succès",
+						JOptionPane.INFORMATION_MESSAGE);
 
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 
 			break;
+			
 		case "Annuler":
 			this.insertionBien.dispose();
 			break;
 		}
 	}
 
-	public String getIdBien() {
-		return idBien;
-	}
 
 }

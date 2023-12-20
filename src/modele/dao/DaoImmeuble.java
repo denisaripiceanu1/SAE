@@ -22,6 +22,7 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 		SousProgramme<Immeuble> sp = new SousProgrammeInsertImmeuble();
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
+		st.execute();
 	}
 
 	@Override
