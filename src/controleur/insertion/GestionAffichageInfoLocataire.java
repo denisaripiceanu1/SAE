@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
 import modele.Locataire;
 import modele.dao.CictOracleDataSource;
@@ -42,7 +43,8 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 			break;
 
 		case "Retour":
-			this.fail.dispose();
+			((Fenetre_Accueil) SwingUtilities.getWindowAncestor(this.fail)).getLayeredPane().remove(this.fail);
+			((Fenetre_Accueil) SwingUtilities.getWindowAncestor(this.fail)).repaint();
 			break;
 		}
 	}
