@@ -29,11 +29,10 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 	private JButton btnAnnuler;
 	private GestionAffichageInfoLocataire gestionClic;
 
-    public Fenetre_AffichageInfoLocataire() {
-    	
-    	
-        this.setBounds(100, 100, 762, 541);
-        this.getContentPane().setLayout(null);
+	public Fenetre_AffichageInfoLocataire() {
+
+		this.setBounds(100, 100, 762, 541);
+		this.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -72,7 +71,8 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
 		textField_Prenom = new JTextField();
 		textField_Prenom.setColumns(10);
-		textField_Prenom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Pr\u00E9nom ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_Prenom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Pr\u00E9nom ",
+				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_Prenom.setBounds(248, 182, 190, 40);
 		panel.add(textField_Prenom);
 
@@ -138,15 +138,16 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		lblDpartLoca.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblDpartLoca.setBounds(534, 264, 137, 25);
 		panel.add(lblDpartLoca);
-		
-        initialiserGestionClic();
+
+		initialiserGestionClic();
 
 	}
-    private void initialiserGestionClic() {
-        this.gestionClic = new GestionAffichageInfoLocataire(this);
-        // Assigne le gestionnaire d'événements à l'action du bouton "Retour"
-        this.btnAnnuler.addActionListener(gestionClic);
-    }
+
+	private void initialiserGestionClic() {
+		this.gestionClic = new GestionAffichageInfoLocataire(this);
+		// Assigne le gestionnaire d'événements à l'action du bouton "Retour"
+		this.btnAnnuler.addActionListener(gestionClic);
+	}
 
 	public JTextField getTextField_Nom() {
 		return textField_Nom;
@@ -203,6 +204,5 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 	public void setGestionClic(GestionAffichageInfoLocataire gestionClic) {
 		this.gestionClic = gestionClic;
 	}
-    
-    
+
 }
