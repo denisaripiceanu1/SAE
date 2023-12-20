@@ -26,9 +26,12 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 	private JTextField textField_Mail;
 	private JTextField textField_DateN;
 	private JTextField textField_Id;
+	private JButton btnAnnuler;
 	private GestionAffichageInfoLocataire gestionClic;
 
     public Fenetre_AffichageInfoLocataire() {
+    	
+    	
         this.setBounds(100, 100, 762, 541);
         this.getContentPane().setLayout(null);
 
@@ -87,8 +90,8 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		textField_Mail.setBounds(33, 300, 190, 40);
 		panel.add(textField_Mail);
 
-		JButton btnAnnuler = new JButton("Retour");
-		btnAnnuler.setBounds(399, 460, 200, 25);
+		this.btnAnnuler = new JButton("Retour");
+		this.btnAnnuler.setBounds(399, 460, 200, 25);
 		panel.add(btnAnnuler);
 		btnAnnuler.addActionListener(gestionClic);
 
@@ -135,7 +138,15 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		lblDpartLoca.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblDpartLoca.setBounds(534, 264, 137, 25);
 		panel.add(lblDpartLoca);
+		
+        initialiserGestionClic();
+
 	}
+    private void initialiserGestionClic() {
+        this.gestionClic = new GestionAffichageInfoLocataire(this);
+        // Assigne le gestionnaire d'événements à l'action du bouton "Retour"
+        this.btnAnnuler.addActionListener(gestionClic);
+    }
 
 	public JTextField getTextField_Nom() {
 		return textField_Nom;
