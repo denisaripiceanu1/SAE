@@ -11,6 +11,7 @@ import modele.Bien;
 import modele.Entreprise;
 import modele.Facture;
 import modele.Immeuble;
+import modele.dao.requetes.delete.RequeteDeleteTravaux;
 import modele.dao.requetes.select.RequeteSelectFacture;
 import modele.dao.requetes.select.RequeteSelectFactureByBien;
 import modele.dao.requetes.select.RequeteSelectFactureById;
@@ -34,8 +35,8 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	}
 
 	@Override
-	public void delete(Facture donnees) {
-		this.delete(donnees);
+	public void delete(Facture donnees) throws SQLException {
+		this.miseAJour(new RequeteDeleteTravaux(), donnees);
 
 	}
 

@@ -15,13 +15,11 @@ import vue.suppression.Fenetre_SupprimerTravaux;
 public class GestionSuppressionTravaux implements ActionListener {
 
 	private Fenetre_SupprimerTravaux supprimerTravaux;
-	private String idBien;
 	private DaoFacture daoFacture;
 
 	public GestionSuppressionTravaux(Fenetre_SupprimerTravaux supprimerTravaux) {
-		this.supprimerTravaux = this.supprimerTravaux;
+		this.supprimerTravaux = supprimerTravaux;
 		this.daoFacture = new DaoFacture();
-		this.idBien = null;
 		Sauvegarde.initializeSave();
 	}
 

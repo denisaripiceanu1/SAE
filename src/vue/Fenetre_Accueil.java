@@ -31,8 +31,10 @@ import javax.swing.table.DefaultTableModel;
 import controleur.GestionAccueil;
 import controleur.GestionBienLogement;
 import controleur.GestionLocations;
+import controleur.GestionTableAssurance;
 import controleur.GestionTableCharges;
 import controleur.GestionTableLogement;
+import controleur.GestionTableTravaux;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
 
@@ -80,6 +82,8 @@ public class Fenetre_Accueil extends JFrame {
 	private DaoBien daoBien;
 	private DaoLocataire daoLocataire;
 	private JComboBox<String> comboBox_Regularisation;
+	private GestionTableTravaux gestionTableTravaux;
+	private GestionTableAssurance gestionTableAssurance;
 
 	/**
 	 * Launch the application.
@@ -107,6 +111,8 @@ public class Fenetre_Accueil extends JFrame {
 		this.gestionBienLogement = new GestionBienLogement(this);
 		this.gestionLocations = new GestionLocations(this);
 		this.gestionAccueil = new GestionAccueil(this);
+		this.gestionTableAssurance = new GestionTableAssurance(this);
+		this.gestionTableTravaux = new GestionTableTravaux(this);
 
 		this.daoBien = new DaoBien();
 		this.daoLocataire = new DaoLocataire();
@@ -279,7 +285,7 @@ public class Fenetre_Accueil extends JFrame {
 						new String[] { "Nom", "Surface", "Nb pi\u00E8ces", "Etage", "Aquisition", "Occup\u00E9" }));
 		this.tableMesBiens_Logements.setBounds(40, 266, 438, 106);
 		scrollPaneMesBiens_Logements.setViewportView(this.tableMesBiens_Logements);
-		// Pour action listener sur table logement
+		// Pour action de ligne sur table logement
 		this.tableMesBiens_Logements.getSelectionModel().addListSelectionListener(this.gestionTableLogement);
 
 		// Labels
@@ -447,7 +453,7 @@ public class Fenetre_Accueil extends JFrame {
 		btn_mesLocations_InfoLocataire.addActionListener(this.gestionAccueil);
 		btn_mesLocations_InfoLocataire.setName("btn_mesLocations_InfoLocataire");
 		panel_MesLocations.add(btn_mesLocations_InfoLocataire);
-		
+
 		JButton btn_mesLocations_AjouterFacture = new JButton("Ajouter une facture");
 		btn_mesLocations_AjouterFacture.setName("btn_mesLocations_AjouterFacture");
 		btn_mesLocations_AjouterFacture.setBounds(510, 373, 152, 23);
@@ -516,7 +522,6 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_restantDu.setBackground(Color.WHITE);
 		this.textField_restantDu.setBounds(510, 196, 152, 40);
 		panel_MesLocations.add(this.textField_restantDu);
-		
 
 		//////////////////////////////////////////////////////////////////////////
 		// LAYERED MES
@@ -543,6 +548,7 @@ public class Fenetre_Accueil extends JFrame {
 						new String[] { "Numéro", "Bien/Logement", "D\u00E9signation", "Date \u00E9mission", "Montant",
 								"Pay\u00E9", "Prestataire", "Adresse" }));
 		this.table_MesTravaux.setBounds(40, 53, 668, 130);
+		this.table_MesTravaux.getSelectionModel().addListSelectionListener(this.gestionTableTravaux);
 		scrollPane_MesTravaux.setViewportView(this.table_MesTravaux);
 
 		// labels
@@ -709,6 +715,7 @@ public class Fenetre_Accueil extends JFrame {
 				new Object[][] { { null, null, null, null, null, null }, }, new String[] { "n\u00B0 Police", "Montant",
 						"Date \u00E9ch\u00E9ance", "Prestataire", "Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
 		this.table_MesAssurances.setBounds(40, 53, 668, 130);
+		this.table_MesAssurances.getSelectionModel().addListSelectionListener(this.gestionTableAssurance);
 		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);
 
 		// Labels

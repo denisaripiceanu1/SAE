@@ -35,10 +35,11 @@ public class GestionSuppressionBien implements ActionListener {
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.supprimerBien.getTopLevelAncestor();
 		switch (btn.getText()) {
 		case "Supprimer":
-			Immeuble immeuble_supp = (Immeuble) Sauvegarde.getItem("Immeuble");
+			Immeuble immeuble_sauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
 			try {
+				Immeuble immeuble_supp = this.daoImmeuble.findById(immeuble_sauvegarde.getImmeuble());
 				Compteur compteur_supp = this.daoCompteur.findByIdImmeuble(immeuble_supp.getImmeuble());
-				//supprimer le compteur de l'immeuble, puis l'immeuble
+				// supprimer le compteur de l'immeuble, puis l'immeuble
 				this.daoCompteur.delete(compteur_supp);
 				this.daoImmeuble.delete(immeuble_supp);
 			} catch (SQLException e1) {

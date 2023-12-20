@@ -1,13 +1,11 @@
 package modele.dao;
 
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.List;
 
 import modele.Assurance;
 import modele.Echeance;
-import modele.Entreprise;
 import modele.dao.requetes.select.RequeteSelectEcheance;
 import modele.dao.requetes.select.RequeteSelectEcheanceById;
 
@@ -27,7 +25,7 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 
 	@Override
 	public void delete(Echeance donnees) {
-		delete(donnees);
+		return this.miseAJour(new RequeteDeleteEcheance(), donnees);
 
 	}
 
@@ -49,7 +47,7 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 
 	@Override
 	public Echeance findById(String... id) throws SQLException {
-		List<Echeance> echeances = find(new RequeteSelectEcheanceById(), id);
+		List<Echeance> echeances = this.find(new RequeteSelectEcheanceById(), id);
 		if (echeances.isEmpty()) {
 			return null;
 		}
@@ -58,7 +56,7 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 
 	@Override
 	public List<Echeance> findAll() throws SQLException {
-		return find(new RequeteSelectEcheance());
+		return this.find(new RequeteSelectEcheance());
 	}
 
 }
