@@ -256,7 +256,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		panel.add(scrollPane_table_icc);
 
 		this.table_icc = new JTable();
-		this.table_icc.setCellSelectionEnabled(true);
+		this.table_icc.setSelectionBackground(new Color(0, 102, 204));
 		this.table_icc.setModel(new DefaultTableModel(new Object[][] { {  null, null, null }, }, new String[] { "Annee", "Trimestre", "ICC" }));
 		this.table_icc.setBounds(499, 80, 135, 16);
 		scrollPane_table_icc.setViewportView(this.table_icc);

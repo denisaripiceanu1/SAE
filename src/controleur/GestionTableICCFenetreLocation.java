@@ -27,15 +27,15 @@ public class GestionTableICCFenetreLocation implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
             
-                int selectedRowLogement = fil.getTable_liste_ICC().getSelectedRow();
+                int selectedRowICC = fil.getTable_liste_ICC().getSelectedRow();
 
-                if (selectedRowLogement > -1) {
+                if (selectedRowICC > -1) {
                     JTable tableICC = fil.getTable_liste_ICC();
                     ICC icc = null;
                     try {
-                    	icc = daoICC.findById(tableICC.getValueAt(selectedRowLogement, 0).toString(), 
-                    			tableICC.getValueAt(selectedRowLogement, 1).toString(),
-                    			tableICC.getValueAt(selectedRowLogement, 2).toString());
+                    	icc = daoICC.findById(tableICC.getValueAt(selectedRowICC, 0).toString(), 
+                    			tableICC.getValueAt(selectedRowICC, 1).toString(),
+                    			tableICC.getValueAt(selectedRowICC, 2).toString());
                     } catch (SQLException e1) {
                         e1.printStackTrace();
                     }
