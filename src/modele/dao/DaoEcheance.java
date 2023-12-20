@@ -6,6 +6,7 @@ import java.util.List;
 
 import modele.Assurance;
 import modele.Echeance;
+import modele.dao.requetes.delete.RequeteDeleteEcheance;
 import modele.dao.requetes.select.RequeteSelectEcheance;
 import modele.dao.requetes.select.RequeteSelectEcheanceById;
 
@@ -24,8 +25,8 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 	}
 
 	@Override
-	public void delete(Echeance donnees) {
-		return this.miseAJour(new RequeteDeleteEcheance(), donnees);
+	public void delete(Echeance donnees) throws SQLException {
+		this.miseAJour(new RequeteDeleteEcheance(), donnees);
 
 	}
 

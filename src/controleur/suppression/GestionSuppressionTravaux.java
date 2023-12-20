@@ -30,6 +30,7 @@ public class GestionSuppressionTravaux implements ActionListener {
 		switch (btn.getText()) {
 		case "Supprimer":
 			Facture travaux_supp = (Facture) Sauvegarde.getItem("Travaux");
+			System.out.println(travaux_supp.getNumero());
 			try {
 				Facture travaux = this.daoFacture.findById(travaux_supp.getNumero());
 				this.daoFacture.delete(travaux);
