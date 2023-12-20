@@ -26,6 +26,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controleur.GestionTableLogementsFenetreLocation;
+import controleur.insertion.GestionInsertionICC;
 import controleur.insertion.GestionInsertionLocation;
 import modele.dao.DaoImmeuble;
 
@@ -37,6 +39,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	private JTextField textField_e_mail;
 	private JTextField textField_Date_de_naissance;
 	private JTable table_id_logements;
+	private JTable table_icc;
 	private JTextField textField_caution;
 	private JTextField textField_date_arrivee;
 	private JTextField textField_provision_sur_charges;
@@ -44,15 +47,17 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	private JLabel lblBail;
 	private JPanel panel;
 	private JTextField textField_loyer;
-	private JTable table_liste_locataires;
 	private JComboBox<String> comboBox_bien;
 
 	private DaoImmeuble daoImmeuble;
 	private GestionInsertionLocation gestionClic;
+	private GestionTableLogementsFenetreLocation gtfl;
+	private GestionInsertionICC gii;
 
 	public Fenetre_InsertionLocation() {
 
 		this.gestionClic = new GestionInsertionLocation(this);
+		this.gtfl = new GestionTableLogementsFenetreLocation(this);
 		this.daoImmeuble = new DaoImmeuble();
 
 		this.setBounds(100, 100, 762, 541);
@@ -123,13 +128,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		this.textField_Date_de_naissance.setBounds(24, 215, 190, 40);
 		panel.add(this.textField_Date_de_naissance);
 
-		JButton btn_ajouter_coloc = new JButton("Ajouter un colocataire");
-		btn_ajouter_coloc.setForeground(new Color(255, 255, 255));
-		btn_ajouter_coloc.setBackground(new Color(0, 102, 204));
-		btn_ajouter_coloc.setBounds(47, 479, 139, 21);
-		btn_ajouter_coloc.addActionListener(this.gestionClic);
-		panel.add(btn_ajouter_coloc);
-
 		JLabel lbl_titre_locataire = new JLabel("Locataire");
 		lbl_titre_locataire.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_titre_locataire.setHorizontalAlignment(SwingConstants.CENTER);
@@ -185,28 +183,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 					"Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 
-		JScrollPane scrollPane_table_id_logements = new JScrollPane();
-		scrollPane_table_id_logements.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
-		scrollPane_table_id_logements.setBounds(271, 182, 223, 222);
-		panel.add(scrollPane_table_id_logements);
-
-		this.table_id_logements = new JTable();
-		this.table_id_logements.setCellSelectionEnabled(true);
-		this.table_id_logements
-				.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "ID des logements" }));
-		this.table_id_logements.setBounds(0, 0, 1, 1);
-		scrollPane_table_id_logements.setViewportView(this.table_id_logements);
-
-		JButton btnAjouterBail = new JButton("Ajouter un bail");
-		btnAjouterBail.setBounds(533, 116, 154, 21);
-		btnAjouterBail.addActionListener(this.gestionClic);
-		panel.add(btnAjouterBail);
-
-		JButton btnAjouterEtatDesLieux = new JButton("Ajouter l'état des lieux");
-		btnAjouterEtatDesLieux.setBounds(533, 53, 154, 21);
-		btnAjouterEtatDesLieux.addActionListener(this.gestionClic);
-		panel.add(btnAjouterEtatDesLieux);
-
 		this.textField_caution = new JTextField();
 		this.textField_caution.setColumns(10);
 		this.textField_caution.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Caution",
@@ -235,67 +211,73 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		this.textField_loyer.setBounds(548, 197, 120, 40);
 		panel.add(this.textField_loyer);
 
-		JScrollPane scrollPane_table_locataires = new JScrollPane();
-		scrollPane_table_locataires.setBounds(24, 375, 190, 93);
-		panel.add(scrollPane_table_locataires);
-
-		this.table_liste_locataires = new JTable();
-		this.table_liste_locataires.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
-				new String[] { "ID Locataire", "Nom", "Prenom" }));
-		this.table_liste_locataires.setBounds(0, 0, 1, 1);
-		scrollPane_table_locataires.setViewportView(this.table_liste_locataires);
-
+		// Bail et Etat de Lieux
 		JLabel lblNomEtatDesLieux = new JLabel("État des lieux : ");
 		this.lblNomEtatDesLieux = lblNomEtatDesLieux;
 		lblNomEtatDesLieux.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNomEtatDesLieux.setBounds(533, 86, 197, 20);
+		lblNomEtatDesLieux.setBounds(24, 397, 233, 20);
 		panel.add(lblNomEtatDesLieux);
+		lblNomEtatDesLieux.addMouseListener(this.gestionClic);
 
 		JLabel lblNomBail = new JLabel("Bail : ");
 		this.lblBail = lblNomBail;
 		lblNomBail.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNomBail.setBounds(533, 147, 197, 20); // Adjust the position as needed
+		lblNomBail.setBounds(34, 457, 223, 20); // Adjust the position as needed
 		panel.add(lblNomBail);
-////////// A DEPLACER 
-		// Ajoutez un gestionnaire d'événements à lblNomEtatDesLieux
-		lblNomEtatDesLieux.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ouvrirPDF(lblNomEtatDesLieux.getText());
-			}
-		});
 
-		// Ajoutez un gestionnaire d'événements à lblNomBail
-		lblNomBail.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ouvrirPDF(lblNomBail.getText());
-			}
-		});
+		JButton btnAjouterBail = new JButton("Ajouter un bail");
+		btnAjouterBail.setBounds(24, 429, 154, 21);
+		btnAjouterBail.addActionListener(this.gestionClic);
+		panel.add(btnAjouterBail);
+
+		JButton btnAjouterEtatDesLieux = new JButton("Ajouter l'état des lieux");
+		btnAjouterEtatDesLieux.setBounds(24, 364, 154, 21);
+		btnAjouterEtatDesLieux.addActionListener(this.gestionClic);
+		panel.add(btnAjouterEtatDesLieux);
+
+		// Table Logements
+		JScrollPane scrollPane_table_id_logements = new JScrollPane();
+		scrollPane_table_id_logements.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
+		scrollPane_table_id_logements.setBounds(271, 197, 223, 222);
+		panel.add(scrollPane_table_id_logements);
+
+		this.table_id_logements = new JTable();
+		this.table_id_logements.setCellSelectionEnabled(true);
+		this.table_id_logements
+				.setModel(new DefaultTableModel(new Object[][] { { null }, }, new String[] { "ID des logements" }));
+		this.table_id_logements.setBounds(0, 0, 1, 1);
+		scrollPane_table_id_logements.setViewportView(this.table_id_logements);
+		this.table_id_logements.getSelectionModel().addListSelectionListener(this.gtfl);
+
+		// Table ICC
+		JScrollPane scrollPane_table_icc = new JScrollPane();
+		scrollPane_table_icc.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
+		scrollPane_table_icc.setBounds(524, 80, 195, 97);
+		panel.add(scrollPane_table_icc);
+
+		this.table_icc = new JTable();
+		this.table_icc.setCellSelectionEnabled(true);
+		this.table_icc.setModel(new DefaultTableModel(new Object[][] { {  null, null, null }, }, new String[] { "Annee", "Trimestre", "ICC" }));
+		this.table_icc.setBounds(499, 80, 135, 16);
+		scrollPane_table_icc.setViewportView(this.table_icc);
+		this.table_icc.getSelectionModel().addListSelectionListener(this.gtfl);
+
+		JButton btn_ajouter_icc = new JButton("Ajouter ICC");
+		btn_ajouter_icc.setForeground(Color.WHITE);
+		btn_ajouter_icc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btn_ajouter_icc.setBackground(new Color(0, 102, 204));
+		btn_ajouter_icc.setBounds(514, 39, 94, 31);
+		panel.add(btn_ajouter_icc);
+		btn_ajouter_icc.addActionListener(this.gestionClic);
+
+		JButton btn_charger_icc = new JButton("Charger ICC");
+		btn_charger_icc.setForeground(Color.WHITE);
+		btn_charger_icc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btn_charger_icc.setBackground(new Color(0, 102, 204));
+		btn_charger_icc.setBounds(620, 40, 94, 31);
+		panel.add(btn_charger_icc);
+		btn_charger_icc.addActionListener(this.gestionClic);
 	}
-
-	private void ouvrirPDF(String label) {
-		// Récupérer le chemin complet du fichier PDF à partir du texte de l'étiquette
-		String cheminFichierPDF = label;
-
-		// Vérifier si le fichier existe
-		File fichierPDF = new File(cheminFichierPDF);
-
-		if (fichierPDF.exists()) {
-			// Ouvrez le fichier PDF
-			Desktop desktop = Desktop.getDesktop();
-			try {
-				desktop.open(fichierPDF);
-			} catch (IOException ex) {
-				JOptionPane.showMessageDialog(panel, "Erreur lors de l'ouverture du fichier PDF : " + ex.getMessage(),
-						"Erreur", JOptionPane.ERROR_MESSAGE);
-				ex.printStackTrace();
-			}
-		} else {
-			JOptionPane.showMessageDialog(panel, "Le fichier PDF n'existe pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
-		}
-	}
-	////////
 
 	public JTextField getTextField_IdLocataire() {
 		return this.textField_IdLocataire;
@@ -341,12 +323,12 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		return this.textField_loyer;
 	}
 
-	public JTable getTable_liste_locataires() {
-		return this.table_liste_locataires;
-	}
-
 	public JTable getTable_liste_logements() {
 		return this.table_id_logements;
+	}
+	
+	public JTable getTable_liste_ICC() {
+		return this.table_icc;
 	}
 
 	public JLabel getLblNomEtatDesLieux() {
@@ -368,5 +350,4 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	public JPanel getPanel() {
 		return panel;
 	}
-
 }

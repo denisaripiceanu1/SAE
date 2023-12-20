@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,13 +18,18 @@ import javax.swing.JComboBox;
 
 import modele.Assurance;
 import modele.Bien;
-
+import modele.ICC;
+import modele.Immeuble;
 import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoBien;
+import modele.dao.DaoICC;
 import modele.dao.DaoImmeuble;
 import modele.dao.DaoLocataire;
+import modele.dao.DaoLouer;
+
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -32,48 +39,29 @@ import controleur.GestionPDF;
 import controleur.outils.PDFImporter;
 import controleur.outils.Sauvegarde;
 import vue.Fenetre_Accueil;
+import vue.insertion.Fenetre_InsertionCompteur;
+import vue.insertion.Fenetre_InsertionICC;
 import vue.insertion.Fenetre_InsertionLocation;
 
-public class GestionInsertionLocation implements ActionListener {
+public class GestionInsertionLocation implements ActionListener, MouseListener {
 
 	private Fenetre_InsertionLocation fil;
 	private DaoBien daoBien;
-	private DaoImmeuble daoImmeuble;
+	private DaoICC daoICC;
 	private DaoLocataire daoLocataire;
+	private DaoLouer daoLouer;
+	private String bail;
+	private String etatLieux;
 
 	public GestionInsertionLocation(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
 		this.daoBien = new DaoBien();
-		this.daoImmeuble = new DaoImmeuble();
+		this.daoICC = new DaoICC();
 		this.daoLocataire = new DaoLocataire();
-
+		this.daoLouer = new DaoLouer();
+		this.bail = " ";
+		this.etatLieux = " ";
 	}
-
-	public void ouvrirPDF(String label) {
-		// Récupérer le chemin complet du fichier PDF à partir du texte de l'étiquette
-		String cheminFichierPDF = label;
-
-		// Vérifier si le fichier existe
-		File fichierPDF = new File(cheminFichierPDF);
-
-		if (fichierPDF.exists()) {
-			// Ouvrez le fichier PDF
-			Desktop desktop = Desktop.getDesktop();
-			try {
-				desktop.open(fichierPDF);
-			} catch (IOException ex) {
-				JOptionPane.showMessageDialog(fil,
-						"Erreur lors de l'ouverture du fichier PDF : " + ex.getMessage(), "Erreur",
-						JOptionPane.ERROR_MESSAGE);
-				ex.printStackTrace();
-			}
-		} else {
-			JOptionPane.showMessageDialog(fil, "Le fichier PDF n'existe pas.", "Erreur",
-					JOptionPane.ERROR_MESSAGE);
-		}
-	}
-
-	
 
 	public void ecrireLigneTableLogements(int numeroLigne, Bien bien) {
 		JTable tableLogements = this.fil.getTable_id_logements();
@@ -119,42 +107,64 @@ public class GestionInsertionLocation implements ActionListener {
 			switch (btn.getText()) {
 
 			case "Ajouter un bail":
-	            try {
-	                // Appeler importPDFCheminString une fois et stocker le résultat dans
-	                // cheminOrigine
-	                String cheminOrigine = PDFImporter.getInstance().importPDFCheminString();
+				try {
+					// Appeler importPDFCheminString une fois et stocker le résultat dans
+					// cheminOrigineBail
+					String cheminOrigineBail = PDFImporter.getInstance().importPDFCheminString();
+					this.bail = cheminOrigineBail;
+					// Si le cheminOrigine n'est pas vide
+					if (cheminOrigineBail != null && !cheminOrigineBail.isEmpty()) {
+						// Afficher un message de réussite
+						JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès",
+								JOptionPane.INFORMATION_MESSAGE);
 
-	                // Si aucune exception n'est levée, cela indique le succès
-	                // Afficher un message de réussite
-	                JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès",
-	                        JOptionPane.INFORMATION_MESSAGE);
+						// Mettre à jour le libellé pour permettre l'ouverture du fichier
+						fil.getLblBail().setText(cheminOrigineBail);
+					} else {
+						// Afficher un message d'erreur si aucun fichier n'est sélectionné
+						JOptionPane.showMessageDialog(fil, "Aucun fichier PDF sélectionné.", "Erreur",
+								JOptionPane.ERROR_MESSAGE);
+					}
 
-	                // Mettre à jour le libellé pour permettre l'ouverture du fichier
-	                fil.getLblBail().setText(cheminOrigine);
+				} catch (NullPointerException ex) {
+					// Handle the case where the user cancels the file selection
+					JOptionPane.showMessageDialog(fil, "Annulation de l'insertion du fichier.", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (Exception ex) {
+					// Handle other exceptions
+					ex.printStackTrace();
+				}
+				break;
 
-	            } catch (Exception ex) {
-	                ex.printStackTrace();
-	            }
-	            break;
+			case "Ajouter l'état des lieux":
+				try {
+					// Appeler importPDFCheminString une fois et stocker le résultat dans
+					// cheminOrigine
+					String cheminOrigineEtatLieux = PDFImporter.getInstance().importPDFCheminString();
+					this.etatLieux = cheminOrigineEtatLieux;
+					// Si le cheminOrigine n'est pas vide
+					if (cheminOrigineEtatLieux != null && !cheminOrigineEtatLieux.isEmpty()) {
+						// Afficher un message de réussite
+						JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès",
+								JOptionPane.INFORMATION_MESSAGE);
 
-	        case "Ajouter l'état des lieux":
-	            try {
-	                // Appeler importPDFCheminString une fois et stocker le résultat dans
-	                // cheminOrigine
-	                String cheminOrigine = PDFImporter.getInstance().importPDFCheminString();
+						// Mettre à jour le libellé pour permettre l'ouverture du fichier
+						fil.getLblNomEtatDesLieux().setText(cheminOrigineEtatLieux);
+					} else {
+						// Afficher un message d'erreur si aucun fichier n'est sélectionné
+						JOptionPane.showMessageDialog(fil, "Aucun fichier PDF sélectionné.", "Erreur",
+								JOptionPane.ERROR_MESSAGE);
+					}
 
-	                // Si aucune exception n'est levée, cela indique le succès
-	                // Afficher un message de réussite
-	                JOptionPane.showMessageDialog(fil, "Le fichier a été bien ajouté.", "Succès",
-	                        JOptionPane.INFORMATION_MESSAGE);
-
-	                // Mettre à jour le libellé pour permettre l'ouverture du fichier
-	                fil.getLblNomEtatDesLieux().setText(cheminOrigine);
-
-	            } catch (Exception ex) {
-	                ex.printStackTrace();
-	            }
-	            break;
+				} catch (NullPointerException ex) {
+					// Handle the case where the user cancels the file selection
+					JOptionPane.showMessageDialog(fil, "Annulation de l'insertion du fichier.", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (Exception ex) {
+					// Handle other exceptions
+					ex.printStackTrace();
+				}
+				break;
 
 			case "Ajouter":
 				Louer location = null;
@@ -167,37 +177,119 @@ public class GestionInsertionLocation implements ActionListener {
 							this.fil.getTextField_Date_de_naissance().getText());
 
 					this.daoLocataire.create(nouveauLocataire);
-					
-//				location = new Louer (
-//						nouveauLocataire,
-//						bienSauvegarde,
-//						this.fil.getTextField_date_arrivee().getText(),
-//						null,/*nb de mois*/
-//						Double.parseDouble(this.fil.getTextField_loyer().getText()),
-//						Double.parseDouble(this.fil.getTextField_provision_sur_charges().getText()),
-//						Double.parseDouble(this.fil.getTextField_caution().getText()),
-//						bail,
-//						etatLieux,
-//						null,/*date de départ*/
-//						null, /* loyer paye*/
-//						null, /* icc*/
-//						null/*montant reel payé*/
-//						);
 
+					location = new Louer(nouveauLocataire, bienSauvegarde,
+							this.fil.getTextField_date_arrivee().getText(), 0, /* nb de mois */
+							Double.parseDouble(this.fil.getTextField_loyer().getText()),
+							Double.parseDouble(this.fil.getTextField_provision_sur_charges().getText()),
+							Double.parseDouble(this.fil.getTextField_caution().getText()), this.bail, this.etatLieux,
+							null, /* date de départ */
+							0, /* loyer paye */
+							null, /* icc */
+							0/* montant reel payé */
+					);
+
+					this.daoLouer.create(location);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-
+				this.fil.dispose();
 				break;
+			case "Ajouter ICC":
+				Fenetre_InsertionICC insertionICC = new Fenetre_InsertionICC();
+				fenetre_Principale.getLayeredPane().add(insertionICC);
+				insertionICC.setVisible(true);
+				insertionICC.moveToFront();
+				break;
+			case "Charger ICC":
+				try {
+					this.chargerICC();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				break;
+
 			case "Annuler":
 				this.fil.dispose();
 				break;
 			}
 		} else if (source instanceof JComboBox) {
 			this.filtreLogementByImmeuble();
-
 		}
 
+	}
+
+	public void ouvrirPDF(String label) {
+		// Récupérer le chemin complet du fichier PDF à partir du texte de l'étiquette
+		String cheminFichierPDF = label;
+
+		// Vérifier si le fichier existe
+		File fichierPDF = new File(cheminFichierPDF);
+
+		if (fichierPDF.exists()) {
+			// Ouvrez le fichier PDF
+			Desktop desktop = Desktop.getDesktop();
+			try {
+				desktop.open(fichierPDF);
+			} catch (IOException ex) {
+				JOptionPane.showMessageDialog(fil, "Erreur lors de l'ouverture du fichier PDF : " + ex.getMessage(),
+						"Erreur", JOptionPane.ERROR_MESSAGE);
+				ex.printStackTrace();
+			}
+		} else {
+			JOptionPane.showMessageDialog(fil, "Le fichier PDF n'existe pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		JLabel source = (JLabel) e.getSource();
+
+		if (source == fil.getLblNomEtatDesLieux() || source == fil.getLblBail()) {
+			ouvrirPDF(source.getText());
+		}
+	}
+
+	// PAS UTILISEES mais faut les laiser parce que la fenetre implements
+	// MouseListener
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+	
+	// Table ICC
+	public void ecrireLigneTableICC(int numeroLigne, ICC icc) throws SQLException {
+		JTable tableImmeuble = this.fil.getTable_liste_ICC();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
+
+		modeleTable.setValueAt(icc.getAnnee(), numeroLigne, 0);
+		modeleTable.setValueAt(icc.getTrimestre(), numeroLigne, 1);
+		modeleTable.setValueAt(icc.getIndice(), numeroLigne, 2);
+	}
+
+	private void chargerICC() throws SQLException {
+
+		List<ICC> iccs = this.daoICC.findAll();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fil.getTable_liste_ICC().getModel();
+
+		modeleTable.setRowCount(iccs.size());
+
+		for (int i = 0; i < iccs.size(); i++) {
+			ICC icc = iccs.get(i);
+			this.ecrireLigneTableICC(i, icc);
+		}
 	}
 
 }

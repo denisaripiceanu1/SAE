@@ -1,6 +1,7 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -15,15 +16,19 @@ import modele.Louer;
 import modele.dao.requetes.select.RequeteSelectLocationParBien;
 import modele.dao.requetes.select.RequeteSelectLouer;
 import modele.dao.requetes.select.RequeteSelectLouerById;
+import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeDeleteLocation;
+import modele.dao.requetes.sousProgramme.SousProgrammeInserLocation;
 import modele.dao.requetes.update.RequeteUpdateLouer;
 
 public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 
 	@Override
-	public void create(Louer donnees) {
-		// TODO Auto-generated method stub
-
+	public void create(Louer donnees) throws SQLException {
+		SousProgramme<Louer> sp = new SousProgrammeInserLocation();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
+		st.execute();
 	}
 
 	@Override
