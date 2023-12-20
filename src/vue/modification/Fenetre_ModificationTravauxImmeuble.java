@@ -44,10 +44,10 @@ public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
 		separator_titreInsererBien.setBounds(271, 72, 190, 2);
 		panel.add(separator_titreInsererBien);
 
-		JLabel lbl_InsererUnBien = new JLabel("Modifier un Bien");
-		lbl_InsererUnBien.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUnBien.setBounds(308, 26, 117, 48);
-		panel.add(lbl_InsererUnBien);
+		JLabel lbl_InsererUnTravaux = new JLabel("Modifier un Travaux pour un Immeuble");
+		lbl_InsererUnTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_InsererUnTravaux.setBounds(222, 26, 288, 48);
+		panel.add(lbl_InsererUnTravaux);
 
 		this.textField_Numero = new JTextField();
 		this.textField_Numero.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Numero",
@@ -161,6 +161,46 @@ public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
 
 	public void setSeparator_Compteur(JSeparator separator_Compteur) {
 		this.separator_Compteur = separator_Compteur;
+	}
+
+	public JTextField getTextField_Numero() {
+		return textField_Numero;
+	}
+
+	public JTextField getTextField_designation() {
+		return textField_designation;
+	}
+
+	public JTextField getTextField_dateEmission() {
+		return textField_dateEmission;
+	}
+
+	public JTextField getTextField_montant() {
+		return textField_montant;
+	}
+
+	public JTextField getTextField_paye() {
+		return textField_paye;
+	}
+
+	public JTextField getTextField_prestataire() {
+		return textField_prestataire;
+	}
+
+	public JTextField getTextField_adresse() {
+		return textField_adresse;
+	}
+
+	public JSeparator getSeparator_Compteur() {
+		return separator_Compteur;
+	}
+
+	public GestionModificationTravauxImmeuble getGestionModificationTravauxImmeuble() {
+		return gestionModificationTravauxImmeuble;
+	}
+
+	public JTextField getTextField_Bien_Logement() {
+		return textField_Bien_Logement;
 	}
 
 }
