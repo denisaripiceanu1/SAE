@@ -443,7 +443,7 @@ public class Fenetre_Accueil extends JFrame {
 
 		// Bouton propre à la page
 		JButton btn_mesLocations_InfoLocataire = new JButton("Mon locataire");
-		btn_mesLocations_InfoLocataire.setBounds(510, 395, 152, 23);
+		btn_mesLocations_InfoLocataire.setBounds(510, 407, 152, 23);
 		btn_mesLocations_InfoLocataire.addActionListener(this.gestionAccueil);
 		btn_mesLocations_InfoLocataire.setName("btn_mesLocations_InfoLocataire");
 		panel_MesLocations.add(btn_mesLocations_InfoLocataire);
@@ -454,7 +454,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_loyer.setEditable(false);
 		this.textField_loyer.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true), "Loyer",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
-		this.textField_loyer.setBounds(510, 89, 152, 40);
+		this.textField_loyer.setBounds(510, 72, 152, 40);
 		panel_MesLocations.add(this.textField_loyer);
 		this.textField_loyer.setColumns(10);
 
@@ -464,7 +464,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_provisionCharges.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true),
 				"Provision sur charges", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
 		this.textField_provisionCharges.setBackground(Color.WHITE);
-		this.textField_provisionCharges.setBounds(510, 131, 152, 40);
+		this.textField_provisionCharges.setBounds(510, 114, 152, 40);
 		panel_MesLocations.add(this.textField_provisionCharges);
 
 		this.textField_caution = new JTextField();
@@ -473,7 +473,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_caution.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true), "Caution",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
 		this.textField_caution.setBackground(Color.WHITE);
-		this.textField_caution.setBounds(510, 339, 152, 40);
+		this.textField_caution.setBounds(510, 322, 152, 40);
 		panel_MesLocations.add(this.textField_caution);
 
 		this.textField_dateEmission = new JTextField();
@@ -482,7 +482,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_dateEmission.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true),
 				"Date \u00E9mission", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
 		this.textField_dateEmission.setBackground(Color.WHITE);
-		this.textField_dateEmission.setBounds(510, 255, 152, 40);
+		this.textField_dateEmission.setBounds(510, 238, 152, 40);
 		panel_MesLocations.add(this.textField_dateEmission);
 
 		this.textField_dateEcheance = new JTextField();
@@ -491,7 +491,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_dateEcheance.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true),
 				"Date \u00E9ch\u00E9ance", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
 		this.textField_dateEcheance.setBackground(Color.WHITE);
-		this.textField_dateEcheance.setBounds(510, 297, 152, 40);
+		this.textField_dateEcheance.setBounds(510, 280, 152, 40);
 		panel_MesLocations.add(this.textField_dateEcheance);
 
 		this.textField_paye = new JTextField();
@@ -500,7 +500,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_paye.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true),
 				"Montant pay\u00E9", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
 		this.textField_paye.setBackground(Color.WHITE);
-		this.textField_paye.setBounds(510, 173, 152, 40);
+		this.textField_paye.setBounds(510, 156, 152, 40);
 		panel_MesLocations.add(this.textField_paye);
 
 		this.textField_restantDu = new JTextField();
@@ -509,8 +509,13 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_restantDu.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true),
 				"Restant d\u00FB", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
 		this.textField_restantDu.setBackground(Color.WHITE);
-		this.textField_restantDu.setBounds(510, 213, 152, 40);
+		this.textField_restantDu.setBounds(510, 196, 152, 40);
 		panel_MesLocations.add(this.textField_restantDu);
+		
+		JButton btn_mesLocations_AjouterFacture = new JButton("Ajouter une facture");
+		btn_mesLocations_AjouterFacture.setName("btn_mesLocations_AjouterFacture");
+		btn_mesLocations_AjouterFacture.setBounds(510, 373, 152, 23);
+		panel_MesLocations.add(btn_mesLocations_AjouterFacture);
 
 		//////////////////////////////////////////////////////////////////////////
 		// LAYERED MES
@@ -1031,5 +1036,4 @@ public class Fenetre_Accueil extends JFrame {
 	public JComboBox<String> getComboBox_MesChargesLocatives() {
 		return this.comboBox_MesChargesLocatives;
 	}
-
 }

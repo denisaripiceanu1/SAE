@@ -563,6 +563,8 @@ public class GestionAccueil implements ActionListener {
 						e1.printStackTrace();
 					}
 				}
+			case "btn_mesLocations_AjouterFacture":
+				
 				break;
 			/////////////////////
 			// LAYERED MES TRAVAUX
