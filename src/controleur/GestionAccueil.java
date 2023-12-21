@@ -563,7 +563,7 @@ public class GestionAccueil implements ActionListener {
 				break;
 			case "btn_mesLocations_AjouterFacture":
 				if (Sauvegarde.onSave("Logement") == true) {
-					Fenetre_InsertionPaiementBien insertion_facture = new Fenetre_InsertionPaiementBien();
+					Fenetre_InsertionPaiementLogement insertion_facture = new Fenetre_InsertionPaiementLogement();
 					this.fenetreAccueil.getLayeredPane().add(insertion_facture);
 					insertion_facture.setVisible(true);
 					insertion_facture.moveToFront();

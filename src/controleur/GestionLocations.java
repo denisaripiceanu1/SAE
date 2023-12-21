@@ -87,7 +87,7 @@ public class GestionLocations implements ListSelectionListener {
 					JTextField dateEcheanceField = this.fenetreAccueil.getTextField_dateEcheance();
 
 					if (derniereFactureLoyer != null) {
-						// Si la date d'émission n'est pas null, utilisez-la ; sinon, utilisez "N/A"
+						// Si la date d'émission n'est pas null, on l'utilise ; sinon, "N/A"
 						String dateEmission;
 						if (derniereFactureLoyer.getDateEmission() != null) {
 							dateEmission = derniereFactureLoyer.getDateEmission();
@@ -95,7 +95,7 @@ public class GestionLocations implements ListSelectionListener {
 							dateEmission = "N/A";
 						}
 
-						// Si la date de paiement n'est pas null, utilisez-la ; sinon, utilisez "N/A"
+						// Si la date de paiement n'est pas null, on l'utilise ; sinon, "N/A"
 						String datePaiement;
 						if (derniereFactureLoyer.getDatePaiement() != null) {
 							datePaiement = derniereFactureLoyer.getDatePaiement();

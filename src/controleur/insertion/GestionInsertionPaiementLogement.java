@@ -63,5 +63,28 @@ public class GestionInsertionPaiementLogement implements ActionListener{
 				this.fipl.dispose();
 				break;
 			}
+		// Ajoutez ceci à votre gestionnaire d'événements actionPerformed
+
+		switch (this.fipl.getComboBox_Designation().getSelectedItem().toString()) {
+	    case "Loyer":
+	        // Afficher les composants liés à l'entreprise
+	        btn_ajouter_entreprise.setVisible(true);
+	        btn_charger_entreprise.setVisible(true);
+	        scrollPane_table_entreprise.setVisible(true);
+	        table_entreprise.setVisible(true);
+	        lbl_Entreprise.setVisible(true);
+	        break;
+	    default:
+	        // Masquer les composants liés à l'entreprise pour les autres options
+	        btn_ajouter_entreprise.setVisible(false);
+	        btn_charger_entreprise.setVisible(false);
+	        scrollPane_table_entreprise.setVisible(false);
+	        table_entreprise.setVisible(false);
+	        lbl_Entreprise.setVisible(false);
+	        break;
+	}
+
+		}
+
 	}
 }
