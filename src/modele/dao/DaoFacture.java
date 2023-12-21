@@ -74,24 +74,35 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 			Entreprise entreprise = daoEntreprise.findById(siret);
 
 			// Convertir les dates en chaînes de caractères avec un format spécifique
-			java.sql.Date dateEmission = curseur.getDate("date_emission");
-			java.sql.Date datePaiement = curseur.getDate("date_paiement");
+	        java.sql.Date dateEmission = curseur.getDate("date_emission");
+	        java.sql.Date datePaiement = curseur.getDate("date_paiement");
 
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			String dateEmissionStr = "N/A";
-			if (dateEmission != null) {
-				dateEmissionStr = dateFormat.format(dateEmission);
-			}
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+	        String dateEmissionStr = "N/A";
+	        if (dateEmission != null) {
+	            dateEmissionStr = dateFormat.format(dateEmission);
+	        }
 
-			String datePaiementStr = "N/A";
-			if (datePaiement != null) {
-				datePaiementStr = dateFormat.format(datePaiement);
-			}
+	        String datePaiementStr = "N/A";
+	        if (datePaiement != null) {
+	            datePaiementStr = dateFormat.format(datePaiement);
+	        }
 
-			facture = new Facture(curseur.getString("numero"), dateEmissionStr, datePaiementStr,
-					curseur.getString("mode_paiement"), curseur.getString("numero_devis"),
-					curseur.getString("designation"), curseur.getDouble("accompte_verse"), curseur.getDouble("montant"),
-					curseur.getInt("imputable_locataire"), immeuble, bien, entreprise);
+	        facture = new Facture(
+	                curseur.getString("numero"),
+	                dateEmissionStr,
+	                datePaiementStr,
+	                curseur.getString("mode_paiement"),
+	                curseur.getString("numero_devis"),
+	                curseur.getString("designation"),
+	                curseur.getDouble("accompte_verse"),
+	                curseur.getDouble("montant"),
+	                curseur.getInt("imputable_locataire"),
+	                immeuble,
+	                bien,
+	                entreprise
+	        );
+	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

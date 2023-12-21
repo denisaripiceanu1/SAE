@@ -8,19 +8,17 @@ import modele.dao.requetes.Requete;
 
 public class RequeteSelectFactureByBien implements Requete<Facture> {
 
-	public String requete() {
-		return "SELECT * FROM Facture WHERE Id_Immeuble = ? ORDER BY date_emission DESC";
-	}
+    public String requete() {
+        return "SELECT * FROM Facture WHERE Id_Bien = ? AND designation='Loyer' ORDER BY date_emission DESC";
+    }
 
-	@Override
-	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
-	    prSt.setString(1, id[0]);    
-	}
+    @Override
+    public void parametres(PreparedStatement prSt, String... id) throws SQLException {
+        prSt.setString(1, id[0]);
+    }
 
-
-	@Override
-	public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
-		prSt.setString(1, data.getImmeuble().getImmeuble());
-		
-	}
+    @Override
+    public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
+        prSt.setString(1, data.getBien().getIdBien());
+    }
 }
