@@ -29,8 +29,7 @@ public class GestionSuppressionTravaux implements ActionListener {
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.supprimerTravaux.getTopLevelAncestor();
 		switch (btn.getText()) {
 		case "Supprimer":
-			Facture travaux_supp = (Facture) Sauvegarde.getItem("Travaux");
-			System.out.println(travaux_supp.getNumero());
+			Facture travaux_supp = (Facture) Sauvegarde.getItem("Facture");
 			try {
 				Facture travaux = this.daoFacture.findById(travaux_supp.getNumero());
 				this.daoFacture.delete(travaux);
