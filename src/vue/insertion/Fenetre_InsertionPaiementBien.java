@@ -7,7 +7,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import controleur.GestionTableEntrepriseFenetreFacture;
+import controleur.GestionTableEntrepriseFenetreFactureLogement;
 import controleur.insertion.GestionInsertionPaiementBien;
 
 public class Fenetre_InsertionPaiementBien extends JInternalFrame {
@@ -25,7 +25,7 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 	private JComboBox<String> comboBox_modePaiement;
 	private JComboBox<String> comboBox_Designation;
 
-	private GestionTableEntrepriseFenetreFacture gteff;
+	private GestionTableEntrepriseFenetreFactureLogement gteff;
 	private GestionInsertionPaiementBien gestionClic;
 
 	public Fenetre_InsertionPaiementBien() {

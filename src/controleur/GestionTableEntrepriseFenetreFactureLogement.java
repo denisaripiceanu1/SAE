@@ -2,6 +2,7 @@ package controleur;
 
 import java.sql.SQLException;
 
+
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -9,15 +10,15 @@ import javax.swing.event.ListSelectionListener;
 import controleur.outils.Sauvegarde;
 import modele.Entreprise;
 import modele.dao.DaoEntreprise;
-import vue.insertion.Fenetre_InsertionPaiementBien;
+import vue.insertion.Fenetre_InsertionPaiementLogement;
 
-public class GestionTableEntrepriseFenetreFacture implements ListSelectionListener {
+public class GestionTableEntrepriseFenetreFactureLogement implements ListSelectionListener {
 
-	private Fenetre_InsertionPaiementBien fipb;
+	private Fenetre_InsertionPaiementLogement fipl;
 	private DaoEntreprise daoEntreprise;
 
-	public GestionTableEntrepriseFenetreFacture(Fenetre_InsertionPaiementBien fipb) {
-		this.fipb = fipb;
+	public GestionTableEntrepriseFenetreFactureLogement(Fenetre_InsertionPaiementLogement fipl) {
+		this.fipl = fipl;
 		this.daoEntreprise = new DaoEntreprise();
 		Sauvegarde.initializeSave();
 	}
@@ -26,14 +27,17 @@ public class GestionTableEntrepriseFenetreFacture implements ListSelectionListen
 	public void valueChanged(ListSelectionEvent e) {
 		if (!e.getValueIsAdjusting()) {
 
-			int selectedRowEntreprise = this.fipb.getTable_entreprise().getSelectedRow();
+			int selectedRowEntreprise = this.fipl.getTable_entreprise().getSelectedRow();
 
 			if (selectedRowEntreprise > -1) {
-				JTable tableEntreprise = this.fipb.getTable_entreprise();
+				JTable tableEntreprise = this.fipl.getTable_entreprise();
 				Entreprise entreprise = null;
 				try {
 					entreprise = this.daoEntreprise.findById(tableEntreprise.getValueAt(selectedRowEntreprise, 0).toString(),
 							tableEntreprise.getValueAt(selectedRowEntreprise, 1).toString());
+					
+				    System.out.println("entrepriseSauvegarde depuis le tableau: " + entreprise);
+
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}

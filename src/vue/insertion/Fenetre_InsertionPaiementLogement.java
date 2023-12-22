@@ -7,7 +7,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import controleur.GestionTableEntrepriseFenetreFacture;
+import controleur.GestionTableEntrepriseFenetreFactureLogement;
+import controleur.insertion.GestionInsertionEntreprise;
 import controleur.insertion.GestionInsertionPaiementLogement;
 
 public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
@@ -39,7 +40,8 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 	private JTable table_entreprise;
 
 	// Gestionnaires d'événements
-	private GestionTableEntrepriseFenetreFacture gteff;
+	private GestionTableEntrepriseFenetreFactureLogement gteff;
+	private GestionInsertionEntreprise gie;
 	private GestionInsertionPaiementLogement gestionClic;
 
 	public Fenetre_InsertionPaiementLogement() {
@@ -269,7 +271,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		return table_entreprise;
 	}
 
-	public GestionTableEntrepriseFenetreFacture getGteff() {
+	public GestionTableEntrepriseFenetreFactureLogement getGteff() {
 		return gteff;
 	}
 
