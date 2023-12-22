@@ -2,25 +2,36 @@ package controleur.insertion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import controleur.outils.Sauvegarde;
 import modele.Bien;
+import modele.Entreprise;
 import modele.Facture;
+import modele.ICC;
+import modele.dao.DaoEntreprise;
 import modele.dao.DaoFacture;
 import vue.Fenetre_Accueil;
+import vue.insertion.Fenetre_InsertionEntreprise;
+import vue.insertion.Fenetre_InsertionICC;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
 
 public class GestionInsertionPaiementLogement implements ActionListener {
 
 	private Fenetre_InsertionPaiementLogement fipl;
 	private DaoFacture daoFacture;
+	private DaoEntreprise daoEntreprise;
 
 	public GestionInsertionPaiementLogement(Fenetre_InsertionPaiementLogement fit) {
 		this.fipl = fit;
 		this.daoFacture = new DaoFacture();
+		this.daoEntreprise = new DaoEntreprise();
 	}
 
 	@Override
@@ -63,6 +74,20 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 			case "Annuler":
 				this.fipl.dispose(); // Fermeture de la fenêtre d'insertion en cas d'annulation
 				break;
+			case "Charger":
+				try {
+					this.chargerEntreprise();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				break;
+
+			case "Insérer":
+				Fenetre_InsertionEntreprise insertionEntreprise = new Fenetre_InsertionEntreprise();
+				fenetre_Principale.getLayeredPane().add(insertionEntreprise);
+				insertionEntreprise.setVisible(true);
+				insertionEntreprise.moveToFront();
+				break;
 			}
 
 			// Méthode appelée lorsque l'état de l'élément du JComboBox change
@@ -76,7 +101,8 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 		}
 	}
 
-	// Méthode pour mettre à jour les composants liés à l'entreprise en fonction de la désignation
+	// Méthode pour mettre à jour les composants liés à l'entreprise en fonction de
+	// la désignation
 	private void updateEntrepriseComponents() {
 		String selectedDesignation = this.fipl.getComboBox_Designation().getSelectedItem().toString();
 
@@ -97,6 +123,28 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 			this.fipl.getTable_entreprise().setVisible(true);
 			this.fipl.getLbl_Entreprise().setVisible(true);
 			break;
+		}
+	}
+
+	// Table Entreprise
+	public void ecrireLigneTableEntreprise(int numeroLigne, Entreprise e) throws SQLException {
+		JTable tableEntreprise = this.fipl.getTable_entreprise();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableEntreprise.getModel();
+
+		modeleTable.setValueAt(e.getNom(), numeroLigne, 0);
+		modeleTable.setValueAt(e.getTelephone(), numeroLigne, 1);
+	}
+
+	private void chargerEntreprise() throws SQLException {
+		List<Entreprise> entreprises = this.daoEntreprise.findAll();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fipl.getTable_entreprise().getModel();
+
+		modeleTable.setRowCount(entreprises.size());
+
+		for (int i = 0; i < entreprises.size(); i++) {
+			Entreprise e = entreprises.get(i);
+			this.ecrireLigneTableEntreprise(i, e);
 		}
 	}
 }

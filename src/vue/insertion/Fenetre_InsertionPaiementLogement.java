@@ -58,7 +58,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		panel.setLayout(null);
 		this.getContentPane().add(panel);
 
-		// Labels
+		// Label titre
 		JLabel lbl_InsererUneFacture = new JLabel("Ajouter une facture ");
 		lbl_InsererUneFacture.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUneFacture.setBounds(294, 26, 153, 48);
@@ -180,18 +180,20 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		panel.add(separator);
 
 		// Partie ENTREPRISE
-		this.btn_ajouter_entreprise = new JButton("Ajouter");
+		this.btn_ajouter_entreprise = new JButton("Insérer");
 		this.btn_ajouter_entreprise.setForeground(Color.WHITE);
 		this.btn_ajouter_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.btn_ajouter_entreprise.setBackground(new Color(0, 102, 204));
-		this.btn_ajouter_entreprise.setBounds(505, 142, 94, 31);
+		this.btn_ajouter_entreprise.setBounds(611, 142, 94, 31);
+		this.btn_ajouter_entreprise.addActionListener(gestionClic);
 		panel.add(this.btn_ajouter_entreprise);
 
 		this.btn_charger_entreprise = new JButton("Charger");
 		this.btn_charger_entreprise.setForeground(Color.WHITE);
 		this.btn_charger_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.btn_charger_entreprise.setBackground(new Color(0, 102, 204));
-		this.btn_charger_entreprise.setBounds(611, 142, 94, 31);
+		this.btn_charger_entreprise.setBounds(505, 142, 94, 31);
+		this.btn_charger_entreprise.addActionListener(gestionClic);
 		panel.add(this.btn_charger_entreprise);
 
 		this.scrollPane_table_entreprise = new JScrollPane();
@@ -200,11 +202,10 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		panel.add(this.scrollPane_table_entreprise);
 
 		// Table pour afficher les données d'entreprise
-
 		this.table_entreprise = new JTable();
 		this.table_entreprise.setSelectionBackground(new Color(0, 102, 204));
-		this.table_entreprise.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
-				new String[] { "Annee", "Trimestre", "ICC" }));
+		this.table_entreprise.setModel(new DefaultTableModel(new Object[][] { { null, null }, },
+				new String[] { "Nom", "Telephone" }));
 		this.table_entreprise.setBounds(499, 80, 135, 16);
 		scrollPane_table_entreprise.setViewportView(this.table_entreprise);
 		this.table_entreprise.getSelectionModel().addListSelectionListener(this.gteff);
