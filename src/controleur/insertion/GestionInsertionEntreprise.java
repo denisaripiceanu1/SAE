@@ -1,22 +1,15 @@
 package controleur.insertion;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import controleur.outils.Sauvegarde;
-import modele.Facture;
-import modele.Compteur;
-import modele.Diagnostics;
 import modele.Entreprise;
-import modele.Immeuble;
-import modele.dao.DaoBien;
-import modele.dao.DaoDiagnostic;
+
 import modele.dao.DaoEntreprise;
-import modele.dao.DaoImmeuble;
 import vue.Fenetre_Accueil;
-import vue.insertion.Fenetre_InsertionDiagnostic;
 import vue.insertion.Fenetre_InsertionEntreprise;
 
 public class GestionInsertionEntreprise implements ActionListener {
@@ -38,24 +31,21 @@ public class GestionInsertionEntreprise implements ActionListener {
 		case "Ajouter":
 			Entreprise entreprise = null;
 			try {
-				
+
 				entreprise = new Entreprise(this.fie.getTextField_SIRET().getText(),
-						this.fie.getTextField_Nom().getText(),
-						this.fie.getTextField_Adresse().getText(),
-						this.fie.getTextField_CP().getText(), 
-						this.fie.getTextField_Ville().getText(),
-						this.fie.getTextField_Mail().getText(),
-						this.fie.getTextField_Telephone().getText(),
+						this.fie.getTextField_Nom().getText(), this.fie.getTextField_Adresse().getText(),
+						this.fie.getTextField_CP().getText(), this.fie.getTextField_Ville().getText(),
+						this.fie.getTextField_Mail().getText(), this.fie.getTextField_Telephone().getText(),
 						this.fie.getTextField_IBAN().getText());
 
 				this.daoEntreprise.create(entreprise);
-				
+
 				this.fie.dispose();
 
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-			
+
 			this.fie.dispose();
 			break;
 

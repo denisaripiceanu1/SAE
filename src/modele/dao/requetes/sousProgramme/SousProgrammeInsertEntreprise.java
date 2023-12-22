@@ -1,11 +1,9 @@
 package modele.dao.requetes.sousProgramme;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import modele.Entreprise;
-import modele.Locataire;
 
 public class SousProgrammeInsertEntreprise implements SousProgramme<Entreprise> {
 
