@@ -45,36 +45,35 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 			// Gestion des actions en fonction du bouton cliqué
 			switch (btn.getText()) {
 			case "Ajouter":
-				try {
-					
-					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
-					Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
+			    Facture facture = null;
+			    Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+			    Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
 
-					int imputable = 0;
-					if (this.fipl.getRdbtnOui().isSelected()) {
-						imputable = 1;
-					}
+			    int imputable = 0;
+			    if (this.fipl.getRdbtnOui().isSelected()) {
+			        imputable = 1;
+			    }
+			    try {
+			        // Création d'un objet Facture à partir des données saisies dans la fenêtre
+			        facture = new Facture(this.fipl.getTextField_Numero().getText(),
+			                this.fipl.getTextField_date_emission().getText(),
+			                this.fipl.getTextField_date_paiement().getText(),
+			                this.fipl.getComboBox_modePaiement().getSelectedItem().toString(),
+			                this.fipl.getTextField_numeroDevis().getText(),
+			                this.fipl.getComboBox_Designation().getSelectedItem().toString(),
+			                Double.parseDouble(this.fipl.getTextField_accompteVerse().getText()),
+			                Double.parseDouble(this.fipl.getTextField_montant().getText()), imputable, null,
+			                bienSauvegarde, entrepriseSauvegarde);
+			        // Enregistrement de la facture dans la base de données
+			        this.daoFacture.create(facture);
+			    } catch (Exception e1) {
+			        e1.printStackTrace();
+			        System.err.println("Erreur lors de l'ajout de la facture : " + e1.getMessage());
+			    }
 
-					// Création d'un objet Facture à partir des données saisies dans la fenêtre
-					Facture facture = new Facture(this.fipl.getTextField_Numero().getText(),
-							this.fipl.getTextField_date_emission().getText(),
-							this.fipl.getTextField_date_paiement().getText(),
-							this.fipl.getComboBox_modePaiement().getSelectedItem().toString(),
-							this.fipl.getTextField_numeroDevis().getText(),
-							this.fipl.getComboBox_Designation().getSelectedItem().toString(),
-							Double.parseDouble(this.fipl.getTextField_accompteVerse().getText()),
-							Double.parseDouble(this.fipl.getTextField_montant().getText()), imputable, null,
-							bienSauvegarde, entrepriseSauvegarde);
+			    this.fipl.dispose(); // Fermeture de la fenêtre d'insertion
+			    break;
 
-					// Enregistrement de la facture dans la base de données
-					this.daoFacture.create(facture);
-					this.fipl.dispose(); // Fermeture de la fenêtre d'insertion
-
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-
-				break;
 			case "Annuler":
 				this.fipl.dispose(); // Fermeture de la fenêtre d'insertion en cas d'annulation
 				break;
