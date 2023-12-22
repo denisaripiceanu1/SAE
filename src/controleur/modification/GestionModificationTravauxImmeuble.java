@@ -48,8 +48,7 @@ public class GestionModificationTravauxImmeuble implements ActionListener {
 
 				this.facture = this.daoTravaux
 						.findById(this.modificationTravauxImmeuble.getTextField_Numero().getText());
-				this.entreprise = this.daoEntreprise
-						.findById(this.modificationTravauxImmeuble.getTextField_prestataire().getText());
+				this.entreprise = this.daoEntreprise.findById(this.facture.getEntreprise().getSiret());
 				this.bien = this.daoBien
 						.findById(this.modificationTravauxImmeuble.getTextField_Bien_Logement().getText());
 				this.immeuble = this.daoImmeuble
