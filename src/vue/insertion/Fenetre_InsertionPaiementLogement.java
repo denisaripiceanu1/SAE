@@ -21,6 +21,8 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 	private JTextField textField_montant;
 	private JTextField textField_accompteVerse;
 	private JSeparator separator_Travaux;
+    private boolean isAjouterFacture; // Déclaration de la variable
+
 
 	// Boutons radio
 	private JRadioButton rdbtnOui = new JRadioButton("Oui");
@@ -41,13 +43,15 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 
 	// Gestionnaires d'événements
 	private GestionTableEntrepriseFenetreFactureLogement gteff;
-	private GestionInsertionEntreprise gie;
 	private GestionInsertionPaiementLogement gestionClic;
 
-	public Fenetre_InsertionPaiementLogement() {
+	public Fenetre_InsertionPaiementLogement(boolean isAjouterFacture) {
 
 		// Initialisation des gestionnaires d'événements
 		this.gestionClic = new GestionInsertionPaiementLogement(this);
+		this.gteff = new GestionTableEntrepriseFenetreFactureLogement(this);
+		
+        this.isAjouterFacture = isAjouterFacture; // Initialisation de la variable
 
 		// Configuration de la fenêtre interne
 		this.setBounds(100, 100, 762, 541);
@@ -122,11 +126,17 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.comboBox_Designation.setBounds(247, 104, 190, 40);
 
 		DefaultComboBoxModel<String> designationModel = new DefaultComboBoxModel<String>();
-		designationModel.addElement("Travaux");
-		designationModel.addElement("Loyer");
-		designationModel.addElement("Eau");
-		designationModel.addElement("Ordures ménagères");
-		designationModel.addElement("Électricité parties communes ");
+		// Ajouter seulement "Loyer" si la page est ouverte depuis "Ajouter une facture"
+        if (isAjouterFacture) {
+            designationModel.addElement("Loyer");
+        } else {
+            // Ajouter tous les éléments si la page est ouverte autrement
+            designationModel.addElement("Travaux");
+            designationModel.addElement("Loyer");
+            designationModel.addElement("Eau");
+            designationModel.addElement("Ordures ménagères");
+            designationModel.addElement("Électricité parties communes ");
+        }
 		this.comboBox_Designation.setModel(designationModel);
 		comboBox_Designation.addActionListener(gestionClic);
 		panel.add(this.comboBox_Designation);

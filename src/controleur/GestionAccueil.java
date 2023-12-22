@@ -510,7 +510,7 @@ public class GestionAccueil implements ActionListener {
 				break;
 			case "btnMesBiens_AjouterPaiements_Logements": // A MODIFIER POUR QUE L'OUVERTURE SOIT FAITES APRES LA
 															// SELECTION D'UNE LIGNE DU TABLEAU
-				Fenetre_InsertionPaiementLogement paiement_logement = new Fenetre_InsertionPaiementLogement();
+				Fenetre_InsertionPaiementLogement paiement_logement = new Fenetre_InsertionPaiementLogement(false);
 				this.fenetreAccueil.getLayeredPane().add(paiement_logement);
 				paiement_logement.setVisible(true);
 				paiement_logement.moveToFront();
@@ -563,7 +563,7 @@ public class GestionAccueil implements ActionListener {
 				break;
 			case "btn_mesLocations_AjouterFacture":
 				if (Sauvegarde.onSave("Logement") == true) {
-					Fenetre_InsertionPaiementLogement insertion_facture = new Fenetre_InsertionPaiementLogement();
+					Fenetre_InsertionPaiementLogement insertion_facture = new Fenetre_InsertionPaiementLogement(true);
 					this.fenetreAccueil.getLayeredPane().add(insertion_facture);
 					insertion_facture.setVisible(true);
 					insertion_facture.moveToFront();
