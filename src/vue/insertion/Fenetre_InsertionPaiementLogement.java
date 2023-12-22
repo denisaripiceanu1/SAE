@@ -205,7 +205,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.table_entreprise = new JTable();
 		this.table_entreprise.setSelectionBackground(new Color(0, 102, 204));
 		this.table_entreprise.setModel(new DefaultTableModel(new Object[][] { { null, null }, },
-				new String[] { "Nom", "Telephone" }));
+				new String[] { "SIRET", "Nom" }));
 		this.table_entreprise.setBounds(499, 80, 135, 16);
 		scrollPane_table_entreprise.setViewportView(this.table_entreprise);
 		this.table_entreprise.getSelectionModel().addListSelectionListener(this.gteff);

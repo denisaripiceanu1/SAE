@@ -32,7 +32,8 @@ public class GestionTableEntrepriseFenetreFacture implements ListSelectionListen
 				JTable tableEntreprise = this.fipb.getTable_entreprise();
 				Entreprise entreprise = null;
 				try {
-					entreprise = this.daoEntreprise.findById(tableEntreprise.getValueAt(selectedRowEntreprise, 0).toString());
+					entreprise = this.daoEntreprise.findById(tableEntreprise.getValueAt(selectedRowEntreprise, 0).toString(),
+							tableEntreprise.getValueAt(selectedRowEntreprise, 1).toString());
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
