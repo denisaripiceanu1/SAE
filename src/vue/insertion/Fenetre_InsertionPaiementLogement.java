@@ -25,6 +25,10 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 	JRadioButton rdbtnNon = new JRadioButton("Non");
 	private JComboBox<String> comboBox_modePaiement;
 	private JComboBox<String> comboBox_Designation;
+	private JButton btn_ajouter_entreprise;
+	private JButton btn_charger_entreprise;
+	private JScrollPane scrollPane_table_entreprise;
+	private JLabel lbl_Entreprise;
 
 	private GestionTableEntrepriseFenetreFacture gteff;
 	private GestionInsertionPaiementLogement gestionClic;
@@ -167,24 +171,25 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		separator.setBounds(473, 106, 20, 278);
 		panel.add(separator);
 
-		JButton btn_ajouter_entreprise = new JButton("Ajouter");
-		btn_ajouter_entreprise.setForeground(Color.WHITE);
-		btn_ajouter_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_ajouter_entreprise.setBackground(new Color(0, 102, 204));
-		btn_ajouter_entreprise.setBounds(505, 142, 94, 31);
-		panel.add(btn_ajouter_entreprise);
+		// Partie ENTREPRISE
+		this.btn_ajouter_entreprise = new JButton("Ajouter");
+		this.btn_ajouter_entreprise.setForeground(Color.WHITE);
+		this.btn_ajouter_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.btn_ajouter_entreprise.setBackground(new Color(0, 102, 204));
+		this.btn_ajouter_entreprise.setBounds(505, 142, 94, 31);
+		panel.add(this.btn_ajouter_entreprise);
 
-		JButton btn_charger_entreprise = new JButton("Charger");
-		btn_charger_entreprise.setForeground(Color.WHITE);
-		btn_charger_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_charger_entreprise.setBackground(new Color(0, 102, 204));
-		btn_charger_entreprise.setBounds(611, 142, 94, 31);
-		panel.add(btn_charger_entreprise);
+		this.btn_charger_entreprise = new JButton("Charger");
+		this.btn_charger_entreprise.setForeground(Color.WHITE);
+		this.btn_charger_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.btn_charger_entreprise.setBackground(new Color(0, 102, 204));
+		this.btn_charger_entreprise.setBounds(611, 142, 94, 31);
+		panel.add(this.btn_charger_entreprise);
 
-		JScrollPane scrollPane_table_entreprise = new JScrollPane();
-		scrollPane_table_entreprise.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
-		scrollPane_table_entreprise.setBounds(505, 189, 195, 97);
-		panel.add(scrollPane_table_entreprise);
+		this.scrollPane_table_entreprise = new JScrollPane();
+		this.scrollPane_table_entreprise.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
+		this.scrollPane_table_entreprise.setBounds(505, 189, 195, 97);
+		panel.add(this.scrollPane_table_entreprise);
 
 		this.table_entreprise = new JTable();
 		this.table_entreprise.setSelectionBackground(new Color(0, 102, 204));
@@ -194,11 +199,11 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		scrollPane_table_entreprise.setViewportView(this.table_entreprise);
 		this.table_entreprise.getSelectionModel().addListSelectionListener(this.gteff);
 
-		JLabel lbl_Entreprise = new JLabel("Entreprise");
-		lbl_Entreprise.setForeground(Color.BLACK);
-		lbl_Entreprise.setBackground(new Color(0, 102, 204));
-		lbl_Entreprise.setBounds(573, 104, 132, 31);
-		panel.add(lbl_Entreprise);
+		this.lbl_Entreprise = new JLabel("Entreprise");
+		this.lbl_Entreprise.setForeground(Color.BLACK);
+		this.lbl_Entreprise.setBackground(new Color(0, 102, 204));
+		this.lbl_Entreprise.setBounds(573, 104, 132, 31);
+		panel.add(this.lbl_Entreprise);
 	}
 
 	public JTextField getTextField_Numero() {
@@ -255,6 +260,22 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 
 	public GestionTableEntrepriseFenetreFacture getGteff() {
 		return gteff;
+	}
+
+	public JButton getBtn_ajouter_entreprise() {
+		return btn_ajouter_entreprise;
+	}
+
+	public JButton getBtn_charger_entreprise() {
+		return btn_charger_entreprise;
+	}
+
+	public JScrollPane getScrollPane_table_entreprise() {
+		return scrollPane_table_entreprise;
+	}
+
+	public JLabel getLbl_Entreprise() {
+		return lbl_Entreprise;
 	}
 	
 }

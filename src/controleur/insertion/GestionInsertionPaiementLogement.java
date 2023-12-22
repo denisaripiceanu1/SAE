@@ -68,19 +68,19 @@ public class GestionInsertionPaiementLogement implements ActionListener{
 		switch (this.fipl.getComboBox_Designation().getSelectedItem().toString()) {
 	    case "Loyer":
 	        // Afficher les composants liés à l'entreprise
-	        btn_ajouter_entreprise.setVisible(true);
-	        btn_charger_entreprise.setVisible(true);
-	        scrollPane_table_entreprise.setVisible(true);
-	        table_entreprise.setVisible(true);
-	        lbl_Entreprise.setVisible(true);
+	        this.fipl.getBtn_ajouter_entreprise().setVisible(true);
+	        this.fipl.getBtn_charger_entreprise().setVisible(true);
+	        this.fipl.getScrollPane_table_entreprise().setVisible(true);
+	        this.fipl.getTable_entreprise().setVisible(true);
+	        this.fipl.getLbl_Entreprise().setVisible(true);
 	        break;
 	    default:
 	        // Masquer les composants liés à l'entreprise pour les autres options
-	        btn_ajouter_entreprise.setVisible(false);
-	        btn_charger_entreprise.setVisible(false);
-	        scrollPane_table_entreprise.setVisible(false);
-	        table_entreprise.setVisible(false);
-	        lbl_Entreprise.setVisible(false);
+	    	this.fipl.getBtn_ajouter_entreprise().setVisible(false);
+	        this.fipl.getBtn_charger_entreprise().setVisible(false);
+	        this.fipl.getScrollPane_table_entreprise().setVisible(false);
+	        this.fipl.getTable_entreprise().setVisible(false);
+	        this.fipl.getLbl_Entreprise().setVisible(false);
 	        break;
 	}
 
