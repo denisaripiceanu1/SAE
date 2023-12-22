@@ -1,6 +1,7 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +21,6 @@ import modele.dao.requetes.select.RequeteSelectFactureByLogement;
 import modele.dao.requetes.select.RequeteSelectFactureCharge;
 import modele.dao.requetes.select.RequeteSelectFactureTravaux;
 import modele.dao.requetes.sousProgramme.SousProgramme;
-import modele.dao.requetes.sousProgramme.SousProgrammeInsertEntreprise;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertFacture;
 import modele.dao.requetes.update.RequeteUpdateFacture;
 

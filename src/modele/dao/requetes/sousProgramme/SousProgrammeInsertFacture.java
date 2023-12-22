@@ -31,17 +31,26 @@ public class SousProgrammeInsertFacture implements SousProgramme<Facture> {
 	@Override
 	public void parametres(PreparedStatement prSt, Facture donnee) throws SQLException {
 		prSt.setString(1, donnee.getNumero()); // clé priamire de Locataire
-		prSt.setString(2, donnee.getDateEmission());
-		prSt.setString(3, donnee.getDatePaiement());
+		prSt.setDate(2, java.sql.Date.valueOf(donnee.getDateEmission()));
+		prSt.setDate(3, java.sql.Date.valueOf(donnee.getDatePaiement()));
 		prSt.setString(4, donnee.getModePaiement());
 		prSt.setString(5, donnee.getNumeroDevis());
 		prSt.setString(6, donnee.getDesignation());
 		prSt.setDouble(7, donnee.getAccompteVerse());
 		prSt.setDouble(8, donnee.getMontant());
 		prSt.setInt(9, donnee.getImputableLocataire());
-		prSt.setString(10, donnee.getImmeuble().getImmeuble());
+
+		// Paramètres potentiellement nuls
+		if (donnee.getImmeuble() != null && donnee.getImmeuble().getImmeuble() != null) {
+			prSt.setString(10, donnee.getImmeuble().getImmeuble());
+		} else {
+			prSt.setNull(10, java.sql.Types.VARCHAR);
+		}
 		prSt.setString(11, donnee.getBien().getIdBien());
-		prSt.setString(11, donnee.getEntreprise().getSiret());
+
+	
+			prSt.setString(12, donnee.getEntreprise().getSiret());
+		
 
 	}
 
