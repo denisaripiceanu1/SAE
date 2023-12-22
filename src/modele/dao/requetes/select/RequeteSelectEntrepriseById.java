@@ -22,7 +22,6 @@ public class RequeteSelectEntrepriseById implements Requete<Entreprise> {
 	@Override
 	public void parametres(PreparedStatement prSt, Entreprise data) throws SQLException {
 		prSt.setString(1, data.getSiret());
-
 	}
 
 }

@@ -30,8 +30,17 @@ public class RequeteUpdateFacture implements Requete<Facture> {
 		prSt.setString(5, data.getDesignation());
 		prSt.setDouble(6, data.getAccompteVerse());
 		prSt.setInt(7, data.getImputableLocataire());
-		prSt.setString(8, data.getImmeuble().getImmeuble());
-		prSt.setString(9, data.getBien().getIdBien());
+		if (data.getImmeuble() != null) {
+			prSt.setString(8, data.getImmeuble().getImmeuble());
+		} else {
+			prSt.setNull(8, java.sql.Types.VARCHAR);
+		}
+
+		if (data.getBien() != null) {
+			prSt.setString(9, data.getBien().getIdBien());
+		} else {
+			prSt.setNull(9, java.sql.Types.VARCHAR);
+		}
 		prSt.setString(10, data.getEntreprise().getSiret());
 		prSt.setString(11, data.getNumero());
 	}

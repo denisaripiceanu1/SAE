@@ -587,6 +587,7 @@ public class GestionAccueil implements ActionListener {
 					try {
 						travauxCourant = this.daoFacture.findById(travauxSauvegarde.getNumero());
 						modif_travaux.getTextField_Numero().setText(travauxCourant.getNumero());
+						modif_travaux.getTextField_Bien_Logement().setText(travauxCourant.getImmeuble().getImmeuble());
 						modif_travaux.getTextField_designation().setText(travauxCourant.getDesignation());
 						modif_travaux.getTextField_dateEmission().setText(travauxCourant.getDateEmission());
 						modif_travaux.getTextField_montant().setText(Double.toString(travauxCourant.getMontant()));
