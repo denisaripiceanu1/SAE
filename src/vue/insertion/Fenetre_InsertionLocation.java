@@ -52,7 +52,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	private DaoImmeuble daoImmeuble;
 	private GestionInsertionLocation gestionClic;
 	private GestionTableLogementsFenetreLocation gtfl;
-	private GestionInsertionICC gii;
 
 	public Fenetre_InsertionLocation() {
 

@@ -1,17 +1,15 @@
 package controleur.insertion;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
 import modele.ICC;
-import modele.Quotter;
 import modele.dao.DaoICC;
-import modele.dao.DaoQuotter;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionICC;
-import vue.insertion.Fenetre_InsertionQuotite;
 
 public class GestionInsertionICC implements ActionListener {
 

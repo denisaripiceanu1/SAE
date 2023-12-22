@@ -29,9 +29,9 @@ public class GestionInsertionEntreprise implements ActionListener {
 
 		switch (btn.getText()) {
 		case "Ajouter":
+
 			Entreprise entreprise = null;
 			try {
-
 				entreprise = new Entreprise(this.fie.getTextField_SIRET().getText(),
 						this.fie.getTextField_Nom().getText(), this.fie.getTextField_Adresse().getText(),
 						this.fie.getTextField_CP().getText(), this.fie.getTextField_Ville().getText(),
@@ -39,8 +39,6 @@ public class GestionInsertionEntreprise implements ActionListener {
 						this.fie.getTextField_IBAN().getText());
 
 				this.daoEntreprise.create(entreprise);
-
-				this.fie.dispose();
 
 			} catch (Exception e1) {
 				e1.printStackTrace();
