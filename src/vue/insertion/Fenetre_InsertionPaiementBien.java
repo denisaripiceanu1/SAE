@@ -47,6 +47,7 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		lbl_InsererUnTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUnTravaux.setBounds(294, 26, 153, 48);
 		panel.add(lbl_InsererUnTravaux);
+		
 		JLabel lbl_ImputableLocataire = new JLabel("Imputable Locataire");
 		lbl_ImputableLocataire.setForeground(Color.BLACK);
 		lbl_ImputableLocataire.setBackground(new Color(0, 102, 204));

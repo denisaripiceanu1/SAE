@@ -457,7 +457,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_mesLocations_AjouterFacture = new JButton("Ajouter facture pour loyer");
 		btn_mesLocations_AjouterFacture.setName("btn_mesLocations_AjouterFacture");
 		btn_mesLocations_AjouterFacture.addActionListener(this.gestionAccueil);
-		btn_mesLocations_AjouterFacture.setBounds(510, 373, 152, 23);
+		btn_mesLocations_AjouterFacture.setBounds(510, 373, 200, 23);
 		panel_MesLocations.add(btn_mesLocations_AjouterFacture);
 
 		// Champs de saisie

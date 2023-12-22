@@ -63,11 +63,17 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		panel.setLayout(null);
 		this.getContentPane().add(panel);
 
-		// Label titre
+		// Labels
 		JLabel lbl_InsererUneFacture = new JLabel("Ajouter une facture ");
 		lbl_InsererUneFacture.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUneFacture.setBounds(294, 26, 153, 48);
 		panel.add(lbl_InsererUneFacture);
+		
+		JLabel lbl_ImputableLocataire = new JLabel("Imputable Locataire");
+		lbl_ImputableLocataire.setForeground(Color.BLACK);
+		lbl_ImputableLocataire.setBackground(new Color(0, 102, 204));
+		lbl_ImputableLocataire.setBounds(182, 353, 132, 31);
+		panel.add(lbl_ImputableLocataire);
 
 		// Séparateurs
 		JSeparator separator_titreInsererTravaux = new JSeparator();
@@ -231,6 +237,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.lbl_Entreprise.setBackground(new Color(0, 102, 204));
 		this.lbl_Entreprise.setBounds(573, 104, 132, 31);
 		panel.add(this.lbl_Entreprise);
+		
 		// Masquer les composants liés à l'entreprise au début
 		this.btn_ajouter_entreprise.setVisible(false);
 		this.btn_charger_entreprise.setVisible(false);
