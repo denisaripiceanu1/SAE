@@ -8,11 +8,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.GestionTableEntrepriseFenetreFacture;
-import controleur.insertion.GestionInsertionPaiementBien;
 import controleur.insertion.GestionInsertionPaiementLogement;
 
 public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 
+	// Champs de saisie
 	private JTextField textField_Numero;
 	private JTextField textField_date_emission;
 	private JTextField textField_date_paiement;
@@ -20,23 +20,34 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 	private JTextField textField_montant;
 	private JTextField textField_accompteVerse;
 	private JSeparator separator_Travaux;
-	private JTable table_entreprise; // Utilisé pour afficher une table, mais non initialisé dans le constructeur
-	JRadioButton rdbtnOui = new JRadioButton("Oui");
-	JRadioButton rdbtnNon = new JRadioButton("Non");
+
+	// Boutons radio
+	private JRadioButton rdbtnOui = new JRadioButton("Oui");
+	private JRadioButton rdbtnNon = new JRadioButton("Non");
+
+	// Menu déroulant
 	private JComboBox<String> comboBox_modePaiement;
 	private JComboBox<String> comboBox_Designation;
+
+	// Boutons et libellés
 	private JButton btn_ajouter_entreprise;
 	private JButton btn_charger_entreprise;
 	private JScrollPane scrollPane_table_entreprise;
 	private JLabel lbl_Entreprise;
 
+	// Table pour afficher les données d'entreprise
+	private JTable table_entreprise;
+
+	// Gestionnaires d'événements
 	private GestionTableEntrepriseFenetreFacture gteff;
 	private GestionInsertionPaiementLogement gestionClic;
 
 	public Fenetre_InsertionPaiementLogement() {
 
+		// Initialisation des gestionnaires d'événements
 		this.gestionClic = new GestionInsertionPaiementLogement(this);
 
+		// Configuration de la fenêtre interne
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
@@ -48,15 +59,10 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.getContentPane().add(panel);
 
 		// Labels
-		JLabel lbl_InsererUnTravaux = new JLabel("Ajouter une facture ");
-		lbl_InsererUnTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUnTravaux.setBounds(294, 26, 153, 48);
-		panel.add(lbl_InsererUnTravaux);
-		JLabel lbl_ImputableLocataire = new JLabel("Imputable Locataire");
-		lbl_ImputableLocataire.setForeground(Color.BLACK);
-		lbl_ImputableLocataire.setBackground(new Color(0, 102, 204));
-		lbl_ImputableLocataire.setBounds(182, 353, 132, 31);
-		panel.add(lbl_ImputableLocataire);
+		JLabel lbl_InsererUneFacture = new JLabel("Ajouter une facture ");
+		lbl_InsererUneFacture.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_InsererUneFacture.setBounds(294, 26, 153, 48);
+		panel.add(lbl_InsererUneFacture);
 
 		// Séparateurs
 		JSeparator separator_titreInsererTravaux = new JSeparator();
@@ -93,21 +99,6 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		textField_numeroDevis.setBounds(24, 228, 190, 40);
 		panel.add(textField_numeroDevis);
 
-		// Menu déroulant pour la designation de la facture
-		comboBox_Designation = new JComboBox<>();
-		comboBox_Designation.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "D\u00E9signation",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		comboBox_Designation.setBounds(247, 104, 190, 40);
-
-		DefaultComboBoxModel<String> designationModel = new DefaultComboBoxModel<>();
-		designationModel.addElement("Loyer");
-		designationModel.addElement("Travaux");
-		designationModel.addElement("Eau");
-		designationModel.addElement("Ordures ménagères");
-		designationModel.addElement("Électricité parties communes ");
-		comboBox_Designation.setModel(designationModel);
-		panel.add(comboBox_Designation);
-		
 		textField_montant = new JTextField();
 		textField_montant.setColumns(10);
 		textField_montant.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
@@ -122,9 +113,21 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		textField_accompteVerse.setBounds(247, 294, 190, 40);
 		panel.add(textField_accompteVerse);
 
-		separator_Travaux = new JSeparator();
-		separator_Travaux.setBounds(90, 401, 591, 2);
-		panel.add(separator_Travaux);
+		// Menu déroulant pour la designation de la facture
+		this.comboBox_Designation = new JComboBox<String>();
+		this.comboBox_Designation.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "D\u00E9signation",
+				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		this.comboBox_Designation.setBounds(247, 104, 190, 40);
+
+		DefaultComboBoxModel<String> designationModel = new DefaultComboBoxModel<String>();
+		designationModel.addElement("Travaux");
+		designationModel.addElement("Loyer");
+		designationModel.addElement("Eau");
+		designationModel.addElement("Ordures ménagères");
+		designationModel.addElement("Électricité parties communes ");
+		this.comboBox_Designation.setModel(designationModel);
+		comboBox_Designation.addActionListener(gestionClic);
+		panel.add(this.comboBox_Designation);
 
 		// Menu déroulant pour le mode de paiement
 		comboBox_modePaiement = new JComboBox<>();
@@ -137,6 +140,11 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		modePaiementModel.addElement("Espèce");
 		comboBox_modePaiement.setModel(modePaiementModel);
 		panel.add(comboBox_modePaiement);
+
+		// Séparateur vertical
+		separator_Travaux = new JSeparator();
+		separator_Travaux.setBounds(90, 401, 591, 2);
+		panel.add(separator_Travaux);
 
 		// Boutons radio
 		this.rdbtnOui.setForeground(new Color(0, 0, 0));
@@ -190,6 +198,8 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.scrollPane_table_entreprise.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
 		this.scrollPane_table_entreprise.setBounds(505, 189, 195, 97);
 		panel.add(this.scrollPane_table_entreprise);
+
+		// Table pour afficher les données d'entreprise
 
 		this.table_entreprise = new JTable();
 		this.table_entreprise.setSelectionBackground(new Color(0, 102, 204));
@@ -247,7 +257,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 	}
 
 	public JComboBox<String> getComboBox_Designation() {
-		return comboBox_Designation;
+		return this.comboBox_Designation;
 	}
 
 	public JComboBox<String> getComboBox_modePaiement() {
@@ -277,5 +287,5 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 	public JLabel getLbl_Entreprise() {
 		return lbl_Entreprise;
 	}
-	
+
 }

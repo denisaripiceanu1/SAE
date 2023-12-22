@@ -4,20 +4,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 import controleur.outils.Sauvegarde;
 import modele.Bien;
 import modele.Facture;
-import modele.Immeuble;
 import modele.dao.DaoFacture;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
 
-public class GestionInsertionPaiementLogement implements ActionListener{
-	
+public class GestionInsertionPaiementLogement implements ActionListener {
+
 	private Fenetre_InsertionPaiementLogement fipl;
 	private DaoFacture daoFacture;
-	
+
 	public GestionInsertionPaiementLogement(Fenetre_InsertionPaiementLogement fit) {
 		this.fipl = fit;
 		this.daoFacture = new DaoFacture();
@@ -25,66 +25,78 @@ public class GestionInsertionPaiementLogement implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fipl.getTopLevelAncestor(); //fenetre dans laquelle on ouvre des internal frame
-		switch (btn.getText()) {
+		Object source = e.getSource();
+
+		if (source instanceof JButton) {
+			JButton btn = (JButton) source;
+			Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fipl.getTopLevelAncestor();
+
+			// Gestion des actions en fonction du bouton cliqué
+			switch (btn.getText()) {
 			case "Ajouter":
-				
 				try {
 					int imputable = 0;
-					if(this.fipl.getRdbtnOui().isSelected()) {
+					if (this.fipl.getRdbtnOui().isSelected()) {
 						imputable = 1;
 					}
-					
-					Facture facture = new Facture(
-							this.fipl.getTextField_Numero().getText(),
+
+					// Création d'un objet Facture à partir des données saisies dans la fenêtre
+					Facture facture = new Facture(this.fipl.getTextField_Numero().getText(),
 							this.fipl.getTextField_date_emission().getText(),
 							this.fipl.getTextField_date_paiement().getText(),
 							this.fipl.getComboBox_modePaiement().getSelectedItem().toString(),
 							this.fipl.getTextField_numeroDevis().getText(),
 							this.fipl.getComboBox_Designation().getSelectedItem().toString(),
 							Double.parseDouble(this.fipl.getTextField_accompteVerse().getText()),
-							Double.parseDouble(this.fipl.getTextField_montant().getText()),
-							imputable,
-							null /*Immeuble null*/,
-							(Bien) Sauvegarde.getItem("Logement"),
-							null); // INSERER UNE ENTREPRISE
-					
+							Double.parseDouble(this.fipl.getTextField_montant().getText()), imputable, null,
+							(Bien) Sauvegarde.getItem("Logement"), null);
+
+					// Enregistrement de la facture dans la base de données
 					this.daoFacture.create(facture);
-					
-					this.fipl.dispose();
-					
+					this.fipl.dispose(); // Fermeture de la fenêtre d'insertion
+
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				
+
 				break;
 			case "Annuler":
-				this.fipl.dispose();
+				this.fipl.dispose(); // Fermeture de la fenêtre d'insertion en cas d'annulation
 				break;
 			}
-		// Ajoutez ceci à votre gestionnaire d'événements actionPerformed
 
-		switch (this.fipl.getComboBox_Designation().getSelectedItem().toString()) {
-	    case "Loyer":
-	        // Afficher les composants liés à l'entreprise
-	        this.fipl.getBtn_ajouter_entreprise().setVisible(true);
-	        this.fipl.getBtn_charger_entreprise().setVisible(true);
-	        this.fipl.getScrollPane_table_entreprise().setVisible(true);
-	        this.fipl.getTable_entreprise().setVisible(true);
-	        this.fipl.getLbl_Entreprise().setVisible(true);
-	        break;
-	    default:
-	        // Masquer les composants liés à l'entreprise pour les autres options
-	    	this.fipl.getBtn_ajouter_entreprise().setVisible(false);
-	        this.fipl.getBtn_charger_entreprise().setVisible(false);
-	        this.fipl.getScrollPane_table_entreprise().setVisible(false);
-	        this.fipl.getTable_entreprise().setVisible(false);
-	        this.fipl.getLbl_Entreprise().setVisible(false);
-	        break;
+			// Méthode appelée lorsque l'état de l'élément du JComboBox change
+			updateEntrepriseComponents();
+
+		} else if (source instanceof JComboBox) {
+			// Traitement spécifique pour le JComboBox
+			JComboBox<?> comboBox = (JComboBox<?>) source;
+			// Reste du code pour le JComboBox
+			updateEntrepriseComponents();
+		}
 	}
 
-		}
+	// Méthode pour mettre à jour les composants liés à l'entreprise en fonction de la désignation
+	private void updateEntrepriseComponents() {
+		String selectedDesignation = this.fipl.getComboBox_Designation().getSelectedItem().toString();
 
+		switch (selectedDesignation) {
+		case "Loyer":
+			// Masquer les composants liés à l'entreprise pour les autres options
+			this.fipl.getBtn_ajouter_entreprise().setVisible(false);
+			this.fipl.getBtn_charger_entreprise().setVisible(false);
+			this.fipl.getScrollPane_table_entreprise().setVisible(false);
+			this.fipl.getTable_entreprise().setVisible(false);
+			this.fipl.getLbl_Entreprise().setVisible(false);
+			break;
+		// Afficher les composants liés à l'entreprise pour d'autres options
+		default:
+			this.fipl.getBtn_ajouter_entreprise().setVisible(true);
+			this.fipl.getBtn_charger_entreprise().setVisible(true);
+			this.fipl.getScrollPane_table_entreprise().setVisible(true);
+			this.fipl.getTable_entreprise().setVisible(true);
+			this.fipl.getLbl_Entreprise().setVisible(true);
+			break;
+		}
 	}
 }
