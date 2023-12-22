@@ -22,7 +22,6 @@ public class DaoEntreprise extends DaoModele<Entreprise> implements Dao<Entrepri
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
-
 	}
 
 	@Override

@@ -14,12 +14,10 @@ import controleur.outils.Sauvegarde;
 import modele.Bien;
 import modele.Entreprise;
 import modele.Facture;
-import modele.ICC;
 import modele.dao.DaoEntreprise;
 import modele.dao.DaoFacture;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionEntreprise;
-import vue.insertion.Fenetre_InsertionICC;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
 
 public class GestionInsertionPaiementLogement implements ActionListener {
