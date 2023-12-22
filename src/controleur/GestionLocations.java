@@ -65,7 +65,7 @@ public class GestionLocations implements ListSelectionListener {
 					bien = this.daoBien.findById(tableLocations.getValueAt(selectedRow, 1).toString());
 					// On ajoute le bien a la sauvegarde
 					Sauvegarde.deleteItem("Logement");
-					Sauvegarde.addItem("Logement", locataire);
+					Sauvegarde.addItem("Logement", bien);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}

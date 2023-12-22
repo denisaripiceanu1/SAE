@@ -46,6 +46,10 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 			switch (btn.getText()) {
 			case "Ajouter":
 				try {
+					
+					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+					Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
+
 					int imputable = 0;
 					if (this.fipl.getRdbtnOui().isSelected()) {
 						imputable = 1;
@@ -60,7 +64,7 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 							this.fipl.getComboBox_Designation().getSelectedItem().toString(),
 							Double.parseDouble(this.fipl.getTextField_accompteVerse().getText()),
 							Double.parseDouble(this.fipl.getTextField_montant().getText()), imputable, null,
-							(Bien) Sauvegarde.getItem("Logement"), null);
+							bienSauvegarde, entrepriseSauvegarde);
 
 					// Enregistrement de la facture dans la base de données
 					this.daoFacture.create(facture);
