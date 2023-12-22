@@ -7,35 +7,35 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import controleur.suppression.GestionSuppressionFactureCharge;
+import controleur.suppression.GestionSuppressionCharges;
 
-public class Fenetre_SupprimerFactureCharge extends JInternalFrame {
-	GestionSuppressionFactureCharge gestionSuppressionCharge;
+public class Fenetre_SupprimerCharges extends JInternalFrame {
+	GestionSuppressionCharges gestionSuppressionCharges;
 
 	/**
 	 * Create the frame.
 	 */
-	public Fenetre_SupprimerFactureCharge() {
+	public Fenetre_SupprimerCharges() {
 
-		// this.gestionSuppressionCharge = new GestionSuppressionFactureCharge(this);
+		this.gestionSuppressionCharges = new GestionSuppressionCharges(this);
 
 		this.setBounds(100, 100, 445, 210);
 		this.getContentPane().setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Êtes-vous sur de vouloir supprimer cette charge ?");
+		JLabel lblNewLabel = new JLabel("Êtes-vous sur de vouloir supprimer cette assurance ?");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(52, 23, 323, 70);
 		this.getContentPane().add(lblNewLabel);
 
 		JButton btn_supprimer = new JButton("Supprimer");
-		// btn_supprimer.addActionListener(this.gestionSuppressionCharge);
+		btn_supprimer.addActionListener(this.gestionSuppressionCharges);
 		btn_supprimer.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btn_supprimer.setBounds(96, 103, 103, 30);
 		this.getContentPane().add(btn_supprimer);
 
 		JButton btn_annuler = new JButton("Annuler");
-		// btn_annuler.addActionListener(this.gestionSuppressionCharge);
+		btn_annuler.addActionListener(this.gestionSuppressionCharges);
 		btn_annuler.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btn_annuler.setBounds(233, 103, 95, 30);
 		this.getContentPane().add(btn_annuler);
