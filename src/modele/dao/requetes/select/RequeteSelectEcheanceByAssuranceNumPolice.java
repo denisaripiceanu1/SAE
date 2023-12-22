@@ -3,25 +3,24 @@ package modele.dao.requetes.select;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import modele.Entreprise;
+import modele.Echeance;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectEntrepriseById implements Requete<Entreprise> {
+public class RequeteSelectEcheanceByAssuranceNumPolice implements Requete<Echeance> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Entreprise WHERE SIRET = ? ";
+		return "SELECT * FROM Echeance WHERE NUMERO_POLICE = ?";
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
 		prSt.setString(1, id[0]);
-
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Entreprise data) throws SQLException {
-		prSt.setString(1, data.getSiret());
+	public void parametres(PreparedStatement prSt, Echeance data) throws SQLException {
+
 	}
 
 }

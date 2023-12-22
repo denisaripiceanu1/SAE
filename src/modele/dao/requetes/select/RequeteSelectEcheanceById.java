@@ -1,5 +1,6 @@
 package modele.dao.requetes.select;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -10,13 +11,14 @@ public class RequeteSelectEcheanceById implements Requete<Echeance> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Echeance WHERE NUMERO_POLICE = ? AND DATE_ECHEANCE  ?";
+		return "SELECT * FROM Echeance WHERE NUMERO_POLICE = ? AND DATE_ECHEANCE = ?";
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
 		prSt.setString(1, id[0]);
-		prSt.setString(2, id[1]);
+		prSt.setDate(2, Date.valueOf(id[1]));
+		// le format n'est pas le bon car il y a l'heure d'affichée
 	}
 
 	@Override

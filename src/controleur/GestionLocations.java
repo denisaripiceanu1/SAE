@@ -1,6 +1,8 @@
 package controleur;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -63,7 +65,7 @@ public class GestionLocations implements ListSelectionListener {
 					bien = this.daoBien.findById(tableLocations.getValueAt(selectedRow, 1).toString());
 					// On ajoute le bien a la sauvegarde
 					Sauvegarde.deleteItem("Logement");
-					Sauvegarde.addItem("Logement", locataire);
+					Sauvegarde.addItem("Logement", bien);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -81,16 +83,33 @@ public class GestionLocations implements ListSelectionListener {
 					JTextField loyer = this.fenetreAccueil.getTextField_loyer();
 					loyer.setText(String.valueOf(location.getLoyerTTC()));
 
-					JTextField dateEmission = this.fenetreAccueil.getTextField_dateEmission();
-					JTextField dateEcheance = this.fenetreAccueil.getTextField_dateEcheance();
+					JTextField dateEmissionField = this.fenetreAccueil.getTextField_dateEmission();
+					JTextField dateEcheanceField = this.fenetreAccueil.getTextField_dateEcheance();
 
-					// Vérification si la facture et sa date d'émission ne sont pas null
 					if (derniereFactureLoyer != null) {
-						dateEmission.setText(derniereFactureLoyer.getDateEmission());
-						dateEcheance.setText(derniereFactureLoyer.getDatePaiement());
+						// Si la date d'émission n'est pas null, on l'utilise ; sinon, "N/A"
+						String dateEmission;
+						if (derniereFactureLoyer.getDateEmission() != null) {
+							dateEmission = derniereFactureLoyer.getDateEmission();
+						} else {
+							dateEmission = "N/A";
+						}
+
+						// Si la date de paiement n'est pas null, on l'utilise ; sinon, "N/A"
+						String datePaiement;
+						if (derniereFactureLoyer.getDatePaiement() != null) {
+							datePaiement = derniereFactureLoyer.getDatePaiement();
+						} else {
+							datePaiement = "N/A";
+						}
+
+						// Définir les champs de texte avec les valeurs formatées
+						dateEmissionField.setText(dateEmission);
+						dateEcheanceField.setText(datePaiement);
 					} else {
-						dateEmission.setText("N/A");
-						dateEcheance.setText("N/A");
+						// Si la facture est null, définir les champs de texte sur "N/A"
+						dateEmissionField.setText("N/A");
+						dateEcheanceField.setText("N/A");
 					}
 
 					JTextField paye = this.fenetreAccueil.getTextField_paye();
