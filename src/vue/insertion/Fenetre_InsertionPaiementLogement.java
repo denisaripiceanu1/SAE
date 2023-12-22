@@ -21,8 +21,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 	private JTextField textField_montant;
 	private JTextField textField_accompteVerse;
 	private JSeparator separator_Travaux;
-    private boolean isAjouterFacture; // Déclaration de la variable
-
+	private boolean isAjouterFacture; // Déclaration de la variable
 
 	// Boutons radio
 	private JRadioButton rdbtnOui = new JRadioButton("Oui");
@@ -50,8 +49,8 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		// Initialisation des gestionnaires d'événements
 		this.gestionClic = new GestionInsertionPaiementLogement(this);
 		this.gteff = new GestionTableEntrepriseFenetreFactureLogement(this);
-		
-        this.isAjouterFacture = isAjouterFacture; // Initialisation de la variable
+
+		this.isAjouterFacture = isAjouterFacture; // Initialisation de la variable
 
 		// Configuration de la fenêtre interne
 		this.setBounds(100, 100, 762, 541);
@@ -126,18 +125,23 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.comboBox_Designation.setBounds(247, 104, 190, 40);
 
 		DefaultComboBoxModel<String> designationModel = new DefaultComboBoxModel<String>();
-		// Ajouter seulement "Loyer" si la page est ouverte depuis "Ajouter une facture"
-        if (isAjouterFacture) {
-            designationModel.addElement("Loyer");
-        } else {
-            // Ajouter tous les éléments si la page est ouverte autrement
-            designationModel.addElement("Travaux");
-            designationModel.addElement("Loyer");
-            designationModel.addElement("Eau");
-            designationModel.addElement("Ordures ménagères");
-            designationModel.addElement("Électricité parties communes ");
-        }
+
+		// Si la page est ouverte depuis "Ajouter une facture", ajouter uniquement
+		// "Loyer"
+		if (isAjouterFacture) {
+			designationModel.addElement("Loyer");
+		} else {
+			// Ajouter tous les éléments
+			designationModel.addElement(" ");
+			designationModel.addElement("Travaux");
+			designationModel.addElement("Eau");
+			designationModel.addElement("Ordures ménagères");
+			designationModel.addElement("Électricité parties communes ");
+		}
 		this.comboBox_Designation.setModel(designationModel);
+//		if (!isAjouterFacture) {
+//			comboBox_Designation.setSelectedItem("Travaux");
+//		}
 		comboBox_Designation.addActionListener(gestionClic);
 		panel.add(this.comboBox_Designation);
 
@@ -216,8 +220,8 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		// Table pour afficher les données d'entreprise
 		this.table_entreprise = new JTable();
 		this.table_entreprise.setSelectionBackground(new Color(0, 102, 204));
-		this.table_entreprise.setModel(new DefaultTableModel(new Object[][] { { null, null }, },
-				new String[] { "SIRET", "Nom" }));
+		this.table_entreprise
+				.setModel(new DefaultTableModel(new Object[][] { { null, null }, }, new String[] { "SIRET", "Nom" }));
 		this.table_entreprise.setBounds(499, 80, 135, 16);
 		scrollPane_table_entreprise.setViewportView(this.table_entreprise);
 		this.table_entreprise.getSelectionModel().addListSelectionListener(this.gteff);
@@ -227,6 +231,12 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.lbl_Entreprise.setBackground(new Color(0, 102, 204));
 		this.lbl_Entreprise.setBounds(573, 104, 132, 31);
 		panel.add(this.lbl_Entreprise);
+		// Masquer les composants liés à l'entreprise au début
+		this.btn_ajouter_entreprise.setVisible(false);
+		this.btn_charger_entreprise.setVisible(false);
+		this.scrollPane_table_entreprise.setVisible(false);
+		this.table_entreprise.setVisible(false);
+		this.lbl_Entreprise.setVisible(false);
 	}
 
 	public JTextField getTextField_Numero() {
