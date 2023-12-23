@@ -19,13 +19,11 @@ public class GestionSuppressionBien implements ActionListener {
 	private Fenetre_SupprimerBien supprimerBien;
 	private DaoImmeuble daoImmeuble;
 	private DaoCompteur daoCompteur;
-	private String idBien;
 
 	public GestionSuppressionBien(Fenetre_SupprimerBien supprimerBien) {
 		this.supprimerBien = supprimerBien;
 		this.daoImmeuble = new DaoImmeuble();
 		this.daoCompteur = new DaoCompteur();
-		this.idBien = null;
 		Sauvegarde.initializeSave();
 	}
 

@@ -17,7 +17,7 @@ public class Fenetre_SupprimerFactureCharge extends JInternalFrame {
 	 */
 	public Fenetre_SupprimerFactureCharge() {
 
-		// this.gestionSuppressionCharge = new GestionSuppressionFactureCharge(this);
+		this.gestionSuppressionCharge = new GestionSuppressionFactureCharge(this);
 
 		this.setBounds(100, 100, 445, 210);
 		this.getContentPane().setLayout(null);
@@ -29,13 +29,13 @@ public class Fenetre_SupprimerFactureCharge extends JInternalFrame {
 		this.getContentPane().add(lblNewLabel);
 
 		JButton btn_supprimer = new JButton("Supprimer");
-		// btn_supprimer.addActionListener(this.gestionSuppressionCharge);
+		btn_supprimer.addActionListener(this.gestionSuppressionCharge);
 		btn_supprimer.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btn_supprimer.setBounds(96, 103, 103, 30);
 		this.getContentPane().add(btn_supprimer);
 
 		JButton btn_annuler = new JButton("Annuler");
-		// btn_annuler.addActionListener(this.gestionSuppressionCharge);
+		btn_annuler.addActionListener(this.gestionSuppressionCharge);
 		btn_annuler.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btn_annuler.setBounds(233, 103, 95, 30);
 		this.getContentPane().add(btn_annuler);
