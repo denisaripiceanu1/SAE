@@ -3,6 +3,7 @@ package controleur.suppression;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JButton;
 
@@ -27,11 +28,11 @@ public class GestionSuppressionFactureCharge implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.supprimerCharges.getTopLevelAncestor();
+		Facture travaux_supp = (Facture) Sauvegarde.getItem("Facture");
 		switch (btn.getText()) {
 		case "Supprimer":
-			Facture travaux_supp = (Facture) Sauvegarde.getItem("Facture");
 			try {
-				Facture travaux = this.daoFacture.findById(travaux_supp.getNumero());
+				Facture travaux = this.daoFacture.findFactureChargeById(travaux_supp.getNumero());
 				this.daoFacture.delete(travaux);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
