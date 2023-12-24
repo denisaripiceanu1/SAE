@@ -3,10 +3,10 @@ package modele.dao.requetes.delete;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import modele.Immeuble;
+import modele.Imposer;
 import modele.dao.requetes.Requete;
 
-public class RequeteDeleteImposerByImmeuble implements Requete<Immeuble> {
+public class RequeteDeleteImposerByImmeuble implements Requete<Imposer> {
 
     @Override
     public String requete() {
@@ -21,7 +21,7 @@ public class RequeteDeleteImposerByImmeuble implements Requete<Immeuble> {
     }
 
     @Override
-    public void parametres(PreparedStatement prSt, Immeuble data) throws SQLException {
-        prSt.setString(1, data.getImmeuble()); // clé étrangère (ID_Immeuble)
+    public void parametres(PreparedStatement prSt, Imposer data) throws SQLException {
+        prSt.setString(1, data.getBien().getImmeuble().getImmeuble()); // clé étrangère (ID_Immeuble)
     }
 }

@@ -3,11 +3,11 @@ package modele.dao.requetes.delete;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import modele.Immeuble;
+import modele.Quotter;
 import modele.dao.requetes.Requete;
 
 //Bien = Immeuble
-public class RequeteDeleteQuotterByImmeuble implements Requete<Immeuble> {
+public class RequeteDeleteQuotterByImmeuble implements Requete<Quotter> {
 
     @Override
     public String requete() {
@@ -22,7 +22,7 @@ public class RequeteDeleteQuotterByImmeuble implements Requete<Immeuble> {
     }
 
     @Override
-    public void parametres(PreparedStatement prSt, Immeuble donnee) throws SQLException {
-        prSt.setString(1, donnee.getImmeuble()); // clé étrangère (ID_Immeuble)
+    public void parametres(PreparedStatement prSt, Quotter donnee) throws SQLException {
+        prSt.setString(1, donnee.getBien().getImmeuble().getImmeuble()); // clé étrangère (ID_Immeuble)
     }
 }

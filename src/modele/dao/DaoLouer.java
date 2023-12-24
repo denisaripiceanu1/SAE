@@ -13,6 +13,7 @@ import modele.Bien;
 import modele.ICC;
 import modele.Locataire;
 import modele.Louer;
+import modele.dao.requetes.delete.RequeteDeleteLocationByBien;
 import modele.dao.requetes.select.RequeteSelectLocationParBien;
 import modele.dao.requetes.select.RequeteSelectLouer;
 import modele.dao.requetes.select.RequeteSelectLouerById;
@@ -39,13 +40,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 
 	@Override
 	public void delete(Louer donnees) throws SQLException {
-		SousProgrammeDeleteLocation sousProgramme = new SousProgrammeDeleteLocation(donnees.getLocataire(),
-				donnees.getBien(), donnees.getDateDebut());
-
-		try (CallableStatement st = connection.prepareCall(sousProgramme.appelSousProgramme())) {
-			sousProgramme.parametres(st);
-			st.execute();
-		}
+		miseAJour(new RequeteDeleteLocationByBien(), donnees);
 	}
 
 	@Override

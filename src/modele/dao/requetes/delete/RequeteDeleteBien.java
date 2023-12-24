@@ -15,8 +15,7 @@ public class RequeteDeleteBien implements Requete<Bien> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
-		
-
+		prSt.setString(1, id[0]);
 	}
 
 	@Override

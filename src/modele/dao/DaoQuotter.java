@@ -12,8 +12,10 @@ import modele.Immeuble;
 import modele.Quotite;
 import modele.Quotter;
 import modele.dao.requetes.delete.RequeteDeleteQuotterByImmeuble;
+import modele.dao.requetes.select.RequeteSelectAssuranceByLogement;
 import modele.dao.requetes.select.RequeteSelectBienparImmeuble;
 import modele.dao.requetes.select.RequeteSelectQuotter;
+import modele.dao.requetes.select.RequeteSelectQuotterByBien;
 import modele.dao.requetes.select.RequeteSelectQuotterById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertQuotter;
@@ -35,7 +37,7 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 
 	@Override
 	public void delete(Quotter donnees) throws SQLException {
-		delete(donnees);
+		miseAJour(new RequeteDeleteQuotterByImmeuble(), donnees);
 	}
 
 	@Override
@@ -71,6 +73,10 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 		return find(new RequeteSelectQuotter());
 	}
 	
+	public List<Quotter> findQuotterByBien(String id) throws SQLException {
+		return this.find(new RequeteSelectQuotterByBien(), id);
+	}
+		
 	
 	//Y A DES MODIF A FAIRE LAAAAAAAA
 	public void deleteByBien(Immeuble immeuble) throws SQLException {

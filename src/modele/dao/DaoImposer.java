@@ -8,6 +8,7 @@ import java.util.List;
 import modele.Bien;
 import modele.Imposer;
 import modele.Impôt;
+import modele.dao.requetes.delete.RequeteDeleteImposerByImmeuble;
 import modele.dao.requetes.select.RequeteSelectImposer;
 import modele.dao.requetes.select.RequeteSelectImposerById;
 
@@ -27,7 +28,7 @@ public class DaoImposer extends DaoModele<Imposer> implements Dao<Imposer> {
 
 	@Override
 	public void delete(Imposer donnees) throws SQLException {
-		delete(donnees);
+		miseAJour(new RequeteDeleteImposerByImmeuble(), donnees);
 	}
 
 	@Override
@@ -61,6 +62,10 @@ public class DaoImposer extends DaoModele<Imposer> implements Dao<Imposer> {
 	@Override
 	public List<Imposer> findAll() throws SQLException {
 		return find(new RequeteSelectImposer());
+	}
+	
+	public List<Imposer> findImposerByBien(String id) throws SQLException{
+		return find(new RequeteSelectImposer(), id);
 	}
 
 }

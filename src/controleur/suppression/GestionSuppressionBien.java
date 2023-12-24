@@ -12,10 +12,16 @@ import modele.Assurance;
 import modele.Bien;
 import modele.Echeance;
 import modele.Immeuble;
+import modele.Imposer;
+import modele.Louer;
+import modele.Quotter;
 import modele.dao.DaoAssurance;
 import modele.dao.DaoBien;
 import modele.dao.DaoEcheance;
 import modele.dao.DaoImmeuble;
+import modele.dao.DaoImposer;
+import modele.dao.DaoLouer;
+import modele.dao.DaoQuotter;
 import vue.Fenetre_Accueil;
 import vue.suppression.Fenetre_SupprimerBien;
 
@@ -26,6 +32,9 @@ public class GestionSuppressionBien implements ActionListener {
 	private DaoBien daoBien;
 	private DaoAssurance daoAssurance;
 	private DaoEcheance daoEcheance;
+	private DaoLouer daoLouer;
+	private DaoQuotter daoQuotter;
+	private DaoImposer daoImposer;
 
 	public GestionSuppressionBien(Fenetre_SupprimerBien supprimerBien) {
 		this.supprimerBien = supprimerBien;
@@ -33,6 +42,9 @@ public class GestionSuppressionBien implements ActionListener {
 		this.daoBien = new DaoBien();
 		this.daoAssurance = new DaoAssurance();
 		this.daoEcheance = new DaoEcheance();
+		this.daoLouer = new DaoLouer();
+		this.daoQuotter = new DaoQuotter();
+		this.daoImposer = new DaoImposer();
 		Sauvegarde.initializeSave();
 	}
 
@@ -47,14 +59,35 @@ public class GestionSuppressionBien implements ActionListener {
 				List<Bien> bien_supp = this.daoBien.findBiensparImmeuble(immeuble_supp.getImmeuble());
 				Bien idBien = this.daoBien.findBienByImmeubleObject(immeuble_supp.getImmeuble());
 				
-				List<Assurance> assurance_supp = this.daoAssurance.findByLogement(idBien.getIdBien());
-				Assurance idAssurance = this.daoAssurance.findByLogementObject(idBien.getIdBien());
+				List<Assurance> assurance_supp = this.daoAssurance.findByLogement(idBien.getImmeuble().getImmeuble());
+				Assurance idAssurance = this.daoAssurance.findByLogementObject(idBien.getImmeuble().getImmeuble());
 				
-				List<Echeance> echance_supp = this.daoEcheance.findByAssuranceNumPoliceList(idAssurance.getNuméroPolice());
-				for(Echeance echeance : echance_supp) {
-					this.daoEcheance.delete(echeance);
+				List<Louer> louer_supp = this.daoLouer.findLocationByBien(idBien.getImmeuble().getImmeuble());
+				
+				List<Quotter> quotter_supp = this.daoQuotter.findQuotterByBien(idBien.getImmeuble().getImmeuble());
+				
+				List<Echeance> echance_supp;
+				
+				List<Imposer> imposer_supp = this.daoImposer.findImposerByBien(idBien.getImmeuble().getImmeuble());
+				
+				for(Imposer imposer : imposer_supp) {
+					this.daoImposer.delete(imposer);
 				}
+				
+				for(Quotter quotter : quotter_supp) {
+					this.daoQuotter.delete(quotter);
+				}
+				
+				for(Louer louer : louer_supp) {
+					this.daoLouer.delete(louer);
+				}
+
 				for(Assurance assurance : assurance_supp) {
+					// on le met ici car les assurances change de id si on le met a l'exterieur alors il supprimera que 1 seul
+					echance_supp = this.daoEcheance.findByAssuranceNumPoliceList(assurance.getNuméroPolice());
+					for(Echeance echeance : echance_supp) {
+						this.daoEcheance.delete(echeance);
+					}
 					this.daoAssurance.delete(assurance);
 				}
 				for(Bien bien : bien_supp) {
