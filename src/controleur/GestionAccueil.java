@@ -654,7 +654,7 @@ public class GestionAccueil implements ActionListener {
 				break;
 
 			case "btn_MesChargesLocatives_Supprimer":
-				if (Sauvegarde.onSave("Charge") == true) {
+				if (Sauvegarde.onSave("Facture") == true) {
 					Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Facture");
 					Fenetre_SupprimerFactureCharge supp_charge = new Fenetre_SupprimerFactureCharge();
 					this.fenetreAccueil.getLayeredPane().add(supp_charge);

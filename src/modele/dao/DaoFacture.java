@@ -19,6 +19,7 @@ import modele.dao.requetes.select.RequeteSelectFactureByBien;
 import modele.dao.requetes.select.RequeteSelectFactureById;
 import modele.dao.requetes.select.RequeteSelectFactureByLogement;
 import modele.dao.requetes.select.RequeteSelectFactureCharge;
+import modele.dao.requetes.select.RequeteSelectFactureChargeById;
 import modele.dao.requetes.select.RequeteSelectFactureTravaux;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertFacture;
@@ -149,6 +150,14 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 
 	public List<Facture> findFactureCharge() throws SQLException {
 		return this.find(new RequeteSelectFactureCharge());
+	}
+	
+	public Facture findFactureChargeById(String id) throws SQLException {
+		List<Facture> factures = this.find(new RequeteSelectFactureChargeById(), id);
+		if (factures.isEmpty()) {
+			return null;
+		}
+		return factures.get(0);
 	}
 
 	public List<Facture> findFactureTravaux() throws SQLException {
