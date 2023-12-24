@@ -18,7 +18,6 @@ public class RequeteSelectEcheanceById implements Requete<Echeance> {
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
 		prSt.setString(1, id[0]);
 		prSt.setDate(2, Date.valueOf(id[1]));
-		// le format n'est pas le bon car il y a l'heure d'affichée
 	}
 
 	@Override

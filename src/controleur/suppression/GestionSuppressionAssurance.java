@@ -38,7 +38,8 @@ public class GestionSuppressionAssurance implements ActionListener {
 			try {
 				Assurance assurance_supp = this.daoAssurance.findById(assurance_sauvegarde.getNuméroPolice());
 				Echeance echeance_supp = this.daoEcheance.findById(echeance_sauvegarde.getAssurance().getNuméroPolice(),
-						echeance_sauvegarde.getDateEcheance());
+						echeance_sauvegarde.getDateEcheance().substring(0, 10)); // Pour enlever l'heure de la date et éviter les bug de format de type "YYYY-DD-MM HH:MM" on garde que les 10 premiers pour enlever "HH:MM"
+				 
 
 				this.daoEcheance.delete(echeance_supp);
 				this.daoAssurance.delete(assurance_supp);

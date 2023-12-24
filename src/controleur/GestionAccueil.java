@@ -331,7 +331,7 @@ public class GestionAccueil implements ActionListener {
 		for (int i = 0; i < assurancesLogement.size(); i++) {
 			Assurance assurance = assurancesLogement.get(i);
 			Entreprise entreprise = this.daoEntreprise.findById(assurance.getEntreprise().getSiret());
-			Echeance echeance = this.daoEcheance.findById(assurance.getNuméroPolice());
+			Echeance echeance = this.daoEcheance.findByAssuranceNumPolice(assurance.getNuméroPolice());
 			echeance.setDateEcheance(echeance.getDateEcheance().substring(0, 10)); // Pour enlever l'heure de la date et éviter les bug de format de type "YYYY-DD-MM HH:MM" on garde que les 10 premiers pour enlever "HH:MM"
 			this.ecrireLigneTableAssurances(i, assurance, entreprise, echeance);
 		}
