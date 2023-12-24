@@ -77,7 +77,16 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 	}
 
 	// ---------------- AUTRES METHODES ----------------//
-
+	
+	public Bien findBienByImmeubleObject(String id) throws SQLException {
+		List<Bien> biens = this.find(new RequeteSelectBienparImmeuble(), id);
+		if (biens.isEmpty()) {
+			return null;
+		}
+		return biens.get(0);
+	}
+	
+	
 	public List<Bien> findBiensparImmeuble(String id) throws SQLException {
 		List<Bien> biens = null;
 

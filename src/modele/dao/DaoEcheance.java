@@ -7,6 +7,7 @@ import java.util.List;
 import modele.Assurance;
 import modele.Echeance;
 import modele.dao.requetes.delete.RequeteDeleteEcheance;
+import modele.dao.requetes.select.RequeteSelectAssuranceByLogement;
 import modele.dao.requetes.select.RequeteSelectEcheance;
 import modele.dao.requetes.select.RequeteSelectEcheanceByAssuranceNumPolice;
 import modele.dao.requetes.select.RequeteSelectEcheanceById;
@@ -62,6 +63,10 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 			return null;
 		}
 		return echeances.get(0);
+	}
+	
+	public List<Echeance> findByAssuranceNumPoliceList(String idImmeuble) throws SQLException {
+		return this.find(new RequeteSelectEcheanceByAssuranceNumPolice(), idImmeuble);
 	}
 
 	@Override
