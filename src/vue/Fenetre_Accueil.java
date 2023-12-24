@@ -713,8 +713,13 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesAssurances = new JTable();
 		this.table_MesAssurances.setSelectionBackground(new Color(0, 102, 204));
 		this.table_MesAssurances.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null }, }, new String[] { "n\u00B0 Police", "Montant",
-						"Date \u00E9ch\u00E9ance", "Prestataire", "Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
+			new Object[][] {
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"n\u00B0 Police", "Montant", "Date \u00E9cheance", "Prestataire", "Adresse", "n\u00B0 T\u00E9l\u00E9phone"
+			}
+		));
 		this.table_MesAssurances.setBounds(40, 53, 668, 130);
 		this.table_MesAssurances.getSelectionModel().addListSelectionListener(this.gestionTableAssurance);
 		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);

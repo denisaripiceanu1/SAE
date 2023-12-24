@@ -317,7 +317,7 @@ public class GestionAccueil implements ActionListener {
 			Assurance a = assurances.get(i);
 			Entreprise entreprise = this.daoEntreprise.findById(a.getEntreprise().getSiret());
 			Echeance echeance = this.daoEcheance.findByAssuranceNumPolice(a.getNuméroPolice());
-
+			echeance.setDateEcheance(echeance.getDateEcheance().substring(0, 10)); // Pour enlever l'heure de la date et éviter les bug de format de type "YYYY-DD-MM HH:MM" on garde que les 10 premiers pour enlever "HH:MM"
 			this.ecrireLigneTableAssurances(i, a, entreprise, echeance);
 		}
 	}
@@ -332,7 +332,7 @@ public class GestionAccueil implements ActionListener {
 			Assurance assurance = assurancesLogement.get(i);
 			Entreprise entreprise = this.daoEntreprise.findById(assurance.getEntreprise().getSiret());
 			Echeance echeance = this.daoEcheance.findById(assurance.getNuméroPolice());
-
+			echeance.setDateEcheance(echeance.getDateEcheance().substring(0, 10)); // Pour enlever l'heure de la date et éviter les bug de format de type "YYYY-DD-MM HH:MM" on garde que les 10 premiers pour enlever "HH:MM"
 			this.ecrireLigneTableAssurances(i, assurance, entreprise, echeance);
 		}
 	}
@@ -587,7 +587,6 @@ public class GestionAccueil implements ActionListener {
 					try {
 						travauxCourant = this.daoFacture.findById(travauxSauvegarde.getNumero());
 						modif_travaux.getTextField_Numero().setText(travauxCourant.getNumero());
-						modif_travaux.getTextField_Bien_Logement().setText(travauxCourant.getImmeuble().getImmeuble());
 						modif_travaux.getTextField_designation().setText(travauxCourant.getDesignation());
 						modif_travaux.getTextField_dateEmission().setText(travauxCourant.getDateEmission());
 						modif_travaux.getTextField_montant().setText(Double.toString(travauxCourant.getMontant()));

@@ -22,6 +22,10 @@ public class Echeance {
 		return dateEcheance;
 	}
 
+	public void setNumeroPolice(Assurance numeroPolice) {
+		this.numeroPolice = numeroPolice;
+	}
+
 	public void setDateEcheance(String dateEcheance) {
 		this.dateEcheance = dateEcheance;
 	}
