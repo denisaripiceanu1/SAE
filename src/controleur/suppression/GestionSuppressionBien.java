@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.tools.Diagnostic;
 
 import controleur.outils.Sauvegarde;
 import modele.Assurance;
@@ -15,8 +16,10 @@ import modele.Immeuble;
 import modele.Imposer;
 import modele.Louer;
 import modele.Quotter;
+import modele.Diagnostics;
 import modele.dao.DaoAssurance;
 import modele.dao.DaoBien;
+import modele.dao.DaoDiagnostic;
 import modele.dao.DaoEcheance;
 import modele.dao.DaoImmeuble;
 import modele.dao.DaoImposer;
@@ -35,6 +38,7 @@ public class GestionSuppressionBien implements ActionListener {
 	private DaoLouer daoLouer;
 	private DaoQuotter daoQuotter;
 	private DaoImposer daoImposer;
+	private DaoDiagnostic daoDiagnostic;
 
 	public GestionSuppressionBien(Fenetre_SupprimerBien supprimerBien) {
 		this.supprimerBien = supprimerBien;
@@ -45,6 +49,7 @@ public class GestionSuppressionBien implements ActionListener {
 		this.daoLouer = new DaoLouer();
 		this.daoQuotter = new DaoQuotter();
 		this.daoImposer = new DaoImposer();
+		this.daoDiagnostic = new DaoDiagnostic();
 		Sauvegarde.initializeSave();
 	}
 
@@ -69,6 +74,12 @@ public class GestionSuppressionBien implements ActionListener {
 				List<Echeance> echance_supp;
 				
 				List<Imposer> imposer_supp = this.daoImposer.findImposerByBien(idBien.getImmeuble().getImmeuble());
+				
+				List<Diagnostics> diagnostic_supp = this.daoDiagnostic.findDiagnosticByBien(idBien.getImmeuble().getImmeuble());
+				
+				for(Diagnostics diagnostics : diagnostic_supp) {
+					this.daoDiagnostic.delete(diagnostics);
+				}
 				
 				for(Imposer imposer : imposer_supp) {
 					this.daoImposer.delete(imposer);

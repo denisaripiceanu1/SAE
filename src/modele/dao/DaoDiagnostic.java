@@ -6,8 +6,10 @@ import java.util.List;
 
 import modele.Bien;
 import modele.Diagnostics;
+import modele.dao.requetes.delete.RequeteDeleteDiagnostic;
 import modele.dao.requetes.select.RequeteSelectDiagnostic;
 import modele.dao.requetes.select.RequeteSelectDiagnosticById;
+import modele.dao.requetes.select.RequeteSelectDiagnoticByBien;
 
 public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnostics> {
 
@@ -24,9 +26,8 @@ public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnos
 	}
 
 	@Override
-	public void delete(Diagnostics donnees) {
-		this.delete(donnees);
-
+	public void delete(Diagnostics donnees) throws SQLException {
+		this.miseAJour(new RequeteDeleteDiagnostic(), donnees);
 	}
 
 	@Override
@@ -63,7 +64,10 @@ public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnos
 	@Override
 	public List<Diagnostics> findAll() throws SQLException {
 		return this.find(new RequeteSelectDiagnostic());
-
 	}
+	
 
+	public List<Diagnostics> findDiagnosticByBien(String... id) throws SQLException {
+		return find(new RequeteSelectDiagnoticByBien(), id);
+	}
 }
