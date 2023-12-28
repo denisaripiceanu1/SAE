@@ -317,7 +317,11 @@ public class GestionAccueil implements ActionListener {
 			Assurance a = assurances.get(i);
 			Entreprise entreprise = this.daoEntreprise.findById(a.getEntreprise().getSiret());
 			Echeance echeance = this.daoEcheance.findByAssuranceNumPolice(a.getNuméroPolice());
-			echeance.setDateEcheance(echeance.getDateEcheance().substring(0, 10)); // Pour enlever l'heure de la date et éviter les bug de format de type "YYYY-DD-MM HH:MM" on garde que les 10 premiers pour enlever "HH:MM"
+			echeance.setDateEcheance(echeance.getDateEcheance().substring(0, 10)); // Pour enlever l'heure de la date et
+																					// éviter les bug de format de type
+																					// "YYYY-DD-MM HH:MM" on garde que
+																					// les 10 premiers pour enlever
+																					// "HH:MM"
 			this.ecrireLigneTableAssurances(i, a, entreprise, echeance);
 		}
 	}
@@ -332,7 +336,11 @@ public class GestionAccueil implements ActionListener {
 			Assurance assurance = assurancesLogement.get(i);
 			Entreprise entreprise = this.daoEntreprise.findById(assurance.getEntreprise().getSiret());
 			Echeance echeance = this.daoEcheance.findByAssuranceNumPolice(assurance.getNuméroPolice());
-			echeance.setDateEcheance(echeance.getDateEcheance().substring(0, 10)); // Pour enlever l'heure de la date et éviter les bug de format de type "YYYY-DD-MM HH:MM" on garde que les 10 premiers pour enlever "HH:MM"
+			echeance.setDateEcheance(echeance.getDateEcheance().substring(0, 10)); // Pour enlever l'heure de la date et
+																					// éviter les bug de format de type
+																					// "YYYY-DD-MM HH:MM" on garde que
+																					// les 10 premiers pour enlever
+																					// "HH:MM"
 			this.ecrireLigneTableAssurances(i, assurance, entreprise, echeance);
 		}
 	}
@@ -487,33 +495,38 @@ public class GestionAccueil implements ActionListener {
 				insertion_bien.setVisible(true);
 				insertion_bien.moveToFront();
 				break;
-			case "btnMesBiens_AjouterPaiements": // A MODIFIER POUR QUE L'OUVERTURE SOIT FAITES APRES LA SELECTION D'UNE
-													// LIGNE DU TABLEAU
-				Fenetre_InsertionPaiementBien paiement_bien = new Fenetre_InsertionPaiementBien();
-				this.fenetreAccueil.getLayeredPane().add(paiement_bien);
-				paiement_bien.setVisible(true);
-				paiement_bien.moveToFront();
+			case "btnMesBiens_AjouterPaiements":
+				if (Sauvegarde.onSave("Immeuble") == true) {
+					Fenetre_InsertionPaiementBien paiement_bien = new Fenetre_InsertionPaiementBien();
+					this.fenetreAccueil.getLayeredPane().add(paiement_bien);
+					paiement_bien.setVisible(true);
+					paiement_bien.moveToFront();
+				}
 				break;
 
 			case "btnMesBiens_AjouterLogement":
-				Fenetre_InsertionLogement insertion_logement = new Fenetre_InsertionLogement();
-				this.fenetreAccueil.getLayeredPane().add(insertion_logement);
-				insertion_logement.setVisible(true);
-				insertion_logement.moveToFront();
+				if (Sauvegarde.onSave("Logement") == true) {
+					Fenetre_InsertionLogement insertion_logement = new Fenetre_InsertionLogement();
+					this.fenetreAccueil.getLayeredPane().add(insertion_logement);
+					insertion_logement.setVisible(true);
+					insertion_logement.moveToFront();
+				}
 				break;
-			case "btnMesBiens_AjouterDiagnostic_Logements": // A MODIFIER POUR QUE L'OUVERTURE SOIT FAITES APRES LA
-															// SELECTION D'UNE LIGNE DU TABLEAU
-				Fenetre_InsertionDiagnostic diagnostic_logement = new Fenetre_InsertionDiagnostic();
-				this.fenetreAccueil.getLayeredPane().add(diagnostic_logement);
-				diagnostic_logement.setVisible(true);
-				diagnostic_logement.moveToFront();
+			case "btnMesBiens_AjouterDiagnostic_Logements":
+				if (Sauvegarde.onSave("Logement") == true) {
+					Fenetre_InsertionDiagnostic diagnostic_logement = new Fenetre_InsertionDiagnostic();
+					this.fenetreAccueil.getLayeredPane().add(diagnostic_logement);
+					diagnostic_logement.setVisible(true);
+					diagnostic_logement.moveToFront();
+				}
 				break;
-			case "btnMesBiens_AjouterPaiements_Logements": // A MODIFIER POUR QUE L'OUVERTURE SOIT FAITES APRES LA
-															// SELECTION D'UNE LIGNE DU TABLEAU
-				Fenetre_InsertionPaiementLogement paiement_logement = new Fenetre_InsertionPaiementLogement(false);
-				this.fenetreAccueil.getLayeredPane().add(paiement_logement);
-				paiement_logement.setVisible(true);
-				paiement_logement.moveToFront();
+			case "btnMesBiens_AjouterPaiements_Logements":
+				if (Sauvegarde.onSave("Logement") == true) {
+					Fenetre_InsertionPaiementLogement paiement_logement = new Fenetre_InsertionPaiementLogement(false);
+					this.fenetreAccueil.getLayeredPane().add(paiement_logement);
+					paiement_logement.setVisible(true);
+					paiement_logement.moveToFront();
+				}
 				break;
 
 			///////////////////////
