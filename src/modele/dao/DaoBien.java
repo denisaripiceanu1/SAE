@@ -10,6 +10,7 @@ import java.util.List;
 import modele.Bien;
 import modele.Immeuble;
 import modele.dao.requetes.delete.RequeteDeleteBien;
+import modele.dao.requetes.delete.RequeteDeleteDiagnostic;
 import modele.dao.requetes.select.RequeteSelectBien;
 import modele.dao.requetes.select.RequeteSelectBienById;
 import modele.dao.requetes.select.RequeteSelectBienparImmeuble;
@@ -138,4 +139,5 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 //        return DaoBien.iterateurBien;
 		return null;
 	}
+	
 }

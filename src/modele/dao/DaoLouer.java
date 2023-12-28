@@ -98,16 +98,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 	// ---------------- AUTRES METHODES ----------------//
 	
 	public List<Louer> findLocationByBien(String id) throws SQLException {
-		List<Louer> locations = null;
-		try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
-				.prepareStatement(new RequeteSelectLocationParBien().requete())) {
-			new RequeteSelectLocationParBien().parametres(st, id);
-			ResultSet res = st.executeQuery();
-			locations = convertirResultSetEnListe(res);
-			st.close();
-		}
-
-		return locations;
+		return find(new RequeteSelectLocationParBien(),id);
 
 	}
 
