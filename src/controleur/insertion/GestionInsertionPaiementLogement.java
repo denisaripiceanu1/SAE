@@ -37,46 +37,73 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 		Object source = e.getSource();
 
 		if (source instanceof JButton) {
-			JButton btn = (JButton) source;
-			Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fipl.getTopLevelAncestor();
+			JButton bouton = (JButton) source;
+			Fenetre_Accueil fenetrePrincipale = (Fenetre_Accueil) this.fipl.getTopLevelAncestor();
 
 			// Gestion des actions en fonction du bouton cliqué
-			switch (btn.getText()) {
+			switch (bouton.getText()) {
 			case "Ajouter":
-			    Facture facture = null;
-			    Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
-			    Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
-			    System.out.println("entrepriseSauvegarde: " + entrepriseSauvegarde);
-			    System.out.println("Facture avant création: " + facture);
+				Facture facture = null;
+				Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+				Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
+				System.out.println("entrepriseSauvegarde: " + entrepriseSauvegarde);
+				System.out.println("Facture avant création: " + facture);
 
-			    int imputable = 0;
-			    if (this.fipl.getRdbtnOui().isSelected()) {
-			        imputable = 1;
-			    }
-			    try {
-			        // Création d'un objet Facture à partir des données saisies dans la fenêtre
-			        facture = new Facture(this.fipl.getTextField_Numero().getText(),
-			                this.fipl.getTextField_date_emission().getText(),
-			                this.fipl.getTextField_date_paiement().getText(),
-			                this.fipl.getComboBox_modePaiement().getSelectedItem().toString(),
-			                this.fipl.getTextField_numeroDevis().getText(),
-			                this.fipl.getComboBox_Designation().getSelectedItem().toString(),
-			                Double.parseDouble(this.fipl.getTextField_accompteVerse().getText()),
-			                Double.parseDouble(this.fipl.getTextField_montant().getText()), imputable, null,
-			                bienSauvegarde, entrepriseSauvegarde);
-			        // Enregistrement de la facture dans la base de données
-			        this.daoFacture.create(facture);
-			    } catch (Exception e1) {
-			        e1.printStackTrace();
-			        System.err.println("Erreur lors de l'ajout de la facture : " + e1.getMessage());
-			    }
+				int imputable = 0;
+				if (this.fipl.getRdbtnOui().isSelected()) {
+					imputable = 1;
+				}
+				// Si la désignation de la facture est "Loyer", on insère null pour l'entreprise
+				// car celui qui génère la facture c'est le propriétaire du bien
+				String selectedDesignation = this.fipl.getComboBox_Designation().getSelectedItem().toString();
 
-			    this.fipl.dispose(); // Fermeture de la fenêtre d'insertion
-			    break;
+				if ("Loyer".equals(selectedDesignation)) {
+					try {
+						// Création d'un objet Facture à partir des données saisies dans la fenêtre
+						facture = new Facture(this.fipl.getTextField_Numero().getText(),
+								this.fipl.getTextField_date_emission().getText(),
+								this.fipl.getTextField_date_paiement().getText(),
+								this.fipl.getComboBox_modePaiement().getSelectedItem().toString(),
+								this.fipl.getTextField_numeroDevis().getText(),
+								this.fipl.getComboBox_Designation().getSelectedItem().toString(),
+								Double.parseDouble(this.fipl.getTextField_accompteVerse().getText()),
+								Double.parseDouble(this.fipl.getTextField_montant().getText()), imputable, null,
+								bienSauvegarde, null);
+						// Enregistrement de la facture dans la base de données
+						this.daoFacture.create(facture);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+						System.err.println("Erreur lors de l'ajout de la facture : " + e1.getMessage());
+					}
+					// Sinon, on crée une facture avec l'entreprise sauvegardée, qu'on a
+					// sélectionnée auparavant
+				} else {
+					try {
+						// Création d'un objet Facture à partir des données saisies dans la fenêtre
+						facture = new Facture(this.fipl.getTextField_Numero().getText(),
+								this.fipl.getTextField_date_emission().getText(),
+								this.fipl.getTextField_date_paiement().getText(),
+								this.fipl.getComboBox_modePaiement().getSelectedItem().toString(),
+								this.fipl.getTextField_numeroDevis().getText(),
+								this.fipl.getComboBox_Designation().getSelectedItem().toString(),
+								Double.parseDouble(this.fipl.getTextField_accompteVerse().getText()),
+								Double.parseDouble(this.fipl.getTextField_montant().getText()), imputable, null,
+								bienSauvegarde, entrepriseSauvegarde);
+						// Enregistrement de la facture dans la base de données
+						this.daoFacture.create(facture);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+						System.err.println("Erreur lors de l'ajout de la facture : " + e1.getMessage());
+					}
+				}
+
+				this.fipl.dispose(); // Fermeture de la fenêtre d'insertion
+				break;
 
 			case "Annuler":
 				this.fipl.dispose(); // Fermeture de la fenêtre d'insertion en cas d'annulation
 				break;
+
 			case "Charger":
 				try {
 					this.chargerEntreprise();
@@ -87,7 +114,7 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 
 			case "Insérer":
 				Fenetre_InsertionEntreprise insertionEntreprise = new Fenetre_InsertionEntreprise();
-				fenetre_Principale.getLayeredPane().add(insertionEntreprise);
+				fenetrePrincipale.getLayeredPane().add(insertionEntreprise);
 				insertionEntreprise.setVisible(true);
 				insertionEntreprise.moveToFront();
 				break;

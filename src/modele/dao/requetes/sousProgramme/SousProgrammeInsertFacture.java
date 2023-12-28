@@ -48,7 +48,11 @@ public class SousProgrammeInsertFacture implements SousProgramme<Facture> {
 		}
 		prSt.setString(11, donnee.getBien().getIdBien());
 
-		prSt.setString(12, donnee.getEntreprise().getSiret());
+		if (donnee.getEntreprise() != null && donnee.getEntreprise().getSiret() != null) {
+			prSt.setString(12, donnee.getEntreprise().getSiret());
+		} else {
+			prSt.setNull(12, java.sql.Types.VARCHAR);
+		}
 
 	}
 

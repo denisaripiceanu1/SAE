@@ -138,16 +138,15 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 			designationModel.addElement("Loyer");
 		} else {
 			// Ajouter tous les éléments
-			designationModel.addElement(" ");
+			// Faut laisser l'element vide 
+			designationModel.addElement(null);
 			designationModel.addElement("Travaux");
 			designationModel.addElement("Eau");
 			designationModel.addElement("Ordures ménagères");
 			designationModel.addElement("Électricité parties communes ");
 		}
 		this.comboBox_Designation.setModel(designationModel);
-//		if (!isAjouterFacture) {
-//			comboBox_Designation.setSelectedItem("Travaux");
-//		}
+
 		comboBox_Designation.addActionListener(gestionClic);
 		panel.add(this.comboBox_Designation);
 
