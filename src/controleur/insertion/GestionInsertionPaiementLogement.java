@@ -134,25 +134,29 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 	// Méthode pour mettre à jour les composants liés à l'entreprise en fonction de
 	// la désignation
 	private void updateEntrepriseComponents() {
-		String selectedDesignation = this.fipl.getComboBox_Designation().getSelectedItem().toString();
+		Object selectedObject = this.fipl.getComboBox_Designation().getSelectedItem();
 
-		switch (selectedDesignation) {
-		case "Loyer":
-			// Masquer les composants liés à l'entreprise pour les autres options
-			this.fipl.getBtn_ajouter_entreprise().setVisible(false);
-			this.fipl.getBtn_charger_entreprise().setVisible(false);
-			this.fipl.getScrollPane_table_entreprise().setVisible(false);
-			this.fipl.getTable_entreprise().setVisible(false);
-			this.fipl.getLbl_Entreprise().setVisible(false);
-			break;
-		// Afficher les composants liés à l'entreprise pour d'autres options
-		default:
-			this.fipl.getBtn_ajouter_entreprise().setVisible(true);
-			this.fipl.getBtn_charger_entreprise().setVisible(true);
-			this.fipl.getScrollPane_table_entreprise().setVisible(true);
-			this.fipl.getTable_entreprise().setVisible(true);
-			this.fipl.getLbl_Entreprise().setVisible(true);
-			break;
+		if (selectedObject != null) {
+			String selectedDesignation = selectedObject.toString();
+
+			switch (selectedDesignation) {
+			case "Loyer":
+				// Masquer les composants liés à l'entreprise pour les autres options
+				this.fipl.getBtn_ajouter_entreprise().setVisible(false);
+				this.fipl.getBtn_charger_entreprise().setVisible(false);
+				this.fipl.getScrollPane_table_entreprise().setVisible(false);
+				this.fipl.getTable_entreprise().setVisible(false);
+				this.fipl.getLbl_Entreprise().setVisible(false);
+				break;
+			// Afficher les composants liés à l'entreprise pour d'autres options
+			default:
+				this.fipl.getBtn_ajouter_entreprise().setVisible(true);
+				this.fipl.getBtn_charger_entreprise().setVisible(true);
+				this.fipl.getScrollPane_table_entreprise().setVisible(true);
+				this.fipl.getTable_entreprise().setVisible(true);
+				this.fipl.getLbl_Entreprise().setVisible(true);
+				break;
+			}
 		}
 	}
 
