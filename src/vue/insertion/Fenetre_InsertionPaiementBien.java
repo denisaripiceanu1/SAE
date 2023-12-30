@@ -1,17 +1,19 @@
 package vue.insertion;
 
 import javax.swing.*;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import controleur.GestionTableEntrepriseFenetreFactureLogement;
+import controleur.GestionTableEntrepriseFenetreFactureBien;
 import controleur.insertion.GestionInsertionPaiementBien;
 
 public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 
+	// Champs de saisie
 	private JTextField textField_Numero;
 	private JTextField textField_date_emission;
 	private JTextField textField_date_paiement;
@@ -19,18 +21,32 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 	private JTextField textField_montant;
 	private JTextField textField_accompteVerse;
 	private JSeparator separator_Travaux;
-	private JTable table_entreprise; // Utilisé pour afficher une table, mais non initialisé dans le constructeur
-	JRadioButton rdbtnOui = new JRadioButton("Oui");
-	JRadioButton rdbtnNon = new JRadioButton("Non");
+
+	// Table pour afficher les données d'entreprise
+	private JTable table_entreprise;
+
+	// Boutons radio
+	private JRadioButton rdbtnOui = new JRadioButton("Oui");
+	private JRadioButton rdbtnNon = new JRadioButton("Non");
+
+	// Menu déroulant
 	private JComboBox<String> comboBox_modePaiement;
 	private JComboBox<String> comboBox_Designation;
 
-	private GestionTableEntrepriseFenetreFactureLogement gteff;
+	// Boutons et libellés
+	private JButton btn_ajouter_entreprise;
+	private JButton btn_charger_entreprise;
+	private JScrollPane scrollPane_table_entreprise;
+	private JLabel lbl_Entreprise;
+
+	// Gestionnaires d'événements
+	private GestionTableEntrepriseFenetreFactureBien gteff;
 	private GestionInsertionPaiementBien gestionClic;
 
 	public Fenetre_InsertionPaiementBien() {
 
 		this.gestionClic = new GestionInsertionPaiementBien(this);
+		this.gteff = new GestionTableEntrepriseFenetreFactureBien(this);
 
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
@@ -47,7 +63,7 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		lbl_InsererUnTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUnTravaux.setBounds(294, 26, 153, 48);
 		panel.add(lbl_InsererUnTravaux);
-		
+
 		JLabel lbl_ImputableLocataire = new JLabel("Imputable Locataire");
 		lbl_ImputableLocataire.setForeground(Color.BLACK);
 		lbl_ImputableLocataire.setBackground(new Color(0, 102, 204));
@@ -164,38 +180,42 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		separator.setBounds(473, 106, 20, 278);
 		panel.add(separator);
 
-		JButton btn_ajouter_entreprise = new JButton("Ajouter");
-		btn_ajouter_entreprise.setForeground(Color.WHITE);
-		btn_ajouter_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_ajouter_entreprise.setBackground(new Color(0, 102, 204));
-		btn_ajouter_entreprise.setBounds(505, 142, 94, 31);
-		panel.add(btn_ajouter_entreprise);
+		// Partie ENTREPRISE
+		this.btn_ajouter_entreprise = new JButton("Insérer");
+		this.btn_ajouter_entreprise.setForeground(Color.WHITE);
+		this.btn_ajouter_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.btn_ajouter_entreprise.setBackground(new Color(0, 102, 204));
+		this.btn_ajouter_entreprise.setBounds(611, 142, 94, 31);
+		this.btn_ajouter_entreprise.addActionListener(gestionClic);
+		panel.add(this.btn_ajouter_entreprise);
 
-		JButton btn_charger_entreprise = new JButton("Charger");
-		btn_charger_entreprise.setForeground(Color.WHITE);
-		btn_charger_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_charger_entreprise.setBackground(new Color(0, 102, 204));
-		btn_charger_entreprise.setBounds(611, 142, 94, 31);
-		panel.add(btn_charger_entreprise);
+		this.btn_charger_entreprise = new JButton("Charger");
+		this.btn_charger_entreprise.setForeground(Color.WHITE);
+		this.btn_charger_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.btn_charger_entreprise.setBackground(new Color(0, 102, 204));
+		this.btn_charger_entreprise.setBounds(505, 142, 94, 31);
+		this.btn_charger_entreprise.addActionListener(gestionClic);
+		panel.add(this.btn_charger_entreprise);
 
-		JScrollPane scrollPane_table_entreprise = new JScrollPane();
-		scrollPane_table_entreprise.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
-		scrollPane_table_entreprise.setBounds(505, 189, 195, 97);
-		panel.add(scrollPane_table_entreprise);
+		this.scrollPane_table_entreprise = new JScrollPane();
+		this.scrollPane_table_entreprise.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
+		this.scrollPane_table_entreprise.setBounds(505, 189, 195, 97);
+		panel.add(this.scrollPane_table_entreprise);
 
+		// Table pour afficher les données d'entreprise
 		this.table_entreprise = new JTable();
 		this.table_entreprise.setSelectionBackground(new Color(0, 102, 204));
-		this.table_entreprise.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
-				new String[] { "Annee", "Trimestre", "ICC" }));
+		this.table_entreprise
+				.setModel(new DefaultTableModel(new Object[][] { { null, null }, }, new String[] { "SIRET", "Nom" }));
 		this.table_entreprise.setBounds(499, 80, 135, 16);
 		scrollPane_table_entreprise.setViewportView(this.table_entreprise);
 		this.table_entreprise.getSelectionModel().addListSelectionListener(this.gteff);
 
-		JLabel lbl_Entreprise = new JLabel("Entreprise");
-		lbl_Entreprise.setForeground(Color.BLACK);
-		lbl_Entreprise.setBackground(new Color(0, 102, 204));
-		lbl_Entreprise.setBounds(573, 104, 132, 31);
-		panel.add(lbl_Entreprise);
+		this.lbl_Entreprise = new JLabel("Entreprise");
+		this.lbl_Entreprise.setForeground(Color.BLACK);
+		this.lbl_Entreprise.setBackground(new Color(0, 102, 204));
+		this.lbl_Entreprise.setBounds(573, 104, 132, 31);
+		panel.add(this.lbl_Entreprise);
 	}
 
 	public JTextField getTextField_Numero() {
@@ -249,5 +269,20 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 	public JTable getTable_entreprise() {
 		return table_entreprise;
 	}
-	
+
+	public JButton getBtn_ajouter_entreprise() {
+		return btn_ajouter_entreprise;
+	}
+
+	public JButton getBtn_charger_entreprise() {
+		return btn_charger_entreprise;
+	}
+
+	public JScrollPane getScrollPane_table_entreprise() {
+		return scrollPane_table_entreprise;
+	}
+
+	public JLabel getLbl_Entreprise() {
+		return lbl_Entreprise;
+	}
 }

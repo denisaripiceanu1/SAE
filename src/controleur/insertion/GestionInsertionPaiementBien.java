@@ -14,7 +14,6 @@ import controleur.outils.Sauvegarde;
 import modele.Bien;
 import modele.Entreprise;
 import modele.Facture;
-import modele.Immeuble;
 import modele.dao.DaoEntreprise;
 import modele.dao.DaoFacture;
 import vue.Fenetre_Accueil;
