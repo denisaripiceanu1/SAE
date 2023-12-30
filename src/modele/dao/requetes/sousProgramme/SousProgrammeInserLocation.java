@@ -24,7 +24,7 @@ public class SousProgrammeInserLocation implements SousProgramme<Louer> {
 		prSt.setString(2, donnee.getBien().getIdBien());
 		prSt.setDate(3, java.sql.Date.valueOf(donnee.getDateDebut()));
 
-		// Paramètre potentiellement nul
+		// nb_mois --> Paramètre potentiellement nul
 
 		prSt.setNull(4, java.sql.Types.INTEGER);
 
@@ -43,9 +43,9 @@ public class SousProgrammeInserLocation implements SousProgramme<Louer> {
 
 		prSt.setInt(11, donnee.getLoyerPaye());
 
-		prSt.setString(12, "2023"); // annee
+		prSt.setString(12, donnee.getIcc().getAnnee()); // annee
 
-		prSt.setString(13, "1"); // trimestre
+		prSt.setString(13, donnee.getIcc().getTrimestre()); // trimestre
 
 		prSt.setDouble(14, donnee.getMontantReelPaye());
 	}

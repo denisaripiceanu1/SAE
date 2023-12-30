@@ -1,12 +1,8 @@
 package vue.insertion;
 
 import java.awt.Color;
-import java.awt.Desktop;
+
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -26,8 +22,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controleur.GestionTableICCFenetreLocation;
 import controleur.GestionTableLogementsFenetreLocation;
-import controleur.insertion.GestionInsertionICC;
 import controleur.insertion.GestionInsertionLocation;
 import modele.dao.DaoImmeuble;
 
@@ -52,11 +48,13 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	private DaoImmeuble daoImmeuble;
 	private GestionInsertionLocation gestionClic;
 	private GestionTableLogementsFenetreLocation gtfl;
+	private GestionTableICCFenetreLocation gtIccFl;
 
 	public Fenetre_InsertionLocation() {
 
 		this.gestionClic = new GestionInsertionLocation(this);
 		this.gtfl = new GestionTableLogementsFenetreLocation(this);
+		this.gtIccFl = new GestionTableICCFenetreLocation(this);
 		this.daoImmeuble = new DaoImmeuble();
 
 		this.setBounds(100, 100, 762, 541);
@@ -259,7 +257,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		this.table_icc.setModel(new DefaultTableModel(new Object[][] { {  null, null, null }, }, new String[] { "Annee", "Trimestre", "ICC" }));
 		this.table_icc.setBounds(499, 80, 135, 16);
 		scrollPane_table_icc.setViewportView(this.table_icc);
-		this.table_icc.getSelectionModel().addListSelectionListener(this.gtfl);
+		this.table_icc.getSelectionModel().addListSelectionListener(this.gtIccFl);
 
 		JButton btn_ajouter_icc = new JButton("Ajouter ICC");
 		btn_ajouter_icc.setForeground(Color.WHITE);

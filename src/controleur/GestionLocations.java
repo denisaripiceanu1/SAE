@@ -1,8 +1,6 @@
 package controleur;
 
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 
 import javax.swing.JTable;
 import javax.swing.JTextField;

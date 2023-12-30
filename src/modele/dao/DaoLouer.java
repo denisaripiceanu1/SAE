@@ -2,11 +2,9 @@ package modele.dao;
 
 import java.sql.CallableStatement;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import modele.Bien;
@@ -18,7 +16,6 @@ import modele.dao.requetes.select.RequeteSelectLocationParBien;
 import modele.dao.requetes.select.RequeteSelectLouer;
 import modele.dao.requetes.select.RequeteSelectLouerById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
-import modele.dao.requetes.sousProgramme.SousProgrammeDeleteLocation;
 import modele.dao.requetes.sousProgramme.SousProgrammeInserLocation;
 import modele.dao.requetes.update.RequeteUpdateLouer;
 
@@ -88,7 +85,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 			louer = new Louer(locataire, bien, dateDebutStr, curseur.getInt("nb_mois"), curseur.getDouble("loyer_TTC"),
 					curseur.getDouble("provision_chargeMens_TTC"), curseur.getDouble("caution_TTC"),
 					curseur.getString("bail"), curseur.getString("etat_lieux"), dateDepartStr,
-					curseur.getInt("loyer_paye"), icc , curseur.getDouble("montant_reel_paye"));
+					curseur.getInt("loyer_paye"), icc, curseur.getDouble("montant_reel_paye"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -96,21 +93,9 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 	}
 
 	// ---------------- AUTRES METHODES ----------------//
-	
+
 	public List<Louer> findLocationByBien(String id) throws SQLException {
-		return find(new RequeteSelectLocationParBien(),id);
+		return find(new RequeteSelectLocationParBien(), id);
 
 	}
-
-	private List<Louer> convertirResultSetEnListe(ResultSet res) throws SQLException {
-		List<Louer> locations = new ArrayList<>();
-
-		while (res.next()) {
-			Louer l = creerInstance(res);
-			locations.add(l);
-		}
-
-		return locations;
-	}
-
 }
