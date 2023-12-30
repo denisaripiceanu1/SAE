@@ -40,7 +40,6 @@ public class GestionModificationLocataire implements ActionListener {
 
 				this.daoLocataire.update(nouvelLocataire);
 
-				
 				this.modificationLocataire.dispose(); // Fermer la page après l'ajout
 
 			} catch (Exception e1) {
@@ -54,5 +53,4 @@ public class GestionModificationLocataire implements ActionListener {
 		}
 	}
 
-	
 }

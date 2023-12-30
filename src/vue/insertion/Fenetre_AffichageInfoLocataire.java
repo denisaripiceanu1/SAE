@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import controleur.insertion.GestionAffichageInfoLocataire;
-import controleur.modification.GestionModificationBien;
 import controleur.modification.GestionModificationLocataire;
 
 import javax.swing.border.LineBorder;
