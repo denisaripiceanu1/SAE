@@ -13,39 +13,55 @@ import vue.Fenetre_Accueil;
 
 public class GestionTableCharges implements ListSelectionListener {
 
-	private Fenetre_Accueil fenetreAccueil;
-	private DaoFacture daoFacture;
+    // Référence à la fenêtre d'accueil
+    private Fenetre_Accueil fenetreAccueil;
 
-	public GestionTableCharges(Fenetre_Accueil fenetreAccueil) {
-		this.fenetreAccueil = fenetreAccueil;
-		this.daoFacture = new DaoFacture();
-		Sauvegarde.initializeSave();
-	}
+    // Accès à la couche d'accès aux données pour l'entité Facture
+    private DaoFacture daoFacture;
 
-	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		if (!e.getValueIsAdjusting()) {
+    // Constructeur prenant en paramètre la fenêtre d'accueil
+    public GestionTableCharges(Fenetre_Accueil fenetreAccueil) {
+        this.fenetreAccueil = fenetreAccueil;
+        // Initialisation de l'accès à la base de données pour l'entité Facture
+        this.daoFacture = new DaoFacture();
+        // Initialisation de la sauvegarde
+        Sauvegarde.initializeSave();
+    }
 
-			int selectedRowCharge = this.fenetreAccueil.getTableChargesLocatives().getSelectedRow();
+    // Méthode appelée lorsqu'une sélection est modifiée dans la table des charges
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        // Vérifie si l'événement de sélection a été finalisé
+        if (!e.getValueIsAdjusting()) {
+            // Récupère l'indice de la ligne sélectionnée dans la table des charges locatives
+            int selectedRowCharge = this.fenetreAccueil.getTableChargesLocatives().getSelectedRow();
 
-			if (selectedRowCharge > -1) {
-				JTable tableFacturesCharges = this.fenetreAccueil.getTableChargesLocatives();
-				Facture facture = null;
-				try {
-					// Correction : Utilisez les entiers 1 et 0 pour deductible
-					int deductible = "Oui"
-							.equalsIgnoreCase(tableFacturesCharges.getValueAt(selectedRowCharge, 2).toString()) ? 1 : 0;
+            // Vérifie si une ligne est effectivement sélectionnée
+            if (selectedRowCharge > -1) {
+                // Récupère la référence à la table des charges locatives
+                JTable tableFacturesCharges = this.fenetreAccueil.getTableChargesLocatives();
+                // Initialise une référence à l'objet Facture
+                Facture facture = null;
 
-					facture = this.daoFacture.findById(tableFacturesCharges.getValueAt(selectedRowCharge, 0).toString() // numero
-					);
+                try {
+                    // Correction : Utilisez les entiers 1 et 0 pour "deductible"
+                    int deductible = "Oui"
+                            .equalsIgnoreCase(tableFacturesCharges.getValueAt(selectedRowCharge, 2).toString()) ? 1 : 0;
 
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				Sauvegarde.deleteItem("Facture");
-				Sauvegarde.addItem("Facture", facture);
-			}
-		}
-	}
+                    // Récupère l'objet Facture à partir des données de la ligne sélectionnée dans la table
+                    facture = this.daoFacture.findById(
+                            tableFacturesCharges.getValueAt(selectedRowCharge, 0).toString() // numéro de facture
+                    );
+
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+
+                // Supprime l'élément Facture précédemment sauvegardé et sauvegarde le nouvel élément
+                Sauvegarde.deleteItem("Facture");
+                Sauvegarde.addItem("Facture", facture);
+            }
+        }
+    }
 
 }

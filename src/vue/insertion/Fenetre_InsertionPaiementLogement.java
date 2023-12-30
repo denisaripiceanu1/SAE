@@ -1,6 +1,7 @@
 package vue.insertion;
 
 import javax.swing.*;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
@@ -8,7 +9,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.GestionTableEntrepriseFenetreFactureLogement;
-import controleur.insertion.GestionInsertionEntreprise;
 import controleur.insertion.GestionInsertionPaiementLogement;
 
 public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
