@@ -15,8 +15,6 @@ import controleur.insertion.GestionAffichageInfoLocataire;
 import controleur.modification.GestionModificationLocataire;
 
 import javax.swing.border.LineBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 	private JTextField textField_Nom;
@@ -95,15 +93,13 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		this.btnAnnuler.setBounds(399, 460, 200, 25);
 		panel.add(btnAnnuler);
 		btnAnnuler.addActionListener(gestionClic);
+		btnAnnuler.addActionListener(gestionModificationLocataire);
 
 		JButton btnModifier = new JButton("Modifier");
-		btnModifier.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnModifier.setBounds(144, 461, 200, 25);
 		panel.add(btnModifier);
 		btnModifier.addActionListener(gestionClic);
+		btnModifier.addActionListener(gestionModificationLocataire);
 
 		textField_DateN = new JTextField();
 		textField_DateN.setColumns(10);
