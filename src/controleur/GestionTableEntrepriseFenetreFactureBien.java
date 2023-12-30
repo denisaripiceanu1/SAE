@@ -13,37 +13,49 @@ import vue.insertion.Fenetre_InsertionPaiementBien;
 
 public class GestionTableEntrepriseFenetreFactureBien implements ListSelectionListener {
 
-	private Fenetre_InsertionPaiementBien fipb;
-	private DaoEntreprise daoEntreprise;
+    // Référence à la fenêtre d'insertion de paiement de bien
+    private Fenetre_InsertionPaiementBien fipb;
 
-	public GestionTableEntrepriseFenetreFactureBien(Fenetre_InsertionPaiementBien fipb) {
-		this.fipb = fipb;
-		this.daoEntreprise = new DaoEntreprise();
-		Sauvegarde.initializeSave();
-	}
+    // Accès à la couche d'accès aux données pour l'entité Entreprise
+    private DaoEntreprise daoEntreprise;
 
-	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		if (!e.getValueIsAdjusting()) {
+    // Constructeur prenant en paramètre la fenêtre d'insertion de paiement de bien
+    public GestionTableEntrepriseFenetreFactureBien(Fenetre_InsertionPaiementBien fipb) {
+        this.fipb = fipb;
+        // Initialisation de l'accès à la base de données pour l'entité Entreprise
+        this.daoEntreprise = new DaoEntreprise();
+        // Initialisation de la sauvegarde
+        Sauvegarde.initializeSave();
+    }
 
-			int selectedRowEntreprise = this.fipb.getTable_entreprise().getSelectedRow();
+    // Méthode appelée lorsqu'une sélection est modifiée dans la table d'entreprise
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        // Vérifie si l'événement de sélection a été finalisé
+        if (!e.getValueIsAdjusting()) {
+            // Récupère l'indice de la ligne sélectionnée dans la table d'entreprise
+            int selectedRowEntreprise = this.fipb.getTable_entreprise().getSelectedRow();
 
-			if (selectedRowEntreprise > -1) {
-				JTable tableEntreprise = this.fipb.getTable_entreprise();
-				Entreprise entreprise = null;
-				try {
-					entreprise = this.daoEntreprise.findById(tableEntreprise.getValueAt(selectedRowEntreprise, 0).toString(),
-							tableEntreprise.getValueAt(selectedRowEntreprise, 1).toString());
-					
-				    System.out.println("entrepriseSauvegarde depuis le tableau: " + entreprise);
+            // Vérifie si une ligne est effectivement sélectionnée
+            if (selectedRowEntreprise > -1) {
+                // Récupère la référence à la table d'entreprise
+                JTable tableEntreprise = this.fipb.getTable_entreprise();
+                // Initialise une référence à l'objet Entreprise
+                Entreprise entreprise = null;
 
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				Sauvegarde.deleteItem("Entreprise");
-				Sauvegarde.addItem("Entreprise", entreprise);
-			}
-		}
-	}
+                try {
+                    // Récupère l'objet Entreprise à partir des données de la ligne sélectionnée dans la table
+                    entreprise = this.daoEntreprise.findById(
+                            tableEntreprise.getValueAt(selectedRowEntreprise, 0).toString(),
+                            tableEntreprise.getValueAt(selectedRowEntreprise, 1).toString());
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+
+                // Supprime l'élément Entreprise précédemment sauvegardé et sauvegarde le nouvel élément
+                Sauvegarde.deleteItem("Entreprise");
+                Sauvegarde.addItem("Entreprise", entreprise);
+            }
+        }
+    }
 }
-

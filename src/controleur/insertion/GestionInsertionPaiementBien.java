@@ -14,6 +14,7 @@ import controleur.outils.Sauvegarde;
 import modele.Bien;
 import modele.Entreprise;
 import modele.Facture;
+import modele.Immeuble;
 import modele.dao.DaoEntreprise;
 import modele.dao.DaoFacture;
 import vue.Fenetre_Accueil;
@@ -41,10 +42,8 @@ public class GestionInsertionPaiementBien implements ActionListener {
 		switch (btn.getText()) {
 		case "Ajouter":
 			Facture facture = null;
-			Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+			Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
 			Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
-			System.out.println("entrepriseSauvegarde: " + entrepriseSauvegarde);
-			System.out.println("Facture avant création: " + facture);
 
 			int imputable = 0;
 			if (this.fipb.getRdbtnOui().isSelected()) {
@@ -60,8 +59,8 @@ public class GestionInsertionPaiementBien implements ActionListener {
 						this.fipb.getTextField_numeroDevis().getText(),
 						this.fipb.getComboBox_Designation().getSelectedItem().toString(),
 						Double.parseDouble(this.fipb.getTextField_accompteVerse().getText()),
-						Double.parseDouble(this.fipb.getTextField_montant().getText()), imputable, null, bienSauvegarde,
-						entrepriseSauvegarde);
+						Double.parseDouble(this.fipb.getTextField_montant().getText()), imputable, immeubleSauvegarde,
+						null, entrepriseSauvegarde);
 				// Enregistrement de la facture dans la base de données
 				this.daoFacture.create(facture);
 			} catch (Exception e1) {
@@ -69,7 +68,9 @@ public class GestionInsertionPaiementBien implements ActionListener {
 				System.err.println("Erreur lors de l'ajout de la facture : " + e1.getMessage());
 			}
 
+			this.fipb.dispose(); // Fermeture de la fenêtre d'insertion
 			break;
+			
 		case "Annuler":
 			this.fipb.dispose();
 			break;

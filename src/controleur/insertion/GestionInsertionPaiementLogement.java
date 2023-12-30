@@ -46,8 +46,6 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 				Facture facture = null;
 				Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
 				Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
-				System.out.println("entrepriseSauvegarde: " + entrepriseSauvegarde);
-				System.out.println("Facture avant création: " + facture);
 
 				int imputable = 0;
 				if (this.fipl.getRdbtnOui().isSelected()) {
