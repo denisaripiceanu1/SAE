@@ -35,11 +35,12 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		case "Modifier":
 			Locataire locataire = creationLocataire();
 			try {
-				RequeteUpdateLocataire updateLocataire = new RequeteUpdateLocataire();
 				this.daoLocataire.update(locataire);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+			this.fail.dispose();
+
 			break;
 
 		case "Retour":
