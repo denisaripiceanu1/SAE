@@ -45,21 +45,24 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	private JTextField textField_loyer;
 	private JComboBox<String> comboBox_bien;
 
+    // Gestionnaires d'événements
 	private DaoImmeuble daoImmeuble;
 	private GestionInsertionLocation gestionClic;
 	private GestionTableLogementsFenetreLocation gtfl;
 	private GestionTableICCFenetreLocation gtIccFl;
 
 	public Fenetre_InsertionLocation() {
-
+        // Initialisation des gestionnaires
 		this.gestionClic = new GestionInsertionLocation(this);
 		this.gtfl = new GestionTableLogementsFenetreLocation(this);
 		this.gtIccFl = new GestionTableICCFenetreLocation(this);
 		this.daoImmeuble = new DaoImmeuble();
 
+        // Configuration de la fenêtre interne
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
+        // Création du panneau principal
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(new Color(255, 255, 255));
@@ -67,11 +70,13 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		panel.setLayout(null);
 		this.getContentPane().add(panel);
 
+        // Séparateur sous le titre
 		JSeparator separator_titreInsererLocation = new JSeparator();
 		separator_titreInsererLocation.setForeground(new Color(0, 102, 204));
 		separator_titreInsererLocation.setBounds(271, 61, 190, 2);
 		panel.add(separator_titreInsererLocation);
 
+        // Titre de la fenêtre
 		JLabel lbl_InsererUneLocation = new JLabel("Insérer une location");
 		lbl_InsererUneLocation.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUneLocation.setBounds(290, 14, 171, 48);
