@@ -1,7 +1,5 @@
 package vue.insertion;
 
-import java.awt.EventQueue;
-
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -14,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import controleur.insertion.GestionAffichageInfoLocataire;
+import controleur.modification.GestionModificationBien;
+import controleur.modification.GestionModificationLocataire;
 
 import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
@@ -27,10 +27,12 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 	private JTextField textField_DateN;
 	private JTextField textField_Id;
 	private JButton btnAnnuler;
+	private GestionModificationLocataire gestionModificationLocataire;
 	private GestionAffichageInfoLocataire gestionClic;
 
 	public Fenetre_AffichageInfoLocataire() {
 
+		this.gestionModificationLocataire = new GestionModificationLocataire(this);
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 

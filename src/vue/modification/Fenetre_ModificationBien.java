@@ -89,20 +89,6 @@ public class Fenetre_ModificationBien extends JInternalFrame {
 		this.textField_periodeDeConstruction.setBounds(427, 228, 190, 40);
 		panel.add(this.textField_periodeDeConstruction);
 
-		this.textField_nbLogement = new JTextField();
-		this.textField_nbLogement.setColumns(10);
-		this.textField_nbLogement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Nombre de logements", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_nbLogement.setBounds(110, 294, 190, 40);
-		panel.add(this.textField_nbLogement);
-
-		this.textField_dateAcquisition = new JTextField();
-		this.textField_dateAcquisition.setColumns(10);
-		this.textField_dateAcquisition.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Date d'acquisition", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_dateAcquisition.setBounds(427, 294, 190, 40);
-		panel.add(this.textField_dateAcquisition);
-
 		this.comboBox_typeDeBien = new JComboBox();
 		this.comboBox_typeDeBien.setModel(new DefaultComboBoxModel(new String[] { "Immeuble", "Maison" }));
 		this.comboBox_typeDeBien.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type",

@@ -123,8 +123,7 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		btn_ajouterCompteur.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_ajouterCompteur.setBounds(246, 378, 246, 31);
 		panel.add(btn_ajouterCompteur);
-		
-
+	
 	}
 	
 	public JTextField getTextField_IdImmeuble() {
