@@ -1,15 +1,11 @@
 package vue.insertion;
 
-import java.awt.EventQueue;
-
-
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
@@ -18,8 +14,6 @@ import controleur.insertion.GestionInsertionBien;
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 
 public class Fenetre_InsertionBien extends JInternalFrame {

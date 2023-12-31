@@ -57,6 +57,7 @@ public class DaoICC extends DaoModele<ICC> implements Dao<ICC> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		return icc;
 	}
 

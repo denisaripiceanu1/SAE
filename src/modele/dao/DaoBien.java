@@ -1,6 +1,7 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +11,6 @@ import java.util.List;
 import modele.Bien;
 import modele.Immeuble;
 import modele.dao.requetes.delete.RequeteDeleteBien;
-import modele.dao.requetes.delete.RequeteDeleteDiagnostic;
 import modele.dao.requetes.select.RequeteSelectBien;
 import modele.dao.requetes.select.RequeteSelectBienById;
 import modele.dao.requetes.select.RequeteSelectBienparImmeuble;

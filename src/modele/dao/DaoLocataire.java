@@ -1,6 +1,7 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -8,12 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import modele.Bien;
 import modele.Locataire;
 import modele.dao.requetes.select.RequeteSelectLocataire;
 import modele.dao.requetes.select.RequeteSelectLocataireById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
-import modele.dao.requetes.sousProgramme.SousProgrammeInsertBien;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocataire;
 import modele.dao.requetes.update.RequeteUpdateLocataire;
 
@@ -30,13 +29,24 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 
 	@Override
 	public void update(Locataire donnees) throws SQLException {
-		miseAJour(new RequeteUpdateLocataire(), donnees);
+	    try {
+	        System.out.println("Données à mettre à jour : " + donnees);
+	        miseAJour(new RequeteUpdateLocataire(), donnees);
+	        System.out.println("Mise à jour effectuée avec succès.");
+	    } catch (SQLException e) {
+	        System.out.println("Erreur lors de la mise à jour : " + e.getMessage());
+	        e.printStackTrace();
+	    } catch (Exception ex) {
+	        System.out.println("Erreur inattendue lors de la mise à jour : " + ex.getMessage());
+	        ex.printStackTrace();
+	    }
 
 	}
 
+
 	@Override
 	public void delete(Locataire donnees) {
-		delete(donnees);
+		
 
 	}
 

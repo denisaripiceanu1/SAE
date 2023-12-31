@@ -150,21 +150,24 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	private void chargerLocations() throws SQLException {
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableLocations().getModel();
+
+		// Réinitialiser le modèle pour vider la table
+		modeleTable.setRowCount(0);
+
 		List<Bien> biens = this.daoBien.findAll();
 		List<Louer> locations = new ArrayList<>();
 
 		for (Bien b : biens) {
-			locations.addAll(this.daoLouer.findLocationByBien(b.getIdBien())); // Ajouter toutes les locations du bien Ã
-																				// la liste
+			locations.addAll(this.daoLouer.findLocationByBien(b.getIdBien()));
 		}
-
-		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableLocations().getModel();
-		modeleTable.setRowCount(locations.size());
-
+		// Ajouter les nouvelles lignes
 		for (int i = 0; i < locations.size(); i++) {
 			Louer location = locations.get(i);
 			Bien bien = location.getBien();
-			this.ecrireLigneTableLocations(i, location, bien);
+			int row = modeleTable.getRowCount(); // Obtenir le nb de lignes 
+			modeleTable.addRow(new Object[0]); // Ajouter une nouvelle ligne
+			this.ecrireLigneTableLocations(row, location, bien);
 		}
 	}
 

@@ -29,6 +29,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
 	public Fenetre_AffichageInfoLocataire() {
 
+		this.gestionClic = new GestionAffichageInfoLocataire(this);
 		this.gestionModificationLocataire = new GestionModificationLocataire(this);
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
@@ -57,7 +58,6 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
 		JButton btnRegularisationCharges = new JButton("Régularisation des charges");
 		btnRegularisationCharges.setBounds(502, 198, 200, 25);
-		// Ajoutez le code associé à l'action du bouton ici
 		panel.add(btnRegularisationCharges);
 		btnRegularisationCharges.addActionListener(gestionClic);
 
@@ -92,14 +92,12 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		this.btnAnnuler = new JButton("Retour");
 		this.btnAnnuler.setBounds(399, 460, 200, 25);
 		panel.add(btnAnnuler);
-		btnAnnuler.addActionListener(gestionClic);
 		btnAnnuler.addActionListener(gestionModificationLocataire);
 
 		JButton btnModifier = new JButton("Modifier");
-		btnModifier.setBounds(144, 461, 200, 25);
-		panel.add(btnModifier);
-		btnModifier.addActionListener(gestionClic);
-		btnModifier.addActionListener(gestionModificationLocataire);
+        btnModifier.setBounds(144, 461, 200, 25);
+        panel.add(btnModifier);
+        btnModifier.addActionListener(new GestionModificationLocataire(this));
 
 		textField_DateN = new JTextField();
 		textField_DateN.setColumns(10);
@@ -136,14 +134,6 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		lblDpartLoca.setBounds(534, 264, 137, 25);
 		panel.add(lblDpartLoca);
 
-		initialiserGestionClic();
-
-	}
-
-	private void initialiserGestionClic() {
-		this.gestionClic = new GestionAffichageInfoLocataire(this);
-		// Assigne le gestionnaire d'événements à l'action du bouton "Retour"
-		this.btnAnnuler.addActionListener(gestionClic);
 	}
 
 	public JTextField getTextField_Nom() {
