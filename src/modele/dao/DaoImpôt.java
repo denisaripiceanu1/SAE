@@ -46,7 +46,7 @@ public class DaoImpôt extends DaoModele<Impôt> implements Dao<Impôt> {
 	protected Impôt creerInstance(ResultSet curseur) throws SQLException {
 		Impôt impôt = null;
 		try {
-			impôt = new Impôt(curseur.getInt("idImpot"), curseur.getString("nom"), curseur.getDouble("montant"));
+			impôt = new Impôt(curseur.getInt("id_Impot"), curseur.getString("nom"), curseur.getDouble("montant"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -20,7 +20,7 @@ public class RequeteSelectImposerByBien implements Requete<Imposer> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, Imposer data) throws SQLException {
-		prSt.setString(1, data.getBien().toString());
+		prSt.setString(1, data.getBien().getIdBien());
 	}
 
 }

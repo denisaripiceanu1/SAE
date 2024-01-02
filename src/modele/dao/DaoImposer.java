@@ -1,7 +1,6 @@
 package modele.dao;
 
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,6 +9,7 @@ import modele.Imposer;
 import modele.Impôt;
 import modele.dao.requetes.delete.RequeteDeleteImposerByImmeuble;
 import modele.dao.requetes.select.RequeteSelectImposer;
+import modele.dao.requetes.select.RequeteSelectImposerByBien;
 import modele.dao.requetes.select.RequeteSelectImposerById;
 
 public class DaoImposer extends DaoModele<Imposer> implements Dao<Imposer> {
@@ -63,9 +63,9 @@ public class DaoImposer extends DaoModele<Imposer> implements Dao<Imposer> {
 	public List<Imposer> findAll() throws SQLException {
 		return find(new RequeteSelectImposer());
 	}
-	
-	public List<Imposer> findImposerByBien(String id) throws SQLException{
-		return find(new RequeteSelectImposer(), id);
+
+	public List<Imposer> findImposerByBien(String id) throws SQLException {
+		return find(new RequeteSelectImposerByBien(), id);
 	}
 
 }

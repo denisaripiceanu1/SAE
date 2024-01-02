@@ -14,6 +14,7 @@ import modele.Compteur;
 import modele.Diagnostics;
 import modele.Facture;
 import modele.Immeuble;
+import modele.Imposer;
 import modele.Louer;
 import modele.Quotter;
 import modele.Releve;
@@ -73,12 +74,9 @@ public class GestionSuppressionBien implements ActionListener {
 				String idBien = immeuble_supp.getImmeuble();
 				List<Bien> bienListe = this.daoBien.findBiensparImmeuble(idBien);
 				List<Compteur> compteurListeImmeuble = this.daoCompteur.findByIdImmeubleListe(idBien);
-				List<Facture> factureListeImmeuble = this.daoFacture.findFactureImmeuble(idBien);
-				List<Releve> releves;
+				List<Facture> factureListeImmeuble = this.daoFacture.findFactureImmeuble(idBien); // marche
+				List<Releve> releves; // marche
 				if (compteurListeImmeuble != null && !compteurListeImmeuble.isEmpty()) {
-					for (Facture facture : factureListeImmeuble) {
-						this.daoFacture.delete(facture);
-					}
 					for (Compteur compteur : compteurListeImmeuble) {
 						releves = this.daoReleve.findReleveByCompteur(compteur.getIdCompteur());
 						for (Releve releve : releves) {
@@ -87,13 +85,20 @@ public class GestionSuppressionBien implements ActionListener {
 						this.daoCompteur.delete(compteur);
 					}
 				}
+				if (factureListeImmeuble != null && !factureListeImmeuble.isEmpty()) {
+					for (Facture facture : factureListeImmeuble) {
+						this.daoFacture.delete(facture);
+					}
+				}
 				for (Bien bien : bienListe) {
 					List<Assurance> assurances = this.daoAssurance.findByLogement(bien.getIdBien()); // assurance marche
-					List<Diagnostics> diagnostics = this.daoDiagnostic.findDiagnosticByBien(bien.getIdBien());
-					List<Louer> louers = this.daoLouer.findLocationByBien(bien.getIdBien());
-					List<Compteur> compteurListeBien = this.daoCompteur.findByIdBienListe(bien.getIdBien());
-					List<Quotter> quotters = this.daoQuotter.findQuotterByBien(bien.getIdBien());
-					List<Facture> factureListeBien = this.daoFacture.findFactureByBien(bien.getIdBien());
+					List<Diagnostics> diagnostics = this.daoDiagnostic.findDiagnosticByBien(bien.getIdBien()); // marche
+																												// pas
+					List<Louer> louers = this.daoLouer.findLocationByBien(bien.getIdBien()); // marche
+					List<Compteur> compteurListeBien = this.daoCompteur.findByIdBienListe(bien.getIdBien()); // marche
+					List<Quotter> quotters = this.daoQuotter.findQuotterByBien(bien.getIdBien()); // marche
+					List<Facture> factureListeBien = this.daoFacture.findFactureByBien(bien.getIdBien()); // marche
+					List<Imposer> imposers = this.daoImposer.findImposerByBien(bien.getIdBien());
 					for (Assurance assurance : assurances) {
 						this.daoAssurance.delete(assurance);
 					}
@@ -104,9 +109,6 @@ public class GestionSuppressionBien implements ActionListener {
 						this.daoLouer.delete(louer);
 					}
 					if (compteurListeBien != null && !compteurListeBien.isEmpty()) {
-						for (Facture facture : factureListeBien) {
-							this.daoFacture.delete(facture);
-						}
 						for (Compteur compteur : compteurListeBien) {
 							releves = this.daoReleve.findReleveByCompteur(compteur.getIdCompteur());
 							for (Releve releve : releves) {
@@ -115,8 +117,16 @@ public class GestionSuppressionBien implements ActionListener {
 							this.daoCompteur.delete(compteur);
 						}
 					}
+					if (factureListeBien != null && !factureListeBien.isEmpty()) {
+						for (Facture facture : factureListeBien) {
+							this.daoFacture.delete(facture);
+						}
+					}
 					for (Quotter quotter : quotters) {
 						this.daoQuotter.delete(quotter);
+					}
+					for (Imposer imposer : imposers) {
+						this.daoImposer.delete(imposer);
 					}
 					this.daoBien.delete(bien);
 				}
