@@ -569,6 +569,7 @@ public class GestionAccueil implements ActionListener {
 					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sÃ©lectionner un bien pour supprimer",
 							"Erreur", JOptionPane.ERROR_MESSAGE);
 				}
+				break;
 
 			case "btn_mesLocations_InfoLocataire":
 				if (Sauvegarde.onSave("Locataire") == true) {
