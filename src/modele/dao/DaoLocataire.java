@@ -29,24 +29,13 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 
 	@Override
 	public void update(Locataire donnees) throws SQLException {
-	    try {
-	        System.out.println("Données à mettre à jour : " + donnees);
-	        miseAJour(new RequeteUpdateLocataire(), donnees);
-	        System.out.println("Mise à jour effectuée avec succès.");
-	    } catch (SQLException e) {
-	        System.out.println("Erreur lors de la mise à jour : " + e.getMessage());
-	        e.printStackTrace();
-	    } catch (Exception ex) {
-	        System.out.println("Erreur inattendue lors de la mise à jour : " + ex.getMessage());
-	        ex.printStackTrace();
-	    }
+		
+			this.miseAJour(new RequeteUpdateLocataire(), donnees);
 
 	}
 
-
 	@Override
 	public void delete(Locataire donnees) {
-		
 
 	}
 
@@ -80,21 +69,21 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 		}
 		return locataire;
 	}
-	
+
 	public List<String> getAllIdLocataire() throws SQLException {
-	    List<String> identifiants = new ArrayList<>();
+		List<String> identifiants = new ArrayList<>();
 
-	    String sql = "SELECT ID_Locataire FROM LOCATAIRE";
+		String sql = "SELECT ID_Locataire FROM LOCATAIRE";
 
-	    try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(sql);
-	         ResultSet resultSet = st.executeQuery()) {
+		try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(sql);
+				ResultSet resultSet = st.executeQuery()) {
 
-	        while (resultSet.next()) {
-	        	identifiants.add(resultSet.getString("ID_Locataire"));
-	        }
-	    }
+			while (resultSet.next()) {
+				identifiants.add(resultSet.getString("ID_Locataire"));
+			}
+		}
 
-	    return identifiants;
+		return identifiants;
 	}
 
 }

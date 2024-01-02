@@ -95,9 +95,9 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		btnAnnuler.addActionListener(gestionModificationLocataire);
 
 		JButton btnModifier = new JButton("Modifier");
-        btnModifier.setBounds(144, 461, 200, 25);
-        panel.add(btnModifier);
-        btnModifier.addActionListener(new GestionModificationLocataire(this));
+		btnModifier.setBounds(144, 461, 200, 25);
+		panel.add(btnModifier);
+		btnModifier.addActionListener(new GestionModificationLocataire(this));
 
 		textField_DateN = new JTextField();
 		textField_DateN.setColumns(10);
@@ -112,6 +112,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_Id.setBounds(33, 130, 190, 40);
 		panel.add(textField_Id);
+		textField_Id.setEditable(false);
 
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);

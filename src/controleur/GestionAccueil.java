@@ -3,7 +3,9 @@ package controleur;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -452,18 +454,23 @@ public class GestionAccueil implements ActionListener {
 					Bien logementCourant;
 
 					try {
-						logementCourant = this.daoBien.findById(logementSauvegarde.getIdBien());
-						modif_logement.getTextField_IdLogement().setText(logementCourant.getIdBien());
-						modif_logement.getTextField_SurfaceHabitable()
-								.setText(Double.toString(logementCourant.getSurfaceHabitable()));
-						modif_logement.getTextField_NbPièces().setText(Integer.toString(logementCourant.getNbPieces()));
-						modif_logement.getTextField_DateAcquisition().setText(logementCourant.getDateAcquisition());
-						modif_logement.getTextField_NumEtage().setText(Integer.toString(logementCourant.getNumEtage()));
-						modif_logement.getComboBox_typeDeLogement().setSelectedItem(logementCourant.getType_bien());
-						// voir comment potentiellement recuperer le compteur et les autres trucs
+					    logementCourant = this.daoBien.findById(logementSauvegarde.getIdBien());
+					    modif_logement.getTextField_IdLogement().setText(logementCourant.getIdBien());
+					    modif_logement.getTextField_SurfaceHabitable().setText(Double.toString(logementCourant.getSurfaceHabitable()));
+					    modif_logement.getTextField_NbPièces().setText(Integer.toString(logementCourant.getNbPieces()));
+
+					    // Format date
+					    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+					    String formattedDate = dateFormat.format(Date.valueOf(logementCourant.getDateAcquisition()));
+					    modif_logement.getTextField_DateAcquisition().setText(formattedDate);
+
+					    modif_logement.getTextField_NumEtage().setText(Integer.toString(logementCourant.getNumEtage()));
+					    modif_logement.getComboBox_typeDeLogement().setSelectedItem(logementCourant.getType_bien());
+					    // voir comment potentiellement récupérer le compteur et les autres trucs
 					} catch (SQLException e1) {
-						e1.printStackTrace();
+					    e1.printStackTrace();
 					}
+
 
 				} else {
 					//////// POUR MODIFIER UN IMMEUBLE///////////
@@ -589,7 +596,9 @@ public class GestionAccueil implements ActionListener {
 						infos_locataire.getTextField_Prenom().setText(locataireCourant.getPrenom());
 						infos_locataire.getTextField_Telephone().setText(locataireCourant.getTelephone());
 						infos_locataire.getTextField_Mail().setText(locataireCourant.getMail());
-						infos_locataire.getTextField_DateN().setText(locataireCourant.getDateNaissance());
+						SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+					    String formattedDate = dateFormat.format(Date.valueOf(locataireCourant.getDateNaissance()));
+					    infos_locataire.getTextField_DateN().setText(formattedDate);
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}

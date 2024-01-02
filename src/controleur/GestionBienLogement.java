@@ -1,6 +1,8 @@
 package controleur;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -87,7 +89,9 @@ public class GestionBienLogement implements ListSelectionListener {
 							double surface = bien.getSurfaceHabitable();
 							int nbPieces = bien.getNbPieces();
 							int etage = bien.getNumEtage();
-							String date = bien.getDateAcquisition();
+							// Format date using SimpleDateFormat
+					        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+					        String date = dateFormat.format(Date.valueOf(bien.getDateAcquisition()));
 
 							// Utiliser la méthode estLoue pour vérifier si le logement est loué
 							boolean estLoue = false;

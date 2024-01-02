@@ -1,9 +1,10 @@
 package modele.dao.requetes.update;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import modele.Locataire;
 import modele.dao.CictOracleDataSource;
@@ -13,7 +14,7 @@ public class RequeteUpdateLocataire implements Requete<Locataire> {
 
     @Override
     public String requete() {
-        // Only update non-primary key fields in the Locataire table
+        // Update other fields except Id_Locataire
         return "UPDATE Locataire SET nom = ?, prenom = ?, telephone = ?, mail = ?, date_naissance = ? WHERE Id_Locataire = ?";
     }
 
@@ -34,17 +35,14 @@ public class RequeteUpdateLocataire implements Requete<Locataire> {
         prSt.setString(2, data.getPrenom());
         prSt.setString(3, data.getTelephone());
         prSt.setString(4, data.getMail());
-        prSt.setDate(5, Date.valueOf(data.getDateNaissance()));
-        prSt.setString(6, data.getIdLocataire()); // Old Id_Locataire
-    }
-
-    // Method to update Id_Locataire in Louer table
-    public void updateLouerIdLocataire(String oldIdLocataire, String newIdLocataire) throws SQLException {
-        String sql = "UPDATE Louer SET Id_Locataire = ? WHERE Id_Locataire = ?";
-        try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(sql)) {
-            st.setString(1, newIdLocataire);
-            st.setString(2, oldIdLocataire);
-            st.executeUpdate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            java.util.Date parsedDate = dateFormat.parse(data.getDateNaissance());
+            prSt.setDate(5, new Date(parsedDate.getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        prSt.setString(6, data.getIdLocataire()); 
     }
+ 
 }

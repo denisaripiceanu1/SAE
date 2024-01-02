@@ -80,36 +80,34 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		textField_Numero = new JTextField();
 		textField_Numero.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Numero.setBounds(24, 104, 190, 40);
+		textField_Numero.setBounds(24, 104, 202, 40);
 		panel.add(textField_Numero);
 		textField_Numero.setColumns(10);
 
 		textField_date_emission = new JTextField();
 		textField_date_emission.setColumns(10);
-		textField_date_emission.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Date \u00E9mission  ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_emission.setBounds(24, 168, 190, 40);
+		textField_date_emission.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9mission (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_date_emission.setBounds(24, 168, 202, 40);
 		panel.add(textField_date_emission);
 
 		textField_date_paiement = new JTextField();
 		textField_date_paiement.setColumns(10);
-		textField_date_paiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date Paiement",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_paiement.setBounds(247, 167, 190, 40);
+		textField_date_paiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date Paiement (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_date_paiement.setBounds(247, 167, 202, 40);
 		panel.add(textField_date_paiement);
 
 		textField_numeroDevis = new JTextField();
 		textField_numeroDevis.setColumns(10);
 		textField_numeroDevis.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro devis",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_numeroDevis.setBounds(24, 228, 190, 40);
+		textField_numeroDevis.setBounds(24, 228, 202, 40);
 		panel.add(textField_numeroDevis);
 
 		// Menu déroulant pour la designation de la facture
 		comboBox_Designation = new JComboBox<>();
 		comboBox_Designation.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "D\u00E9signation",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		comboBox_Designation.setBounds(247, 104, 190, 40);
+		comboBox_Designation.setBounds(247, 104, 200, 40);
 
 		DefaultComboBoxModel<String> designationModel = new DefaultComboBoxModel<>();
 		designationModel.addElement("Travaux");
@@ -121,14 +119,14 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		textField_montant.setColumns(10);
 		textField_montant.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_montant.setBounds(24, 294, 190, 40);
+		textField_montant.setBounds(24, 294, 202, 40);
 		panel.add(textField_montant);
 
 		textField_accompteVerse = new JTextField();
 		textField_accompteVerse.setColumns(10);
 		textField_accompteVerse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
 				"Acompte vers\u00E9 ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_accompteVerse.setBounds(247, 294, 190, 40);
+		textField_accompteVerse.setBounds(247, 294, 200, 40);
 		panel.add(textField_accompteVerse);
 
 		separator_Travaux = new JSeparator();
@@ -139,7 +137,7 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		comboBox_modePaiement = new JComboBox<>();
 		comboBox_modePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mode de Paiement",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		comboBox_modePaiement.setBounds(247, 230, 189, 39);
+		comboBox_modePaiement.setBounds(247, 230, 200, 39);
 
 		DefaultComboBoxModel<String> modePaiementModel = new DefaultComboBoxModel<>();
 		modePaiementModel.addElement("Virement bancaire");
