@@ -636,7 +636,6 @@ public class GestionAccueil implements ActionListener {
 						modif_travaux.getTextField_paye().setText(Double.toString(travauxCourant.getAccompteVerse()));
 						modif_travaux.getTextField_prestataire().setText(travauxCourant.getEntreprise().getNom());
 						modif_travaux.getTextField_adresse().setText(travauxCourant.getEntreprise().getAdresse());
-						// Set any other fields as needed
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
@@ -690,7 +689,7 @@ public class GestionAccueil implements ActionListener {
 //			            }
 //
 //			        } catch (SQLException e1) {
-//			            // GÃ©rer l'exception de maniÃ¨re appropriÃ©e (affichage d'un message Ã  l'utilisateur, etc.)
+//			            // Gerer l'exception de maniÃ¨re appropriÃ©e (affichage d'un message Ã  l'utilisateur, etc.)
 //			            e1.printStackTrace();
 //			        }
 //			    }
@@ -766,6 +765,7 @@ public class GestionAccueil implements ActionListener {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+
 				break;
 			case "tglbtn_Travaux_logements":
 				// Permet de trier le tableau de travaux en n'affichant que ceux concernants les
