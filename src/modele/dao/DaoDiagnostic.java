@@ -65,10 +65,9 @@ public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnos
 	public List<Diagnostics> findAll() throws SQLException {
 		return this.find(new RequeteSelectDiagnostic());
 	}
-	
 
-	public List<Diagnostics> findDiagnosticByBien(String... id) throws SQLException {
-		return find(new RequeteSelectDiagnoticByBien(), id);
+	public List<Diagnostics> findDiagnosticByBien(String id) throws SQLException {
+		return this.find(new RequeteSelectDiagnoticByBien(), id);
 	}
 
 	public Diagnostics findByIdBien(String... id) throws SQLException {

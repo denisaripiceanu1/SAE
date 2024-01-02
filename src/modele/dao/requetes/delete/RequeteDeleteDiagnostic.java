@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import modele.Diagnostics;
 import modele.dao.requetes.Requete;
 
-public class RequeteDeleteDiagnostic implements Requete<Diagnostics>{
+public class RequeteDeleteDiagnostic implements Requete<Diagnostics> {
 
 	@Override
 	public String requete() {

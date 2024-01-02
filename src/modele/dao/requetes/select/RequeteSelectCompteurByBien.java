@@ -3,14 +3,14 @@ package modele.dao.requetes.select;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import modele.Diagnostics;
+import modele.Compteur;
 import modele.dao.requetes.Requete;
 
-public class RequeteSelectDiagnoticByBien implements Requete<Diagnostics> {
+public class RequeteSelectCompteurByBien implements Requete<Compteur> {
 
 	@Override
 	public String requete() {
-		return "SELECT * FROM Diagnostic WHERE Id_Bien = ?";
+		return "SELECT * FROM Compteur WHERE Id_Bien  = ?";
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class RequeteSelectDiagnoticByBien implements Requete<Diagnostics> {
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Diagnostics data) throws SQLException {
+	public void parametres(PreparedStatement prSt, Compteur data) throws SQLException {
 		prSt.setString(1, data.getBien().getIdBien());
 	}
 

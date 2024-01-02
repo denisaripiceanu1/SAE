@@ -1,7 +1,6 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +15,9 @@ import modele.Immeuble;
 import modele.dao.requetes.delete.RequeteDeleteTravaux;
 import modele.dao.requetes.select.RequeteSelectFacture;
 import modele.dao.requetes.select.RequeteSelectFactureByBien;
+import modele.dao.requetes.select.RequeteSelectFactureByBien2;
 import modele.dao.requetes.select.RequeteSelectFactureById;
+import modele.dao.requetes.select.RequeteSelectFactureByImmeuble;
 import modele.dao.requetes.select.RequeteSelectFactureByLogement;
 import modele.dao.requetes.select.RequeteSelectFactureCharge;
 import modele.dao.requetes.select.RequeteSelectFactureChargeById;
@@ -81,35 +82,25 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 			Entreprise entreprise = daoEntreprise.findById(siret);
 
 			// Convertir les dates en chaînes de caractères avec un format spécifique
-	        java.sql.Date dateEmission = curseur.getDate("date_emission");
-	        java.sql.Date datePaiement = curseur.getDate("date_paiement");
+			java.sql.Date dateEmission = curseur.getDate("date_emission");
+			java.sql.Date datePaiement = curseur.getDate("date_paiement");
 
-	        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-	        String dateEmissionStr = "N/A";
-	        if (dateEmission != null) {
-	            dateEmissionStr = dateFormat.format(dateEmission);
-	        }
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			String dateEmissionStr = "N/A";
+			if (dateEmission != null) {
+				dateEmissionStr = dateFormat.format(dateEmission);
+			}
 
-	        String datePaiementStr = "N/A";
-	        if (datePaiement != null) {
-	            datePaiementStr = dateFormat.format(datePaiement);
-	        }
+			String datePaiementStr = "N/A";
+			if (datePaiement != null) {
+				datePaiementStr = dateFormat.format(datePaiement);
+			}
 
-	        facture = new Facture(
-	                curseur.getString("numero"),
-	                dateEmissionStr,
-	                datePaiementStr,
-	                curseur.getString("mode_paiement"),
-	                curseur.getString("numero_devis"),
-	                curseur.getString("designation"),
-	                curseur.getDouble("accompte_verse"),
-	                curseur.getDouble("montant"),
-	                curseur.getInt("imputable_locataire"),
-	                immeuble,
-	                bien,
-	                entreprise
-	        );
-	
+			facture = new Facture(curseur.getString("numero"), dateEmissionStr, datePaiementStr,
+					curseur.getString("mode_paiement"), curseur.getString("numero_devis"),
+					curseur.getString("designation"), curseur.getDouble("accompte_verse"), curseur.getDouble("montant"),
+					curseur.getInt("imputable_locataire"), immeuble, bien, entreprise);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -151,7 +142,15 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	public List<Facture> findFactureCharge() throws SQLException {
 		return this.find(new RequeteSelectFactureCharge());
 	}
-	
+
+	public List<Facture> findFactureImmeuble(String id) throws SQLException {
+		return find(new RequeteSelectFactureByImmeuble(), id);
+	}
+
+	public List<Facture> findFactureByBien(String id) throws SQLException {
+		return find(new RequeteSelectFactureByBien2(), id);
+	}
+
 	public Facture findFactureChargeById(String id) throws SQLException {
 		List<Facture> factures = this.find(new RequeteSelectFactureChargeById(), id);
 		if (factures.isEmpty()) {

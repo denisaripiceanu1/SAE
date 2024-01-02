@@ -2,7 +2,6 @@ package modele.dao;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,19 +10,19 @@ import modele.Compteur;
 import modele.Immeuble;
 import modele.dao.requetes.delete.RequeteDeleteCompteur;
 import modele.dao.requetes.select.RequeteSelectCompteur;
+import modele.dao.requetes.select.RequeteSelectCompteurByBien;
 import modele.dao.requetes.select.RequeteSelectCompteurById;
 import modele.dao.requetes.select.RequeteSelectCompteurParImmeuble;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertCompteur;
-import modele.dao.requetes.sousProgramme.SousProgrammeInsertImmeuble;
 
 public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 
 	@Override
 	public void create(Compteur donnees) throws SQLException {
 		SousProgramme<Compteur> sp = new SousProgrammeInsertCompteur();
-    	CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
-    	sp.parametres(st, donnees);
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
 		st.execute();
 
 	}
@@ -36,10 +35,9 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 
 	@Override
 	public void delete(Compteur donnees) throws SQLException {
-		miseAJour(new RequeteDeleteCompteur(),donnees);
+		miseAJour(new RequeteDeleteCompteur(), donnees);
 	}
 
-	
 	@Override
 	protected Compteur creerInstance(ResultSet curseur) throws SQLException {
 		Compteur compteur = null;
@@ -54,7 +52,8 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 			DaoImmeuble daoImmeuble = new DaoImmeuble();
 			Immeuble immeuble = daoImmeuble.findById(idImmeuble);
 
-			compteur = new Compteur(curseur.getString("id_compteur"), curseur.getString("typeComp") , curseur.getDouble("prix_abonnement"), bien, immeuble);
+			compteur = new Compteur(curseur.getString("id_compteur"), curseur.getString("typeComp"),
+					curseur.getDouble("prix_abonnement"), bien, immeuble);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -69,7 +68,7 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 		}
 		return compteurs.get(0);
 	}
-	
+
 	public Compteur findByIdImmeuble(String... id) throws SQLException {
 		List<Compteur> compteurs = find(new RequeteSelectCompteurParImmeuble(), id);
 		if (compteurs.isEmpty()) {
@@ -78,9 +77,25 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 		return compteurs.get(0);
 	}
 
+	public Compteur findByIdBien(String... id) throws SQLException {
+		List<Compteur> compteurs = find(new RequeteSelectCompteurByBien(), id);
+		if (compteurs.isEmpty()) {
+			return null;
+		}
+		return compteurs.get(0);
+	}
+
+	public List<Compteur> findByIdImmeubleListe(String id) throws SQLException {
+		return find(new RequeteSelectCompteurParImmeuble(), id);
+	}
+
 	@Override
 	public List<Compteur> findAll() throws SQLException {
 		return find(new RequeteSelectCompteur());
+	}
+
+	public List<Compteur> findByIdBienListe(String idBien) throws SQLException {
+		return find(new RequeteSelectCompteurByBien(), idBien);
 	}
 
 }

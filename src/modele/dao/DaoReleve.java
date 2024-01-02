@@ -1,13 +1,14 @@
 package modele.dao;
 
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.List;
 
 import modele.Compteur;
 import modele.Releve;
+import modele.dao.requetes.delete.RequeteDeleteReleve;
 import modele.dao.requetes.select.RequeteSelectReleve;
+import modele.dao.requetes.select.RequeteSelectReleveByCompteur;
 import modele.dao.requetes.select.RequeteSelectReleveById;
 
 public class DaoReleve extends DaoModele<Releve> implements Dao<Releve> {
@@ -26,7 +27,7 @@ public class DaoReleve extends DaoModele<Releve> implements Dao<Releve> {
 
 	@Override
 	public void delete(Releve donnees) throws SQLException {
-		delete(donnees);
+		this.miseAJour(new RequeteDeleteReleve(), donnees);
 	}
 
 	@Override
@@ -56,6 +57,10 @@ public class DaoReleve extends DaoModele<Releve> implements Dao<Releve> {
 	@Override
 	public List<Releve> findAll() throws SQLException {
 		return find(new RequeteSelectReleve());
+	}
+
+	public List<Releve> findReleveByCompteur(String id) throws SQLException {
+		return find(new RequeteSelectReleveByCompteur(), id);
 	}
 
 }

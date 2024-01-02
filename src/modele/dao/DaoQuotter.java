@@ -3,7 +3,6 @@ package modele.dao;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,8 +10,8 @@ import modele.Bien;
 import modele.Immeuble;
 import modele.Quotite;
 import modele.Quotter;
+import modele.dao.requetes.delete.RequeteDeleteQuotter;
 import modele.dao.requetes.delete.RequeteDeleteQuotterByImmeuble;
-import modele.dao.requetes.select.RequeteSelectAssuranceByLogement;
 import modele.dao.requetes.select.RequeteSelectBienparImmeuble;
 import modele.dao.requetes.select.RequeteSelectQuotter;
 import modele.dao.requetes.select.RequeteSelectQuotterByBien;
@@ -32,12 +31,12 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 
 	@Override
 	public void update(Quotter donnees) throws SQLException {
-		
+
 	}
 
 	@Override
 	public void delete(Quotter donnees) throws SQLException {
-		miseAJour(new RequeteDeleteQuotterByImmeuble(), donnees);
+		miseAJour(new RequeteDeleteQuotter(), donnees);
 	}
 
 	@Override
@@ -72,22 +71,23 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 	public List<Quotter> findAll() throws SQLException {
 		return find(new RequeteSelectQuotter());
 	}
-	
+
 	public List<Quotter> findQuotterByBien(String id) throws SQLException {
 		return this.find(new RequeteSelectQuotterByBien(), id);
 	}
-		
-	
-	//Y A DES MODIF A FAIRE LAAAAAAAA
+
+	// Y A DES MODIF A FAIRE LAAAAAAAA
 	public void deleteByBien(Immeuble immeuble) throws SQLException {
-        RequeteDeleteQuotterByImmeuble requete = new RequeteDeleteQuotterByImmeuble();
-        
-        try (PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(new RequeteSelectBienparImmeuble().requete())) { {
-        	requete.parametres(st, immeuble.getImmeuble());
-            st.executeUpdate();
-        }
-        
-    }
+		RequeteDeleteQuotterByImmeuble requete = new RequeteDeleteQuotterByImmeuble();
+
+		try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectBienparImmeuble().requete())) {
+			{
+				requete.parametres(st, immeuble.getImmeuble());
+				st.executeUpdate();
+			}
+
+		}
 
 	}
 }
