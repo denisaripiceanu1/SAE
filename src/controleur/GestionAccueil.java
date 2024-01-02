@@ -47,6 +47,7 @@ import vue.modification.Fenetre_ModificationTravauxImmeuble;
 import vue.suppression.Fenetre_SupprimerAssurance;
 import vue.suppression.Fenetre_SupprimerBien;
 import vue.suppression.Fenetre_SupprimerFactureCharge;
+import vue.suppression.Fenetre_SupprimerLogement;
 import vue.suppression.Fenetre_SupprimerTravaux;
 
 public class GestionAccueil implements ActionListener {
@@ -165,7 +166,7 @@ public class GestionAccueil implements ActionListener {
 		for (int i = 0; i < locations.size(); i++) {
 			Louer location = locations.get(i);
 			Bien bien = location.getBien();
-			int row = modeleTable.getRowCount(); // Obtenir le nb de lignes 
+			int row = modeleTable.getRowCount(); // Obtenir le nb de lignes
 			modeleTable.addRow(new Object[0]); // Ajouter une nouvelle ligne
 			this.ecrireLigneTableLocations(row, location, bien);
 		}
@@ -418,12 +419,18 @@ public class GestionAccueil implements ActionListener {
 				break;
 
 			case "btnMesBiens_Supprimer":
-				if (Sauvegarde.onSave("Immeuble") == true) {
+				if (Sauvegarde.onSave("Immeuble") == true && !Sauvegarde.onSave("Logement")) {
 					Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
 					Fenetre_SupprimerBien supp_bien = new Fenetre_SupprimerBien();
 					this.fenetreAccueil.getLayeredPane().add(supp_bien);
 					supp_bien.setVisible(true);
 					supp_bien.moveToFront();
+				} else if (Sauvegarde.onSave("Logement") == true) {
+					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+					Fenetre_SupprimerLogement supp_logement = new Fenetre_SupprimerLogement();
+					this.fenetreAccueil.getLayeredPane().add(supp_logement);
+					supp_logement.setVisible(true);
+					supp_logement.moveToFront();
 				} else {
 					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sÃ©lectionner un bien pour supprimer",
 							"Erreur", JOptionPane.ERROR_MESSAGE);
