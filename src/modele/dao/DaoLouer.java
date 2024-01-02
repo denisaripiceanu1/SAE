@@ -1,9 +1,7 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
-
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,6 +9,7 @@ import modele.Bien;
 import modele.ICC;
 import modele.Locataire;
 import modele.Louer;
+import modele.dao.requetes.delete.RequeteDeleteLocation;
 import modele.dao.requetes.delete.RequeteDeleteLocationByBien;
 import modele.dao.requetes.select.RequeteSelectLocationParBien;
 import modele.dao.requetes.select.RequeteSelectLouer;
@@ -97,5 +96,9 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 	public List<Louer> findLocationByBien(String id) throws SQLException {
 		return find(new RequeteSelectLocationParBien(), id);
 
+	}
+
+	public void deleteVrai(Louer id) throws SQLException {
+		miseAJour(new RequeteDeleteLocation(), id);
 	}
 }

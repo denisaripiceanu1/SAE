@@ -69,8 +69,9 @@ public class GestionLocations implements ListSelectionListener {
 				}
 
 				if (location != null) {
+					Sauvegarde.deleteItem("Louer");
+					Sauvegarde.addItem("Louer", location);
 					Facture derniereFactureLoyer = null;
-
 					try {
 						derniereFactureLoyer = this.daoFacture.findDerniereFactureLoyer(location.getBien());
 

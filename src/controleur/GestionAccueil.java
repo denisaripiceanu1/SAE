@@ -47,6 +47,7 @@ import vue.modification.Fenetre_ModificationTravauxImmeuble;
 import vue.suppression.Fenetre_SupprimerAssurance;
 import vue.suppression.Fenetre_SupprimerBien;
 import vue.suppression.Fenetre_SupprimerFactureCharge;
+import vue.suppression.Fenetre_SupprimerLocation;
 import vue.suppression.Fenetre_SupprimerLogement;
 import vue.suppression.Fenetre_SupprimerTravaux;
 
@@ -558,7 +559,16 @@ public class GestionAccueil implements ActionListener {
 				location.moveToFront();
 				break;
 			case "btn_MesLocations_Supprimer":
-				break;
+				if (Sauvegarde.onSave("Louer") == true) {
+					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
+					Fenetre_SupprimerLocation loc_supp = new Fenetre_SupprimerLocation();
+					this.fenetreAccueil.getLayeredPane().add(loc_supp);
+					loc_supp.setVisible(true);
+					loc_supp.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sÃ©lectionner un bien pour supprimer",
+							"Erreur", JOptionPane.ERROR_MESSAGE);
+				}
 
 			case "btn_mesLocations_InfoLocataire":
 				if (Sauvegarde.onSave("Locataire") == true) {
