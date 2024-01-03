@@ -36,10 +36,6 @@ public class Facture {
 		return montant;
 	}
 
-	public void setMontant(double montant) {
-		this.montant = montant;
-	}
-
 	public String getNumero() {
 		return numero;
 	}

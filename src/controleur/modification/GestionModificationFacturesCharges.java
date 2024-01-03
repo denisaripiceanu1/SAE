@@ -64,14 +64,7 @@ public class GestionModificationFacturesCharges implements ActionListener {
 			break;
 
 		case "Annuler":
-			// Vérifier si l'élément "Logement" est présent dans la sauvegarde
-			if (Sauvegarde.onSave("Logement") == true) {
-				// Si oui, fermer la fenêtre de modification
-				this.modificationFacturesCharge.dispose();
-			} else {
-				// Si non, afficher un message d'avertissement ou prendre une autre action
-				System.out.println("Aucun élément 'Logement' trouvé dans la sauvegarde.");
-			}
+			this.modificationFacturesCharge.dispose();
 			break;
 		}
 	}

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -676,10 +677,19 @@ public class GestionAccueil implements ActionListener {
 
 						modif_charge.getTextField_Numero().setText(chargeCourant.getNumero());
 						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-						modif_charge.getTextField_date_paiement()
-								.setText(dateFormat.format(chargeCourant.getDatePaiement()));
-						modif_charge.getTextField_date_emission()
-								.setText(dateFormat.format(chargeCourant.getDateEmission()));
+
+						// Assuming getDatePaiement() and getDateEmission() return strings
+						try {
+						    java.util.Date datePaiement = dateFormat.parse(chargeCourant.getDatePaiement());
+						    java.util.Date dateEmission = dateFormat.parse(chargeCourant.getDateEmission());
+
+						    modif_charge.getTextField_date_paiement().setText(dateFormat.format(datePaiement));
+						    modif_charge.getTextField_date_emission().setText(dateFormat.format(dateEmission));
+						} catch (ParseException e1) {
+						    e1.printStackTrace();
+						    // Handle the exception (e.g., show an error message) based on your requirements
+						}
+
 						modif_charge.getComboBox_modePaiement().setSelectedItem(chargeCourant.getModePaiement());
 						modif_charge.getTextField_numeroDevis().setText(chargeCourant.getNumeroDevis());
 						modif_charge.getComboBox_Designation().setSelectedItem(chargeCourant.getDesignation());

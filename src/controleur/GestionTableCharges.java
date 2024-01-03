@@ -44,20 +44,20 @@ public class GestionTableCharges implements ListSelectionListener {
                 Facture facture = null;
 
                 try {
-                    // Correction : Utilisez les entiers 1 et 0 pour "deductible"
+                    // Utilise les entiers 1 et 0 pour "deductible"
                     int deductible = "Oui"
                             .equalsIgnoreCase(tableFacturesCharges.getValueAt(selectedRowCharge, 2).toString()) ? 1 : 0;
 
                     // Récupère l'objet Facture à partir des données de la ligne sélectionnée dans la table
                     facture = this.daoFacture.findById(
-                            tableFacturesCharges.getValueAt(selectedRowCharge, 0).toString() // numéro de facture
+                            tableFacturesCharges.getValueAt(selectedRowCharge, 1).toString() // numéro de facture
                     );
 
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
 
-                // Supprime l'élément Facture précédemment sauvegardé et sauvegarde le nouvel élément
+                // Supprimer l'élément CHARGE précédemment sauvegardé et sauvegarder le nouvel élément
                 Sauvegarde.deleteItem("Charge");
                 Sauvegarde.addItem("Charge", facture);
             }
