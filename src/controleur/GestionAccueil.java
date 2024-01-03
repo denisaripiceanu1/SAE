@@ -617,7 +617,6 @@ public class GestionAccueil implements ActionListener {
 			// LAYERED MES TRAVAUX
 			/////////////////////
 			case "btn_Travaux_Modifier":
-				// Assume you have a method to check if there's saved data for "Travaux"
 				if (Sauvegarde.onSave("Facture")) {
 					Fenetre_ModificationTravauxImmeuble modif_travaux = new Fenetre_ModificationTravauxImmeuble();
 					this.fenetreAccueil.getLayeredPane().add(modif_travaux);
@@ -654,21 +653,17 @@ public class GestionAccueil implements ActionListener {
 			// LAYERED MES CHARGES LOCATIVES
 			///////////////////////////////
 			case "btn_MesChargesLocatives_Modifier":
-				if (Sauvegarde.onSave("Charge") && Sauvegarde.onSave("Logement")) {
+				if (Sauvegarde.onSave("Charge")) {
 					Fenetre_ModificationFactureChargeLogement modif_charge = new Fenetre_ModificationFactureChargeLogement();
 					this.fenetreAccueil.getLayeredPane().add(modif_charge);
 					modif_charge.setVisible(true);
 					modif_charge.moveToFront();
 
 					// On récupère la charge de la sauvegarde
-					Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Facture");
-
-					// On récupère le logement de la sauvegarde
-					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
-					Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
+					Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Charge");
 
 					try {
-						Bien bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
+						Facture chargeCourant = this.daoFacture.findById(chargeSauvegarde.getNumero());
 
 						int deductibleValeur = 0; // Non déductible par défaut
 
@@ -679,29 +674,23 @@ public class GestionAccueil implements ActionListener {
 							deductibleValeur = 0;
 						}
 
-						modif_charge.getTextField_Numero().setText(chargeSauvegarde.getNumero());
+						modif_charge.getTextField_Numero().setText(chargeCourant.getNumero());
 						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 						modif_charge.getTextField_date_paiement()
-								.setText(dateFormat.format(chargeSauvegarde.getDatePaiement()));
+								.setText(dateFormat.format(chargeCourant.getDatePaiement()));
 						modif_charge.getTextField_date_emission()
-								.setText(dateFormat.format(chargeSauvegarde.getDateEmission()));
-						modif_charge.getComboBox_modePaiement().setSelectedItem(chargeSauvegarde.getModePaiement());
-						modif_charge.getTextField_numeroDevis().setText(chargeSauvegarde.getNumeroDevis());
-						modif_charge.getComboBox_Designation().setSelectedItem(chargeSauvegarde.getDesignation());
+								.setText(dateFormat.format(chargeCourant.getDateEmission()));
+						modif_charge.getComboBox_modePaiement().setSelectedItem(chargeCourant.getModePaiement());
+						modif_charge.getTextField_numeroDevis().setText(chargeCourant.getNumeroDevis());
+						modif_charge.getComboBox_Designation().setSelectedItem(chargeCourant.getDesignation());
 						modif_charge.getTextField_accompteVerse()
-								.setText(String.valueOf(chargeSauvegarde.getAccompteVerse())); // assurez-vous que le
-																								// champ accepte une
-																								// chaîne
-						modif_charge.getTextField_montant().setText(String.valueOf(chargeSauvegarde.getMontant())); // assurez-vous
-																													// que
-																													// le
-																													// champ
-																													// accepte
-																													// une
-																													// chaîne
+								.setText(String.valueOf(chargeCourant.getAccompteVerse())); // assurez-vous que le
+																							// champ accepte une
+																							// chaîne
+						modif_charge.getTextField_montant().setText(String.valueOf(chargeCourant.getMontant()));
 
 						// Mise à jour des boutons radio
-						if (chargeSauvegarde.getImputableLocataire() == 1) {
+						if (chargeCourant.getImputableLocataire() == 1) {
 							modif_charge.getRdbtnOui().setSelected(true);
 						} else {
 							modif_charge.getRdbtnNon().setSelected(true);

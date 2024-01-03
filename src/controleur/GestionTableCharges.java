@@ -58,8 +58,8 @@ public class GestionTableCharges implements ListSelectionListener {
                 }
 
                 // Supprime l'élément Facture précédemment sauvegardé et sauvegarde le nouvel élément
-                Sauvegarde.deleteItem("Facture");
-                Sauvegarde.addItem("Facture", facture);
+                Sauvegarde.deleteItem("Charge");
+                Sauvegarde.addItem("Charge", facture);
             }
         }
     }
