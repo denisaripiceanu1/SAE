@@ -680,14 +680,14 @@ public class GestionAccueil implements ActionListener {
 
 						// Assuming getDatePaiement() and getDateEmission() return strings
 						try {
-						    java.util.Date datePaiement = dateFormat.parse(chargeCourant.getDatePaiement());
-						    java.util.Date dateEmission = dateFormat.parse(chargeCourant.getDateEmission());
+							java.util.Date datePaiement = dateFormat.parse(chargeCourant.getDatePaiement());
+							java.util.Date dateEmission = dateFormat.parse(chargeCourant.getDateEmission());
 
-						    modif_charge.getTextField_date_paiement().setText(dateFormat.format(datePaiement));
-						    modif_charge.getTextField_date_emission().setText(dateFormat.format(dateEmission));
+							modif_charge.getTextField_date_paiement().setText(dateFormat.format(datePaiement));
+							modif_charge.getTextField_date_emission().setText(dateFormat.format(dateEmission));
 						} catch (ParseException e1) {
-						    e1.printStackTrace();
-						    // Handle the exception (e.g., show an error message) based on your requirements
+							e1.printStackTrace();
+							// Handle the exception (e.g., show an error message) based on your requirements
 						}
 
 						modif_charge.getComboBox_modePaiement().setSelectedItem(chargeCourant.getModePaiement());
