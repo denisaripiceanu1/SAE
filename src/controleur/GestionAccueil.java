@@ -46,6 +46,7 @@ import vue.insertion.Fenetre_InsertionPaiementBien;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
 import vue.modification.Fenetre_ModificationBien;
 import vue.modification.Fenetre_ModificationFactureChargeLogement;
+import vue.modification.Fenetre_ModificationLocation;
 import vue.modification.Fenetre_ModificationLogement;
 import vue.modification.Fenetre_ModificationTravauxImmeuble;
 import vue.suppression.Fenetre_SupprimerAssurance;
@@ -560,6 +561,35 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesLocations_Modifier":
+				if (Sauvegarde.onSave("Louer") == true) {
+					Fenetre_ModificationLocation fml = new Fenetre_ModificationLocation();
+					this.fenetreAccueil.getLayeredPane().add(fml);
+					fml.setVisible(true);
+					fml.moveToFront();
+					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
+					try {
+						Louer louerBD = this.daoLouer.findById(locSauvegarde.getBien().getIdBien(),
+								locSauvegarde.getLocataire().getIdLocataire());
+						fml.getTextField_caution_TTC().setText(String.valueOf(louerBD.getCautionTTC()));
+						fml.getTextField_date_debut().setText(louerBD.getDateDebut());
+						fml.getTextField_IdImmeuble()
+								.setText(String.valueOf(louerBD.getBien().getImmeuble().getImmeuble()));
+						fml.getTextField_provision_chargeMens_TTC()
+								.setText(String.valueOf(louerBD.getProvision_chargeMens_TTC()));
+						fml.getTextField_loyer_paye().setText(String.valueOf(louerBD.getLoyerPaye()));
+						fml.getTextField_montant_reel_paye().setText(String.valueOf(louerBD.getMontantReelPaye()));
+						fml.getTextField_Id_Locataire().setText(louerBD.getLocataire().getIdLocataire());
+						fml.getTextField_loyer_TCC().setText(String.valueOf(louerBD.getLoyerTTC()));
+						fml.getTextField_date_depart().setText(louerBD.getDateDepart());
+
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien pour supprimer",
+							"Erreur", JOptionPane.ERROR_MESSAGE);
+				}
 				break;
 			case "btn_MesLocations_Inserer":
 				Fenetre_InsertionLocation location = new Fenetre_InsertionLocation();
