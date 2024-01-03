@@ -44,6 +44,7 @@ import vue.insertion.Fenetre_InsertionLogement;
 import vue.insertion.Fenetre_InsertionPaiementBien;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
 import vue.modification.Fenetre_ModificationBien;
+import vue.modification.Fenetre_ModificationFactureChargeLogement;
 import vue.modification.Fenetre_ModificationLogement;
 import vue.modification.Fenetre_ModificationTravauxImmeuble;
 import vue.suppression.Fenetre_SupprimerAssurance;
@@ -454,23 +455,23 @@ public class GestionAccueil implements ActionListener {
 					Bien logementCourant;
 
 					try {
-					    logementCourant = this.daoBien.findById(logementSauvegarde.getIdBien());
-					    modif_logement.getTextField_IdLogement().setText(logementCourant.getIdBien());
-					    modif_logement.getTextField_SurfaceHabitable().setText(Double.toString(logementCourant.getSurfaceHabitable()));
-					    modif_logement.getTextField_NbPièces().setText(Integer.toString(logementCourant.getNbPieces()));
+						logementCourant = this.daoBien.findById(logementSauvegarde.getIdBien());
+						modif_logement.getTextField_IdLogement().setText(logementCourant.getIdBien());
+						modif_logement.getTextField_SurfaceHabitable()
+								.setText(Double.toString(logementCourant.getSurfaceHabitable()));
+						modif_logement.getTextField_NbPièces().setText(Integer.toString(logementCourant.getNbPieces()));
 
-					    // Format date
-					    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-					    String formattedDate = dateFormat.format(Date.valueOf(logementCourant.getDateAcquisition()));
-					    modif_logement.getTextField_DateAcquisition().setText(formattedDate);
+						// Format date
+						SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+						String formattedDate = dateFormat.format(Date.valueOf(logementCourant.getDateAcquisition()));
+						modif_logement.getTextField_DateAcquisition().setText(formattedDate);
 
-					    modif_logement.getTextField_NumEtage().setText(Integer.toString(logementCourant.getNumEtage()));
-					    modif_logement.getComboBox_typeDeLogement().setSelectedItem(logementCourant.getType_bien());
-					    // voir comment potentiellement récupérer le compteur et les autres trucs
+						modif_logement.getTextField_NumEtage().setText(Integer.toString(logementCourant.getNumEtage()));
+						modif_logement.getComboBox_typeDeLogement().setSelectedItem(logementCourant.getType_bien());
+						// voir comment potentiellement récupérer le compteur et les autres trucs
 					} catch (SQLException e1) {
-					    e1.printStackTrace();
+						e1.printStackTrace();
 					}
-
 
 				} else {
 					//////// POUR MODIFIER UN IMMEUBLE///////////
@@ -597,8 +598,8 @@ public class GestionAccueil implements ActionListener {
 						infos_locataire.getTextField_Telephone().setText(locataireCourant.getTelephone());
 						infos_locataire.getTextField_Mail().setText(locataireCourant.getMail());
 						SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-					    String formattedDate = dateFormat.format(Date.valueOf(locataireCourant.getDateNaissance()));
-					    infos_locataire.getTextField_DateN().setText(formattedDate);
+						String formattedDate = dateFormat.format(Date.valueOf(locataireCourant.getDateNaissance()));
+						infos_locataire.getTextField_DateN().setText(formattedDate);
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
@@ -653,46 +654,63 @@ public class GestionAccueil implements ActionListener {
 			// LAYERED MES CHARGES LOCATIVES
 			///////////////////////////////
 			case "btn_MesChargesLocatives_Modifier":
-//			    if (Sauvegarde.onSave("Charge") && Sauvegarde.onSave("Logement")) {
-//			        Fenetre_ModificationCharges modif_charge = new Fenetre_ModificationCharges();
-//			        this.fenetreAccueil.getLayeredPane().add(modif_charge);
-//			        modif_charge.setVisible(true);
-//			        modif_charge.moveToFront();
-//
-//			        // On recupÃ¨re la charge de la sauvegarde
-//			        Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Facture");
-//
-//			        // On recupÃ¨re le logement de la sauvegarde
-//			        Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
-//
-//			        try {
-//			            Bien bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
-//
-//			            int deductibleValeur = 0; // Non dÃ©ductible par dÃ©faut
-//
-//			            // choix de la radio button
-//			            if (modif_charge.getRdbtnAjouterChargeOui().isSelected()) {
-//			                deductibleValeur = 1;
-//			            } else if (modif_charge.getRdbtnAjouterChargeNon().isSelected()) {
-//			                deductibleValeur = 0;
-//			            }
-//
-//			            modif_charge.getTextField_nomCharge().setText(chargeSauvegarde.getNom());
-//			            modif_charge.getTextField_montantPrevisionnel().setText(Double.toString(chargeSauvegarde.getMontantPrevisionnel()));
-//			            modif_charge.getTextField_montantReel().setText(Double.toString(chargeSauvegarde.getMontantReel()));
-//
-//			            // Mise Ã  jour des boutons radio
-//			            if (chargeSauvegarde.getImputableLocataire() == 1) {
-//			                modif_charge.getRdbtnAjouterChargeNon().setSelected(true);
-//			            } else {
-//			                modif_charge.getRdbtnAjouterChargeOui().setSelected(true);
-//			            }
-//
-//			        } catch (SQLException e1) {
-//			            // Gerer l'exception de maniÃ¨re appropriÃ©e (affichage d'un message Ã  l'utilisateur, etc.)
-//			            e1.printStackTrace();
-//			        }
-//			    }
+				if (Sauvegarde.onSave("Charge") && Sauvegarde.onSave("Logement")) {
+					Fenetre_ModificationFactureChargeLogement modif_charge = new Fenetre_ModificationFactureChargeLogement();
+					this.fenetreAccueil.getLayeredPane().add(modif_charge);
+					modif_charge.setVisible(true);
+					modif_charge.moveToFront();
+
+					// On récupère la charge de la sauvegarde
+					Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Facture");
+
+					// On récupère le logement de la sauvegarde
+					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+					Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
+
+					try {
+						Bien bienCourant = this.daoBien.findById(bienSauvegarde.getIdBien());
+
+						int deductibleValeur = 0; // Non déductible par défaut
+
+						// Choix de la radio button
+						if (modif_charge.getRdbtnOui().isSelected()) {
+							deductibleValeur = 1;
+						} else if (modif_charge.getRdbtnNon().isSelected()) {
+							deductibleValeur = 0;
+						}
+
+						modif_charge.getTextField_Numero().setText(chargeSauvegarde.getNumero());
+						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+						modif_charge.getTextField_date_paiement()
+								.setText(dateFormat.format(chargeSauvegarde.getDatePaiement()));
+						modif_charge.getTextField_date_emission()
+								.setText(dateFormat.format(chargeSauvegarde.getDateEmission()));
+						modif_charge.getComboBox_modePaiement().setSelectedItem(chargeSauvegarde.getModePaiement());
+						modif_charge.getTextField_numeroDevis().setText(chargeSauvegarde.getNumeroDevis());
+						modif_charge.getComboBox_Designation().setSelectedItem(chargeSauvegarde.getDesignation());
+						modif_charge.getTextField_accompteVerse()
+								.setText(String.valueOf(chargeSauvegarde.getAccompteVerse())); // assurez-vous que le
+																								// champ accepte une
+																								// chaîne
+						modif_charge.getTextField_montant().setText(String.valueOf(chargeSauvegarde.getMontant())); // assurez-vous
+																													// que
+																													// le
+																													// champ
+																													// accepte
+																													// une
+																													// chaîne
+
+						// Mise à jour des boutons radio
+						if (chargeSauvegarde.getImputableLocataire() == 1) {
+							modif_charge.getRdbtnOui().setSelected(true);
+						} else {
+							modif_charge.getRdbtnNon().setSelected(true);
+						}
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
 				break;
 
 			case "btn_MesChargesLocatives_Supprimer":

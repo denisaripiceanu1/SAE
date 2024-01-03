@@ -66,7 +66,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		lbl_InsererUneFacture.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUneFacture.setBounds(294, 26, 153, 48);
 		panel.add(lbl_InsererUneFacture);
-		
+
 		JLabel lbl_ImputableLocataire = new JLabel("Imputable Locataire");
 		lbl_ImputableLocataire.setForeground(Color.BLACK);
 		lbl_ImputableLocataire.setBackground(new Color(0, 102, 204));
@@ -86,50 +86,50 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		textField_Numero.setBounds(24, 104, 202, 40);
 		panel.add(textField_Numero);
 		textField_Numero.setColumns(10);
-		
 
 		textField_date_emission = new JTextField();
 		textField_date_emission.setColumns(10);
-		textField_date_emission.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9mission (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_date_emission
+				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9mission (YYYY-MM-JJ)",
+						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_date_emission.setBounds(24, 157, 202, 40);
 		panel.add(textField_date_emission);
-		
+
 		textField_date_paiement = new JTextField();
 		textField_date_paiement.setColumns(10);
-		textField_date_paiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date Paiement (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_date_paiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
+				"Date Paiement (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_date_paiement.setBounds(247, 156, 202, 40);
 		panel.add(textField_date_paiement);
-		
+
 		textField_numeroDevis = new JTextField();
 		textField_numeroDevis.setColumns(10);
 		textField_numeroDevis.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro devis",
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_numeroDevis.setBounds(24, 217, 202, 40);
 		panel.add(textField_numeroDevis);
-		
-		
-		
+
 		textField_accompteVerse = new JTextField();
 		textField_accompteVerse.setColumns(10);
 		textField_accompteVerse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-						"Acompte vers\u00E9 ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+				"Acompte vers\u00E9 ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_accompteVerse.setBounds(247, 283, 200, 40);
 		panel.add(textField_accompteVerse);
-		
+
 		textField_montant = new JTextField();
 		textField_montant.setColumns(10);
 		textField_montant.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_montant.setBounds(24, 283, 202, 40);
 		panel.add(textField_montant);
 
 		// Menu déroulant pour la designation de la facture
 		comboBox_modePaiement = new JComboBox<String>();
 		comboBox_modePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mode de Paiement",
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		comboBox_modePaiement.setBounds(247, 219, 200, 39);
 		panel.add(comboBox_modePaiement);
-		
+
 		this.comboBox_Designation = new JComboBox<String>();
 		this.comboBox_Designation.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "D\u00E9signation",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
@@ -143,7 +143,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 			designationModel.addElement("Loyer");
 		} else {
 			// Ajouter tous les éléments
-			// Faut laisser l'element vide 
+			// Faut laisser l'element vide
 			designationModel.addElement(null);
 			designationModel.addElement("Travaux");
 			designationModel.addElement("Eau");
@@ -233,46 +233,49 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.lbl_Entreprise.setBackground(new Color(0, 102, 204));
 		this.lbl_Entreprise.setBounds(573, 104, 132, 31);
 		panel.add(this.lbl_Entreprise);
-		
+
 		textField_date_emission = new JTextField();
 		textField_date_emission.setColumns(10);
-		textField_date_emission.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9mission (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_date_emission
+				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9mission (YYYY-MM-JJ)",
+						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_date_emission.setBounds(24, 157, 202, 40);
 		panel.add(textField_date_emission);
-		
+
 		textField_date_paiement = new JTextField();
 		textField_date_paiement.setColumns(10);
-		textField_date_paiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date Paiement (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_date_paiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
+				"Date Paiement (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_date_paiement.setBounds(247, 156, 202, 40);
 		panel.add(textField_date_paiement);
-		
+
 		textField_numeroDevis = new JTextField();
 		textField_numeroDevis.setColumns(10);
 		textField_numeroDevis.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro devis",
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_numeroDevis.setBounds(24, 217, 202, 40);
 		panel.add(textField_numeroDevis);
-		
+
 		comboBox_modePaiement = new JComboBox<String>();
 		comboBox_modePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mode de Paiement",
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		comboBox_modePaiement.setBounds(247, 219, 200, 39);
 		panel.add(comboBox_modePaiement);
-		
+
 		textField_accompteVerse = new JTextField();
 		textField_accompteVerse.setColumns(10);
 		textField_accompteVerse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-						"Acompte vers\u00E9 ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+				"Acompte vers\u00E9 ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_accompteVerse.setBounds(247, 283, 200, 40);
 		panel.add(textField_accompteVerse);
-		
+
 		textField_montant = new JTextField();
 		textField_montant.setColumns(10);
 		textField_montant.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_montant.setBounds(24, 283, 202, 40);
 		panel.add(textField_montant);
-		
+
 		// Masquer les composants liés à l'entreprise au début
 		this.btn_ajouter_entreprise.setVisible(false);
 		this.btn_charger_entreprise.setVisible(false);
@@ -305,20 +308,12 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		return textField_accompteVerse;
 	}
 
-	public JSeparator getSeparator_Travaux() {
-		return separator_Travaux;
-	}
-
 	public JRadioButton getRdbtnOui() {
 		return rdbtnOui;
 	}
 
 	public JRadioButton getRdbtnNon() {
 		return rdbtnNon;
-	}
-
-	public GestionInsertionPaiementLogement getGestionClic() {
-		return gestionClic;
 	}
 
 	public JComboBox<String> getComboBox_Designation() {
@@ -333,10 +328,6 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		return table_entreprise;
 	}
 
-	public GestionTableEntrepriseFenetreFactureLogement getGteff() {
-		return gteff;
-	}
-
 	public JButton getBtn_ajouter_entreprise() {
 		return btn_ajouter_entreprise;
 	}
@@ -345,11 +336,11 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		return btn_charger_entreprise;
 	}
 
-	public JScrollPane getScrollPane_table_entreprise() {
-		return scrollPane_table_entreprise;
-	}
-
 	public JLabel getLbl_Entreprise() {
 		return lbl_Entreprise;
+	}
+
+	public JScrollPane getScrollPane_table_entreprise() {
+		return scrollPane_table_entreprise;
 	}
 }
