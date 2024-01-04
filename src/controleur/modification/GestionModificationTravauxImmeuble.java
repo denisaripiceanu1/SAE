@@ -19,61 +19,67 @@ import vue.modification.Fenetre_ModificationTravauxImmeuble;
 
 public class GestionModificationTravauxImmeuble implements ActionListener {
 
-	private Fenetre_ModificationTravauxImmeuble modificationTravauxImmeuble;
-	private DaoFacture daoTravaux;
-	private DaoEntreprise daoEntreprise;
-	private DaoImmeuble daoImmeuble;
-	private DaoBien daoBien;
-	private Facture facture;
-	private Entreprise entreprise;
-	private Immeuble immeuble;
-	private Bien bien;
+    private Fenetre_ModificationTravauxImmeuble modificationTravauxImmeuble;
+    private DaoFacture daoTravaux;
+    private DaoEntreprise daoEntreprise;
+    private DaoImmeuble daoImmeuble;
+    private DaoBien daoBien;
+    private Facture facture;
+    private Entreprise entreprise;
+    private Immeuble immeuble;
+    private Bien bien;
 
-	public GestionModificationTravauxImmeuble(Fenetre_ModificationTravauxImmeuble modificationTravauxImmeuble) {
-		this.modificationTravauxImmeuble = modificationTravauxImmeuble;
-		this.daoTravaux = new DaoFacture();
-		this.daoEntreprise = new DaoEntreprise();
-		this.daoBien = new DaoBien();
-		this.daoImmeuble = new DaoImmeuble();
-		Sauvegarde.initializeSave();
-	}
+    public GestionModificationTravauxImmeuble(Fenetre_ModificationTravauxImmeuble modificationTravauxImmeuble) {
+        this.modificationTravauxImmeuble = modificationTravauxImmeuble;
+        this.daoTravaux = new DaoFacture();
+        this.daoEntreprise = new DaoEntreprise();
+        this.daoBien = new DaoBien();
+        this.daoImmeuble = new DaoImmeuble();
+        Sauvegarde.initializeSave();
+    }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationTravauxImmeuble.getTopLevelAncestor();
-		switch (btn.getText()) {
-		case "Modifier":
-			try {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton btn = (JButton) e.getSource();
+        Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationTravauxImmeuble.getTopLevelAncestor();
 
-				this.facture = this.daoTravaux
-						.findById(this.modificationTravauxImmeuble.getTextField_Numero().getText());
-				this.entreprise = this.daoEntreprise.findById(this.facture.getEntreprise().getSiret());
-				this.bien = this.daoBien
-						.findById(this.modificationTravauxImmeuble.getTextField_Bien_Logement().getText());
-				this.immeuble = this.daoImmeuble
-						.findById(this.modificationTravauxImmeuble.getTextField_Bien_Logement().getText());
-				Facture nouvelFacture = new Facture(this.modificationTravauxImmeuble.getTextField_Numero().getText(),
-						this.modificationTravauxImmeuble.getTextField_dateEmission().getText(),
-						facture.getDatePaiement(), facture.getModePaiement(), facture.getNumeroDevis(),
-						this.modificationTravauxImmeuble.getTextField_designation().getText(),
-						facture.getAccompteVerse(),
-						Double.parseDouble(this.modificationTravauxImmeuble.getTextField_montant().getText()),
-						facture.getImputableLocataire(), this.immeuble, this.bien, entreprise);
+        switch (btn.getText()) {
+            case "Modifier":
+                try {
+                    // Récupération des objets associés à la facture depuis la base de données
+                    this.facture = this.daoTravaux.findById(this.modificationTravauxImmeuble.getTextField_Numero().getText());
+                    this.entreprise = this.daoEntreprise.findById(this.facture.getEntreprise().getSiret());
+                    this.bien = this.daoBien.findById(this.modificationTravauxImmeuble.getTextField_Bien_Logement().getText());
+                    this.immeuble = this.daoImmeuble.findById(this.modificationTravauxImmeuble.getTextField_Bien_Logement().getText());
 
-				this.daoTravaux.update(nouvelFacture);
+                    // Création d'un nouvel objet Facture avec les modifications
+                    Facture nouvelFacture = new Facture(
+                            this.modificationTravauxImmeuble.getTextField_Numero().getText(),
+                            this.modificationTravauxImmeuble.getTextField_dateEmission().getText(),
+                            facture.getDatePaiement(),
+                            facture.getModePaiement(),
+                            facture.getNumeroDevis(),
+                            this.modificationTravauxImmeuble.getTextField_designation().getText(),
+                            facture.getAccompteVerse(),
+                            Double.parseDouble(this.modificationTravauxImmeuble.getTextField_montant().getText()),
+                            facture.getImputableLocataire(),
+                            this.immeuble,
+                            this.bien,
+                            entreprise);
 
-				this.modificationTravauxImmeuble.dispose(); // Fermer la page après l'ajout
+                    // Mise à jour de l'objet Facture dans la base de données
+                    this.daoTravaux.update(nouvelFacture);
 
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-
-			break;
-		case "Annuler":
-			this.modificationTravauxImmeuble.dispose();
-			break;
-		}
-	}
-
+                    // Fermeture de la page après la modification
+                    this.modificationTravauxImmeuble.dispose();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                break;
+            case "Annuler":
+                // Annulation de la modification et fermeture de la fenêtre
+                this.modificationTravauxImmeuble.dispose();
+                break;
+        }
+    }
 }
