@@ -665,31 +665,21 @@ public class Fenetre_Accueil extends JFrame {
 		this.comboBox_MesChargesLocatives.setBounds(55, 81, 171, 29);
 		panel_chargesLocatives.add(this.comboBox_MesChargesLocatives);
 		this.comboBox_MesChargesLocatives.addActionListener(this.gestionAccueil);
+
 		// Remplir le JComboBox avec les identifiants des logements
 		try {
 			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
 			identifiantsLogements.add(0, "ID du logement");
+
 			// Ajouter les identifiants au modèle du JComboBox
 			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
 					identifiantsLogements.toArray(new String[0]));
 			this.comboBox_MesChargesLocatives.setModel(modelComboBox);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		this.comboBox_MesChargesLocatives = new JComboBox<String>();
-		this.comboBox_MesChargesLocatives.setBounds(55, 81, 171, 29);
-		panel_chargesLocatives.add(this.comboBox_MesChargesLocatives);
-		this.comboBox_MesChargesLocatives.addActionListener(this.gestionAccueil);
-		// Remplir le JComboBox avec les identifiants des logements
-		try {
-			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
-			identifiantsLogements.add(0, "ID du logement");
-			// Ajouter les identifiants au modèle du JComboBox
-			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-					identifiantsLogements.toArray(new String[0]));
-			this.comboBox_MesChargesLocatives.setModel(modelComboBox);
-		} catch (SQLException e) {
-			e.printStackTrace();
+			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
+			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
+					"Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 
 		///////////////////////////////////////////////////////////////////
@@ -713,13 +703,8 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesAssurances = new JTable();
 		this.table_MesAssurances.setSelectionBackground(new Color(0, 102, 204));
 		this.table_MesAssurances.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"n\u00B0 Police", "Montant", "Date \u00E9cheance", "Prestataire", "Adresse", "n\u00B0 T\u00E9l\u00E9phone"
-			}
-		));
+				new Object[][] { { null, null, null, null, null, null }, }, new String[] { "n\u00B0 Police", "Montant",
+						"Date \u00E9cheance", "Prestataire", "Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
 		this.table_MesAssurances.setBounds(40, 53, 668, 130);
 		this.table_MesAssurances.getSelectionModel().addListSelectionListener(this.gestionTableAssurance);
 		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);
