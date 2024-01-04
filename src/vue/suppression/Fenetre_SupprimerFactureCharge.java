@@ -12,9 +12,6 @@ import controleur.suppression.GestionSuppressionFactureCharge;
 public class Fenetre_SupprimerFactureCharge extends JInternalFrame {
 	GestionSuppressionFactureCharge gestionSuppressionCharge;
 
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_SupprimerFactureCharge() {
 
 		this.gestionSuppressionCharge = new GestionSuppressionFactureCharge(this);

@@ -34,57 +34,58 @@ public class GestionModificationBien implements ActionListener {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationBien.getTopLevelAncestor();
 		switch (btn.getText()) {
-		case "Ajouter un compteur":
-			this.idBien = this.modificationBien.getTextField_IdImmeuble().getText();
-			Fenetre_InsertionCompteur fenetreCompteur = new Fenetre_InsertionCompteur();
-			// Je créer temporairement le bien pour pouvoir récupérer l'ID quand je vais
-			// créer le compteur
-			Immeuble immeubleTemporaire = new Immeuble(this.modificationBien.getTextField_IdImmeuble().getText(),
-					this.modificationBien.getTextField_adresse().getText(),
-					this.modificationBien.getTextField_codePostal().getText(),
-					this.modificationBien.getTextField_ville().getText(),
-					this.modificationBien.getTextField_periodeDeConstruction().getText(),
-					this.modificationBien.getComboBox_typeDeBien().getSelectedItem().toString());
-			// J'ajoute l'immeuble dans la sauvegarde pour réutiliser
-			Sauvegarde.deleteItem("Immeuble");
-			Sauvegarde.addItem("Immeuble", immeubleTemporaire);
-			fenetre_Principale.getLayeredPane().add(fenetreCompteur);
-			fenetreCompteur.setVisible(true);
-			fenetreCompteur.moveToFront();
-			break;
-		case "Modifier":
-
-			try {
-				Immeuble nouvelImmeuble = new Immeuble(this.modificationBien.getTextField_IdImmeuble().getText(),
+			// Action lors du clic sur "Ajouter un compteur"
+			case "Ajouter un compteur":
+				this.idBien = this.modificationBien.getTextField_IdImmeuble().getText();
+				Fenetre_InsertionCompteur fenetreCompteur = new Fenetre_InsertionCompteur();
+				// Je crée temporairement le bien pour pouvoir récupérer l'ID quand je vais
+				// créer le compteur
+				Immeuble immeubleTemporaire = new Immeuble(this.modificationBien.getTextField_IdImmeuble().getText(),
 						this.modificationBien.getTextField_adresse().getText(),
 						this.modificationBien.getTextField_codePostal().getText(),
 						this.modificationBien.getTextField_ville().getText(),
 						this.modificationBien.getTextField_periodeDeConstruction().getText(),
 						this.modificationBien.getComboBox_typeDeBien().getSelectedItem().toString());
+				// J'ajoute l'immeuble dans la sauvegarde pour réutiliser
+				Sauvegarde.deleteItem("Immeuble");
+				Sauvegarde.addItem("Immeuble", immeubleTemporaire);
+				fenetre_Principale.getLayeredPane().add(fenetreCompteur);
+				fenetreCompteur.setVisible(true);
+				fenetreCompteur.moveToFront();
+				break;
+			// Action lors du clic sur "Modifier"
+			case "Modifier":
+				try {
+					Immeuble nouvelImmeuble = new Immeuble(this.modificationBien.getTextField_IdImmeuble().getText(),
+							this.modificationBien.getTextField_adresse().getText(),
+							this.modificationBien.getTextField_codePostal().getText(),
+							this.modificationBien.getTextField_ville().getText(),
+							this.modificationBien.getTextField_periodeDeConstruction().getText(),
+							this.modificationBien.getComboBox_typeDeBien().getSelectedItem().toString());
 
-				this.daoImmeuble.update(nouvelImmeuble);
+					this.daoImmeuble.update(nouvelImmeuble);
 
-				// Si il y a un compteur à ajouter
-				if (Sauvegarde.onSave("Compteur")) {
-					this.daoCompteur.create((Compteur) Sauvegarde.getItem("Compteur"));
-					Sauvegarde.clearSave();
+					// Si il y a un compteur à ajouter
+					if (Sauvegarde.onSave("Compteur")) {
+						this.daoCompteur.create((Compteur) Sauvegarde.getItem("Compteur"));
+						Sauvegarde.clearSave();
+					}
+
+					this.modificationBien.dispose(); // Fermer la page après la modification
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
-
-				this.modificationBien.dispose(); // Fermer la page après l'ajout
-
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-
-			break;
-		case "Annuler":
-			this.modificationBien.dispose();
-			break;
+				break;
+			// Action lors du clic sur "Annuler"
+			case "Annuler":
+				// Fermeture de la fenêtre de modification sans enregistrement
+				this.modificationBien.dispose();
+				break;
 		}
 	}
 
 	public String getIdBien() {
 		return this.idBien;
 	}
-
 }

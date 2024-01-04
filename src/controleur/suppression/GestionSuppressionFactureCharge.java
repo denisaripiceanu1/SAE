@@ -28,12 +28,12 @@ public class GestionSuppressionFactureCharge implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.supprimerCharges.getTopLevelAncestor();
-		Facture travaux_supp = (Facture) Sauvegarde.getItem("Facture");
+		Facture charge_supp = (Facture) Sauvegarde.getItem("Charge");
 		switch (btn.getText()) {
 		case "Supprimer":
 			try {
-				Facture travaux = this.daoFacture.findFactureChargeById(travaux_supp.getNumero());
-				this.daoFacture.delete(travaux);
+				Facture charge = this.daoFacture.findFactureChargeById(charge_supp.getNumero());
+				this.daoFacture.delete(charge);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
