@@ -352,7 +352,6 @@ public class GestionAccueil implements ActionListener {
 		Bien bien = this.daoBien.findById(idLogement);
 		Sauvegarde.deleteItem("Logement");
 		Sauvegarde.addItem("Logement", bien);
-
 	}
 
 	// ---------------------------------------------------------------//
