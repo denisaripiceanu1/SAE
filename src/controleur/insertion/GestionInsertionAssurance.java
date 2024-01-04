@@ -16,41 +16,52 @@ import vue.insertion.Fenetre_InsertionAssurance;
 
 public class GestionInsertionAssurance implements ActionListener {
 
-	private Fenetre_InsertionAssurance fia;
-	private DaoAssurance daoAssurance;
+    private Fenetre_InsertionAssurance fia;
+    private DaoAssurance daoAssurance;
 
-	public GestionInsertionAssurance(Fenetre_InsertionAssurance fia) {
-		this.fia = fia;
-		this.daoAssurance = new DaoAssurance();
-	}
+    public GestionInsertionAssurance(Fenetre_InsertionAssurance fia) {
+        this.fia = fia;
+        this.daoAssurance = new DaoAssurance();
+    }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fia.getTopLevelAncestor();
-		switch (btn.getText()) {
-		case "Ajouter":
-			Assurance assurance = null;
-			try {
-				DaoBien daoBien = new DaoBien();
-				DaoEntreprise daoEntreprise = new DaoEntreprise();
-				Bien bien = daoBien.findById(/*a completer*/);
-				Entreprise entreprise = daoEntreprise.findById(this.fia.getTextField_SIRET().getText());
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton btn = (JButton) e.getSource();
+        Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fia.getTopLevelAncestor();
+        switch (btn.getText()) {
+            case "Ajouter":
+                // Création d'un objet Assurance
+                Assurance assurance = null;
+                try {
+                    // Récupération des DAO nécessaires
+                    DaoBien daoBien = new DaoBien();
+                    DaoEntreprise daoEntreprise = new DaoEntreprise();
+                    
+                    // Recherche du Bien par son identifiant (à compléter avec la méthode correspondante)
+                    Bien bien = daoBien.findById(/*à compléter*/);
+                    
+                    // Recherche de l'Entreprise par son SIRET
+                    Entreprise entreprise = daoEntreprise.findById(this.fia.getTextField_SIRET().getText());
 
-				assurance = new Assurance(this.fia.getTextField_numPolice().getText(),
-						Float.parseFloat(this.fia.getTextField_montant().getText()), bien, entreprise);
+                    // Création de l'objet Assurance avec les données de la fenêtre d'insertion
+                    assurance = new Assurance(
+                            this.fia.getTextField_numPolice().getText(),
+                            Float.parseFloat(this.fia.getTextField_montant().getText()),
+                            bien, entreprise);
 
-				this.daoAssurance.create(assurance);
+                    // Appel de la méthode DAO pour l'ajout de l'assurance dans la base de données
+                    this.daoAssurance.create(assurance);
 
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-			this.fia.dispose();
-			break;
-		case "Annuler":
-			this.fia.dispose();
-			break;
-		}
-	}
-
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                // Fermeture de la fenêtre d'insertion après l'ajout
+                this.fia.dispose();
+                break;
+            case "Annuler":
+                // Annulation de l'opération, fermeture de la fenêtre d'insertion
+                this.fia.dispose();
+                break;
+        }
+    }
 }

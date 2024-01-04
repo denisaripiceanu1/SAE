@@ -7,54 +7,51 @@ import javax.swing.JButton;
 
 import controleur.outils.Sauvegarde;
 import modele.Bien;
-import modele.Compteur;
 import modele.Diagnostics;
-import modele.Immeuble;
-import modele.dao.DaoBien;
 import modele.dao.DaoDiagnostic;
-import modele.dao.DaoImmeuble;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionDiagnostic;
 
 public class GestionInsertionDiagnostic implements ActionListener {
 
-	private Fenetre_InsertionDiagnostic fid;
-	private DaoDiagnostic daoDiagnostic;
+    private Fenetre_InsertionDiagnostic fid;
+    private DaoDiagnostic daoDiagnostic;
 
-	public GestionInsertionDiagnostic(Fenetre_InsertionDiagnostic fid) {
-		this.fid = fid;
-	}
+    public GestionInsertionDiagnostic(Fenetre_InsertionDiagnostic fid) {
+        this.fid = fid;
+    }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fid.getTopLevelAncestor(); // fenetre dans laquelle
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton btn = (JButton) e.getSource();
+        Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fid.getTopLevelAncestor(); 
 
-		// on ouvre des internal
-		// frame
-		switch (btn.getText()) {
-		case "Ajouter":
-			Diagnostics diagnostic = null;
-			Bien bienSauvegarde  = (Bien) Sauvegarde.getItem("Logement");
-			try {
-				
-				diagnostic = new Diagnostics(this.fid.getTextField_Date_Validite().getText(),
-						this.fid.getTextField_Type().getText(), bienSauvegarde);
+        switch (btn.getText()) {
+            case "Ajouter":
+                Diagnostics diagnostic = null;
+                Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+                try {
+                    // Créer un nouveau diagnostic avec les données de la fenêtre d'insertion
+                    diagnostic = new Diagnostics(
+                            this.fid.getTextField_Date_Validite().getText(),
+                            this.fid.getTextField_Type().getText(), bienSauvegarde);
 
-				this.daoDiagnostic.create(diagnostic);
-				
-				this.fid.dispose();
+                    // Ajouter le nouveau diagnostic dans la base de données
+                    this.daoDiagnostic.create(diagnostic);
 
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-			
-			this.fid.dispose();
-			break;
+                    // Fermer la fenêtre d'insertion après l'ajout
+                    this.fid.dispose();
 
-		case "Annuler":
-			this.fid.dispose();
-			break;
-		}
-	}
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+
+                break;
+
+            case "Annuler":
+                // Annuler l'opération, fermer la fenêtre d'insertion
+                this.fid.dispose();
+                break;
+        }
+    }
 }
