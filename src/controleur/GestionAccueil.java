@@ -682,43 +682,45 @@ public class GestionAccueil implements ActionListener {
 			case "btn_MesChargesLocatives_Modifier":
 				// Premier test si il n'y a aucune charge sélectionnée alors erreur
 				if (Sauvegarde.onSave("Charge") == false) {
-				    JOptionPane.showMessageDialog(this.fenetreAccueil,
-				            "Veuillez sélectionner une charge pour modifier", "Erreur", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner une charge pour modifier",
+							"Erreur", JOptionPane.ERROR_MESSAGE);
 				} else {
-				    // On ouvre la fenêtre
-				    Fenetre_ModificationFactureChargeLogement modif_charge = new Fenetre_ModificationFactureChargeLogement();
-				    this.fenetreAccueil.getLayeredPane().add(modif_charge);
-				    modif_charge.setVisible(true);
-				    modif_charge.moveToFront();
-				    // permet de récupérer les infos sur la charge courante pour les afficher
-				    // On récupère la charge de la sauvegarde
-				    Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Charge");
-				    Facture chargeCourante;
-				    try {
-				        // À partir du numéro de la charge dans la sauvegarde, utilisez la BD pour récupérer
-				        // la charge la plus récente correspondante
-				        chargeCourante = this.daoFacture.findById(chargeSauvegarde.getNumero());
-				        // Afficher les infos dans la page de modification
-				        modif_charge.getTextField_Numero().setText(chargeCourante.getNumero());
-				        modif_charge.getTextField_date_paiement().setText(chargeCourante.getDatePaiement());
-				        modif_charge.getTextField_date_emission().setText(chargeCourante.getDateEmission());
-				        modif_charge.getTextField_numeroDevis().setText(chargeCourante.getNumeroDevis());
-				        modif_charge.getTextField_accompteVerse().setText(String.valueOf(chargeCourante.getAccompteVerse()));
-				        modif_charge.getTextField_montant().setText(String.valueOf(chargeCourante.getMontant()));
+					// On ouvre la fenêtre
+					Fenetre_ModificationFactureChargeLogement modif_charge = new Fenetre_ModificationFactureChargeLogement();
+					this.fenetreAccueil.getLayeredPane().add(modif_charge);
+					modif_charge.setVisible(true);
+					modif_charge.moveToFront();
+					// permet de récupérer les infos sur la charge courante pour les afficher
+					// On récupère la charge de la sauvegarde
+					Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Charge");
+					Facture chargeCourante;
+					try {
+						// À partir du numéro de la charge dans la sauvegarde, utilisez la BD pour
+						// récupérer
+						// la charge la plus récente correspondante
+						chargeCourante = this.daoFacture.findById(chargeSauvegarde.getNumero());
+						// Afficher les infos dans la page de modification
+						modif_charge.getTextField_Numero().setText(chargeCourante.getNumero());
+						modif_charge.getTextField_date_paiement().setText(chargeCourante.getDatePaiement());
+						modif_charge.getTextField_date_emission().setText(chargeCourante.getDateEmission());
+						modif_charge.getTextField_numeroDevis().setText(chargeCourante.getNumeroDevis());
+						modif_charge.getTextField_accompteVerse()
+								.setText(String.valueOf(chargeCourante.getAccompteVerse()));
+						modif_charge.getTextField_montant().setText(String.valueOf(chargeCourante.getMontant()));
 
-				        // Mise à jour des boutons radio
-				        if (chargeCourante.getImputableLocataire() == 1) {
-				            modif_charge.getRdbtnOui().setSelected(true);
-				        } else {
-				            modif_charge.getRdbtnNon().setSelected(true);
-				        }
+						// Mise à jour des boutons radio
+						if (chargeCourante.getImputableLocataire() == 1) {
+							modif_charge.getRdbtnOui().setSelected(true);
+						} else {
+							modif_charge.getRdbtnNon().setSelected(true);
+						}
 
-				        // Mise à jour du JComboBox_Designation
-				        modif_charge.getComboBox_Designation().setSelectedItem(chargeCourante.getDesignation());
+						// Mise à jour du JComboBox_Designation
+						modif_charge.getComboBox_Designation().setSelectedItem(chargeCourante.getDesignation());
 
-				    } catch (SQLException e1) {
-				        e1.printStackTrace();
-				    }
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
 				}
 
 				break;
@@ -749,10 +751,12 @@ public class GestionAccueil implements ActionListener {
 			case "btn_MesAssurances_Modifier":
 				break;
 			case "btn_MesAssurances_Inserer":
-				Fenetre_InsertionAssurance insertion_assurance = new Fenetre_InsertionAssurance();
-				this.fenetreAccueil.getLayeredPane().add(insertion_assurance);
-				insertion_assurance.setVisible(true);
-				insertion_assurance.moveToFront();
+				if (Sauvegarde.onSave("Assurance") == true) {
+					Fenetre_InsertionAssurance insertion_assurance = new Fenetre_InsertionAssurance();
+					this.fenetreAccueil.getLayeredPane().add(insertion_assurance);
+					insertion_assurance.setVisible(true);
+					insertion_assurance.moveToFront();
+				}
 				break;
 			case "btn_MesAssurances_Supprimer":
 				Fenetre_SupprimerAssurance supp_assurance = new Fenetre_SupprimerAssurance();
