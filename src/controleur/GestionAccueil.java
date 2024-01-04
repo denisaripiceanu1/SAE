@@ -1,7 +1,6 @@
 package controleur;
 
 import java.awt.BorderLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -525,7 +524,7 @@ public class GestionAccueil implements ActionListener {
 				break;
 
 			case "btnMesBiens_AjouterLogement":
-				if (Sauvegarde.onSave("Logement") == true) {
+				if (Sauvegarde.onSave("Immeuble") == true) {
 					Fenetre_InsertionLogement insertion_logement = new Fenetre_InsertionLogement();
 					this.fenetreAccueil.getLayeredPane().add(insertion_logement);
 					insertion_logement.setVisible(true);
