@@ -22,7 +22,7 @@ import vue.insertion.Fenetre_AffichageInfoLocataire;
 public class GestionLocations implements ListSelectionListener {
 
 	private Fenetre_Accueil fenetreAccueil;
-	private Fenetre_AffichageInfoLocataire fail;
+	private Fenetre_AffichageInfoLocataire fenetreAffichageLocataire;
 	private DaoLouer daoLouer;
 	private DaoFacture daoFacture;
 	private DaoLocataire daoLocataire;
@@ -30,11 +30,12 @@ public class GestionLocations implements ListSelectionListener {
 
 	public GestionLocations(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
+		this.fenetreAffichageLocataire = new Fenetre_AffichageInfoLocataire();
 		this.daoLouer = new DaoLouer();
 		this.daoFacture = new DaoFacture();
 		this.daoLocataire = new DaoLocataire();
-		Sauvegarde.initializeSave();
 		this.daoBien = new DaoBien();
+		Sauvegarde.initializeSave();
 	}
 
 	@Override
@@ -47,21 +48,22 @@ public class GestionLocations implements ListSelectionListener {
 				Louer location = null;
 				Locataire locataire = null;
 				Bien bien = null;
+
 				try {
-					// On va extraire le locataire de la location pour pouvoir ensuite afficher
-					// plusieurs inforamtions qui le concerne
-					location = this.daoLouer.findById(tableLocations.getValueAt(selectedRow, 1).toString(),
+					// Récupération de l'objet Louer sélectionné dans la table
+					location = this.daoLouer.findById(
+							tableLocations.getValueAt(selectedRow, 1).toString(),
 							tableLocations.getValueAt(selectedRow, 0).toString());
 
-					// On ajoute le locataire a la sauvegarde
+					// Récupération du locataire associé à la location
 					locataire = this.daoLocataire.findById(tableLocations.getValueAt(selectedRow, 0).toString());
+					// Ajout du locataire à la sauvegarde
 					Sauvegarde.deleteItem("Locataire");
 					Sauvegarde.addItem("Locataire", locataire);
 
-					// On va extraire le bien de la location pour pouvoir ensuite ajouter une
-					// facture pour ce bien
+					// Récupération du bien associé à la location
 					bien = this.daoBien.findById(tableLocations.getValueAt(selectedRow, 1).toString());
-					// On ajoute le bien a la sauvegarde
+					// Ajout du bien à la sauvegarde
 					Sauvegarde.deleteItem("Logement");
 					Sauvegarde.addItem("Logement", bien);
 				} catch (SQLException e1) {
@@ -69,16 +71,19 @@ public class GestionLocations implements ListSelectionListener {
 				}
 
 				if (location != null) {
+					// Ajout de la location à la sauvegarde
 					Sauvegarde.deleteItem("Louer");
 					Sauvegarde.addItem("Louer", location);
+
+					// Récupération de la dernière facture de loyer associée à la location
 					Facture derniereFactureLoyer = null;
 					try {
 						derniereFactureLoyer = this.daoFacture.findDerniereFactureLoyer(location.getBien());
-
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
 
+					// Mise à jour des champs de la fenêtre principale avec les informations de la location
 					JTextField loyer = this.fenetreAccueil.getTextField_loyer();
 					loyer.setText(String.valueOf(location.getLoyerTTC()));
 
@@ -124,6 +129,9 @@ public class GestionLocations implements ListSelectionListener {
 					JTextField provision = this.fenetreAccueil.getTextField_provisionCharges();
 					provision.setText(String.valueOf(location.getProvision_chargeMens_TTC()));
 
+					// Affichage de la fenêtre d'affichage des informations du locataire
+					fenetreAffichageLocataire.setVisible(true);
+					fenetreAffichageLocataire.moveToFront();
 				}
 			}
 		}

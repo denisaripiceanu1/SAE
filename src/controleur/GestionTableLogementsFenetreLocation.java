@@ -13,32 +13,35 @@ import vue.insertion.Fenetre_InsertionLocation;
 
 public class GestionTableLogementsFenetreLocation implements ListSelectionListener {
 
-	private Fenetre_InsertionLocation fil;
-	private DaoBien daoBien;
+    private Fenetre_InsertionLocation fenetreInsertionLocation;
+    private DaoBien daoBien;
 
-	public GestionTableLogementsFenetreLocation(Fenetre_InsertionLocation fil) {
-		this.fil = fil;
-		this.daoBien = new DaoBien();
-		Sauvegarde.initializeSave();
-	}
+    public GestionTableLogementsFenetreLocation(Fenetre_InsertionLocation fenetreInsertionLocation) {
+        this.fenetreInsertionLocation = fenetreInsertionLocation;
+        this.daoBien = new DaoBien();
+        Sauvegarde.initializeSave();
+    }
 
-	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		if (!e.getValueIsAdjusting()) {
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting()) {
+            // Vérifie si la sélection dans la table de logements a changé
+            int selectedRowLogement = this.fenetreInsertionLocation.getTable_liste_logements().getSelectedRow();
 
-			int selectedRowLogement = this.fil.getTable_liste_logements().getSelectedRow();
-
-			if (selectedRowLogement > -1) {
-				JTable tableLogement = this.fil.getTable_liste_logements();
-				Bien bien = null;
-				try {
-					bien = this.daoBien.findById(tableLogement.getValueAt(selectedRowLogement, 0).toString());
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				Sauvegarde.deleteItem("Logement");
-				Sauvegarde.addItem("Logement", bien);
-			}
-		}
-	}
+            if (selectedRowLogement > -1) {
+                // Si une ligne est sélectionnée
+                JTable tableLogement = this.fenetreInsertionLocation.getTable_liste_logements();
+                Bien bien = null;
+                try {
+                    // Récupération de l'objet Bien associé à la ligne sélectionnée
+                    bien = this.daoBien.findById(tableLogement.getValueAt(selectedRowLogement, 0).toString());
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                // Mise à jour de la sauvegarde avec l'objet Bien sélectionné
+                Sauvegarde.deleteItem("Logement");
+                Sauvegarde.addItem("Logement", bien);
+            }
+        }
+    }
 }

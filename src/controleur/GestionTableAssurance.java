@@ -30,6 +30,7 @@ public class GestionTableAssurance implements ListSelectionListener {
 	public void valueChanged(ListSelectionEvent e) {
 		if (!e.getValueIsAdjusting()) {
 
+			// Récupération de l'index de la ligne sélectionnée dans la table des assurances
 			int selectedRowAssurance = this.fenetreAccueil.getTableAssurances().getSelectedRow();
 
 			if (selectedRowAssurance > -1) {
@@ -37,14 +38,18 @@ public class GestionTableAssurance implements ListSelectionListener {
 				Assurance assurance = null;
 				Echeance echeance = null;
 				try {
-					assurance = this.daoAssurance
-							.findById(tableAssurance.getValueAt(selectedRowAssurance, 0).toString());
+					// Récupération de l'objet Assurance associé à la ligne sélectionnée
+					assurance = this.daoAssurance.findById(tableAssurance.getValueAt(selectedRowAssurance, 0).toString());
+					
+					// Récupération de l'objet Echeance associé à la ligne sélectionnée
 					echeance = this.daoEcheance.findById(tableAssurance.getValueAt(selectedRowAssurance, 0).toString(),
 							tableAssurance.getValueAt(selectedRowAssurance, 2).toString());
 
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				
+				// Mise à jour de la sauvegarde avec les objets Assurance et Echeance
 				Sauvegarde.deleteItem("Echeance");
 				Sauvegarde.deleteItem("Assurance");
 				Sauvegarde.addItem("Echeance", echeance);

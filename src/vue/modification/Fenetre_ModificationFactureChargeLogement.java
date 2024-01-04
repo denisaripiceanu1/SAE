@@ -21,7 +21,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import controleur.GestionTableEntrepriseFenetreFactureLogement2;
+import controleur.GestionTableEntrepriseFenetreModificationCharge;
 import controleur.modification.GestionModificationFacturesCharges;
 
 public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
@@ -52,7 +52,7 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 	private JComboBox<String> comboBox_modePaiement;
 
 	// Gestionnaires d'événements
-	private GestionTableEntrepriseFenetreFactureLogement2 gteff;
+	private GestionTableEntrepriseFenetreModificationCharge gteff;
 	private GestionModificationFacturesCharges gestionClic;
 
 	public Fenetre_ModificationFactureChargeLogement() {

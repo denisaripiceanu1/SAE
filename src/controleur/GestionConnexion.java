@@ -1,6 +1,5 @@
 package controleur;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -12,36 +11,43 @@ import modele.dao.CictOracleDataSource;
 import vue.Fenetre_Accueil;
 import vue.Fenetre_Connexion;
 
-public class GestionConnexion implements ActionListener{
-	
+public class GestionConnexion implements ActionListener {
+
 	private Fenetre_Connexion fc;
-	
+
+	// Constructeur prenant en paramètre la fenêtre de connexion
 	public GestionConnexion(Fenetre_Connexion fc) {
 		this.fc = fc;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton text = (JButton) e.getSource();
+		JButton boutonClicke = (JButton) e.getSource();
 
-		switch (text.getText()) {
+		switch (boutonClicke.getText()) {
 		case "Se connecter":
+			// Récupération des informations de connexion depuis la fenêtre
 			String login = fc.getNomUtilisateur();
 			String mdp = fc.getMdp();
 			try {
+				// Tentative de création de l'accès avec les informations de connexion
 				CictOracleDataSource.creerAcces(login, mdp);
-				Fenetre_Accueil fa = new Fenetre_Accueil();
-				fa.setVisible(true);
+				
+				// Si la connexion réussit, ouvrir la fenêtre principale et fermer la fenêtre de connexion
+				Fenetre_Accueil fenetreAccueil = new Fenetre_Accueil();
+				fenetreAccueil.setVisible(true);
 				this.fc.dispose();
 			} catch (SQLException e1) {
+				// En cas d'échec de connexion, afficher un message d'erreur
 				JOptionPane.showMessageDialog(fc, "Login ou mot de passe incorrect", "Erreur",
 						JOptionPane.ERROR_MESSAGE);
 				e1.printStackTrace();
 			}
 			break;
 		case "Annuler":
+			// En cas d'annulation, fermer la fenêtre de connexion
 			this.fc.dispose();
+			break;
 		}
 	}
-	
 }

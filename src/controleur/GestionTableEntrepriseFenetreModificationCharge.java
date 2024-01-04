@@ -11,7 +11,7 @@ import modele.Entreprise;
 import modele.dao.DaoEntreprise;
 import vue.modification.Fenetre_ModificationFactureChargeLogement;
 
-public class GestionTableEntrepriseFenetreFactureLogement2 implements ListSelectionListener {
+public class GestionTableEntrepriseFenetreModificationCharge implements ListSelectionListener {
 
 	// Référence à la fenêtre d'insertion de paiement de logement
 	private Fenetre_ModificationFactureChargeLogement fmfcl;
@@ -21,7 +21,7 @@ public class GestionTableEntrepriseFenetreFactureLogement2 implements ListSelect
 
 	// Constructeur prenant en paramètre la fenêtre d'insertion de paiement de
 	// logement
-	public GestionTableEntrepriseFenetreFactureLogement2(Fenetre_ModificationFactureChargeLogement fmfcl) {
+	public GestionTableEntrepriseFenetreModificationCharge(Fenetre_ModificationFactureChargeLogement fmfcl) {
 		this.fmfcl = fmfcl;
 		// Initialisation de l'accès à la base de données pour l'entité Entreprise
 		this.daoEntreprise = new DaoEntreprise();
