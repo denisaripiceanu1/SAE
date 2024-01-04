@@ -667,8 +667,8 @@ public class GestionAccueil implements ActionListener {
 						e1.printStackTrace();
 					}
 				}
-
 				break;
+
 			case "btn_Travaux_Supprimer":
 				Fenetre_SupprimerTravaux supp_travaux = new Fenetre_SupprimerTravaux();
 				this.fenetreAccueil.getLayeredPane().add(supp_travaux);
@@ -680,64 +680,49 @@ public class GestionAccueil implements ActionListener {
 			// LAYERED MES CHARGES LOCATIVES
 			///////////////////////////////
 			case "btn_MesChargesLocatives_Modifier":
-				if (Sauvegarde.onSave("Charge")) {
-					Fenetre_ModificationFactureChargeLogement modif_charge = new Fenetre_ModificationFactureChargeLogement();
-					this.fenetreAccueil.getLayeredPane().add(modif_charge);
-					modif_charge.setVisible(true);
-					modif_charge.moveToFront();
-
-					// On récupère la charge de la sauvegarde
-					Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Charge");
-					if (chargeSauvegarde != null) {
-						try {
-							Facture chargeCourant = this.daoFacture.findById(chargeSauvegarde.getNumero());
-
-							int deductibleValeur = 0; // Non déductible par défaut
-
-							// Choix de la radio button
-							if (modif_charge.getRdbtnOui().isSelected()) {
-								deductibleValeur = 1;
-							} else if (modif_charge.getRdbtnNon().isSelected()) {
-								deductibleValeur = 0;
-							}
-
-							modif_charge.getTextField_Numero().setText(chargeCourant.getNumero());
-							SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-							try {
-								java.util.Date datePaiement = dateFormat.parse(chargeCourant.getDatePaiement());
-								java.util.Date dateEmission = dateFormat.parse(chargeCourant.getDateEmission());
-
-								modif_charge.getTextField_date_paiement().setText(dateFormat.format(datePaiement));
-								modif_charge.getTextField_date_emission().setText(dateFormat.format(dateEmission));
-							} catch (ParseException e1) {
-								e1.printStackTrace();
-								// Handle the exception (e.g., show an error message) based on your requirements
-							}
-
-							modif_charge.getTextField_numeroDevis().setText(chargeCourant.getNumeroDevis());
-							modif_charge.getComboBox_Designation().setSelectedItem(chargeCourant.getDesignation());
-							modif_charge.getTextField_accompteVerse()
-									.setText(String.valueOf(chargeCourant.getAccompteVerse()));
-							modif_charge.getTextField_montant().setText(String.valueOf(chargeCourant.getMontant()));
-							modif_charge.getComboBox_modePaiement().setSelectedItem(chargeCourant.getModePaiement());
-							modif_charge.getComboBox_Designation().setSelectedItem(chargeCourant.getDesignation());
-
-							// Mise à jour des boutons radio
-							if (chargeCourant.getImputableLocataire() == 1) {
-								modif_charge.getRdbtnOui().setSelected(true);
-							} else {
-								modif_charge.getRdbtnNon().setSelected(true);
-							}
-
-						} catch (SQLException e1) {
-							e1.printStackTrace();
-						}
-					}
+				// Premier test si il n'y a aucune charge sélectionnée alors erreur
+				if (Sauvegarde.onSave("Charge") == false) {
+				    JOptionPane.showMessageDialog(this.fenetreAccueil,
+				            "Veuillez sélectionner une charge pour modifier", "Erreur", JOptionPane.ERROR_MESSAGE);
 				} else {
-					// chargeSauvegarde is null
-					System.out.println("Aucune charge sélectionnée");
+				    // On ouvre la fenêtre
+				    Fenetre_ModificationFactureChargeLogement modif_charge = new Fenetre_ModificationFactureChargeLogement();
+				    this.fenetreAccueil.getLayeredPane().add(modif_charge);
+				    modif_charge.setVisible(true);
+				    modif_charge.moveToFront();
+				    // permet de récupérer les infos sur la charge courante pour les afficher
+				    // On récupère la charge de la sauvegarde
+				    Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Charge");
+				    Facture chargeCourante;
+				    try {
+				        // À partir du numéro de la charge dans la sauvegarde, utilisez la BD pour récupérer
+				        // la charge la plus récente correspondante
+				        chargeCourante = this.daoFacture.findById(chargeSauvegarde.getNumero());
+				        // Afficher les infos dans la page de modification
+				        modif_charge.getTextField_Numero().setText(chargeCourante.getNumero());
+				        modif_charge.getTextField_date_paiement().setText(chargeCourante.getDatePaiement());
+				        modif_charge.getTextField_date_emission().setText(chargeCourante.getDateEmission());
+				        modif_charge.getTextField_numeroDevis().setText(chargeCourante.getNumeroDevis());
+				        modif_charge.getTextField_accompteVerse().setText(String.valueOf(chargeCourante.getAccompteVerse()));
+				        modif_charge.getTextField_montant().setText(String.valueOf(chargeCourante.getMontant()));
+
+				        // Mise à jour des boutons radio
+				        if (chargeCourante.getImputableLocataire() == 1) {
+				            modif_charge.getRdbtnOui().setSelected(true);
+				        } else {
+				            modif_charge.getRdbtnNon().setSelected(true);
+				        }
+
+				        // Mise à jour du JComboBox_Designation
+				        modif_charge.getComboBox_Designation().setSelectedItem(chargeCourante.getDesignation());
+
+				        // Mise à jour des autres éléments si nécessaire
+
+				    } catch (SQLException e1) {
+				        e1.printStackTrace();
+				    }
 				}
+
 				break;
 
 			case "btn_MesChargesLocatives_Supprimer":

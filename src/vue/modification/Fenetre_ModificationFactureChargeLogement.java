@@ -155,7 +155,7 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		designationModel.addElement("Électricité parties communes");
 		designationModel.addElement("????");
 		this.comboBox_Designation.setModel(designationModel);
-		comboBox_Designation.addActionListener(gestionClic);
+		//comboBox_Designation.addActionListener(gestionClic);
 		panel.add(this.comboBox_Designation);
 
 		// Séparateur vertical
@@ -233,41 +233,6 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		this.lbl_Entreprise.setBounds(573, 104, 132, 31);
 		panel.add(this.lbl_Entreprise);
 
-		textField_date_emission = new JTextField();
-		textField_date_emission.setColumns(10);
-		textField_date_emission
-				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9mission (YYYY-MM-JJ)",
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_emission.setBounds(24, 157, 202, 40);
-		panel.add(textField_date_emission);
-
-		textField_date_paiement = new JTextField();
-		textField_date_paiement.setColumns(10);
-		textField_date_paiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Date Paiement (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_paiement.setBounds(247, 156, 202, 40);
-		panel.add(textField_date_paiement);
-
-		textField_numeroDevis = new JTextField();
-		textField_numeroDevis.setColumns(10);
-		textField_numeroDevis.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro devis",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_numeroDevis.setBounds(24, 217, 202, 40);
-		panel.add(textField_numeroDevis);
-
-		textField_accompteVerse = new JTextField();
-		textField_accompteVerse.setColumns(10);
-		textField_accompteVerse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Acompte vers\u00E9 ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_accompteVerse.setBounds(247, 283, 200, 40);
-		panel.add(textField_accompteVerse);
-
-		textField_montant = new JTextField();
-		textField_montant.setColumns(10);
-		textField_montant.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_montant.setBounds(24, 283, 202, 40);
-		panel.add(textField_montant);
 	}
 
 	public JTextField getTextField_Numero() {
@@ -329,4 +294,5 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 	public JScrollPane getScrollPane_table_entreprise() {
 		return scrollPane_table_entreprise;
 	}
+	
 }
