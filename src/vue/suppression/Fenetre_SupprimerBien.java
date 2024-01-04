@@ -12,9 +12,6 @@ import controleur.suppression.GestionSuppressionBien;
 public class Fenetre_SupprimerBien extends JInternalFrame {
 	GestionSuppressionBien gestionSuppressionBien;
 
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_SupprimerBien() {
 
 		this.gestionSuppressionBien = new GestionSuppressionBien(this);
