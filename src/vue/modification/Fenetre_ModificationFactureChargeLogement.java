@@ -21,13 +21,17 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import controleur.GestionTableEntrepriseFenetreFactureLogement;
+import controleur.GestionTableEntrepriseFenetreFactureLogement2;
 import controleur.modification.GestionModificationFacturesCharges;
 
 public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 	// Champs de saisie
 	private JTextField textField_Numero;
-	private JSeparator separator_Travaux;
+	private JTextField textField_date_emission;
+	private JTextField textField_date_paiement;
+	private JTextField textField_numeroDevis;
+	private JTextField textField_accompteVerse;
+	private JTextField textField_montant;
 
 	// Boutons radio
 	private JRadioButton rdbtnOui = new JRadioButton("Oui");
@@ -37,21 +41,19 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 	// Boutons et libellés
 	private JButton btn_ajouter_entreprise;
 	private JButton btn_charger_entreprise;
-	private JScrollPane scrollPane_table_entreprise;
 	private JLabel lbl_Entreprise;
 
 	// Table pour afficher les données d'entreprise
 	private JTable table_entreprise;
 
-	// Gestionnaires d'événements
-	private GestionTableEntrepriseFenetreFactureLogement gteff;
-	private GestionModificationFacturesCharges gestionClic;
-	private JTextField textField_date_emission;
-	private JTextField textField_date_paiement;
-	private JTextField textField_numeroDevis;
+	// Autres elements
+	private JSeparator separator_Travaux;
+	private JScrollPane scrollPane_table_entreprise;
 	private JComboBox<String> comboBox_modePaiement;
-	private JTextField textField_accompteVerse;
-	private JTextField textField_montant;
+
+	// Gestionnaires d'événements
+	private GestionTableEntrepriseFenetreFactureLogement2 gteff;
+	private GestionModificationFacturesCharges gestionClic;
 
 	public Fenetre_ModificationFactureChargeLogement() {
 
@@ -155,7 +157,7 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		designationModel.addElement("Électricité parties communes");
 		designationModel.addElement("????");
 		this.comboBox_Designation.setModel(designationModel);
-		//comboBox_Designation.addActionListener(gestionClic);
+		// comboBox_Designation.addActionListener(gestionClic);
 		panel.add(this.comboBox_Designation);
 
 		// Séparateur vertical
@@ -294,5 +296,5 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 	public JScrollPane getScrollPane_table_entreprise() {
 		return scrollPane_table_entreprise;
 	}
-	
+
 }

@@ -11,7 +11,7 @@ public class RequeteUpdateImmeuble implements Requete<Immeuble> {
 
 	@Override
 	public String requete() {
-		return "UPDATE Immeuble SET adresse = ?, cp = ?, " + "ville = ?, periode_construction = ?, type_immeuble = ?"
+		return "UPDATE Immeuble SET adresse = ?, cp = ?, ville = ?, periode_construction = ?, type_immeuble = ?"
 				+ "WHERE Id_Immeuble = ?";
 	}
 

@@ -1,5 +1,9 @@
 package modele;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class Facture {
 
 	private String numero;
@@ -123,4 +127,24 @@ public class Facture {
 	public void setEntreprise(Entreprise entreprise) {
 		this.entreprise = entreprise;
 	}
+	public java.sql.Date getDateEmissionAsSqlDate() {
+        return parseDate(dateEmission);
+    }
+
+    public java.sql.Date getDatePaiementAsSqlDate() {
+        return parseDate(datePaiement);
+    }
+
+    private java.sql.Date parseDate(String dateString) {
+        try {
+            if (dateString != null) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                java.util.Date utilDate = dateFormat.parse(dateString);
+                return new java.sql.Date(utilDate.getTime());
+            }
+        } catch (ParseException e) {
+            e.printStackTrace(); // Handle the exception according to your needs
+        }
+        return null;
+    }
 }

@@ -127,9 +127,6 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 			updateEntrepriseComponents();
 
 		} else if (source instanceof JComboBox) {
-			// Traitement spécifique pour le JComboBox
-			JComboBox<?> comboBox = (JComboBox<?>) source;
-			// Reste du code pour le JComboBox
 			updateEntrepriseComponents();
 		}
 	}
