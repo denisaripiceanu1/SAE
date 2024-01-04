@@ -9,7 +9,6 @@ import controleur.outils.Sauvegarde;
 import modele.Bien;
 import modele.Immeuble;
 import modele.dao.DaoBien;
-import modele.dao.DaoImmeuble;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionCompteur;
 import vue.insertion.Fenetre_InsertionLogement;
@@ -32,42 +31,55 @@ public class GestionInsertionLogement implements ActionListener {
 																								// on ouvre des internal
 																								// frame
 		switch (btn.getText()) {
-		case "Ajouter une quotité":
-			Fenetre_InsertionQuotite insertion_quotite = new Fenetre_InsertionQuotite();
-			fenetre_Principale.getLayeredPane().add(insertion_quotite);
-			insertion_quotite.setVisible(true);
-			insertion_quotite.moveToFront();
-			break;
+			// Action lors du clic sur "Ajouter une quotité"
+			case "Ajouter une quotité":
+				Fenetre_InsertionQuotite insertion_quotite = new Fenetre_InsertionQuotite();
+				fenetre_Principale.getLayeredPane().add(insertion_quotite);
+				insertion_quotite.setVisible(true);
+				insertion_quotite.moveToFront();
+				break;
 
-		case "Ajouter un compteur":
-			Fenetre_InsertionCompteur insertion_compteur = new Fenetre_InsertionCompteur();
-			fenetre_Principale.getLayeredPane().add(insertion_compteur);
-			insertion_compteur.setVisible(true);
-			insertion_compteur.moveToFront();
-			break;
+			// Action lors du clic sur "Ajouter un compteur"
+			case "Ajouter un compteur":
+				Fenetre_InsertionCompteur insertion_compteur = new Fenetre_InsertionCompteur();
+				fenetre_Principale.getLayeredPane().add(insertion_compteur);
+				insertion_compteur.setVisible(true);
+				insertion_compteur.moveToFront();
+				break;
 
-		case "Ajouter":
-			Bien logement = null;
-			try {
-				String typeLogement = this.fil.getComboBox_typeDeLogement().getSelectedItem().toString();
-
-				logement = new Bien(this.fil.getTextField_IdLogement().getText(),
-						Double.parseDouble(this.fil.getTextField_SurfaceHabitable().getText()),
-						Integer.parseInt(this.fil.getTextField_NbPièces().getText()),
-						Integer.parseInt(this.fil.getTextField_NumEtage().getText()),
-						this.fil.getTextField_DateAcquisition().getText(), typeLogement, (Immeuble) Sauvegarde.getItem("Immeuble"));
+			// Action lors du clic sur "Ajouter"
+			case "Ajouter":
+				Bien logement = null;
+				try {
+					// Récupération des informations du logement depuis l'interface graphique
+					String typeLogement = this.fil.getComboBox_typeDeLogement().getSelectedItem().toString();
+					logement = new Bien(
+							this.fil.getTextField_IdLogement().getText(),
+							Double.parseDouble(this.fil.getTextField_SurfaceHabitable().getText()),
+							Integer.parseInt(this.fil.getTextField_NbPièces().getText()),
+							Integer.parseInt(this.fil.getTextField_NumEtage().getText()),
+							this.fil.getTextField_DateAcquisition().getText(),
+							typeLogement,
+							(Immeuble) Sauvegarde.getItem("Immeuble") // Récupération de l'Immeuble associé au logement
+					);
+					
+					// Enregistrement du logement dans la base de données
+					this.daoBien.create(logement);
+					
+					// Potentiellement supprimer l'immeuble de la sauvegarde si besoin
+					
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				// Fermeture de la fenêtre d'insertion de logement après ajout
+				this.fil.dispose();
+				break;
 				
-				this.daoBien.create(logement);
-				//Potentiellement supprimer l'immeuble de la sauvegarde
-				
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-			this.fil.dispose();
-			break;
-		case "Annuler":
-			this.fil.dispose();
-			break;
+			// Action lors du clic sur "Annuler"
+			case "Annuler":
+				// Fermeture de la fenêtre d'insertion de logement sans ajout
+				this.fil.dispose();
+				break;
 		}
 	}
 }

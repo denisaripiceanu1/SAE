@@ -716,8 +716,6 @@ public class GestionAccueil implements ActionListener {
 				        // Mise à jour du JComboBox_Designation
 				        modif_charge.getComboBox_Designation().setSelectedItem(chargeCourante.getDesignation());
 
-				        // Mise à jour des autres éléments si nécessaire
-
 				    } catch (SQLException e1) {
 				        e1.printStackTrace();
 				    }

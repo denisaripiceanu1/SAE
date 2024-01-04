@@ -1,55 +1,60 @@
 package controleur.insertion;
 
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
 import modele.Entreprise;
-
 import modele.dao.DaoEntreprise;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionEntreprise;
 
 public class GestionInsertionEntreprise implements ActionListener {
 
-	private Fenetre_InsertionEntreprise fie;
-	private DaoEntreprise daoEntreprise;
+    private Fenetre_InsertionEntreprise fie;
+    private DaoEntreprise daoEntreprise;
 
-	public GestionInsertionEntreprise(Fenetre_InsertionEntreprise fie) {
-		this.daoEntreprise = new DaoEntreprise();
-		this.fie = fie;
-	}
+    public GestionInsertionEntreprise(Fenetre_InsertionEntreprise fie) {
+        this.daoEntreprise = new DaoEntreprise();
+        this.fie = fie;
+    }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fie.getTopLevelAncestor(); // fenetre dans laquelle
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton btn = (JButton) e.getSource();
+        Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fie.getTopLevelAncestor();
 
-		switch (btn.getText()) {
-		case "Ajouter":
+        switch (btn.getText()) {
+            case "Ajouter":
+                Entreprise entreprise = null;
+                try {
+                    // Créer une nouvelle entreprise avec les informations fournies dans la fenêtre d'insertion
+                    entreprise = new Entreprise(
+                            this.fie.getTextField_SIRET().getText(),
+                            this.fie.getTextField_Nom().getText(),
+                            this.fie.getTextField_Adresse().getText(),
+                            this.fie.getTextField_CP().getText(),
+                            this.fie.getTextField_Ville().getText(),
+                            this.fie.getTextField_Mail().getText(),
+                            this.fie.getTextField_Telephone().getText(),
+                            this.fie.getTextField_IBAN().getText());
 
-			Entreprise entreprise = null;
-			try {
-				entreprise = new Entreprise(this.fie.getTextField_SIRET().getText(),
-						this.fie.getTextField_Nom().getText(), this.fie.getTextField_Adresse().getText(),
-						this.fie.getTextField_CP().getText(), this.fie.getTextField_Ville().getText(),
-						this.fie.getTextField_Mail().getText(), this.fie.getTextField_Telephone().getText(),
-						this.fie.getTextField_IBAN().getText());
+                    // Ajouter la nouvelle entreprise à la base de données
+                    this.daoEntreprise.create(entreprise);
 
-				this.daoEntreprise.create(entreprise);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
 
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+                // Fermer la fenêtre d'insertion après l'ajout
+                this.fie.dispose();
+                break;
 
-			this.fie.dispose();
-			break;
-
-		case "Annuler":
-			this.fie.dispose();
-			break;
-		}
-	}
+            case "Annuler":
+                // Annuler l'opération, fermer la fenêtre d'insertion
+                this.fie.dispose();
+                break;
+        }
+    }
 }
