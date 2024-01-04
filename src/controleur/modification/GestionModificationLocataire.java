@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import controleur.outils.Sauvegarde;
 import modele.Locataire;
 import modele.dao.DaoLocataire;
-import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
 
 public class GestionModificationLocataire implements ActionListener {
@@ -28,24 +27,30 @@ public class GestionModificationLocataire implements ActionListener {
 
         switch (btn.getText()) {
             case "Modifier":
+                // Appel de la méthode pour effectuer la modification du locataire
                 modifierLocataire();
                 break;
             case "Retour":
+                // Fermeture de la fenêtre de modification
                 this.modificationLocataire.dispose();
                 break;
         }
     }
 
+    // Méthode privée pour effectuer la modification du locataire
     private void modifierLocataire() {
         Locataire locataire = creerLocataireAPartirDesChamps();
         try {
+            // Appel de la méthode de mise à jour dans la base de données
             this.daoLocataire.update(locataire);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        // Fermeture de la fenêtre de modification après la mise à jour
         this.modificationLocataire.dispose();
     }
 
+    // Méthode privée pour créer un objet Locataire à partir des champs de saisie
     private Locataire creerLocataireAPartirDesChamps() {
         Locataire locataire = new Locataire(
                 this.modificationLocataire.getTextField_Id().getText(),
