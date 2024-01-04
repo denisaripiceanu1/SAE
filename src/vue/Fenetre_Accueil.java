@@ -617,7 +617,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesChargesLocatives.setSelectionBackground(new Color(0, 102, 204));
 		this.table_MesChargesLocatives
 				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
-						new String[] { "Bien/Logement", "Numero", "Designation", "Date d'emission", "Date de paiement",
+						new String[] { "Logement", "Numero", "Designation", "Date d'emission", "Date de paiement",
 								"Imputable", "Montant", "Accompte", "Restant du" }));
 		this.table_MesChargesLocatives.setBounds(40, 53, 668, 130);
 		scrollPane_MesChargesLocatives.setViewportView(this.table_MesChargesLocatives);

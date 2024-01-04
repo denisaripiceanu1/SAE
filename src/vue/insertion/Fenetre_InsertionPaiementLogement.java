@@ -136,7 +136,6 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		panel.add(comboBox_modePaiement);
 
 		// Menu déroulant pour la designation de la facture
-
 		this.comboBox_Designation = new JComboBox<String>();
 		this.comboBox_Designation.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "D\u00E9signation",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));

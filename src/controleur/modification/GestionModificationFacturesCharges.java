@@ -30,42 +30,53 @@ public class GestionModificationFacturesCharges implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationFacturesCharge.getTopLevelAncestor();
+		Object source = e.getSource();
 
-		switch (btn.getText()) {
-		case "Modifier":
-			try {
-				int imputable = 0;
-				if (this.modificationFacturesCharge.getRdbtnOui().isSelected()) {
-					imputable = 1;
+		if (source instanceof JButton) {
+			JButton btn = (JButton) source;
+			Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationFacturesCharge
+					.getTopLevelAncestor();
+
+			switch (btn.getText()) {
+			case "Modifier":
+				try {
+					int imputable = 0;
+					if (this.modificationFacturesCharge.getRdbtnOui().isSelected()) {
+						imputable = 1;
+					}
+
+					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+					Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
+
+					Facture nouvelleCharge = new Facture(
+							this.modificationFacturesCharge.getTextField_Numero().getText(),
+							this.modificationFacturesCharge.getTextField_date_emission().getText(),
+							this.modificationFacturesCharge.getTextField_date_paiement().getText(),
+							this.modificationFacturesCharge.getComboBox_modePaiement().getSelectedItem().toString(),
+							this.modificationFacturesCharge.getTextField_numeroDevis().getText(),
+							this.modificationFacturesCharge.getComboBox_Designation().getSelectedItem().toString(),
+							Double.parseDouble(this.modificationFacturesCharge.getTextField_accompteVerse().getText()),
+							Double.parseDouble(this.modificationFacturesCharge.getTextField_montant().getText()),
+							imputable, null, bienSauvegarde, entrepriseSauvegarde);
+
+					this.daoFacture.update(nouvelleCharge);
+
+					this.modificationFacturesCharge.dispose(); // Fermer la page après l'ajout
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
+				break;
 
-				Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
-				Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
-
-				Facture nouvelleCharge = new Facture(this.modificationFacturesCharge.getTextField_Numero().getText(),
-						this.modificationFacturesCharge.getTextField_date_emission().getText(),
-						this.modificationFacturesCharge.getTextField_date_paiement().getText(),
-						this.modificationFacturesCharge.getComboBox_modePaiement().getSelectedItem().toString(),
-						this.modificationFacturesCharge.getTextField_numeroDevis().getText(),
-						this.modificationFacturesCharge.getComboBox_Designation().getSelectedItem().toString(),
-						Double.parseDouble(this.modificationFacturesCharge.getTextField_accompteVerse().getText()),
-						Double.parseDouble(this.modificationFacturesCharge.getTextField_montant().getText()), imputable,
-						null, bienSauvegarde, entrepriseSauvegarde);
-
-				this.daoFacture.update(nouvelleCharge);
-
-				this.modificationFacturesCharge.dispose(); // Fermer la page après l'ajout
-
-			} catch (Exception e1) {
-				e1.printStackTrace();
+			case "Annuler":
+				this.modificationFacturesCharge.dispose();
+				break;
 			}
-			break;
-
-		case "Annuler":
-			this.modificationFacturesCharge.dispose();
-			break;
+		} else {
+			// Handle other event sources
+			System.out.println("Unexpected event source: " + source);
+			// You can log the event source or provide additional handling based on your
+			// requirements
 		}
 	}
 }

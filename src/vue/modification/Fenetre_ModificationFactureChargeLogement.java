@@ -131,34 +131,32 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		textField_montant.setBounds(24, 283, 202, 40);
 		panel.add(textField_montant);
 
-		// Menu déroulant pour la designation de la facture
-		comboBox_modePaiement = new JComboBox<String>();
+		// Menu déroulant pour le mode de paiement
+		comboBox_modePaiement = new JComboBox<>();
 		comboBox_modePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mode de Paiement",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		comboBox_modePaiement.setBounds(247, 219, 200, 39);
+		comboBox_modePaiement.setBounds(247, 230, 200, 39);
+
+		DefaultComboBoxModel<String> modePaiementModel = new DefaultComboBoxModel<>();
+		modePaiementModel.addElement("Virement bancaire");
+		modePaiementModel.addElement("Espèce");
+		comboBox_modePaiement.setModel(modePaiementModel);
 		panel.add(comboBox_modePaiement);
 
+		// Menu déroulant pour la designation de la facture
 		this.comboBox_Designation = new JComboBox<String>();
 		this.comboBox_Designation.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "D\u00E9signation",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		this.comboBox_Designation.setBounds(247, 104, 200, 40);
 
 		DefaultComboBoxModel<String> designationModel = new DefaultComboBoxModel<String>();
-
-		designationModel.addElement("Loyer ??");
-		designationModel.addElement("Travaux");
 		designationModel.addElement("Eau");
 		designationModel.addElement("Ordures ménagères");
-		designationModel.addElement("Électricité parties communes ");
-
+		designationModel.addElement("Électricité parties communes");
+		designationModel.addElement("????");
 		this.comboBox_Designation.setModel(designationModel);
-
 		comboBox_Designation.addActionListener(gestionClic);
 		panel.add(this.comboBox_Designation);
-
-		DefaultComboBoxModel<String> modePaiementModel = new DefaultComboBoxModel<>();
-		modePaiementModel.addElement("Virement bancaire");
-		modePaiementModel.addElement("Espèce");
 
 		// Séparateur vertical
 		separator_Travaux = new JSeparator();
@@ -257,12 +255,6 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		textField_numeroDevis.setBounds(24, 217, 202, 40);
 		panel.add(textField_numeroDevis);
 
-		comboBox_modePaiement = new JComboBox<String>();
-		comboBox_modePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mode de Paiement",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		comboBox_modePaiement.setBounds(247, 219, 200, 39);
-		panel.add(comboBox_modePaiement);
-
 		textField_accompteVerse = new JTextField();
 		textField_accompteVerse.setColumns(10);
 		textField_accompteVerse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
@@ -276,7 +268,6 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_montant.setBounds(24, 283, 202, 40);
 		panel.add(textField_montant);
-
 	}
 
 	public JTextField getTextField_Numero() {

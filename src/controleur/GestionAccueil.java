@@ -346,7 +346,7 @@ public class GestionAccueil implements ActionListener {
 			Assurance assurance = assurancesLogement.get(i);
 			Entreprise entreprise = this.daoEntreprise.findById(assurance.getEntreprise().getSiret());
 			Echeance echeance = this.daoEcheance.findByAssuranceNumPolice(assurance.getNuméroPolice());
-			echeance.setDateEcheance(echeance.getDateEcheance().substring(0, 10)); 
+			echeance.setDateEcheance(echeance.getDateEcheance().substring(0, 10));
 			this.ecrireLigneTableAssurances(i, assurance, entreprise, echeance);
 		}
 	}
@@ -688,53 +688,55 @@ public class GestionAccueil implements ActionListener {
 
 					// On récupère la charge de la sauvegarde
 					Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Charge");
-
-					try {
-						Facture chargeCourant = this.daoFacture.findById(chargeSauvegarde.getNumero());
-
-						int deductibleValeur = 0; // Non déductible par défaut
-
-						// Choix de la radio button
-						if (modif_charge.getRdbtnOui().isSelected()) {
-							deductibleValeur = 1;
-						} else if (modif_charge.getRdbtnNon().isSelected()) {
-							deductibleValeur = 0;
-						}
-
-						modif_charge.getTextField_Numero().setText(chargeCourant.getNumero());
-						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-						// Assuming getDatePaiement() and getDateEmission() return strings
+					if (chargeSauvegarde != null) {
 						try {
-							java.util.Date datePaiement = dateFormat.parse(chargeCourant.getDatePaiement());
-							java.util.Date dateEmission = dateFormat.parse(chargeCourant.getDateEmission());
+							Facture chargeCourant = this.daoFacture.findById(chargeSauvegarde.getNumero());
 
-							modif_charge.getTextField_date_paiement().setText(dateFormat.format(datePaiement));
-							modif_charge.getTextField_date_emission().setText(dateFormat.format(dateEmission));
-						} catch (ParseException e1) {
+							int deductibleValeur = 0; // Non déductible par défaut
+
+							// Choix de la radio button
+							if (modif_charge.getRdbtnOui().isSelected()) {
+								deductibleValeur = 1;
+							} else if (modif_charge.getRdbtnNon().isSelected()) {
+								deductibleValeur = 0;
+							}
+
+							modif_charge.getTextField_Numero().setText(chargeCourant.getNumero());
+							SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+							try {
+								java.util.Date datePaiement = dateFormat.parse(chargeCourant.getDatePaiement());
+								java.util.Date dateEmission = dateFormat.parse(chargeCourant.getDateEmission());
+
+								modif_charge.getTextField_date_paiement().setText(dateFormat.format(datePaiement));
+								modif_charge.getTextField_date_emission().setText(dateFormat.format(dateEmission));
+							} catch (ParseException e1) {
+								e1.printStackTrace();
+								// Handle the exception (e.g., show an error message) based on your requirements
+							}
+
+							modif_charge.getTextField_numeroDevis().setText(chargeCourant.getNumeroDevis());
+							modif_charge.getComboBox_Designation().setSelectedItem(chargeCourant.getDesignation());
+							modif_charge.getTextField_accompteVerse()
+									.setText(String.valueOf(chargeCourant.getAccompteVerse()));
+							modif_charge.getTextField_montant().setText(String.valueOf(chargeCourant.getMontant()));
+							modif_charge.getComboBox_modePaiement().setSelectedItem(chargeCourant.getModePaiement());
+							modif_charge.getComboBox_Designation().setSelectedItem(chargeCourant.getDesignation());
+
+							// Mise à jour des boutons radio
+							if (chargeCourant.getImputableLocataire() == 1) {
+								modif_charge.getRdbtnOui().setSelected(true);
+							} else {
+								modif_charge.getRdbtnNon().setSelected(true);
+							}
+
+						} catch (SQLException e1) {
 							e1.printStackTrace();
-							// Handle the exception (e.g., show an error message) based on your requirements
 						}
-
-						modif_charge.getComboBox_modePaiement().setSelectedItem(chargeCourant.getModePaiement());
-						modif_charge.getTextField_numeroDevis().setText(chargeCourant.getNumeroDevis());
-						modif_charge.getComboBox_Designation().setSelectedItem(chargeCourant.getDesignation());
-						modif_charge.getTextField_accompteVerse()
-								.setText(String.valueOf(chargeCourant.getAccompteVerse())); // assurez-vous que le
-																							// champ accepte une
-																							// chaîne
-						modif_charge.getTextField_montant().setText(String.valueOf(chargeCourant.getMontant()));
-
-						// Mise à jour des boutons radio
-						if (chargeCourant.getImputableLocataire() == 1) {
-							modif_charge.getRdbtnOui().setSelected(true);
-						} else {
-							modif_charge.getRdbtnNon().setSelected(true);
-						}
-
-					} catch (SQLException e1) {
-						e1.printStackTrace();
 					}
+				} else {
+					// chargeSauvegarde is null
+					System.out.println("Aucune charge sélectionnée");
 				}
 				break;
 
