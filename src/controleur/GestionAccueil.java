@@ -751,7 +751,7 @@ public class GestionAccueil implements ActionListener {
 			case "btn_MesAssurances_Modifier":
 				break;
 			case "btn_MesAssurances_Inserer":
-				if (Sauvegarde.onSave("Assurance") == true) {
+				if (Sauvegarde.onSave("Logement") == true) {
 					Fenetre_InsertionAssurance insertion_assurance = new Fenetre_InsertionAssurance();
 					this.fenetreAccueil.getLayeredPane().add(insertion_assurance);
 					insertion_assurance.setVisible(true);
@@ -759,14 +759,13 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesAssurances_Supprimer":
-				Fenetre_SupprimerAssurance supp_assurance = new Fenetre_SupprimerAssurance();
-				this.fenetreAccueil.getLayeredPane().add(supp_assurance);
-				supp_assurance.setVisible(true);
-				supp_assurance.moveToFront();
+				if (Sauvegarde.onSave("Assurance") == true) {
+					Fenetre_SupprimerAssurance supp_assurance = new Fenetre_SupprimerAssurance();
+					this.fenetreAccueil.getLayeredPane().add(supp_assurance);
+					supp_assurance.setVisible(true);
+					supp_assurance.moveToFront();
+				}
 				break;
-
-			// Coder la cas de la selection d'un id logement
-			// parmi la liste prÃ©sente dans le JComboBox "comboBox_MesAssurances"
 
 			////////////////////////////////////
 			// LAYERED REGULARISATION DES CHARGES
