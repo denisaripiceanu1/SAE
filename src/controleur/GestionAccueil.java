@@ -349,6 +349,10 @@ public class GestionAccueil implements ActionListener {
 			echeance.setDateEcheance(echeance.getDateEcheance().substring(0, 10));
 			this.ecrireLigneTableAssurances(i, assurance, entreprise, echeance);
 		}
+		Bien bien = this.daoBien.findById(idLogement);
+		Sauvegarde.deleteItem("Logement");
+		Sauvegarde.addItem("Logement", bien);
+
 	}
 
 	// ---------------------------------------------------------------//
