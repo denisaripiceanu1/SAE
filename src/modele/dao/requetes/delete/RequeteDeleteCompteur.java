@@ -1,9 +1,9 @@
 package modele.dao.requetes.delete;
 
 import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
 
-import modele.Bien;
 import modele.Compteur;
 import modele.dao.requetes.Requete;
 

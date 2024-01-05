@@ -1,13 +1,13 @@
 package modele.dao;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
 import modele.Assurance;
 import modele.Echeance;
 import modele.dao.requetes.delete.RequeteDeleteEcheance;
-import modele.dao.requetes.select.RequeteSelectAssuranceByLogement;
 import modele.dao.requetes.select.RequeteSelectEcheance;
 import modele.dao.requetes.select.RequeteSelectEcheanceByAssuranceNumPolice;
 import modele.dao.requetes.select.RequeteSelectEcheanceById;

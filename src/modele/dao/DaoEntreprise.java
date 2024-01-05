@@ -1,18 +1,17 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
+
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import modele.Entreprise;
-import modele.Locataire;
 import modele.dao.requetes.select.RequeteSelectEntreprise;
 import modele.dao.requetes.select.RequeteSelectEntrepriseById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertEntreprise;
-import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocataire;
 
 public class DaoEntreprise extends DaoModele<Entreprise> implements Dao<Entreprise> {
 

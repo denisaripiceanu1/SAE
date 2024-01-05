@@ -45,7 +45,6 @@ public class Iterateur<T> implements Iterator<T> {
 
 			return instance;
 		} catch (SQLException e) {
-			// Gérer l'exception appropriée selon vos besoins
 			throw new RuntimeException("Erreur lors de l'itération", e);
 		}
 	}

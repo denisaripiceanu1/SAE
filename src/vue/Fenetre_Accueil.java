@@ -40,9 +40,6 @@ import modele.dao.DaoLocataire;
 
 public class Fenetre_Accueil extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLayeredPane layeredPane_Accueil;

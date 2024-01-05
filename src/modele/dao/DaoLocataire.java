@@ -1,7 +1,7 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
-import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -29,8 +29,8 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 
 	@Override
 	public void update(Locataire donnees) throws SQLException {
-		
-			this.miseAJour(new RequeteUpdateLocataire(), donnees);
+
+		this.miseAJour(new RequeteUpdateLocataire(), donnees);
 
 	}
 
