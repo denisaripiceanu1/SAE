@@ -28,23 +28,26 @@ public class GestionSuppressionLocation implements ActionListener {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.supprimerLocation.getTopLevelAncestor();
 		switch (btn.getText()) {
-		case "Supprimer":
-			Louer louer_supp = (Louer) Sauvegarde.getItem("Louer"); // bien
-			try {
-				Louer louer = this.daoLouer.findById(louer_supp.getBien().getIdBien(),
-						louer_supp.getLocataire().getIdLocataire(), louer_supp.getDateDebut());
-				this.daoLouer.deleteVrai(louer);
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-			this.supprimerLocation.dispose();
-			break;
-		case "Annuler":
-			this.supprimerLocation.dispose();
-			break;
+			// Suppression d'une location
+			case "Supprimer":
+				Louer louer_supp = (Louer) Sauvegarde.getItem("Louer");
+				try {
+					// Récupération de la location à supprimer
+					Louer louer = this.daoLouer.findById(louer_supp.getBien().getIdBien(),
+							louer_supp.getLocataire().getIdLocataire(), louer_supp.getDateDebut());
+					
+					// Suppression de la location dans la base de données
+					this.daoLouer.deleteVrai(louer);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				// Fermeture de la fenêtre de suppression de location
+				this.supprimerLocation.dispose();
+				break;
+			// Annulation de la suppression
+			case "Annuler":
+				this.supprimerLocation.dispose();
+				break;
 		}
 	}
-
 }

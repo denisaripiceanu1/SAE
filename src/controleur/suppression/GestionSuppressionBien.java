@@ -59,7 +59,6 @@ public class GestionSuppressionBien implements ActionListener {
 		this.daoImposer = new DaoImposer();
 		this.daoCompteur = new DaoCompteur();
 		this.daoReleve = new DaoReleve();
-		this.daoDiagnostic = new DaoDiagnostic();
 		Sauvegarde.initializeSave();
 	}
 
@@ -68,48 +67,20 @@ public class GestionSuppressionBien implements ActionListener {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.supprimerBien.getTopLevelAncestor();
 		switch (btn.getText()) {
-		case "Supprimer":
-			Immeuble immeuble_supp = (Immeuble) Sauvegarde.getItem("Immeuble"); // bien
-			try {
-				String idBien = immeuble_supp.getImmeuble();
-				List<Bien> bienListe = this.daoBien.findBiensparImmeuble(idBien);
-				List<Compteur> compteurListeImmeuble = this.daoCompteur.findByIdImmeubleListe(idBien);
-				List<Facture> factureListeImmeuble = this.daoFacture.findFactureImmeuble(idBien); // marche
-				List<Releve> releves; // marche
-				if (compteurListeImmeuble != null && !compteurListeImmeuble.isEmpty()) {
-					for (Compteur compteur : compteurListeImmeuble) {
-						releves = this.daoReleve.findReleveByCompteur(compteur.getIdCompteur());
-						for (Releve releve : releves) {
-							this.daoReleve.delete(releve);
-						}
-						this.daoCompteur.delete(compteur);
-					}
-				}
-				if (factureListeImmeuble != null && !factureListeImmeuble.isEmpty()) {
-					for (Facture facture : factureListeImmeuble) {
-						this.daoFacture.delete(facture);
-					}
-				}
-				for (Bien bien : bienListe) {
-					List<Assurance> assurances = this.daoAssurance.findByLogement(bien.getIdBien()); // assurance marche
-					List<Diagnostics> diagnostics = this.daoDiagnostic.findDiagnosticByBien(bien.getIdBien()); // marche
-																												// pas
-					List<Louer> louers = this.daoLouer.findLocationByBien(bien.getIdBien()); // marche
-					List<Compteur> compteurListeBien = this.daoCompteur.findByIdBienListe(bien.getIdBien()); // marche
-					List<Quotter> quotters = this.daoQuotter.findQuotterByBien(bien.getIdBien()); // marche
-					List<Facture> factureListeBien = this.daoFacture.findFactureByBien(bien.getIdBien()); // marche
-					List<Imposer> imposers = this.daoImposer.findImposerByBien(bien.getIdBien());
-					for (Assurance assurance : assurances) {
-						this.daoAssurance.delete(assurance);
-					}
-					for (Diagnostics diagnostic : diagnostics) {
-						this.daoDiagnostic.delete(diagnostic);
-					}
-					for (Louer louer : louers) {
-						this.daoLouer.delete(louer);
-					}
-					if (compteurListeBien != null && !compteurListeBien.isEmpty()) {
-						for (Compteur compteur : compteurListeBien) {
+			case "Supprimer":
+				// Récupération de l'Immeuble sauvegardé
+				Immeuble immeuble_supp = (Immeuble) Sauvegarde.getItem("Immeuble");
+				try {
+					String idBien = immeuble_supp.getImmeuble();
+					// Récupération des listes liées au Bien (Immeuble)
+					List<Bien> bienListe = this.daoBien.findBiensparImmeuble(idBien);
+					List<Compteur> compteurListeImmeuble = this.daoCompteur.findByIdImmeubleListe(idBien);
+					List<Facture> factureListeImmeuble = this.daoFacture.findFactureImmeuble(idBien);
+					List<Releve> releves;
+					
+					// Suppression des Relevés liés aux Compteurs de l'Immeuble
+					if (compteurListeImmeuble != null && !compteurListeImmeuble.isEmpty()) {
+						for (Compteur compteur : compteurListeImmeuble) {
 							releves = this.daoReleve.findReleveByCompteur(compteur.getIdCompteur());
 							for (Releve releve : releves) {
 								this.daoReleve.delete(releve);
@@ -117,29 +88,82 @@ public class GestionSuppressionBien implements ActionListener {
 							this.daoCompteur.delete(compteur);
 						}
 					}
-					if (factureListeBien != null && !factureListeBien.isEmpty()) {
-						for (Facture facture : factureListeBien) {
+					
+					// Suppression des Factures liées à l'Immeuble
+					if (factureListeImmeuble != null && !factureListeImmeuble.isEmpty()) {
+						for (Facture facture : factureListeImmeuble) {
 							this.daoFacture.delete(facture);
 						}
 					}
-					for (Quotter quotter : quotters) {
-						this.daoQuotter.delete(quotter);
+					
+					// Suppression des Biens liés à l'Immeuble
+					for (Bien bien : bienListe) {
+						List<Assurance> assurances = this.daoAssurance.findByLogement(bien.getIdBien());
+						List<Diagnostics> diagnostics = this.daoDiagnostic.findDiagnosticByBien(bien.getIdBien());
+						List<Louer> louers = this.daoLouer.findLocationByBien(bien.getIdBien());
+						List<Compteur> compteurListeBien = this.daoCompteur.findByIdBienListe(bien.getIdBien());
+						List<Quotter> quotters = this.daoQuotter.findQuotterByBien(bien.getIdBien());
+						List<Facture> factureListeBien = this.daoFacture.findFactureByBien(bien.getIdBien());
+						List<Imposer> imposers = this.daoImposer.findImposerByBien(bien.getIdBien());
+						
+						// Suppression des Assurances liées au Bien
+						for (Assurance assurance : assurances) {
+							this.daoAssurance.delete(assurance);
+						}
+						
+						// Suppression des Diagnostics liés au Bien
+						for (Diagnostics diagnostic : diagnostics) {
+							this.daoDiagnostic.delete(diagnostic);
+						}
+						
+						// Suppression des Locations liées au Bien
+						for (Louer louer : louers) {
+							this.daoLouer.delete(louer);
+						}
+						
+						// Suppression des Relevés liés aux Compteurs du Bien
+						if (compteurListeBien != null && !compteurListeBien.isEmpty()) {
+							for (Compteur compteur : compteurListeBien) {
+								releves = this.daoReleve.findReleveByCompteur(compteur.getIdCompteur());
+								for (Releve releve : releves) {
+									this.daoReleve.delete(releve);
+								}
+								this.daoCompteur.delete(compteur);
+							}
+						}
+						
+						// Suppression des Factures liées au Bien
+						if (factureListeBien != null && !factureListeBien.isEmpty()) {
+							for (Facture facture : factureListeBien) {
+								this.daoFacture.delete(facture);
+							}
+						}
+						
+						// Suppression des Quotters liés au Bien
+						for (Quotter quotter : quotters) {
+							this.daoQuotter.delete(quotter);
+						}
+						
+						// Suppression des Impositions liées au Bien
+						for (Imposer imposer : imposers) {
+							this.daoImposer.delete(imposer);
+						}
+						
+						// Suppression du Bien
+						this.daoBien.delete(bien);
 					}
-					for (Imposer imposer : imposers) {
-						this.daoImposer.delete(imposer);
-					}
-					this.daoBien.delete(bien);
+					
+					// Suppression de l'Immeuble
+					this.daoImmeuble.delete(immeuble_supp);
+					
+				} catch (SQLException e1) {
+					e1.printStackTrace();
 				}
-				this.daoImmeuble.delete(immeuble_supp);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			this.supprimerBien.dispose();
-			break;
-		case "Annuler":
-			this.supprimerBien.dispose();
-			break;
+				this.supprimerBien.dispose();
+				break;
+			case "Annuler":
+				this.supprimerBien.dispose();
+				break;
 		}
 	}
-
 }

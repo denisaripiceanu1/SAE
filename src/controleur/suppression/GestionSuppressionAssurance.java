@@ -32,25 +32,28 @@ public class GestionSuppressionAssurance implements ActionListener {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.supprimerAssurance.getTopLevelAncestor();
 		switch (btn.getText()) {
-		case "Supprimer":
-			Assurance assurance_sauvegarde = (Assurance) Sauvegarde.getItem("Assurance");
-			Echeance echeance_sauvegarde = (Echeance) Sauvegarde.getItem("Echeance");
-			try {
-				Assurance assurance_supp = this.daoAssurance.findById(assurance_sauvegarde.getNuméroPolice());
-				Echeance echeance_supp = this.daoEcheance.findById(echeance_sauvegarde.getAssurance().getNuméroPolice(),
-						echeance_sauvegarde.getDateEcheance().substring(0, 10)); // Pour enlever l'heure de la date et éviter les bug de format de type "YYYY-DD-MM HH:MM" on garde que les 10 premiers pour enlever "HH:MM"
-				 
-
-				this.daoEcheance.delete(echeance_supp);
-				this.daoAssurance.delete(assurance_supp);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			this.supprimerAssurance.dispose();
-			break;
-		case "Annuler":
-			this.supprimerAssurance.dispose();
-			break;
+			case "Supprimer":
+				// Récupération des éléments sauvegardés
+				Assurance assurance_sauvegarde = (Assurance) Sauvegarde.getItem("Assurance");
+				Echeance echeance_sauvegarde = (Echeance) Sauvegarde.getItem("Echeance");
+				
+				try {
+					// Recherche des instances dans la base de données
+					Assurance assurance_supp = this.daoAssurance.findById(assurance_sauvegarde.getNuméroPolice());
+					Echeance echeance_supp = this.daoEcheance.findById(echeance_sauvegarde.getAssurance().getNuméroPolice(),
+							echeance_sauvegarde.getDateEcheance().substring(0, 10)); 
+					
+					// Suppression de l'échéance et de l'assurance
+					this.daoEcheance.delete(echeance_supp);
+					this.daoAssurance.delete(assurance_supp);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				this.supprimerAssurance.dispose();
+				break;
+			case "Annuler":
+				this.supprimerAssurance.dispose();
+				break;
 		}
 	}
 }
