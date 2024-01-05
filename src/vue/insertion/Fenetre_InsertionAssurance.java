@@ -16,7 +16,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import controleur.GestionTableEntrepriseFenetreFactureLogement;
 import controleur.GestionTableEntrepriseFenetreInsertionAssurance;
 import controleur.insertion.GestionInsertionAssurance;
 

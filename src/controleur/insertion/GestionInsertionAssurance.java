@@ -51,7 +51,7 @@ public class GestionInsertionAssurance implements ActionListener {
 
 				// Création de l'objet Assurance avec les données de la fenêtre d'insertion
 				assurance = new Assurance(this.fia.getTextField_numPolice().getText(),
-						Float.parseFloat(this.fia.getTextField_montant().getText()), bien, entreprise);
+						Float.parseFloat(this.fia.getTextField_montant().getText()), bien, entrepriseSauvegarde);
 
 				// Appel de la méthode DAO pour l'ajout de l'assurance dans la base de données
 				this.daoAssurance.create(assurance);

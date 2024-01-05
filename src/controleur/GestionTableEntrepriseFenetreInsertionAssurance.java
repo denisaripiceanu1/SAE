@@ -2,6 +2,7 @@ package controleur;
 
 import java.sql.SQLException;
 
+
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -10,7 +11,6 @@ import controleur.outils.Sauvegarde;
 import modele.Entreprise;
 import modele.dao.DaoEntreprise;
 import vue.insertion.Fenetre_InsertionAssurance;
-import vue.insertion.Fenetre_InsertionPaiementLogement;
 
 public class GestionTableEntrepriseFenetreInsertionAssurance implements ListSelectionListener {
 
