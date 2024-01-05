@@ -40,9 +40,6 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 	protected Assurance creerInstance(ResultSet curseur) throws SQLException {
 		Assurance assurance = null;
 		try {
-			String numeroPolice = curseur.getString("numero_police");
-			float montantInit = curseur.getFloat("montant");
-
 			// Récupérer l'identifiant de l'immeuble
 			String idBien = curseur.getString("Id_Bien");
 			DaoBien daoBien = new DaoBien();
@@ -53,7 +50,7 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 			DaoEntreprise daoEntreprise = new DaoEntreprise();
 			Entreprise entreprise = daoEntreprise.findById(siretEntreprise);
 
-			assurance = new Assurance(numeroPolice, montantInit, bien, entreprise);
+			assurance = new Assurance(curseur.getString("numero_police"), curseur.getFloat("montant"), bien, entreprise);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -96,6 +96,7 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		textField_Numero.setBounds(24, 104, 202, 40);
 		panel.add(textField_Numero);
 		textField_Numero.setColumns(10);
+		textField_Numero.setEditable(false);
 
 		textField_date_emission = new JTextField();
 		textField_date_emission.setColumns(10);

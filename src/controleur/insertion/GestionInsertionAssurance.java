@@ -21,6 +21,7 @@ import modele.dao.DaoEcheance;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionEntreprise;
+import vue.modification.Fenetre_ModificationEntreprise;
 
 public class GestionInsertionAssurance implements ActionListener {
 
@@ -38,6 +39,9 @@ public class GestionInsertionAssurance implements ActionListener {
 		this.daoEcheance = new DaoEcheance();
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
@@ -71,10 +75,12 @@ public class GestionInsertionAssurance implements ActionListener {
 			// Fermeture de la fenêtre d'insertion après l'ajout
 			this.fia.dispose();
 			break;
+
 		case "Annuler":
 			// Annulation de l'opération, fermeture de la fenêtre d'insertion
 			this.fia.dispose();
 			break;
+
 		case "Charger":
 			try {
 				this.chargerEntreprise();
@@ -89,6 +95,14 @@ public class GestionInsertionAssurance implements ActionListener {
 			fenetre_Principale.getLayeredPane().add(insertionEntreprise);
 			insertionEntreprise.setVisible(true);
 			insertionEntreprise.moveToFront();
+			break;
+
+		case "Modifier":
+			// Ouverture de la fenêtre de modification d'une entreprise
+			Fenetre_ModificationEntreprise modificationEntreprise = new Fenetre_ModificationEntreprise();
+			fenetre_Principale.getLayeredPane().add(modificationEntreprise);
+			modificationEntreprise.setVisible(true);
+			modificationEntreprise.moveToFront();
 			break;
 		}
 

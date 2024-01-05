@@ -225,61 +225,78 @@ public class GestionAccueil implements ActionListener {
 
 	// ------------------- TABLE CHARGES pour un LOGEMENT ------------------- //
 
+	// Méthode pour écrire une ligne dans la table des charges locatives
 	public void ecrireLigneTableChargesLocatives(int numeroLigne, Facture charge) {
 		JTable tableChargesLocatives = this.fenetreAccueil.getTableChargesLocatives();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableChargesLocatives.getModel();
 
-		modeleTable.setValueAt(charge.getNumero(), numeroLigne, 0);
-		modeleTable.setValueAt(charge.getDesignation(), numeroLigne, 1);
-		modeleTable.setValueAt(charge.getDateEmission(), numeroLigne, 2);
-		modeleTable.setValueAt(charge.getDatePaiement(), numeroLigne, 3);
+		// Remplir les colonnes de la table avec les informations de la charge
+		modeleTable.setValueAt(charge.getBien().getIdBien(), numeroLigne, 0);
+		modeleTable.setValueAt(charge.getNumero(), numeroLigne, 1);
+		modeleTable.setValueAt(charge.getDesignation(), numeroLigne, 2);
+		modeleTable.setValueAt(charge.getDateEmission(), numeroLigne, 3);
+		modeleTable.setValueAt(charge.getDatePaiement(), numeroLigne, 4);
 		if (charge.getImputableLocataire() == 1) {
-			modeleTable.setValueAt("Oui", numeroLigne, 4);
+			modeleTable.setValueAt("Oui", numeroLigne, 5);
 		} else {
-			modeleTable.setValueAt("Non", numeroLigne, 4);
+			modeleTable.setValueAt("Non", numeroLigne, 5);
 		}
-
-		modeleTable.setValueAt(charge.getMontant(), numeroLigne, 5);
-		modeleTable.setValueAt(charge.getAccompteVerse(), numeroLigne, 6);
-		modeleTable.setValueAt(charge.getMontant() - charge.getAccompteVerse(), numeroLigne, 7);
+		modeleTable.setValueAt(charge.getMontant(), numeroLigne, 6);
+		modeleTable.setValueAt(charge.getAccompteVerse(), numeroLigne, 7);
+		modeleTable.setValueAt(charge.getMontant() - charge.getAccompteVerse(), numeroLigne, 8);
 	}
 
+	// Méthode pour charger les charges locatives depuis la base de données
 	private void chargerChargesLogement() throws SQLException {
+		// Récupérer la liste des factures de charges depuis la base de données
 		List<Facture> factures = this.daoFacture.findFactureCharge();
 
+		// Récupérer le modèle de la table des charges locatives
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
-		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
 
+		// Effacer toutes les lignes existantes dans la table
+		modeleTable.setRowCount(0);
+
+		// Parcourir la liste des factures pour remplir la table avec les informations
+		// des charges
 		for (int i = 0; i < factures.size(); i++) {
 			Facture f = factures.get(i);
+
+			// Convertir la valeur de la colonne "imputable" de 1 ou 0 à "Oui" ou "Non"
+			String imputable = (f.getImputableLocataire() == 1) ? "Oui" : "Non";
+
+			// Vérifier si la facture et la propriété associée existent
 			if (f != null && f.getBien() != null) {
+				// Ajouter une nouvelle ligne à la table avec les informations de la charge
 				modeleTable.addRow(new Object[] { f.getBien().getIdBien(), f.getNumero(), f.getDesignation(),
-						f.getDateEmission(), f.getDatePaiement(), f.getImputableLocataire(), f.getMontant(),
-						f.getAccompteVerse(), f.getMontant() - f.getAccompteVerse(), });
+						f.getDateEmission(), f.getDatePaiement(), imputable, f.getMontant(), f.getAccompteVerse(),
+						f.getMontant() - f.getAccompteVerse(), });
 			}
 		}
 	}
 
+	// Méthode pour mettre à jour la table des charges pour un logement spécifique
 	private void updateTableChargesForLogement(String idLogement) throws SQLException {
 		List<Facture> factures = this.daoFacture.findFactureChargeByLogement(idLogement);
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
 		modeleTable.setRowCount(factures.size());
 
+		// Mettre à jour la table avec les informations des charges pour le logement
+		// spécifié
 		for (int i = 0; i < factures.size(); i++) {
 			Facture f = factures.get(i);
 			this.ecrireLigneTableChargesLocatives(i, f);
 		}
 	}
 
-	// ---------------------------------------------------------//
-	// Méthode pour filtrer les Charges par Id Logement
+	// Méthode pour filtrer les charges par ID de logement
 	private void filtreChargesByLogement() {
 		JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
 		String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
 
-		// Si l'ID selectionne est different de "ID du logement", filtrez la table
-		// des charges
+		// Si l'ID sélectionné est différent de "ID du logement", filtrer la table des
+		// charges
 		if (!idLogementSelectionne.equals("ID du logement")) {
 			try {
 				this.updateTableChargesForLogement(idLogementSelectionne);
@@ -643,7 +660,7 @@ public class GestionAccueil implements ActionListener {
 					insertion_facture.moveToFront();
 				}
 				break;
-				
+
 			/////////////////////
 			// LAYERED MES TRAVAUX
 			/////////////////////
