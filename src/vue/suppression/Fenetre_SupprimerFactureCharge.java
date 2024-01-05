@@ -38,5 +38,4 @@ public class Fenetre_SupprimerFactureCharge extends JInternalFrame {
 		this.getContentPane().add(btn_annuler);
 
 	}
-
 }

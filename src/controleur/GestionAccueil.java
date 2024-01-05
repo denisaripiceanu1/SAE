@@ -642,6 +642,7 @@ public class GestionAccueil implements ActionListener {
 					insertion_facture.moveToFront();
 				}
 				break;
+				
 			/////////////////////
 			// LAYERED MES TRAVAUX
 			/////////////////////

@@ -12,9 +12,6 @@ import controleur.suppression.GestionSuppressionLogement;
 public class Fenetre_SupprimerLogement extends JInternalFrame {
 	GestionSuppressionLogement gestionSuppressionLogement;
 
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_SupprimerLogement() {
 
 		this.gestionSuppressionLogement = new GestionSuppressionLogement(this);
@@ -41,5 +38,4 @@ public class Fenetre_SupprimerLogement extends JInternalFrame {
 		this.getContentPane().add(btn_annuler);
 
 	}
-
 }

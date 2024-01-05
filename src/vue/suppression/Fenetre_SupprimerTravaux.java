@@ -12,9 +12,6 @@ import controleur.suppression.GestionSuppressionTravaux;
 public class Fenetre_SupprimerTravaux extends JInternalFrame {
 	GestionSuppressionTravaux gestionSuppressionTravaux;
 
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_SupprimerTravaux() {
 
 		this.gestionSuppressionTravaux = new GestionSuppressionTravaux(this);
@@ -41,5 +38,4 @@ public class Fenetre_SupprimerTravaux extends JInternalFrame {
 		this.getContentPane().add(btn_annuler);
 
 	}
-
 }

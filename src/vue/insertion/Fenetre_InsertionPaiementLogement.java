@@ -15,8 +15,12 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 
 	// Champs de saisie
 	private JTextField textField_Numero;
-	private JSeparator separator_Travaux;
-	
+	private JTextField textField_date_emission;
+	private JTextField textField_date_paiement;
+	private JTextField textField_numeroDevis;
+	private JTextField textField_accompteVerse;
+	private JTextField textField_montant;
+
 	// Boutons radio
 	private JRadioButton rdbtnOui = new JRadioButton("Oui");
 	private JRadioButton rdbtnNon = new JRadioButton("Non");
@@ -25,7 +29,6 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 	// Boutons et libellés
 	private JButton btn_ajouter_entreprise;
 	private JButton btn_charger_entreprise;
-	private JScrollPane scrollPane_table_entreprise;
 	private JLabel lbl_Entreprise;
 
 	// Table pour afficher les données d'entreprise
@@ -34,12 +37,11 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 	// Gestionnaires d'événements
 	private GestionTableEntrepriseFenetreFactureLogement gteff;
 	private GestionInsertionPaiementLogement gestionClic;
-	private JTextField textField_date_emission;
-	private JTextField textField_date_paiement;
-	private JTextField textField_numeroDevis;
+
+	// Autres elements
+	private JScrollPane scrollPane_table_entreprise;
+	private JSeparator separator_Travaux;
 	private JComboBox<String> comboBox_modePaiement;
-	private JTextField textField_accompteVerse;
-	private JTextField textField_montant;
 
 	public Fenetre_InsertionPaiementLogement(boolean isAjouterFacture) {
 
@@ -238,7 +240,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.btn_charger_entreprise.setVisible(false);
 		this.scrollPane_table_entreprise.setVisible(false);
 		this.table_entreprise.setVisible(false);
-		this.lbl_Entreprise.setVisible(false);
+		lbl_Entreprise.setVisible(false);
 	}
 
 	public JTextField getTextField_Numero() {
@@ -293,11 +295,11 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		return btn_charger_entreprise;
 	}
 
-	public JLabel getLbl_Entreprise() {
-		return lbl_Entreprise;
-	}
-
 	public JScrollPane getScrollPane_table_entreprise() {
 		return scrollPane_table_entreprise;
+	}
+
+	public JLabel getLbl_Entreprise() {
+		return lbl_Entreprise;
 	}
 }

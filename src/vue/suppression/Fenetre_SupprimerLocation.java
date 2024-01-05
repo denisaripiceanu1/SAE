@@ -12,9 +12,6 @@ import controleur.suppression.GestionSuppressionLocation;
 public class Fenetre_SupprimerLocation extends JInternalFrame {
 	GestionSuppressionLocation gestionSuppressionLocation;
 
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_SupprimerLocation() {
 
 		this.gestionSuppressionLocation = new GestionSuppressionLocation(this);
@@ -41,5 +38,4 @@ public class Fenetre_SupprimerLocation extends JInternalFrame {
 		this.getContentPane().add(btn_annuler);
 
 	}
-
 }

@@ -12,9 +12,6 @@ import controleur.suppression.GestionSuppressionAssurance;
 public class Fenetre_SupprimerAssurance extends JInternalFrame {
 	GestionSuppressionAssurance gestionSuppressionAssurance;
 
-	/**
-	 * Create the frame.
-	 */
 	public Fenetre_SupprimerAssurance() {
 
 		this.gestionSuppressionAssurance = new GestionSuppressionAssurance(this);
