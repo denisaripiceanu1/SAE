@@ -31,6 +31,7 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 	private JTable table_entreprise;
 
 	private GestionTableEntrepriseFenetreInsertionAssurance gtefia;
+	private JTextField textField_dateEcheance;
 
 	public Fenetre_InsertionAssurance() {
 		// Initialisation du gestionnaire d'actions
@@ -48,14 +49,6 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
 
-		// Champs de saisie
-		this.textField_numPolice = new JTextField();
-		this.textField_numPolice.setBounds(135, 177, 163, 40);
-		this.textField_numPolice.setColumns(10);
-		this.textField_numPolice.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Numéro de police",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		panel.add(this.textField_numPolice);
-
 		// Libellé "Assurance"
 		JLabel lbl_InsertionAssurance = new JLabel("Assurance");
 		lbl_InsertionAssurance.setBounds(302, 39, 163, 20);
@@ -64,12 +57,27 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		panel.add(lbl_InsertionAssurance);
 
 		// Champs de saisie
+		this.textField_numPolice = new JTextField();
+		this.textField_numPolice.setBounds(135, 166, 197, 40);
+		this.textField_numPolice.setColumns(10);
+		this.textField_numPolice.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Numéro de police",
+				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		panel.add(this.textField_numPolice);
+
 		this.textField_montant = new JTextField();
 		this.textField_montant.setColumns(10);
 		this.textField_montant.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_montant.setBounds(135, 246, 163, 40);
+		this.textField_montant.setBounds(135, 229, 197, 40);
 		panel.add(this.textField_montant);
+
+		textField_dateEcheance = new JTextField();
+		textField_dateEcheance.setColumns(10);
+		textField_dateEcheance.setBorder(
+				new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9ch\u00E9ance (YYYY-MM-JJ)",
+						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_dateEcheance.setBounds(135, 298, 197, 40);
+		panel.add(textField_dateEcheance);
 
 		// Bouton "Ajouter"
 		JButton btnAjouter = new JButton("Ajouter");
@@ -145,6 +153,7 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		btn_modifier_entreprise.setBackground(new Color(0, 102, 204));
 		btn_modifier_entreprise.setBounds(624, 329, 94, 30);
 		panel.add(btn_modifier_entreprise);
+
 	}
 
 	// Getters pour les champs de saisie
@@ -154,6 +163,18 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 
 	public JTextField getTextField_montant() {
 		return this.textField_montant;
+	}
+
+	public GestionInsertionAssurance getGestionClic() {
+		return gestionClic;
+	}
+
+	public GestionTableEntrepriseFenetreInsertionAssurance getGtefia() {
+		return gtefia;
+	}
+
+	public JTextField getTextField_dateEcheance() {
+		return textField_dateEcheance;
 	}
 
 	public JButton getBtn_ajouter_entreprise() {

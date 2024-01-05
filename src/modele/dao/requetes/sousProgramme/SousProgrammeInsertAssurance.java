@@ -9,7 +9,7 @@ public class SousProgrammeInsertAssurance implements SousProgramme<Assurance> {
 
 	@Override
 	public String appelSousProgramme() {
-		return "{call Insert_Assurance(?,?,?,?)}";
+		return "{call Inserer_Assurance(?,?,?,?)}";
 	}
 
 	@Override

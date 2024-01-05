@@ -300,14 +300,15 @@ public class GestionAccueil implements ActionListener {
 		JTable tableAssurances = this.fenetreAccueil.getTableAssurances();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
 
-		modeleTable.setValueAt(assurance.getNuméroPolice(), numeroLigne, 0);
-		modeleTable.setValueAt(assurance.getMontant(), numeroLigne, 1);
-		modeleTable.setValueAt(echeance.getDateEcheance(), numeroLigne, 2);
+		modeleTable.setValueAt(assurance.getBien().getIdBien(), numeroLigne, 0);
+		modeleTable.setValueAt(assurance.getNuméroPolice(), numeroLigne, 1);
+		modeleTable.setValueAt(assurance.getMontant(), numeroLigne, 2);
+		modeleTable.setValueAt(echeance.getDateEcheance(), numeroLigne, 3);
 		if (entreprise != null) {
-			modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 3);
+			modeleTable.setValueAt(entreprise.getNom(), numeroLigne, 4);
 			modeleTable.setValueAt(entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille(),
-					numeroLigne, 4);
-			modeleTable.setValueAt(entreprise.getTelephone(), numeroLigne, 5);
+					numeroLigne, 5);
+			modeleTable.setValueAt(entreprise.getTelephone(), numeroLigne, 6);
 		} else {
 			// Si l'entreprise est null
 			modeleTable.setValueAt("N/A", numeroLigne, 3);

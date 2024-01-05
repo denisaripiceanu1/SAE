@@ -1,5 +1,7 @@
 package modele.dao;
 
+import java.sql.CallableStatement;
+
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
@@ -11,13 +13,17 @@ import modele.dao.requetes.delete.RequeteDeleteEcheance;
 import modele.dao.requetes.select.RequeteSelectEcheance;
 import modele.dao.requetes.select.RequeteSelectEcheanceByAssuranceNumPolice;
 import modele.dao.requetes.select.RequeteSelectEcheanceById;
+import modele.dao.requetes.sousProgramme.SousProgramme;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertEcheance;
 
 public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 
 	@Override
-	public void create(Echeance donnees) {
-		// TODO Auto-generated method stub
-
+	public void create(Echeance donnees) throws SQLException {
+		SousProgramme<Echeance> sp = new SousProgrammeInsertEcheance();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
+		st.execute();
 	}
 
 	@Override

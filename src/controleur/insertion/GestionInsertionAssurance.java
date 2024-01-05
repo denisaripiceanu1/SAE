@@ -13,9 +13,11 @@ import controleur.outils.Sauvegarde;
 import modele.Assurance;
 import modele.Entreprise;
 import modele.Bien;
+import modele.Echeance;
 import modele.dao.DaoAssurance;
 import modele.dao.DaoEntreprise;
 import modele.dao.DaoBien;
+import modele.dao.DaoEcheance;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionEntreprise;
@@ -26,12 +28,14 @@ public class GestionInsertionAssurance implements ActionListener {
 	private DaoAssurance daoAssurance;
 	private DaoBien daoBien;
 	private DaoEntreprise daoEntreprise;
+	private DaoEcheance daoEcheance;
 
 	public GestionInsertionAssurance(Fenetre_InsertionAssurance fia) {
 		this.fia = fia;
 		this.daoAssurance = new DaoAssurance();
 		this.daoBien = new DaoBien();
 		this.daoEntreprise = new DaoEntreprise();
+		this.daoEcheance = new DaoEcheance();
 	}
 
 	@Override
@@ -42,6 +46,7 @@ public class GestionInsertionAssurance implements ActionListener {
 		case "Ajouter":
 			// Création d'un objet Assurance
 			Assurance assurance = null;
+			Echeance echeance = null;
 			try {
 				Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
 				Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
@@ -53,8 +58,12 @@ public class GestionInsertionAssurance implements ActionListener {
 				assurance = new Assurance(this.fia.getTextField_numPolice().getText(),
 						Float.parseFloat(this.fia.getTextField_montant().getText()), bien, entrepriseSauvegarde);
 
+				// Création de l'objet Echeance avec les données de la fenêtre d'insertion
+				echeance = new Echeance(assurance, this.fia.getTextField_dateEcheance().getText());
+
 				// Appel de la méthode DAO pour l'ajout de l'assurance dans la base de données
 				this.daoAssurance.create(assurance);
+				this.daoEcheance.create(echeance);
 
 			} catch (Exception e1) {
 				e1.printStackTrace();
