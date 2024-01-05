@@ -1,6 +1,5 @@
 package modele;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -19,9 +18,9 @@ public class Facture {
 	private Bien bien;
 	private Entreprise entreprise;
 
-	public Facture(String numero, String dateEmission, String datePaiement, String modePaiement,
-			String numeroDevis, String designation, double accompteVerse, double montant, int imputableLocataire,
-			Immeuble immeuble, Bien bien, Entreprise entreprise) {
+	public Facture(String numero, String dateEmission, String datePaiement, String modePaiement, String numeroDevis,
+			String designation, double accompteVerse, double montant, int imputableLocataire, Immeuble immeuble,
+			Bien bien, Entreprise entreprise) {
 		this.numero = numero;
 		this.dateEmission = dateEmission;
 		this.datePaiement = datePaiement;
@@ -44,107 +43,82 @@ public class Facture {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
 	public String getDateEmission() {
 		return dateEmission;
-	}
-
-	public void setDateEmission(String dateEmission) {
-		this.dateEmission = dateEmission;
 	}
 
 	public String getDatePaiement() {
 		return datePaiement;
 	}
 
-	public void setDatePaiement(String datePaiement) {
-		this.datePaiement = datePaiement;
-	}
-
 	public String getModePaiement() {
 		return modePaiement;
-	}
-
-	public void setModePaiement(String modePaiement) {
-		this.modePaiement = modePaiement;
 	}
 
 	public String getNumeroDevis() {
 		return numeroDevis;
 	}
 
-	public void setNumeroDevis(String numeroDevis) {
-		this.numeroDevis = numeroDevis;
-	}
-
 	public String getDesignation() {
 		return designation;
-	}
-
-	public void setDesignation(String designation) {
-		this.designation = designation;
 	}
 
 	public double getAccompteVerse() {
 		return accompteVerse;
 	}
 
-	public void setAccompteVerse(double accompteVerse) {
-		this.accompteVerse = accompteVerse;
-	}
-
 	public int getImputableLocataire() {
 		return imputableLocataire;
-	}
-
-	public void setImputableLocataire(int imputableLocataire) {
-		this.imputableLocataire = imputableLocataire;
 	}
 
 	public Immeuble getImmeuble() {
 		return immeuble;
 	}
 
-	public void setImmeuble(Immeuble immeuble) {
-		this.immeuble = immeuble;
-	}
-
 	public Bien getBien() {
 		return bien;
-	}
-
-	public void setBien(Bien bien) {
-		this.bien = bien;
 	}
 
 	public Entreprise getEntreprise() {
 		return entreprise;
 	}
 
-	public void setEntreprise(Entreprise entreprise) {
-		this.entreprise = entreprise;
-	}
+	/**
+	 * Convertit la date d'émission en objet java.sql.Date.
+	 * 
+	 * @return La date d'émission convertie en java.sql.Date.
+	 */
 	public java.sql.Date getDateEmissionAsSqlDate() {
-        return parseDate(dateEmission);
-    }
+		return parseDate(dateEmission);
+	}
 
-    public java.sql.Date getDatePaiementAsSqlDate() {
-        return parseDate(datePaiement);
-    }
+	/**
+	 * Convertit la date de paiement en objet java.sql.Date.
+	 * 
+	 * @return La date de paiement convertie en java.sql.Date.
+	 */
+	public java.sql.Date getDatePaiementAsSqlDate() {
+		return parseDate(datePaiement);
+	}
 
-    private java.sql.Date parseDate(String dateString) {
-        try {
-            if (dateString != null) {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                java.util.Date utilDate = dateFormat.parse(dateString);
-                return new java.sql.Date(utilDate.getTime());
-            }
-        } catch (ParseException e) {
-            e.printStackTrace(); // Handle the exception according to your needs
-        }
-        return null;
-    }
+	/**
+	 * Parse la chaîne de caractères représentant une date au format "dd-MM-yyyy" en
+	 * objet java.sql.Date.
+	 * 
+	 * @param dateString La chaîne de caractères représentant la date.
+	 * @return La date convertie en java.sql.Date.
+	 */
+	private java.sql.Date parseDate(String dateString) {
+		try {
+			if (dateString != null) {
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+				java.util.Date utilDate = dateFormat.parse(dateString);
+				return new java.sql.Date(utilDate.getTime());
+			}
+		} catch (ParseException e) {
+			e.printStackTrace(); // Gérer l'exception selon vos besoins
+		}
+		return null;
+	}
+
 }
