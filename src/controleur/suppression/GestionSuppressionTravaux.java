@@ -14,34 +14,36 @@ import vue.suppression.Fenetre_SupprimerTravaux;
 
 public class GestionSuppressionTravaux implements ActionListener {
 
-	private Fenetre_SupprimerTravaux supprimerTravaux;
-	private DaoFacture daoFacture;
+    private Fenetre_SupprimerTravaux supprimerTravaux;
+    private DaoFacture daoFacture;
 
-	public GestionSuppressionTravaux(Fenetre_SupprimerTravaux supprimerTravaux) {
-		this.supprimerTravaux = supprimerTravaux;
-		this.daoFacture = new DaoFacture();
-		Sauvegarde.initializeSave();
-	}
+    public GestionSuppressionTravaux(Fenetre_SupprimerTravaux supprimerTravaux) {
+        this.supprimerTravaux = supprimerTravaux;
+        this.daoFacture = new DaoFacture();
+        Sauvegarde.initializeSave();
+    }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.supprimerTravaux.getTopLevelAncestor();
-		switch (btn.getText()) {
-		case "Supprimer":
-			Facture travaux_supp = (Facture) Sauvegarde.getItem("Facture");
-			try {
-				Facture travaux = this.daoFacture.findById(travaux_supp.getNumero());
-				this.daoFacture.delete(travaux);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			this.supprimerTravaux.dispose();
-			break;
-		case "Annuler":
-			this.supprimerTravaux.dispose();
-			break;
-		}
-	}
-
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton btn = (JButton) e.getSource();
+        Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.supprimerTravaux.getTopLevelAncestor();
+        switch (btn.getText()) {
+            // Suppression d'une facture de travaux
+            case "Supprimer":
+                Facture travaux_supp = (Facture) Sauvegarde.getItem("Facture");
+                try {
+                    Facture travaux = this.daoFacture.findById(travaux_supp.getNumero());
+                    this.daoFacture.delete(travaux);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                // Fermeture de la fenêtre de suppression de travaux
+                this.supprimerTravaux.dispose();
+                break;
+            // Annulation de la suppression
+            case "Annuler":
+                this.supprimerTravaux.dispose();
+                break;
+        }
+    }
 }
