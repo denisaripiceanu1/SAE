@@ -15,43 +15,51 @@ import javax.swing.border.TitledBorder;
 import controleur.modification.GestionModificationLocation;
 
 public class Fenetre_ModificationLocation extends JInternalFrame {
+	// Déclaration des champs de texte
 	private JTextField textField_IdImmeuble;
 	private JTextField textField_provision_chargeMens_TTC;
 	private JTextField textField_loyer_TCC;
 	private JTextField textField_caution_TTC;
-	private JSeparator separator_Compteur;
-	private GestionModificationLocation GestionModificationLocation;
 	private JTextField textField_Id_Locataire;
 	private JTextField textField_date_depart;
 	private JTextField textField_loyer_paye;
 	private JTextField textField_montant_reel_paye;
 	private JTextField textField_date_debut;
 
+	private JSeparator separator_Compteur;
+	private GestionModificationLocation gestionModificationLocation;
+
+	// Constructeur de la fenêtre de modification de location
 	public Fenetre_ModificationLocation() {
+		// Initialisation du gestionnaire de modification de location
+		this.gestionModificationLocation = new GestionModificationLocation(this);
 
-		this.GestionModificationLocation = new GestionModificationLocation(this);
-
+		// Configuration de la fenêtre
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
+		// Panneau principal
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 755, 511);
+		panel.setBounds(6, -22, 755, 511);
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
 
+		// Séparateur de titre
 		JSeparator separator_titreInsererBien = new JSeparator();
 		separator_titreInsererBien.setForeground(new Color(0, 102, 204));
 		separator_titreInsererBien.setBounds(271, 72, 190, 2);
 		panel.add(separator_titreInsererBien);
 
+		// Étiquette du titre
 		JLabel lbl_InsererUnBien = new JLabel("Modifier une Location");
 		lbl_InsererUnBien.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUnBien.setBounds(306, 26, 168, 48);
 		panel.add(lbl_InsererUnBien);
 
+		// Champs de texte
 		this.textField_IdImmeuble = new JTextField();
-		this.textField_IdImmeuble.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Bien",
+		this.textField_IdImmeuble.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Logement",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
 		this.textField_IdImmeuble.setBounds(166, 104, 190, 40);
 		panel.add(this.textField_IdImmeuble);
@@ -63,68 +71,37 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		this.textField_provision_chargeMens_TTC
 				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Provision charge mensuelle TTC",
 						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_provision_chargeMens_TTC.setBounds(425, 164, 190, 40);
+		this.textField_provision_chargeMens_TTC.setBounds(425, 164, 220, 40);
 		panel.add(this.textField_provision_chargeMens_TTC);
 
 		this.textField_loyer_TCC = new JTextField();
 		this.textField_loyer_TCC.setColumns(10);
 		this.textField_loyer_TCC.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Loyer TTC",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_loyer_TCC.setBounds(306, 330, 190, 40);
+		this.textField_loyer_TCC.setBounds(166, 273, 190, 40);
 		panel.add(this.textField_loyer_TCC);
 
 		this.textField_caution_TTC = new JTextField();
 		this.textField_caution_TTC.setColumns(10);
 		this.textField_caution_TTC.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Caution TTC",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_caution_TTC.setBounds(425, 221, 190, 40);
+		this.textField_caution_TTC.setBounds(425, 221, 220, 40);
 		panel.add(this.textField_caution_TTC);
-
-		JButton btnModifier = new JButton("Modifier");
-		btnModifier.setForeground(Color.WHITE);
-		btnModifier.setBackground(new Color(0, 102, 204));
-		btnModifier.addActionListener(this.GestionModificationLocation);
-
-		btnModifier.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnModifier.setBounds(246, 447, 94, 31);
-		panel.add(btnModifier);
-
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setForeground(Color.WHITE);
-		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.addActionListener(this.GestionModificationLocation);
-
-		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAnnuler.setBounds(398, 447, 94, 31);
-		panel.add(btnAnnuler);
-
-		this.separator_Compteur = new JSeparator();
-		this.separator_Compteur.setBounds(81, 435, 591, 2);
-		panel.add(this.separator_Compteur);
 
 		textField_Id_Locataire = new JTextField();
 		textField_Id_Locataire.setEditable(false);
 		textField_Id_Locataire.setColumns(10);
-		textField_Id_Locataire.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id_Locataire",
+		textField_Id_Locataire.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Locataire",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_Id_Locataire.setBounds(166, 164, 190, 40);
 		panel.add(textField_Id_Locataire);
 
 		textField_date_depart = new JTextField();
 		textField_date_depart.setColumns(10);
-		textField_date_depart.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date debut",
-
+		textField_date_depart.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date départ",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_date_depart.setBounds(166, 221, 190, 40);
 		panel.add(textField_date_depart);
-
-		textField_loyer_paye = new JTextField();
-		textField_loyer_paye.setColumns(10);
-		textField_loyer_paye.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "loyer_payé",
-
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_loyer_paye.setBounds(425, 280, 190, 40);
-		panel.add(textField_loyer_paye);
 
 		textField_montant_reel_paye = new JTextField();
 		textField_montant_reel_paye.setColumns(10);
@@ -132,7 +109,7 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant reel payé",
 
 						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_montant_reel_paye.setBounds(166, 280, 190, 40);
+		textField_montant_reel_paye.setBounds(425, 273, 220, 40);
 		panel.add(textField_montant_reel_paye);
 
 		textField_date_debut = new JTextField();
@@ -140,8 +117,31 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		textField_date_debut.setColumns(10);
 		textField_date_debut.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date début",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_debut.setBounds(425, 104, 190, 40);
+		textField_date_debut.setBounds(425, 104, 220, 40);
 		panel.add(textField_date_debut);
+		
+		// Bouton de modification
+		JButton btnModifier = new JButton("Modifier");
+		btnModifier.setForeground(Color.WHITE);
+		btnModifier.setBackground(new Color(0, 102, 204));
+		btnModifier.addActionListener(this.gestionModificationLocation);
+		btnModifier.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnModifier.setBounds(246, 447, 94, 31);
+		panel.add(btnModifier);
+
+		// Bouton d'annulation
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setForeground(Color.WHITE);
+		btnAnnuler.setBackground(new Color(0, 102, 204));
+		btnAnnuler.addActionListener(this.gestionModificationLocation);
+		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnAnnuler.setBounds(398, 447, 94, 31);
+		panel.add(btnAnnuler);
+
+		// Séparateur
+		this.separator_Compteur = new JSeparator();
+		this.separator_Compteur.setBounds(81, 435, 591, 2);
+		panel.add(this.separator_Compteur);
 
 	}
 
@@ -186,11 +186,7 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 	}
 
 	public GestionModificationLocation getGestionModificationLocation() {
-		return GestionModificationLocation;
-	}
-
-	public void setGestionModificationLocation(GestionModificationLocation gestionModificationLocation) {
-		GestionModificationLocation = gestionModificationLocation;
+		return gestionModificationLocation;
 	}
 
 	public JTextField getTextField_Id_Locataire() {
