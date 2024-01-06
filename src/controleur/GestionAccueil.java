@@ -43,6 +43,7 @@ import vue.insertion.Fenetre_InsertionLocation;
 import vue.insertion.Fenetre_InsertionLogement;
 import vue.insertion.Fenetre_InsertionPaiementBien;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
+import vue.modification.Fenetre_ModificationAssurance;
 import vue.modification.Fenetre_ModificationBien;
 import vue.modification.Fenetre_ModificationFactureChargeLogement;
 import vue.modification.Fenetre_ModificationLocation;
@@ -670,7 +671,7 @@ public class GestionAccueil implements ActionListener {
 					modif_travaux.setVisible(true);
 					modif_travaux.moveToFront();
 
-					// Retrieve the saved "Travaux" data
+					// Recuperer la facture du travaux de la sauvegarde
 					Facture travauxSauvegarde = (Facture) Sauvegarde.getItem("Facture");
 					Facture travauxCourant;
 
@@ -769,6 +770,29 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesAssurances_Modifier":
+				if (Sauvegarde.onSave("Assurance") == true) {
+					Fenetre_ModificationAssurance modification_assurance = new Fenetre_ModificationAssurance();
+					this.fenetreAccueil.getLayeredPane().add(modification_assurance);
+					modification_assurance.setVisible(true);
+					modification_assurance.moveToFront();
+					
+					// Retrieve the saved "Travaux" data
+					Facture travauxSauvegarde = (Facture) Sauvegarde.getItem("Facture");
+					Facture travauxCourant;
+
+					try {
+						travauxCourant = this.daoFacture.findById(travauxSauvegarde.getNumero());
+						modif_travaux.getTextField_Numero().setText(travauxCourant.getNumero());
+						modif_travaux.getTextField_designation().setText(travauxCourant.getDesignation());
+						modif_travaux.getTextField_dateEmission().setText(travauxCourant.getDateEmission());
+						modif_travaux.getTextField_montant().setText(Double.toString(travauxCourant.getMontant()));
+						modif_travaux.getTextField_paye().setText(Double.toString(travauxCourant.getAccompteVerse()));
+						modif_travaux.getTextField_prestataire().setText(travauxCourant.getEntreprise().getNom());
+						modif_travaux.getTextField_adresse().setText(travauxCourant.getEntreprise().getAdresse());
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
 				break;
 			case "btn_MesAssurances_Inserer":
 				if (Sauvegarde.onSave("Logement") == true) {

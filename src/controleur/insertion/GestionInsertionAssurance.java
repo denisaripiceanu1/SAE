@@ -25,14 +25,14 @@ import vue.modification.Fenetre_ModificationEntreprise;
 
 public class GestionInsertionAssurance implements ActionListener {
 
-	private Fenetre_InsertionAssurance modificationEntreprise;
+	private Fenetre_InsertionAssurance modificationAssurance;
 	private DaoAssurance daoAssurance;
 	private DaoBien daoBien;
 	private DaoEntreprise daoEntreprise;
 	private DaoEcheance daoEcheance;
 
 	public GestionInsertionAssurance(Fenetre_InsertionAssurance fia) {
-		this.modificationEntreprise = fia;
+		this.modificationAssurance = fia;
 		this.daoAssurance = new DaoAssurance();
 		this.daoBien = new DaoBien();
 		this.daoEntreprise = new DaoEntreprise();
@@ -42,7 +42,7 @@ public class GestionInsertionAssurance implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationEntreprise.getTopLevelAncestor();
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationAssurance.getTopLevelAncestor();
 		switch (btn.getText()) {
 		case "Ajouter":
 			// Création d'un objet Assurance
@@ -56,27 +56,27 @@ public class GestionInsertionAssurance implements ActionListener {
 				Bien bien = daoBien.findById(bienSauvegarde.getIdBien());
 
 				// Création de l'objet Assurance avec les données de la fenêtre d'insertion
-				assurance = new Assurance(this.modificationEntreprise.getTextField_numPolice().getText(),
-						Float.parseFloat(this.modificationEntreprise.getTextField_montant().getText()), bien,
+				assurance = new Assurance(this.modificationAssurance.getTextField_numPolice().getText(),
+						Float.parseFloat(this.modificationAssurance.getTextField_montant().getText()), bien,
 						entrepriseSauvegarde);
 
 				// Création de l'objet Echeance avec les données de la fenêtre d'insertion
-				echeance = new Echeance(assurance, this.modificationEntreprise.getTextField_dateEcheance().getText());
+				echeance = new Echeance(assurance, this.modificationAssurance.getTextField_dateEcheance().getText());
 
 				// Appel de la méthode DAO pour l'ajout de l'assurance dans la base de données
 				this.daoAssurance.create(assurance);
 				this.daoEcheance.create(echeance);
-
+				// Fermeture de la fenêtre d'insertion après l'ajout
+				this.modificationAssurance.dispose();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-			// Fermeture de la fenêtre d'insertion après l'ajout
-			this.modificationEntreprise.dispose();
+
 			break;
 
 		case "Annuler":
 			// Annulation de l'opération, fermeture de la fenêtre d'insertion
-			this.modificationEntreprise.dispose();
+			this.modificationAssurance.dispose();
 			break;
 
 		case "Charger":
@@ -101,7 +101,7 @@ public class GestionInsertionAssurance implements ActionListener {
 				fenetre_Principale.getLayeredPane().add(modificationEntreprise);
 				modificationEntreprise.setVisible(true);
 				modificationEntreprise.moveToFront();
-				
+
 				// On recupere l'entreprise de la sauvegarde
 				Entreprise entrepriseSauvgarde = (Entreprise) Sauvegarde.getItem("Entreprise");
 				Entreprise entrepriseCourante;
@@ -129,7 +129,7 @@ public class GestionInsertionAssurance implements ActionListener {
 
 	// Méthode pour écrire une ligne d'entreprise dans la table d'entreprise
 	public void ecrireLigneTableEntreprise(int numeroLigne, Entreprise e) throws SQLException {
-		JTable tableEntreprise = this.modificationEntreprise.getTable_entreprise();
+		JTable tableEntreprise = this.modificationAssurance.getTable_entreprise();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableEntreprise.getModel();
 
 		modeleTable.setValueAt(e.getSiret(), numeroLigne, 0);
@@ -140,8 +140,7 @@ public class GestionInsertionAssurance implements ActionListener {
 	private void chargerEntreprise() throws SQLException {
 		List<Entreprise> entreprises = this.daoEntreprise.findAll();
 
-		DefaultTableModel modeleTable = (DefaultTableModel) this.modificationEntreprise.getTable_entreprise()
-				.getModel();
+		DefaultTableModel modeleTable = (DefaultTableModel) this.modificationAssurance.getTable_entreprise().getModel();
 
 		modeleTable.setRowCount(entreprises.size());
 
