@@ -30,7 +30,21 @@ public class GestionModificationEntreprise implements ActionListener {
 		case "Modifier":
 			// Appel de la méthode pour effectuer la modification du locataire
 			try {
-				modifierEntrepirse();
+				Entreprise entreprise = new Entreprise(
+						this.modificationEntreprise.getTextField_SIRET().getText(),
+						this.modificationEntreprise.getTextField_Nom().getText(),
+						this.modificationEntreprise.getTextField_Adresse().getText(),
+						this.modificationEntreprise.getTextField_CP().getText(),
+						this.modificationEntreprise.getTextField_Ville().getText(),
+						this.modificationEntreprise.getTextField_Mail().getText(),
+						this.modificationEntreprise.getTextField_Telephone().getText(),
+						this.modificationEntreprise.getTextField_IBAN().getText());
+				
+				// Appel de la méthode de mise à jour dans la base de données
+				this.daoEntreprise.update(entreprise);
+
+				// Fermeture de la fenêtre de modification après la mise à jour
+				this.modificationEntreprise.dispose();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -42,25 +56,4 @@ public class GestionModificationEntreprise implements ActionListener {
 		}
 	}
 
-	// Méthode privée pour effectuer la modification du locataire
-	private void modifierEntrepirse() throws SQLException {
-		Entreprise entreprise = creerEntrepriseAPartirDesChamps();
-		// Appel de la méthode de mise à jour dans la base de données
-		this.daoEntreprise.update(entreprise);
-		// Fermeture de la fenêtre de modification après la mise à jour
-		this.modificationEntreprise.dispose();
-	}
-
-	// Méthode privée pour créer un objet Locataire à partir des champs de saisie
-	private Entreprise creerEntrepriseAPartirDesChamps() {
-		Entreprise entreprise = new Entreprise(this.modificationEntreprise.getTextField_Nom().getText(),
-				this.modificationEntreprise.getTextField_SIRET().getText(),
-				this.modificationEntreprise.getTextField_Telephone().getText(),
-				this.modificationEntreprise.getTextField_Mail().getText(),
-				this.modificationEntreprise.getTextField_Adresse().getText(),
-				this.modificationEntreprise.getTextField_CP().getText(),
-				this.modificationEntreprise.getTextField_Ville().getText(),
-				this.modificationEntreprise.getTextField_IBAN().getText());
-		return entreprise;
-	}
 }

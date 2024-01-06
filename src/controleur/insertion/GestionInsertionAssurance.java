@@ -2,9 +2,7 @@ package controleur.insertion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -103,6 +101,7 @@ public class GestionInsertionAssurance implements ActionListener {
 				fenetre_Principale.getLayeredPane().add(modificationEntreprise);
 				modificationEntreprise.setVisible(true);
 				modificationEntreprise.moveToFront();
+				
 				// On recupere l'entreprise de la sauvegarde
 				Entreprise entrepriseSauvgarde = (Entreprise) Sauvegarde.getItem("Entreprise");
 				Entreprise entrepriseCourante;
