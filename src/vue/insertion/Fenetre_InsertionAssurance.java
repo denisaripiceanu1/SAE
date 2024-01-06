@@ -126,6 +126,14 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		this.btn_charger_entreprise.setBounds(412, 328, 94, 30);
 		this.btn_charger_entreprise.addActionListener(gestionClic);
 		panel.add(this.btn_charger_entreprise);
+		
+		JButton btn_modifier_entreprise = new JButton("Modifier");
+		btn_modifier_entreprise.setForeground(Color.WHITE);
+		btn_modifier_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btn_modifier_entreprise.setBackground(new Color(0, 102, 204));
+		btn_modifier_entreprise.setBounds(624, 329, 94, 30);
+		btn_modifier_entreprise.addActionListener(gestionClic);
+		panel.add(btn_modifier_entreprise);
 
 		this.scrollPane_table_entreprise = new JScrollPane();
 		this.scrollPane_table_entreprise.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
@@ -146,13 +154,6 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		lbl_Entreprise.setBackground(new Color(0, 102, 204));
 		lbl_Entreprise.setBounds(529, 143, 132, 31);
 		panel.add(lbl_Entreprise);
-
-		JButton btn_modifier_entreprise = new JButton("Modifier");
-		btn_modifier_entreprise.setForeground(Color.WHITE);
-		btn_modifier_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_modifier_entreprise.setBackground(new Color(0, 102, 204));
-		btn_modifier_entreprise.setBounds(624, 329, 94, 30);
-		panel.add(btn_modifier_entreprise);
 
 	}
 

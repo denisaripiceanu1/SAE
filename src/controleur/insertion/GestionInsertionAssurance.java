@@ -2,7 +2,9 @@ package controleur.insertion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -25,27 +27,24 @@ import vue.modification.Fenetre_ModificationEntreprise;
 
 public class GestionInsertionAssurance implements ActionListener {
 
-	private Fenetre_InsertionAssurance fia;
+	private Fenetre_InsertionAssurance modificationEntreprise;
 	private DaoAssurance daoAssurance;
 	private DaoBien daoBien;
 	private DaoEntreprise daoEntreprise;
 	private DaoEcheance daoEcheance;
 
 	public GestionInsertionAssurance(Fenetre_InsertionAssurance fia) {
-		this.fia = fia;
+		this.modificationEntreprise = fia;
 		this.daoAssurance = new DaoAssurance();
 		this.daoBien = new DaoBien();
 		this.daoEntreprise = new DaoEntreprise();
 		this.daoEcheance = new DaoEcheance();
 	}
 
-	/**
-	 *
-	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fia.getTopLevelAncestor();
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationEntreprise.getTopLevelAncestor();
 		switch (btn.getText()) {
 		case "Ajouter":
 			// Création d'un objet Assurance
@@ -59,11 +58,12 @@ public class GestionInsertionAssurance implements ActionListener {
 				Bien bien = daoBien.findById(bienSauvegarde.getIdBien());
 
 				// Création de l'objet Assurance avec les données de la fenêtre d'insertion
-				assurance = new Assurance(this.fia.getTextField_numPolice().getText(),
-						Float.parseFloat(this.fia.getTextField_montant().getText()), bien, entrepriseSauvegarde);
+				assurance = new Assurance(this.modificationEntreprise.getTextField_numPolice().getText(),
+						Float.parseFloat(this.modificationEntreprise.getTextField_montant().getText()), bien,
+						entrepriseSauvegarde);
 
 				// Création de l'objet Echeance avec les données de la fenêtre d'insertion
-				echeance = new Echeance(assurance, this.fia.getTextField_dateEcheance().getText());
+				echeance = new Echeance(assurance, this.modificationEntreprise.getTextField_dateEcheance().getText());
 
 				// Appel de la méthode DAO pour l'ajout de l'assurance dans la base de données
 				this.daoAssurance.create(assurance);
@@ -73,12 +73,12 @@ public class GestionInsertionAssurance implements ActionListener {
 				e1.printStackTrace();
 			}
 			// Fermeture de la fenêtre d'insertion après l'ajout
-			this.fia.dispose();
+			this.modificationEntreprise.dispose();
 			break;
 
 		case "Annuler":
 			// Annulation de l'opération, fermeture de la fenêtre d'insertion
-			this.fia.dispose();
+			this.modificationEntreprise.dispose();
 			break;
 
 		case "Charger":
@@ -98,19 +98,39 @@ public class GestionInsertionAssurance implements ActionListener {
 			break;
 
 		case "Modifier":
-			// Ouverture de la fenêtre de modification d'une entreprise
-			Fenetre_ModificationEntreprise modificationEntreprise = new Fenetre_ModificationEntreprise();
-			fenetre_Principale.getLayeredPane().add(modificationEntreprise);
-			modificationEntreprise.setVisible(true);
-			modificationEntreprise.moveToFront();
-			break;
+			if (Sauvegarde.onSave("Entreprise") == true) {
+				Fenetre_ModificationEntreprise modificationEntreprise = new Fenetre_ModificationEntreprise();
+				fenetre_Principale.getLayeredPane().add(modificationEntreprise);
+				modificationEntreprise.setVisible(true);
+				modificationEntreprise.moveToFront();
+				// On recupere l'entreprise de la sauvegarde
+				Entreprise entrepriseSauvgarde = (Entreprise) Sauvegarde.getItem("Entreprise");
+				Entreprise entrepriseCourante;
+
+				try {
+					entrepriseCourante = this.daoEntreprise.findById(entrepriseSauvgarde.getSiret());
+					modificationEntreprise.getTextField_SIRET().setText(entrepriseCourante.getSiret());
+					modificationEntreprise.getTextField_Nom().setText(entrepriseCourante.getNom());
+					modificationEntreprise.getTextField_Adresse().setText(entrepriseCourante.getAdresse());
+					modificationEntreprise.getTextField_CP().setText(entrepriseCourante.getCp());
+					modificationEntreprise.getTextField_Ville().setText(entrepriseCourante.getVille());
+					modificationEntreprise.getTextField_Mail().setText(entrepriseCourante.getMail());
+					modificationEntreprise.getTextField_Mail().setText(entrepriseCourante.getMail());
+					modificationEntreprise.getTextField_Telephone().setText(entrepriseCourante.getTelephone());
+					modificationEntreprise.getTextField_IBAN().setText(entrepriseCourante.getIban());
+
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				break;
+			}
 		}
 
 	}
 
 	// Méthode pour écrire une ligne d'entreprise dans la table d'entreprise
 	public void ecrireLigneTableEntreprise(int numeroLigne, Entreprise e) throws SQLException {
-		JTable tableEntreprise = this.fia.getTable_entreprise();
+		JTable tableEntreprise = this.modificationEntreprise.getTable_entreprise();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableEntreprise.getModel();
 
 		modeleTable.setValueAt(e.getSiret(), numeroLigne, 0);
@@ -121,7 +141,8 @@ public class GestionInsertionAssurance implements ActionListener {
 	private void chargerEntreprise() throws SQLException {
 		List<Entreprise> entreprises = this.daoEntreprise.findAll();
 
-		DefaultTableModel modeleTable = (DefaultTableModel) this.fia.getTable_entreprise().getModel();
+		DefaultTableModel modeleTable = (DefaultTableModel) this.modificationEntreprise.getTable_entreprise()
+				.getModel();
 
 		modeleTable.setRowCount(entreprises.size());
 

@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import controleur.insertion.GestionInsertionEntreprise;
 import controleur.modification.GestionModificationEntreprise;
 
 public class Fenetre_ModificationEntreprise extends JInternalFrame {
@@ -72,7 +71,6 @@ public class Fenetre_ModificationEntreprise extends JInternalFrame {
 			textField_SIRET.setBounds(381, 166, 190, 40);
 			panel.add(textField_SIRET);
 			textField_SIRET.setEditable(false);
-
 
 			textField_Telephone = new JTextField();
 			textField_Telephone.setColumns(10);

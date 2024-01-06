@@ -2,6 +2,7 @@ package modele.dao;
 
 import java.sql.CallableStatement;
 
+
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import modele.dao.requetes.select.RequeteSelectEntreprise;
 import modele.dao.requetes.select.RequeteSelectEntrepriseById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertEntreprise;
+import modele.dao.requetes.update.RequeteUpdateEntreprise;
 
 public class DaoEntreprise extends DaoModele<Entreprise> implements Dao<Entreprise> {
 
@@ -24,15 +26,13 @@ public class DaoEntreprise extends DaoModele<Entreprise> implements Dao<Entrepri
 	}
 
 	@Override
-	public void update(Entreprise donnees) {
-		// TODO Auto-generated method stub
+	public void update(Entreprise donnees) throws SQLException {
+		this.miseAJour(new RequeteUpdateEntreprise(), donnees);
 
 	}
 
 	@Override
 	public void delete(Entreprise donnees) {
-		delete(donnees);
-
 	}
 
 	@Override

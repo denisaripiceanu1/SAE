@@ -39,11 +39,11 @@ public class GestionTableAssurance implements ListSelectionListener {
 				Echeance echeance = null;
 				try {
 					// Récupération de l'objet Assurance associé à la ligne sélectionnée
-					assurance = this.daoAssurance.findById(tableAssurance.getValueAt(selectedRowAssurance, 0).toString());
+					assurance = this.daoAssurance.findById(tableAssurance.getValueAt(selectedRowAssurance, 1).toString());
 					
 					// Récupération de l'objet Echeance associé à la ligne sélectionnée
-					echeance = this.daoEcheance.findById(tableAssurance.getValueAt(selectedRowAssurance, 0).toString(),
-							tableAssurance.getValueAt(selectedRowAssurance, 2).toString());
+					echeance = this.daoEcheance.findById(tableAssurance.getValueAt(selectedRowAssurance, 1).toString(),
+							tableAssurance.getValueAt(selectedRowAssurance, 3).toString());
 
 				} catch (SQLException e1) {
 					e1.printStackTrace();

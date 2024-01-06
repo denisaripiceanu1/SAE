@@ -3,6 +3,7 @@ package controleur.modification;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import controleur.outils.Sauvegarde;
@@ -28,7 +29,11 @@ public class GestionModificationEntreprise implements ActionListener {
 		switch (btn.getText()) {
 		case "Modifier":
 			// Appel de la méthode pour effectuer la modification du locataire
-			modifierEntrepirse();
+			try {
+				modifierEntrepirse();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "Annuler":
 			// Fermeture de la fenêtre de modification
@@ -38,7 +43,7 @@ public class GestionModificationEntreprise implements ActionListener {
 	}
 
 	// Méthode privée pour effectuer la modification du locataire
-	private void modifierEntrepirse() {
+	private void modifierEntrepirse() throws SQLException {
 		Entreprise entreprise = creerEntrepriseAPartirDesChamps();
 		// Appel de la méthode de mise à jour dans la base de données
 		this.daoEntreprise.update(entreprise);
