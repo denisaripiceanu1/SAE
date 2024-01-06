@@ -770,31 +770,44 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesAssurances_Modifier":
-				if (Sauvegarde.onSave("Assurance") == true) {
-					Fenetre_ModificationAssurance modification_assurance = new Fenetre_ModificationAssurance();
-					this.fenetreAccueil.getLayeredPane().add(modification_assurance);
-					modification_assurance.setVisible(true);
-					modification_assurance.moveToFront();
-					
-					// Retrieve the saved "Travaux" data
-					Facture travauxSauvegarde = (Facture) Sauvegarde.getItem("Facture");
-					Facture travauxCourant;
+			    // Vérifie s'il y a des données d'assurance sauvegardées
+			    if (Sauvegarde.onSave("Assurance")) {
+			        // Crée une nouvelle fenêtre de modification d'assurance
+			        Fenetre_ModificationAssurance modification_assurance = new Fenetre_ModificationAssurance();
+			        
+			        // Ajoute la fenêtre de modification à la couche interne de la fenêtre principale
+			        this.fenetreAccueil.getLayeredPane().add(modification_assurance);
+			        
+			        // Rend la fenêtre de modification visible
+			        modification_assurance.setVisible(true);
+			        
+			        // Place la fenêtre de modification au premier plan
+			        modification_assurance.moveToFront();
 
-					try {
-						travauxCourant = this.daoFacture.findById(travauxSauvegarde.getNumero());
-						modif_travaux.getTextField_Numero().setText(travauxCourant.getNumero());
-						modif_travaux.getTextField_designation().setText(travauxCourant.getDesignation());
-						modif_travaux.getTextField_dateEmission().setText(travauxCourant.getDateEmission());
-						modif_travaux.getTextField_montant().setText(Double.toString(travauxCourant.getMontant()));
-						modif_travaux.getTextField_paye().setText(Double.toString(travauxCourant.getAccompteVerse()));
-						modif_travaux.getTextField_prestataire().setText(travauxCourant.getEntreprise().getNom());
-						modif_travaux.getTextField_adresse().setText(travauxCourant.getEntreprise().getAdresse());
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-				}
-				break;
+			        // Récupère l'assurance sauvegardée précédemment
+			        Assurance assuranceSauvegarde = (Assurance) Sauvegarde.getItem("Assurance");
+			        
+			        // Déclare les objets nécessaires
+			        Assurance assuranceCourante;
+			        Echeance echeance = (Echeance) Sauvegarde.getItem("Echeance");;
+
+			        try {
+			            // Recherche l'assurance courante dans la base de données
+			            assuranceCourante = this.daoAssurance.findById(assuranceSauvegarde.getNuméroPolice());
+			            
+			            // Remplit les champs de la fenêtre de modification avec les données de l'assurance courante
+			            modification_assurance.getTextField_numPolice().setText(assuranceCourante.getNuméroPolice());
+			            modification_assurance.getTextField_dateEcheance().setText(echeance.getDateEcheance());
+			            modification_assurance.getTextField_montant().setText(Double.toString(assuranceCourante.getMontant()));
+
+			        } catch (SQLException e1) {
+			            e1.printStackTrace();
+			        }
+			    }
+			    break;
+
 			case "btn_MesAssurances_Inserer":
+			    // Vérifie s'il y a des données d'un logement sauvegardées
 				if (Sauvegarde.onSave("Logement") == true) {
 					Fenetre_InsertionAssurance insertion_assurance = new Fenetre_InsertionAssurance();
 					this.fenetreAccueil.getLayeredPane().add(insertion_assurance);
@@ -803,6 +816,7 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesAssurances_Supprimer":
+			    // Vérifie s'il y a des données d'assurance sauvegardées
 				if (Sauvegarde.onSave("Assurance") == true) {
 					Fenetre_SupprimerAssurance supp_assurance = new Fenetre_SupprimerAssurance();
 					this.fenetreAccueil.getLayeredPane().add(supp_assurance);
