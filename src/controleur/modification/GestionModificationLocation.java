@@ -42,7 +42,7 @@ public class GestionModificationLocation implements ActionListener {
 						Double.parseDouble(fml.getTextField_caution_TTC().getText()), louerBD.getBail(),
 						louerBD.getEtat_lieux(), 
 						fml.getTextField_date_depart().getText(),
-						Integer.parseInt(fml.getTextField_loyer_paye().getText()), louerBD.getIcc(),
+						louerBD.getLoyerPaye(), louerBD.getIcc(),
 						Double.parseDouble(fml.getTextField_montant_reel_paye().getText()));
 
 				// Mise à jour de l'objet Louer dans la base de données
@@ -62,8 +62,3 @@ public class GestionModificationLocation implements ActionListener {
 		}
 	}
 }
-
-// (Locataire locataire, Bien bien, String dateDebut, int nbMois, double
-// loyerTTC,
-//		double provision_chargeMens_TTC, double cautionTTC, String bail, String etat_lieux, String dateDepart,
-//		int loyerPaye, ICC icc, double montantReelPaye)

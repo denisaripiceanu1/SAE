@@ -592,7 +592,6 @@ public class GestionAccueil implements ActionListener {
 								.setText(String.valueOf(louerBD.getBien().getImmeuble().getImmeuble()));
 						fml.getTextField_provision_chargeMens_TTC()
 								.setText(String.valueOf(louerBD.getProvision_chargeMens_TTC()));
-						fml.getTextField_loyer_paye().setText(String.valueOf(louerBD.getLoyerPaye()));
 						fml.getTextField_montant_reel_paye().setText(String.valueOf(louerBD.getMontantReelPaye()));
 						fml.getTextField_Id_Locataire().setText(louerBD.getLocataire().getIdLocataire());
 						fml.getTextField_loyer_TCC().setText(String.valueOf(louerBD.getLoyerTTC()));
