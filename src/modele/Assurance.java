@@ -15,7 +15,7 @@ public class Assurance {
 	}
 
 	public Entreprise getEntreprise() {
-		return entreprise;
+		return this.entreprise;
 	}
 
 	public void setEntreprise(Entreprise entreprise) {
