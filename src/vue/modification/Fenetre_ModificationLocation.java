@@ -16,7 +16,7 @@ import controleur.modification.GestionModificationLocation;
 
 public class Fenetre_ModificationLocation extends JInternalFrame {
 	// Déclaration des champs de texte
-	private JTextField textField_IdImmeuble;
+	private JTextField textField_IdBien;
 	private JTextField textField_provision_chargeMens_TTC;
 	private JTextField textField_loyer_TCC;
 	private JTextField textField_caution_TTC;
@@ -58,13 +58,13 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		panel.add(lbl_InsererUnBien);
 
 		// Champs de texte
-		this.textField_IdImmeuble = new JTextField();
-		this.textField_IdImmeuble.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Logement",
+		this.textField_IdBien = new JTextField();
+		this.textField_IdBien.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Logement",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
-		this.textField_IdImmeuble.setBounds(166, 104, 190, 40);
-		panel.add(this.textField_IdImmeuble);
-		this.textField_IdImmeuble.setColumns(10);
-		this.textField_IdImmeuble.setEditable(false);
+		this.textField_IdBien.setBounds(166, 104, 190, 40);
+		panel.add(this.textField_IdBien);
+		this.textField_IdBien.setColumns(10);
+		this.textField_IdBien.setEditable(false);  // cle primaire de la table Louer non modifiable
 
 		this.textField_provision_chargeMens_TTC = new JTextField();
 		this.textField_provision_chargeMens_TTC.setColumns(10);
@@ -89,7 +89,7 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		panel.add(this.textField_caution_TTC);
 
 		textField_Id_Locataire = new JTextField();
-		textField_Id_Locataire.setEditable(false);
+		textField_Id_Locataire.setEditable(false); // cle primaire de la table Louer non modifiable
 		textField_Id_Locataire.setColumns(10);
 		textField_Id_Locataire.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Locataire",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
@@ -113,7 +113,7 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		panel.add(textField_montant_reel_paye);
 
 		textField_date_debut = new JTextField();
-		textField_date_debut.setEditable(false);
+		textField_date_debut.setEditable(false); // cle primaire de la table Louer non modifiable
 		textField_date_debut.setColumns(10);
 		textField_date_debut.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date début",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
@@ -146,11 +146,11 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 	}
 
 	public JTextField getTextField_IdImmeuble() {
-		return textField_IdImmeuble;
+		return textField_IdBien;
 	}
 
 	public void setTextField_IdImmeuble(JTextField textField_IdImmeuble) {
-		this.textField_IdImmeuble = textField_IdImmeuble;
+		this.textField_IdBien = textField_IdImmeuble;
 	}
 
 	public JTextField getTextField_provision_chargeMens_TTC() {

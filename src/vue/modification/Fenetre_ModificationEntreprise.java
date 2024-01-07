@@ -70,7 +70,7 @@ public class Fenetre_ModificationEntreprise extends JInternalFrame {
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, new Font("Tahoma", Font.PLAIN, 12), new Color(0, 0, 0)));
 		textField_SIRET.setBounds(381, 166, 190, 40);
 		panel.add(textField_SIRET);
-		textField_SIRET.setEditable(false);
+		textField_SIRET.setEditable(false); // cle primaire de la table Entreprise non modifiable
 
 		textField_Telephone = new JTextField();
 		textField_Telephone.setColumns(10);

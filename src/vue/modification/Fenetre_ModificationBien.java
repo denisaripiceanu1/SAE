@@ -58,7 +58,7 @@ public class Fenetre_ModificationBien extends JInternalFrame {
 		this.textField_IdImmeuble.setBounds(110, 104, 190, 40);
 		panel.add(this.textField_IdImmeuble);
 		this.textField_IdImmeuble.setColumns(10);
-		this.textField_IdImmeuble.setEditable(false);
+		this.textField_IdImmeuble.setEditable(false);  // cle primaire de la table Immeuble non modifiable
 
 		this.textField_adresse = new JTextField();
 		this.textField_adresse.setColumns(10);
