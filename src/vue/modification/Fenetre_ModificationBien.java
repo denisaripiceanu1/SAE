@@ -17,6 +17,7 @@ import javax.swing.border.TitledBorder;
 import controleur.modification.GestionModificationBien;
 
 public class Fenetre_ModificationBien extends JInternalFrame {
+	// Champs de saisie
 	private JTextField textField_IdImmeuble;
 	private JTextField textField_adresse;
 	private JTextField textField_codePostal;
@@ -24,15 +25,18 @@ public class Fenetre_ModificationBien extends JInternalFrame {
 	private JTextField textField_periodeDeConstruction;
 	private JTextField textField_nbLogement;
 	private JTextField textField_dateAcquisition;
+	// Autres elements
 	private JSeparator separator_Compteur;
 	private JButton btn_ajouterCompteur;
-	private GestionModificationBien gestionModificationBien;
 	private JComboBox comboBox_typeDeBien;
 
+	// Gestionnaires d'événements
+	private GestionModificationBien gestionModificationBien;
+
 	public Fenetre_ModificationBien() {
-
+		// Initialisation des gestionnaires d'événements
 		this.gestionModificationBien = new GestionModificationBien(this);
-
+		// Configuration de la fenêtre interne
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 

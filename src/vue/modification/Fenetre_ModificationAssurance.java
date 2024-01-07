@@ -20,18 +20,21 @@ import controleur.GestionTableEntrepriseFenetreModificationAssurance;
 import controleur.modification.GestionModificationAssurance;
 
 public class Fenetre_ModificationAssurance extends JInternalFrame {
+	// Champs de saisie
 	private JTextField textField_numPolice;
 	private JTextField textField_montant;
+	private JTextField textField_dateEcheance;
+	// Boutons
 	private JButton btn_ajouter_entreprise;
 	private JButton btn_charger_entreprise;
-	private JScrollPane scrollPane_table_entreprise;
 
 	// Table pour afficher les données d'entreprise
 	private JTable table_entreprise;
+	private JScrollPane scrollPane_table_entreprise;
 
+	// Gestionnaires d'événements
 	private GestionModificationAssurance gestionClic;
 	private GestionTableEntrepriseFenetreModificationAssurance gtefma;
-	private JTextField textField_dateEcheance;
 
 	public Fenetre_ModificationAssurance() {
 		// Initialisation du gestionnaire d'actions

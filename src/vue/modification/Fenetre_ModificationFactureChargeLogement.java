@@ -36,7 +36,6 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 	// Boutons radio
 	private JRadioButton rdbtnOui = new JRadioButton("Oui");
 	private JRadioButton rdbtnNon = new JRadioButton("Non");
-	private JComboBox<String> comboBox_Designation;
 
 	// Boutons et libellés
 	private JButton btn_ajouter_entreprise;
@@ -45,10 +44,11 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 
 	// Table pour afficher les données d'entreprise
 	private JTable table_entreprise;
+	private JScrollPane scrollPane_table_entreprise;
 
 	// Autres elements
 	private JSeparator separator_Travaux;
-	private JScrollPane scrollPane_table_entreprise;
+	private JComboBox<String> comboBox_Designation;
 	private JComboBox<String> comboBox_modePaiement;
 
 	// Gestionnaires d'événements

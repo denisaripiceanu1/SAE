@@ -17,40 +17,21 @@ import javax.swing.border.TitledBorder;
 import controleur.modification.GestionModificationLogement;
 
 public class Fenetre_ModificationLogement extends JInternalFrame {
-	public JTextField getTextField_IdLogement() {
-		return this.textField_IdLogement;
-	}
-
-	public JTextField getTextField_SurfaceHabitable() {
-		return this.textField_SurfaceHabitable;
-	}
-
-	public JTextField getTextField_NbPièces() {
-		return this.textField_NbPièces;
-	}
-
-	public JTextField getTextField_DateAcquisition() {
-		return this.textField_DateAcquisition;
-	}
-
-	public JTextField getTextField_NumEtage() {
-		return this.textField_NumEtage;
-	}
-
-	public JComboBox getComboBox_typeDeLogement() {
-		return this.comboBox_typeDeLogement;
-	}
-
+	// Champs de saisie
 	private JTextField textField_IdLogement;
 	private JTextField textField_SurfaceHabitable;
 	private JTextField textField_NbPièces;
 	private JTextField textField_DateAcquisition;
 	private JTextField textField_NumEtage;
+	// Boutons
 	private JButton btnModifier;
 	private JButton btnAnnuler;
 	private JButton btnAjouterCompteur;
 	private JButton btnAjouterQuotite;
+	
+	// Gestionnaire d'événements
 	private GestionModificationLogement gestionClic;
+	
 	private JComboBox comboBox_typeDeLogement;
 
 	public Fenetre_ModificationLogement() {
@@ -90,7 +71,7 @@ public class Fenetre_ModificationLogement extends JInternalFrame {
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		this.textField_IdLogement.setBounds(145, 118, 190, 40);
 		panel.add(this.textField_IdLogement);
-		this.textField_IdLogement.setEditable(false);
+		this.textField_IdLogement.setEditable(false); // cle primaire de la table Bien non modifiable
 
 		this.textField_SurfaceHabitable = new JTextField();
 		this.textField_SurfaceHabitable.setColumns(10);
@@ -146,5 +127,28 @@ public class Fenetre_ModificationLogement extends JInternalFrame {
 		this.btnAjouterQuotite.addActionListener(this.gestionClic);
 		panel.add(this.btnAjouterQuotite);
 
+	}
+	public JTextField getTextField_IdLogement() {
+		return this.textField_IdLogement;
+	}
+
+	public JTextField getTextField_SurfaceHabitable() {
+		return this.textField_SurfaceHabitable;
+	}
+
+	public JTextField getTextField_NbPièces() {
+		return this.textField_NbPièces;
+	}
+
+	public JTextField getTextField_DateAcquisition() {
+		return this.textField_DateAcquisition;
+	}
+
+	public JTextField getTextField_NumEtage() {
+		return this.textField_NumEtage;
+	}
+
+	public JComboBox getComboBox_typeDeLogement() {
+		return this.comboBox_typeDeLogement;
 	}
 }

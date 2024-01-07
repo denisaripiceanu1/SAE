@@ -15,6 +15,7 @@ import javax.swing.border.TitledBorder;
 import controleur.modification.GestionModificationTravauxImmeuble;
 
 public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
+	// Champs de saisie
 	private JTextField textField_Numero;
 	private JTextField textField_designation;
 	private JTextField textField_dateEmission;
@@ -22,9 +23,12 @@ public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
 	private JTextField textField_paye;
 	private JTextField textField_prestataire;
 	private JTextField textField_adresse;
-	private JSeparator separator_Compteur;
-	private GestionModificationTravauxImmeuble gestionModificationTravauxImmeuble;
 	private JTextField textField_Bien_Logement;
+	
+	private JSeparator separator_Compteur;
+	
+	// Gestionnaire d'événements
+	private GestionModificationTravauxImmeuble gestionModificationTravauxImmeuble;
 
 	public Fenetre_ModificationTravauxImmeuble() {
 
@@ -55,7 +59,7 @@ public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
 		this.textField_Numero.setBounds(110, 104, 190, 40);
 		panel.add(this.textField_Numero);
 		this.textField_Numero.setColumns(10);
-		this.textField_Numero.setEditable(false);
+		this.textField_Numero.setEditable(false); // cle primaire de la table Facture non modifiable
 
 		this.textField_designation = new JTextField();
 		this.textField_designation.setColumns(10);

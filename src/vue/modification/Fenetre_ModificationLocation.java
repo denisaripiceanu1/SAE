@@ -27,6 +27,8 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 	private JTextField textField_date_debut;
 
 	private JSeparator separator_Compteur;
+	
+	// Gestionnaires d'événements
 	private GestionModificationLocation gestionModificationLocation;
 
 	// Constructeur de la fenêtre de modification de location
