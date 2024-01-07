@@ -1,147 +1,131 @@
 package vue.insertion;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import java.awt.Color;
-import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import java.awt.Color;
+import java.awt.Font;
 
 import controleur.insertion.GestionInsertionBien;
 
-import javax.swing.border.LineBorder;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.DefaultComboBoxModel;
-
 public class Fenetre_InsertionBien extends JInternalFrame {
-	private JTextField textField_IdImmeuble;
-	private JTextField textField_adresse;
-	private JTextField textField_codePostal;
-	private JTextField textField_ville;
-	private JTextField textField_periodeDeConstruction;
-	private JSeparator separator_Compteur;
-	private JButton btn_ajouterCompteur;
-	private JComboBox comboBox_typeDeBien;
-	private GestionInsertionBien gestionInsertionBien;
-	
+    private JTextField textField_IdImmeuble;
+    private JTextField textField_adresse;
+    private JTextField textField_codePostal;
+    private JTextField textField_ville;
+    private JTextField textField_periodeDeConstruction;
+    private JComboBox<String> comboBox_typeDeBien;
+    private GestionInsertionBien gestionInsertionBien;
 
-	public Fenetre_InsertionBien() {
-		
-		this.gestionInsertionBien = new GestionInsertionBien(this);
-		
-		this.setBounds(100, 100, 762, 541);
-		this.getContentPane().setLayout(null);
+    public Fenetre_InsertionBien() {
+        // Initialisation du gestionnaire d'insertion de bien
+        this.gestionInsertionBien = new GestionInsertionBien(this);
 
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 755, 511);
-		this.getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		JSeparator separator_titreInsererBien = new JSeparator();
-		separator_titreInsererBien.setForeground(new Color(0, 102, 204));
-		separator_titreInsererBien.setBounds(271, 72, 190, 2);
-		panel.add(separator_titreInsererBien);
-		
-		JLabel lbl_InsererUnBien = new JLabel("Ajouter un Bien");
-		lbl_InsererUnBien.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUnBien.setBounds(308, 26, 117, 48);
-		panel.add(lbl_InsererUnBien);
-		
-		textField_IdImmeuble = new JTextField();
-		textField_IdImmeuble.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Bien", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
-		textField_IdImmeuble.setBounds(110, 104, 190, 40);
-		panel.add(textField_IdImmeuble);
-		textField_IdImmeuble.setColumns(10);
-		
-		textField_adresse = new JTextField();
-		textField_adresse.setColumns(10);
-		textField_adresse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Adresse", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_adresse.setBounds(110, 168, 190, 40);
-		panel.add(textField_adresse);
-		
-		textField_codePostal = new JTextField();
-		textField_codePostal.setColumns(10);
-		textField_codePostal.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Code Postal", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_codePostal.setBounds(427, 168, 190, 40);
-		panel.add(textField_codePostal);
-		
-		textField_ville = new JTextField();
-		textField_ville.setColumns(10);
-		textField_ville.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Ville", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_ville.setBounds(110, 228, 190, 40);
-		panel.add(textField_ville);
-		
-		textField_periodeDeConstruction = new JTextField();
-		textField_periodeDeConstruction.setColumns(10);
-		textField_periodeDeConstruction.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "P\u00E9riode de construction", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_periodeDeConstruction.setBounds(427, 228, 190, 40);
-		panel.add(textField_periodeDeConstruction);
-		
-		comboBox_typeDeBien = new JComboBox();
-		comboBox_typeDeBien.setModel(new DefaultComboBoxModel(new String[] {"Immeuble", "Maison"}));
-		comboBox_typeDeBien.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
-		comboBox_typeDeBien.setBounds(427, 104, 189, 45);
-		panel.add(comboBox_typeDeBien);
-		
-		JButton btnAjouter = new JButton("Ajouter");
-		btnAjouter.setForeground(Color.WHITE);
-		btnAjouter.setBackground(new Color(0, 102, 204));
-		btnAjouter.addActionListener(this.gestionInsertionBien);
-		
-		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAjouter.setBounds(246, 447, 94, 31);
-		panel.add(btnAjouter);
-		
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setForeground(Color.WHITE);
-		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.addActionListener(this.gestionInsertionBien);
-		
-		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAnnuler.setBounds(398, 447, 94, 31);
-		panel.add(btnAnnuler);
-		
-		separator_Compteur = new JSeparator();
-		separator_Compteur.setBounds(82, 354, 591, 2);
-		panel.add(separator_Compteur);
-		
-		btn_ajouterCompteur = new JButton("Ajouter un compteur");
-		btn_ajouterCompteur.setForeground(Color.WHITE);
-		btn_ajouterCompteur.setBackground(new Color(0, 102, 204));
-		btn_ajouterCompteur.addActionListener(this.gestionInsertionBien);
-		
-		btn_ajouterCompteur.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_ajouterCompteur.setBounds(246, 378, 246, 31);
-		panel.add(btn_ajouterCompteur);
-	
-	}
-	
-	public JTextField getTextField_IdImmeuble() {
-		return textField_IdImmeuble;
-	}
+        this.setBounds(100, 100, 762, 541);
+        this.getContentPane().setLayout(null);
 
-	public JTextField getTextField_adresse() {
-		return textField_adresse;
-	}
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
+        panel.setBounds(0, 0, 755, 511);
+        this.getContentPane().add(panel);
+        panel.setLayout(null);
 
-	public JTextField getTextField_codePostal() {
-		return textField_codePostal;
-	}
+        // Titre et séparateur
+        JSeparator separator_titreInsererBien = new JSeparator();
+        separator_titreInsererBien.setForeground(new Color(0, 102, 204));
+        separator_titreInsererBien.setBounds(271, 72, 190, 2);
+        panel.add(separator_titreInsererBien);
 
-	public JTextField getTextField_ville() {
-		return textField_ville;
-	}
+        JLabel lbl_InsererUnBien = new JLabel("Ajouter un Bien");
+        lbl_InsererUnBien.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lbl_InsererUnBien.setBounds(308, 26, 117, 48);
+        panel.add(lbl_InsererUnBien);
 
-	public JTextField getTextField_periodeDeConstruction() {
-		return textField_periodeDeConstruction;
-	}
+        // Champs de texte et menus déroulants
+        textField_IdImmeuble = createTextField("Id Bien", 110, 104, 190, 40, panel);
+        textField_adresse = createTextField("Adresse", 110, 168, 190, 40, panel);
+        textField_codePostal = createTextField("Code Postal", 427, 168, 190, 40, panel);
+        textField_ville = createTextField("Ville", 110, 228, 190, 40, panel);
+        textField_periodeDeConstruction = createTextField("Période de construction", 427, 228, 190, 40, panel);
 
-	public JComboBox getComboBox_typeDeBien() {
-		return comboBox_typeDeBien;
-	}
-	
+        comboBox_typeDeBien = createComboBox("Type", new String[]{"Immeuble", "Maison"}, 427, 104, 189, 45, panel);
+
+        // Boutons Ajouter et Annuler
+        createButton("Ajouter", 246, 447, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionInsertionBien, panel);
+        createButton("Annuler", 398, 447, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionInsertionBien, panel);
+
+        createSeparator(82, 354, 591, 2, panel);
+        createButton("Ajouter un compteur", 246, 378, 246, 31, Color.WHITE, new Color(0, 102, 204), gestionInsertionBien, panel);
+    }
+
+    // Méthode pour créer un champ de texte avec une bordure spécifique
+    private JTextField createTextField(String title, int x, int y, int width, int height, JPanel panel) {
+        JTextField textField = new JTextField();
+        textField.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), title,
+                TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
+        textField.setBounds(x, y, width, height);
+        panel.add(textField);
+        return textField;
+    }
+
+    // Méthode pour créer un menu déroulant avec une bordure spécifique
+    private JComboBox<String> createComboBox(String title, String[] items, int x, int y, int width, int height, JPanel panel) {
+        JComboBox<String> comboBox = new JComboBox<>(items);
+        comboBox.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), title,
+                TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
+        comboBox.setBounds(x, y, width, height);
+        panel.add(comboBox);
+        return comboBox;
+    }
+
+    // Méthode pour créer un bouton avec une couleur de texte, de fond et un gestionnaire d'événements spécifiques
+    private JButton createButton(String label, int x, int y, int width, int height, Color textColor, Color bgColor, GestionInsertionBien listener, JPanel panel) {
+        JButton button = new JButton(label);
+        button.setForeground(textColor);
+        button.setBackground(bgColor);
+        button.addActionListener(listener);
+        button.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        button.setBounds(x, y, width, height);
+        panel.add(button);
+        return button;
+    }
+
+    // Méthode pour créer un séparateur
+    private JSeparator createSeparator(int x, int y, int width, int height, JPanel panel) {
+        JSeparator separator = new JSeparator();
+        separator.setBounds(x, y, width, height);
+        panel.add(separator);
+        return separator;
+    }
+
+    // Getters pour récupérer les valeurs des champs
+    public JTextField getTextField_IdImmeuble() {
+        return textField_IdImmeuble;
+    }
+
+    public JTextField getTextField_adresse() {
+        return textField_adresse;
+    }
+
+    public JTextField getTextField_codePostal() {
+        return textField_codePostal;
+    }
+
+    public JTextField getTextField_ville() {
+        return textField_ville;
+    }
+
+    public JTextField getTextField_periodeDeConstruction() {
+        return textField_periodeDeConstruction;
+    }
+
+    public JComboBox<String> getComboBox_typeDeBien() {
+        return comboBox_typeDeBien;
+    }
 }

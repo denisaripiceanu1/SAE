@@ -17,29 +17,6 @@ import javax.swing.border.TitledBorder;
 import controleur.insertion.GestionInsertionLogement;
 
 public class Fenetre_InsertionLogement extends JInternalFrame {
-	public JTextField getTextField_IdLogement() {
-		return this.textField_IdLogement;
-	}
-
-	public JTextField getTextField_SurfaceHabitable() {
-		return this.textField_SurfaceHabitable;
-	}
-
-	public JTextField getTextField_NbPièces() {
-		return this.textField_NbPièces;
-	}
-
-	public JTextField getTextField_DateAcquisition() {
-		return this.textField_DateAcquisition;
-	}
-
-	public JTextField getTextField_NumEtage() {
-		return this.textField_NumEtage;
-	}
-
-	public JComboBox getComboBox_typeDeLogement() {
-		return this.comboBox_typeDeLogement;
-	}
 
 	private JTextField textField_IdLogement;
 	private JTextField textField_SurfaceHabitable;
@@ -51,10 +28,11 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 	private JButton btnAjouterCompteur;
 	private JButton btnAjouterQuotite;
 	private GestionInsertionLogement gestionClic;
-	private JComboBox comboBox_typeDeLogement;
+	private JComboBox<String> comboBox_typeDeLogement;
 
 	public Fenetre_InsertionLogement() {
-
+		// Initialisation du gestionnaire d'actions pour la fenêtre d'insertion de
+		// logement
 		this.gestionClic = new GestionInsertionLogement(this);
 
 		this.setBounds(100, 100, 762, 541);
@@ -76,14 +54,16 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		lbl_InsererUnLogement.setBounds(290, 25, 171, 48);
 		panel.add(lbl_InsererUnLogement);
 
-		this.comboBox_typeDeLogement = new JComboBox();
+		// ComboBox pour le type de logement
+		this.comboBox_typeDeLogement = new JComboBox<String>();
 		this.comboBox_typeDeLogement
-				.setModel(new DefaultComboBoxModel(new String[] { "Appartement", "Maison", "Garage" }));
+				.setModel(new DefaultComboBoxModel<String>(new String[] { "Appartement", "Maison", "Garage" }));
 		this.comboBox_typeDeLogement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
 		this.comboBox_typeDeLogement.setBounds(376, 119, 189, 39);
 		panel.add(this.comboBox_typeDeLogement);
 
+		// TextFields
 		this.textField_IdLogement = new JTextField();
 		this.textField_IdLogement.setColumns(10);
 		this.textField_IdLogement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Logement",
@@ -119,6 +99,7 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		this.textField_NumEtage.setBounds(375, 269, 190, 40);
 		panel.add(this.textField_NumEtage);
 
+		// Bouton Ajouter
 		this.btnAjouter = new JButton("Ajouter");
 		this.btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.btnAjouter.setBounds(235, 445, 94, 31);
@@ -127,6 +108,7 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		this.btnAjouter.addActionListener(this.gestionClic);
 		panel.add(this.btnAjouter);
 
+		// Bouton Annuler
 		this.btnAnnuler = new JButton("Annuler");
 		this.btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.btnAnnuler.setBounds(394, 445, 94, 31);
@@ -135,15 +117,43 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		this.btnAnnuler.addActionListener(this.gestionClic);
 		panel.add(this.btnAnnuler);
 
+		// Bouton Ajouter Compteur
 		this.btnAjouterCompteur = new JButton("Ajouter un compteur");
 		this.btnAjouterCompteur.setBounds(291, 390, 154, 23);
 		this.btnAjouterCompteur.addActionListener(this.gestionClic);
 		panel.add(this.btnAjouterCompteur);
 
+		// Bouton Ajouter Quotité
 		this.btnAjouterQuotite = new JButton("Ajouter une quotité");
 		this.btnAjouterQuotite.setBounds(290, 356, 154, 23);
 		this.btnAjouterQuotite.addActionListener(this.gestionClic);
 		panel.add(this.btnAjouterQuotite);
 
 	}
+
+	// Getters pour récupérer les valeurs des champs
+	public JTextField getTextField_IdLogement() {
+		return this.textField_IdLogement;
+	}
+
+	public JTextField getTextField_SurfaceHabitable() {
+		return this.textField_SurfaceHabitable;
+	}
+
+	public JTextField getTextField_NbPièces() {
+		return this.textField_NbPièces;
+	}
+
+	public JTextField getTextField_DateAcquisition() {
+		return this.textField_DateAcquisition;
+	}
+
+	public JTextField getTextField_NumEtage() {
+		return this.textField_NumEtage;
+	}
+
+	public JComboBox getComboBox_typeDeLogement() {
+		return this.comboBox_typeDeLogement;
+	}
+
 }

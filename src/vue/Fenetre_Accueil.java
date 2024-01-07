@@ -293,7 +293,7 @@ public class Fenetre_Accueil extends JFrame {
 		lblMesBiens.setBounds(244, 22, 216, 43);
 		panelMesBiens.add(lblMesBiens);
 
-		JLabel lblImmeubles = new JLabel("Immeuble/Maison");
+		JLabel lblImmeubles = new JLabel("Bien");
 		lblImmeubles.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblImmeubles.setBounds(40, 71, 109, 31);
 		panelMesBiens.add(lblImmeubles);
