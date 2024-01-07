@@ -268,7 +268,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		btn_ajouter_icc.setForeground(Color.WHITE);
 		btn_ajouter_icc.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_ajouter_icc.setBackground(new Color(0, 102, 204));
-		btn_ajouter_icc.setBounds(514, 39, 94, 31);
+		btn_ajouter_icc.setBounds(511, 38, 106, 31);
 		panel.add(btn_ajouter_icc);
 		btn_ajouter_icc.addActionListener(this.gestionClic);
 
@@ -276,7 +276,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		btn_charger_icc.setForeground(Color.WHITE);
 		btn_charger_icc.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_charger_icc.setBackground(new Color(0, 102, 204));
-		btn_charger_icc.setBounds(620, 40, 94, 31);
+		btn_charger_icc.setBounds(627, 39, 106, 31);
 		panel.add(btn_charger_icc);
 		btn_charger_icc.addActionListener(this.gestionClic);
 	}
