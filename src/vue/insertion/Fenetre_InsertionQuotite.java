@@ -18,73 +18,82 @@ import javax.swing.border.TitledBorder;
 import controleur.insertion.GestionInsertionQuotite;
 
 public class Fenetre_InsertionQuotite extends JInternalFrame {
-	private JTextField textField_Pourcentage;
-	private GestionInsertionQuotite gestionClic;
-	private JComboBox comboBox_typeDeCompteur;
+    private JTextField textField_Pourcentage;
+    private GestionInsertionQuotite gestionClic;
+    private JComboBox<String> comboBox_typeDeCompteur;
 
-	public Fenetre_InsertionQuotite() {
+    public Fenetre_InsertionQuotite() {
+        // Initialisation du gestionnaire d'insertion de quotité
+        this.gestionClic = new GestionInsertionQuotite(this);
 
-		this.gestionClic = new GestionInsertionQuotite(this);
+        this.setBounds(100, 100, 762, 541);
+        this.getContentPane().setLayout(null);
 
-		this.setBounds(100, 100, 762, 541);
-		this.getContentPane().setLayout(null);
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
+        panel.setBounds(0, 0, 755, 511);
+        this.getContentPane().add(panel);
+        panel.setLayout(null);
 
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 755, 511);
-		this.getContentPane().add(panel);
-		panel.setLayout(null);
+        // Titre et séparateur
+        JSeparator separator_titreInsererQuotite = new JSeparator();
+        separator_titreInsererQuotite.setForeground(new Color(0, 102, 204));
+        separator_titreInsererQuotite.setBounds(271, 130, 190, 2);
+        panel.add(separator_titreInsererQuotite);
 
-		JSeparator separator_titreInsererQuotite = new JSeparator();
-		separator_titreInsererQuotite.setForeground(new Color(0, 102, 204));
-		separator_titreInsererQuotite.setBounds(271, 130, 190, 2);
-		panel.add(separator_titreInsererQuotite);
+        JLabel lbl_InsererUneQuotite = new JLabel("Ajouter une Quotité");
+        lbl_InsererUneQuotite.setHorizontalAlignment(SwingConstants.CENTER);
+        lbl_InsererUneQuotite.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lbl_InsererUneQuotite.setBounds(284, 84, 160, 48);
+        panel.add(lbl_InsererUneQuotite);
 
-		JLabel lbl_InsererUneQuotite = new JLabel("Ajouter une Quotité");
-		lbl_InsererUneQuotite.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_InsererUneQuotite.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUneQuotite.setBounds(284, 84, 160, 48);
-		panel.add(lbl_InsererUneQuotite);
+        // Menu déroulant pour le type de compteur
+        this.comboBox_typeDeCompteur = new JComboBox<String>();
+        this.comboBox_typeDeCompteur.setModel(new DefaultComboBoxModel<String>(
+                new String[] { "Eau", "Gaz", "Electricité", "Ordure Ménagère" }));
+        this.comboBox_typeDeCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type",
+                TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
+        this.comboBox_typeDeCompteur.setBounds(271, 215, 189, 39);
+        panel.add(this.comboBox_typeDeCompteur);
 
-		this.comboBox_typeDeCompteur = new JComboBox();
-		this.comboBox_typeDeCompteur
-				.setModel(new DefaultComboBoxModel(new String[] { "Eau", "Gaz", "Electricité", "Ordure Ménagère" }));
-		this.comboBox_typeDeCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
-		this.comboBox_typeDeCompteur.setBounds(271, 215, 189, 39);
-		panel.add(this.comboBox_typeDeCompteur);
+        // Champ de texte pour le pourcentage
+        this.textField_Pourcentage = createTextField("Pourcentage", 271, 291, 190, 40, panel);
 
-		this.textField_Pourcentage = new JTextField();
-		this.textField_Pourcentage.setColumns(10);
-		this.textField_Pourcentage.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Pourcentage",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Pourcentage.setBounds(271, 291, 190, 40);
-		panel.add(this.textField_Pourcentage);
+        // Boutons Ajouter et Annuler
+        createButton("Ajouter", 246, 447, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionClic, panel);
+        createButton("Annuler", 398, 447, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionClic, panel);
+    }
 
-		JButton btnAjouter = new JButton("Ajouter");
-		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAjouter.setBounds(246, 447, 94, 31);
-		btnAjouter.setForeground(Color.WHITE);
-		btnAjouter.setBackground(new Color(0, 102, 204));
-		btnAjouter.addActionListener(this.gestionClic);
-		panel.add(btnAjouter);
+    // Méthode pour créer un champ de texte avec une bordure spécifique
+    private JTextField createTextField(String title, int x, int y, int width, int height, JPanel panel) {
+        JTextField textField = new JTextField();
+        textField.setColumns(10);
+        textField.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), title, TitledBorder.LEADING,
+                TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+        textField.setBounds(x, y, width, height);
+        panel.add(textField);
+        return textField;
+    }
 
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAnnuler.setBounds(398, 447, 94, 31);
-		btnAnnuler.setForeground(Color.WHITE);
-		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.addActionListener(this.gestionClic);
-		panel.add(btnAnnuler);
+    // Méthode pour créer un bouton avec une couleur de texte, de fond et un gestionnaire d'événements spécifiques
+    private JButton createButton(String label, int x, int y, int width, int height, Color textColor, Color bgColor,
+            GestionInsertionQuotite listener, JPanel panel) {
+        JButton button = new JButton(label);
+        button.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        button.setBounds(x, y, width, height);
+        button.setForeground(textColor);
+        button.setBackground(bgColor);
+        button.addActionListener(listener);
+        panel.add(button);
+        return button;
+    }
 
-	}
+    // Getters pour récupérer les valeurs des champs
+    public JTextField getTextField_Pourcentage() {
+        return this.textField_Pourcentage;
+    }
 
-	public JTextField getTextField_Pourcentage() {
-		return this.textField_Pourcentage;
-	}
-
-	public JComboBox getComboBox_typeDeCompteur() {
-		return this.comboBox_typeDeCompteur;
-	}
-
+    public JComboBox<String> getComboBox_typeDeCompteur() {
+        return this.comboBox_typeDeCompteur;
+    }
 }
