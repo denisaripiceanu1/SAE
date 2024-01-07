@@ -59,6 +59,7 @@ public class GestionSuppressionBien implements ActionListener {
 		this.daoImposer = new DaoImposer();
 		this.daoCompteur = new DaoCompteur();
 		this.daoReleve = new DaoReleve();
+		this.daoDiagnostic = new DaoDiagnostic();
 		Sauvegarde.initializeSave();
 	}
 
@@ -71,11 +72,11 @@ public class GestionSuppressionBien implements ActionListener {
 				// Récupération de l'Immeuble sauvegardé
 				Immeuble immeuble_supp = (Immeuble) Sauvegarde.getItem("Immeuble");
 				try {
-					String idBien = immeuble_supp.getImmeuble();
+					String idImmeuble = immeuble_supp.getImmeuble();
 					// Récupération des listes liées au Bien (Immeuble)
-					List<Bien> bienListe = this.daoBien.findBiensparImmeuble(idBien);
-					List<Compteur> compteurListeImmeuble = this.daoCompteur.findByIdImmeubleListe(idBien);
-					List<Facture> factureListeImmeuble = this.daoFacture.findFactureImmeuble(idBien);
+					List<Bien> bienListe = this.daoBien.findBiensparImmeuble(idImmeuble);
+					List<Compteur> compteurListeImmeuble = this.daoCompteur.findByIdImmeubleListe(idImmeuble);
+					List<Facture> factureListeImmeuble = this.daoFacture.findFactureImmeuble(idImmeuble);
 					List<Releve> releves;
 					
 					// Suppression des Relevés liés aux Compteurs de l'Immeuble
