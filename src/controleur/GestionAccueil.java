@@ -770,44 +770,49 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesAssurances_Modifier":
-			    // Vérifie s'il y a des données d'assurance sauvegardées
-			    if (Sauvegarde.onSave("Assurance")) {
-			        // Crée une nouvelle fenêtre de modification d'assurance
-			        Fenetre_ModificationAssurance modification_assurance = new Fenetre_ModificationAssurance();
-			        
-			        // Ajoute la fenêtre de modification à la couche interne de la fenêtre principale
-			        this.fenetreAccueil.getLayeredPane().add(modification_assurance);
-			        
-			        // Rend la fenêtre de modification visible
-			        modification_assurance.setVisible(true);
-			        
-			        // Place la fenêtre de modification au premier plan
-			        modification_assurance.moveToFront();
+				// Vérifie s'il y a des données d'assurance sauvegardées
+				if (Sauvegarde.onSave("Assurance")) {
+					// Crée une nouvelle fenêtre de modification d'assurance
+					Fenetre_ModificationAssurance modification_assurance = new Fenetre_ModificationAssurance();
 
-			        // Récupère l'assurance sauvegardée précédemment
-			        Assurance assuranceSauvegarde = (Assurance) Sauvegarde.getItem("Assurance");
-			        
-			        // Déclare les objets nécessaires
-			        Assurance assuranceCourante;
-			        Echeance echeance = (Echeance) Sauvegarde.getItem("Echeance");;
+					// Ajoute la fenêtre de modification à la couche interne de la fenêtre
+					// principale
+					this.fenetreAccueil.getLayeredPane().add(modification_assurance);
 
-			        try {
-			            // Recherche l'assurance courante dans la base de données
-			            assuranceCourante = this.daoAssurance.findById(assuranceSauvegarde.getNuméroPolice());
-			            
-			            // Remplit les champs de la fenêtre de modification avec les données de l'assurance courante
-			            modification_assurance.getTextField_numPolice().setText(assuranceCourante.getNuméroPolice());
-			            modification_assurance.getTextField_dateEcheance().setText(echeance.getDateEcheance());
-			            modification_assurance.getTextField_montant().setText(Double.toString(assuranceCourante.getMontant()));
+					// Rend la fenêtre de modification visible
+					modification_assurance.setVisible(true);
 
-			        } catch (SQLException e1) {
-			            e1.printStackTrace();
-			        }
-			    }
-			    break;
+					// Place la fenêtre de modification au premier plan
+					modification_assurance.moveToFront();
+
+					// Récupère l'assurance sauvegardée précédemment
+					Assurance assuranceSauvegarde = (Assurance) Sauvegarde.getItem("Assurance");
+
+					// Déclare les objets nécessaires
+					Assurance assuranceCourante;
+					Echeance echeance = (Echeance) Sauvegarde.getItem("Echeance");
+					;
+
+					try {
+						// Recherche l'assurance courante dans la base de données
+						assuranceCourante = this.daoAssurance.findById(assuranceSauvegarde.getNuméroPolice());
+
+						// Remplit les champs de la fenêtre de modification avec les données de
+						// l'assurance courante
+						modification_assurance.getTextField_numPolice().setText(assuranceCourante.getNuméroPolice());
+						modification_assurance.getTextField_dateEcheance()
+								.setText(echeance.getDateEcheance().substring(0, 10));
+						modification_assurance.getTextField_montant()
+								.setText(Double.toString(assuranceCourante.getMontant()));
+
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+				break;
 
 			case "btn_MesAssurances_Inserer":
-			    // Vérifie s'il y a des données d'un logement sauvegardées
+				// Vérifie s'il y a des données d'un logement sauvegardées
 				if (Sauvegarde.onSave("Logement") == true) {
 					Fenetre_InsertionAssurance insertion_assurance = new Fenetre_InsertionAssurance();
 					this.fenetreAccueil.getLayeredPane().add(insertion_assurance);
@@ -816,7 +821,7 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesAssurances_Supprimer":
-			    // Vérifie s'il y a des données d'assurance sauvegardées
+				// Vérifie s'il y a des données d'assurance sauvegardées
 				if (Sauvegarde.onSave("Assurance") == true) {
 					Fenetre_SupprimerAssurance supp_assurance = new Fenetre_SupprimerAssurance();
 					this.fenetreAccueil.getLayeredPane().add(supp_assurance);
