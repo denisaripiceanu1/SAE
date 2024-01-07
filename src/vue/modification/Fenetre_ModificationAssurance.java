@@ -63,6 +63,7 @@ public class Fenetre_ModificationAssurance extends JInternalFrame {
 		this.textField_numPolice.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Numéro de police",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		panel.add(this.textField_numPolice);
+		textField_numPolice.setEditable(false); // cle primaire de la table Assurance non modifiable
 
 		this.textField_montant = new JTextField();
 		this.textField_montant.setColumns(10);
@@ -78,6 +79,7 @@ public class Fenetre_ModificationAssurance extends JInternalFrame {
 						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_dateEcheance.setBounds(135, 298, 197, 40);
 		panel.add(textField_dateEcheance);
+		textField_dateEcheance.setEditable(false); // cle primaire de la table Echeance non modifiable
 
 		// Bouton "Ajouter"
 		JButton btnModifier = new JButton("Modifier");
@@ -126,8 +128,8 @@ public class Fenetre_ModificationAssurance extends JInternalFrame {
 		this.btn_charger_entreprise.setBounds(412, 328, 94, 30);
 		this.btn_charger_entreprise.addActionListener(gestionClic);
 		panel.add(this.btn_charger_entreprise);
-		
-		JButton btn_modifier_entreprise = new JButton("Modifier");
+
+		JButton btn_modifier_entreprise = new JButton("Modifier ");
 		btn_modifier_entreprise.setForeground(Color.WHITE);
 		btn_modifier_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btn_modifier_entreprise.setBackground(new Color(0, 102, 204));
@@ -165,6 +167,7 @@ public class Fenetre_ModificationAssurance extends JInternalFrame {
 	public JTextField getTextField_montant() {
 		return this.textField_montant;
 	}
+
 	public JTextField getTextField_dateEcheance() {
 		return textField_dateEcheance;
 	}

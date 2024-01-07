@@ -6,17 +6,17 @@ import java.sql.SQLException;
 import modele.Assurance;
 import modele.dao.requetes.Requete;
 
-public class RequeteUpdateAssurance implements Requete<Assurance>{
+public class RequeteUpdateAssurance implements Requete<Assurance> {
 
 	@Override
 	public String requete() {
-		return "UPDATE Assurance SET montant_init = ?, Id_Bien = ?, SIRET = ? WHERE numero_police = ?";
+		return "UPDATE Assurance SET montant = ?, Id_Bien = ?, SIRET = ? WHERE numero_police = ?";
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
