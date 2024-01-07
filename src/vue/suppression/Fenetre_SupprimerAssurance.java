@@ -19,10 +19,10 @@ public class Fenetre_SupprimerAssurance extends JInternalFrame {
 		this.setBounds(100, 100, 445, 210);
 		this.getContentPane().setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Êtes-vous sur de vouloir supprimer cette assurance ?");
+		JLabel lblNewLabel = new JLabel("Êtes-vous sûr de vouloir supprimer cette assurance ?");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(52, 23, 323, 70);
+		lblNewLabel.setBounds(21, 23, 384, 70);
 		this.getContentPane().add(lblNewLabel);
 
 		JButton btn_supprimer = new JButton("Supprimer");
