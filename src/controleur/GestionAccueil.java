@@ -90,7 +90,6 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getLayeredPane_MesLocations().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
-		this.fenetreAccueil.getLayeredPane_SoldeDeToutCompte().setVisible(false);
 		// this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
 
 		visible.setVisible(true);
@@ -389,6 +388,34 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
+	///////////////////////////////////////////////////////////////////
+	// LAYERED REGULARISATIONS CHARGES
+	// ////////////////////////////////////////////////////////////////
+	// ---------------------------------------------------------------//
+
+//	private void updateTableRegularisationsForLocataire(String idLocataire) throws SQLException {
+//		
+//	}
+//	
+//		// Methode pour filtrer les Regularisation par Id Locataire
+//		private void filtreRegularisationChargesByLocataire() {
+//			JComboBox<String> comboBox_MesRegularisations = this.fenetreAccueil.getComboBox_Regularisation();
+//			String idLocataireSelectionne = comboBox_MesRegularisations.getSelectedItem().toString();
+//
+//			// Si l'ID selectionne est diffÃ©rent de "ID du Locataire", filtrez la table
+//			// des regularisations
+//			if (!idLocataireSelectionne.equals("Locataire")) {
+//				try {
+//					this.updateTableRegularisationsForLocataire(idLocataireSelectionne);
+//				} catch (SQLException ex) {
+//					ex.printStackTrace();
+//				}
+//			}
+//		}
+	///////////////////////////////////////////////////////////////////
+	// LAYERED SOLDE TOUT COMPTE
+	// ////////////////////////////////////////////////////////////////
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NAVIGATION
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -684,7 +711,7 @@ public class GestionAccueil implements ActionListener {
 						modif_travaux.getTextField_paye().setText(Double.toString(travauxCourant.getAccompteVerse()));
 						modif_travaux.getTextField_prestataire().setText(travauxCourant.getEntreprise().getNom());
 						modif_travaux.getTextField_adresse().setText(travauxCourant.getEntreprise().getAdresse());
-						if (travauxCourant.getBien().getImmeuble().getImmeuble() != null) {
+						if (travauxCourant.getImmeuble() != null) {
 							modif_travaux.getTextField_Bien_Logement()
 									.setText(travauxCourant.getImmeuble().getImmeuble());
 						} else {
@@ -843,10 +870,6 @@ public class GestionAccueil implements ActionListener {
 			// Coder la cas de la selection d'un locataire
 			// parmi la liste prÃ©sente dans le JComboBox "comboBox_Regularisation"
 
-			///////////////////////////
-			// LAYERED SOLDE TOUT COMPTE
-			///////////////////////////
-
 			///////////////////////
 			// LAYERED MES DOCUMENTS
 			///////////////////////
@@ -894,7 +917,6 @@ public class GestionAccueil implements ActionListener {
 		}
 		this.filtreAssuranceByLogement();
 		this.filtreChargesByLogement();
-		this.filtreRegularisationChargesByLocataire();
-		this.filtreRegularisationChargesByLocataire();
+		// this.filtreRegularisationChargesByLocataire();
 	}
 }
