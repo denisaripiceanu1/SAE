@@ -676,7 +676,7 @@ public class GestionAccueil implements ActionListener {
 					Facture travauxCourant;
 
 					try {
-						travauxCourant = this.daoFacture.findById(travauxSauvegarde.getNumero());
+						travauxCourant = this.daoFacture.findFactureTravauxById(travauxSauvegarde.getNumero());
 						modif_travaux.getTextField_Numero().setText(travauxCourant.getNumero());
 						modif_travaux.getTextField_designation().setText(travauxCourant.getDesignation());
 						modif_travaux.getTextField_dateEmission().setText(travauxCourant.getDateEmission());
@@ -684,6 +684,12 @@ public class GestionAccueil implements ActionListener {
 						modif_travaux.getTextField_paye().setText(Double.toString(travauxCourant.getAccompteVerse()));
 						modif_travaux.getTextField_prestataire().setText(travauxCourant.getEntreprise().getNom());
 						modif_travaux.getTextField_adresse().setText(travauxCourant.getEntreprise().getAdresse());
+						if (travauxCourant.getImmeuble().getImmeuble() != null) {
+							modif_travaux.getTextField_Bien_Logement()
+									.setText(travauxCourant.getImmeuble().getImmeuble());
+						} else {
+							modif_travaux.getTextField_Bien_Logement().setText(travauxCourant.getBien().getIdBien());
+						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
