@@ -789,7 +789,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
 		this.tableRegularisation.setModel(new DefaultTableModel(
 				new Object[][] { { null, null, null, null, null, null }, }, new String[] { "Période du", "au",
-						"Total charges", "Travaux imputables", "Charges garage", "Total des provisions" }));
+						"Total charges réelles", "Charges garage", "Total des provisions", "RESTE" }));
 		this.tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(65);
 		this.tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(65);
 		this.tableRegularisation.setBounds(40, 53, 668, 130);
