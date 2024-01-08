@@ -162,4 +162,12 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	public List<Facture> findFactureTravaux() throws SQLException {
 		return this.find(new RequeteSelectFactureTravaux());
 	}
+
+	public Facture findFactureTravauxById(String id) throws SQLException {
+		List<Facture> factures = this.find(new RequeteSelectFactureTravaux(), id);
+		if (factures.isEmpty()) {
+			return null;
+		}
+		return factures.get(0);
+	}
 }
