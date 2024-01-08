@@ -15,10 +15,10 @@ import controleur.GestionConnexion;
 
 public class Fenetre_Connexion extends JFrame {
 
-    private JPanel contentPane;
-    private JTextField textFieldUtilisateur;
-    private JPasswordField textFieldMdp;
-    private GestionConnexion gestionClic;
+	private JPanel contentPane;
+	private JTextField textFieldUtilisateur;
+	private JPasswordField textFieldMdp;
+	private GestionConnexion gestionClic;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

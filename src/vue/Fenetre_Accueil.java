@@ -691,9 +691,10 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesAssurances = new JTable();
 		this.table_MesAssurances.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesAssurances.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null, null }, }, new String[] { "Logement", "n\u00B0 Police", "Montant",
-						"Date \u00E9cheance", "Prestataire", "Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
+		this.table_MesAssurances
+				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
+						new String[] { "Logement", "n\u00B0 Police", "Montant", "Date \u00E9cheance", "Prestataire",
+								"Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
 		this.table_MesAssurances.setBounds(40, 53, 668, 130);
 		this.table_MesAssurances.getSelectionModel().addListSelectionListener(this.gestionTableAssurance);
 		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);
@@ -809,12 +810,11 @@ public class Fenetre_Accueil extends JFrame {
 		panel_RegularisationDesCharges.add(separator_RegularisationDesChargess);
 
 		// JComboBox
-	    comboBox_Regularisation = new JComboBox<String>();
+		comboBox_Regularisation = new JComboBox<String>();
 		comboBox_Regularisation.setModel(new DefaultComboBoxModel<String>(new String[] { "Locataire" }));
 		comboBox_Regularisation.setBounds(55, 81, 130, 29);
 		panel_RegularisationDesCharges.add(comboBox_Regularisation);
 		comboBox_Regularisation.addActionListener(this.gestionAccueil);
-
 
 		// Remplir le JComboBox avec les identifiants des locataires
 		try {
