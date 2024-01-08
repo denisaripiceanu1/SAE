@@ -30,13 +30,13 @@ public class RequeteUpdateFacture implements Requete<Facture> {
 		prSt.setDouble(7, data.getMontant());
 		prSt.setInt(8, data.getImputableLocataire());
 
-		if (data.getImmeuble().getImmeuble() == null) {
+		if (data.getImmeuble() == null) {
 			prSt.setNull(9, java.sql.Types.VARCHAR);
 		} else {
 			prSt.setString(9, data.getImmeuble().getImmeuble());
 		}
 
-		if (data.getBien().getIdBien() == null) {
+		if (data.getBien() == null) {
 			prSt.setNull(10, java.sql.Types.VARCHAR);
 		} else {
 			prSt.setString(10, data.getBien().getIdBien());
