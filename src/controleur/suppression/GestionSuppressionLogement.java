@@ -12,8 +12,8 @@ import modele.Assurance;
 import modele.Bien;
 import modele.Compteur;
 import modele.Diagnostics;
+import modele.Echeance;
 import modele.Facture;
-import modele.Immeuble;
 import modele.Imposer;
 import modele.Louer;
 import modele.Quotter;
@@ -70,35 +70,8 @@ public class GestionSuppressionLogement implements ActionListener {
 		switch (btn.getText()) {
 			// Suppression d'un logement
 			case "Supprimer":
-				Immeuble immeuble_supp = (Immeuble) Sauvegarde.getItem("Immeuble");
 				Bien bien_supp = (Bien) Sauvegarde.getItem("Logement");
 				try {
-					String idBien = immeuble_supp.getImmeuble();
-					
-					// Récupération des compteurs liés à l'immeuble
-					List<Compteur> compteurListeImmeuble = this.daoCompteur.findByIdImmeubleListe(idBien);
-					
-					// Récupération des factures liées à l'immeuble
-					List<Facture> factureListeImmeuble = this.daoFacture.findFactureImmeuble(idBien);
-					List<Releve> releves;
-					
-					// Suppression des compteurs et de leurs relevés associés
-					if (compteurListeImmeuble != null && !compteurListeImmeuble.isEmpty()) {
-						for (Compteur compteur : compteurListeImmeuble) {
-							releves = this.daoReleve.findReleveByCompteur(compteur.getIdCompteur());
-							for (Releve releve : releves) {
-								this.daoReleve.delete(releve);
-							}
-							this.daoCompteur.delete(compteur);
-						}
-					}
-					
-					// Suppression des factures associées à l'immeuble
-					if (factureListeImmeuble != null && !factureListeImmeuble.isEmpty()) {
-						for (Facture facture : factureListeImmeuble) {
-							this.daoFacture.delete(facture);
-						}
-					}
 					
 					// Récupération des assurances, diagnostics, locations, compteurs, quotters,
 					// factures et impositions liées au logement
@@ -109,9 +82,17 @@ public class GestionSuppressionLogement implements ActionListener {
 					List<Quotter> quotters = this.daoQuotter.findQuotterByBien(bien_supp.getIdBien());
 					List<Facture> factureListeBien = this.daoFacture.findFactureByBien(bien_supp.getIdBien());
 					List<Imposer> imposers = this.daoImposer.findImposerByBien(bien_supp.getIdBien());
+					//relevé concernant les compteurs 
+					List<Releve> releves;
+					List<Echeance> echeances;
 					
 					// Suppression des assurances liées au logement
 					for (Assurance assurance : assurances) {
+						echeances = this.daoEcheance.findByAssuranceNumPoliceList(assurance.getNuméroPolice());
+						// Suppression des echéances liées aux assurances
+						for(Echeance echeance : echeances) {
+							this.daoEcheance.delete(echeance);
+						}
 						this.daoAssurance.delete(assurance);
 					}
 					

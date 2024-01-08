@@ -62,4 +62,10 @@ public class SousProgrammeInsertFacture implements SousProgramme<Facture> {
 
 	}
 
+	@Override
+	public void parametres(PreparedStatement prSt, Facture donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

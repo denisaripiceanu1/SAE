@@ -22,4 +22,10 @@ public class SousProgrammeInsertQuotter implements SousProgramme<Quotter> {
 	public void parametres(PreparedStatement prSt, Quotter donnee) throws SQLException {
 		prSt.setString(1, donnee.getTypeQuotite().getType_quotite());
 	}
+
+	@Override
+	public void parametres(PreparedStatement prSt, Quotter donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
 }

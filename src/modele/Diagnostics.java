@@ -1,13 +1,12 @@
 package modele;
 
 public class Diagnostics {
-	private int idDiagnostic; //AUTO INCREMENTE
+	private int idDiagnostic; //Sequence
 	private String dateValidite;
 	private String typeDiagnostic;
 	private Bien bien;
 
-	public Diagnostics(/* int idDiagnostic ,*/ String dateValidite, String typeDiagnostic, Bien bien) {
-		// this.idDiagnostic = idDiagnostic;
+	public Diagnostics(String dateValidite, String typeDiagnostic, Bien bien) {
 		this.dateValidite = dateValidite;
 		this.typeDiagnostic = typeDiagnostic;
 		this.bien = bien;

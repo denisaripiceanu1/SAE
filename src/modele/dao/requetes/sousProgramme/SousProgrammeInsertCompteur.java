@@ -44,4 +44,10 @@ public class SousProgrammeInsertCompteur implements SousProgramme<Compteur>{
 		}
 	}
 
+	@Override
+	public void parametres(PreparedStatement prSt, Compteur donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

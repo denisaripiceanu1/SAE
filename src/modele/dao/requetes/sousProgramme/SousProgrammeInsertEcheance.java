@@ -26,4 +26,10 @@ public class SousProgrammeInsertEcheance implements SousProgramme<Echeance> {
 
 	}
 
+	@Override
+	public void parametres(PreparedStatement prSt, Echeance donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

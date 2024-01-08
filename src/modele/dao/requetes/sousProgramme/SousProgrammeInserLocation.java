@@ -50,4 +50,11 @@ public class SousProgrammeInserLocation implements SousProgramme<Louer> {
 		prSt.setDouble(14, donnee.getMontantReelPaye());
 	}
 
+
+	@Override
+	public void parametres(PreparedStatement prSt, Louer donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

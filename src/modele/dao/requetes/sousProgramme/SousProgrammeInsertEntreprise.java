@@ -36,4 +36,11 @@ public class SousProgrammeInsertEntreprise implements SousProgramme<Entreprise> 
 		prSt.setString(8, donnee.getIban());
 	}
 
+
+	@Override
+	public void parametres(PreparedStatement prSt, Entreprise donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

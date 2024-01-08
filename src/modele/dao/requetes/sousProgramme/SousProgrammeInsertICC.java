@@ -25,4 +25,11 @@ public class SousProgrammeInsertICC implements SousProgramme<ICC> {
 		prSt.setDouble(3, donnee.getIndice());
 
 	}
+
+
+	@Override
+	public void parametres(PreparedStatement prSt, ICC donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
 }
