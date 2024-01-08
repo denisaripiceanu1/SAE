@@ -392,11 +392,10 @@ public class GestionAccueil implements ActionListener {
 	// LAYERED REGULARISATIONS CHARGES
 	// ////////////////////////////////////////////////////////////////
 	// ---------------------------------------------------------------//
-	public void ecrireLigneTableRegularisation(int numeroLigne, Louer location, /*Facture facture,*/ Bien bien) {
+	public void ecrireLigneTableRegularisation(int numeroLigne, Louer location, /* Facture facture, */ Bien bien) {
 		JTable tableRegularisation = this.fenetreAccueil.getTableRegularisation();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableRegularisation.getModel();
 
-<<<<<<< HEAD
 		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 0);
 		if (location.getDateDepart() != null) {
 			modeleTable.setValueAt(location.getDateDepart(), numeroLigne, 1);
@@ -416,7 +415,7 @@ public class GestionAccueil implements ActionListener {
 
 	private void updateTableRegularisationsForLocataire(String idLocataire) throws SQLException {
 		List<Louer> locations = this.daoLouer.findByLocataire(idLocataire);
-		
+
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableRegularisation().getModel();
 		modeleTable.setRowCount(locations.size());
 
@@ -426,7 +425,7 @@ public class GestionAccueil implements ActionListener {
 
 			this.ecrireLigneTableRegularisation(i, l, bien);
 		}
-		
+
 	}
 
 	// Methode pour filtrer les Regularisation par Id Locataire
@@ -444,7 +443,7 @@ public class GestionAccueil implements ActionListener {
 			}
 		}
 	}
-=======
+
 //	private void updateTableRegularisationsForLocataire(String idLocataire) throws SQLException {
 //
 //	}
@@ -464,7 +463,6 @@ public class GestionAccueil implements ActionListener {
 //				}
 //			}
 //		}
->>>>>>> 6737ec5650e60c06edd16511c382a287934251eb
 	///////////////////////////////////////////////////////////////////
 	// LAYERED SOLDE TOUT COMPTE
 	// ////////////////////////////////////////////////////////////////
@@ -970,12 +968,12 @@ public class GestionAccueil implements ActionListener {
 		}
 		this.filtreAssuranceByLogement();
 		this.filtreChargesByLogement();
-<<<<<<< HEAD
+
 		this.filtreRegularisationChargesByLocataire();
-=======
+
 //		this.filtreRegularisationChargesByLocataire();
 //		this.filtreRegularisationChargesByLocataire();
 		// this.filtreRegularisationChargesByLocataire();
->>>>>>> 6737ec5650e60c06edd16511c382a287934251eb
+
 	}
 }
