@@ -684,7 +684,7 @@ public class GestionAccueil implements ActionListener {
 						modif_travaux.getTextField_paye().setText(Double.toString(travauxCourant.getAccompteVerse()));
 						modif_travaux.getTextField_prestataire().setText(travauxCourant.getEntreprise().getNom());
 						modif_travaux.getTextField_adresse().setText(travauxCourant.getEntreprise().getAdresse());
-						if (travauxCourant.getImmeuble().getImmeuble() != null) {
+						if (travauxCourant.getBien().getImmeuble().getImmeuble() != null) {
 							modif_travaux.getTextField_Bien_Logement()
 									.setText(travauxCourant.getImmeuble().getImmeuble());
 						} else {
@@ -894,5 +894,7 @@ public class GestionAccueil implements ActionListener {
 		}
 		this.filtreAssuranceByLogement();
 		this.filtreChargesByLogement();
+		this.filtreRegularisationChargesByLocataire();
+		this.filtreRegularisationChargesByLocataire();
 	}
 }
