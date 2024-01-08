@@ -90,7 +90,6 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getLayeredPane_MesLocations().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
-		// this.fenetreAccueil.getLayeredPane_SoldeDeToutCompte().setVisible(false);
 		// this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
 
 		visible.setVisible(true);
@@ -195,7 +194,7 @@ public class GestionAccueil implements ActionListener {
 			if (f != null && f.getImmeuble() != null) {
 				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
 				modeleTable.addRow(new Object[] { f.getNumero(), f.getImmeuble().getImmeuble(), f.getDesignation(),
-						f.getDateEmission(), f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
+						f.getDateEmission(), f.getMontant(), f.getDatePaiement(), entreprise.getNom(),
 						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
 			}
 		}
@@ -214,7 +213,7 @@ public class GestionAccueil implements ActionListener {
 			if (f != null && f.getBien() != null) {
 				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
 				modeleTable.addRow(new Object[] { f.getNumero(), f.getBien().getIdBien(), f.getDesignation(),
-						f.getDateEmission(), f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
+						f.getDateEmission(), f.getMontant(), f.getDatePaiement(), entreprise.getNom(),
 						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
 			}
 		}
@@ -388,6 +387,66 @@ public class GestionAccueil implements ActionListener {
 			}
 		}
 	}
+
+	///////////////////////////////////////////////////////////////////
+	// LAYERED REGULARISATIONS CHARGES
+	// ////////////////////////////////////////////////////////////////
+	// ---------------------------------------------------------------//
+	public void ecrireLigneTableRegularisation(int numeroLigne, Louer location, /* Facture facture, */ Bien bien) {
+		JTable tableRegularisation = this.fenetreAccueil.getTableRegularisation();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableRegularisation.getModel();
+
+		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 0);
+		if (location.getDateDepart() != null) {
+			modeleTable.setValueAt(location.getDateDepart(), numeroLigne, 1);
+		} else {
+			modeleTable.setValueAt("N/A", numeroLigne, 1);
+		}
+		// Total charges reelles
+		modeleTable.setValueAt(location.getProvision_chargeMens_TTC(), numeroLigne, 2);
+		// Charges garages
+		modeleTable.setValueAt(location.getBail(), numeroLigne, 3);
+		// Total des provisions sur charges
+		modeleTable.setValueAt(location.getBail(), numeroLigne, 4);
+		// TOTAL
+		modeleTable.setValueAt(location.getBail(), numeroLigne, 5);
+
+	}
+
+	private void updateTableRegularisationsForLocataire(String idLocataire) throws SQLException {
+		List<Louer> locations = this.daoLouer.findByLocataire(idLocataire);
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableRegularisation().getModel();
+		modeleTable.setRowCount(locations.size());
+
+		for (int i = 0; i < locations.size(); i++) {
+			Louer l = locations.get(i);
+			Bien bien = this.daoBien.findById(l.getBien().getIdBien());
+
+			this.ecrireLigneTableRegularisation(i, l, bien);
+		}
+
+	}
+
+	// Methode pour filtrer les Regularisation par Id Locataire
+	private void filtreRegularisationChargesByLocataire() {
+		JComboBox<String> comboBox_MesRegularisations = this.fenetreAccueil.getComboBox_Regularisation();
+		String idLocataireSelectionne = comboBox_MesRegularisations.getSelectedItem().toString();
+
+		// Si l'ID selectionne est diffÃ©rent de "ID du Locataire", filtrez la table
+		// des regularisations
+		if (!idLocataireSelectionne.equals("Locataire")) {
+			try {
+				this.updateTableRegularisationsForLocataire(idLocataireSelectionne);
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
+	///////////////////////////////////////////////////////////////////
+	// LAYERED SOLDE TOUT COMPTE
+	// ////////////////////////////////////////////////////////////////
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NAVIGATION
@@ -676,7 +735,7 @@ public class GestionAccueil implements ActionListener {
 					Facture travauxCourant;
 
 					try {
-						travauxCourant = this.daoFacture.findById(travauxSauvegarde.getNumero());
+						travauxCourant = this.daoFacture.findFactureTravauxById(travauxSauvegarde.getNumero());
 						modif_travaux.getTextField_Numero().setText(travauxCourant.getNumero());
 						modif_travaux.getTextField_designation().setText(travauxCourant.getDesignation());
 						modif_travaux.getTextField_dateEmission().setText(travauxCourant.getDateEmission());
@@ -684,6 +743,12 @@ public class GestionAccueil implements ActionListener {
 						modif_travaux.getTextField_paye().setText(Double.toString(travauxCourant.getAccompteVerse()));
 						modif_travaux.getTextField_prestataire().setText(travauxCourant.getEntreprise().getNom());
 						modif_travaux.getTextField_adresse().setText(travauxCourant.getEntreprise().getAdresse());
+						if (travauxCourant.getImmeuble() != null) {
+							modif_travaux.getTextField_Bien_Logement()
+									.setText(travauxCourant.getImmeuble().getImmeuble());
+						} else {
+							modif_travaux.getTextField_Bien_Logement().setText(travauxCourant.getBien().getIdBien());
+						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
@@ -837,10 +902,6 @@ public class GestionAccueil implements ActionListener {
 			// Coder la cas de la selection d'un locataire
 			// parmi la liste prÃ©sente dans le JComboBox "comboBox_Regularisation"
 
-			///////////////////////////
-			// LAYERED SOLDE TOUT COMPTE
-			///////////////////////////
-
 			///////////////////////
 			// LAYERED MES DOCUMENTS
 			///////////////////////
@@ -888,5 +949,6 @@ public class GestionAccueil implements ActionListener {
 		}
 		this.filtreAssuranceByLogement();
 		this.filtreChargesByLogement();
+		this.filtreRegularisationChargesByLocataire();
 	}
 }

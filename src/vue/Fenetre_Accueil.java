@@ -69,6 +69,7 @@ public class Fenetre_Accueil extends JFrame {
 
 	private JComboBox<String> comboBox_MesAssurances;
 	private JComboBox<String> comboBox_MesChargesLocatives;
+	private JComboBox<String> comboBox_Regularisation;
 
 	private GestionAccueil gestionAccueil;
 	private GestionBienLogement gestionBienLogement;
@@ -78,7 +79,6 @@ public class Fenetre_Accueil extends JFrame {
 
 	private DaoBien daoBien;
 	private DaoLocataire daoLocataire;
-	private JComboBox<String> comboBox_Regularisation;
 	private GestionTableTravaux gestionTableTravaux;
 	private GestionTableAssurance gestionTableAssurance;
 
@@ -209,14 +209,6 @@ public class Fenetre_Accueil extends JFrame {
 		btnRegularisationDesCharges.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnRegularisationDesCharges.setName("btnRegularisationDesCharges");
 		panel_Menu_Boutons.add(btnRegularisationDesCharges);
-
-		JButton btnSoldeDeToutCompte = new JButton("Solde de tout compte");
-		btnSoldeDeToutCompte.setForeground(new Color(255, 255, 255));
-		btnSoldeDeToutCompte.addActionListener(this.gestionAccueil);
-		btnSoldeDeToutCompte.setBackground(new Color(0, 102, 204));
-		btnSoldeDeToutCompte.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnSoldeDeToutCompte.setName("btnSoldeDeToutCompte");
-		panel_Menu_Boutons.add(btnSoldeDeToutCompte);
 
 		JButton btnMesDocuments = new JButton("Mes Documents");
 		btnMesDocuments.setForeground(new Color(255, 255, 255));
@@ -699,9 +691,10 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesAssurances = new JTable();
 		this.table_MesAssurances.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesAssurances.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null, null }, }, new String[] { "Logement", "n\u00B0 Police", "Montant",
-						"Date \u00E9cheance", "Prestataire", "Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
+		this.table_MesAssurances
+				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
+						new String[] { "Logement", "n\u00B0 Police", "Montant", "Date \u00E9cheance", "Prestataire",
+								"Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
 		this.table_MesAssurances.setBounds(40, 53, 668, 130);
 		this.table_MesAssurances.getSelectionModel().addListSelectionListener(this.gestionTableAssurance);
 		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);
@@ -796,8 +789,8 @@ public class Fenetre_Accueil extends JFrame {
 		this.tableRegularisation = new JTable();
 		this.tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
 		this.tableRegularisation.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null }, }, new String[] { "Date entree", "Date sortie",
-						"Total charges", "Travaux imputables", "Charges garage", "Total des provisions" }));
+				new Object[][] { { null, null, null, null, null, null }, }, new String[] { "Période du", "au",
+						"Total charges réelles", "Charges garage", "Total des provisions", "RESTE" }));
 		this.tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(65);
 		this.tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(65);
 		this.tableRegularisation.setBounds(40, 53, 668, 130);
@@ -817,10 +810,11 @@ public class Fenetre_Accueil extends JFrame {
 		panel_RegularisationDesCharges.add(separator_RegularisationDesChargess);
 
 		// JComboBox
-		JComboBox comboBox_Regularisation = new JComboBox();
-		comboBox_Regularisation.setModel(new DefaultComboBoxModel(new String[] { "Locataire" }));
+		comboBox_Regularisation = new JComboBox<String>();
+		comboBox_Regularisation.setModel(new DefaultComboBoxModel<String>(new String[] { "Locataire" }));
 		comboBox_Regularisation.setBounds(55, 81, 130, 29);
 		panel_RegularisationDesCharges.add(comboBox_Regularisation);
+		comboBox_Regularisation.addActionListener(this.gestionAccueil);
 
 		// Remplir le JComboBox avec les identifiants des locataires
 		try {
@@ -833,61 +827,6 @@ public class Fenetre_Accueil extends JFrame {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		/////////////////////////////////////////////////////////////////////////
-		// LAYERED SOLDE DE TOUT
-		// COMPTE////////////////////////////////////////////////////////////////
-//		this.layeredPane_SoldeDeToutCompte = new JLayeredPane();
-//		this.contentPane.add(this.layeredPane_SoldeDeToutCompte, BorderLayout.CENTER);
-//		this.layeredPane_SoldeDeToutCompte.setLayout(new BorderLayout(0, 0));
-//
-//		JPanel panel_SoldeDeToutCompte = new JPanel();
-//		panel_SoldeDeToutCompte.setBackground(Color.WHITE);
-//		this.layeredPane_SoldeDeToutCompte.add(panel_SoldeDeToutCompte);
-//		panel_SoldeDeToutCompte.setLayout(null);
-//
-//		JLabel lbl_SoldeDeToutCompte = new JLabel("Mon Solde de Tout Compte");
-//		lbl_SoldeDeToutCompte.setHorizontalAlignment(SwingConstants.CENTER);
-//		lbl_SoldeDeToutCompte.setFont(new Font("Tahoma", Font.PLAIN, 16));
-//		lbl_SoldeDeToutCompte.setBounds(244, 22, 216, 43);
-//		panel_SoldeDeToutCompte.add(lbl_SoldeDeToutCompte);
-//
-//		JSeparator separator_SoldeDeToutCompte = new JSeparator();
-//		separator_SoldeDeToutCompte.setForeground(new Color(0, 102, 204));
-//		separator_SoldeDeToutCompte.setBounds(258, 63, 190, 2);
-//		panel_SoldeDeToutCompte.add(separator_SoldeDeToutCompte);
-//
-//		JScrollPane scrollPane_SoldeDeToutCompte = new JScrollPane();
-//		scrollPane_SoldeDeToutCompte.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-//		scrollPane_SoldeDeToutCompte.setBounds(55, 131, 643, 225);
-//		panel_SoldeDeToutCompte.add(scrollPane_SoldeDeToutCompte);
-//
-//		this.table_SoldeDeToutCompte = new JTable();
-//		this.table_SoldeDeToutCompte.setSelectionBackground(new Color(0, 102, 204));
-//		this.table_SoldeDeToutCompte
-//				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
-//						new String[] { "New column", "New column", "New column", "New column" }));
-//		this.table_SoldeDeToutCompte.setBounds(40, 53, 668, 130);
-//		scrollPane_SoldeDeToutCompte.setViewportView(this.table_SoldeDeToutCompte);
-//
-//		JButton btn_SoldeDeToutCompte_Inserer = new JButton("Générer le reçu");
-//		btn_SoldeDeToutCompte_Inserer.setFont(new Font("Tahoma", Font.PLAIN, 12));
-//		btn_SoldeDeToutCompte_Inserer.setBounds(201, 449, 137, 31);
-//		panel_SoldeDeToutCompte.add(btn_SoldeDeToutCompte_Inserer);
-//
-//		JButton btn_SoldeDeToutCompte_Annuler = new JButton("Annuler");
-//		btn_SoldeDeToutCompte_Annuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
-//		btn_SoldeDeToutCompte_Annuler.setBounds(396, 449, 94, 31);
-//		panel_SoldeDeToutCompte.add(btn_SoldeDeToutCompte_Annuler);
-//
-//		JComboBox comboBox_SoldeDeToutCompte = new JComboBox();
-//		comboBox_SoldeDeToutCompte.setModel(new DefaultComboBoxModel(new String[] { "Locataire" }));
-//		comboBox_SoldeDeToutCompte.setBounds(55, 92, 118, 21);
-//		panel_SoldeDeToutCompte.add(comboBox_SoldeDeToutCompte);
-//
-//		JLabel lbl_SoldeDeToutCompte_Locataires = new JLabel("Locataires");
-//		lbl_SoldeDeToutCompte_Locataires.setBounds(56, 69, 82, 13);
-//		panel_SoldeDeToutCompte.add(lbl_SoldeDeToutCompte_Locataires);
 
 //		// A faire éventuellement à la fin
 //		////////////////////////////////////////////////////////////////////////////
