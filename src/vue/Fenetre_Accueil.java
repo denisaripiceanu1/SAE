@@ -69,6 +69,7 @@ public class Fenetre_Accueil extends JFrame {
 
 	private JComboBox<String> comboBox_MesAssurances;
 	private JComboBox<String> comboBox_MesChargesLocatives;
+	private JComboBox<String> comboBox_Regularisation;
 
 	private GestionAccueil gestionAccueil;
 	private GestionBienLogement gestionBienLogement;
@@ -78,7 +79,6 @@ public class Fenetre_Accueil extends JFrame {
 
 	private DaoBien daoBien;
 	private DaoLocataire daoLocataire;
-	private JComboBox<String> comboBox_Regularisation;
 	private GestionTableTravaux gestionTableTravaux;
 	private GestionTableAssurance gestionTableAssurance;
 
@@ -809,10 +809,12 @@ public class Fenetre_Accueil extends JFrame {
 		panel_RegularisationDesCharges.add(separator_RegularisationDesChargess);
 
 		// JComboBox
-		JComboBox<String> comboBox_Regularisation = new JComboBox<String>();
+	    comboBox_Regularisation = new JComboBox<String>();
 		comboBox_Regularisation.setModel(new DefaultComboBoxModel<String>(new String[] { "Locataire" }));
 		comboBox_Regularisation.setBounds(55, 81, 130, 29);
 		panel_RegularisationDesCharges.add(comboBox_Regularisation);
+		comboBox_Regularisation.addActionListener(this.gestionAccueil);
+
 
 		// Remplir le JComboBox avec les identifiants des locataires
 		try {

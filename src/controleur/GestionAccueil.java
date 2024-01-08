@@ -194,7 +194,7 @@ public class GestionAccueil implements ActionListener {
 			if (f != null && f.getImmeuble() != null) {
 				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
 				modeleTable.addRow(new Object[] { f.getNumero(), f.getImmeuble().getImmeuble(), f.getDesignation(),
-						f.getDateEmission(), f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
+						f.getDateEmission(), f.getMontant(), f.getDatePaiement(), entreprise.getNom(),
 						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
 			}
 		}
@@ -213,7 +213,7 @@ public class GestionAccueil implements ActionListener {
 			if (f != null && f.getBien() != null) {
 				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
 				modeleTable.addRow(new Object[] { f.getNumero(), f.getBien().getIdBien(), f.getDesignation(),
-						f.getDateEmission(), f.getMontant(), f.getAccompteVerse(), entreprise.getNom(),
+						f.getDateEmission(), f.getMontant(), f.getDatePaiement(), entreprise.getNom(),
 						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
 			}
 		}
@@ -392,26 +392,57 @@ public class GestionAccueil implements ActionListener {
 	// LAYERED REGULARISATIONS CHARGES
 	// ////////////////////////////////////////////////////////////////
 	// ---------------------------------------------------------------//
+	public void ecrireLigneTableRegularisation(int numeroLigne, Louer location, /*Facture facture,*/ Bien bien) {
+		JTable tableRegularisation = this.fenetreAccueil.getTableRegularisation();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableRegularisation.getModel();
 
-//	private void updateTableRegularisationsForLocataire(String idLocataire) throws SQLException {
-//		
-//	}
-//	
-//		// Methode pour filtrer les Regularisation par Id Locataire
-//		private void filtreRegularisationChargesByLocataire() {
-//			JComboBox<String> comboBox_MesRegularisations = this.fenetreAccueil.getComboBox_Regularisation();
-//			String idLocataireSelectionne = comboBox_MesRegularisations.getSelectedItem().toString();
-//
-//			// Si l'ID selectionne est diffÃ©rent de "ID du Locataire", filtrez la table
-//			// des regularisations
-//			if (!idLocataireSelectionne.equals("Locataire")) {
-//				try {
-//					this.updateTableRegularisationsForLocataire(idLocataireSelectionne);
-//				} catch (SQLException ex) {
-//					ex.printStackTrace();
-//				}
-//			}
-//		}
+		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 0);
+		if (location.getDateDepart() != null) {
+			modeleTable.setValueAt(location.getDateDepart(), numeroLigne, 1);
+		} else {
+			modeleTable.setValueAt("N/A", numeroLigne, 1);
+		}
+		// Total charges reelles
+		modeleTable.setValueAt(location.getProvision_chargeMens_TTC(), numeroLigne, 2);
+		// Travaux imputables
+		modeleTable.setValueAt(location.getBail(), numeroLigne, 3);
+		// Charges garages
+		modeleTable.setValueAt(location.getBail(), numeroLigne, 4);
+		// Total des provisions sur charges
+		modeleTable.setValueAt(location.getBail(), numeroLigne, 5);
+
+	}
+
+	private void updateTableRegularisationsForLocataire(String idLocataire) throws SQLException {
+		List<Louer> locations = this.daoLouer.findByLocataire(idLocataire);
+		
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableRegularisation().getModel();
+		modeleTable.setRowCount(locations.size());
+
+		for (int i = 0; i < locations.size(); i++) {
+			Louer l = locations.get(i);
+			Bien bien = this.daoBien.findById(l.getBien().getIdBien());
+
+			this.ecrireLigneTableRegularisation(i, l, bien);
+		}
+		
+	}
+
+	// Methode pour filtrer les Regularisation par Id Locataire
+	private void filtreRegularisationChargesByLocataire() {
+		JComboBox<String> comboBox_MesRegularisations = this.fenetreAccueil.getComboBox_Regularisation();
+		String idLocataireSelectionne = comboBox_MesRegularisations.getSelectedItem().toString();
+
+		// Si l'ID selectionne est diffÃ©rent de "ID du Locataire", filtrez la table
+		// des regularisations
+		if (!idLocataireSelectionne.equals("Locataire")) {
+			try {
+				this.updateTableRegularisationsForLocataire(idLocataireSelectionne);
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
 	///////////////////////////////////////////////////////////////////
 	// LAYERED SOLDE TOUT COMPTE
 	// ////////////////////////////////////////////////////////////////
@@ -917,6 +948,6 @@ public class GestionAccueil implements ActionListener {
 		}
 		this.filtreAssuranceByLogement();
 		this.filtreChargesByLogement();
-		// this.filtreRegularisationChargesByLocataire();
+		this.filtreRegularisationChargesByLocataire();
 	}
 }

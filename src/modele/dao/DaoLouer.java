@@ -12,6 +12,7 @@ import modele.Louer;
 import modele.dao.requetes.delete.RequeteDeleteLocation;
 import modele.dao.requetes.delete.RequeteDeleteLocationByBien;
 import modele.dao.requetes.select.RequeteSelectLocationParBien;
+import modele.dao.requetes.select.RequeteSelectLocationParLocataire;
 import modele.dao.requetes.select.RequeteSelectLouer;
 import modele.dao.requetes.select.RequeteSelectLouerById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
@@ -100,5 +101,9 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 
 	public void deleteVrai(Louer id) throws SQLException {
 		miseAJour(new RequeteDeleteLocation(), id);
+	}
+
+	public List<Louer> findByLocataire(String idLocataire) throws SQLException {
+		return find(new RequeteSelectLocationParLocataire(), idLocataire);
 	}
 }
