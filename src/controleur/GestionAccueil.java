@@ -396,6 +396,7 @@ public class GestionAccueil implements ActionListener {
 		JTable tableRegularisation = this.fenetreAccueil.getTableRegularisation();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableRegularisation.getModel();
 
+<<<<<<< HEAD
 		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 0);
 		if (location.getDateDepart() != null) {
 			modeleTable.setValueAt(location.getDateDepart(), numeroLigne, 1);
@@ -443,6 +444,27 @@ public class GestionAccueil implements ActionListener {
 			}
 		}
 	}
+=======
+//	private void updateTableRegularisationsForLocataire(String idLocataire) throws SQLException {
+//
+//	}
+//
+//		// Methode pour filtrer les Regularisation par Id Locataire
+//		private void filtreRegularisationChargesByLocataire() {
+//			JComboBox<String> comboBox_MesRegularisations = this.fenetreAccueil.getComboBox_Regularisation();
+//			String idLocataireSelectionne = comboBox_MesRegularisations.getSelectedItem().toString();
+//
+//			// Si l'ID selectionne est diffÃ©rent de "ID du Locataire", filtrez la table
+//			// des regularisations
+//			if (!idLocataireSelectionne.equals("Locataire")) {
+//				try {
+//					this.updateTableRegularisationsForLocataire(idLocataireSelectionne);
+//				} catch (SQLException ex) {
+//					ex.printStackTrace();
+//				}
+//			}
+//		}
+>>>>>>> 6737ec5650e60c06edd16511c382a287934251eb
 	///////////////////////////////////////////////////////////////////
 	// LAYERED SOLDE TOUT COMPTE
 	// ////////////////////////////////////////////////////////////////
@@ -948,6 +970,12 @@ public class GestionAccueil implements ActionListener {
 		}
 		this.filtreAssuranceByLogement();
 		this.filtreChargesByLogement();
+<<<<<<< HEAD
 		this.filtreRegularisationChargesByLocataire();
+=======
+//		this.filtreRegularisationChargesByLocataire();
+//		this.filtreRegularisationChargesByLocataire();
+		// this.filtreRegularisationChargesByLocataire();
+>>>>>>> 6737ec5650e60c06edd16511c382a287934251eb
 	}
 }
