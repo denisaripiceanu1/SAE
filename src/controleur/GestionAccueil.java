@@ -404,11 +404,11 @@ public class GestionAccueil implements ActionListener {
 		}
 		// Total charges reelles
 		modeleTable.setValueAt(location.getProvision_chargeMens_TTC(), numeroLigne, 2);
-		// Travaux imputables
-		modeleTable.setValueAt(location.getBail(), numeroLigne, 3);
 		// Charges garages
-		modeleTable.setValueAt(location.getBail(), numeroLigne, 4);
+		modeleTable.setValueAt(location.getBail(), numeroLigne, 3);
 		// Total des provisions sur charges
+		modeleTable.setValueAt(location.getBail(), numeroLigne, 4);
+		// TOTAL
 		modeleTable.setValueAt(location.getBail(), numeroLigne, 5);
 
 	}
