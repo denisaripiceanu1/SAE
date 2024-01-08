@@ -90,7 +90,7 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getLayeredPane_MesLocations().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
-		// this.fenetreAccueil.getLayeredPane_SoldeDeToutCompte().setVisible(false);
+		 this.fenetreAccueil.getLayeredPane_SoldeDeToutCompte().setVisible(false);
 		// this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
 
 		visible.setVisible(true);
