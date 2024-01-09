@@ -6,12 +6,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.tools.Diagnostic;
 
 import controleur.outils.Sauvegarde;
 import modele.Assurance;
 import modele.Bien;
 import modele.Compteur;
 import modele.Diagnostics;
+import modele.Echeance;
 import modele.Facture;
 import modele.Immeuble;
 import modele.Imposer;
@@ -73,13 +75,16 @@ public class GestionSuppressionBien implements ActionListener {
 				Immeuble immeuble_supp = (Immeuble) Sauvegarde.getItem("Immeuble");
 				try {
 					String idImmeuble = immeuble_supp.getImmeuble();
-					// Récupération des listes liées au Bien (Immeuble)
+					// Récupération des Biens liées a l'Immeuble
 					List<Bien> bienListe = this.daoBien.findBiensparImmeuble(idImmeuble);
 					List<Compteur> compteurListeImmeuble = this.daoCompteur.findByIdImmeubleListe(idImmeuble);
 					List<Facture> factureListeImmeuble = this.daoFacture.findFactureImmeuble(idImmeuble);
+					//relevé concernant les compteurs 
 					List<Releve> releves;
+					//écheances concernant les assurnces
+					List<Echeance> echeances;
 					
-					// Suppression des Relevés liés aux Compteurs de l'Immeuble
+					// Suppression des Relevés et des Compteurs de l'Immeuble
 					if (compteurListeImmeuble != null && !compteurListeImmeuble.isEmpty()) {
 						for (Compteur compteur : compteurListeImmeuble) {
 							releves = this.daoReleve.findReleveByCompteur(compteur.getIdCompteur());
@@ -107,8 +112,13 @@ public class GestionSuppressionBien implements ActionListener {
 						List<Facture> factureListeBien = this.daoFacture.findFactureByBien(bien.getIdBien());
 						List<Imposer> imposers = this.daoImposer.findImposerByBien(bien.getIdBien());
 						
-						// Suppression des Assurances liées au Bien
+						// Suppression des assurances liées au Bien
 						for (Assurance assurance : assurances) {
+							echeances = this.daoEcheance.findByAssuranceNumPoliceList(assurance.getNuméroPolice());
+							// Suppression des echéances liées aux assurances
+							for(Echeance echeance : echeances) {
+								this.daoEcheance.delete(echeance);
+							}
 							this.daoAssurance.delete(assurance);
 						}
 						
@@ -156,6 +166,9 @@ public class GestionSuppressionBien implements ActionListener {
 					
 					// Suppression de l'Immeuble
 					this.daoImmeuble.delete(immeuble_supp);
+					
+					// On charge le tableau après la suppression de l'immeuble
+					fenetre_Principale.getGestionAccueil().chargerBiens();
 					
 				} catch (SQLException e1) {
 					e1.printStackTrace();

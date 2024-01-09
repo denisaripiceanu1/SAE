@@ -24,15 +24,16 @@ public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnos
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	// Méthode qui créer l'objet puis récupère son ID depuis la BD juste après la création lorsque c'est une séquence 
 	public int createAvecSequence(Diagnostics donnees) throws SQLException {
 		SousProgramme<Diagnostics> sp = new SousProgrammeInsertDiagnostic();
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees, Statement.RETURN_GENERATED_KEYS);
 		int idDiagnostic = -1;  // Initialiser à une valeur qui ne peut pas être valide
-		int affectedRows = st.executeUpdate();;
+		int ligneInseree = st.executeUpdate();;
 	
-	    if (affectedRows > 0) {
+	    if (ligneInseree > 0) {
 	    // La ligne a été insérée avec succès, récupérer l'ID généré
 	    ResultSet resultSet = st.getGeneratedKeys(); 
 	        if (resultSet.next()) {
