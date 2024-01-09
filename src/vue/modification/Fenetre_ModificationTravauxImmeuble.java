@@ -50,7 +50,7 @@ public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
 
 		JLabel lbl_InsererUnTravaux = new JLabel("Modifier un Travaux");
 		lbl_InsererUnTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUnTravaux.setBounds(222, 26, 288, 48);
+		lbl_InsererUnTravaux.setBounds(298, 26, 149, 48);
 		panel.add(lbl_InsererUnTravaux);
 
 		this.textField_Numero = new JTextField();
