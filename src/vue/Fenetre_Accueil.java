@@ -229,11 +229,17 @@ public class Fenetre_Accueil extends JFrame {
 
 		JPanel panel_accueil = new JPanel();
 		this.layeredPane_Accueil.add(panel_accueil, BorderLayout.CENTER);
-		panel_accueil.setLayout(new BorderLayout(0, 0));
+		panel_accueil.setLayout(null);
 
-		JLabel lbl_accueil = new JLabel("Accueil");
-		lbl_accueil.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_accueil.add(lbl_accueil, BorderLayout.CENTER);
+		JLabel lbl_moyenne_loyers = new JLabel("Moyenne des loyers");
+		lbl_moyenne_loyers.setBounds(60, 66, 127, 20);
+		lbl_moyenne_loyers.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_accueil.add(lbl_moyenne_loyers);
+
+		JLabel lbl_mediane_loyers = new JLabel("Mediane des loyers");
+		lbl_mediane_loyers.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_mediane_loyers.setBounds(60, 116, 127, 20);
+		panel_accueil.add(lbl_mediane_loyers);
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES BIENS
@@ -691,9 +697,10 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesAssurances = new JTable();
 		this.table_MesAssurances.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesAssurances.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null, null }, }, new String[] { "Logement", "n\u00B0 Police", "Montant",
-						"Date \u00E9cheance", "Prestataire", "Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
+		this.table_MesAssurances
+				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
+						new String[] { "Logement", "n\u00B0 Police", "Montant", "Date \u00E9cheance", "Prestataire",
+								"Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
 		this.table_MesAssurances.setBounds(40, 53, 668, 130);
 		this.table_MesAssurances.getSelectionModel().addListSelectionListener(this.gestionTableAssurance);
 		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);
