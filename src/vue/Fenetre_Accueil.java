@@ -73,6 +73,12 @@ public class Fenetre_Accueil extends JFrame {
 	private JComboBox<String> comboBox_Regularisation;
 
 	private GestionAccueil gestionAccueil;
+	
+	// Getteur specifique utilisé dans le code pour faire une action de chargement de la table 
+	public GestionAccueil getGestionAccueil() {
+		return gestionAccueil;
+	}
+
 	private GestionBienLogement gestionBienLogement;
 	private GestionTableLogement gestionTableLogement;
 	private GestionTableCharges gestionTableCharges;

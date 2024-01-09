@@ -84,6 +84,7 @@ public class GestionSuppressionLogement implements ActionListener {
 					List<Imposer> imposers = this.daoImposer.findImposerByBien(bien_supp.getIdBien());
 					//relevé concernant les compteurs 
 					List<Releve> releves;
+					
 					List<Echeance> echeances;
 					
 					// Suppression des assurances liées au logement
@@ -136,11 +137,18 @@ public class GestionSuppressionLogement implements ActionListener {
 					
 					// Suppression du logement
 					this.daoBien.delete(bien_supp);
+					
+					// On charge le tableau après la suppression du logement
+					fenetre_Principale.getGestionAccueil().chargerBiens();
+					
+					
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				
 				// Fermeture de la fenêtre de suppression de logement
 				this.supprimerLogement.dispose();
+				
 				break;
 			// Annulation de la suppression
 			case "Annuler":
