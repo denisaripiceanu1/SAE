@@ -92,42 +92,42 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		this.textField_IdLocataire.setColumns(10);
 		this.textField_IdLocataire.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Locataire",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_IdLocataire.setBounds(24, 69, 190, 40);
+		this.textField_IdLocataire.setBounds(24, 69, 208, 40);
 		panel.add(this.textField_IdLocataire);
 
 		this.textField_Nom = new JTextField();
 		this.textField_Nom.setColumns(10);
 		this.textField_Nom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Nom",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Nom.setBounds(24, 116, 190, 40);
+		this.textField_Nom.setBounds(24, 116, 208, 40);
 		panel.add(this.textField_Nom);
 
 		this.textField_Prenom = new JTextField();
 		this.textField_Prenom.setColumns(10);
 		this.textField_Prenom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Pr\u00E9nom",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Prenom.setBounds(24, 165, 190, 40);
+		this.textField_Prenom.setBounds(24, 165, 208, 40);
 		panel.add(this.textField_Prenom);
 
 		this.textField_tel = new JTextField();
 		this.textField_tel.setColumns(10);
 		this.textField_tel.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
 				"N\u00B0 t\u00E9l\u00E9phone", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_tel.setBounds(24, 262, 190, 40);
+		this.textField_tel.setBounds(24, 262, 208, 40);
 		panel.add(this.textField_tel);
 
 		this.textField_e_mail = new JTextField();
 		this.textField_e_mail.setColumns(10);
 		this.textField_e_mail.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "E-mail",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_e_mail.setBounds(24, 312, 190, 40);
+		this.textField_e_mail.setBounds(24, 312, 208, 40);
 		panel.add(this.textField_e_mail);
 
 		this.textField_Date_de_naissance = new JTextField();
 		this.textField_Date_de_naissance.setColumns(10);
 		this.textField_Date_de_naissance.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Date de naissance", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Date_de_naissance.setBounds(24, 215, 190, 40);
+				"Date naissance (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		this.textField_Date_de_naissance.setBounds(24, 215, 208, 40);
 		panel.add(this.textField_Date_de_naissance);
 
 		JLabel lbl_titre_locataire = new JLabel("Locataire");
@@ -162,7 +162,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 
 		this.comboBox_bien = new JComboBox<String>();
 		comboBox_bien.setBorder(new LineBorder(new Color(0, 102, 204)));
-		comboBox_bien.setModel(new DefaultComboBoxModel(new String[] { "Biens" }));
+		comboBox_bien.setModel(new DefaultComboBoxModel<String>(new String[] { "Biens" }));
 		comboBox_bien.setBounds(267, 131, 94, 21);
 		panel.add(comboBox_bien);
 		this.comboBox_bien.addActionListener(this.gestionClic);

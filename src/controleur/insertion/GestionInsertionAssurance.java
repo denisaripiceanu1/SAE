@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -70,6 +71,10 @@ public class GestionInsertionAssurance implements ActionListener {
 				this.modificationAssurance.dispose();
 			} catch (Exception e1) {
 				e1.printStackTrace();
+				// Afficher un message d'erreur à l'utilisateur
+				JOptionPane.showMessageDialog(null,
+						"Erreur lors de l'ajout de l'assurance dans la base de données. Veuillez réessayer plus tard.",
+						"Erreur d'ajout", JOptionPane.ERROR_MESSAGE);
 			}
 
 			break;

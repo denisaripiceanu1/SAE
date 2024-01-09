@@ -306,6 +306,7 @@ public class GestionAccueil implements ActionListener {
 				this.updateTableChargesForLogement(idLogementSelectionne);
 			} catch (SQLException ex) {
 				ex.printStackTrace();
+
 			}
 		}
 	}
@@ -506,6 +507,9 @@ public class GestionAccueil implements ActionListener {
 					this.chargerBiens();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null,
+							"Erreur lors du chargement des logements. Veuillez réessayer plus tard.",
+							"Erreur de chargement", JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
@@ -523,7 +527,7 @@ public class GestionAccueil implements ActionListener {
 					supp_logement.setVisible(true);
 					supp_logement.moveToFront();
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sÃ©lectionner un bien pour supprimer",
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien pour supprimer",
 							"Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 
@@ -558,6 +562,10 @@ public class GestionAccueil implements ActionListener {
 						// voir comment potentiellement récupérer le compteur et les autres trucs
 					} catch (SQLException e1) {
 						e1.printStackTrace();
+						// Afficher un message d'erreur à l'utilisateur
+						JOptionPane.showMessageDialog(null,
+								"Erreur lors de la recherche du logement dans la base de données. Veuillez réessayer plus tard.",
+								"Erreur de recherche", JOptionPane.ERROR_MESSAGE);
 					}
 
 				} else {
@@ -565,7 +573,7 @@ public class GestionAccueil implements ActionListener {
 					// Premier test si il n'y a aucun immeuble sélectionné alors erreur
 					if (Sauvegarde.onSave("Immeuble") == false) {
 						JOptionPane.showMessageDialog(this.fenetreAccueil,
-								"Veuillez sÃ©lectionner un bien pour modifier", "Erreur", JOptionPane.ERROR_MESSAGE);
+								"Veuillez sélectionner un bien pour modifier !", "Erreur", JOptionPane.ERROR_MESSAGE);
 					} else {
 						// On ouvre la fenÃªtre
 						Fenetre_ModificationBien modif_bien = new Fenetre_ModificationBien();
@@ -590,6 +598,10 @@ public class GestionAccueil implements ActionListener {
 							modif_bien.getComboBox_typeDeBien().setSelectedItem(immeubleCourant.getType_immeuble());
 						} catch (SQLException e1) {
 							e1.printStackTrace();
+							// Afficher un message d'erreur à l'utilisateur
+							JOptionPane.showMessageDialog(null,
+									"Erreur lors de la recherche du bien dans la base de données. Veuillez réessayer plus tard.",
+									"Erreur de recherche", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}
@@ -607,6 +619,9 @@ public class GestionAccueil implements ActionListener {
 					this.fenetreAccueil.getLayeredPane().add(paiement_bien);
 					paiement_bien.setVisible(true);
 					paiement_bien.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
@@ -616,22 +631,33 @@ public class GestionAccueil implements ActionListener {
 					this.fenetreAccueil.getLayeredPane().add(insertion_logement);
 					insertion_logement.setVisible(true);
 					insertion_logement.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
+				
 			case "btnMesBiens_AjouterDiagnostic_Logements":
 				if (Sauvegarde.onSave("Logement") == true) {
 					Fenetre_InsertionDiagnostic diagnostic_logement = new Fenetre_InsertionDiagnostic();
 					this.fenetreAccueil.getLayeredPane().add(diagnostic_logement);
 					diagnostic_logement.setVisible(true);
 					diagnostic_logement.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
+				
 			case "btnMesBiens_AjouterPaiements_Logements":
 				if (Sauvegarde.onSave("Logement") == true) {
 					Fenetre_InsertionPaiementLogement paiement_logement = new Fenetre_InsertionPaiementLogement(false);
 					this.fenetreAccueil.getLayeredPane().add(paiement_logement);
 					paiement_logement.setVisible(true);
 					paiement_logement.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
@@ -643,8 +669,12 @@ public class GestionAccueil implements ActionListener {
 					this.chargerLocations();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null,
+							"Erreur lors du chargement des locations. Veuillez réessayer plus tard.",
+							"Erreur de chargement", JOptionPane.ERROR_MESSAGE);
 				}
 				break;
+				
 			case "btn_MesLocations_Modifier":
 				if (Sauvegarde.onSave("Louer") == true) {
 					Fenetre_ModificationLocation fml = new Fenetre_ModificationLocation();
@@ -667,20 +697,26 @@ public class GestionAccueil implements ActionListener {
 						fml.getTextField_date_depart().setText(louerBD.getDateDepart());
 
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
+						// Afficher un message d'erreur à l'utilisateur
+						JOptionPane.showMessageDialog(null,
+								"Erreur lors de la recherche de la location dans la base de données. Veuillez réessayer plus tard.",
+								"Erreur de recherche", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien pour supprimer",
-							"Erreur", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this.fenetreAccueil,
+							"Veuillez sélectionner une location pour la modifier !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
+				
 			case "btn_MesLocations_Inserer":
 				Fenetre_InsertionLocation location = new Fenetre_InsertionLocation();
 				this.fenetreAccueil.getLayeredPane().add(location);
 				location.setVisible(true);
 				location.moveToFront();
 				break;
+				
 			case "btn_MesLocations_Supprimer":
 				if (Sauvegarde.onSave("Louer") == true) {
 					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
@@ -689,8 +725,8 @@ public class GestionAccueil implements ActionListener {
 					loc_supp.setVisible(true);
 					loc_supp.moveToFront();
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sÃ©lectionner un bien pour supprimer",
-							"Erreur", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this.fenetreAccueil,
+							"Veuillez sélectionner une location pour supprimer !", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
@@ -717,7 +753,14 @@ public class GestionAccueil implements ActionListener {
 						infos_locataire.getTextField_DateN().setText(formattedDate);
 					} catch (SQLException e1) {
 						e1.printStackTrace();
+						// Afficher un message d'erreur à l'utilisateur
+						JOptionPane.showMessageDialog(null,
+								"Erreur lors de la recherche du locataire dans la base de données. Veuillez réessayer plus tard.",
+								"Erreur de recherche", JOptionPane.ERROR_MESSAGE);
 					}
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un locataire !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 			case "btn_mesLocations_AjouterFacture":
@@ -726,6 +769,9 @@ public class GestionAccueil implements ActionListener {
 					this.fenetreAccueil.getLayeredPane().add(insertion_facture);
 					insertion_facture.setVisible(true);
 					insertion_facture.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
@@ -764,15 +810,28 @@ public class GestionAccueil implements ActionListener {
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
+						// Afficher un message d'erreur à l'utilisateur
+						JOptionPane.showMessageDialog(null,
+								"Erreur lors de la recherche du travau dans la base de données. Veuillez réessayer plus tard.",
+								"Erreur de recherche", JOptionPane.ERROR_MESSAGE);
 					}
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un travaux !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
 			case "btn_Travaux_Supprimer":
-				Fenetre_SupprimerTravaux supp_travaux = new Fenetre_SupprimerTravaux();
-				this.fenetreAccueil.getLayeredPane().add(supp_travaux);
-				supp_travaux.setVisible(true);
-				supp_travaux.moveToFront();
+				if (Sauvegarde.onSave("Facture")) {
+					Fenetre_SupprimerTravaux supp_travaux = new Fenetre_SupprimerTravaux();
+					this.fenetreAccueil.getLayeredPane().add(supp_travaux);
+					supp_travaux.setVisible(true);
+					supp_travaux.moveToFront();
+					break;
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un travau !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
 				break;
 
 			///////////////////////////////
@@ -781,8 +840,8 @@ public class GestionAccueil implements ActionListener {
 			case "btn_MesChargesLocatives_Modifier":
 				// Premier test si il n'y a aucune charge sélectionnée alors erreur
 				if (Sauvegarde.onSave("Charge") == false) {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner une charge pour modifier",
-							"Erreur", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this.fenetreAccueil,
+							"Veuillez sélectionner une charge pour modifier !", "Erreur", JOptionPane.ERROR_MESSAGE);
 				} else {
 					// On ouvre la fenêtre
 					Fenetre_ModificationFactureChargeLogement modif_charge = new Fenetre_ModificationFactureChargeLogement();
@@ -795,8 +854,7 @@ public class GestionAccueil implements ActionListener {
 					Facture chargeCourante;
 					try {
 						// À partir du numéro de la charge dans la sauvegarde, utilisez la BD pour
-						// récupérer
-						// la charge la plus récente correspondante
+						// récupérer la charge la plus récente correspondante
 						chargeCourante = this.daoFacture.findById(chargeSauvegarde.getNumero());
 						// Afficher les infos dans la page de modification
 						modif_charge.getTextField_Numero().setText(chargeCourante.getNumero());
@@ -818,7 +876,10 @@ public class GestionAccueil implements ActionListener {
 						modif_charge.getComboBox_Designation().setSelectedItem(chargeCourante.getDesignation());
 
 					} catch (SQLException e1) {
-						e1.printStackTrace();
+						// Afficher un message d'erreur à l'utilisateur
+						JOptionPane.showMessageDialog(null,
+								"Erreur lors de la recherche de la facture dans la base de données. Veuillez réessayer plus tard.",
+								"Erreur de recherche", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 
@@ -833,7 +894,7 @@ public class GestionAccueil implements ActionListener {
 					supp_charge.moveToFront();
 				} else {
 					JOptionPane.showMessageDialog(this.fenetreAccueil,
-							"Veuillez sÃ©lectionner une charge pour supprimer", "Erreur", JOptionPane.ERROR_MESSAGE);
+							"Veuillez sélectionner une charge pour supprimer", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
@@ -845,6 +906,9 @@ public class GestionAccueil implements ActionListener {
 					this.chargerAssurances();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null,
+							"Erreur lors du chargement des assurance. Veuillez réessayer plus tard.",
+							"Erreur de chargement", JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 			case "btn_MesAssurances_Modifier":
@@ -869,7 +933,6 @@ public class GestionAccueil implements ActionListener {
 					// Déclare les objets nécessaires
 					Assurance assuranceCourante;
 					Echeance echeance = (Echeance) Sauvegarde.getItem("Echeance");
-					;
 
 					try {
 						// Recherche l'assurance courante dans la base de données
@@ -885,7 +948,14 @@ public class GestionAccueil implements ActionListener {
 
 					} catch (SQLException e1) {
 						e1.printStackTrace();
+						// Afficher un message d'erreur à l'utilisateur
+						JOptionPane.showMessageDialog(null,
+								"Erreur lors de la recherche de l'assurance dans la base de données. Veuillez réessayer plus tard.",
+								"Erreur de recherche", JOptionPane.ERROR_MESSAGE);
 					}
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil,
+							"Veuillez sélectionner une assurance pour modifier !", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
@@ -896,6 +966,9 @@ public class GestionAccueil implements ActionListener {
 					this.fenetreAccueil.getLayeredPane().add(insertion_assurance);
 					insertion_assurance.setVisible(true);
 					insertion_assurance.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 			case "btn_MesAssurances_Supprimer":
@@ -905,6 +978,10 @@ public class GestionAccueil implements ActionListener {
 					this.fenetreAccueil.getLayeredPane().add(supp_assurance);
 					supp_assurance.setVisible(true);
 					supp_assurance.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil,
+							"Veuillez sélectionner une assurance pour supprimer !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
@@ -931,7 +1008,12 @@ public class GestionAccueil implements ActionListener {
 				try {
 					this.chargerTravauxImmeubles();
 				} catch (SQLException e1) {
+					// Afficher un message d'erreur à l'utilisateur
 					e1.printStackTrace();
+					// Affichage d'une boîte de dialogue avec le message d'erreur
+					JOptionPane.showMessageDialog(null,
+							"Erreur lors du chargement des charges des immeubles. Veuillez réessayer plus tard.",
+							"Erreur de chargement", JOptionPane.ERROR_MESSAGE);
 				}
 
 				break;
@@ -941,19 +1023,29 @@ public class GestionAccueil implements ActionListener {
 				try {
 					this.chargerTravauxLogements();
 				} catch (SQLException e1) {
+					// Afficher un message d'erreur à l'utilisateur
 					e1.printStackTrace();
+					// Affichage d'une boîte de dialogue avec le message d'erreur
+					JOptionPane.showMessageDialog(null,
+							"Erreur lors du chargement des travaux des logements. Veuillez réessayer plus tard.",
+							"Erreur de chargement", JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
 			// ------------- MES CHARGES -------------//
 
 			case "tglbtn_FactureCharge_biens":
-				// Permet de trier le tableau de charges en n'affichant que ceux concernants les
+				// Permet de trier le tableau de charges en n'affichant que ceux concernant les
 				// immeubles
 				try {
 					this.chargerChargesLogement();
 				} catch (SQLException e1) {
+					// Afficher un message d'erreur à l'utilisateur
 					e1.printStackTrace();
+					// Affichage d'une boîte de dialogue avec le message d'erreur
+					JOptionPane.showMessageDialog(null,
+							"Erreur lors du chargement des charges de logement. Veuillez réessayer plus tard.",
+							"Erreur de chargement", JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
