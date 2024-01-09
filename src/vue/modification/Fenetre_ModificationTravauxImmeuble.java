@@ -65,7 +65,7 @@ public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
 		this.textField_designation.setColumns(10);
 		this.textField_designation.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Designation",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_designation.setBounds(110, 168, 190, 40);
+		this.textField_designation.setBounds(110, 228, 190, 40);
 		panel.add(this.textField_designation);
 
 		this.textField_dateEmission = new JTextField();
@@ -79,17 +79,19 @@ public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
 		this.textField_montant.setColumns(10);
 		this.textField_montant.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_montant.setBounds(110, 228, 190, 40);
+		this.textField_montant.setBounds(110, 168, 190, 40);
 		panel.add(this.textField_montant);
 
 		this.textField_paye = new JTextField();
+		textField_paye.setEditable(false);
 		this.textField_paye.setColumns(10);
-		this.textField_paye.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Payé",
+		this.textField_paye.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date paiement",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		this.textField_paye.setBounds(427, 228, 190, 40);
 		panel.add(this.textField_paye);
 
 		this.textField_prestataire = new JTextField();
+		textField_prestataire.setEditable(false);
 		this.textField_prestataire.setColumns(10);
 		this.textField_prestataire.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Prestataire",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
@@ -97,6 +99,7 @@ public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
 		panel.add(this.textField_prestataire);
 
 		this.textField_adresse = new JTextField();
+		textField_adresse.setEditable(false);
 		this.textField_adresse.setColumns(10);
 		this.textField_adresse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Adresse",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
