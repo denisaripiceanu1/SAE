@@ -740,7 +740,7 @@ public class GestionAccueil implements ActionListener {
 						modif_travaux.getTextField_designation().setText(travauxCourant.getDesignation());
 						modif_travaux.getTextField_dateEmission().setText(travauxCourant.getDateEmission());
 						modif_travaux.getTextField_montant().setText(Double.toString(travauxCourant.getMontant()));
-						modif_travaux.getTextField_paye().setText(Double.toString(travauxCourant.getAccompteVerse()));
+						modif_travaux.getTextField_paye().setText(travauxCourant.getDatePaiement());
 						modif_travaux.getTextField_prestataire().setText(travauxCourant.getEntreprise().getNom());
 						modif_travaux.getTextField_adresse().setText(travauxCourant.getEntreprise().getAdresse());
 						if (travauxCourant.getImmeuble() != null) {

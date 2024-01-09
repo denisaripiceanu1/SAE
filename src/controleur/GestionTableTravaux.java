@@ -55,13 +55,6 @@ public class GestionTableTravaux implements ListSelectionListener {
 				// Mise à jour de la sauvegarde avec l'objet Facture sélectionné
 				Sauvegarde.deleteItem("Facture");
 				Sauvegarde.addItem("Facture", travaux);
-				if (bien != null) {
-					Sauvegarde.deleteItem("Logement");
-					Sauvegarde.addItem("Logement", bien);
-				} else {
-					Sauvegarde.deleteItem("Immeuble");
-					Sauvegarde.addItem("Immeuble", immeuble);
-				}
 			}
 		}
 	}
