@@ -65,6 +65,7 @@ public class Fenetre_Accueil extends JFrame {
 	private JTextField textField_dateEcheance;
 	private JTextField textField_paye;
 	private JTextField textField_restantDu;
+	private JTextField textField_moyenne_loyers;
 	private JTable tableRegularisation;
 
 	private JComboBox<String> comboBox_MesAssurances;
@@ -81,6 +82,7 @@ public class Fenetre_Accueil extends JFrame {
 	private DaoLocataire daoLocataire;
 	private GestionTableTravaux gestionTableTravaux;
 	private GestionTableAssurance gestionTableAssurance;
+	private JTextField textField_mediane_loyers;
 
 	/**
 	 * Launch the application.
@@ -236,10 +238,30 @@ public class Fenetre_Accueil extends JFrame {
 		lbl_moyenne_loyers.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_accueil.add(lbl_moyenne_loyers);
 
+		this.textField_moyenne_loyers = new JTextField();
+		this.textField_moyenne_loyers.setBounds(200, 66, 127, 20);
+		this.textField_moyenne_loyers.setEditable(false);
+		this.textField_moyenne_loyers.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_accueil.add(this.textField_moyenne_loyers);
+
 		JLabel lbl_mediane_loyers = new JLabel("Mediane des loyers");
 		lbl_mediane_loyers.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_mediane_loyers.setBounds(60, 116, 127, 20);
 		panel_accueil.add(lbl_mediane_loyers);
+
+		this.textField_mediane_loyers = new JTextField();
+		this.textField_mediane_loyers.setBounds(200, 116, 127, 20);
+		this.textField_mediane_loyers.setEditable(false);
+		this.textField_mediane_loyers.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_accueil.add(this.textField_mediane_loyers);
+
+		JButton btn_stats = new JButton("Stats");
+		btn_stats.setForeground(Color.WHITE);
+		btn_stats.setBackground(new Color(0, 102, 204));
+		btn_stats.setBounds(287, 449, 99, 31);
+		btn_stats.addActionListener(this.gestionAccueil);
+		btn_stats.setName("btn_stats");
+		panel_accueil.add(btn_stats);
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES BIENS
@@ -816,11 +838,11 @@ public class Fenetre_Accueil extends JFrame {
 		panel_RegularisationDesCharges.add(separator_RegularisationDesChargess);
 
 		// JComboBox
-		comboBox_Regularisation = new JComboBox<String>();
-		comboBox_Regularisation.setModel(new DefaultComboBoxModel<String>(new String[] { "Locataire" }));
-		comboBox_Regularisation.setBounds(55, 81, 130, 29);
-		panel_RegularisationDesCharges.add(comboBox_Regularisation);
-		comboBox_Regularisation.addActionListener(this.gestionAccueil);
+		this.comboBox_Regularisation = new JComboBox<String>();
+		this.comboBox_Regularisation.setModel(new DefaultComboBoxModel<String>(new String[] { "Locataire" }));
+		this.comboBox_Regularisation.setBounds(55, 81, 130, 29);
+		panel_RegularisationDesCharges.add(this.comboBox_Regularisation);
+		this.comboBox_Regularisation.addActionListener(this.gestionAccueil);
 
 		// Remplir le JComboBox avec les identifiants des locataires
 		try {
@@ -829,7 +851,7 @@ public class Fenetre_Accueil extends JFrame {
 			// Ajouter les identifiants au modèle du JComboBox
 			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
 					identifiantsLocataires.toArray(new String[0]));
-			comboBox_Regularisation.setModel(modelComboBox);
+			this.comboBox_Regularisation.setModel(modelComboBox);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -936,6 +958,14 @@ public class Fenetre_Accueil extends JFrame {
 
 	public JTextField getTextField_loyer() {
 		return this.textField_loyer;
+	}
+
+	public JTextField getTextField_moyenne_loyers() {
+		return this.textField_moyenne_loyers;
+	}
+
+	public JTextField getTextField_mediane_loyers() {
+		return this.textField_mediane_loyers;
 	}
 
 	public JTextField getTextField_provisionCharges() {
