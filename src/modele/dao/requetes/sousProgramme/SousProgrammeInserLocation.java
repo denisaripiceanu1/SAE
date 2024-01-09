@@ -35,10 +35,10 @@ public class SousProgrammeInserLocation implements SousProgramme<Louer> {
 		prSt.setString(9, donnee.getEtat_lieux());
 
 		// Paramètres potentiellement nuls
-		if (donnee.getDateDepart() == null) {
+		if (donnee.getDateDerniereRegularisation() == null) {
 			prSt.setNull(10, java.sql.Types.DATE);
 		} else {
-			prSt.setDate(10, java.sql.Date.valueOf(donnee.getDateDepart()));
+			prSt.setDate(10, java.sql.Date.valueOf(donnee.getDateDerniereRegularisation()));
 		}
 
 		prSt.setInt(11, donnee.getLoyerPaye());

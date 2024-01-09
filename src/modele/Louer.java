@@ -11,13 +11,13 @@ public class Louer {
 	private double cautionTTC;
 	private String bail;
 	private String etat_lieux;
-	private String dateDepart;
+	private String dateDerniereRegularisation;
 	private int loyerPaye;
 	private ICC icc; // anciennement (trimestre,année) en string : DOIT ETRE DE TYPE ICC !!!!!!!!!
 	private double montantReelPaye;
 
 	public Louer(Locataire locataire, Bien bien, String dateDebut, int nbMois, double loyerTTC,
-			double provision_chargeMens_TTC, double cautionTTC, String bail, String etat_lieux, String dateDepart,
+			double provision_chargeMens_TTC, double cautionTTC, String bail, String etat_lieux, String dateDerniereRegularisation,
 			int loyerPaye, ICC icc, double montantReelPaye) {
 		this.locataire = locataire;
 		this.bien = bien;
@@ -28,7 +28,7 @@ public class Louer {
 		this.cautionTTC = cautionTTC;
 		this.bail = bail;
 		this.etat_lieux = etat_lieux;
-		this.dateDepart = dateDepart;
+		this.dateDerniereRegularisation = dateDerniereRegularisation;
 		this.loyerPaye = loyerPaye;
 		this.icc = icc;
 		this.montantReelPaye = montantReelPaye;
@@ -70,8 +70,8 @@ public class Louer {
 		return etat_lieux;
 	}
 
-	public String getDateDepart() {
-		return dateDepart;
+	public String getDateDerniereRegularisation() {
+		return dateDerniereRegularisation;
 	}
 
 	public int getLoyerPaye() {

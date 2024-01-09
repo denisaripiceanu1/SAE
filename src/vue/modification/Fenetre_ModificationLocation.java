@@ -21,13 +21,13 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 	private JTextField textField_loyer_TCC;
 	private JTextField textField_caution_TTC;
 	private JTextField textField_Id_Locataire;
-	private JTextField textField_date_depart;
+	private JTextField textField_date_derniere_regularisation;
 	private JTextField textField_loyer_paye;
 	private JTextField textField_montant_reel_paye;
 	private JTextField textField_date_debut;
 
 	private JSeparator separator_Compteur;
-	
+
 	// Gestionnaires d'événements
 	private GestionModificationLocation gestionModificationLocation;
 
@@ -63,10 +63,10 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		this.textField_IdBien = new JTextField();
 		this.textField_IdBien.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Logement",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
-		this.textField_IdBien.setBounds(166, 104, 190, 40);
+		this.textField_IdBien.setBounds(166, 104, 220, 40);
 		panel.add(this.textField_IdBien);
 		this.textField_IdBien.setColumns(10);
-		this.textField_IdBien.setEditable(false);  // cle primaire de la table Louer non modifiable
+		this.textField_IdBien.setEditable(false); // cle primaire de la table Louer non modifiable
 
 		this.textField_provision_chargeMens_TTC = new JTextField();
 		this.textField_provision_chargeMens_TTC.setColumns(10);
@@ -80,7 +80,7 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		this.textField_loyer_TCC.setColumns(10);
 		this.textField_loyer_TCC.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Loyer TTC",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_loyer_TCC.setBounds(166, 273, 190, 40);
+		this.textField_loyer_TCC.setBounds(166, 273, 220, 40);
 		panel.add(this.textField_loyer_TCC);
 
 		this.textField_caution_TTC = new JTextField();
@@ -95,15 +95,16 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		textField_Id_Locataire.setColumns(10);
 		textField_Id_Locataire.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Locataire",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Id_Locataire.setBounds(166, 164, 190, 40);
+		textField_Id_Locataire.setBounds(166, 164, 220, 40);
 		panel.add(textField_Id_Locataire);
 
-		textField_date_depart = new JTextField();
-		textField_date_depart.setColumns(10);
-		textField_date_depart.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date départ",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_depart.setBounds(166, 221, 190, 40);
-		panel.add(textField_date_depart);
+		textField_date_derniere_regularisation = new JTextField();
+		textField_date_derniere_regularisation.setColumns(10);
+		textField_date_derniere_regularisation
+				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date dernière régularisations",
+						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_date_derniere_regularisation.setBounds(166, 221, 220, 40);
+		panel.add(textField_date_derniere_regularisation);
 
 		textField_montant_reel_paye = new JTextField();
 		textField_montant_reel_paye.setColumns(10);
@@ -121,7 +122,7 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_date_debut.setBounds(425, 104, 220, 40);
 		panel.add(textField_date_debut);
-		
+
 		// Bouton de modification
 		JButton btnModifier = new JButton("Modifier");
 		btnModifier.setForeground(Color.WHITE);
@@ -199,12 +200,12 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		this.textField_Id_Locataire = textField_Id_Locataire;
 	}
 
-	public JTextField getTextField_date_depart() {
-		return textField_date_depart;
+	public JTextField getTextField_date_derniere_regularisation() {
+		return textField_date_derniere_regularisation;
 	}
 
 	public void setTextField_date_depart(JTextField textField_date_depart) {
-		this.textField_date_depart = textField_date_depart;
+		this.textField_date_derniere_regularisation = textField_date_depart;
 	}
 
 	public JTextField getTextField_loyer_paye() {

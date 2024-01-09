@@ -41,7 +41,7 @@ public class GestionModificationLocation implements ActionListener {
 						Double.parseDouble(fml.getTextField_provision_chargeMens_TTC().getText()),
 						Double.parseDouble(fml.getTextField_caution_TTC().getText()), louerBD.getBail(),
 						louerBD.getEtat_lieux(), 
-						fml.getTextField_date_depart().getText(),
+						fml.getTextField_date_derniere_regularisation().getText(),
 						louerBD.getLoyerPaye(), louerBD.getIcc(),
 						Double.parseDouble(fml.getTextField_montant_reel_paye().getText()));
 

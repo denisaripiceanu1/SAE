@@ -27,7 +27,7 @@ public class RequeteUpdateLouer implements Requete<Louer> {
 		prSt.setDouble(2, data.getLoyerTTC());
 		prSt.setDouble(3, data.getCautionTTC());
 		prSt.setString(4, data.getBail());
-		prSt.setDate(5, Date.valueOf(data.getDateDepart()));
+		prSt.setDate(5, Date.valueOf(data.getDateDerniereRegularisation()));
 		prSt.setInt(6, data.getLoyerPaye());
 		prSt.setDouble(7, data.getMontantReelPaye());
 		prSt.setString(8, data.getIcc().getAnnee());

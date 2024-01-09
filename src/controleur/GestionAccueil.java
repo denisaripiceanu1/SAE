@@ -402,8 +402,8 @@ public class GestionAccueil implements ActionListener {
 		DefaultTableModel modeleTable = (DefaultTableModel) tableRegularisation.getModel();
 
 		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 0);
-		if (location.getDateDepart() != null) {
-			modeleTable.setValueAt(location.getDateDepart(), numeroLigne, 1);
+		if (location.getDateDerniereRegularisation() != null) {
+			modeleTable.setValueAt(location.getDateDerniereRegularisation(), numeroLigne, 1);
 		} else {
 			modeleTable.setValueAt("N/A", numeroLigne, 1);
 		}
@@ -636,7 +636,7 @@ public class GestionAccueil implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
-				
+
 			case "btnMesBiens_AjouterDiagnostic_Logements":
 				if (Sauvegarde.onSave("Logement") == true) {
 					Fenetre_InsertionDiagnostic diagnostic_logement = new Fenetre_InsertionDiagnostic();
@@ -648,7 +648,7 @@ public class GestionAccueil implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
-				
+
 			case "btnMesBiens_AjouterPaiements_Logements":
 				if (Sauvegarde.onSave("Logement") == true) {
 					Fenetre_InsertionPaiementLogement paiement_logement = new Fenetre_InsertionPaiementLogement(false);
@@ -674,7 +674,7 @@ public class GestionAccueil implements ActionListener {
 							"Erreur de chargement", JOptionPane.ERROR_MESSAGE);
 				}
 				break;
-				
+
 			case "btn_MesLocations_Modifier":
 				if (Sauvegarde.onSave("Louer") == true) {
 					Fenetre_ModificationLocation fml = new Fenetre_ModificationLocation();
@@ -694,7 +694,11 @@ public class GestionAccueil implements ActionListener {
 						fml.getTextField_montant_reel_paye().setText(String.valueOf(louerBD.getMontantReelPaye()));
 						fml.getTextField_Id_Locataire().setText(louerBD.getLocataire().getIdLocataire());
 						fml.getTextField_loyer_TCC().setText(String.valueOf(louerBD.getLoyerTTC()));
-						fml.getTextField_date_depart().setText(louerBD.getDateDepart());
+						// Si la date de la derniere regularisation est null
+						if (louerBD.getDateDerniereRegularisation() == null)
+							fml.getTextField_date_derniere_regularisation().setText("N/A");
+						else
+							fml.getTextField_date_derniere_regularisation().setText(louerBD.getDateDerniereRegularisation());
 
 					} catch (SQLException e1) {
 						e1.printStackTrace();
@@ -709,14 +713,14 @@ public class GestionAccueil implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
-				
+
 			case "btn_MesLocations_Inserer":
 				Fenetre_InsertionLocation location = new Fenetre_InsertionLocation();
 				this.fenetreAccueil.getLayeredPane().add(location);
 				location.setVisible(true);
 				location.moveToFront();
 				break;
-				
+
 			case "btn_MesLocations_Supprimer":
 				if (Sauvegarde.onSave("Louer") == true) {
 					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
