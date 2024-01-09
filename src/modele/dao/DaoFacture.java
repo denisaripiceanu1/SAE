@@ -169,7 +169,6 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		if (factures.isEmpty()) {
 			return null;
 		}
-		System.out.println("Facture retrieved: " + factures);
 		return factures.get(0);
 	}
 }

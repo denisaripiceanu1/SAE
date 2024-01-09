@@ -12,6 +12,9 @@ public interface SousProgramme<T> {
     
     void parametres(PreparedStatement prSt, T donnee) throws SQLException;
     
+    //Méthode utile pour les requêtes sur les séquences
+    void parametres(PreparedStatement prSt, T donnee, int Sequence) throws SQLException;
+    
     
     
     

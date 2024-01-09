@@ -32,5 +32,10 @@ public class SousProgrammeInsertLocataire implements SousProgramme<Locataire> {
 		prSt.setString(5, donnee.getMail());
 		prSt.setDate(6, Date.valueOf(donnee.getDateNaissance()));
 	}
+	public void parametres(PreparedStatement prSt, Locataire donnee, int Sequence) throws SQLException {
+
+		// TODO Auto-generated method stub
+		
+	}
 
 }

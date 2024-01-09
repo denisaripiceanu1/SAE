@@ -29,4 +29,10 @@ public class SousProgrammeInsertBien implements SousProgramme<Bien> {
 		prSt.setString(7, donnee.getType_bien());
 
 	}
+
+	@Override
+	public void parametres(PreparedStatement prSt, Bien donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
 }

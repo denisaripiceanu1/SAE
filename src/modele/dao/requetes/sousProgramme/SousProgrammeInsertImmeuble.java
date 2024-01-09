@@ -27,5 +27,11 @@ public class SousProgrammeInsertImmeuble implements SousProgramme<Immeuble> {
 	    prSt.setString(6, donnee.getType_immeuble());
 	}
 
+	@Override
+	public void parametres(PreparedStatement prSt, Immeuble donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

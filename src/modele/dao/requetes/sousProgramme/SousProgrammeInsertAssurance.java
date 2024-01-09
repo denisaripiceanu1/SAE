@@ -26,4 +26,11 @@ public class SousProgrammeInsertAssurance implements SousProgramme<Assurance> {
 		prSt.setString(4, donnee.getEntreprise().getSiret());
 	}
 
+
+	@Override
+	public void parametres(PreparedStatement prSt, Assurance donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

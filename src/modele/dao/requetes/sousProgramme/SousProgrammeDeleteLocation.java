@@ -39,4 +39,10 @@ public class SousProgrammeDeleteLocation implements SousProgramme<Louer> {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void parametres(PreparedStatement prSt, Louer donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
 }

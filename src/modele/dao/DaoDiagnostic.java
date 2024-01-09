@@ -1,22 +1,45 @@
 package modele.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import modele.Bien;
 import modele.Diagnostics;
+import modele.Echeance;
 import modele.dao.requetes.delete.RequeteDeleteDiagnostic;
 import modele.dao.requetes.select.RequeteSelectDiagnostic;
 import modele.dao.requetes.select.RequeteSelectDiagnosticById;
 import modele.dao.requetes.select.RequeteSelectDiagnoticByBien;
+import modele.dao.requetes.sousProgramme.SousProgramme;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertDiagnostic;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertEcheance;
 
 public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnostics> {
-
+	
 	@Override
-	public void create(Diagnostics donnees) {
+	public void create(Diagnostics donnees) throws SQLException {
 		// TODO Auto-generated method stub
+		
+	}
 
+	public int createAvecSequence(Diagnostics donnees) throws SQLException {
+		SousProgramme<Diagnostics> sp = new SousProgrammeInsertDiagnostic();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees, Statement.RETURN_GENERATED_KEYS);
+		int idDiagnostic = -1;  // Initialiser à une valeur qui ne peut pas être valide
+		int affectedRows = st.executeUpdate();;
+	
+	    if (affectedRows > 0) {
+	    // La ligne a été insérée avec succès, récupérer l'ID généré
+	    ResultSet resultSet = st.getGeneratedKeys(); 
+	        if (resultSet.next()) {
+	            idDiagnostic = resultSet.getInt(1);
+	        }
+	     }
+	    return idDiagnostic;
 	}
 
 	@Override
@@ -43,8 +66,10 @@ public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnos
 			java.sql.Date dateValidite = curseur.getDate("date_validite");
 			String dateValiditeStr = dateValidite.toString();
 
-			diagnostic = new Diagnostics(/* curseur.getInt("Id_Diagnostic") */ dateValiditeStr,
+			diagnostic = new Diagnostics(dateValiditeStr,
 					curseur.getString("type_diagnostic"), bien);
+			
+			diagnostic.setIdDiagnostic(curseur.getInt("Id_Diagnostic"));
 
 		} catch (Exception e) {
 			e.printStackTrace();

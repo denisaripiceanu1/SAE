@@ -19,6 +19,7 @@ public class GestionInsertionDiagnostic implements ActionListener {
 
     public GestionInsertionDiagnostic(Fenetre_InsertionDiagnostic fid) {
         this.fid = fid;
+        this.daoDiagnostic = new DaoDiagnostic();
     }
 
     @Override
@@ -37,8 +38,10 @@ public class GestionInsertionDiagnostic implements ActionListener {
                             this.fid.getTextField_Type().getText(), bienSauvegarde);
 
                     // Ajouter le nouveau diagnostic dans la base de données
-                    this.daoDiagnostic.create(diagnostic);
-
+                    int idSequence = this.daoDiagnostic.createAvecSequence(diagnostic);
+                    // Attribue l'id de la séquence au diagnostic
+                    diagnostic.setIdDiagnostic(idSequence);
+                   
                     // Fermer la fenêtre d'insertion après l'ajout
                     this.fid.dispose();
 
