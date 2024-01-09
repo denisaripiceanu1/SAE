@@ -13,7 +13,7 @@ public class Louer {
 	private String etat_lieux;
 	private String dateDerniereRegularisation;
 	private int loyerPaye;
-	private ICC icc; // anciennement (trimestre,année) en string : DOIT ETRE DE TYPE ICC !!!!!!!!!
+	private ICC icc;
 	private double montantReelPaye;
 
 	public Louer(Locataire locataire, Bien bien, String dateDebut, int nbMois, double loyerTTC,
