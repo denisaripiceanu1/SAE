@@ -101,7 +101,7 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		textField_date_derniere_regularisation = new JTextField();
 		textField_date_derniere_regularisation.setColumns(10);
 		textField_date_derniere_regularisation
-				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date dernière régularisations",
+				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date dernière régularisation",
 						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_date_derniere_regularisation.setBounds(166, 221, 220, 40);
 		panel.add(textField_date_derniere_regularisation);
