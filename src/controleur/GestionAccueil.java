@@ -514,7 +514,7 @@ public class GestionAccueil implements ActionListener {
 			// LAYERED ACCUEIL
 			///////////////////
 			case "btn_stats":
-				this.chargerPageAccueil();
+//				this.chargerPageAccueil();
 				break;
 
 			///////////////////
