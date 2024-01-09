@@ -34,7 +34,6 @@ import modele.dao.DaoFacture;
 import modele.dao.DaoImmeuble;
 import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
-import modele.dao.DaoStatistique;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
@@ -68,7 +67,6 @@ public class GestionAccueil implements ActionListener {
 	private DaoEntreprise daoEntreprise;
 	private DaoFacture daoFacture;
 	private DaoLocataire daoLocataire;
-	private DaoStatistique daoStatistique;
 
 	public GestionAccueil(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
@@ -80,7 +78,6 @@ public class GestionAccueil implements ActionListener {
 		this.daoEntreprise = new DaoEntreprise();
 		this.daoFacture = new DaoFacture();
 		this.daoLocataire = new DaoLocataire();
-		this.daoStatistique = new DaoStatistique();
 	}
 
 	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE
@@ -114,21 +111,6 @@ public class GestionAccueil implements ActionListener {
 	///////////////////////////////////////////////////////////////////
 	// LAYERED ACCUEIL
 	///////////////////////////////////////////////////////////////////
-//	public void chargerPageAccueil() {
-//		double moyenneLoyers;
-//		try {
-//			moyenneLoyers = this.daoStatistique.recupererMoyenneLoyers();
-//
-//			// Convertir le double en une chaîne de caractères
-//			String moyenneText = String.valueOf(moyenneLoyers);
-//
-//			// Afficher la moyenne dans le champ dédié sur la page d'accueil
-//			this.getTextField_moyenne_loyers().setText(moyenneText);
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace(); // Gérer les exceptions de manière appropriée dans votre application
-//		}
-//	}
 
 	///////////////////////////////////////////////////////////////////
 	// LAYERED MES BIENS
@@ -514,7 +496,6 @@ public class GestionAccueil implements ActionListener {
 			// LAYERED ACCUEIL
 			///////////////////
 			case "btn_stats":
-//				this.chargerPageAccueil();
 				break;
 
 			///////////////////
