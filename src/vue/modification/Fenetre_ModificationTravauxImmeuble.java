@@ -24,9 +24,9 @@ public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
 	private JTextField textField_prestataire;
 	private JTextField textField_adresse;
 	private JTextField textField_Bien_Logement;
-	
+
 	private JSeparator separator_Compteur;
-	
+
 	// Gestionnaire d'événements
 	private GestionModificationTravauxImmeuble gestionModificationTravauxImmeuble;
 
@@ -48,7 +48,7 @@ public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
 		separator_titreInsererBien.setBounds(271, 72, 190, 2);
 		panel.add(separator_titreInsererBien);
 
-		JLabel lbl_InsererUnTravaux = new JLabel("Modifier un Travaux pour un Immeuble");
+		JLabel lbl_InsererUnTravaux = new JLabel("Modifier un Travaux");
 		lbl_InsererUnTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUnTravaux.setBounds(222, 26, 288, 48);
 		panel.add(lbl_InsererUnTravaux);
@@ -84,7 +84,7 @@ public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
 
 		this.textField_paye = new JTextField();
 		this.textField_paye.setColumns(10);
-		this.textField_paye.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Pay\u00E9",
+		this.textField_paye.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Payé",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		this.textField_paye.setBounds(427, 228, 190, 40);
 		panel.add(this.textField_paye);
