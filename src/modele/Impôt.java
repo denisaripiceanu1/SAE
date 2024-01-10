@@ -2,14 +2,16 @@ package modele;
 
 public class Impôt {
 
-	private int idImpot; //AUTO INCREMENT
+	private int idImpot; // AUTO INCREMENT
 	private String nom;
 	private double montant;
+	private String annee;
 
-	public Impôt(int idImpot, String nom, double montant) {
+	public Impôt(int idImpot, String nom, double montant, String annee) {
 		this.idImpot = idImpot;
 		this.nom = nom;
 		this.montant = montant;
+		this.annee = annee;
 	}
 
 	public int getIdImpot() {
@@ -35,4 +37,13 @@ public class Impôt {
 	public void setMontant(double montant) {
 		this.montant = montant;
 	}
+
+	public String getAnnee() {
+		return annee;
+	}
+
+	public void setAnnee(String annee) {
+		this.annee = annee;
+	}
+
 }
