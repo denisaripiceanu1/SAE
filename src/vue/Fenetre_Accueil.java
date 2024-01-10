@@ -33,6 +33,7 @@ import controleur.GestionBienLogement;
 import controleur.GestionLocations;
 import controleur.GestionTableAssurance;
 import controleur.GestionTableCharges;
+import controleur.GestionTableDocuments;
 import controleur.GestionTableLogement;
 import controleur.GestionTableTravaux;
 import modele.dao.DaoBien;
@@ -58,6 +59,8 @@ public class Fenetre_Accueil extends JFrame {
 	private JTable table_MesChargesLocatives;
 	private JTable table_MesAssurances;
 	private JTable table_SoldeDeToutCompte;
+	private JTable table_MesDocuments;
+
 	private JTextField textField_loyer;
 	private JTextField textField_provisionCharges;
 	private JTextField textField_caution;
@@ -71,6 +74,7 @@ public class Fenetre_Accueil extends JFrame {
 	private JComboBox<String> comboBox_MesAssurances;
 	private JComboBox<String> comboBox_MesChargesLocatives;
 	private JComboBox<String> comboBox_Regularisation;
+	private JComboBox<String> comboBox_MesDocuments;
 
 	private GestionAccueil gestionAccueil;
 
@@ -84,6 +88,7 @@ public class Fenetre_Accueil extends JFrame {
 	private GestionTableLogement gestionTableLogement;
 	private GestionTableCharges gestionTableCharges;
 	private GestionLocations gestionLocations;
+	private GestionTableDocuments gestionTableDocuments;
 
 	private DaoBien daoBien;
 	private DaoLocataire daoLocataire;
@@ -119,6 +124,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.gestionAccueil = new GestionAccueil(this);
 		this.gestionTableAssurance = new GestionTableAssurance(this);
 		this.gestionTableTravaux = new GestionTableTravaux(this);
+		this.gestionTableDocuments = new GestionTableDocuments(this);
 
 		this.daoBien = new DaoBien();
 		this.daoLocataire = new DaoLocataire();
@@ -879,34 +885,92 @@ public class Fenetre_Accueil extends JFrame {
 //		////////////////////////////////////////////////////////////////////////////
 //		// LAYERED
 //		// DOCUMENTS////////////////////////////////////////////////////////////////
-//		this.layeredPane_MesDocuments = new JLayeredPane();
-//		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
-//		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
-//
-//		JPanel panel_MesDocuments = new JPanel();
-//		panel_MesDocuments.setBackground(Color.WHITE);
-//		this.layeredPane_MesDocuments.add(panel_MesDocuments);
-//		panel_MesDocuments.setLayout(new BorderLayout());
-//
-//		JLabel lbl_MesDocuments = new JLabel("Mes Documents");
-//		lbl_MesDocuments.setHorizontalAlignment(SwingConstants.CENTER);
-//		lbl_MesDocuments.setFont(new Font("Tahoma", Font.PLAIN, 16));
-//		lbl_MesDocuments.setBounds(244, 22, 216, 43);
-//		panel_MesDocuments.add(lbl_MesDocuments);
-//
-//		JSeparator separator_MesDocuments = new JSeparator();
-//		separator_MesDocuments.setForeground(new Color(0, 102, 204));
-//		separator_MesDocuments.setBounds(258, 63, 190, 2);
-//		panel_MesDocuments.add(separator_MesDocuments);
-//
-//		JLabel aFAIRE2 = new JLabel("A FAIRE");
-//		aFAIRE2.setFont(new Font("Tahoma", Font.PLAIN, 44));
-//		aFAIRE2.setBounds(258, 189, 312, 139);
-//		panel_MesDocuments.add(aFAIRE2);
-//	    PDFListe pdfViewer = new PDFListe();
-//	    panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
-//
-//	
+		this.layeredPane_MesDocuments = new JLayeredPane();
+		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
+		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
+
+		JPanel panel_MesDocuments = new JPanel();
+		panel_MesDocuments.setBackground(Color.WHITE);
+		this.layeredPane_MesDocuments.add(panel_MesDocuments);
+		panel_MesDocuments.setLayout(null);
+
+		JLabel lbl_MesDocuments = new JLabel("Mes Documents");
+		lbl_MesDocuments.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_MesDocuments.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_MesDocuments.setBounds(244, 22, 216, 43);
+		panel_MesDocuments.add(lbl_MesDocuments);
+
+		JSeparator separator_MesDocuments = new JSeparator();
+		separator_MesDocuments.setForeground(new Color(0, 102, 204));
+		separator_MesDocuments.setBounds(258, 63, 190, 2);
+		panel_MesDocuments.add(separator_MesDocuments);
+
+		// Tableau et scroll
+		JScrollPane scrollPane_MesDocuments = new JScrollPane();
+		scrollPane_MesDocuments.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+		scrollPane_MesDocuments.setBounds(55, 124, 643, 270);
+		panel_MesDocuments.add(scrollPane_MesDocuments);
+
+		this.table_MesDocuments = new JTable();
+		this.table_MesDocuments.setSelectionBackground(new Color(0, 102, 204));
+		this.table_MesDocuments
+				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
+						new String[] { "Bien/Logement", "Nom", "Montant", "Année" }));
+		this.table_MesDocuments.setBounds(40, 53, 668, 130);
+		this.table_MesDocuments.getSelectionModel().addListSelectionListener(this.gestionTableDocuments);
+		scrollPane_MesDocuments.setViewportView(this.table_MesDocuments);
+
+		// Boutons généraux
+		JButton btn_MesDocuments_Charger = new JButton("Charger");
+		btn_MesDocuments_Charger.setForeground(Color.WHITE);
+		btn_MesDocuments_Charger.setBackground(new Color(0, 102, 204));
+		btn_MesDocuments_Charger.setBounds(118, 449, 94, 31);
+		btn_MesDocuments_Charger.addActionListener(this.gestionAccueil);
+		btn_MesDocuments_Charger.setName("btn_MesDocuments_Charger");
+		panel_MesDocuments.add(btn_MesDocuments_Charger);
+
+		JButton btn_MesDocuments_generer_annexe = new JButton("Génerer une annexe");
+		btn_MesDocuments_generer_annexe.setForeground(Color.WHITE);
+		btn_MesDocuments_generer_annexe.setBackground(new Color(0, 102, 204));
+		btn_MesDocuments_generer_annexe.setBounds(396, 449, 99, 31);
+		btn_MesDocuments_generer_annexe.addActionListener(this.gestionAccueil);
+		btn_MesDocuments_generer_annexe.setName("btn_MesDocuments_generer_annexe");
+		panel_MesDocuments.add(btn_MesDocuments_generer_annexe);
+
+		JButton btn_MesDocuments_Inserer_Impots = new JButton("Insérer un impôt");
+		btn_MesDocuments_Inserer_Impots.setForeground(Color.WHITE);
+		btn_MesDocuments_Inserer_Impots.setBackground(new Color(0, 102, 204));
+		btn_MesDocuments_Inserer_Impots.setBounds(258, 449, 94, 31);
+		btn_MesDocuments_Inserer_Impots.addActionListener(this.gestionAccueil);
+		btn_MesDocuments_Inserer_Impots.setName("btn_MesDocuments_Inserer_Impots");
+		panel_MesDocuments.add(btn_MesDocuments_Inserer_Impots);
+
+		// ComboBox
+		this.comboBox_MesDocuments = new JComboBox<String>();
+		this.comboBox_MesDocuments.setBounds(55, 80, 130, 29);
+		panel_MesDocuments.add(this.comboBox_MesDocuments);
+		this.comboBox_MesDocuments.addActionListener(this.gestionAccueil);
+
+		// Remplir le JComboBox avec les identifiants des logements
+		try {
+			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
+			identifiantsLogements.add(0, "ID du logement");
+
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsLogements.toArray(new String[0]));
+
+			this.comboBox_MesDocuments.setModel(modelComboBox);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
+			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
+					"Erreur", JOptionPane.ERROR_MESSAGE);
+		}
+
+//		PDFListe pdfViewer = new PDFListe();
+//		panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
+
 	}
 
 	public JLayeredPane getLayeredPane_MesDocuments() {

@@ -3,9 +3,7 @@ package controleur;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +38,7 @@ import vue.insertion.Fenetre_AffichageInfoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
 import vue.insertion.Fenetre_InsertionDiagnostic;
+import vue.insertion.Fenetre_InsertionImpot;
 import vue.insertion.Fenetre_InsertionLocation;
 import vue.insertion.Fenetre_InsertionLogement;
 import vue.insertion.Fenetre_InsertionPaiementBien;
@@ -91,7 +90,7 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getLayeredPane_MesLocations().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
-		// this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
 
 		visible.setVisible(true);
 		this.fenetreAccueil.getContentPane().add(visible, BorderLayout.CENTER);
@@ -451,7 +450,7 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	///////////////////////////////////////////////////////////////////
-	// LAYERED SOLDE TOUT COMPTE
+	// LAYERED MES DOCUMENTS
 	// ////////////////////////////////////////////////////////////////
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -553,7 +552,7 @@ public class GestionAccueil implements ActionListener {
 								.setText(Double.toString(logementCourant.getSurfaceHabitable()));
 						modif_logement.getTextField_NbPièces().setText(Integer.toString(logementCourant.getNbPieces()));
 
-						modif_logement.getTextField_DateAcquisition().setText(logementCourant.getDateAcquisition());	
+						modif_logement.getTextField_DateAcquisition().setText(logementCourant.getDateAcquisition());
 
 						modif_logement.getTextField_NumEtage().setText(Integer.toString(logementCourant.getNumEtage()));
 						modif_logement.getComboBox_typeDeLogement().setSelectedItem(logementCourant.getType_bien());
@@ -715,7 +714,8 @@ public class GestionAccueil implements ActionListener {
 						if (louerBD.getDateDerniereRegularisation() == null)
 							fml.getTextField_date_derniere_regularisation().setText("N/A");
 						else
-							fml.getTextField_date_derniere_regularisation().setText(louerBD.getDateDerniereRegularisation());
+							fml.getTextField_date_derniere_regularisation()
+									.setText(louerBD.getDateDerniereRegularisation());
 
 					} catch (SQLException e1) {
 						e1.printStackTrace();
@@ -1013,6 +1013,25 @@ public class GestionAccueil implements ActionListener {
 
 			///////////////////////
 			// LAYERED MES DOCUMENTS
+			case "btn_MesDocuments_Inserer_Impots":
+				// Vérifie s'il y a des données d'un logement sauvegardées
+				if (Sauvegarde.onSave("Logement") == true) {
+					Fenetre_InsertionImpot insertion_impot = new Fenetre_InsertionImpot();
+					this.fenetreAccueil.getLayeredPane().add(insertion_impot);
+					insertion_impot.setVisible(true);
+					insertion_impot.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				break;
+			case "btn_MesDocuments_Charger":
+
+				break;
+			case "btn_MesDocuments_generer_annexe":
+
+				break;
+
 			///////////////////////
 
 			}
