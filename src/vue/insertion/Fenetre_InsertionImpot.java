@@ -17,11 +17,12 @@ import javax.swing.border.TitledBorder;
 
 import controleur.GestionTableEntrepriseFenetreInsertionAssurance;
 import controleur.insertion.GestionInsertionAssurance;
+import controleur.insertion.GestionInsertionImpot;
 
 public class Fenetre_InsertionImpot extends JInternalFrame {
 	private JTextField textField_nom;
 	private JTextField textField_montant;
-	// private GestionInsertionImpot gestionClic;
+	private GestionInsertionImpot gestionClic;
 
 	// Table pour afficher les données d'entreprise
 	private JTable table_entreprise;
@@ -30,7 +31,8 @@ public class Fenetre_InsertionImpot extends JInternalFrame {
 
 	public Fenetre_InsertionImpot() {
 		// Initialisation du gestionnaire d'actions
-		// this.gestionClic = new GestionInsertionImpot(this);
+		this.gestionClic = new GestionInsertionImpot(this);
+
 		// Configuration de la fenêtre interne
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
@@ -44,10 +46,10 @@ public class Fenetre_InsertionImpot extends JInternalFrame {
 
 		// Libellé "Assurance"
 		JLabel lbl_InsertionImpot = new JLabel("Insérer un Impôt");
-		lbl_InsertionAssurance.setBounds(302, 39, 163, 20);
-		lbl_InsertionAssurance.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_InsertionAssurance.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel.add(lbl_InsertionAssurance);
+		lbl_InsertionImpot.setBounds(302, 39, 163, 20);
+		lbl_InsertionImpot.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_InsertionImpot.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panel.add(lbl_InsertionImpot);
 
 		// Champs de saisie
 		this.textField_nom = new JTextField();
@@ -100,7 +102,7 @@ public class Fenetre_InsertionImpot extends JInternalFrame {
 	}
 
 	public GestionInsertionAssurance getGestionClic() {
-		return gestionClic;
+		return this.gestionClic;
 	}
 
 	public GestionTableEntrepriseFenetreInsertionAssurance getGtefia() {

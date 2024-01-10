@@ -1,23 +1,42 @@
 package controleur.insertion;
 
-import modele.dao.DaoAssurance;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+
 import modele.dao.DaoBien;
-import modele.dao.DaoEcheance;
-import modele.dao.DaoEntreprise;
-import vue.insertion.Fenetre_InsertionAssurance;
+import modele.dao.DaoImpôt;
+import vue.Fenetre_Accueil;
+import vue.insertion.Fenetre_InsertionImpot;
 
 public class GestionInsertionImpot {
 
-	private Fenetre_InsertionAssurance modificationAssurance;
+	private Fenetre_InsertionImpot fii;
 	private DaoBien daoBien;
-	private DaoImpot daoImpot;
+	private DaoImpôt daoImpot;
 
-	public GestionInsertionAssurance(Fenetre_InsertionAssurance fia) {
-		this.modificationAssurance = fia;
-		this.daoAssurance = new DaoAssurance();
+	public GestionInsertionImpot(Fenetre_InsertionImpot fii) {
+		this.fii = fii;
 		this.daoBien = new DaoBien();
-		this.daoEntreprise = new DaoEntreprise();
-		this.daoEcheance = new DaoEcheance();
+		this.daoImpot = new DaoImpôt();
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		JButton btn = (JButton) e.getSource();
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fii.getTopLevelAncestor();
+
+		// Gérer les actions en fonction du bouton cliqué
+		switch (btn.getText()) {
+		case "Ajouter":
+			// Fermer la fenêtre d'insertion après l'ajout
+			this.fii.dispose();
+			break;
+
+		case "Annuler":
+			// Annuler l'opération, fermer la fenêtre d'insertion
+			this.fii.dispose();
+			break;
+		}
 	}
 
 }
