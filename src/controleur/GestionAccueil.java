@@ -3,9 +3,7 @@ package controleur;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,7 +88,7 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getLayeredPane_MesLocations().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
-		// this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
 
 		visible.setVisible(true);
 		this.fenetreAccueil.getContentPane().add(visible, BorderLayout.CENTER);
@@ -552,10 +550,7 @@ public class GestionAccueil implements ActionListener {
 								.setText(Double.toString(logementCourant.getSurfaceHabitable()));
 						modif_logement.getTextField_NbPièces().setText(Integer.toString(logementCourant.getNbPieces()));
 
-						// Format date
-						SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-						String formattedDate = dateFormat.format(Date.valueOf(logementCourant.getDateAcquisition()));
-						modif_logement.getTextField_DateAcquisition().setText(formattedDate);
+						modif_logement.getTextField_DateAcquisition().setText(logementCourant.getDateAcquisition());
 
 						modif_logement.getTextField_NumEtage().setText(Integer.toString(logementCourant.getNumEtage()));
 						modif_logement.getComboBox_typeDeLogement().setSelectedItem(logementCourant.getType_bien());
@@ -698,7 +693,8 @@ public class GestionAccueil implements ActionListener {
 						if (louerBD.getDateDerniereRegularisation() == null)
 							fml.getTextField_date_derniere_regularisation().setText("N/A");
 						else
-							fml.getTextField_date_derniere_regularisation().setText(louerBD.getDateDerniereRegularisation());
+							fml.getTextField_date_derniere_regularisation()
+									.setText(louerBD.getDateDerniereRegularisation());
 
 					} catch (SQLException e1) {
 						e1.printStackTrace();
@@ -752,9 +748,7 @@ public class GestionAccueil implements ActionListener {
 						infos_locataire.getTextField_Prenom().setText(locataireCourant.getPrenom());
 						infos_locataire.getTextField_Telephone().setText(locataireCourant.getTelephone());
 						infos_locataire.getTextField_Mail().setText(locataireCourant.getMail());
-						SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-						String formattedDate = dateFormat.format(Date.valueOf(locataireCourant.getDateNaissance()));
-						infos_locataire.getTextField_DateN().setText(formattedDate);
+						infos_locataire.getTextField_DateN().setText(locataireCourant.getDateNaissance());
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 						// Afficher un message d'erreur à l'utilisateur

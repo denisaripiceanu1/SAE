@@ -66,21 +66,11 @@ public class GestionModificationLogement implements ActionListener {
 						.toString();
 				
 				
-				// Format actuel de la chaîne
-				SimpleDateFormat formatActuel = new SimpleDateFormat("dd-MM-yyyy");
-
-				// On change le format pour qu'il corresponde à celui de la BD
-				SimpleDateFormat formatBD = new SimpleDateFormat("yyyy-MM-dd");
-
-			    String dateAcquisitionStr = this.modificationLogement.getTextField_DateAcquisition().getText();
-			    java.util.Date parsedDate = formatActuel.parse(dateAcquisitionStr);
-			    String dateAcquisition = formatBD.format(parsedDate);
-
 				logement = new Bien(this.modificationLogement.getTextField_IdLogement().getText(),
 						Double.parseDouble(this.modificationLogement.getTextField_SurfaceHabitable().getText()),
 						Integer.parseInt(this.modificationLogement.getTextField_NbPièces().getText()), 
 						Integer.parseInt(this.modificationLogement.getTextField_NumEtage().getText()),
-						dateAcquisition , typeLogement,
+						this.modificationLogement.getTextField_DateAcquisition().getText() , typeLogement,
 						(Immeuble) Sauvegarde.getItem("Immeuble"));
 //
 //				// Si il y a un compteur à ajouter
