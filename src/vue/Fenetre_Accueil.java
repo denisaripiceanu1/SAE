@@ -74,6 +74,7 @@ public class Fenetre_Accueil extends JFrame {
 	private JComboBox<String> comboBox_MesAssurances;
 	private JComboBox<String> comboBox_MesChargesLocatives;
 	private JComboBox<String> comboBox_Regularisation;
+	private JComboBox<String> comboBox_MesDocuments;
 
 	private GestionAccueil gestionAccueil;
 
@@ -928,29 +929,44 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesDocuments_Charger.setName("btn_MesDocuments_Charger");
 		panel_MesDocuments.add(btn_MesDocuments_Charger);
 
-		JButton btn_MesDocuments_Modifier = new JButton("Modifier");
-		btn_MesDocuments_Modifier.setForeground(Color.WHITE);
-		btn_MesDocuments_Modifier.setBackground(new Color(0, 102, 204));
-		btn_MesDocuments_Modifier.setBounds(396, 449, 99, 31);
-		btn_MesDocuments_Modifier.addActionListener(this.gestionAccueil);
-		btn_MesDocuments_Modifier.setName("btn_MesDocuments_Modifier");
-		panel_MesDocuments.add(btn_MesDocuments_Modifier);
+		JButton btn_MesDocuments_generer_annexe = new JButton("Génerer une annexe");
+		btn_MesDocuments_generer_annexe.setForeground(Color.WHITE);
+		btn_MesDocuments_generer_annexe.setBackground(new Color(0, 102, 204));
+		btn_MesDocuments_generer_annexe.setBounds(396, 449, 99, 31);
+		btn_MesDocuments_generer_annexe.addActionListener(this.gestionAccueil);
+		btn_MesDocuments_generer_annexe.setName("btn_MesDocuments_generer_annexe");
+		panel_MesDocuments.add(btn_MesDocuments_generer_annexe);
 
-		JButton btn_MesDocuments_Inserer = new JButton("Insérer");
-		btn_MesDocuments_Inserer.setForeground(Color.WHITE);
-		btn_MesDocuments_Inserer.setBackground(new Color(0, 102, 204));
-		btn_MesDocuments_Inserer.setBounds(258, 449, 94, 31);
-		btn_MesDocuments_Inserer.addActionListener(this.gestionAccueil);
-		btn_MesDocuments_Inserer.setName("btn_MesDocuments_Inserer");
-		panel_MesDocuments.add(btn_MesDocuments_Inserer);
+		JButton btn_MesDocuments_Inserer_Impots = new JButton("Insérer un impôt");
+		btn_MesDocuments_Inserer_Impots.setForeground(Color.WHITE);
+		btn_MesDocuments_Inserer_Impots.setBackground(new Color(0, 102, 204));
+		btn_MesDocuments_Inserer_Impots.setBounds(258, 449, 94, 31);
+		btn_MesDocuments_Inserer_Impots.addActionListener(this.gestionAccueil);
+		btn_MesDocuments_Inserer_Impots.setName("btn_MesDocuments_Inserer_Impots");
+		panel_MesDocuments.add(btn_MesDocuments_Inserer_Impots);
 
-		JButton btn_MesDocuments_Supprimer = new JButton("Supprimer");
-		btn_MesDocuments_Supprimer.setForeground(Color.WHITE);
-		btn_MesDocuments_Supprimer.setBackground(new Color(0, 102, 204));
-		btn_MesDocuments_Supprimer.setBounds(539, 449, 106, 31);
-		btn_MesDocuments_Supprimer.addActionListener(this.gestionAccueil);
-		btn_MesDocuments_Supprimer.setName("btn_MesDocuments_Supprimer");
-		panel_MesDocuments.add(btn_MesDocuments_Supprimer);
+		// ComboBox
+		this.comboBox_MesDocuments = new JComboBox<String>();
+		this.comboBox_MesDocuments.setBounds(55, 80, 130, 29);
+		panel_MesDocuments.add(this.comboBox_MesDocuments);
+		this.comboBox_MesDocuments.addActionListener(this.gestionAccueil);
+
+		// Remplir le JComboBox avec les identifiants des logements
+		try {
+			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
+			identifiantsLogements.add(0, "ID du logement");
+
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsLogements.toArray(new String[0]));
+
+			this.comboBox_MesDocuments.setModel(modelComboBox);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
+			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
+					"Erreur", JOptionPane.ERROR_MESSAGE);
+		}
 
 //		PDFListe pdfViewer = new PDFListe();
 //		panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);

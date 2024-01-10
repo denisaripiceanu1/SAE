@@ -37,6 +37,7 @@ import vue.insertion.Fenetre_AffichageInfoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
 import vue.insertion.Fenetre_InsertionDiagnostic;
+import vue.insertion.Fenetre_InsertionImpot;
 import vue.insertion.Fenetre_InsertionLocation;
 import vue.insertion.Fenetre_InsertionLogement;
 import vue.insertion.Fenetre_InsertionPaiementBien;
@@ -448,7 +449,7 @@ public class GestionAccueil implements ActionListener {
 	}
 
 	///////////////////////////////////////////////////////////////////
-	// LAYERED SOLDE TOUT COMPTE
+	// LAYERED MES DOCUMENTS
 	// ////////////////////////////////////////////////////////////////
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -992,6 +993,25 @@ public class GestionAccueil implements ActionListener {
 
 			///////////////////////
 			// LAYERED MES DOCUMENTS
+			case "btn_MesDocuments_Inserer_Impots":
+				// Vérifie s'il y a des données d'un logement sauvegardées
+				if (Sauvegarde.onSave("Logement") == true) {
+					Fenetre_InsertionImpot insertion_impot = new Fenetre_InsertionImpot();
+					this.fenetreAccueil.getLayeredPane().add(insertion_impot);
+					insertion_impot.setVisible(true);
+					insertion_impot.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				break;
+			case "btn_MesDocuments_Charger":
+
+				break;
+			case "btn_MesDocuments_generer_annexe":
+
+				break;
+
 			///////////////////////
 
 			}
