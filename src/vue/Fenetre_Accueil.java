@@ -33,6 +33,7 @@ import controleur.GestionBienLogement;
 import controleur.GestionLocations;
 import controleur.GestionTableAssurance;
 import controleur.GestionTableCharges;
+import controleur.GestionTableDocuments;
 import controleur.GestionTableLogement;
 import controleur.GestionTableTravaux;
 import modele.dao.DaoBien;
@@ -58,6 +59,8 @@ public class Fenetre_Accueil extends JFrame {
 	private JTable table_MesChargesLocatives;
 	private JTable table_MesAssurances;
 	private JTable table_SoldeDeToutCompte;
+	private JTable table_MesDocuments;
+
 	private JTextField textField_loyer;
 	private JTextField textField_provisionCharges;
 	private JTextField textField_caution;
@@ -84,6 +87,7 @@ public class Fenetre_Accueil extends JFrame {
 	private GestionTableLogement gestionTableLogement;
 	private GestionTableCharges gestionTableCharges;
 	private GestionLocations gestionLocations;
+	private GestionTableDocuments gestionTableDocuments;
 
 	private DaoBien daoBien;
 	private DaoLocataire daoLocataire;
@@ -119,6 +123,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.gestionAccueil = new GestionAccueil(this);
 		this.gestionTableAssurance = new GestionTableAssurance(this);
 		this.gestionTableTravaux = new GestionTableTravaux(this);
+		this.gestionTableDocuments = new GestionTableDocuments(this);
 
 		this.daoBien = new DaoBien();
 		this.daoLocataire = new DaoLocataire();
@@ -879,34 +884,77 @@ public class Fenetre_Accueil extends JFrame {
 //		////////////////////////////////////////////////////////////////////////////
 //		// LAYERED
 //		// DOCUMENTS////////////////////////////////////////////////////////////////
-//		this.layeredPane_MesDocuments = new JLayeredPane();
-//		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
-//		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
-//
-//		JPanel panel_MesDocuments = new JPanel();
-//		panel_MesDocuments.setBackground(Color.WHITE);
-//		this.layeredPane_MesDocuments.add(panel_MesDocuments);
-//		panel_MesDocuments.setLayout(new BorderLayout());
-//
-//		JLabel lbl_MesDocuments = new JLabel("Mes Documents");
-//		lbl_MesDocuments.setHorizontalAlignment(SwingConstants.CENTER);
-//		lbl_MesDocuments.setFont(new Font("Tahoma", Font.PLAIN, 16));
-//		lbl_MesDocuments.setBounds(244, 22, 216, 43);
-//		panel_MesDocuments.add(lbl_MesDocuments);
-//
-//		JSeparator separator_MesDocuments = new JSeparator();
-//		separator_MesDocuments.setForeground(new Color(0, 102, 204));
-//		separator_MesDocuments.setBounds(258, 63, 190, 2);
-//		panel_MesDocuments.add(separator_MesDocuments);
-//
-//		JLabel aFAIRE2 = new JLabel("A FAIRE");
-//		aFAIRE2.setFont(new Font("Tahoma", Font.PLAIN, 44));
-//		aFAIRE2.setBounds(258, 189, 312, 139);
-//		panel_MesDocuments.add(aFAIRE2);
-//	    PDFListe pdfViewer = new PDFListe();
-//	    panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
-//
-//	
+		this.layeredPane_MesDocuments = new JLayeredPane();
+		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
+		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
+
+		JPanel panel_MesDocuments = new JPanel();
+		panel_MesDocuments.setBackground(Color.WHITE);
+		this.layeredPane_MesDocuments.add(panel_MesDocuments);
+		panel_MesDocuments.setLayout(null);
+
+		JLabel lbl_MesDocuments = new JLabel("Mes Documents");
+		lbl_MesDocuments.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_MesDocuments.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_MesDocuments.setBounds(244, 22, 216, 43);
+		panel_MesDocuments.add(lbl_MesDocuments);
+
+		JSeparator separator_MesDocuments = new JSeparator();
+		separator_MesDocuments.setForeground(new Color(0, 102, 204));
+		separator_MesDocuments.setBounds(258, 63, 190, 2);
+		panel_MesDocuments.add(separator_MesDocuments);
+
+		// Tableau et scroll
+		JScrollPane scrollPane_MesDocuments = new JScrollPane();
+		scrollPane_MesDocuments.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+		scrollPane_MesDocuments.setBounds(55, 124, 643, 270);
+		panel_MesDocuments.add(scrollPane_MesDocuments);
+
+		this.table_MesDocuments = new JTable();
+		this.table_MesDocuments.setSelectionBackground(new Color(0, 102, 204));
+		this.table_MesDocuments
+				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
+						new String[] { "Bien/Logement", "Nom", "Montant", "Année" }));
+		this.table_MesDocuments.setBounds(40, 53, 668, 130);
+		this.table_MesDocuments.getSelectionModel().addListSelectionListener(this.gestionTableDocuments);
+		scrollPane_MesDocuments.setViewportView(this.table_MesDocuments);
+
+		// Boutons généraux
+		JButton btn_MesDocuments_Charger = new JButton("Charger");
+		btn_MesDocuments_Charger.setForeground(Color.WHITE);
+		btn_MesDocuments_Charger.setBackground(new Color(0, 102, 204));
+		btn_MesDocuments_Charger.setBounds(118, 449, 94, 31);
+		btn_MesDocuments_Charger.addActionListener(this.gestionAccueil);
+		btn_MesDocuments_Charger.setName("btn_MesDocuments_Charger");
+		panel_MesDocuments.add(btn_MesDocuments_Charger);
+
+		JButton btn_MesDocuments_Modifier = new JButton("Modifier");
+		btn_MesDocuments_Modifier.setForeground(Color.WHITE);
+		btn_MesDocuments_Modifier.setBackground(new Color(0, 102, 204));
+		btn_MesDocuments_Modifier.setBounds(396, 449, 99, 31);
+		btn_MesDocuments_Modifier.addActionListener(this.gestionAccueil);
+		btn_MesDocuments_Modifier.setName("btn_MesDocuments_Modifier");
+		panel_MesDocuments.add(btn_MesDocuments_Modifier);
+
+		JButton btn_MesDocuments_Inserer = new JButton("Insérer");
+		btn_MesDocuments_Inserer.setForeground(Color.WHITE);
+		btn_MesDocuments_Inserer.setBackground(new Color(0, 102, 204));
+		btn_MesDocuments_Inserer.setBounds(258, 449, 94, 31);
+		btn_MesDocuments_Inserer.addActionListener(this.gestionAccueil);
+		btn_MesDocuments_Inserer.setName("btn_MesDocuments_Inserer");
+		panel_MesDocuments.add(btn_MesDocuments_Inserer);
+
+		JButton btn_MesDocuments_Supprimer = new JButton("Supprimer");
+		btn_MesDocuments_Supprimer.setForeground(Color.WHITE);
+		btn_MesDocuments_Supprimer.setBackground(new Color(0, 102, 204));
+		btn_MesDocuments_Supprimer.setBounds(539, 449, 106, 31);
+		btn_MesDocuments_Supprimer.addActionListener(this.gestionAccueil);
+		btn_MesDocuments_Supprimer.setName("btn_MesDocuments_Supprimer");
+		panel_MesDocuments.add(btn_MesDocuments_Supprimer);
+
+//		PDFListe pdfViewer = new PDFListe();
+//		panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
+
 	}
 
 	public JLayeredPane getLayeredPane_MesDocuments() {
