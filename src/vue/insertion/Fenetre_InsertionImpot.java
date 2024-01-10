@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -15,8 +14,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import controleur.GestionTableEntrepriseFenetreInsertionAssurance;
-import controleur.insertion.GestionInsertionAssurance;
 import controleur.insertion.GestionInsertionImpot;
 
 public class Fenetre_InsertionImpot extends JInternalFrame {
@@ -93,39 +90,16 @@ public class Fenetre_InsertionImpot extends JInternalFrame {
 	}
 
 	// Getters pour les champs de saisie
-	public JTextField getTextField_numPolice() {
-		return this.textField_numPolice;
+	public JTextField getTextField_nom() {
+		return this.textField_nom;
 	}
 
 	public JTextField getTextField_montant() {
 		return this.textField_montant;
 	}
 
-	public GestionInsertionAssurance getGestionClic() {
+	public GestionInsertionImpot getGestionClic() {
 		return this.gestionClic;
 	}
 
-	public GestionTableEntrepriseFenetreInsertionAssurance getGtefia() {
-		return gtefia;
-	}
-
-	public JTextField getTextField_dateEcheance() {
-		return this.textField_dateEcheance;
-	}
-
-	public JButton getBtn_ajouter_entreprise() {
-		return btn_ajouter_entreprise;
-	}
-
-	public JButton getBtn_charger_entreprise() {
-		return btn_charger_entreprise;
-	}
-
-	public JScrollPane getScrollPane_table_entreprise() {
-		return scrollPane_table_entreprise;
-	}
-
-	public JTable getTable_entreprise() {
-		return this.table_entreprise;
-	}
 }
