@@ -73,10 +73,11 @@ public class Fenetre_Accueil extends JFrame {
 	private JComboBox<String> comboBox_Regularisation;
 
 	private GestionAccueil gestionAccueil;
-	
-	// Getteur specifique utilisé dans le code pour faire une action de chargement de la table 
+
+	// Getteur specifique utilisé dans le code pour faire une action de chargement
+	// de la table
 	public GestionAccueil getGestionAccueil() {
-		return gestionAccueil;
+		return this.gestionAccueil;
 	}
 
 	private GestionBienLogement gestionBienLogement;
@@ -378,6 +379,12 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesBiens_AjouterPaiements.setName("btnMesBiens_AjouterPaiements");
 		panelMesBiens.add(btnMesBiens_AjouterPaiements);
 
+		JButton btnMesBiens_AfficherCompteurs_Bien = new JButton("Afficher les compteurs");
+		btnMesBiens_AfficherCompteurs_Bien.setBounds(551, 192, 161, 23);
+		btnMesBiens_AfficherCompteurs_Bien.addActionListener(this.gestionAccueil);
+		btnMesBiens_AfficherCompteurs_Bien.setName("btnMesBiens_AfficherCompteurs_Bien");
+		panelMesBiens.add(btnMesBiens_AfficherCompteurs_Bien);
+
 		// Boutons LOGEMENTS
 		JButton btnMesBiens_AjouterLogement = new JButton("Ajouter un logement");
 		btnMesBiens_AjouterLogement.setBounds(551, 323, 161, 23);
@@ -396,6 +403,12 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesBiens_AjouterPaiements_Logements.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterPaiements_Logements.setName("btnMesBiens_AjouterPaiements_Logements");
 		panelMesBiens.add(btnMesBiens_AjouterPaiements_Logements);
+
+		JButton btnMesBiens_AfficherCompteurs_Logement = new JButton("Afficher les compteurs");
+		btnMesBiens_AfficherCompteurs_Logement.setBounds(551, 425, 161, 23);
+		btnMesBiens_AfficherCompteurs_Logement.addActionListener(this.gestionAccueil);
+		btnMesBiens_AfficherCompteurs_Logement.setName("btnMesBiens_AfficherCompteurs_Logement");
+		panelMesBiens.add(btnMesBiens_AfficherCompteurs_Logement);
 
 		////////////////////////////////////////////////////////////////////////////
 		// LAYERED MES
