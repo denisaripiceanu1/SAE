@@ -118,7 +118,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
         JButton btnModifier = new JButton("Modifier");
         btnModifier.setBounds(144, 461, 200, 25);
         panel.add(btnModifier);
-        btnModifier.addActionListener(new GestionModificationLocataire(this));
+        btnModifier.addActionListener(gestionModificationLocataire);
 
         // Séparateur vertical et étiquette "Opérations"
         JSeparator separator = new JSeparator();

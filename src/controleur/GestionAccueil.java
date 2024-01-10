@@ -35,6 +35,7 @@ import modele.dao.DaoImmeuble;
 import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
+import vue.insertion.Fenetre_AffichageCompteursBien;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
@@ -618,6 +619,25 @@ public class GestionAccueil implements ActionListener {
 					paiement_bien.moveToFront();
 				} else {
 					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				break;
+			
+			case "btnMesBiens_AfficherCompteurs_Bien":
+				if (Sauvegarde.onSave("Immeuble") == true) {
+					Fenetre_AffichageCompteursBien affichage_compteursBien = new Fenetre_AffichageCompteursBien();
+					this.fenetreAccueil.getLayeredPane().add(affichage_compteursBien);
+					// On test d'afficher les compteurs au chargement de la page
+					try {
+						affichage_compteursBien.getGestionAffichage().chargerCompteurs();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					affichage_compteursBien.setVisible(true);
+					affichage_compteursBien.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un immeuble !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
