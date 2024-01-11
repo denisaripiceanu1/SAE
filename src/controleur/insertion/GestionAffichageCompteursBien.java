@@ -20,6 +20,7 @@ import vue.insertion.Fenetre_AffichageCompteursBien;
 import vue.insertion.Fenetre_InsertionEntreprise;
 import vue.insertion.Fenetre_InsertionPaiementBien;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
+import vue.insertion.Fenetre_InsertionReleve;
 
 public class GestionAffichageCompteursBien implements ActionListener {
 	
@@ -42,10 +43,10 @@ public class GestionAffichageCompteursBien implements ActionListener {
 		switch (btn.getText()) {
 		case "Ajouter un relevé":
 			if (Sauvegarde.onSave("Compteur") == true) {
-				Fenetre_InsertionPaiementLogement paiement_logement = new Fenetre_InsertionPaiementLogement(false);
-				fenetre_Principale.getLayeredPane().add(paiement_logement);
-				paiement_logement.setVisible(true);
-				paiement_logement.moveToFront();
+				Fenetre_InsertionReleve insertion_releve = new Fenetre_InsertionReleve();
+				fenetre_Principale.getLayeredPane().add(insertion_releve);
+				insertion_releve.setVisible(true);
+				insertion_releve.moveToFront();
 			} else {
 				JOptionPane.showMessageDialog(fenetre_Principale, "Veuillez sélectionner un compteur !", "Erreur",
 						JOptionPane.ERROR_MESSAGE);

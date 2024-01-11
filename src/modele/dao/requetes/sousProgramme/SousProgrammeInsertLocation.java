@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import modele.Louer;
 
-public class SousProgrammeInserLocation implements SousProgramme<Louer> {
+public class SousProgrammeInsertLocation implements SousProgramme<Louer> {
 
 	@Override
 	public String appelSousProgramme() {

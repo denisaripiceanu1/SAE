@@ -1,22 +1,29 @@
 package modele.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import modele.Compteur;
+import modele.ICC;
 import modele.Releve;
 import modele.dao.requetes.delete.RequeteDeleteReleve;
 import modele.dao.requetes.select.RequeteSelectReleve;
 import modele.dao.requetes.select.RequeteSelectReleveByCompteur;
 import modele.dao.requetes.select.RequeteSelectReleveById;
+import modele.dao.requetes.sousProgramme.SousProgramme;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertICC;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertReleve;
 
 public class DaoReleve extends DaoModele<Releve> implements Dao<Releve> {
 
 	@Override
 	public void create(Releve donnees) throws SQLException {
-		// TODO Auto-generated method stub
-
+		SousProgramme<Releve> sp = new SousProgrammeInsertReleve();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
+		st.execute();
 	}
 
 	@Override

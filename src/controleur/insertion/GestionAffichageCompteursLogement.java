@@ -17,6 +17,7 @@ import modele.dao.DaoCompteur;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageCompteursLogement;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
+import vue.insertion.Fenetre_InsertionReleve;
 
 public class GestionAffichageCompteursLogement implements ActionListener {
 	
@@ -39,10 +40,10 @@ public class GestionAffichageCompteursLogement implements ActionListener {
 		switch (btn.getText()) {
 		case "Ajouter un relevé":
 			if (Sauvegarde.onSave("Compteur") == true) {
-				Fenetre_InsertionPaiementLogement paiement_logement = new Fenetre_InsertionPaiementLogement(false);
-				fenetre_Principale.getLayeredPane().add(paiement_logement);
-				paiement_logement.setVisible(true);
-				paiement_logement.moveToFront();
+				Fenetre_InsertionReleve insertion_releve = new Fenetre_InsertionReleve();
+				fenetre_Principale.getLayeredPane().add(insertion_releve);
+				insertion_releve.setVisible(true);
+				insertion_releve.moveToFront();
 			} else {
 				JOptionPane.showMessageDialog(fenetre_Principale, "Veuillez sélectionner un compteur !", "Erreur",
 						JOptionPane.ERROR_MESSAGE);
