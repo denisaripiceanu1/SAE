@@ -33,7 +33,6 @@ import controleur.GestionBienLogement;
 import controleur.GestionLocations;
 import controleur.GestionTableAssurance;
 import controleur.GestionTableCharges;
-import controleur.GestionTableDocuments;
 import controleur.GestionTableLogement;
 import controleur.GestionTableTravaux;
 import modele.dao.DaoBien;
@@ -88,7 +87,6 @@ public class Fenetre_Accueil extends JFrame {
 	private GestionTableLogement gestionTableLogement;
 	private GestionTableCharges gestionTableCharges;
 	private GestionLocations gestionLocations;
-	private GestionTableDocuments gestionTableDocuments;
 
 	private DaoBien daoBien;
 	private DaoLocataire daoLocataire;
@@ -124,7 +122,6 @@ public class Fenetre_Accueil extends JFrame {
 		this.gestionAccueil = new GestionAccueil(this);
 		this.gestionTableAssurance = new GestionTableAssurance(this);
 		this.gestionTableTravaux = new GestionTableTravaux(this);
-		this.gestionTableDocuments = new GestionTableDocuments(this);
 
 		this.daoBien = new DaoBien();
 		this.daoLocataire = new DaoLocataire();
@@ -881,7 +878,6 @@ public class Fenetre_Accueil extends JFrame {
 			e.printStackTrace();
 		}
 
-//		// A faire éventuellement à la fin
 //		////////////////////////////////////////////////////////////////////////////
 //		// LAYERED
 //		// DOCUMENTS////////////////////////////////////////////////////////////////
@@ -915,9 +911,8 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesDocuments.setSelectionBackground(new Color(0, 102, 204));
 		this.table_MesDocuments
 				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
-						new String[] { "Bien/Logement", "Nom", "Montant", "Année" }));
+						new String[] { "Nom", "Montant", "Année" }));
 		this.table_MesDocuments.setBounds(40, 53, 668, 130);
-		this.table_MesDocuments.getSelectionModel().addListSelectionListener(this.gestionTableDocuments);
 		scrollPane_MesDocuments.setViewportView(this.table_MesDocuments);
 
 		// Boutons généraux
@@ -932,7 +927,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesDocuments_generer_annexe = new JButton("Génerer une annexe");
 		btn_MesDocuments_generer_annexe.setForeground(Color.WHITE);
 		btn_MesDocuments_generer_annexe.setBackground(new Color(0, 102, 204));
-		btn_MesDocuments_generer_annexe.setBounds(396, 449, 99, 31);
+		btn_MesDocuments_generer_annexe.setBounds(468, 449, 167, 31);
 		btn_MesDocuments_generer_annexe.addActionListener(this.gestionAccueil);
 		btn_MesDocuments_generer_annexe.setName("btn_MesDocuments_generer_annexe");
 		panel_MesDocuments.add(btn_MesDocuments_generer_annexe);
@@ -940,7 +935,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesDocuments_Inserer_Impots = new JButton("Insérer un impôt");
 		btn_MesDocuments_Inserer_Impots.setForeground(Color.WHITE);
 		btn_MesDocuments_Inserer_Impots.setBackground(new Color(0, 102, 204));
-		btn_MesDocuments_Inserer_Impots.setBounds(258, 449, 94, 31);
+		btn_MesDocuments_Inserer_Impots.setBounds(271, 449, 130, 31);
 		btn_MesDocuments_Inserer_Impots.addActionListener(this.gestionAccueil);
 		btn_MesDocuments_Inserer_Impots.setName("btn_MesDocuments_Inserer_Impots");
 		panel_MesDocuments.add(btn_MesDocuments_Inserer_Impots);
@@ -1039,6 +1034,10 @@ public class Fenetre_Accueil extends JFrame {
 		return this.table_MesChargesLocatives;
 	}
 
+	public JTable getTableDocuments() {
+		return this.table_MesDocuments;
+	}
+
 	public JTextField getTextField_loyer() {
 		return this.textField_loyer;
 	}
@@ -1089,5 +1088,9 @@ public class Fenetre_Accueil extends JFrame {
 
 	public JComboBox<String> getComboBox_MesChargesLocatives() {
 		return this.comboBox_MesChargesLocatives;
+	}
+
+	public JComboBox<String> getComboBox_MesDocuments() {
+		return this.comboBox_MesDocuments;
 	}
 }

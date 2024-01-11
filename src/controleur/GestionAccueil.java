@@ -22,6 +22,8 @@ import modele.Echeance;
 import modele.Entreprise;
 import modele.Facture;
 import modele.Immeuble;
+import modele.Imposer;
+import modele.Impôt;
 import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoAssurance;
@@ -30,6 +32,8 @@ import modele.dao.DaoEcheance;
 import modele.dao.DaoEntreprise;
 import modele.dao.DaoFacture;
 import modele.dao.DaoImmeuble;
+import modele.dao.DaoImposer;
+import modele.dao.DaoImpôt;
 import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
@@ -68,6 +72,8 @@ public class GestionAccueil implements ActionListener {
 	private DaoEntreprise daoEntreprise;
 	private DaoFacture daoFacture;
 	private DaoLocataire daoLocataire;
+	private DaoImposer daoImposer;
+	private DaoImpôt daoImpot;
 
 	public GestionAccueil(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
@@ -79,6 +85,8 @@ public class GestionAccueil implements ActionListener {
 		this.daoEntreprise = new DaoEntreprise();
 		this.daoFacture = new DaoFacture();
 		this.daoLocataire = new DaoLocataire();
+		this.daoImposer = new DaoImposer();
+		this.daoImpot = new DaoImpôt();
 	}
 
 	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE
@@ -454,6 +462,63 @@ public class GestionAccueil implements ActionListener {
 	// LAYERED MES DOCUMENTS
 	// ////////////////////////////////////////////////////////////////
 
+	public void ecrireLigneTableDocuments(int numeroLigne, Impôt impot) throws SQLException {
+		JTable tableDocuments = this.fenetreAccueil.getTableDocuments();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableDocuments.getModel();
+
+		modeleTable.setValueAt(impot.getNom(), numeroLigne, 0);
+		modeleTable.setValueAt(impot.getMontant(), numeroLigne, 1);
+		modeleTable.setValueAt(impot.getAnnee(), numeroLigne, 2);
+
+	}
+
+	public void chargerImpot() throws SQLException {
+
+		List<Impôt> impots = this.daoImpot.findAll();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableDocuments().getModel();
+
+		modeleTable.setRowCount(impots.size());
+
+		for (int i = 0; i < impots.size(); i++) {
+			Impôt impot = impots.get(i);
+			modeleTable.addRow(new Object[0]); // Ajouter une nouvelle ligne
+			this.ecrireLigneTableDocuments(i, impot);
+		}
+	}
+
+	// Methode pour filtrer les Impôts par Id Logement
+	private void filtreImpotByLogement() {
+		JComboBox<String> comboBox_Logement = this.fenetreAccueil.getComboBox_MesDocuments();
+		String idLogementSelectionne = comboBox_Logement.getSelectedItem().toString();
+
+		// Si l'ID selectionne est diffÃ©rent de "ID du logement", filtrez la table
+		// des assurances
+		if (!idLogementSelectionne.equals("ID du logement")) {
+			try {
+				this.updateTableDocumentsForLogement(idLogementSelectionne);
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
+	private void updateTableDocumentsForLogement(String idLogement) throws SQLException {
+		List<Imposer> impotLogement = this.daoImposer.findImposerByBien(idLogement);
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableDocuments().getModel();
+		modeleTable.setRowCount(impotLogement.size());
+
+		for (int i = 0; i < impotLogement.size(); i++) {
+			Imposer imposer = impotLogement.get(i);
+			Impôt impot = this.daoImpot.findById(String.valueOf(imposer.getImpot().getIdImpot()));
+			this.ecrireLigneTableDocuments(i, impot);
+		}
+		Bien bien = this.daoBien.findById(idLogement);
+		Sauvegarde.deleteItem("Logement");
+		Sauvegarde.addItem("Logement", bien);
+	}
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NAVIGATION
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -622,7 +687,7 @@ public class GestionAccueil implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
-			
+
 			case "btnMesBiens_AfficherCompteurs_Bien":
 				if (Sauvegarde.onSave("Immeuble")) {
 					Fenetre_AffichageCompteursBien affichage_compteursBien = new Fenetre_AffichageCompteursBien();
@@ -677,7 +742,7 @@ public class GestionAccueil implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
-				
+
 			case "btnMesBiens_AfficherCompteurs_Logement":
 				if (Sauvegarde.onSave("Logement")) {
 					Fenetre_AffichageCompteursLogement affichage_compteursLogement = new Fenetre_AffichageCompteursLogement();
@@ -1046,7 +1111,14 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesDocuments_Charger":
-
+				try {
+					this.chargerImpot();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null,
+							"Erreur lors du chargement des assurance. Veuillez réessayer plus tard.",
+							"Erreur de chargement", JOptionPane.ERROR_MESSAGE);
+				}
 				break;
 			case "btn_MesDocuments_generer_annexe":
 
@@ -1113,5 +1185,6 @@ public class GestionAccueil implements ActionListener {
 		this.filtreAssuranceByLogement();
 		this.filtreChargesByLogement();
 		this.filtreRegularisationChargesByLocataire();
+		this.filtreImpotByLogement();
 	}
 }

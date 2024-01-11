@@ -24,13 +24,13 @@ public class DaoImpôt extends DaoModele<Impôt> implements Dao<Impôt> {
 
 	@Override
 	public void delete(Impôt donnees) {
-		delete(donnees);
+		this.delete(donnees);
 
 	}
 
 	@Override
 	public Impôt findById(String... id) throws SQLException {
-		List<Impôt> impots = find(new RequeteSelectImpôtById(), id);
+		List<Impôt> impots = this.find(new RequeteSelectImpôtById(), id);
 		if (impots.isEmpty()) {
 			return null;
 		}
@@ -39,14 +39,15 @@ public class DaoImpôt extends DaoModele<Impôt> implements Dao<Impôt> {
 
 	@Override
 	public List<Impôt> findAll() throws SQLException {
-		return find(new RequeteSelectImpôt());
+		return this.find(new RequeteSelectImpôt());
 	}
 
 	@Override
 	protected Impôt creerInstance(ResultSet curseur) throws SQLException {
 		Impôt impôt = null;
 		try {
-			impôt = new Impôt(curseur.getInt("id_Impot"), curseur.getString("nom"), curseur.getDouble("montant"), curseur.getString("annee"));
+			impôt = new Impôt(curseur.getInt("Id_Impot"), curseur.getString("nom"), curseur.getDouble("montant"),
+					curseur.getString("annee"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
