@@ -34,6 +34,7 @@ import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageCompteursBien;
+import vue.insertion.Fenetre_AffichageCompteursLogement;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionBien;
@@ -623,7 +624,7 @@ public class GestionAccueil implements ActionListener {
 				break;
 			
 			case "btnMesBiens_AfficherCompteurs_Bien":
-				if (Sauvegarde.onSave("Immeuble") == true) {
+				if (Sauvegarde.onSave("Immeuble")) {
 					Fenetre_AffichageCompteursBien affichage_compteursBien = new Fenetre_AffichageCompteursBien();
 					this.fenetreAccueil.getLayeredPane().add(affichage_compteursBien);
 					// On test d'afficher les compteurs au chargement de la page
@@ -671,6 +672,25 @@ public class GestionAccueil implements ActionListener {
 					this.fenetreAccueil.getLayeredPane().add(paiement_logement);
 					paiement_logement.setVisible(true);
 					paiement_logement.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				break;
+				
+			case "btnMesBiens_AfficherCompteurs_Logement":
+				if (Sauvegarde.onSave("Logement")) {
+					Fenetre_AffichageCompteursLogement affichage_compteursLogement = new Fenetre_AffichageCompteursLogement();
+					this.fenetreAccueil.getLayeredPane().add(affichage_compteursLogement);
+					// On test d'afficher les compteurs au chargement de la page
+					try {
+						affichage_compteursLogement.getGestionAffichage().chargerCompteurs();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					affichage_compteursLogement.setVisible(true);
+					affichage_compteursLogement.moveToFront();
 				} else {
 					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);

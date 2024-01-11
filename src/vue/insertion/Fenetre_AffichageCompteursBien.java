@@ -16,32 +16,32 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import controleur.insertion.GestionAffichageCompteurs;
+import controleur.insertion.GestionAffichageCompteursBien;
 import controleur.insertion.GestionAffichageInfoLocataire;
-import controleur.insertion.GestionTableAffichageCompteurs;
+import controleur.insertion.GestionTableAffichageCompteursBien;
 import controleur.modification.GestionModificationLocataire;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 public class Fenetre_AffichageCompteursBien extends JInternalFrame {
 	
-    private GestionAffichageCompteurs gestionAffichage;
-	private GestionTableAffichageCompteurs gestionClic;
+    private GestionAffichageCompteursBien gestionAffichage;
+	private GestionTableAffichageCompteursBien gestionClic;
 	// Table pour afficher les compteurs associés
     private JScrollPane scrollPane_table_compteurs;
 	private JTable table_compteurs;
 
-    public Fenetre_AffichageCompteursBien() {
+	public Fenetre_AffichageCompteursBien() {
         // Initialisation du gestionnaire d'affichage 
-        this.gestionAffichage = new GestionAffichageCompteurs(this); 
-        this.gestionClic = new GestionTableAffichageCompteurs(this);
+        this.gestionAffichage = new GestionAffichageCompteursBien(this); 
+        this.gestionClic = new GestionTableAffichageCompteursBien(this);
    
         this.setBounds(100, 100, 762, 541);
         this.getContentPane().setLayout(null);
 
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
-        panel.setBounds(6, 6, 755, 511);
+        panel.setBounds(0, 0, 750, 512);
         this.getContentPane().add(panel);
         panel.setLayout(null);
 
@@ -59,12 +59,11 @@ public class Fenetre_AffichageCompteursBien extends JInternalFrame {
         
         this.scrollPane_table_compteurs = new JScrollPane();
 		this.scrollPane_table_compteurs.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
-		this.scrollPane_table_compteurs.setBounds(55, 103, 627, 297);
+		this.scrollPane_table_compteurs.setBounds(60, 103, 627, 238);
 		panel.add(this.scrollPane_table_compteurs);
 
 		// Table pour afficher les données d'entreprise
 		this.table_compteurs = new JTable();
-		this.table_compteurs.setSelectionBackground(new Color(0, 102, 204));
 		this.table_compteurs
 				.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -83,20 +82,25 @@ public class Fenetre_AffichageCompteursBien extends JInternalFrame {
 		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setForeground(Color.WHITE);
 		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.setBounds(248, 437, 94, 31);
+		btnAnnuler.setBounds(228, 369, 94, 31);
 		btnAnnuler.addActionListener(gestionAffichage);
 		panel.add(btnAnnuler);
 
 		JButton btnAjouterReleve = new JButton("Ajouter un relevé");
 		btnAjouterReleve.setForeground(Color.WHITE);
 		btnAjouterReleve.setBackground(new Color(0, 102, 204));
-		btnAjouterReleve.setBounds(389, 437, 130, 31);
+		btnAjouterReleve.setBounds(362, 369, 166, 31);
 		btnAjouterReleve.addActionListener(gestionAffichage);
 		panel.add(btnAjouterReleve);
     }
     
-    public GestionAffichageCompteurs getGestionAffichage() {
+    public GestionAffichageCompteursBien getGestionAffichage() {
 		return gestionAffichage;
+	}
+    
+
+    public JTable getTable_compteurs() {
+		return table_compteurs;
 	}
 
  

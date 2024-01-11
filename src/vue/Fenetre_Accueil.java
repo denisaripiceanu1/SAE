@@ -344,7 +344,7 @@ public class Fenetre_Accueil extends JFrame {
 
 		JSeparator separator_mesBiens_1 = new JSeparator();
 		separator_mesBiens_1.setForeground(new Color(0, 102, 204));
-		separator_mesBiens_1.setBounds(40, 274, 494, 2);
+		separator_mesBiens_1.setBounds(40, 274, 690, 2);
 		panelMesBiens.add(separator_mesBiens_1);
 
 		// Boutons généraux
@@ -393,25 +393,25 @@ public class Fenetre_Accueil extends JFrame {
 
 		// Boutons LOGEMENTS
 		JButton btnMesBiens_AjouterLogement = new JButton("Ajouter un logement");
-		btnMesBiens_AjouterLogement.setBounds(551, 323, 161, 23);
+		btnMesBiens_AjouterLogement.setBounds(551, 300, 161, 23);
 		btnMesBiens_AjouterLogement.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterLogement.setName("btnMesBiens_AjouterLogement");
 		panelMesBiens.add(btnMesBiens_AjouterLogement);
 
 		JButton btnMesBiens_AjouterDiagnostic_Logements = new JButton("Ajouter un diagnostic");
-		btnMesBiens_AjouterDiagnostic_Logements.setBounds(551, 357, 161, 23);
+		btnMesBiens_AjouterDiagnostic_Logements.setBounds(551, 334, 161, 23);
 		btnMesBiens_AjouterDiagnostic_Logements.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterDiagnostic_Logements.setName("btnMesBiens_AjouterDiagnostic_Logements");
 		panelMesBiens.add(btnMesBiens_AjouterDiagnostic_Logements);
 
 		JButton btnMesBiens_AjouterPaiements_Logements = new JButton("Ajouter des factures");
-		btnMesBiens_AjouterPaiements_Logements.setBounds(551, 391, 161, 23);
+		btnMesBiens_AjouterPaiements_Logements.setBounds(551, 368, 161, 23);
 		btnMesBiens_AjouterPaiements_Logements.addActionListener(this.gestionAccueil);
 		btnMesBiens_AjouterPaiements_Logements.setName("btnMesBiens_AjouterPaiements_Logements");
 		panelMesBiens.add(btnMesBiens_AjouterPaiements_Logements);
 
 		JButton btnMesBiens_AfficherCompteurs_Logement = new JButton("Afficher les compteurs");
-		btnMesBiens_AfficherCompteurs_Logement.setBounds(551, 425, 161, 23);
+		btnMesBiens_AfficherCompteurs_Logement.setBounds(551, 402, 161, 23);
 		btnMesBiens_AfficherCompteurs_Logement.addActionListener(this.gestionAccueil);
 		btnMesBiens_AfficherCompteurs_Logement.setName("btnMesBiens_AfficherCompteurs_Logement");
 		panelMesBiens.add(btnMesBiens_AfficherCompteurs_Logement);
