@@ -50,7 +50,7 @@ public class Fenetre_AffichageCompteursLogement extends JInternalFrame {
 	        JLabel lbl_AffichageCompteursBien = new JLabel("Compteurs du logement");
 	        lbl_AffichageCompteursBien.setHorizontalAlignment(SwingConstants.CENTER);
 	        lbl_AffichageCompteursBien.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	        lbl_AffichageCompteursBien.setBounds(293, 11, 160, 48);
+	        lbl_AffichageCompteursBien.setBounds(259, 10, 225, 48);
 	        panel.add(lbl_AffichageCompteursBien);
 	        
 	        this.scrollPane_table_compteurs = new JScrollPane();
