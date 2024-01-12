@@ -9,7 +9,7 @@ import modele.dao.requetes.Requete;
 public class RequeteSelectFactureChargeById implements Requete<Facture> {
 
     public String requete() {
-        return "SELECT * FROM Facture WHERE designation NOT IN ('Travaux', 'Loyer') AND numero = ? ORDER BY Id_Bien ASC, date_emission DESC";
+        return "SELECT * FROM Facture WHERE designation NOT IN ('Travaux') AND numero = ? ORDER BY Id_Bien ASC, date_emission DESC";
     }
 
     @Override

@@ -554,9 +554,6 @@ public class GestionAccueil implements ActionListener {
 			case "btnRegularisationDesCharges":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_RegularisationDesCharges());
 				break;
-			case "btnSoldeDeToutCompte":
-				this.rendreVisible(this.fenetreAccueil.getLayeredPane_SoldeDeToutCompte());
-				break;
 			case "btnMesDocuments":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesDocuments());
 				break;
@@ -940,9 +937,9 @@ public class GestionAccueil implements ActionListener {
 				break;
 
 			///////////////////////////////
-			// LAYERED MES CHARGES LOCATIVES
+			// LAYERED MES FACTURES
 			///////////////////////////////
-			case "btn_MesChargesLocatives_Modifier":
+			case "btn_MesFactures_Modifier":
 				// Premier test si il n'y a aucune charge sélectionnée alors erreur
 				if (Sauvegarde.onSave("Charge") == false) {
 					JOptionPane.showMessageDialog(this.fenetreAccueil,
@@ -990,7 +987,7 @@ public class GestionAccueil implements ActionListener {
 
 				break;
 
-			case "btn_MesChargesLocatives_Supprimer":
+			case "btn_MesFactures_Supprimer":
 				if (Sauvegarde.onSave("Charge") == true) {
 					Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Charge");
 					Fenetre_SupprimerFactureCharge supp_charge = new Fenetre_SupprimerFactureCharge();
