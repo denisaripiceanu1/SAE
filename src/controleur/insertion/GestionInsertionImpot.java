@@ -36,16 +36,23 @@ public class GestionInsertionImpot {
 			try {
 
 				impot = new Impôt(this.fii.getTextField_nom().getText(),
-						Float.parseFloat(this.fii.getTextField_montant().getText()),
+						Double.parseDouble(this.fii.getTextField_montant().getText()),
 						this.fii.getTextField_annee().getText());
 
-				this.daoImpot.create(impot);
+				// Ajouter le nouvel impot dans la base de données
+				int idImpotSequence = this.daoImpot.createAvecSequence(impot);
+				// Attribue l'id de la séquence à l'impot
+				impot.setIdImpot(idImpotSequence);
+
 				this.fii.dispose();
+
+				JOptionPane.showMessageDialog(null, "Impôt ajouté avec succès !", "Succès", JOptionPane.YES_OPTION);
+
 			} catch (Exception e1) {
 				e1.printStackTrace();
 				// Afficher un message d'erreur à l'utilisateur
 				JOptionPane.showMessageDialog(null,
-						"Erreur lors de l'ajout de l'assurance dans la base de données. Veuillez réessayer plus tard.",
+						"Erreur lors de l'ajout de l'impôt dans la base de données. Veuillez réessayer plus tard.",
 						"Erreur d'ajout", JOptionPane.ERROR_MESSAGE);
 			}
 			break;
