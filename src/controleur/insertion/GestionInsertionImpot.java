@@ -1,6 +1,7 @@
 package controleur.insertion;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -13,7 +14,7 @@ import modele.dao.DaoImpôt;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionImpot;
 
-public class GestionInsertionImpot {
+public class GestionInsertionImpot implements ActionListener {
 
 	private Fenetre_InsertionImpot fii;
 	private DaoBien daoBien;
