@@ -1,7 +1,6 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,6 +19,7 @@ public class DaoQuotite extends DaoModele<Quotite> implements Dao<Quotite> {
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
+		st.close();
 	}
 
 	@Override

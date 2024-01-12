@@ -27,22 +27,23 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
+		st.close();
 	}
 
 	@Override
 	public void update(Louer donnees) throws SQLException {
 		RequeteUpdateLouer requeteUpdate = new RequeteUpdateLouer();
-		miseAJour(requeteUpdate, donnees);
+		this.miseAJour(requeteUpdate, donnees);
 	}
 
 	@Override
 	public void delete(Louer donnees) throws SQLException {
-		miseAJour(new RequeteDeleteLocationByBien(), donnees);
+		this.miseAJour(new RequeteDeleteLocationByBien(), donnees);
 	}
 
 	@Override
 	public Louer findById(String... id) throws SQLException {
-		List<Louer> louer = find(new RequeteSelectLouerById(), id);
+		List<Louer> louer = this.find(new RequeteSelectLouerById(), id);
 		if (louer.isEmpty()) {
 			return null;
 		}
@@ -51,7 +52,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 
 	@Override
 	public List<Louer> findAll() throws SQLException {
-		return find(new RequeteSelectLouer());
+		return this.find(new RequeteSelectLouer());
 	}
 
 	@Override
@@ -95,15 +96,15 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 	// ---------------- AUTRES METHODES ----------------//
 
 	public List<Louer> findLocationByBien(String id) throws SQLException {
-		return find(new RequeteSelectLocationParBien(), id);
+		return this.find(new RequeteSelectLocationParBien(), id);
 
 	}
 
 	public void deleteVrai(Louer id) throws SQLException {
-		miseAJour(new RequeteDeleteLocation(), id);
+		this.miseAJour(new RequeteDeleteLocation(), id);
 	}
 
 	public List<Louer> findByLocataire(String idLocataire) throws SQLException {
-		return find(new RequeteSelectLocationParLocataire(), idLocataire);
+		return this.find(new RequeteSelectLocationParLocataire(), idLocataire);
 	}
 }

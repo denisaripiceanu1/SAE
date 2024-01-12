@@ -1,9 +1,7 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
-
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,6 +19,7 @@ public class DaoICC extends DaoModele<ICC> implements Dao<ICC> {
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
+		st.close();
 	}
 
 	@Override
@@ -31,13 +30,13 @@ public class DaoICC extends DaoModele<ICC> implements Dao<ICC> {
 
 	@Override
 	public void delete(ICC donnees) {
-		delete(donnees);
+		this.delete(donnees);
 
 	}
 
 	@Override
 	public ICC findById(String... id) throws SQLException {
-		List<ICC> iccs = find(new RequeteSelectICCById(), id);
+		List<ICC> iccs = this.find(new RequeteSelectICCById(), id);
 		if (iccs.isEmpty()) {
 			return null;
 		}
@@ -46,7 +45,7 @@ public class DaoICC extends DaoModele<ICC> implements Dao<ICC> {
 
 	@Override
 	public List<ICC> findAll() throws SQLException {
-		return find(new RequeteSelectICC());
+		return this.find(new RequeteSelectICC());
 	}
 
 	@Override

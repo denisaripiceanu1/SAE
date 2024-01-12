@@ -36,6 +36,7 @@ public class DaoImpôt extends DaoModele<Impôt> implements Dao<Impôt> {
 				idImpot = resultSet.getInt(1);
 			}
 		}
+		st.close();
 		return idImpot;
 	}
 

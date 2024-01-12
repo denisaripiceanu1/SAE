@@ -6,14 +6,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import modele.Compteur;
-import modele.ICC;
 import modele.Releve;
 import modele.dao.requetes.delete.RequeteDeleteReleve;
 import modele.dao.requetes.select.RequeteSelectReleve;
 import modele.dao.requetes.select.RequeteSelectReleveByCompteur;
 import modele.dao.requetes.select.RequeteSelectReleveById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
-import modele.dao.requetes.sousProgramme.SousProgrammeInsertICC;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertReleve;
 
 public class DaoReleve extends DaoModele<Releve> implements Dao<Releve> {
@@ -24,6 +22,7 @@ public class DaoReleve extends DaoModele<Releve> implements Dao<Releve> {
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
+		st.close();
 	}
 
 	@Override
@@ -54,7 +53,7 @@ public class DaoReleve extends DaoModele<Releve> implements Dao<Releve> {
 
 	@Override
 	public Releve findById(String... id) throws SQLException {
-		List<Releve> releve = find(new RequeteSelectReleveById(), id);
+		List<Releve> releve = this.find(new RequeteSelectReleveById(), id);
 		if (releve.isEmpty()) {
 			return null;
 		}
@@ -63,11 +62,11 @@ public class DaoReleve extends DaoModele<Releve> implements Dao<Releve> {
 
 	@Override
 	public List<Releve> findAll() throws SQLException {
-		return find(new RequeteSelectReleve());
+		return this.find(new RequeteSelectReleve());
 	}
 
 	public List<Releve> findReleveByCompteur(String id) throws SQLException {
-		return find(new RequeteSelectReleveByCompteur(), id);
+		return this.find(new RequeteSelectReleveByCompteur(), id);
 	}
 
 }

@@ -39,7 +39,9 @@ public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnos
 				idDiagnostic = resultSet.getInt(1);
 			}
 		}
+		st.close();
 		return idDiagnostic;
+
 	}
 
 	@Override
