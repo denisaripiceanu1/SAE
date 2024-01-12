@@ -57,7 +57,7 @@ public class Fenetre_InsertionQuotite extends JInternalFrame {
         panel.add(this.comboBox_typeDeCompteur);
 
         // Champ de texte pour le pourcentage
-        this.textField_Pourcentage = createTextField("Pourcentage", 271, 291, 190, 40, panel);
+        this.textField_Pourcentage = createTextField("Pourcentage (%)", 271, 291, 190, 40, panel);
 
         // Boutons Ajouter et Annuler
         createButton("Ajouter", 246, 447, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionClic, panel);

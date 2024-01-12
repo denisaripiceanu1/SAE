@@ -7,15 +7,14 @@ public class Impôt {
 	private double montant;
 	private String annee;
 
-	public Impôt(int idImpot, String nom, double montant, String annee) {
-		this.idImpot = idImpot;
+	public Impôt(String nom, double montant, String annee) {
 		this.nom = nom;
 		this.montant = montant;
 		this.annee = annee;
 	}
 
 	public int getIdImpot() {
-		return idImpot;
+		return this.idImpot;
 	}
 
 	public void setIdImpot(int idImpot) {
@@ -23,7 +22,7 @@ public class Impôt {
 	}
 
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 
 	public void setNom(String nom) {
@@ -31,7 +30,7 @@ public class Impôt {
 	}
 
 	public double getMontant() {
-		return montant;
+		return this.montant;
 	}
 
 	public void setMontant(double montant) {
@@ -39,7 +38,7 @@ public class Impôt {
 	}
 
 	public String getAnnee() {
-		return annee;
+		return this.annee;
 	}
 
 	public void setAnnee(String annee) {

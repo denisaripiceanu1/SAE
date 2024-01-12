@@ -40,7 +40,6 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 
 	// Autres elements
 	private JScrollPane scrollPane_table_entreprise;
-	private JSeparator separator_Travaux;
 	private JComboBox<String> comboBox_modePaiement;
 
 	public Fenetre_InsertionPaiementLogement(boolean isAjouterFacture) {
@@ -160,11 +159,6 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		comboBox_Designation.addActionListener(gestionClic);
 		panel.add(this.comboBox_Designation);
 
-		// Séparateur vertical
-		separator_Travaux = new JSeparator();
-		separator_Travaux.setBounds(90, 401, 591, 2);
-		panel.add(separator_Travaux);
-
 		// Boutons radio
 		this.rdbtnOui.setForeground(new Color(0, 0, 0));
 		this.rdbtnOui.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -192,11 +186,11 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		btnAnnuler.addActionListener(gestionClic);
 		panel.add(btnAnnuler);
 
-		JSeparator separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBackground(new Color(0, 102, 204));
-		separator.setBounds(473, 106, 20, 278);
-		panel.add(separator);
+		JSeparator separator_vertical = new JSeparator();
+		separator_vertical.setOrientation(SwingConstants.VERTICAL);
+		separator_vertical.setBackground(new Color(0, 102, 204));
+		separator_vertical.setBounds(473, 106, 20, 278);
+		panel.add(separator_vertical);
 
 		// Partie ENTREPRISE
 		this.btn_ajouter_entreprise = new JButton("Insérer");
