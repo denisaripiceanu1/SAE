@@ -295,7 +295,7 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.tableMesBiens = new JTable();
 		this.tableMesBiens.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
-				new String[] { "Nom du bien", "Adresse", "Nb de logements" }));
+				new String[] { "Nom du bien", "Adresse", "Nb de logements", "Type"}));
 		this.tableMesBiens.setBounds(40, 53, 668, 130);
 		scrollPaneMesBiens.setViewportView(this.tableMesBiens);
 		this.tableMesBiens.getSelectionModel().addListSelectionListener(this.gestionBienLogement);
@@ -309,7 +309,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.tableMesBiens_Logements = new JTable();
 		this.tableMesBiens_Logements
 				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
-						new String[] { "Nom", "Surface", "Nb pi\u00E8ces", "Etage", "Aquisition", "Occup\u00E9" }));
+						new String[] { "Nom", "Surface", "Nb pi\u00E8ces", "Etage", "Aquisition", "Occup\u00E9", "Type"}));
 		this.tableMesBiens_Logements.setBounds(40, 266, 438, 106);
 		scrollPaneMesBiens_Logements.setViewportView(this.tableMesBiens_Logements);
 		// Pour action de ligne sur table logement
@@ -657,7 +657,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesChargesLocatives
 				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
 						new String[] { "Logement", "Numero", "Designation", "Date d'emission", "Date de paiement",
-								"Imputable", "Montant", "Accompte", "Restant du" }));
+								"Imputable", "Montant", "Montant payé", "Restant dû" }));
 		this.table_MesChargesLocatives.setBounds(40, 53, 668, 130);
 		scrollPane_MesChargesLocatives.setViewportView(this.table_MesChargesLocatives);
 		this.table_MesChargesLocatives.getSelectionModel().addListSelectionListener(this.gestionTableCharges);
