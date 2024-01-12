@@ -24,6 +24,7 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
+		st.close();
 
 	}
 
@@ -35,7 +36,7 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 
 	@Override
 	public void delete(Compteur donnees) throws SQLException {
-		miseAJour(new RequeteDeleteCompteur(), donnees);
+		this.miseAJour(new RequeteDeleteCompteur(), donnees);
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 
 	@Override
 	public Compteur findById(String... id) throws SQLException {
-		List<Compteur> compteurs = find(new RequeteSelectCompteurById(), id);
+		List<Compteur> compteurs = this.find(new RequeteSelectCompteurById(), id);
 		if (compteurs.isEmpty()) {
 			return null;
 		}
@@ -70,7 +71,7 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 	}
 
 	public Compteur findByIdImmeuble(String... id) throws SQLException {
-		List<Compteur> compteurs = find(new RequeteSelectCompteurParImmeuble(), id);
+		List<Compteur> compteurs = this.find(new RequeteSelectCompteurParImmeuble(), id);
 		if (compteurs.isEmpty()) {
 			return null;
 		}
@@ -78,7 +79,7 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 	}
 
 	public Compteur findByIdBien(String... id) throws SQLException {
-		List<Compteur> compteurs = find(new RequeteSelectCompteurByBien(), id);
+		List<Compteur> compteurs = this.find(new RequeteSelectCompteurByBien(), id);
 		if (compteurs.isEmpty()) {
 			return null;
 		}
@@ -86,16 +87,16 @@ public class DaoCompteur extends DaoModele<Compteur> implements Dao<Compteur> {
 	}
 
 	public List<Compteur> findByIdImmeubleListe(String id) throws SQLException {
-		return find(new RequeteSelectCompteurParImmeuble(), id);
+		return this.find(new RequeteSelectCompteurParImmeuble(), id);
 	}
 
 	@Override
 	public List<Compteur> findAll() throws SQLException {
-		return find(new RequeteSelectCompteur());
+		return this.find(new RequeteSelectCompteur());
 	}
 
 	public List<Compteur> findByIdBienListe(String idBien) throws SQLException {
-		return find(new RequeteSelectCompteurByBien(), idBien);
+		return this.find(new RequeteSelectCompteurByBien(), idBien);
 	}
 
 }

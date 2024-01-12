@@ -24,6 +24,7 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
+		st.close();
 	}
 
 	@Override
@@ -50,7 +51,8 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 			DaoEntreprise daoEntreprise = new DaoEntreprise();
 			Entreprise entreprise = daoEntreprise.findById(siretEntreprise);
 
-			assurance = new Assurance(curseur.getString("numero_police"), curseur.getFloat("montant"), bien, entreprise);
+			assurance = new Assurance(curseur.getString("numero_police"), curseur.getFloat("montant"), bien,
+					entreprise);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -76,7 +78,7 @@ public class DaoAssurance extends DaoModele<Assurance> implements Dao<Assurance>
 	public List<Assurance> findByLogement(String idImmeuble) throws SQLException {
 		return this.find(new RequeteSelectAssuranceByLogement(), idImmeuble);
 	}
-	
+
 	public Assurance findByLogementObject(String idImmeuble) throws SQLException {
 		List<Assurance> assurances = this.find(new RequeteSelectAssuranceByLogement(), idImmeuble);
 		if (assurances.isEmpty()) {
