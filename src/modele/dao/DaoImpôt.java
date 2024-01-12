@@ -1,12 +1,15 @@
 package modele.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import modele.Impôt;
 import modele.dao.requetes.select.RequeteSelectImpôt;
 import modele.dao.requetes.select.RequeteSelectImpôtById;
+import modele.dao.requetes.sousProgramme.SousProgramme;
 
 public class DaoImpôt extends DaoModele<Impôt> implements Dao<Impôt> {
 
@@ -14,6 +17,25 @@ public class DaoImpôt extends DaoModele<Impôt> implements Dao<Impôt> {
 	public void create(Impôt donnees) {
 		// TODO Auto-generated method stub
 
+	}
+
+	// Méthode qui créer l'objet puis récupère son ID depuis la BD juste après la
+	// création lorsque c'est une séquence
+	public int createAvecSequence(Impôt donnees) throws SQLException {
+		SousProgramme<Impôt> sp = new SousProgrammeInsertImpot();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees, Statement.RETURN_GENERATED_KEYS);
+		int idImpot = -1; // Initialiser à une valeur qui ne peut pas être valide
+		int ligneInseree = st.executeUpdate();
+
+		if (ligneInseree > 0) {
+			// La ligne a été insérée avec succès, récupérer l'ID généré
+			ResultSet resultSet = st.getGeneratedKeys();
+			if (resultSet.next()) {
+				idImpot = resultSet.getInt(1);
+			}
+		}
+		return idImpot;
 	}
 
 	@Override
@@ -46,8 +68,8 @@ public class DaoImpôt extends DaoModele<Impôt> implements Dao<Impôt> {
 	protected Impôt creerInstance(ResultSet curseur) throws SQLException {
 		Impôt impôt = null;
 		try {
-			impôt = new Impôt(curseur.getInt("Id_Impot"), curseur.getString("nom"), curseur.getDouble("montant"),
-					curseur.getString("annee"));
+			impôt = new Impôt(curseur.getString("nom"), curseur.getDouble("montant"), curseur.getString("annee"));
+			impôt.setIdImpot(curseur.getInt("Id_Impot"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
