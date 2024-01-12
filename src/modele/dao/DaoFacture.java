@@ -99,7 +99,7 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 
 			facture = new Facture(curseur.getString("numero"), dateEmissionStr, datePaiementStr,
 					curseur.getString("mode_paiement"), curseur.getString("numero_devis"),
-					curseur.getString("designation"), curseur.getDouble("accompte_verse"), curseur.getDouble("montant"),
+					curseur.getString("designation"), curseur.getDouble("montant_reel_paye"), curseur.getDouble("montant"),
 					curseur.getInt("imputable_locataire"), immeuble, bien, entreprise);
 
 		} catch (Exception e) {
