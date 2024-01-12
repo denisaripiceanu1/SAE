@@ -908,7 +908,6 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesDocuments.add(scrollPane_MesDocuments);
 
 		this.table_MesDocuments = new JTable();
-		this.table_MesDocuments.setSelectionBackground(new Color(0, 102, 204));
 		this.table_MesDocuments
 				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
 						new String[] { "Nom", "Montant", "Année" }));

@@ -25,7 +25,6 @@ public class GestionInsertionImpot {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fii.getTopLevelAncestor();
 
-		// Gérer les actions en fonction du bouton cliqué
 		switch (btn.getText()) {
 		case "Ajouter":
 			// Fermer la fenêtre d'insertion après l'ajout
@@ -33,10 +32,8 @@ public class GestionInsertionImpot {
 			break;
 
 		case "Annuler":
-			// Annuler l'opération, fermer la fenêtre d'insertion
 			this.fii.dispose();
 			break;
 		}
 	}
-
 }
