@@ -64,7 +64,7 @@ public class Fenetre_Accueil extends JFrame {
 	private JTextField textField_provisionCharges;
 	private JTextField textField_caution;
 	private JTextField textField_dateEmission;
-	private JTextField textField_dateEcheance;
+	private JTextField textField_datePaiement;
 	private JTextField textField_paye;
 	private JTextField textField_restantDu;
 	private JTextField textField_moyenne_loyers;
@@ -536,14 +536,14 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_dateEmission.setBounds(510, 238, 152, 40);
 		panel_MesLocations.add(this.textField_dateEmission);
 
-		this.textField_dateEcheance = new JTextField();
-		this.textField_dateEcheance.setEditable(false);
-		this.textField_dateEcheance.setColumns(10);
-		this.textField_dateEcheance.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true),
-				"Date \u00E9ch\u00E9ance", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
-		this.textField_dateEcheance.setBackground(Color.WHITE);
-		this.textField_dateEcheance.setBounds(510, 280, 152, 40);
-		panel_MesLocations.add(this.textField_dateEcheance);
+		this.textField_datePaiement = new JTextField();
+		this.textField_datePaiement.setEditable(false);
+		this.textField_datePaiement.setColumns(10);
+		this.textField_datePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204), 1, true),
+				"Date paiement", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 102, 204)));
+		this.textField_datePaiement.setBackground(Color.WHITE);
+		this.textField_datePaiement.setBounds(510, 280, 152, 40);
+		panel_MesLocations.add(this.textField_datePaiement);
 
 		this.textField_paye = new JTextField();
 		this.textField_paye.setEditable(false);
@@ -1062,7 +1062,7 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JTextField getTextField_dateEcheance() {
-		return this.textField_dateEcheance;
+		return this.textField_datePaiement;
 	}
 
 	public JTextField getTextField_paye() {
