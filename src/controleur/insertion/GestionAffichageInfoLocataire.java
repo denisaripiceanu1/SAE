@@ -25,7 +25,10 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 
 		switch (btn.getText()) {
 		case "Régularisation des charges ":
-
+			this.fail.dispose();
+			
+			fenetre_Principale.getLayeredPane_RegularisationDesCharges();
+			fenetre_Principale.getLayeredPane_RegularisationDesCharges().setVisible(true);
 			break;
 
 		case "Solde tout compte":
