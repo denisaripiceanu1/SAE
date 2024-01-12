@@ -17,6 +17,7 @@ import modele.dao.requetes.select.RequeteSelectLouer;
 import modele.dao.requetes.select.RequeteSelectLouerById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocation;
+import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalProvisions;
 import modele.dao.requetes.update.RequeteUpdateLouer;
 
 public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
@@ -106,5 +107,15 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 
 	public List<Louer> findByLocataire(String idLocataire) throws SQLException {
 		return this.find(new RequeteSelectLocationParLocataire(), idLocataire);
+	}
+
+	public double totalProvisions(Louer donnees) throws SQLException {
+		SousProgramme<Louer> sp = new SousProgrammeTotalProvisions();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametresCalcul(st, donnees);
+		st.execute();
+		double resultat = st.getDouble(1);
+		st.close();
+		return resultat;
 	}
 }
