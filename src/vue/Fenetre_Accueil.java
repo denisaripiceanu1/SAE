@@ -93,23 +93,6 @@ public class Fenetre_Accueil extends JFrame {
 	private JTextField textField_mediane_loyers;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Fenetre_Accueil frame = new Fenetre_Accueil();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public Fenetre_Accueil() {
