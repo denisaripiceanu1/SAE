@@ -137,6 +137,7 @@ public class GestionAccueil implements ActionListener {
 
 		int nb = this.daoImmeuble.getNombreLogementsDansImmeuble(immeuble.getImmeuble());
 		modeleTable.setValueAt(nb, numeroLigne, 2);// rajouter une méthode count pour le nb logement
+		modeleTable.setValueAt(immeuble.getType_immeuble(), numeroLigne, 3);
 	}
 
 	public void chargerBiens() throws SQLException {

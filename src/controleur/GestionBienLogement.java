@@ -90,6 +90,7 @@ public class GestionBienLogement implements ListSelectionListener {
 							int nbPieces = bien.getNbPieces();
 							int etage = bien.getNumEtage();
 					        String date = bien.getDateAcquisition();
+					        String type = bien.getType_bien();
 
 							// Utiliser la méthode estLoue pour vérifier si le logement est loué
 							boolean estLoue = false;
@@ -113,6 +114,7 @@ public class GestionBienLogement implements ListSelectionListener {
 							model.setValueAt(etage, i, 3);
 							model.setValueAt(date, i, 4);
 							model.setValueAt(occupe, i, 5);
+							model.setValueAt(type, i, 6);
 						}
 					}
 				}
