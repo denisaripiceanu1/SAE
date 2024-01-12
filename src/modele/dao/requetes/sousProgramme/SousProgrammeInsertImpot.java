@@ -1,9 +1,11 @@
 package modele.dao.requetes.sousProgramme;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import modele.Impôt;
+import modele.Louer;
 
 public class SousProgrammeInsertImpot implements SousProgramme<Impôt> {
 
@@ -28,6 +30,12 @@ public class SousProgrammeInsertImpot implements SousProgramme<Impôt> {
 		prSt.setString(1, donnee.getNom());
 		prSt.setDouble(2, donnee.getMontant());
 		prSt.setString(3, donnee.getAnnee());
+	}
+
+	@Override
+	public void parametresCalcul(CallableStatement st, Louer donnees) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,5 +1,6 @@
 package modele.dao.requetes.sousProgramme;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -53,6 +54,12 @@ public class SousProgrammeInsertLocation implements SousProgramme<Louer> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, Louer donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void parametresCalcul(CallableStatement st, Louer donnees) {
 		// TODO Auto-generated method stub
 		
 	}

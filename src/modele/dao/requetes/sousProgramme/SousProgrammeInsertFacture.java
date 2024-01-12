@@ -1,10 +1,12 @@
 package modele.dao.requetes.sousProgramme;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 
 import java.sql.SQLException;
 
 import modele.Facture;
+import modele.Louer;
 
 public class SousProgrammeInsertFacture implements SousProgramme<Facture> {
 
@@ -64,6 +66,12 @@ public class SousProgrammeInsertFacture implements SousProgramme<Facture> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, Facture donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void parametresCalcul(CallableStatement st, Louer donnees) {
 		// TODO Auto-generated method stub
 		
 	}

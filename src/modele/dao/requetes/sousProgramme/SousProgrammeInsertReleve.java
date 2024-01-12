@@ -1,9 +1,11 @@
 package modele.dao.requetes.sousProgramme;
 
+import java.sql.CallableStatement;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import modele.Louer;
 import modele.Releve;
 
 public class SousProgrammeInsertReleve implements SousProgramme<Releve> {
@@ -30,6 +32,12 @@ public class SousProgrammeInsertReleve implements SousProgramme<Releve> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, Releve donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void parametresCalcul(CallableStatement st, Louer donnees) {
 		// TODO Auto-generated method stub
 		
 	}
