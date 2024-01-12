@@ -2,7 +2,6 @@ package vue;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.sql.SQLException;
@@ -179,7 +178,7 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesTravaux.setName("btnMesTravaux");
 		panel_Menu_Boutons.add(btnMesTravaux);
 
-		JButton btnMesChargesLocatives = new JButton("Mes Charges Locatives");
+		JButton btnMesChargesLocatives = new JButton("Mes Factures");
 		btnMesChargesLocatives.setForeground(new Color(255, 255, 255));
 		btnMesChargesLocatives.addActionListener(this.gestionAccueil);
 		btnMesChargesLocatives.setBackground(new Color(0, 102, 204));
