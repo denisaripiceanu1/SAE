@@ -10,6 +10,7 @@ import modele.Impôt;
 import modele.dao.requetes.select.RequeteSelectImpôt;
 import modele.dao.requetes.select.RequeteSelectImpôtById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertImpot;
 
 public class DaoImpôt extends DaoModele<Impôt> implements Dao<Impôt> {
 
