@@ -23,6 +23,7 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
+		st.close();
 	}
 
 	@Override
@@ -57,13 +58,13 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 		try {
 			immeuble = new Immeuble(curseur.getString("Id_Immeuble"), curseur.getString("adresse"),
 					curseur.getString("cp"), curseur.getString("ville"), curseur.getString("periode_construction"),
-					 curseur.getString("type_immeuble"));
+					curseur.getString("type_immeuble"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return immeuble;
 	}
-	
+
 	public List<String> getAllIdImmeuble() throws SQLException {
 		List<String> identifiants = new ArrayList<>();
 
@@ -80,25 +81,23 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 
 		return identifiants;
 	}
-	
-	 public int getNombreLogementsDansImmeuble(String idImmeuble) throws SQLException {
-	        int nombreLogements = 0;
 
-	        String sql = "SELECT COUNT(*) FROM Bien WHERE Id_Immeuble = ?";
+	public int getNombreLogementsDansImmeuble(String idImmeuble) throws SQLException {
+		int nombreLogements = 0;
 
-	        try (PreparedStatement pstmt = CictOracleDataSource.getConnectionBD().prepareStatement(sql)) {
-	            pstmt.setString(1, idImmeuble);
+		String sql = "SELECT COUNT(*) FROM Bien WHERE Id_Immeuble = ?";
 
-	            try (ResultSet rs = pstmt.executeQuery()) {
-	                if (rs.next()) {
-	                    nombreLogements = rs.getInt(1);
-	                }
-	            }
-	        }
+		try (PreparedStatement pstmt = CictOracleDataSource.getConnectionBD().prepareStatement(sql)) {
+			pstmt.setString(1, idImmeuble);
 
-	        return nombreLogements;
-	    }
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					nombreLogements = rs.getInt(1);
+				}
+			}
+		}
 
-	
+		return nombreLogements;
+	}
 
 }

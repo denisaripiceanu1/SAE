@@ -1,10 +1,7 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
-
-
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -23,6 +20,7 @@ public class DaoEntreprise extends DaoModele<Entreprise> implements Dao<Entrepri
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
+		st.close();
 	}
 
 	@Override
@@ -37,7 +35,7 @@ public class DaoEntreprise extends DaoModele<Entreprise> implements Dao<Entrepri
 
 	@Override
 	public Entreprise findById(String... id) throws SQLException {
-		List<Entreprise> entreprises = find(new RequeteSelectEntrepriseById(), id);
+		List<Entreprise> entreprises = this.find(new RequeteSelectEntrepriseById(), id);
 		if (entreprises.isEmpty()) {
 			return null;
 		}
@@ -46,7 +44,7 @@ public class DaoEntreprise extends DaoModele<Entreprise> implements Dao<Entrepri
 
 	@Override
 	public List<Entreprise> findAll() throws SQLException {
-		return find(new RequeteSelectEntreprise());
+		return this.find(new RequeteSelectEntreprise());
 	}
 
 	@Override

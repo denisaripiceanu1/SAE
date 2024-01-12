@@ -1094,7 +1094,7 @@ public class GestionAccueil implements ActionListener {
 			////////////////////////////////////
 
 			// Coder la cas de la selection d'un locataire
-			// parmi la liste prÃ©sente dans le JComboBox "comboBox_Regularisation"
+			// parmi la liste présente dans le JComboBox "comboBox_Regularisation"
 
 			///////////////////////
 			// LAYERED MES DOCUMENTS

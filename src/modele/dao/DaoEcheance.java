@@ -1,9 +1,7 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
-
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,6 +22,7 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
+		st.close();
 	}
 
 	@Override
@@ -70,7 +69,7 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 		}
 		return echeances.get(0);
 	}
-	
+
 	public List<Echeance> findByAssuranceNumPoliceList(String idImmeuble) throws SQLException {
 		return this.find(new RequeteSelectEcheanceByAssuranceNumPolice(), idImmeuble);
 	}

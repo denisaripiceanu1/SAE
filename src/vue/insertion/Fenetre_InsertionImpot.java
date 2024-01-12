@@ -69,7 +69,7 @@ public class Fenetre_InsertionImpot extends JInternalFrame implements ActionList
 
 		// Bouton "Ajouter"
 		JButton btnAjouter = new JButton("Ajouter");
-		btnAjouter.addActionListener(this);
+		btnAjouter.addActionListener(this.gestionClic);
 		btnAjouter.setForeground(Color.WHITE);
 		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAjouter.setBackground(new Color(0, 102, 204));
@@ -78,7 +78,7 @@ public class Fenetre_InsertionImpot extends JInternalFrame implements ActionList
 
 		// Bouton "Annuler"
 		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.addActionListener(this);
+		btnAnnuler.addActionListener(this.gestionClic);
 		btnAnnuler.setForeground(Color.WHITE);
 		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAnnuler.setBackground(new Color(0, 102, 204));

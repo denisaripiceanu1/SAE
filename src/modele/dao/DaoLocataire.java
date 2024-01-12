@@ -1,10 +1,8 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +22,7 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
-
+		st.close();
 	}
 
 	@Override
@@ -41,7 +39,7 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 
 	@Override
 	public Locataire findById(String... id) throws SQLException {
-		List<Locataire> locataires = find(new RequeteSelectLocataireById(), id);
+		List<Locataire> locataires = this.find(new RequeteSelectLocataireById(), id);
 		if (locataires.isEmpty()) {
 			return null;
 		}
@@ -50,7 +48,7 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 
 	@Override
 	public List<Locataire> findAll() throws SQLException {
-		return find(new RequeteSelectLocataire());
+		return this.find(new RequeteSelectLocataire());
 	}
 
 	@Override

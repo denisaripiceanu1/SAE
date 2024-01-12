@@ -35,6 +35,7 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
+		st.close();
 	}
 
 	@Override
@@ -99,8 +100,8 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 
 			facture = new Facture(curseur.getString("numero"), dateEmissionStr, datePaiementStr,
 					curseur.getString("mode_paiement"), curseur.getString("numero_devis"),
-					curseur.getString("designation"), curseur.getDouble("montant_reel_paye"), curseur.getDouble("montant"),
-					curseur.getInt("imputable_locataire"), immeuble, bien, entreprise);
+					curseur.getString("designation"), curseur.getDouble("montant_reel_paye"),
+					curseur.getDouble("montant"), curseur.getInt("imputable_locataire"), immeuble, bien, entreprise);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -145,11 +146,11 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	}
 
 	public List<Facture> findFactureImmeuble(String id) throws SQLException {
-		return find(new RequeteSelectFactureByImmeuble(), id);
+		return this.find(new RequeteSelectFactureByImmeuble(), id);
 	}
 
 	public List<Facture> findFactureByBien(String id) throws SQLException {
-		return find(new RequeteSelectFactureByBien2(), id);
+		return this.find(new RequeteSelectFactureByBien2(), id);
 	}
 
 	public Facture findFactureChargeById(String id) throws SQLException {

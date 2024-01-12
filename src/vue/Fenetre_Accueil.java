@@ -64,7 +64,6 @@ public class Fenetre_Accueil extends JFrame {
 	private JTextField textField_datePaiement;
 	private JTextField textField_paye;
 	private JTextField textField_restantDu;
-	private JTextField textField_moyenne_loyers;
 	private JTable tableRegularisation;
 
 	private JComboBox<String> comboBox_MesAssurances;
@@ -89,7 +88,6 @@ public class Fenetre_Accueil extends JFrame {
 	private DaoLocataire daoLocataire;
 	private GestionTableTravaux gestionTableTravaux;
 	private GestionTableAssurance gestionTableAssurance;
-	private JTextField textField_mediane_loyers;
 
 	/**
 	 * Create the frame.
@@ -125,6 +123,7 @@ public class Fenetre_Accueil extends JFrame {
 		panel_Menu.add(panel_Menu_Boutons, BorderLayout.CENTER);
 		panel_Menu_Boutons.setLayout(new GridLayout(8, 1, 0, 0));
 
+		
 		////// Bande accueil//////////////////////////////////////////////////
 		JPanel bandeAccueil = new JPanel();
 		bandeAccueil.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
@@ -151,6 +150,7 @@ public class Fenetre_Accueil extends JFrame {
 		btnAccueil.setName("btnAccueil");
 		panelDuBtnAccueil.add(btnAccueil);
 
+		
 		///////////////////////////////////////////////////////////////////
 		// MENU DE BOUTONS SUR LE CÔTE
 		// ////////////////////////////////////////////////////////////////
@@ -221,37 +221,19 @@ public class Fenetre_Accueil extends JFrame {
 
 		JPanel panel_accueil = new JPanel();
 		this.layeredPane_Accueil.add(panel_accueil, BorderLayout.CENTER);
-		panel_accueil.setLayout(null);
+		panel_accueil.setLayout(new GridLayout(2, 2, 0, 0));
 
-		JLabel lbl_moyenne_loyers = new JLabel("Moyenne des loyers");
-		lbl_moyenne_loyers.setBounds(60, 66, 127, 20);
-		lbl_moyenne_loyers.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_accueil.add(lbl_moyenne_loyers);
+		JPanel panel_1 = new JPanel();
+		panel_accueil.add(panel_1);
 
-		this.textField_moyenne_loyers = new JTextField();
-		this.textField_moyenne_loyers.setBounds(200, 66, 127, 20);
-		this.textField_moyenne_loyers.setEditable(false);
-		this.textField_moyenne_loyers.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_accueil.add(this.textField_moyenne_loyers);
+		JPanel panel = new JPanel();
+		panel_accueil.add(panel);
 
-		JLabel lbl_mediane_loyers = new JLabel("Mediane des loyers");
-		lbl_mediane_loyers.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_mediane_loyers.setBounds(60, 116, 127, 20);
-		panel_accueil.add(lbl_mediane_loyers);
+		JPanel panel_2 = new JPanel();
+		panel_accueil.add(panel_2);
 
-		this.textField_mediane_loyers = new JTextField();
-		this.textField_mediane_loyers.setBounds(200, 116, 127, 20);
-		this.textField_mediane_loyers.setEditable(false);
-		this.textField_mediane_loyers.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_accueil.add(this.textField_mediane_loyers);
-
-		JButton btn_stats = new JButton("Stats");
-		btn_stats.setForeground(Color.WHITE);
-		btn_stats.setBackground(new Color(0, 102, 204));
-		btn_stats.setBounds(287, 449, 99, 31);
-		btn_stats.addActionListener(this.gestionAccueil);
-		btn_stats.setName("btn_stats");
-		panel_accueil.add(btn_stats);
+		JPanel panel_3 = new JPanel();
+		panel_accueil.add(panel_3);
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES BIENS
@@ -275,7 +257,7 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.tableMesBiens = new JTable();
 		this.tableMesBiens.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
-				new String[] { "Nom du bien", "Adresse", "Nb de logements", "Type"}));
+				new String[] { "Nom du bien", "Adresse", "Nb de logements", "Type" }));
 		this.tableMesBiens.setBounds(40, 53, 668, 130);
 		scrollPaneMesBiens.setViewportView(this.tableMesBiens);
 		this.tableMesBiens.getSelectionModel().addListSelectionListener(this.gestionBienLogement);
@@ -287,9 +269,9 @@ public class Fenetre_Accueil extends JFrame {
 		panelMesBiens.add(scrollPaneMesBiens_Logements);
 
 		this.tableMesBiens_Logements = new JTable();
-		this.tableMesBiens_Logements
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
-						new String[] { "Nom", "Surface", "Nb pi\u00E8ces", "Etage", "Aquisition", "Occup\u00E9", "Type"}));
+		this.tableMesBiens_Logements.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null, null, null, null }, },
+				new String[] { "Nom", "Surface", "Nb pi\u00E8ces", "Etage", "Aquisition", "Occup\u00E9", "Type" }));
 		this.tableMesBiens_Logements.setBounds(40, 266, 438, 106);
 		scrollPaneMesBiens_Logements.setViewportView(this.tableMesBiens_Logements);
 		// Pour action de ligne sur table logement
@@ -634,10 +616,9 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesFactures = new JTable();
 		this.table_MesFactures.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesFactures
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
-						new String[] { "Logement", "Numero", "Designation", "Date d'emission", "Date de paiement",
-								"Imputable", "Montant", "Montant payé", "Restant dû" }));
+		this.table_MesFactures.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
+				new String[] { "Logement", "Numero", "Designation", "Date d'emission", "Date de paiement", "Imputable",
+						"Montant", "Montant payé", "Restant dû" }));
 		this.table_MesFactures.setBounds(40, 53, 668, 130);
 		scrollPane_MesFactures.setViewportView(this.table_MesFactures);
 		this.table_MesFactures.getSelectionModel().addListSelectionListener(this.gestionTableCharges);
