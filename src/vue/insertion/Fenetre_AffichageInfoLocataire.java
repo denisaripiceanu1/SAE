@@ -60,7 +60,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
         // Bouton Régularisation des charges
         JButton btnRegularisationCharges = new JButton("Régularisation des charges");
-        btnRegularisationCharges.setBounds(502, 198, 200, 25);
+        btnRegularisationCharges.setBounds(490, 130, 200, 25);
         panel.add(btnRegularisationCharges);
         btnRegularisationCharges.addActionListener(gestionClic);
 
@@ -134,13 +134,13 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
         // Bouton Solde tout compte
         JButton btnSoldeToutCompte = new JButton("Solde tout compte");
-        btnSoldeToutCompte.setBounds(502, 295, 200, 25);
+        btnSoldeToutCompte.setBounds(500, 198, 200, 25);
         panel.add(btnSoldeToutCompte);
         btnSoldeToutCompte.addActionListener(gestionClic);
 
         JLabel lblDpartLoca = new JLabel("Départ de votre locataire :");
         lblDpartLoca.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        lblDpartLoca.setBounds(534, 264, 137, 25);
+        lblDpartLoca.setBounds(532, 167, 137, 25);
         panel.add(lblDpartLoca);
     }
 
