@@ -16,7 +16,9 @@ import modele.dao.requetes.select.RequeteSelectLocationParLocataire;
 import modele.dao.requetes.select.RequeteSelectLouer;
 import modele.dao.requetes.select.RequeteSelectLouerById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocataire;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocation;
+import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalProvisions;
 import modele.dao.requetes.update.RequeteUpdateLouer;
 
 public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
@@ -33,17 +35,17 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 	@Override
 	public void update(Louer donnees) throws SQLException {
 		RequeteUpdateLouer requeteUpdate = new RequeteUpdateLouer();
-		this.miseAJour(requeteUpdate, donnees);
+		miseAJour(requeteUpdate, donnees);
 	}
 
 	@Override
 	public void delete(Louer donnees) throws SQLException {
-		this.miseAJour(new RequeteDeleteLocationByBien(), donnees);
+		miseAJour(new RequeteDeleteLocationByBien(), donnees);
 	}
 
 	@Override
 	public Louer findById(String... id) throws SQLException {
-		List<Louer> louer = this.find(new RequeteSelectLouerById(), id);
+		List<Louer> louer = find(new RequeteSelectLouerById(), id);
 		if (louer.isEmpty()) {
 			return null;
 		}
@@ -52,7 +54,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 
 	@Override
 	public List<Louer> findAll() throws SQLException {
-		return this.find(new RequeteSelectLouer());
+		return find(new RequeteSelectLouer());
 	}
 
 	@Override
@@ -96,15 +98,25 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 	// ---------------- AUTRES METHODES ----------------//
 
 	public List<Louer> findLocationByBien(String id) throws SQLException {
-		return this.find(new RequeteSelectLocationParBien(), id);
+		return find(new RequeteSelectLocationParBien(), id);
 
 	}
 
 	public void deleteVrai(Louer id) throws SQLException {
-		this.miseAJour(new RequeteDeleteLocation(), id);
+		miseAJour(new RequeteDeleteLocation(), id);
 	}
 
 	public List<Louer> findByLocataire(String idLocataire) throws SQLException {
-		return this.find(new RequeteSelectLocationParLocataire(), idLocataire);
+		return find(new RequeteSelectLocationParLocataire(), idLocataire);
+	}
+	
+	public double totalProvisions(Louer donnees) throws SQLException {
+		SousProgramme<Louer> sp = new SousProgrammeTotalProvisions();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametresCalcul(st, donnees);
+		st.execute();
+		double resultat = st.getDouble(1);
+		st.close();
+		return resultat;
 	}
 }

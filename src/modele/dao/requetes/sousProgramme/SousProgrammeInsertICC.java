@@ -1,9 +1,11 @@
 package modele.dao.requetes.sousProgramme;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import modele.ICC;
+import modele.Louer;
 
 public class SousProgrammeInsertICC implements SousProgramme<ICC> {
 
@@ -29,6 +31,12 @@ public class SousProgrammeInsertICC implements SousProgramme<ICC> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, ICC donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void parametresCalcul(CallableStatement st, Louer donnees) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -45,4 +45,10 @@ public class SousProgrammeDeleteLocation implements SousProgramme<Louer> {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void parametresCalcul(CallableStatement st, Louer donnees) {
+		// TODO Auto-generated method stub
+		
+	}
 }

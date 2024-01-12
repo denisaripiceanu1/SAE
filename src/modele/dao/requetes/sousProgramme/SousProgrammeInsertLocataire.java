@@ -1,10 +1,12 @@
 package modele.dao.requetes.sousProgramme;
 
+import java.sql.CallableStatement;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import modele.Locataire;
+import modele.Louer;
 
 public class SousProgrammeInsertLocataire implements SousProgramme<Locataire> {
 
@@ -34,6 +36,12 @@ public class SousProgrammeInsertLocataire implements SousProgramme<Locataire> {
 	}
 	public void parametres(PreparedStatement prSt, Locataire donnee, int Sequence) throws SQLException {
 
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void parametresCalcul(CallableStatement st, Louer donnees) {
 		// TODO Auto-generated method stub
 		
 	}

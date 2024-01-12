@@ -998,14 +998,6 @@ public class Fenetre_Accueil extends JFrame {
 		return this.textField_loyer;
 	}
 
-	public JTextField getTextField_moyenne_loyers() {
-		return this.textField_moyenne_loyers;
-	}
-
-	public JTextField getTextField_mediane_loyers() {
-		return this.textField_mediane_loyers;
-	}
-
 	public JTextField getTextField_provisionCharges() {
 		return this.textField_provisionCharges;
 	}
