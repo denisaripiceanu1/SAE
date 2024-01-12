@@ -75,16 +75,16 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 			ICC icc = daoICC.findById(annee, trimestre);
 
 			// Convertir les dates en chaînes de caractères
-			String dateDebutStr = curseur.getDate("date_debut").toString();
-			String dateDepartStr = null;
-			if (curseur.getDate("date_depart") != null) {
-				java.sql.Date dateDepart = curseur.getDate("date_depart");
-				dateDepartStr = dateDepart.toString();
+			String dateDebutStr = curseur.getDate("Date_Debut").toString();
+			String dateDernRegStr = null;
+			if (curseur.getDate("date_derniere_reg") != null) {
+				java.sql.Date dateDepart = curseur.getDate("date_derniere_reg");
+				dateDernRegStr = dateDepart.toString();
 			}
 
 			louer = new Louer(locataire, bien, dateDebutStr, curseur.getInt("nb_mois"), curseur.getDouble("loyer_TTC"),
 					curseur.getDouble("provision_chargeMens_TTC"), curseur.getDouble("caution_TTC"),
-					curseur.getString("bail"), curseur.getString("etat_lieux"), dateDepartStr,
+					curseur.getString("bail"), curseur.getString("etat_lieux"), dateDernRegStr,
 					curseur.getInt("loyer_paye"), icc, curseur.getDouble("montant_reel_paye"));
 		} catch (Exception e) {
 			e.printStackTrace();
