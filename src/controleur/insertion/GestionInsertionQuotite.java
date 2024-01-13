@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import controleur.outils.Sauvegarde;
 import modele.Quotite;
 import modele.Quotter;
 import modele.dao.DaoQuotite;
@@ -41,8 +42,9 @@ public class GestionInsertionQuotite implements ActionListener {
 					// Création de l'objet Quotite
 					quotite = new Quotite(typeQuotite);
 
-					// Enregistrement de la quotité dans la base de données
-					this.daoQuotite.create(quotite);
+					// Ajout dans la sauvegarde pour le créer dans la page voulue
+					Sauvegarde.deleteItem("Quotite");
+					Sauvegarde.addItem("Quotite", quotite);
 
 				} catch (Exception e1) {
 					e1.printStackTrace();

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import controleur.outils.Sauvegarde;
 import modele.Compteur;
@@ -49,6 +50,10 @@ public class GestionModificationBien implements ActionListener {
 				// J'ajoute l'immeuble dans la sauvegarde pour réutiliser
 				Sauvegarde.deleteItem("Immeuble");
 				Sauvegarde.addItem("Immeuble", immeubleTemporaire);
+				
+				// On enleve le logement de la sauvegarde pour éviter d'avoir l'id immeuble dans la création du compteur donc constraint check UU
+				Sauvegarde.deleteItem("Logement");
+				
 				fenetre_Principale.getLayeredPane().add(fenetreCompteur);
 				fenetreCompteur.setVisible(true);
 				fenetreCompteur.moveToFront();
@@ -72,6 +77,10 @@ public class GestionModificationBien implements ActionListener {
 					}
 
 					this.modificationBien.dispose(); // Fermer la page après la modification
+					
+					 // Afficher un message de réussite
+		            JOptionPane.showMessageDialog(this.modificationBien, "Modifé avec succès !", "Succès",
+		                    JOptionPane.INFORMATION_MESSAGE);
 
 				} catch (Exception e1) {
 					e1.printStackTrace();

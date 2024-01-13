@@ -7,14 +7,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import controleur.outils.Sauvegarde;
 import modele.Bien;
+import modele.Compteur;
 import modele.Immeuble;
+import modele.Quotite;
 import modele.dao.DaoBien;
 import modele.dao.DaoCompteur;
 import modele.dao.DaoImmeuble;
+import modele.dao.DaoQuotite;
 import vue.Fenetre_Accueil;
+import vue.insertion.Fenetre_InsertionCompteur;
+import vue.insertion.Fenetre_InsertionQuotite;
 import vue.modification.Fenetre_ModificationLogement;
 
 public class GestionModificationLogement implements ActionListener {
@@ -23,14 +29,17 @@ public class GestionModificationLogement implements ActionListener {
 	private DaoBien daoBien;
 	private DaoImmeuble daoImmeuble;
 	private DaoCompteur daoCompteur;
-	private String idBien;
+	private DaoQuotite daoQuotite;
+	private Immeuble immeubleSauvegarde;
 
 	public GestionModificationLogement(Fenetre_ModificationLogement modificationLogement) {
 		this.modificationLogement = modificationLogement;
 		this.daoBien = new DaoBien();
 		this.daoImmeuble = new DaoImmeuble();
 		this.daoCompteur = new DaoCompteur();
-		this.idBien = null;
+		this.daoQuotite = new DaoQuotite();
+		//On créer directement l'immeuble à partir de celui de la sauvegarde pour ne plus en dépendre
+		this.immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
 		Sauvegarde.initializeSave();
 	}
 
@@ -38,26 +47,49 @@ public class GestionModificationLogement implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationLogement.getTopLevelAncestor();
+				
 		switch (btn.getText()) {
 		case "Ajouter un compteur":
-//			this.idBien = this.modificationLogement.getTextField_IdImmeuble().getText();
-//			Fenetre_InsertionCompteur fenetreCompteur = new Fenetre_InsertionCompteur();
-//			// Je créer temporairement le bien pour pouvoir récupérer l'ID quand je vais
-//			// créer le compteur
-//			Immeuble immeubleTemporaire = new Immeuble(this.modificationLogement.getTextField_IdImmeuble().getText(),
-//					this.modificationLogement.getTextField_adresse().getText(),
-//					this.modificationLogement.getTextField_codePostal().getText(),
-//					this.modificationLogement.getTextField_ville().getText(),
-//					this.modificationLogement.getTextField_periodeDeConstruction().getText(),
-//					Integer.parseInt(this.modificationLogement.getTextField_nbLogement().getText()),
-//					this.modificationLogement.getTextField_dateAcquisition().getText(),
-//					this.modificationLogement.getComboBox_typeDeBien().getSelectedItem().toString());
-//			// J'ajoute l'immeuble dans la sauvegarde pour réutiliser
-//			Sauvegarde.deleteItem("Immeuble");
-//			Sauvegarde.addItem("Immeuble", immeubleTemporaire);
-//			fenetre_Principale.getLayeredPane().add(fenetreCompteur);
-//			fenetreCompteur.setVisible(true);
-//			fenetreCompteur.moveToFront();
+			// Je créer temporairement le bien pour pouvoir récupérer l'ID quand je vais
+			// créer le compteur
+			Bien bienTemporaire = new Bien (this.modificationLogement.getTextField_IdLogement().getText(), 
+					Double.parseDouble(this.modificationLogement.getTextField_SurfaceHabitable().getText()),
+					Integer.parseInt(this.modificationLogement.getTextField_NbPièces().getText()),
+					Integer.parseInt(this.modificationLogement.getTextField_NumEtage().getText()),
+					this.modificationLogement.getTextField_DateAcquisition().getText(),
+					this.modificationLogement.getComboBox_typeDeLogement().getSelectedItem().toString(),
+					this.immeubleSauvegarde);	
+			// J'ajoute  dans le logement la sauvegarde pour réutiliser
+			Sauvegarde.deleteItem("Logement");
+			Sauvegarde.addItem("Logement", bienTemporaire);
+			
+			// On enleve l'immeuble de la sauvegarde pour éviter d'avoir l'id immeuble dans la création du compteur donc constraint check UU
+			Sauvegarde.deleteItem("Immeuble");
+			
+			Fenetre_InsertionCompteur fenetreCompteur = new Fenetre_InsertionCompteur();
+			fenetre_Principale.getLayeredPane().add(fenetreCompteur);
+			fenetreCompteur.setVisible(true);
+			fenetreCompteur.moveToFront();
+			break;
+			
+		case "Ajouter une quotité":
+			// Je créer temporairement le bien pour pouvoir récupérer l'ID quand je vais
+			// créer la quotité
+			Bien bienTemporaireQ = new Bien (this.modificationLogement.getTextField_IdLogement().getText(), 
+					Double.parseDouble(this.modificationLogement.getTextField_SurfaceHabitable().getText()),
+					Integer.parseInt(this.modificationLogement.getTextField_NbPièces().getText()),
+					Integer.parseInt(this.modificationLogement.getTextField_NumEtage().getText()),
+					this.modificationLogement.getTextField_DateAcquisition().getText(),
+					this.modificationLogement.getComboBox_typeDeLogement().getSelectedItem().toString(),
+					this.immeubleSauvegarde);	
+			// J'ajoute  dans le logement la sauvegarde pour réutiliser
+			Sauvegarde.deleteItem("Logement");
+			Sauvegarde.addItem("Logement", bienTemporaireQ);
+			
+			Fenetre_InsertionQuotite fenetreQuotite = new Fenetre_InsertionQuotite();
+			fenetre_Principale.getLayeredPane().add(fenetreQuotite);
+			fenetreQuotite.setVisible(true);
+			fenetreQuotite.moveToFront();
 			break;
 		case "Modifier":
 			Bien logement = null;
@@ -71,16 +103,27 @@ public class GestionModificationLogement implements ActionListener {
 						Integer.parseInt(this.modificationLogement.getTextField_NbPièces().getText()), 
 						Integer.parseInt(this.modificationLogement.getTextField_NumEtage().getText()),
 						this.modificationLogement.getTextField_DateAcquisition().getText() , typeLogement,
-						(Immeuble) Sauvegarde.getItem("Immeuble"));
-//
-//				// Si il y a un compteur à ajouter
-//				if (Sauvegarde.onSave("Compteur")) {
-//					this.daoCompteur.create((Compteur) Sauvegarde.getItem("Compteur"));
-//					Sauvegarde.clearSave();
-//				}
+						this.immeubleSauvegarde);
 
 				this.daoBien.update(logement);
-				this.modificationLogement.dispose();
+				
+			// Si il y a un compteur à ajouter
+			if (Sauvegarde.onSave("Compteur")) {
+				this.daoCompteur.create((Compteur) Sauvegarde.getItem("Compteur"));
+				Sauvegarde.clearSave();
+			}
+			
+			// Si il y a une quotité à ajouter
+			if (Sauvegarde.onSave("Quotite")) {
+				this.daoQuotite.create((Quotite) Sauvegarde.getItem("Quotite"));
+				Sauvegarde.clearSave();
+			}
+	
+			this.modificationLogement.dispose();
+			
+			 // Afficher un message de réussite
+            JOptionPane.showMessageDialog(this.modificationLogement, "Modifé avec succès !", "Succès",
+                    JOptionPane.INFORMATION_MESSAGE);
 
 			} catch (Exception e1) {
 				e1.printStackTrace();
@@ -90,10 +133,6 @@ public class GestionModificationLogement implements ActionListener {
 			this.modificationLogement.dispose();
 			break;
 		}
-	}
-
-	public String getIdBien() {
-		return this.idBien;
 	}
 
 }
