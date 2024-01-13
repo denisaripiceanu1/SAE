@@ -25,6 +25,7 @@ public abstract class DaoModele<T> implements Dao<T> {
 			liste.add(creerInstance(res));
 			existe = res.next();
 		}
+		res.close();
 		return liste;
 	}
 	
@@ -33,7 +34,10 @@ public abstract class DaoModele<T> implements Dao<T> {
 	protected int miseAJour(Requete<T> requete, T donnee) throws SQLException {
 		PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(requete.requete());
 		requete.parametres(st, donnee);
-		return st.executeUpdate(); // Nombre de lignes mise à jour
+		int nbLignes = st.executeUpdate(); 
+		st.close();
+		return nbLignes; // Nombre de lignes mise à jour
+
 	}
 	
 //	public int delete(Requete<T> req, T data) throws SQLException {
@@ -45,14 +49,16 @@ public abstract class DaoModele<T> implements Dao<T> {
 	protected List<T> find(Requete<T> requete, String... id) throws SQLException {
 		PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(requete.requete());
 		requete.parametres(st, id);
-		return select(st);
-
+		List<T> liste = select(st);
+		st.close();
+		return liste;
 	}
 
 	// Méthode protégée pour exécuter une requête de recherche par ID
 	public T findById(Requete<T> req, String... id) throws SQLException {
 		PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(req.requete());
 		req.parametres(st, id);
+		st.close();
 		List<T> liste = find(req, id);
 		if (liste.isEmpty()) {
 			return null;

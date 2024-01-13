@@ -38,6 +38,7 @@ public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnos
 			if (resultSet.next()) {
 				idDiagnostic = resultSet.getInt(1);
 			}
+			resultSet.close();
 		}
 		st.close();
 		return idDiagnostic;

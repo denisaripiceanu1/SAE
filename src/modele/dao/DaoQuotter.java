@@ -87,7 +87,7 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 				requete.parametres(st, immeuble.getImmeuble());
 				st.executeUpdate();
 			}
-
+			st.close();
 		}
 
 	}

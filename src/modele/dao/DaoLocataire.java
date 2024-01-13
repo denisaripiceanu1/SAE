@@ -79,8 +79,9 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 			while (resultSet.next()) {
 				identifiants.add(resultSet.getString("ID_Locataire"));
 			}
+			resultSet.close();
+			st.close();
 		}
-
 		return identifiants;
 	}
 
