@@ -64,6 +64,10 @@ public class Fenetre_Accueil extends JFrame {
 	private JTextField textField_datePaiement;
 	private JTextField textField_paye;
 	private JTextField textField_restantDu;
+	private JPanel panel_1;
+	private JPanel panel_2;
+	private JPanel panel_3;
+	private JPanel panel_4;
 	private JTable tableRegularisation;
 
 	private JComboBox<String> comboBox_MesAssurances;
@@ -123,7 +127,6 @@ public class Fenetre_Accueil extends JFrame {
 		panel_Menu.add(panel_Menu_Boutons, BorderLayout.CENTER);
 		panel_Menu_Boutons.setLayout(new GridLayout(8, 1, 0, 0));
 
-		
 		////// Bande accueil//////////////////////////////////////////////////
 		JPanel bandeAccueil = new JPanel();
 		bandeAccueil.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
@@ -150,7 +153,6 @@ public class Fenetre_Accueil extends JFrame {
 		btnAccueil.setName("btnAccueil");
 		panelDuBtnAccueil.add(btnAccueil);
 
-		
 		///////////////////////////////////////////////////////////////////
 		// MENU DE BOUTONS SUR LE CÔTE
 		// ////////////////////////////////////////////////////////////////
@@ -223,17 +225,25 @@ public class Fenetre_Accueil extends JFrame {
 		this.layeredPane_Accueil.add(panel_accueil, BorderLayout.CENTER);
 		panel_accueil.setLayout(new GridLayout(2, 2, 0, 0));
 
-		JPanel panel_1 = new JPanel();
+		this.panel_1 = new JPanel();
 		panel_accueil.add(panel_1);
 
-		JPanel panel = new JPanel();
-		panel_accueil.add(panel);
-
-		JPanel panel_2 = new JPanel();
+		panel_2 = new JPanel();
 		panel_accueil.add(panel_2);
 
-		JPanel panel_3 = new JPanel();
+		panel_4 = new JPanel();
+		panel_accueil.add(panel_4);
+
+		panel_3 = new JPanel();
 		panel_accueil.add(panel_3);
+
+		JButton btnCSV = new JButton("Importer un csv");
+		btnCSV.setForeground(Color.WHITE);
+		btnCSV.setBackground(new Color(0, 102, 204));
+		btnCSV.setBounds(111, 449, 94, 31);
+		btnCSV.addActionListener(this.gestionAccueil);
+		btnCSV.setName("importCSV");
+		panel_4.add(btnCSV);
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES BIENS
@@ -1041,4 +1051,37 @@ public class Fenetre_Accueil extends JFrame {
 	public JComboBox<String> getComboBox_MesDocuments() {
 		return this.comboBox_MesDocuments;
 	}
+
+	public JPanel getPanel_1() {
+		return panel_1;
+	}
+
+	public void setPanel_1(JPanel panel_1) {
+		this.panel_1 = panel_1;
+	}
+
+	public JPanel getPanel_2() {
+		return panel_2;
+	}
+
+	public void setPanel_2(JPanel panel_2) {
+		this.panel_2 = panel_2;
+	}
+
+	public JPanel getPanel_3() {
+		return panel_3;
+	}
+
+	public void setPanel_3(JPanel panel_3) {
+		this.panel_3 = panel_3;
+	}
+
+	public JPanel getPanel_4() {
+		return panel_4;
+	}
+
+	public void setPanel_4(JPanel panel_4) {
+		this.panel_4 = panel_4;
+	}
+
 }

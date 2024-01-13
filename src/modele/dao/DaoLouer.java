@@ -1,20 +1,26 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import modele.Bien;
 import modele.ICC;
 import modele.Locataire;
 import modele.Louer;
+import modele.MoyenneLoyer;
+import modele.ProvisionAnnee;
 import modele.dao.requetes.delete.RequeteDeleteLocation;
 import modele.dao.requetes.delete.RequeteDeleteLocationByBien;
 import modele.dao.requetes.select.RequeteSelectLocationParBien;
 import modele.dao.requetes.select.RequeteSelectLocationParLocataire;
 import modele.dao.requetes.select.RequeteSelectLouer;
 import modele.dao.requetes.select.RequeteSelectLouerById;
+import modele.dao.requetes.select.RequeteSelectLouerProvision;
+import modele.dao.requetes.select.RequeteSelectMoyenneLoyer;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocation;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalProvisions;
@@ -117,5 +123,42 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 		double resultat = st.getDouble(1);
 		st.close();
 		return resultat;
+	}
+
+	protected ProvisionAnnee creerInstanceProvisionAnnee(ResultSet curseur) throws SQLException {
+		String annee = curseur.getString("annee");
+		double sommeProvision = curseur.getDouble("SUM(provision_chargeMens_TTC)"); // Assurez-vous que c'est le bon
+																					// alias SQL
+
+		return new ProvisionAnnee(annee, sommeProvision);
+	}
+
+	public List<ProvisionAnnee> findProvisions() throws SQLException {
+		List<ProvisionAnnee> resultats = new ArrayList<>();
+		PreparedStatement prSt = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectLouerProvision().requete());
+		ResultSet curseur = prSt.executeQuery();
+		while (curseur.next()) {
+			resultats.add(creerInstanceProvisionAnnee(curseur));
+		}
+		return resultats;
+	}
+
+	protected MoyenneLoyer creerInstanceMoyenneLoyer(ResultSet curseur) throws SQLException {
+		String annee = curseur.getString("Id_Locataire");
+		int sommeProvision = curseur.getInt("Moyenne_loyer"); // Assurez-vous que c'est le bon alias SQL
+
+		return new MoyenneLoyer(annee, sommeProvision);
+	}
+
+	public List<MoyenneLoyer> findMoyenneLoyer() throws SQLException {
+		List<MoyenneLoyer> resultats = new ArrayList<>();
+		PreparedStatement prSt = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectMoyenneLoyer().requete());
+		ResultSet curseur = prSt.executeQuery();
+		while (curseur.next()) {
+			resultats.add(creerInstanceMoyenneLoyer(curseur));
+		}
+		return resultats;
 	}
 }

@@ -1,6 +1,7 @@
 package controleur;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -15,6 +16,14 @@ import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+import controleur.outils.ImportChemin;
+import controleur.outils.LireCSV;
 import controleur.outils.Sauvegarde;
 import modele.Assurance;
 import modele.Bien;
@@ -26,6 +35,8 @@ import modele.Imposer;
 import modele.Impôt;
 import modele.Locataire;
 import modele.Louer;
+import modele.MoyenneLoyer;
+import modele.ProvisionAnnee;
 import modele.dao.DaoAssurance;
 import modele.dao.DaoBien;
 import modele.dao.DaoEcheance;
@@ -120,6 +131,82 @@ public class GestionAccueil implements ActionListener {
 	///////////////////////////////////////////////////////////////////
 	// LAYERED ACCUEIL
 	///////////////////////////////////////////////////////////////////
+
+	private DefaultCategoryDataset createDataset() {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		DaoLouer daoLouer = new DaoLouer();
+		try {
+			List<ProvisionAnnee> provisions = daoLouer.findProvisions();
+			for (ProvisionAnnee provision : provisions) {
+				dataset.addValue(provision.getSommeProvision(), "Provisions", provision.getAnnee());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dataset;
+	}
+
+	private JFreeChart createBarChartPro(DefaultCategoryDataset dataset) {
+		return ChartFactory.createBarChart("Évolution des provisions pour charges par année", // Titre du graphique
+				"Année", // Axe des abscisses (X)
+				"Provision pour charges", // Axe des ordonnées (Y)
+				dataset, PlotOrientation.VERTICAL, true, // Inclure la légende
+				true, // Générer des tooltips
+				false // Générer des URLs
+		);
+	}
+
+	private DefaultCategoryDataset createDatasetMoyenneLoyer() {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		DaoLouer daoLouer = new DaoLouer();
+		try {
+			List<MoyenneLoyer> moyennes = daoLouer.findMoyenneLoyer(); // Assurez-vous que la méthode est correctement
+																		// nommée
+			for (MoyenneLoyer moyenne : moyennes) {
+				dataset.addValue(moyenne.getLoyer(), "Moyenne Loyer", moyenne.getLocataire());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dataset;
+	}
+
+	private JFreeChart createBarChartMoy(DefaultCategoryDataset dataset) {
+		return ChartFactory.createBarChart("Moyenne des loyers par locataire", // Titre du graphique
+				"Locataire", // Axe des abscisses (X)
+				"Moyenne", // Axe des ordonnées (Y)
+				dataset, PlotOrientation.VERTICAL, true, // Inclure la légende
+				true, // Générer des tooltips
+				false // Générer des URLs
+		);
+	}
+
+	private void chargerAccueil() {
+		// Créer les datasets
+		DefaultCategoryDataset datasetProvisions = createDataset();
+		DefaultCategoryDataset datasetMoyenneLoyer = createDatasetMoyenneLoyer();
+
+		// Créer les graphiques
+		JFreeChart chartProvisions = createBarChartPro(datasetProvisions);
+		JFreeChart chartMoyenneLoyer = createBarChartMoy(datasetMoyenneLoyer);
+
+		// Créer les ChartPanels avec les tailles appropriées
+		ChartPanel chartPanelProvisions = new ChartPanel(chartProvisions);
+		this.fenetreAccueil.getPanel_3().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_3().getWidth(),
+				this.fenetreAccueil.getPanel_4().getHeight()));
+		this.fenetreAccueil.getPanel_3().setLayout(new BorderLayout());
+		this.fenetreAccueil.getPanel_3().add(chartPanelProvisions, BorderLayout.CENTER);
+
+		ChartPanel chartPanelMoyenneLoyer = new ChartPanel(chartMoyenneLoyer);
+		this.fenetreAccueil.getPanel_1().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_1().getWidth(),
+				this.fenetreAccueil.getPanel_1().getHeight()));
+		this.fenetreAccueil.getPanel_1().setLayout(new BorderLayout());
+		this.fenetreAccueil.getPanel_1().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
+
+		// Ajouter les ChartPanels aux panneaux de fenetreAccueil
+		this.fenetreAccueil.revalidate();
+		this.fenetreAccueil.repaint();
+	}
 
 	///////////////////////////////////////////////////////////////////
 	// LAYERED MES BIENS
@@ -537,6 +624,31 @@ public class GestionAccueil implements ActionListener {
 			// NAVIGATION ENTRE LES LAYEREDPANE
 			case "btnAccueil":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_Accueil());
+
+				// Créer les datasets
+				DefaultCategoryDataset datasetProvisions = createDataset();
+				DefaultCategoryDataset datasetMoyenneLoyer = createDatasetMoyenneLoyer();
+
+				// Créer les graphiques
+				JFreeChart chartProvisions = createBarChartPro(datasetProvisions);
+				JFreeChart chartMoyenneLoyer = createBarChartPro(datasetMoyenneLoyer);
+
+				// Créer les ChartPanels avec les tailles appropriées
+				ChartPanel chartPanelProvisions = new ChartPanel(chartProvisions);
+				this.fenetreAccueil.getPanel_3().setPreferredSize(new Dimension(
+						this.fenetreAccueil.getPanel_3().getWidth(), this.fenetreAccueil.getPanel_3().getHeight()));
+				this.fenetreAccueil.getPanel_3().setLayout(new BorderLayout());
+				this.fenetreAccueil.getPanel_3().add(chartPanelProvisions, BorderLayout.CENTER);
+
+				ChartPanel chartPanelMoyenneLoyer = new ChartPanel(chartMoyenneLoyer);
+				this.fenetreAccueil.getPanel_1().setPreferredSize(new Dimension(
+						this.fenetreAccueil.getPanel_1().getWidth(), this.fenetreAccueil.getPanel_1().getHeight()));
+				this.fenetreAccueil.getPanel_1().setLayout(new BorderLayout());
+				this.fenetreAccueil.getPanel_1().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
+
+				// Ajouter les ChartPanels aux panneaux de fenetreAccueil
+				this.fenetreAccueil.revalidate();
+				this.fenetreAccueil.repaint();
 				break;
 			case "btnMesBiens":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesBiens());
@@ -562,7 +674,11 @@ public class GestionAccueil implements ActionListener {
 			///////////////////
 			// LAYERED ACCUEIL
 			///////////////////
-			case "btn_stats":
+			case "importCSV":
+				ImportChemin chemin = new ImportChemin();
+				LireCSV lire = new LireCSV();
+				chemin.choisirChemin();
+				lire.lireCSV(chemin.getSelectedFilePath());
 				break;
 
 			///////////////////
