@@ -1,9 +1,11 @@
 package modele.dao.requetes.sousProgramme;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import modele.Assurance;
+import modele.Louer;
 
 public class SousProgrammeInsertAssurance implements SousProgramme<Assurance> {
 
@@ -29,6 +31,12 @@ public class SousProgrammeInsertAssurance implements SousProgramme<Assurance> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, Assurance donnee, int Sequence) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void parametresCalcul(CallableStatement st, Louer donnees) {
 		// TODO Auto-generated method stub
 		
 	}

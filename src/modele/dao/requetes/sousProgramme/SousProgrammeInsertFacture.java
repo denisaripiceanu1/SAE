@@ -1,5 +1,6 @@
 package modele.dao.requetes.sousProgramme;
 
+import java.sql.CallableStatement;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -7,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import modele.Facture;
+import modele.Louer;
 
 public class SousProgrammeInsertFacture implements SousProgramme<Facture> {
 
@@ -112,5 +114,11 @@ public class SousProgrammeInsertFacture implements SousProgramme<Facture> {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public void parametresCalcul(CallableStatement st, Louer donnees) {
+		// TODO Auto-generated method stub
+
 	}
 }

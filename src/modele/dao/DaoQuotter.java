@@ -27,6 +27,7 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
+		st.close();
 	}
 
 	@Override
@@ -36,7 +37,7 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 
 	@Override
 	public void delete(Quotter donnees) throws SQLException {
-		miseAJour(new RequeteDeleteQuotter(), donnees);
+		this.miseAJour(new RequeteDeleteQuotter(), donnees);
 	}
 
 	@Override
@@ -60,7 +61,7 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 
 	@Override
 	public Quotter findById(String... id) throws SQLException {
-		List<Quotter> quotter = find(new RequeteSelectQuotterById(), id);
+		List<Quotter> quotter = this.find(new RequeteSelectQuotterById(), id);
 		if (quotter.isEmpty()) {
 			return null;
 		}
@@ -69,7 +70,7 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 
 	@Override
 	public List<Quotter> findAll() throws SQLException {
-		return find(new RequeteSelectQuotter());
+		return this.find(new RequeteSelectQuotter());
 	}
 
 	public List<Quotter> findQuotterByBien(String id) throws SQLException {
@@ -86,7 +87,7 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 				requete.parametres(st, immeuble.getImmeuble());
 				st.executeUpdate();
 			}
-
+			st.close();
 		}
 
 	}

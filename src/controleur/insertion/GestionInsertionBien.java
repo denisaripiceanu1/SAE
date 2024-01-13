@@ -50,6 +50,9 @@ public class GestionInsertionBien implements ActionListener {
                 Sauvegarde.deleteItem("Immeuble");
                 Sauvegarde.addItem("Immeuble", immeubleTemporaire);
                 
+             // On enleve le logement de la sauvegarde pour éviter d'avoir l'id immeuble dans la création du compteur donc constraint check UU
+				Sauvegarde.deleteItem("Logement");
+                
                 fenetre_Principale.getLayeredPane().add(fenetreCompteur);
                 fenetreCompteur.setVisible(true);
                 fenetreCompteur.moveToFront();
@@ -78,7 +81,7 @@ public class GestionInsertionBien implements ActionListener {
                     this.insertionBien.dispose();
                     
                     // Afficher un message de réussite
-                    JOptionPane.showMessageDialog(insertionBien, "Le bien a été bien ajouté.", "Succès",
+                    JOptionPane.showMessageDialog(insertionBien, "Bien ajouté avec succès !", "Succès",
                             JOptionPane.INFORMATION_MESSAGE);
 
                 } catch (Exception e1) {

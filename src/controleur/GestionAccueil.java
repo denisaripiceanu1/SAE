@@ -422,7 +422,6 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(location.getProvision_chargeMens_TTC(), numeroLigne, 2);
 		// Charges garages
 		modeleTable.setValueAt(location.getBail(), numeroLigne, 3);
-
 		double resultat = daoLouer.totalProvisions(location);
 		// Total des provisions sur charges
 		modeleTable.setValueAt(resultat, numeroLigne, 4);

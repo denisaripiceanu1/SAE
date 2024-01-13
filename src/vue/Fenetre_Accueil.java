@@ -123,6 +123,7 @@ public class Fenetre_Accueil extends JFrame {
 		panel_Menu.add(panel_Menu_Boutons, BorderLayout.CENTER);
 		panel_Menu_Boutons.setLayout(new GridLayout(8, 1, 0, 0));
 
+		
 		////// Bande accueil//////////////////////////////////////////////////
 		JPanel bandeAccueil = new JPanel();
 		bandeAccueil.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
@@ -149,6 +150,7 @@ public class Fenetre_Accueil extends JFrame {
 		btnAccueil.setName("btnAccueil");
 		panelDuBtnAccueil.add(btnAccueil);
 
+		
 		///////////////////////////////////////////////////////////////////
 		// MENU DE BOUTONS SUR LE CÔTE
 		// ////////////////////////////////////////////////////////////////

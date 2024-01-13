@@ -1,11 +1,13 @@
 
 package modele.dao.requetes.sousProgramme;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 
 import java.sql.SQLException;
 
 import modele.Diagnostics;
+import modele.Louer;
 
 public class SousProgrammeInsertDiagnostic implements SousProgramme<Diagnostics> {
 	
@@ -30,6 +32,12 @@ public class SousProgrammeInsertDiagnostic implements SousProgramme<Diagnostics>
 		prSt.setDate(1, java.sql.Date.valueOf(donnee.getDateValidite()));
 		prSt.setString(2, donnee.getTypeDiagnostic());
 		prSt.setString(3, donnee.getBien().getIdBien());
+	}
+
+	@Override
+	public void parametresCalcul(CallableStatement st, Louer donnees) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

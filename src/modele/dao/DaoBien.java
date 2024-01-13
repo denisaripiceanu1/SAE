@@ -1,7 +1,6 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,6 +27,7 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametres(st, donnees);
 		st.execute();
+		st.close();
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 	}
 
 	// ---------------- AUTRES METHODES ----------------//
-	
+
 	public Bien findBienByImmeubleObject(String id) throws SQLException {
 		List<Bien> biens = this.find(new RequeteSelectBienparImmeuble(), id);
 		if (biens.isEmpty()) {
@@ -86,8 +86,7 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		}
 		return biens.get(0);
 	}
-	
-	
+
 	public List<Bien> findBiensparImmeuble(String id) throws SQLException {
 		List<Bien> biens = null;
 
@@ -139,5 +138,5 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 //        return DaoBien.iterateurBien;
 		return null;
 	}
-	
+
 }
