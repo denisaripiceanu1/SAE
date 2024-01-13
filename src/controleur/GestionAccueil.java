@@ -407,7 +407,8 @@ public class GestionAccueil implements ActionListener {
 	// LAYERED REGULARISATIONS CHARGES
 	// ////////////////////////////////////////////////////////////////
 	// ---------------------------------------------------------------//
-	public void ecrireLigneTableRegularisation(int numeroLigne, Louer location, /* Facture facture, */ Bien bien) {
+	public void ecrireLigneTableRegularisation(int numeroLigne, Louer location, /* Facture facture, */ Bien bien)
+			throws SQLException {
 		JTable tableRegularisation = this.fenetreAccueil.getTableRegularisation();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableRegularisation.getModel();
 
@@ -421,8 +422,10 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(location.getProvision_chargeMens_TTC(), numeroLigne, 2);
 		// Charges garages
 		modeleTable.setValueAt(location.getBail(), numeroLigne, 3);
+
+		double resultat = daoLouer.totalProvisions(location);
 		// Total des provisions sur charges
-		modeleTable.setValueAt(location.getBail(), numeroLigne, 4);
+		modeleTable.setValueAt(resultat, numeroLigne, 4);
 		// TOTAL
 		modeleTable.setValueAt(location.getBail(), numeroLigne, 5);
 
@@ -1092,7 +1095,7 @@ public class GestionAccueil implements ActionListener {
 			////////////////////////////////////
 
 			// Coder la cas de la selection d'un locataire
-			// parmi la liste prÃ©sente dans le JComboBox "comboBox_Regularisation"
+			// parmi la liste présente dans le JComboBox "comboBox_Regularisation"
 
 			///////////////////////
 			// LAYERED MES DOCUMENTS

@@ -1,8 +1,10 @@
 package modele.dao.requetes.sousProgramme;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
-
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import modele.Facture;
 
@@ -27,6 +29,21 @@ public class SousProgrammeInsertFacture implements SousProgramme<Facture> {
 		prSt.setString(10, parametres[9]);
 		prSt.setString(11, parametres[10]);
 		prSt.setString(12, parametres[11]);
+	}
+
+	public void parametresCSV(PreparedStatement prSt, String... parametres) throws SQLException {
+		prSt.setString(1, parametres[0]); // clé priamire Numero
+		prSt.setDate(2, convertirDateJour(parametres[1])); // date émission
+		prSt.setDate(3, convertirDate(parametres[2])); // date paiement
+		prSt.setString(4, parametres[3]); // mode de paiement
+		prSt.setNull(5, java.sql.Types.VARCHAR); // Numero devis
+		prSt.setString(6, parametres[4]); // designation
+		prSt.setString(7, parametres[5]); // montant reel paye
+		prSt.setString(8, parametres[6]); // montant
+		prSt.setString(9, parametres[7]); // imputable locataire
+		prSt.setNull(10, java.sql.Types.VARCHAR); // Id immeuble
+		prSt.setString(11, parametres[8]); // Id Bien
+		prSt.setNull(12, java.sql.Types.VARCHAR); // SIRET
 	}
 
 	@Override
@@ -65,7 +82,35 @@ public class SousProgrammeInsertFacture implements SousProgramme<Facture> {
 	@Override
 	public void parametres(PreparedStatement prSt, Facture donnee, int Sequence) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
+	private Date convertirDate(String dateEnString) {
+		try {
+			// Convertir le format "05/10/23" en "dd/MM/yy"
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+			java.util.Date dateUtil = sdf.parse(dateEnString);
+
+			// Convertir java.util.Date en java.sql.Date
+			return new Date(dateUtil.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private Date convertirDateJour(String dateEnString) {
+		try {
+			// Ajoutez le jour 01 au format "MM/YY" avant de le convertir
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/yy");
+			java.util.Date dateUtil = sdf.parse("01/" + dateEnString);
+
+			// Convertir java.util.Date en java.sql.Date
+			return new Date(dateUtil.getTime());
+		} catch (ParseException e) {
+			// Gérer l'exception en fonction de vos besoins
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

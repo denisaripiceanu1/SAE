@@ -12,7 +12,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import modele.dao.CictOracleDataSource;
-import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocataire;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertFacture;
 
 public class LireCSV {
 
@@ -22,19 +22,21 @@ public class LireCSV {
 
 	public void lireCSV(String chemin) {
 		Connection cn = CictOracleDataSource.getConnectionBD();
-		SousProgrammeInsertLocataire insertLocataire = new SousProgrammeInsertLocataire();
+		SousProgrammeInsertFacture insertFacture = new SousProgrammeInsertFacture();
 
 		try (Reader reader = new FileReader(chemin); CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
+			boolean premiereLigne = true;
 
 			for (CSVRecord csvRecord : csvParser) {
-				try (PreparedStatement prSt = cn.prepareStatement(insertLocataire.appelSousProgramme())) {
-					insertLocataire.parametres(prSt, csvRecord.get(0), // Id_Locataire
-							csvRecord.get(1), // Nom
-							csvRecord.get(2), // Prenom
-							csvRecord.get(3), // Telephone
-							csvRecord.get(4), // Mail
-							csvRecord.get(5) // Date de naissance
-					);
+				// Vérifiez si c'est la première ligne
+				if (premiereLigne) {
+					premiereLigne = false;
+					continue; // Passe à la prochaine itération pour ignorer la première ligne
+				}
+				try (PreparedStatement prSt = cn.prepareStatement(insertFacture.appelSousProgramme())) {
+					insertFacture.parametresCSV(prSt, csvRecord.get(0), csvRecord.get(1), csvRecord.get(2),
+							csvRecord.get(3), csvRecord.get(4), csvRecord.get(5), csvRecord.get(6), csvRecord.get(7),
+							csvRecord.get(8));
 					prSt.execute();
 				} catch (SQLException e) {
 					e.printStackTrace();

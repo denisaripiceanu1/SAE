@@ -12,7 +12,7 @@ public class ImportChemin {
 	// Renommé pour éviter la confusion avec un constructeur
 	public void choisirChemin() {
 		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf"));
+		fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf", "CSV Files", "csv"));
 
 		// Utilisez null comme parent si cette classe n'est pas un composant Swing
 		int result = fileChooser.showSaveDialog(null);
