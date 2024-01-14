@@ -138,7 +138,7 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		comboBox_modePaiement = new JComboBox<>();
 		comboBox_modePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mode de Paiement",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		comboBox_modePaiement.setBounds(247, 230, 200, 39);
+		comboBox_modePaiement.setBounds(247, 219, 200, 39);
 
 		DefaultComboBoxModel<String> modePaiementModel = new DefaultComboBoxModel<>();
 		modePaiementModel.addElement("Virement bancaire");

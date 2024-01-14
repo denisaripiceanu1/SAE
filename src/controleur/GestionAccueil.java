@@ -111,7 +111,6 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
-
 		visible.setVisible(true);
 		this.fenetreAccueil.getContentPane().add(visible, BorderLayout.CENTER);
 	}
@@ -343,8 +342,8 @@ public class GestionAccueil implements ActionListener {
 			modeleTable.setValueAt("Non", numeroLigne, 5);
 		}
 		modeleTable.setValueAt(charge.getMontant(), numeroLigne, 6);
-		modeleTable.setValueAt(charge.getAccompteVerse(), numeroLigne, 7);
-		modeleTable.setValueAt(charge.getMontant() - charge.getAccompteVerse(), numeroLigne, 8);
+		modeleTable.setValueAt(charge.getMontantReelPaye(), numeroLigne, 7);
+		modeleTable.setValueAt(charge.getMontant() - charge.getMontantReelPaye(), numeroLigne, 8);
 	}
 
 	// Méthode pour charger les charges locatives depuis la base de données
@@ -370,8 +369,8 @@ public class GestionAccueil implements ActionListener {
 			if (f != null && f.getBien() != null) {
 				// Ajouter une nouvelle ligne à la table avec les informations de la charge
 				modeleTable.addRow(new Object[] { f.getBien().getIdBien(), f.getNumero(), f.getDesignation(),
-						f.getDateEmission(), f.getDatePaiement(), imputable, f.getMontant(), f.getAccompteVerse(),
-						f.getMontant() - f.getAccompteVerse(), });
+						f.getDateEmission(), f.getDatePaiement(), imputable, f.getMontant(), f.getMontantReelPaye(),
+						f.getMontant() - f.getMontantReelPaye(), });
 			}
 		}
 	}
@@ -709,8 +708,9 @@ public class GestionAccueil implements ActionListener {
 					supp_logement.setVisible(true);
 					supp_logement.moveToFront();
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien/logement pour supprimer",
-							"Erreur", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this.fenetreAccueil,
+							"Veuillez sélectionner un bien/logement pour supprimer", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 
 				break;
@@ -752,7 +752,8 @@ public class GestionAccueil implements ActionListener {
 					// Premier test si il n'y a aucun immeuble sélectionné alors erreur
 					if (Sauvegarde.onSave("Immeuble") == false) {
 						JOptionPane.showMessageDialog(this.fenetreAccueil,
-								"Veuillez sélectionner un bien/logement pour modifier !", "Erreur", JOptionPane.ERROR_MESSAGE);
+								"Veuillez sélectionner un bien/logement pour modifier !", "Erreur",
+								JOptionPane.ERROR_MESSAGE);
 					} else {
 						// On ouvre la fenÃªtre
 						Fenetre_ModificationBien modif_bien = new Fenetre_ModificationBien();
@@ -1018,7 +1019,7 @@ public class GestionAccueil implements ActionListener {
 						if (travauxCourant.getDatePaiement() != null) {
 							modif_travaux.getTextField_paye().setText(travauxCourant.getDatePaiement());
 						} else {
-							modif_travaux.getTextField_paye().setText("A payé");
+							modif_travaux.getTextField_paye().setText("N/A");
 						}
 						modif_travaux.getTextField_prestataire().setText(travauxCourant.getEntreprise().getNom());
 						modif_travaux.getTextField_adresse().setText(travauxCourant.getEntreprise().getAdresse());
@@ -1080,9 +1081,13 @@ public class GestionAccueil implements ActionListener {
 						modif_charge.getTextField_Numero().setText(chargeCourante.getNumero());
 						modif_charge.getTextField_date_paiement().setText(chargeCourante.getDatePaiement());
 						modif_charge.getTextField_date_emission().setText(chargeCourante.getDateEmission());
-						modif_charge.getTextField_numeroDevis().setText(chargeCourante.getNumeroDevis());
+						if (modif_charge.getTextField_numeroDevis() != null) {
+							modif_charge.getTextField_numeroDevis().setText(chargeCourante.getNumeroDevis());
+						} else {
+							modif_charge.getTextField_numeroDevis().setText("N/A");
+						}
 						modif_charge.getTextField_accompteVerse()
-								.setText(String.valueOf(chargeCourante.getAccompteVerse()));
+								.setText(String.valueOf(chargeCourante.getMontantReelPaye()));
 						modif_charge.getTextField_montant().setText(String.valueOf(chargeCourante.getMontant()));
 
 						// Mise à jour des boutons radio

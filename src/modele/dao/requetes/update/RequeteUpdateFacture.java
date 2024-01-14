@@ -10,7 +10,7 @@ public class RequeteUpdateFacture implements Requete<Facture> {
 
 	@Override
 	public String requete() {
-		return "UPDATE Facture SET date_emission = ?, date_paiement = ?, mode_Paiement = ?, numero_Devis = ?, designation = ?, accompte_Verse = ?, montant = ?, "
+		return "UPDATE Facture SET date_emission = ?, date_paiement = ?, mode_Paiement = ?, numero_Devis = ?, designation = ?, montant_reel_paye = ?, montant = ?, "
 				+ " imputable_Locataire = ?, Id_Immeuble = ?, Id_Bien = ?, SIRET = ? WHERE numero = ?";
 	}
 
@@ -26,7 +26,7 @@ public class RequeteUpdateFacture implements Requete<Facture> {
 		prSt.setString(3, data.getModePaiement());
 		prSt.setString(4, data.getNumeroDevis());
 		prSt.setString(5, data.getDesignation());
-		prSt.setDouble(6, data.getAccompteVerse());
+		prSt.setDouble(6, data.getMontantReelPaye());
 		prSt.setDouble(7, data.getMontant());
 		prSt.setInt(8, data.getImputableLocataire());
 

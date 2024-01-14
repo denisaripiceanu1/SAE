@@ -60,7 +60,7 @@ public class GestionModificationTravauxImmeuble implements ActionListener {
 						this.modificationTravauxImmeuble.getTextField_dateEmission().getText(),
 						facture.getDatePaiement(), facture.getModePaiement(), facture.getNumeroDevis(),
 						this.modificationTravauxImmeuble.getTextField_designation().getText(),
-						facture.getAccompteVerse(),
+						facture.getMontantReelPaye(),
 						Double.parseDouble(this.modificationTravauxImmeuble.getTextField_montant().getText()),
 						facture.getImputableLocataire(), this.immeuble, this.bien, entreprise);
 

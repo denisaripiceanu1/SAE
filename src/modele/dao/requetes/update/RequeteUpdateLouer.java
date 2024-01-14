@@ -12,7 +12,7 @@ public class RequeteUpdateLouer implements Requete<Louer> {
 	@Override
 	public String requete() {
 		// TODO Auto-generated method stub
-		return "UPDATE Louer SET nb_mois = ?, loyer_TTC = ?, caution_TTC = ?, bail = ?, date_depart = ?, loyer_paye = ?, montant_reel_paye = ?, "
+		return "UPDATE Louer SET nb_mois = ?, loyer_TTC = ?, caution_TTC = ?, bail = ?, date_derniere_reg = ?, loyer_paye = ?, montant_reel_paye = ?, "
 				+ "annee = ?, trimestre = ?, provision_chargeMens_TTC = ?, etat_lieux = ? "
 				+ "WHERE Id_Locataire = ? AND Id_Bien = ? AND Date_Debut = ?";
 	}

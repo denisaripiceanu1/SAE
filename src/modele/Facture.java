@@ -11,7 +11,7 @@ public class Facture {
 	private String modePaiement;
 	private String numeroDevis;
 	private String designation;
-	private double accompteVerse;
+	private double montantReelPaye;
 	private double montant;
 	private int imputableLocataire;
 	private Immeuble immeuble;
@@ -19,7 +19,7 @@ public class Facture {
 	private Entreprise entreprise;
 
 	public Facture(String numero, String dateEmission, String datePaiement, String modePaiement, String numeroDevis,
-			String designation, double accompteVerse, double montant, int imputableLocataire, Immeuble immeuble,
+			String designation, double montantReelPaye, double montant, int imputableLocataire, Immeuble immeuble,
 			Bien bien, Entreprise entreprise) {
 		this.numero = numero;
 		this.dateEmission = dateEmission;
@@ -27,7 +27,7 @@ public class Facture {
 		this.modePaiement = modePaiement;
 		this.numeroDevis = numeroDevis;
 		this.designation = designation;
-		this.accompteVerse = accompteVerse;
+		this.montantReelPaye = montantReelPaye;
 		this.montant = montant;
 		this.imputableLocataire = imputableLocataire;
 		this.immeuble = immeuble;
@@ -63,8 +63,8 @@ public class Facture {
 		return designation;
 	}
 
-	public double getAccompteVerse() {
-		return accompteVerse;
+	public double getMontantReelPaye() {
+		return montantReelPaye;
 	}
 
 	public int getImputableLocataire() {
