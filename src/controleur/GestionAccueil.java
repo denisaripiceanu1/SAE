@@ -1081,11 +1081,13 @@ public class GestionAccueil implements ActionListener {
 						modif_charge.getTextField_Numero().setText(chargeCourante.getNumero());
 						modif_charge.getTextField_date_paiement().setText(chargeCourante.getDatePaiement());
 						modif_charge.getTextField_date_emission().setText(chargeCourante.getDateEmission());
-						if (modif_charge.getTextField_numeroDevis() != null) {
-							modif_charge.getTextField_numeroDevis().setText(chargeCourante.getNumeroDevis());
+						
+						if (chargeCourante.getNumeroDevis() != null) {
+						    modif_charge.getTextField_numeroDevis().setText(chargeCourante.getNumeroDevis());
 						} else {
-							modif_charge.getTextField_numeroDevis().setText("N/A");
+						    modif_charge.getTextField_numeroDevis().setText("N/A");
 						}
+						
 						modif_charge.getTextField_accompteVerse()
 								.setText(String.valueOf(chargeCourante.getMontantReelPaye()));
 						modif_charge.getTextField_montant().setText(String.valueOf(chargeCourante.getMontant()));
