@@ -709,7 +709,7 @@ public class GestionAccueil implements ActionListener {
 					supp_logement.setVisible(true);
 					supp_logement.moveToFront();
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien pour supprimer",
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien/logement pour supprimer",
 							"Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 
@@ -752,7 +752,7 @@ public class GestionAccueil implements ActionListener {
 					// Premier test si il n'y a aucun immeuble sélectionné alors erreur
 					if (Sauvegarde.onSave("Immeuble") == false) {
 						JOptionPane.showMessageDialog(this.fenetreAccueil,
-								"Veuillez sélectionner un bien pour modifier !", "Erreur", JOptionPane.ERROR_MESSAGE);
+								"Veuillez sélectionner un bien/logement pour modifier !", "Erreur", JOptionPane.ERROR_MESSAGE);
 					} else {
 						// On ouvre la fenÃªtre
 						Fenetre_ModificationBien modif_bien = new Fenetre_ModificationBien();
@@ -799,7 +799,7 @@ public class GestionAccueil implements ActionListener {
 					paiement_bien.setVisible(true);
 					paiement_bien.moveToFront();
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
@@ -818,7 +818,7 @@ public class GestionAccueil implements ActionListener {
 					affichage_compteursBien.setVisible(true);
 					affichage_compteursBien.moveToFront();
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un immeuble !", "Erreur",
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
@@ -842,7 +842,7 @@ public class GestionAccueil implements ActionListener {
 					diagnostic_logement.setVisible(true);
 					diagnostic_logement.moveToFront();
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien !", "Erreur",
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
@@ -979,7 +979,7 @@ public class GestionAccueil implements ActionListener {
 								"Erreur de recherche", JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un locataire !", "Erreur",
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner une location !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
@@ -990,7 +990,7 @@ public class GestionAccueil implements ActionListener {
 					insertion_facture.setVisible(true);
 					insertion_facture.moveToFront();
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner une location !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;

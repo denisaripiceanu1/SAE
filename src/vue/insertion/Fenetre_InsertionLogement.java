@@ -152,7 +152,7 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		return this.textField_NumEtage;
 	}
 
-	public JComboBox getComboBox_typeDeLogement() {
+	public JComboBox<String> getComboBox_typeDeLogement() {
 		return this.comboBox_typeDeLogement;
 	}
 
