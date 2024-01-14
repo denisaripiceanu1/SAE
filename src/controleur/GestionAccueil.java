@@ -806,7 +806,7 @@ public class GestionAccueil implements ActionListener {
 				break;
 
 			case "btnMesBiens_AfficherCompteurs_Bien":
-				if (Sauvegarde.onSave("Immeuble")) {
+				if (Sauvegarde.onSave("Immeuble") == true) {
 					Fenetre_AffichageCompteursBien affichage_compteursBien = new Fenetre_AffichageCompteursBien();
 					this.fenetreAccueil.getLayeredPane().add(affichage_compteursBien);
 					// On test d'afficher les compteurs au chargement de la page

@@ -50,7 +50,7 @@ public class Fenetre_InsertionQuotite extends JInternalFrame {
         // Menu déroulant pour le type de compteur
         this.comboBox_typeDeCompteur = new JComboBox<String>();
         this.comboBox_typeDeCompteur.setModel(new DefaultComboBoxModel<String>(
-                new String[] { "Eau", "Gaz", "Electricité", "Ordure Ménagère" }));
+                new String[] { "Eau", "Gaz", "Électricité", "Ordures ménagères" }));
         this.comboBox_typeDeCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Type",
                 TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
         this.comboBox_typeDeCompteur.setBounds(271, 215, 189, 39);
