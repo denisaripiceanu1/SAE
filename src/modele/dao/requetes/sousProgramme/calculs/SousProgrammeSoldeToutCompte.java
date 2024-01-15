@@ -32,7 +32,7 @@ public class SousProgrammeSoldeToutCompte implements SousProgramme<Louer> {
 	@Override
 	public void parametresCalcul(CallableStatement prSt, Louer donnee) throws SQLException {
 		prSt.registerOutParameter(1, java.sql.Types.DOUBLE);
-		prSt.setString(2, donnee.getLocataire().getIdLocataire());
+		prSt.setString(2, donnee.getBien().getIdBien());
 	}
 
 
