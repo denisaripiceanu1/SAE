@@ -1065,7 +1065,7 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesArchives_Louer.setBackground(new Color(0, 102, 204));
 		btn_MesArchives_Louer.setBounds(117, 449, 94, 31);
 		btn_MesArchives_Louer.addActionListener(this.gestionAccueil);
-		btn_MesArchives_Louer.setName("btn_MesDocuments_Inserer_Impots");
+		btn_MesArchives_Louer.setName("btn_MesArchives_Louer");
 		panel_MesArchives.add(btn_MesArchives_Louer);
 
 		JLabel lbl_Archive_Locataire = new JLabel("Locataire");
