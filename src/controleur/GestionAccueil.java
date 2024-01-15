@@ -51,6 +51,7 @@ import modele.dao.DaoImpôt;
 import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
+import vue.archiver.Fenetre_ArchiverLocation;
 import vue.insertion.Fenetre_AffichageCompteursBien;
 import vue.insertion.Fenetre_AffichageCompteursLogement;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
@@ -998,10 +999,21 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_mesLocation_Archiver":
+				if (Sauvegarde.onSave("Louer") == true) {
+					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
+					Fenetre_ArchiverLocation archiver_location = new Fenetre_ArchiverLocation();
+					this.fenetreAccueil.getLayeredPane().add(archiver_location);
+					archiver_location.setVisible(true);
+					archiver_location.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner une location !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				break;
 
-				/////////////////////
-				// LAYERED MES TRAVAUX
-				/////////////////////
+			/////////////////////
+			// LAYERED MES TRAVAUX
+			/////////////////////
 			case "btn_Travaux_Modifier":
 				if (Sauvegarde.onSave("Facture")) {
 					Fenetre_ModificationTravauxImmeuble modif_travaux = new Fenetre_ModificationTravauxImmeuble();
