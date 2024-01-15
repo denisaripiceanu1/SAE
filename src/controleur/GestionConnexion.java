@@ -37,6 +37,8 @@ public class GestionConnexion implements ActionListener {
 				// connexion
 				Fenetre_Accueil fenetreAccueil = new Fenetre_Accueil();
 				fenetreAccueil.setVisible(true);
+				fenetreAccueil.getGestionAccueil().rendreVisible(fenetreAccueil.getLayeredPane_Accueil());
+				fenetreAccueil.getGestionAccueil().chargerAccueil();
 				this.fc.dispose();
 			} catch (SQLException e1) {
 				// En cas d'échec de connexion, afficher un message d'erreur
