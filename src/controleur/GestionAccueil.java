@@ -2,6 +2,7 @@ package controleur;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -206,8 +207,15 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getPanel_1().setLayout(new BorderLayout());
 		this.fenetreAccueil.getPanel_1().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
 
-		JLabel labelMoyenne = new JLabel(loyerMoyenneMediane().getMoyenne());
-		this.fenetreAccueil.getPanel_2().add(labelMoyenne);
+		JLabel labelMoyenne = new JLabel("La moyenne des loyers est de " + loyerMoyenneMediane().getMoyenne());
+		Font nouvellePoliceMo = new Font(labelMoyenne.getFont().getName(), Font.PLAIN, 20);
+		labelMoyenne.setFont(nouvellePoliceMo);
+		this.fenetreAccueil.getPanel_2().add(labelMoyenne, BorderLayout.NORTH);
+
+		JLabel labelMediane = new JLabel("La mediane des loyers est de " + loyerMoyenneMediane().getMediane());
+		Font nouvellePolice = new Font(labelMediane.getFont().getName(), Font.PLAIN, 20);
+		labelMediane.setFont(nouvellePolice);
+		this.fenetreAccueil.getPanel_4().add(labelMediane, BorderLayout.SOUTH);
 
 		// Ajouter les ChartPanels aux panneaux de fenetreAccueil
 		this.fenetreAccueil.revalidate();
@@ -515,12 +523,18 @@ public class GestionAccueil implements ActionListener {
 		double chargesReellesBien = daoLouer.totalChargesRéelles(location);
 		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 2);
 		// Charges garages
-		modeleTable.setValueAt(location.getBail(), numeroLigne, 3);
+		double chargesGarage = daoLouer.totalChargesGarages(location);
+		if (chargesGarage != 0) {
+			modeleTable.setValueAt(chargesGarage, numeroLigne, 3);
+		}else {
+			modeleTable.setValueAt("N/A", numeroLigne, 3);
+		}
 		// Total des provisions sur charges
 		double totalProvisions = daoLouer.totalProvisions(location);
 		modeleTable.setValueAt(totalProvisions, numeroLigne, 4);
 		// TOTAL
-		modeleTable.setValueAt(location.getBail(), numeroLigne, 5);
+		double regularisationCharges = daoLouer.regularisationCharges(location);
+		modeleTable.setValueAt(regularisationCharges, numeroLigne, 5);
 
 	}
 
