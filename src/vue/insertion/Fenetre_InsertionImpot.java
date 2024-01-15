@@ -17,7 +17,7 @@ import javax.swing.border.TitledBorder;
 
 import controleur.insertion.GestionInsertionImpot;
 
-public class Fenetre_InsertionImpot extends JInternalFrame implements ActionListener {
+public class Fenetre_InsertionImpot extends JInternalFrame {
 	private JTextField textField_nom;
 	private JTextField textField_montant;
 	private GestionInsertionImpot gestionClic;
@@ -103,14 +103,11 @@ public class Fenetre_InsertionImpot extends JInternalFrame implements ActionList
 	}
 
 	public JTextField getTextField_annee() {
-		return this.textField_montant;
+		return this.textField_annee;
 	}
 
 	public GestionInsertionImpot getGestionClic() {
 		return this.gestionClic;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-	}
 }
