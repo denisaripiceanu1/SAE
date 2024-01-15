@@ -10,10 +10,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controleur.outils.Sauvegarde;
 import modele.Assurance;
 import modele.Bien;
 import modele.Echeance;
 import modele.Entreprise;
+import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
@@ -27,12 +29,15 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 	private DaoLocataire daoLocataire;
 	private DaoLouer daoLouer;
 	private DaoBien daoBien;
+	private Locataire locataire;
 
 	public GestionAffichageInfoLocataire(Fenetre_AffichageInfoLocataire fail) {
 		this.fail = fail;
 		this.daoLocataire = new DaoLocataire();
 		this.daoLouer = new DaoLouer();
 		this.daoBien = new DaoBien();
+		this.locataire = (Locataire) Sauvegarde.getItem("Locataire");
+
 	}
 
 	public void ecrireLigneTableSoldeToutCompte(int numeroLigne, Louer location, /* Facture facture, */ Bien bien)
@@ -40,20 +45,20 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		JTable tableSoldeToutCompte = this.fail.getTable_soldeToutCompte();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableSoldeToutCompte.getModel();
 
-		// Total des provisions sur charges
-		double totalProvisions = daoLouer.totalProvisions(location);
-		modeleTable.setValueAt(totalProvisions, numeroLigne, 0);
-
 		// Total charges reelles
 		double chargesReellesBien = daoLouer.totalChargesRéelles(location);
-		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 1);
-
-		// Caution
-		modeleTable.setValueAt(location.getCautionTTC(), numeroLigne, 2);
+		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 0);
 
 		// Travaux imputables
 		double travauxImputables = daoLouer.travauxImputables(location);
-		modeleTable.setValueAt(travauxImputables, numeroLigne, 3);
+		modeleTable.setValueAt(travauxImputables, numeroLigne, 1);
+
+		// Total des provisions sur charges
+		double totalProvisions = daoLouer.totalProvisions(location);
+		modeleTable.setValueAt(totalProvisions, numeroLigne, 2);
+
+		// Caution
+		modeleTable.setValueAt(location.getCautionTTC(), numeroLigne, 3);
 
 		// Reste
 		double soldeToutCompte = daoLouer.soldeToutCompte(location);
@@ -62,14 +67,14 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 	}
 
 	private void chargerSoldeToutCompte() throws SQLException {
-		List<Louer> locations = this.daoLouer.findAll();
+		List<Louer> locations = this.daoLouer.findByLocataire(locataire.getIdLocataire());
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fail.getTable_soldeToutCompte().getModel();
 		modeleTable.setRowCount(1);
 
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < locations.size(); i++) {
 			Louer l = locations.get(i);
-			Bien b = this.daoBien.findById(l.getBien().getIdBien());																					// les 10 premiers pour enlever
-																					// "HH:MM"
+			Bien b = this.daoBien.findById(l.getBien().getIdBien()); // les 10 premiers pour enlever
+			// "HH:MM"
 			this.ecrireLigneTableSoldeToutCompte(i, l, b);
 		}
 	}
