@@ -13,9 +13,11 @@ import modele.Bien;
 import modele.Compteur;
 import modele.Immeuble;
 import modele.Quotite;
+import modele.Quotter;
 import modele.dao.DaoBien;
 import modele.dao.DaoCompteur;
 import modele.dao.DaoQuotite;
+import modele.dao.DaoQuotter;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionCompteur;
 import vue.insertion.Fenetre_InsertionLogement;
@@ -26,14 +28,14 @@ public class GestionInsertionLogement implements ActionListener {
 	private Fenetre_InsertionLogement fil;
 	private DaoBien daoBien;
 	private DaoCompteur daoCompteur;
-	private DaoQuotite daoQuotite;
+	private DaoQuotter daoQuotter;
 	private Immeuble immeubleSauvegarde;
 
 	public GestionInsertionLogement(Fenetre_InsertionLogement fil) {
 		this.fil = fil;
 		this.daoBien = new DaoBien();
 		this.daoCompteur = new DaoCompteur();
-		this.daoQuotite = new DaoQuotite();
+		this.daoQuotter = new DaoQuotter();
 		//On créer directement l'immeuble à partir de celui de la sauvegarde pour ne plus en dépendre
 		this.immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
 	}
@@ -118,8 +120,8 @@ public class GestionInsertionLogement implements ActionListener {
 					}
 					
 					// Si il y a une quotité à ajouter
-					if (Sauvegarde.onSave("Quotite")) {
-						this.daoQuotite.create((Quotite) Sauvegarde.getItem("Quotite"));
+					if (Sauvegarde.onSave("Quotter")) {
+						this.daoQuotter.create((Quotter) Sauvegarde.getItem("Quotter"));    
 						Sauvegarde.clearSave();
 					}
 					

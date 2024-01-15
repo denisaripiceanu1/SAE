@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import controleur.outils.Sauvegarde;
+import modele.Bien;
 import modele.Quotite;
 import modele.Quotter;
 import modele.dao.DaoQuotite;
@@ -17,10 +18,12 @@ public class GestionInsertionQuotite implements ActionListener {
 
 	private Fenetre_InsertionQuotite fiq;
 	private DaoQuotite daoQuotite;
+	private DaoQuotter daoQuotter; 
 
 	public GestionInsertionQuotite(Fenetre_InsertionQuotite fiq) {
 		this.fiq = fiq;
 		this.daoQuotite = new DaoQuotite();
+		this.daoQuotter = new DaoQuotter();
 	}
 
 	@Override
@@ -30,21 +33,27 @@ public class GestionInsertionQuotite implements ActionListener {
 		switch (btn.getText()) {
 			// Action lors du clic sur "Ajouter"
 			case "Ajouter":
-				Quotite quotite = null;
+				Quotite quotite_type = null;
+				Quotter quotter = null;
 				try {
-					// Récupération du pourcentage depuis la base de données
-					DaoQuotter daoQuotter = new DaoQuotter();
-					Quotter pourcentage = daoQuotter.findById(this.fiq.getTextField_Pourcentage().getText());
-
+					// Récupération du logement par la sauvegarde 
+					Bien bien_sauvegarde = (Bien) Sauvegarde.getItem("Logement");
+					
 					// Récupération du type de quotité depuis l'interface graphique
 					String typeQuotite = (String) this.fiq.getComboBox_typeDeCompteur().getSelectedItem();
-
-					// Création de l'objet Quotite
-					quotite = new Quotite(typeQuotite);
+					
+					// Récupération du type de quotité correspondant depuis la base de donnée 
+					quotite_type = this.daoQuotite.findById(typeQuotite);
+					
+					// Récupération du pourcentage depuis l'interface graphique
+					Double pourcentage = Double.parseDouble(this.fiq.getTextField_Pourcentage().getText());
+					
+					// Création de l'objet java quotter 
+					quotter = new Quotter(bien_sauvegarde, quotite_type, pourcentage);
 
 					// Ajout dans la sauvegarde pour le créer dans la page voulue
-					Sauvegarde.deleteItem("Quotite");
-					Sauvegarde.addItem("Quotite", quotite);
+					Sauvegarde.deleteItem("Quotter");
+					Sauvegarde.addItem("Quotter", quotter);
 
 				} catch (Exception e1) {
 					e1.printStackTrace();
