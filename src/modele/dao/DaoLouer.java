@@ -143,6 +143,17 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 		st.close();
 		return resultat;
 	}
+	
+	// Calcule le total des charges garages pour une location donnée
+		public double totalChargesGarages(Louer donnees) throws SQLException {
+			SousProgramme<Louer> sp = new SousProgrammeTotalChargesReellesBien();
+			CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+			sp.parametresCalcul(st, donnees);
+			st.execute();
+			double resultat = st.getDouble(1);
+			st.close();
+			return resultat;
+		}
 
 	// Méthode utilitaire pour créer une instance de ProvisionAnnee à partir d'un
 	// curseur SQL
@@ -203,7 +214,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 		ResultSet curseur1 = prSt.executeQuery();
 
 		if (curseur1.next()) {
-			mediane = curseur1.getDouble("MedianeLoyer");
+			mediane = curseur1.getDouble("MedianLoyer");
 		}
 
 		return new MoyenneMediane(moyenne, mediane);
