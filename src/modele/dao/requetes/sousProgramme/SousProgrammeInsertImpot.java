@@ -22,7 +22,9 @@ public class SousProgrammeInsertImpot implements SousProgramme<Impôt> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, Impôt donnee) throws SQLException {
-		// TODO Auto-generated method stub
+		prSt.setString(1, donnee.getNom());
+		prSt.setDouble(2, donnee.getMontant());
+		prSt.setString(3, donnee.getAnnee());
 	}
 
 	@Override
