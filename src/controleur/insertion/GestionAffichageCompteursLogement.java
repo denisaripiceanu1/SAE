@@ -16,11 +16,11 @@ import modele.Compteur;
 import modele.dao.DaoCompteur;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageCompteursLogement;
-import vue.insertion.Fenetre_InsertionPaiementLogement;
+import vue.insertion.Fenetre_AffichageReleveCompteursLogement;
 import vue.insertion.Fenetre_InsertionReleve;
 
 public class GestionAffichageCompteursLogement implements ActionListener {
-	
+
 	private Fenetre_AffichageCompteursLogement facl;
 	private DaoCompteur daoCompteur;
 
@@ -51,6 +51,26 @@ public class GestionAffichageCompteursLogement implements ActionListener {
 
 			break;
 
+		case "Afficher les relevés":
+			if (Sauvegarde.onSave("Compteur") == true) {
+				Fenetre_AffichageReleveCompteursLogement affichage_releve = new Fenetre_AffichageReleveCompteursLogement();
+				fenetre_Principale.getLayeredPane().add(affichage_releve);
+				affichage_releve.setVisible(true);
+				affichage_releve.moveToFront();
+
+				// On charge les données au moment de l'ouverture
+				try {
+					affichage_releve.getGestionAffichage().chargerReleveCompteurs();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			} else {
+				JOptionPane.showMessageDialog(fenetre_Principale, "Veuillez sélectionner un compteur !", "Erreur",
+						JOptionPane.ERROR_MESSAGE);
+			}
+			break;
+
 		case "Annuler":
 			this.facl.dispose();
 			break;
@@ -69,9 +89,9 @@ public class GestionAffichageCompteursLogement implements ActionListener {
 
 	// Méthode pour charger les compteurs dans la table des compteurs
 	public void chargerCompteurs() throws SQLException {
-		// On récupère le logement de la sauvegarde pour utiliser son ID 
+		// On récupère le logement de la sauvegarde pour utiliser son ID
 		Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
-		
+
 		List<Compteur> compteurs = this.daoCompteur.findByIdBienListe(bienSauvegarde.getIdBien());
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.facl.getTable_compteurs().getModel();
