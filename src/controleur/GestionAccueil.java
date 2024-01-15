@@ -662,15 +662,15 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(louer.getLocataire().getIdLocataire(), numeroLigne, 0);
 		modeleTable.setValueAt(louer.getBien().getIdBien(), numeroLigne, 1);
 		modeleTable.setValueAt(louer.getDateDebut(), numeroLigne, 2);
-		modeleTable.setValueAt(louer.getLoyerPaye(), numeroLigne, 2);
-		modeleTable.setValueAt(louer.getProvision_chargeMens_TTC(), numeroLigne, 2);
+		modeleTable.setValueAt(louer.getLoyerTTC(), numeroLigne, 3);
+		modeleTable.setValueAt(louer.getProvision_chargeMens_TTC(), numeroLigne, 4);
 	}
 
 	public void chargerTableArchiveLouer() throws SQLException {
 
 		List<Louer> louers = this.daoLouer.findAllArchive();
 
-		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableDocuments().getModel();
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTable_MesArchives_Louer().getModel();
 
 		modeleTable.setRowCount(louers.size());
 
@@ -678,6 +678,33 @@ public class GestionAccueil implements ActionListener {
 			Louer louer = louers.get(i);
 			modeleTable.addRow(new Object[0]); // Ajouter une nouvelle ligne
 			this.ecrireLigneTableArchiveLouer(i, louer);
+		}
+	}
+
+	public void ecrireLigneTableArchiveFacture(int numeroLigne, Facture facture) throws SQLException {
+		JTable tableFacture = this.fenetreAccueil.getTable_MesArchives_Facture();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableFacture.getModel();
+
+		modeleTable.setValueAt(facture.getNumero(), numeroLigne, 0);
+		modeleTable.setValueAt(facture.getDateEmission(), numeroLigne, 1);
+		modeleTable.setValueAt(facture.getMontantReelPaye(), numeroLigne, 2);
+		modeleTable.setValueAt(facture.getMontant(), numeroLigne, 3);
+		modeleTable.setValueAt(facture.getModePaiement(), numeroLigne, 4);
+	}
+
+	public void chargerTableArchiveFacture() throws SQLException {
+
+		List<Facture> factures = this.daoFacture.findAllArchive();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTable_MesArchives_Facture()
+				.getModel();
+
+		modeleTable.setRowCount(factures.size());
+
+		for (int i = 0; i < factures.size(); i++) {
+			Facture facture = factures.get(i);
+			modeleTable.addRow(new Object[0]); // Ajouter une nouvelle ligne
+			this.ecrireLigneTableArchiveFacture(i, facture);
 		}
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1328,8 +1355,26 @@ public class GestionAccueil implements ActionListener {
 				break;
 
 			///////////////////////
+			///////////////////////
+			// LAYERED MES ARCHIVES
+			case "btn_MesArchives_Louer":
+				try {
+					this.chargerTableArchiveLouer();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				break;
 
+			case "btn_MesArchives_Facture":
+				try {
+					this.chargerTableArchiveFacture();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
+
 		} else if (source instanceof JToggleButton) {
 			JToggleButton btnToggle = (JToggleButton) source;
 			switch (btnToggle.getName()) {
@@ -1379,17 +1424,6 @@ public class GestionAccueil implements ActionListener {
 					JOptionPane.showMessageDialog(null,
 							"Erreur lors du chargement des charges de logement. Veuillez réessayer plus tard.",
 							"Erreur de chargement", JOptionPane.ERROR_MESSAGE);
-				}
-				break;
-
-			///////////////////////
-			// LAYERED MES ARCHIVES
-			case "btn_MesArchives_Louer":
-				try {
-					this.chargerTableArchiveLouer();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 				break;
 			}
