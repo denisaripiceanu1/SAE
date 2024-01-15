@@ -222,9 +222,9 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesArchives.setName("btnMesArchives");
 		panel_Menu_Boutons.add(btnMesArchives);
 
-//		///////////////////////////////////////////////////////////////////
-//		// LAYERED ACCUEIL
-//		// ////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////
+		// LAYERED ACCUEIL
+		// ////////////////////////////////////////////////////////////////
 
 		this.layeredPane_Accueil = new JLayeredPane();
 		this.layeredPane_Accueil.setBackground(new Color(255, 255, 255));
@@ -671,7 +671,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesFactures_Modifier = new JButton("Modifier");
 		btn_MesFactures_Modifier.setForeground(Color.WHITE);
 		btn_MesFactures_Modifier.setBackground(new Color(0, 102, 204));
-		btn_MesFactures_Modifier.setBounds(396, 449, 99, 31);
+		btn_MesFactures_Modifier.setBounds(417, 449, 99, 31);
 		btn_MesFactures_Modifier.addActionListener(this.gestionAccueil);
 		btn_MesFactures_Modifier.setName("btn_MesFactures_Modifier");
 		panel_factures.add(btn_MesFactures_Modifier);
@@ -679,17 +679,25 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesFactures_Supprimer = new JButton("Supprimer");
 		btn_MesFactures_Supprimer.setForeground(Color.WHITE);
 		btn_MesFactures_Supprimer.setBackground(new Color(0, 102, 204));
-		btn_MesFactures_Supprimer.setBounds(539, 449, 106, 31);
+		btn_MesFactures_Supprimer.setBounds(561, 449, 106, 31);
 		btn_MesFactures_Supprimer.addActionListener(this.gestionAccueil);
 		btn_MesFactures_Supprimer.setName("btn_MesFactures_Supprimer");
 		panel_factures.add(btn_MesFactures_Supprimer);
 
 		// Boutons propres à la page
 		JToggleButton tglbtn_FactureCharge_biens = new JToggleButton("Charger pour mes logements");
-		tglbtn_FactureCharge_biens.setBounds(143, 453, 208, 23);
+		tglbtn_FactureCharge_biens.setBounds(55, 453, 208, 23);
 		tglbtn_FactureCharge_biens.addActionListener(this.gestionAccueil);
 		tglbtn_FactureCharge_biens.setName("tglbtn_FactureCharge_biens");
 		panel_factures.add(tglbtn_FactureCharge_biens);
+
+		JButton btn_MesFactures_Archiver = new JButton("Archiver");
+		btn_MesFactures_Archiver.setName("btn_MesFactures_Archiver");
+		btn_MesFactures_Archiver.setForeground(Color.WHITE);
+		btn_MesFactures_Archiver.setBackground(new Color(0, 102, 204));
+		btn_MesFactures_Archiver.setBounds(292, 449, 99, 31);
+		btn_MesFactures_Archiver.addActionListener(gestionAccueil);
+		panel_factures.add(btn_MesFactures_Archiver);
 
 		// ComboBox
 		this.comboBox_MesFactures = new JComboBox<String>();

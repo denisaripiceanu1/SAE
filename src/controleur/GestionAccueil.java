@@ -51,6 +51,7 @@ import modele.dao.DaoImpôt;
 import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
+import vue.archiver.Fenetre_ArchiverFacture;
 import vue.archiver.Fenetre_ArchiverLocation;
 import vue.insertion.Fenetre_AffichageCompteursBien;
 import vue.insertion.Fenetre_AffichageCompteursLogement;
@@ -1139,6 +1140,19 @@ public class GestionAccueil implements ActionListener {
 					this.fenetreAccueil.getLayeredPane().add(supp_charge);
 					supp_charge.setVisible(true);
 					supp_charge.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil,
+							"Veuillez sélectionner une charge pour supprimer", "Erreur", JOptionPane.ERROR_MESSAGE);
+				}
+				break;
+
+			case "btn_MesFactures_Archiver":
+				if (Sauvegarde.onSave("Charge") == true) {
+					Facture chargeSauvegarde = (Facture) Sauvegarde.getItem("Charge");
+					Fenetre_ArchiverFacture arch_charge = new Fenetre_ArchiverFacture();
+					this.fenetreAccueil.getLayeredPane().add(arch_charge);
+					arch_charge.setVisible(true);
+					arch_charge.moveToFront();
 				} else {
 					JOptionPane.showMessageDialog(this.fenetreAccueil,
 							"Veuillez sélectionner une charge pour supprimer", "Erreur", JOptionPane.ERROR_MESSAGE);

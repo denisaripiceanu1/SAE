@@ -25,6 +25,7 @@ import modele.dao.requetes.select.RequeteSelectFactureTravaux;
 import modele.dao.requetes.select.RequeteSelectFactureTravauxById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertFacture;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertFactureArchiver;
 import modele.dao.requetes.update.RequeteUpdateFacture;
 
 public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
@@ -172,5 +173,13 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 			return null;
 		}
 		return factures.get(0);
+	}
+
+	public void createArchive(Facture donnees) throws SQLException {
+		SousProgramme<Facture> sp = new SousProgrammeInsertFactureArchiver();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
+		st.execute();
+		st.close();
 	}
 }
