@@ -191,4 +191,9 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 	public GestionAffichageInfoLocataire getGestionClic() {
 		return this.gestionClic;
 	}
+
+	public JTable getTable_soldeToutCompte() {
+		return table_soldeToutCompte;
+	}
+
 }

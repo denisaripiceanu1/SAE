@@ -27,9 +27,11 @@ import modele.dao.requetes.select.RequeteSelectMoyenneLoyer;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocation;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeRegularisationCharges;
+import modele.dao.requetes.sousProgramme.calculs.SousProgrammeSoldeToutCompte;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalChargesGarages;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalChargesReellesBien;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalProvisions;
+import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalTravauxImputables;
 import modele.dao.requetes.update.RequeteUpdateLouer;
 
 public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
@@ -168,11 +170,33 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 		return resultat;
 	}
 
+	// Calcule le total des travaux imputables
+	public double travauxImputables(Louer donnees) throws SQLException {
+		SousProgramme<Louer> sp = new SousProgrammeTotalTravauxImputables();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametresCalcul(st, donnees);
+		st.execute();
+		double resultat = st.getDouble(1);
+		st.close();
+		return resultat;
+	}
+
+	// Calcule le total des travaux imputables
+	public double soldeToutCompte(Louer donnees) throws SQLException {
+		SousProgramme<Louer> sp = new SousProgrammeSoldeToutCompte();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametresCalcul(st, donnees);
+		st.execute();
+		double resultat = st.getDouble(1);
+		st.close();
+		return resultat;
+	}
+
 	// Méthode utilitaire pour créer une instance de ProvisionAnnee à partir d'un
 	// curseur SQL
 	protected ProvisionAnnee creerInstanceProvisionAnnee(ResultSet curseur) throws SQLException {
 		String annee = curseur.getString("annee");
-		double sommeProvision = curseur.getDouble("SUM(provision_chargeMens_TTC)"); 
+		double sommeProvision = curseur.getDouble("SUM(provision_chargeMens_TTC)");
 
 		return new ProvisionAnnee(annee, sommeProvision);
 	}
@@ -193,7 +217,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 	// curseur SQL
 	protected MoyenneLoyer creerInstanceMoyenneLoyer(ResultSet curseur) throws SQLException {
 		String annee = curseur.getString("Id_Locataire");
-		int sommeProvision = curseur.getInt("Moyenne_loyer"); 
+		int sommeProvision = curseur.getInt("Moyenne_loyer");
 
 		return new MoyenneLoyer(annee, sommeProvision);
 	}
