@@ -125,7 +125,7 @@ public class Fenetre_Accueil extends JFrame {
 		JPanel panel_Menu_Boutons = new JPanel();
 		panel_Menu_Boutons.setBackground(Color.LIGHT_GRAY);
 		panel_Menu.add(panel_Menu_Boutons, BorderLayout.CENTER);
-		panel_Menu_Boutons.setLayout(new GridLayout(8, 1, 0, 0));
+		panel_Menu_Boutons.setLayout(new GridLayout(7, 1, 0, 0));
 
 		////// Bande accueil//////////////////////////////////////////////////
 		JPanel bandeAccueil = new JPanel();
@@ -226,16 +226,16 @@ public class Fenetre_Accueil extends JFrame {
 		panel_accueil.setLayout(new GridLayout(2, 2, 0, 0));
 
 		this.panel_1 = new JPanel();
-		panel_accueil.add(panel_1);
+		panel_accueil.add(this.panel_1);
 
-		panel_2 = new JPanel();
-		panel_accueil.add(panel_2);
+		this.panel_2 = new JPanel();
+		panel_accueil.add(this.panel_2);
 
-		panel_4 = new JPanel();
-		panel_accueil.add(panel_4);
+		this.panel_4 = new JPanel();
+		panel_accueil.add(this.panel_4);
 
-		panel_3 = new JPanel();
-		panel_accueil.add(panel_3);
+		this.panel_3 = new JPanel();
+		panel_accueil.add(this.panel_3);
 
 		JButton btnCSV = new JButton("Importer un csv");
 		btnCSV.setForeground(Color.WHITE);
@@ -243,7 +243,7 @@ public class Fenetre_Accueil extends JFrame {
 		btnCSV.setBounds(111, 449, 94, 31);
 		btnCSV.addActionListener(this.gestionAccueil);
 		btnCSV.setName("importCSV");
-		panel_4.add(btnCSV);
+		this.panel_4.add(btnCSV);
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES BIENS
@@ -1053,7 +1053,7 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JPanel getPanel_1() {
-		return panel_1;
+		return this.panel_1;
 	}
 
 	public void setPanel_1(JPanel panel_1) {
@@ -1061,7 +1061,7 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JPanel getPanel_2() {
-		return panel_2;
+		return this.panel_2;
 	}
 
 	public void setPanel_2(JPanel panel_2) {
@@ -1069,7 +1069,7 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JPanel getPanel_3() {
-		return panel_3;
+		return this.panel_3;
 	}
 
 	public void setPanel_3(JPanel panel_3) {
@@ -1077,7 +1077,7 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JPanel getPanel_4() {
-		return panel_4;
+		return this.panel_4;
 	}
 
 	public void setPanel_4(JPanel panel_4) {

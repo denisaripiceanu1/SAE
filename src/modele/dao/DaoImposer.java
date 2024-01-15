@@ -1,5 +1,6 @@
 package modele.dao;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -11,13 +12,18 @@ import modele.dao.requetes.delete.RequeteDeleteImposerByImmeuble;
 import modele.dao.requetes.select.RequeteSelectImposer;
 import modele.dao.requetes.select.RequeteSelectImposerByBien;
 import modele.dao.requetes.select.RequeteSelectImposerById;
+import modele.dao.requetes.sousProgramme.SousProgramme;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertImposer;
 
 public class DaoImposer extends DaoModele<Imposer> implements Dao<Imposer> {
 
 	@Override
 	public void create(Imposer donnees) throws SQLException {
-		// TODO Auto-generated method stub
-
+		SousProgramme<Imposer> sp = new SousProgrammeInsertImposer();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
+		st.execute();
+		st.close();
 	}
 
 	@Override
@@ -28,7 +34,7 @@ public class DaoImposer extends DaoModele<Imposer> implements Dao<Imposer> {
 
 	@Override
 	public void delete(Imposer donnees) throws SQLException {
-		miseAJour(new RequeteDeleteImposerByImmeuble(), donnees);
+		this.miseAJour(new RequeteDeleteImposerByImmeuble(), donnees);
 	}
 
 	@Override
@@ -52,7 +58,7 @@ public class DaoImposer extends DaoModele<Imposer> implements Dao<Imposer> {
 
 	@Override
 	public Imposer findById(String... id) throws SQLException {
-		List<Imposer> imposer = find(new RequeteSelectImposerById(), id);
+		List<Imposer> imposer = this.find(new RequeteSelectImposerById(), id);
 		if (imposer.isEmpty()) {
 			return null;
 		}
@@ -61,11 +67,11 @@ public class DaoImposer extends DaoModele<Imposer> implements Dao<Imposer> {
 
 	@Override
 	public List<Imposer> findAll() throws SQLException {
-		return find(new RequeteSelectImposer());
+		return this.find(new RequeteSelectImposer());
 	}
 
 	public List<Imposer> findImposerByBien(String id) throws SQLException {
-		return find(new RequeteSelectImposerByBien(), id);
+		return this.find(new RequeteSelectImposerByBien(), id);
 	}
 
 }

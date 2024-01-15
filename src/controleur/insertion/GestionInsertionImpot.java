@@ -8,8 +8,10 @@ import javax.swing.JOptionPane;
 
 import controleur.outils.Sauvegarde;
 import modele.Bien;
+import modele.Imposer;
 import modele.Impôt;
 import modele.dao.DaoBien;
+import modele.dao.DaoImposer;
 import modele.dao.DaoImpôt;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionImpot;
@@ -19,13 +21,16 @@ public class GestionInsertionImpot implements ActionListener {
 	private Fenetre_InsertionImpot fii;
 	private DaoBien daoBien;
 	private DaoImpôt daoImpot;
+	private DaoImposer daoImposer;
 
 	public GestionInsertionImpot(Fenetre_InsertionImpot fii) {
 		this.fii = fii;
 		this.daoBien = new DaoBien();
 		this.daoImpot = new DaoImpôt();
+		this.daoImposer = new DaoImposer();
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fii.getTopLevelAncestor();
@@ -34,6 +39,7 @@ public class GestionInsertionImpot implements ActionListener {
 		case "Ajouter":
 			Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
 			Impôt impot = null;
+			Imposer imposer = null;
 			try {
 
 				impot = new Impôt(this.fii.getTextField_nom().getText(),
@@ -42,8 +48,12 @@ public class GestionInsertionImpot implements ActionListener {
 
 				// Ajouter le nouvel impot dans la base de données
 				int idImpotSequence = this.daoImpot.createAvecSequence(impot);
+
 				// Attribue l'id de la séquence à l'impot
 				impot.setIdImpot(idImpotSequence);
+
+				imposer = new Imposer(bienSauvegarde, impot);
+				this.daoImposer.create(imposer);
 
 				this.fii.dispose();
 
