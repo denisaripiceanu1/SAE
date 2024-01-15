@@ -109,14 +109,14 @@ public class GestionAccueil implements ActionListener {
 	// ACCUEIL
 	public void rendreVisible(JLayeredPane visible) {
 		this.fenetreAccueil.getLayeredPane_Accueil().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesBiens().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesTravaux().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesChargesLocatives().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesLocations().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
-//		this.fenetreAccueil.getLayeredPane_MesArchives().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesBiens().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesTravaux().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesChargesLocatives().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesLocations().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesArchives().setVisible(false);
 		visible.setVisible(true);
 		this.fenetreAccueil.getContentPane().add(visible, BorderLayout.CENTER);
 	}
@@ -272,6 +272,8 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(location.getLocataire(), numeroLigne, 0);
 		modeleTable.setValueAt(location.getBien(), numeroLigne, 1);
 		modeleTable.setValueAt(bien.getType_bien(), numeroLigne, 2);
+		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 3);
+		modeleTable.setValueAt(location.getDateDerniereRegularisation(), numeroLigne, 4);
 	}
 
 	private void chargerLocations() throws SQLException {
@@ -573,6 +575,23 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
+	// Methode pour afficher les régularisation après clic sur infoLocataire
+	public void filtreRegularisationChargesDepuisInfoLocataire(String idLocataire) {
+		JComboBox<String> comboBox_MesRegularisations = this.fenetreAccueil.getComboBox_Regularisation();
+		comboBox_MesRegularisations.setSelectedItem(idLocataire);
+		String idLocataireSelectionne = comboBox_MesRegularisations.getSelectedItem().toString();
+
+		// Si l'ID selectionne est diffÃ©rent de "ID du Locataire", filtrez la table
+		// des regularisations
+		if (!idLocataireSelectionne.equals("Locataire")) {
+			try {
+				this.updateTableRegularisationsForLocataire(idLocataireSelectionne);
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
 	///////////////////////////////////////////////////////////////////
 	// LAYERED MES DOCUMENTS
 	// ////////////////////////////////////////////////////////////////
@@ -584,7 +603,6 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(impot.getNom(), numeroLigne, 0);
 		modeleTable.setValueAt(impot.getMontant(), numeroLigne, 1);
 		modeleTable.setValueAt(impot.getAnnee(), numeroLigne, 2);
-
 	}
 
 	public void chargerImpot() throws SQLException {
@@ -634,6 +652,34 @@ public class GestionAccueil implements ActionListener {
 		Sauvegarde.addItem("Logement", bien);
 	}
 
+	///////////////////////////////////////////////////////////////////
+	// LAYERED MES DOCUMENTS
+	// ////////////////////////////////////////////////////////////////
+	public void ecrireLigneTableArchiveLouer(int numeroLigne, Louer louer) throws SQLException {
+		JTable tableLouer = this.fenetreAccueil.getTable_MesArchives_Louer();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableLouer.getModel();
+
+		modeleTable.setValueAt(louer.getLocataire().getIdLocataire(), numeroLigne, 0);
+		modeleTable.setValueAt(louer.getBien().getIdBien(), numeroLigne, 1);
+		modeleTable.setValueAt(louer.getDateDebut(), numeroLigne, 2);
+		modeleTable.setValueAt(louer.getLoyerPaye(), numeroLigne, 2);
+		modeleTable.setValueAt(louer.getProvision_chargeMens_TTC(), numeroLigne, 2);
+	}
+
+	public void chargerTableArchiveLouer() throws SQLException {
+
+		List<Louer> louers = this.daoLouer.findAllArchive();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableDocuments().getModel();
+
+		modeleTable.setRowCount(louers.size());
+
+		for (int i = 0; i < louers.size(); i++) {
+			Louer louer = louers.get(i);
+			modeleTable.addRow(new Object[0]); // Ajouter une nouvelle ligne
+			this.ecrireLigneTableArchiveLouer(i, louer);
+		}
+	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NAVIGATION
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1336,9 +1382,20 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 
+			///////////////////////
+			// LAYERED MES ARCHIVES
+			case "btn_MesArchives_Louer":
+				try {
+					this.chargerTableArchiveLouer();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				break;
 			}
 
 		}
+
 		this.filtreAssuranceByLogement();
 		this.filtreChargesByLogement();
 		this.filtreRegularisationChargesByLocataire();

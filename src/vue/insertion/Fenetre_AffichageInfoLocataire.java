@@ -140,26 +140,45 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
 		// Bouton Solde tout compte
 		JButton btnSoldeToutCompte = new JButton("Solde tout compte");
-		btnSoldeToutCompte.setBounds(426, 223, 210, 25);
+		btnSoldeToutCompte.setBounds(426, 267, 210, 25);
 		panel.add(btnSoldeToutCompte);
 		btnSoldeToutCompte.addActionListener(this.gestionClic);
 
 		JLabel lblDpartLoca = new JLabel("Départ de votre locataire :");
 		lblDpartLoca.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblDpartLoca.setBounds(451, 196, 137, 25);
+		lblDpartLoca.setBounds(462, 233, 137, 25);
 		panel.add(lblDpartLoca);
 
 		this.scrollPane_locataireSoldeToutCompte = new JScrollPane();
 		this.scrollPane_locataireSoldeToutCompte.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
-		this.scrollPane_locataireSoldeToutCompte.setBounds(343, 259, 380, 107);
+		this.scrollPane_locataireSoldeToutCompte.setBounds(343, 304, 380, 48);
 		panel.add(this.scrollPane_locataireSoldeToutCompte);
 
 		// Table pour afficher les données d'entreprise
 		this.table_soldeToutCompte = new JTable();
-		this.table_soldeToutCompte.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
-				new String[] {  "Charges réelles payées",  "Travaux imputables" , "Provisions sur charges", "Caution",
-						"Reste" }));
+		this.table_soldeToutCompte.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"Provisions sur charges", " ", "Charges r\u00E9elles", "", "Caution", " ", "Travaux imputables", " ", "Reste"
+			}
+		));
+		table_soldeToutCompte.getColumnModel().getColumn(1).setPreferredWidth(15);
+		table_soldeToutCompte.getColumnModel().getColumn(3).setPreferredWidth(15);
+		table_soldeToutCompte.getColumnModel().getColumn(5).setPreferredWidth(15);
+		table_soldeToutCompte.getColumnModel().getColumn(7).setPreferredWidth(15);
 		this.scrollPane_locataireSoldeToutCompte.setViewportView(this.table_soldeToutCompte);
+		
+		JLabel lblResteLoca = new JLabel("Si votre reste est négatif, alors votre locataire vous doit de l'argent.");
+		lblResteLoca.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblResteLoca.setBounds(343, 363, 380, 25);
+		panel.add(lblResteLoca);
+		
+		JLabel lblRestLoca_2 = new JLabel("Sinon, vous lui en devez");
+		lblRestLoca_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblRestLoca_2.setBounds(343, 388, 380, 25);
+		panel.add(lblRestLoca_2);
 
 	}
 
@@ -195,5 +214,4 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 	public JTable getTable_soldeToutCompte() {
 		return table_soldeToutCompte;
 	}
-
 }

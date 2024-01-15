@@ -19,6 +19,8 @@ import modele.dao.requetes.delete.RequeteDeleteLocationByBien;
 import modele.dao.requetes.select.RequeteSelectLocationParBien;
 import modele.dao.requetes.select.RequeteSelectLocationParLocataire;
 import modele.dao.requetes.select.RequeteSelectLouer;
+import modele.dao.requetes.select.RequeteSelectLouerArchive;
+import modele.dao.requetes.select.RequeteSelectLouerArchiverById;
 import modele.dao.requetes.select.RequeteSelectLouerById;
 import modele.dao.requetes.select.RequeteSelectLouerMediane;
 import modele.dao.requetes.select.RequeteSelectLouerMoyenne;
@@ -263,6 +265,18 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 		sp.parametres(st, donnees);
 		st.execute();
 		st.close();
+	}
+
+	public Louer findByIdArchive(String... id) throws SQLException {
+		List<Louer> louer = find(new RequeteSelectLouerArchiverById(), id);
+		if (louer.isEmpty()) {
+			return null;
+		}
+		return louer.get(0);
+	}
+
+	public List<Louer> findAllArchive() throws SQLException {
+		return find(new RequeteSelectLouerArchive());
 	}
 
 }
