@@ -133,7 +133,6 @@ public class GestionAccueil implements ActionListener {
 
 	private DefaultCategoryDataset createDataset() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		DaoLouer daoLouer = new DaoLouer();
 		try {
 			List<ProvisionAnnee> provisions = daoLouer.findProvisions();
 			for (ProvisionAnnee provision : provisions) {
@@ -157,7 +156,6 @@ public class GestionAccueil implements ActionListener {
 
 	private DefaultCategoryDataset createDatasetMoyenneLoyer() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		DaoLouer daoLouer = new DaoLouer();
 		try {
 			List<MoyenneLoyer> moyennes = daoLouer.findMoyenneLoyer(); // Assurez-vous que la méthode est correctement
 																		// nommée
@@ -180,6 +178,10 @@ public class GestionAccueil implements ActionListener {
 		);
 	}
 
+	private double loyerMoyenneMediane() {
+		daoLouer
+	}
+
 	private void chargerAccueil() {
 		// Créer les datasets
 		DefaultCategoryDataset datasetProvisions = createDataset();
@@ -192,7 +194,7 @@ public class GestionAccueil implements ActionListener {
 		// Créer les ChartPanels avec les tailles appropriées
 		ChartPanel chartPanelProvisions = new ChartPanel(chartProvisions);
 		this.fenetreAccueil.getPanel_3().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_3().getWidth(),
-				this.fenetreAccueil.getPanel_4().getHeight()));
+				this.fenetreAccueil.getPanel_3().getHeight()));
 		this.fenetreAccueil.getPanel_3().setLayout(new BorderLayout());
 		this.fenetreAccueil.getPanel_3().add(chartPanelProvisions, BorderLayout.CENTER);
 
@@ -1081,13 +1083,13 @@ public class GestionAccueil implements ActionListener {
 						modif_charge.getTextField_Numero().setText(chargeCourante.getNumero());
 						modif_charge.getTextField_date_paiement().setText(chargeCourante.getDatePaiement());
 						modif_charge.getTextField_date_emission().setText(chargeCourante.getDateEmission());
-						
+
 						if (chargeCourante.getNumeroDevis() != null) {
-						    modif_charge.getTextField_numeroDevis().setText(chargeCourante.getNumeroDevis());
+							modif_charge.getTextField_numeroDevis().setText(chargeCourante.getNumeroDevis());
 						} else {
-						    modif_charge.getTextField_numeroDevis().setText("N/A");
+							modif_charge.getTextField_numeroDevis().setText("N/A");
 						}
-						
+
 						modif_charge.getTextField_accompteVerse()
 								.setText(String.valueOf(chargeCourante.getMontantReelPaye()));
 						modif_charge.getTextField_montant().setText(String.valueOf(chargeCourante.getMontant()));

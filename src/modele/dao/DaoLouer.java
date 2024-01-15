@@ -12,6 +12,7 @@ import modele.ICC;
 import modele.Locataire;
 import modele.Louer;
 import modele.MoyenneLoyer;
+import modele.MoyenneMediane;
 import modele.ProvisionAnnee;
 import modele.dao.requetes.delete.RequeteDeleteLocation;
 import modele.dao.requetes.delete.RequeteDeleteLocationByBien;
@@ -19,6 +20,8 @@ import modele.dao.requetes.select.RequeteSelectLocationParBien;
 import modele.dao.requetes.select.RequeteSelectLocationParLocataire;
 import modele.dao.requetes.select.RequeteSelectLouer;
 import modele.dao.requetes.select.RequeteSelectLouerById;
+import modele.dao.requetes.select.RequeteSelectLouerMediane;
+import modele.dao.requetes.select.RequeteSelectLouerMoyenne;
 import modele.dao.requetes.select.RequeteSelectLouerProvision;
 import modele.dao.requetes.select.RequeteSelectMoyenneLoyer;
 import modele.dao.requetes.sousProgramme.SousProgramme;
@@ -160,5 +163,18 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 			resultats.add(creerInstanceMoyenneLoyer(curseur));
 		}
 		return resultats;
+	}
+
+	public MoyenneMediane findMoyenneMediane() throws SQLException {
+		PreparedStatement prSt = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectLouerMoyenne().requete());
+		ResultSet curseur = prSt.executeQuery();
+		double moyenne = curseur.getDouble("MoyenneLoyer");
+		PreparedStatement prSt1 = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectLouerMediane().requete());
+		ResultSet curseur1 = prSt.executeQuery();
+		double mediane = curseur.getDouble("MedianeLoyer");
+
+		return new MoyenneMediane(moyenne, mediane);
 	}
 }
