@@ -105,97 +105,108 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 	}
 
 	// ---------------- AUTRES METHODES ----------------//
-	
-    // Recherche et renvoie la liste des locations associées à un bien spécifique
+
+	// Recherche et renvoie la liste des locations associées à un bien spécifique
 	public List<Louer> findLocationByBien(String id) throws SQLException {
-	    return find(new RequeteSelectLocationParBien(), id);
+		return find(new RequeteSelectLocationParBien(), id);
 	}
 
-    // Supprime une location spécifique en utilisant son identifiant
+	// Supprime une location spécifique en utilisant son identifiant
 	public void deleteVrai(Louer id) throws SQLException {
-	    miseAJour(new RequeteDeleteLocation(), id);
+		miseAJour(new RequeteDeleteLocation(), id);
 	}
 
-    // Recherche et renvoie la liste des locations associées à un locataire spécifique
+	// Recherche et renvoie la liste des locations associées à un locataire
+	// spécifique
 	public List<Louer> findByLocataire(String idLocataire) throws SQLException {
-	    return find(new RequeteSelectLocationParLocataire(), idLocataire);
+		return find(new RequeteSelectLocationParLocataire(), idLocataire);
 	}
 
-    // Calcule le total des provisions pour une location donnée
+	// Calcule le total des provisions pour une location donnée
 	public double totalProvisions(Louer donnees) throws SQLException {
-	    SousProgramme<Louer> sp = new SousProgrammeTotalProvisions();
-	    CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
-	    sp.parametresCalcul(st, donnees);
-	    st.execute();
-	    double resultat = st.getDouble(1);
-	    st.close();
-	    return resultat;
+		SousProgramme<Louer> sp = new SousProgrammeTotalProvisions();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametresCalcul(st, donnees);
+		st.execute();
+		double resultat = st.getDouble(1);
+		st.close();
+		return resultat;
 	}
-	
-    // Calcule le total des charges réelles pour une location donnée
+
+	// Calcule le total des charges réelles pour une location donnée
 	public double totalChargesRéelles(Louer donnees) throws SQLException {
-	    SousProgramme<Louer> sp = new SousProgrammeTotalChargesReellesBien();
-	    CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
-	    sp.parametresCalcul(st, donnees);
-	    st.execute();
-	    double resultat = st.getDouble(1);
-	    st.close();
-	    return resultat;
+		SousProgramme<Louer> sp = new SousProgrammeTotalChargesReellesBien();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametresCalcul(st, donnees);
+		st.execute();
+		double resultat = st.getDouble(1);
+		st.close();
+		return resultat;
 	}
 
-	// Méthode utilitaire pour créer une instance de ProvisionAnnee à partir d'un curseur SQL
+	// Méthode utilitaire pour créer une instance de ProvisionAnnee à partir d'un
+	// curseur SQL
 	protected ProvisionAnnee creerInstanceProvisionAnnee(ResultSet curseur) throws SQLException {
-	    String annee = curseur.getString("annee");
-	    double sommeProvision = curseur.getDouble("SUM(provision_chargeMens_TTC)"); // Assurez-vous que c'est le bon alias SQL
+		String annee = curseur.getString("annee");
+		double sommeProvision = curseur.getDouble("SUM(provision_chargeMens_TTC)"); // Assurez-vous que c'est le bon
+																					// alias SQL
 
-	    return new ProvisionAnnee(annee, sommeProvision);
+		return new ProvisionAnnee(annee, sommeProvision);
 	}
 
 	public List<ProvisionAnnee> findProvisions() throws SQLException {
-	    // Recherche et renvoie la liste des provisions annuelles pour les locations
-	    List<ProvisionAnnee> resultats = new ArrayList<>();
-	    PreparedStatement prSt = CictOracleDataSource.getConnectionBD()
-	            .prepareStatement(new RequeteSelectLouerProvision().requete());
-	    ResultSet curseur = prSt.executeQuery();
-	    while (curseur.next()) {
-	        resultats.add(creerInstanceProvisionAnnee(curseur));
-	    }
-	    return resultats;
+		// Recherche et renvoie la liste des provisions annuelles pour les locations
+		List<ProvisionAnnee> resultats = new ArrayList<>();
+		PreparedStatement prSt = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectLouerProvision().requete());
+		ResultSet curseur = prSt.executeQuery();
+		while (curseur.next()) {
+			resultats.add(creerInstanceProvisionAnnee(curseur));
+		}
+		return resultats;
 	}
 
-	// Méthode utilitaire pour créer une instance de MoyenneLoyer à partir d'un curseur SQL
+	// Méthode utilitaire pour créer une instance de MoyenneLoyer à partir d'un
+	// curseur SQL
 	protected MoyenneLoyer creerInstanceMoyenneLoyer(ResultSet curseur) throws SQLException {
-	    String annee = curseur.getString("Id_Locataire");
-	    int sommeProvision = curseur.getInt("Moyenne_loyer"); // Assurez-vous que c'est le bon alias SQL
+		String annee = curseur.getString("Id_Locataire");
+		int sommeProvision = curseur.getInt("Moyenne_loyer"); // Assurez-vous que c'est le bon alias SQL
 
-	    return new MoyenneLoyer(annee, sommeProvision);
+		return new MoyenneLoyer(annee, sommeProvision);
 	}
 
 	public List<MoyenneLoyer> findMoyenneLoyer() throws SQLException {
-	    // Recherche et renvoie la liste des moyennes de loyer par locataire
-	    List<MoyenneLoyer> resultats = new ArrayList<>();
-	    PreparedStatement prSt = CictOracleDataSource.getConnectionBD()
-	            .prepareStatement(new RequeteSelectMoyenneLoyer().requete());
-	    ResultSet curseur = prSt.executeQuery();
-	    while (curseur.next()) {
-	        resultats.add(creerInstanceMoyenneLoyer(curseur));
-	    }
-	    return resultats;
+		// Recherche et renvoie la liste des moyennes de loyer par locataire
+		List<MoyenneLoyer> resultats = new ArrayList<>();
+		PreparedStatement prSt = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectMoyenneLoyer().requete());
+		ResultSet curseur = prSt.executeQuery();
+		while (curseur.next()) {
+			resultats.add(creerInstanceMoyenneLoyer(curseur));
+		}
+		return resultats;
 	}
 
 	public MoyenneMediane findMoyenneMediane() throws SQLException {
-	    // Recherche et renvoie la moyenne et la médiane des loyers
-	    PreparedStatement prSt = CictOracleDataSource.getConnectionBD()
-	            .prepareStatement(new RequeteSelectLouerMoyenne().requete());
-	    ResultSet curseur = prSt.executeQuery();
-	    double moyenne = curseur.getDouble("MoyenneLoyer");
+		PreparedStatement prSt = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(new RequeteSelectLouerMoyenne().requete());
+		ResultSet curseur = prSt.executeQuery();
 
-	    PreparedStatement prSt1 = CictOracleDataSource.getConnectionBD()
-	            .prepareStatement(new RequeteSelectLouerMediane().requete());
-	    ResultSet curseur1 = prSt1.executeQuery();
-	    double mediane = curseur1.getDouble("MedianeLoyer");
+		double moyenne = 0.0;
+		double mediane = 0.0;
 
-	    return new MoyenneMediane(moyenne, mediane);
+		if (curseur.next()) {
+			moyenne = curseur.getDouble("MoyenneLoyer");
+		}
+
+		prSt = CictOracleDataSource.getConnectionBD().prepareStatement(new RequeteSelectLouerMediane().requete());
+		ResultSet curseur1 = prSt.executeQuery();
+
+		if (curseur1.next()) {
+			mediane = curseur1.getDouble("MedianeLoyer");
+		}
+
+		return new MoyenneMediane(moyenne, mediane);
 	}
 
 }

@@ -10,16 +10,16 @@ public class MoyenneMediane {
 		this.mediane = mediane;
 	}
 
-	public double getMoyenne() {
-		return moyenne;
+	public String getMoyenne() {
+		return String.valueOf(moyenne);
 	}
 
 	public void setMoyenne(double moyenne) {
 		this.moyenne = moyenne;
 	}
 
-	public double getMediane() {
-		return mediane;
+	public String getMediane() {
+		return String.valueOf(mediane);
 	}
 
 	public void setMediane(double mediane) {
