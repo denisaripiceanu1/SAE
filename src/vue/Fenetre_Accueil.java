@@ -61,9 +61,6 @@ public class Fenetre_Accueil extends JFrame {
 	private JTable table_MesFactures;
 	private JTable table_MesAssurances;
 	private JTable table_MesDocuments;
-	private JTable table_MesArchives_Facture;
-	private JTable table_MesArchives_Louer;
-	private JTable table_MesArchives_Locataire;
 
 	private JTextField textField_loyer;
 	private JTextField textField_provisionCharges;
@@ -103,6 +100,14 @@ public class Fenetre_Accueil extends JFrame {
 	private DaoLocataire daoLocataire;
 	private GestionTableTravaux gestionTableTravaux;
 	private GestionTableAssurance gestionTableAssurance;
+	private JPanel panel_5;
+	private JPanel panel_8;
+	private JPanel panel_7;
+	private JPanel panel_6;
+	private JTable table_MesArchives_Locataire;
+	private JTable table_MesArchives_Louer;
+	private JTable table_MesArchives_Facture;
+	private JPanel panel_MesArchives;
 
 	/**
 	 * Create the frame.
@@ -249,6 +254,23 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.panel_1 = new JPanel();
 		panel_accueil.add(this.panel_1);
+		this.panel_1.setLayout(new GridLayout(0, 1, 0, 0));
+
+		JPanel panel = new JPanel();
+		this.panel_1.add(panel);
+		panel.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("Accueil");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel.setBounds(156, 32, 63, 35);
+		panel.add(lblNewLabel);
+
+		JSeparator separator = new JSeparator();
+		separator.setBounds(94, 70, 193, 11);
+		panel.add(separator);
+
+		this.panel_6 = new JPanel();
+		this.panel_1.add(this.panel_6);
 
 		this.panel_2 = new JPanel();
 		panel_accueil.add(this.panel_2);
@@ -259,13 +281,25 @@ public class Fenetre_Accueil extends JFrame {
 		this.panel_3 = new JPanel();
 		panel_accueil.add(this.panel_3);
 
+		this.panel_8 = new JPanel();
+		this.panel_4.add(this.panel_8);
+
+		this.panel_7 = new JPanel();
+		this.panel_4.add(this.panel_7);
+
 		JButton btnCSV = new JButton("Importer un csv");
 		btnCSV.setForeground(Color.WHITE);
 		btnCSV.setBackground(new Color(0, 102, 204));
-		btnCSV.setBounds(111, 449, 94, 31);
+		btnCSV.setBounds(118, 45, 143, 39);
 		btnCSV.addActionListener(this.gestionAccueil);
+		this.panel_4.setLayout(new GridLayout(2, 1, 0, 0));
+		this.panel_7.setLayout(null);
 		btnCSV.setName("importCSV");
-		this.panel_4.add(btnCSV);
+		this.panel_7.add(btnCSV);
+
+		JPanel panel_titre_accueil = new JPanel();
+		this.layeredPane_Accueil.add(panel_titre_accueil, BorderLayout.NORTH);
+		panel_titre_accueil.setLayout(new BorderLayout(0, 0));
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES BIENS
@@ -445,7 +479,7 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesLocations.add(lbl_MesLocations);
 
 		// Séparateurs
-		JSeparator separator = new JSeparator();
+		JSeparator separator_location = new JSeparator();
 		separator.setForeground(new Color(0, 102, 204));
 		separator.setBounds(258, 63, 190, 2);
 		panel_MesLocations.add(separator);
@@ -992,6 +1026,21 @@ public class Fenetre_Accueil extends JFrame {
 		this.layeredPane_MesArchives.add(panel_MesArchives);
 		panel_MesArchives.setLayout(null);
 
+		JLabel lbl_test = new JLabel("TEST");
+		lbl_test.setBounds(0, 0, 755, 511);
+		lbl_test.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_test.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panel_MesArchives.add(lbl_test);
+
+		this.layeredPane_MesArchives = new JLayeredPane();
+		this.contentPane.add(this.layeredPane_MesArchives, BorderLayout.CENTER);
+		this.layeredPane_MesArchives.setLayout(new BorderLayout(0, 0));
+
+		this.panel_MesArchives = new JPanel();
+		panel_MesArchives.setBackground(Color.WHITE);
+		this.layeredPane_MesArchives.add(panel_MesArchives);
+		panel_MesArchives.setLayout(null);
+
 		JLabel lbl_MesArchives = new JLabel("Mes Archives");
 		lbl_MesArchives.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_MesArchives.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -1065,7 +1114,7 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesArchives_Louer.setBackground(new Color(0, 102, 204));
 		btn_MesArchives_Louer.setBounds(117, 449, 94, 31);
 		btn_MesArchives_Louer.addActionListener(this.gestionAccueil);
-		btn_MesArchives_Louer.setName("btn_MesDocuments_Inserer_Impots");
+		btn_MesArchives_Louer.setName("btn_MesArchives_Louer");
 		panel_MesArchives.add(btn_MesArchives_Louer);
 
 		JLabel lbl_Archive_Locataire = new JLabel("Locataire");
@@ -1215,6 +1264,14 @@ public class Fenetre_Accueil extends JFrame {
 		return this.panel_2;
 	}
 
+	public JPanel getPanel_6() {
+		return this.panel_6;
+	}
+
+	public JPanel getPanel_8() {
+		return this.panel_8;
+	}
+
 	public void setPanel_2(JPanel panel_2) {
 		this.panel_2 = panel_2;
 	}
@@ -1236,7 +1293,7 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JTable getTable_MesArchives_Facture() {
-		return table_MesArchives_Facture;
+		return this.table_MesArchives_Facture;
 	}
 
 	public void setTable_MesArchives_Facture(JTable table_MesArchives_Facture) {
@@ -1244,7 +1301,7 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JTable getTable_MesArchives_Louer() {
-		return table_MesArchives_Louer;
+		return this.table_MesArchives_Louer;
 	}
 
 	public void setTable_MesArchives_Louer(JTable table_MesArchives_Louer) {
@@ -1252,7 +1309,7 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JTable getTable_MesArchives_Locataire() {
-		return table_MesArchives_Locataire;
+		return this.table_MesArchives_Locataire;
 	}
 
 	public void setTable_MesArchives_Locataire(JTable table_MesArchives_Locataire) {

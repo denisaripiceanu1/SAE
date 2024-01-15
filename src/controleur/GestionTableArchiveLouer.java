@@ -1,5 +1,7 @@
 package controleur;
 
+import java.sql.SQLException;
+
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -27,17 +29,18 @@ public class GestionTableArchiveLouer implements ListSelectionListener {
 
 			if (selectedRowLogement > -1) {
 				// Si une ligne est sélectionnée
+				Louer louer = (Louer) Sauvegarde.getItem("Louer");
 				JTable tableLouer = fenetreAccueil.getTable_MesArchives_Louer();
-				Louer louer = this.daoLouer.find
-//				try {
-//					// Récupération de l'objet Bien associé à la ligne sélectionnée
-//					bien = daoBien.findById(tableLogement.getValueAt(selectedRowLogement, 0).toString());
-//				} catch (SQLException e1) {
-//					e1.printStackTrace();
-//				}
-				// Mise à jour de la sauvegarde avec l'objet Bien sélectionné
-				Sauvegarde.deleteItem("Logement");
-				Sauvegarde.addItem("Logement", bien);
+				Louer louer_sauv = null;
+				try {
+					louer_sauv = this.daoLouer.findByIdArchive(louer.getBien().getIdBien(),
+							louer.getLocataire().getIdLocataire(), louer.getDateDebut());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				Sauvegarde.deleteItem("Louer");
+				Sauvegarde.addItem("Louer", louer_sauv);
 			}
 		}
 	}

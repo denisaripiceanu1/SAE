@@ -206,20 +206,20 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getPanel_3().add(chartPanelProvisions, BorderLayout.CENTER);
 
 		ChartPanel chartPanelMoyenneLoyer = new ChartPanel(chartMoyenneLoyer);
-		this.fenetreAccueil.getPanel_1().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_1().getWidth(),
-				this.fenetreAccueil.getPanel_1().getHeight()));
-		this.fenetreAccueil.getPanel_1().setLayout(new BorderLayout());
-		this.fenetreAccueil.getPanel_1().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
+		this.fenetreAccueil.getPanel_2().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_2().getWidth(),
+				this.fenetreAccueil.getPanel_2().getHeight()));
+		this.fenetreAccueil.getPanel_2().setLayout(new BorderLayout());
+		this.fenetreAccueil.getPanel_2().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
 
-		JLabel labelMoyenne = new JLabel("La moyenne des loyers est de " + this.loyerMoyenneMediane().getMoyenne());
+		JLabel labelMoyenne = new JLabel("Moyenne des loyers : " + this.loyerMoyenneMediane().getMoyenne() + " €");
 		Font nouvellePoliceMo = new Font(labelMoyenne.getFont().getName(), Font.PLAIN, 20);
 		labelMoyenne.setFont(nouvellePoliceMo);
-		this.fenetreAccueil.getPanel_2().add(labelMoyenne, BorderLayout.NORTH);
+		this.fenetreAccueil.getPanel_6().add(labelMoyenne, BorderLayout.NORTH);
 
-		JLabel labelMediane = new JLabel("La mediane des loyers est de " + this.loyerMoyenneMediane().getMediane());
+		JLabel labelMediane = new JLabel("Mediane des loyers : " + this.loyerMoyenneMediane().getMediane() + " €");
 		Font nouvellePolice = new Font(labelMediane.getFont().getName(), Font.PLAIN, 20);
 		labelMediane.setFont(nouvellePolice);
-		this.fenetreAccueil.getPanel_4().add(labelMediane, BorderLayout.SOUTH);
+		this.fenetreAccueil.getPanel_8().add(labelMediane, BorderLayout.SOUTH);
 
 		// Ajouter les ChartPanels aux panneaux de fenetreAccueil
 		this.fenetreAccueil.revalidate();
@@ -273,7 +273,7 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(location.getBien(), numeroLigne, 1);
 		modeleTable.setValueAt(bien.getType_bien(), numeroLigne, 2);
 		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 3);
-		modeleTable.setValueAt(location.getDateDerniereRegularisation(), numeroLigne, 4);		
+		modeleTable.setValueAt(location.getDateDerniereRegularisation(), numeroLigne, 4);
 	}
 
 	private void chargerLocations() throws SQLException {
@@ -574,7 +574,7 @@ public class GestionAccueil implements ActionListener {
 			}
 		}
 	}
-	
+
 	// Methode pour afficher les régularisation après clic sur infoLocataire
 	public void filtreRegularisationChargesDepuisInfoLocataire(String idLocataire) {
 		JComboBox<String> comboBox_MesRegularisations = this.fenetreAccueil.getComboBox_Regularisation();
@@ -652,6 +652,34 @@ public class GestionAccueil implements ActionListener {
 		Sauvegarde.addItem("Logement", bien);
 	}
 
+	///////////////////////////////////////////////////////////////////
+	// LAYERED MES DOCUMENTS
+	// ////////////////////////////////////////////////////////////////
+	public void ecrireLigneTableArchiveLouer(int numeroLigne, Louer louer) throws SQLException {
+		JTable tableLouer = this.fenetreAccueil.getTable_MesArchives_Louer();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableLouer.getModel();
+
+		modeleTable.setValueAt(louer.getLocataire().getIdLocataire(), numeroLigne, 0);
+		modeleTable.setValueAt(louer.getBien().getIdBien(), numeroLigne, 1);
+		modeleTable.setValueAt(louer.getDateDebut(), numeroLigne, 2);
+		modeleTable.setValueAt(louer.getLoyerPaye(), numeroLigne, 2);
+		modeleTable.setValueAt(louer.getProvision_chargeMens_TTC(), numeroLigne, 2);
+	}
+
+	public void chargerTableArchiveLouer() throws SQLException {
+
+		List<Louer> louers = this.daoLouer.findAllArchive();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableDocuments().getModel();
+
+		modeleTable.setRowCount(louers.size());
+
+		for (int i = 0; i < louers.size(); i++) {
+			Louer louer = louers.get(i);
+			modeleTable.addRow(new Object[0]); // Ajouter une nouvelle ligne
+			this.ecrireLigneTableArchiveLouer(i, louer);
+		}
+	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NAVIGATION
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1354,9 +1382,20 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 
+			///////////////////////
+			// LAYERED MES ARCHIVES
+			case "btn_MesArchives_Louer":
+				try {
+					this.chargerTableArchiveLouer();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				break;
 			}
 
 		}
+
 		this.filtreAssuranceByLogement();
 		this.filtreChargesByLogement();
 		this.filtreRegularisationChargesByLocataire();
