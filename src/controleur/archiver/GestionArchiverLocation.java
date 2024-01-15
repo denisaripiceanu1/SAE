@@ -29,19 +29,16 @@ public class GestionArchiverLocation implements ActionListener {
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.archiverLocation.getTopLevelAncestor();
 		switch (btn.getText()) {
 		// Suppression d'une location
-		case "Supprimer":
+		case "Archiver":
 			Louer louer_supp = (Louer) Sauvegarde.getItem("Louer");
 			try {
-				// Récupération de la location à supprimer
 				Louer louer = this.daoLouer.findById(louer_supp.getBien().getIdBien(),
 						louer_supp.getLocataire().getIdLocataire(), louer_supp.getDateDebut());
-
-				// Suppression de la location dans la base de données
 				this.daoLouer.deleteVrai(louer);
+				this.daoLouer.createArchiver(louer);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			// Fermeture de la fenêtre de suppression de location
 			this.archiverLocation.dispose();
 			break;
 		// Annulation de la suppression

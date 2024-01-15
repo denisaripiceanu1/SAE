@@ -26,6 +26,7 @@ import modele.dao.requetes.select.RequeteSelectLouerProvision;
 import modele.dao.requetes.select.RequeteSelectMoyenneLoyer;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocation;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocationArchiver;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeRegularisationCharges;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeSoldeToutCompte;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalChargesGarages;
@@ -254,6 +255,14 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 		}
 
 		return new MoyenneMediane(moyenne, mediane);
+	}
+
+	public void createArchiver(Louer donnees) throws SQLException {
+		SousProgramme<Louer> sp = new SousProgrammeInsertLocationArchiver();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
+		st.execute();
+		st.close();
 	}
 
 }

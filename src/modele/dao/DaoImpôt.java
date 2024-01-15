@@ -15,9 +15,12 @@ import modele.dao.requetes.sousProgramme.SousProgrammeInsertImpot;
 public class DaoImpôt extends DaoModele<Impôt> implements Dao<Impôt> {
 
 	@Override
-	public void create(Impôt donnees) {
-		// TODO Auto-generated method stub
-
+	public void create(Impôt donnees) throws SQLException {
+		SousProgramme<Impôt> sp = new SousProgrammeInsertImpot();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
+		st.execute();
+		st.close();
 	}
 
 	// Méthode qui créer l'objet puis récupère son ID depuis la BD juste après la

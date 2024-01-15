@@ -49,6 +49,8 @@ public class Fenetre_Accueil extends JFrame {
 	private JLayeredPane layeredPane_MesAssurances;
 	private JLayeredPane layeredPane_RegularisationDesCharges;
 	private JLayeredPane layeredPane_MesDocuments;
+	private JLayeredPane layeredPane_MesArchives;
+
 	private JTable tableMesBiens;
 	private JTable tableMesBiens_Logements;
 	private JTable table_MesLocations;
@@ -125,7 +127,7 @@ public class Fenetre_Accueil extends JFrame {
 		JPanel panel_Menu_Boutons = new JPanel();
 		panel_Menu_Boutons.setBackground(Color.LIGHT_GRAY);
 		panel_Menu.add(panel_Menu_Boutons, BorderLayout.CENTER);
-		panel_Menu_Boutons.setLayout(new GridLayout(7, 1, 0, 0));
+		panel_Menu_Boutons.setLayout(new GridLayout(8, 1, 0, 0));
 
 		////// Bande accueil//////////////////////////////////////////////////
 		JPanel bandeAccueil = new JPanel();
@@ -212,9 +214,17 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesDocuments.setName("btnMesDocuments");
 		panel_Menu_Boutons.add(btnMesDocuments);
 
-//		///////////////////////////////////////////////////////////////////
-//		// LAYERED ACCUEIL
-//		// ////////////////////////////////////////////////////////////////
+		JButton btnMesArchives = new JButton("Mes Archives");
+		btnMesArchives.setForeground(new Color(255, 255, 255));
+		btnMesArchives.addActionListener(this.gestionAccueil);
+		btnMesArchives.setBackground(new Color(0, 102, 204));
+		btnMesArchives.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnMesArchives.setName("btnMesArchives");
+		panel_Menu_Boutons.add(btnMesArchives);
+
+		///////////////////////////////////////////////////////////////////
+		// LAYERED ACCUEIL
+		// ////////////////////////////////////////////////////////////////
 
 		this.layeredPane_Accueil = new JLayeredPane();
 		this.layeredPane_Accueil.setBackground(new Color(255, 255, 255));
@@ -408,9 +418,9 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesLocations.setSelectionBackground(new Color(0, 102, 204));
 		this.table_MesLocations.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
 				new String[] { "Locataire", "Bien", "Type", "Date d\u00E9but", "Derni\u00E8re r\u00E9gularisation" }));
-		table_MesLocations.getColumnModel().getColumn(0).setPreferredWidth(60);
-		table_MesLocations.getColumnModel().getColumn(1).setPreferredWidth(58);
-		table_MesLocations.getColumnModel().getColumn(2).setPreferredWidth(70);
+		this.table_MesLocations.getColumnModel().getColumn(0).setPreferredWidth(60);
+		this.table_MesLocations.getColumnModel().getColumn(1).setPreferredWidth(58);
+		this.table_MesLocations.getColumnModel().getColumn(2).setPreferredWidth(70);
 		this.table_MesLocations.setBounds(40, 53, 668, 130);
 		scrollPane_MesLocations.setViewportView(this.table_MesLocations);
 		this.table_MesLocations.getSelectionModel().addListSelectionListener(this.gestionLocations);
@@ -661,7 +671,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesFactures_Modifier = new JButton("Modifier");
 		btn_MesFactures_Modifier.setForeground(Color.WHITE);
 		btn_MesFactures_Modifier.setBackground(new Color(0, 102, 204));
-		btn_MesFactures_Modifier.setBounds(396, 449, 99, 31);
+		btn_MesFactures_Modifier.setBounds(417, 449, 99, 31);
 		btn_MesFactures_Modifier.addActionListener(this.gestionAccueil);
 		btn_MesFactures_Modifier.setName("btn_MesFactures_Modifier");
 		panel_factures.add(btn_MesFactures_Modifier);
@@ -669,17 +679,25 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesFactures_Supprimer = new JButton("Supprimer");
 		btn_MesFactures_Supprimer.setForeground(Color.WHITE);
 		btn_MesFactures_Supprimer.setBackground(new Color(0, 102, 204));
-		btn_MesFactures_Supprimer.setBounds(539, 449, 106, 31);
+		btn_MesFactures_Supprimer.setBounds(561, 449, 106, 31);
 		btn_MesFactures_Supprimer.addActionListener(this.gestionAccueil);
 		btn_MesFactures_Supprimer.setName("btn_MesFactures_Supprimer");
 		panel_factures.add(btn_MesFactures_Supprimer);
 
 		// Boutons propres à la page
 		JToggleButton tglbtn_FactureCharge_biens = new JToggleButton("Charger pour mes logements");
-		tglbtn_FactureCharge_biens.setBounds(143, 453, 208, 23);
+		tglbtn_FactureCharge_biens.setBounds(55, 453, 208, 23);
 		tglbtn_FactureCharge_biens.addActionListener(this.gestionAccueil);
 		tglbtn_FactureCharge_biens.setName("tglbtn_FactureCharge_biens");
 		panel_factures.add(tglbtn_FactureCharge_biens);
+
+		JButton btn_MesFactures_Archiver = new JButton("Archiver");
+		btn_MesFactures_Archiver.setName("btn_MesFactures_Archiver");
+		btn_MesFactures_Archiver.setForeground(Color.WHITE);
+		btn_MesFactures_Archiver.setBackground(new Color(0, 102, 204));
+		btn_MesFactures_Archiver.setBounds(292, 449, 99, 31);
+		btn_MesFactures_Archiver.addActionListener(gestionAccueil);
+		panel_factures.add(btn_MesFactures_Archiver);
 
 		// ComboBox
 		this.comboBox_MesFactures = new JComboBox<String>();
@@ -937,6 +955,7 @@ public class Fenetre_Accueil extends JFrame {
 					identifiantsLogements.toArray(new String[0]));
 
 			this.comboBox_MesDocuments.setModel(modelComboBox);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
@@ -947,10 +966,34 @@ public class Fenetre_Accueil extends JFrame {
 //		PDFListe pdfViewer = new PDFListe();
 //		panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
 
+////////////////////////////////////////////////////////////////////////////
+////// LAYERED
+////// ARCHIVES
+////////////////////////////////////////////////////////////////
+
+		this.layeredPane_MesArchives = new JLayeredPane();
+		this.contentPane.add(this.layeredPane_MesArchives, BorderLayout.CENTER);
+		this.layeredPane_MesArchives.setLayout(new BorderLayout(0, 0));
+
+		JPanel panel_MesArchives = new JPanel();
+		panel_MesArchives.setBackground(Color.WHITE);
+		this.layeredPane_MesArchives.add(panel_MesArchives);
+		panel_MesArchives.setLayout(null);
+
+		JLabel lbl_test = new JLabel("TEST");
+		lbl_test.setBounds(0, 0, 755, 511);
+		lbl_test.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_test.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panel_MesArchives.add(lbl_test);
+
 	}
 
 	public JLayeredPane getLayeredPane_MesDocuments() {
 		return this.layeredPane_MesDocuments;
+	}
+
+	public JLayeredPane getLayeredPane_MesArchives() {
+		return this.layeredPane_MesArchives;
 	}
 
 	public JLayeredPane getLayeredPane_Accueil() {
