@@ -11,16 +11,14 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.outils.Sauvegarde;
-import modele.Assurance;
 import modele.Bien;
-import modele.Echeance;
-import modele.Entreprise;
 import modele.Locataire;
 import modele.Louer;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
+import vue.archiver.Fenetre_ArchiverLocation;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
 
 public class GestionAffichageInfoLocataire implements ActionListener {
@@ -92,11 +90,24 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		case "Régularisation des charges":
 			this.fail.dispose();
 			fenetre_Principale.getGestionAccueil().rendreVisible(fenetre_Principale.getLayeredPane_RegularisationDesCharges());
+			Locataire locataire_save = (Locataire) Sauvegarde.getItem("Locataire");
+			String idLocataire = locataire_save.getIdLocataire();
+			fenetre_Principale.getGestionAccueil().filtreRegularisationChargesDepuisInfoLocataire(idLocataire);
 			break;
 
 		case "Solde tout compte":
 			try {
 				this.chargerSoldeToutCompte();
+				if (Sauvegarde.onSave("Louer") == true) {
+					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
+					Fenetre_ArchiverLocation archiver_location = new Fenetre_ArchiverLocation();
+					this.fail.getLayeredPane().add(archiver_location);
+					archiver_location.setVisible(true);
+					archiver_location.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fail, "Veuillez sélectionner une location !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			} catch (SQLException e1) {
 				// Afficher un message d'erreur à l'utilisateur
 				e1.printStackTrace();

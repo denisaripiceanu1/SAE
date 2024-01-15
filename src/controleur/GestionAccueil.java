@@ -574,6 +574,23 @@ public class GestionAccueil implements ActionListener {
 			}
 		}
 	}
+	
+	// Methode pour afficher les régularisation après clic sur infoLocataire
+	public void filtreRegularisationChargesDepuisInfoLocataire(String idLocataire) {
+		JComboBox<String> comboBox_MesRegularisations = this.fenetreAccueil.getComboBox_Regularisation();
+		comboBox_MesRegularisations.setSelectedItem(idLocataire);
+		String idLocataireSelectionne = comboBox_MesRegularisations.getSelectedItem().toString();
+
+		// Si l'ID selectionne est diffÃ©rent de "ID du Locataire", filtrez la table
+		// des regularisations
+		if (!idLocataireSelectionne.equals("Locataire")) {
+			try {
+				this.updateTableRegularisationsForLocataire(idLocataireSelectionne);
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
 
 	///////////////////////////////////////////////////////////////////
 	// LAYERED MES DOCUMENTS
