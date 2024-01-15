@@ -58,6 +58,9 @@ public class Fenetre_Accueil extends JFrame {
 	private JTable table_MesFactures;
 	private JTable table_MesAssurances;
 	private JTable table_MesDocuments;
+	private JTable table_MesArchives_Facture;
+	private JTable table_MesArchives_Louer;
+	private JTable table_MesArchives_Locataire;
 
 	private JTextField textField_loyer;
 	private JTextField textField_provisionCharges;
@@ -696,7 +699,7 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesFactures_Archiver.setForeground(Color.WHITE);
 		btn_MesFactures_Archiver.setBackground(new Color(0, 102, 204));
 		btn_MesFactures_Archiver.setBounds(292, 449, 99, 31);
-		btn_MesFactures_Archiver.addActionListener(gestionAccueil);
+		btn_MesFactures_Archiver.addActionListener(this.gestionAccueil);
 		panel_factures.add(btn_MesFactures_Archiver);
 
 		// ComboBox
@@ -980,11 +983,91 @@ public class Fenetre_Accueil extends JFrame {
 		this.layeredPane_MesArchives.add(panel_MesArchives);
 		panel_MesArchives.setLayout(null);
 
-		JLabel lbl_test = new JLabel("TEST");
-		lbl_test.setBounds(0, 0, 755, 511);
-		lbl_test.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_test.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel_MesArchives.add(lbl_test);
+		JLabel lbl_MesArchives = new JLabel("Mes Archives");
+		lbl_MesArchives.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_MesArchives.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_MesArchives.setBounds(244, 22, 216, 43);
+		panel_MesArchives.add(lbl_MesArchives);
+
+		JSeparator separator_MesArchives = new JSeparator();
+		separator_MesArchives.setForeground(new Color(0, 102, 204));
+		separator_MesArchives.setBounds(258, 63, 190, 2);
+		panel_MesArchives.add(separator_MesArchives);
+
+		// Tableau et scroll pour le bouton Facture
+		JScrollPane scrollPane_MesArchives_Facture = new JScrollPane();
+		scrollPane_MesArchives_Facture.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+		scrollPane_MesArchives_Facture.setBounds(117, 75, 463, 112); // Nouvelle dimension
+		panel_MesArchives.add(scrollPane_MesArchives_Facture);
+
+		this.table_MesArchives_Facture = new JTable();
+		this.table_MesArchives_Facture.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
+				new String[] { "Numero", "Désignation", "Montant payé", "Montant", "Date Emission" }));
+		scrollPane_MesArchives_Facture.setViewportView(this.table_MesArchives_Facture);
+
+		// Bouton Facture
+		JButton btn_MesArchives_Facture = new JButton("Facture");
+		btn_MesArchives_Facture.setForeground(Color.WHITE);
+		btn_MesArchives_Facture.setBackground(new Color(0, 102, 204));
+		btn_MesArchives_Facture.setBounds(298, 449, 94, 31);
+		btn_MesArchives_Facture.addActionListener(this.gestionAccueil);
+		btn_MesArchives_Facture.setName("btn_MesDocuments_Facture");
+		panel_MesArchives.add(btn_MesArchives_Facture);
+
+		// Tableau et scroll pour le bouton Locataire
+		JScrollPane scrollPane_MesArchives_Locataire = new JScrollPane();
+		scrollPane_MesArchives_Locataire.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+		scrollPane_MesArchives_Locataire.setBounds(117, 204, 463, 106); // Nouvelle dimension
+		panel_MesArchives.add(scrollPane_MesArchives_Locataire);
+
+		this.table_MesArchives_Locataire = new JTable();
+		this.table_MesArchives_Locataire.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
+				new String[] { "Id Locataire", "Nom", "Prenom", "Telephone", "Mail" }));
+		scrollPane_MesArchives_Locataire.setViewportView(this.table_MesArchives_Locataire);
+
+		// Bouton Locataire
+		JButton btn_MesArchives_Locataire = new JButton("Locataire");
+		btn_MesArchives_Locataire.setForeground(Color.WHITE);
+		btn_MesArchives_Locataire.setBackground(new Color(0, 102, 204));
+		btn_MesArchives_Locataire.setBounds(468, 449, 94, 31);
+		btn_MesArchives_Locataire.addActionListener(this.gestionAccueil);
+		btn_MesArchives_Locataire.setName("btn_MesArchives_Locataire");
+		panel_MesArchives.add(btn_MesArchives_Locataire);
+
+		// Tableau et scroll pour le bouton Louer
+		JScrollPane scrollPane_MesArchives_Louer = new JScrollPane();
+		scrollPane_MesArchives_Louer.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+		scrollPane_MesArchives_Louer.setBounds(112, 320, 468, 112); // Nouvelle dimension
+		panel_MesArchives.add(scrollPane_MesArchives_Louer);
+
+		this.table_MesArchives_Louer = new JTable();
+		this.table_MesArchives_Louer.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
+				new String[] { "Id Locataire", "Id Bien", "Date Debut ", "loyer TTC", "Provision charges" }));
+		scrollPane_MesArchives_Louer.setViewportView(this.table_MesArchives_Louer);
+
+		// Bouton Louer
+		JButton btn_MesArchives_Louer = new JButton("Louer");
+		btn_MesArchives_Louer.setForeground(Color.WHITE);
+		btn_MesArchives_Louer.setBackground(new Color(0, 102, 204));
+		btn_MesArchives_Louer.setBounds(117, 449, 94, 31);
+		btn_MesArchives_Louer.addActionListener(this.gestionAccueil);
+		btn_MesArchives_Louer.setName("btn_MesDocuments_Inserer_Impots");
+		panel_MesArchives.add(btn_MesArchives_Louer);
+
+		JLabel lbl_Archive_Locataire = new JLabel("Locataire");
+		lbl_Archive_Locataire.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_Archive_Locataire.setBounds(590, 251, 66, 13);
+		panel_MesArchives.add(lbl_Archive_Locataire);
+
+		JLabel lbl_Archive_Louer = new JLabel("Louer");
+		lbl_Archive_Louer.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_Archive_Louer.setBounds(590, 372, 66, 13);
+		panel_MesArchives.add(lbl_Archive_Louer);
+
+		JLabel lbl_Archive_Facture = new JLabel("Facture");
+		lbl_Archive_Facture.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_Archive_Facture.setBounds(590, 128, 66, 13);
+		panel_MesArchives.add(lbl_Archive_Facture);
 
 	}
 
