@@ -1065,7 +1065,7 @@ public class GestionAccueil implements ActionListener {
 					supp_travaux.moveToFront();
 					break;
 				} else {
-					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un travau !", "Erreur",
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un travaux !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
