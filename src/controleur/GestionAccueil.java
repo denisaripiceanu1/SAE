@@ -2,6 +2,7 @@ package controleur;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -50,6 +51,7 @@ import modele.dao.DaoImpôt;
 import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
+import vue.archiver.Fenetre_ArchiverLocation;
 import vue.insertion.Fenetre_AffichageCompteursBien;
 import vue.insertion.Fenetre_AffichageCompteursLogement;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
@@ -206,8 +208,15 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getPanel_1().setLayout(new BorderLayout());
 		this.fenetreAccueil.getPanel_1().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
 
-		JLabel labelMoyenne = new JLabel(loyerMoyenneMediane().getMoyenne());
-		this.fenetreAccueil.getPanel_2().add(labelMoyenne);
+		JLabel labelMoyenne = new JLabel("La moyenne des loyers est de " + loyerMoyenneMediane().getMoyenne());
+		Font nouvellePoliceMo = new Font(labelMoyenne.getFont().getName(), Font.PLAIN, 20);
+		labelMoyenne.setFont(nouvellePoliceMo);
+		this.fenetreAccueil.getPanel_2().add(labelMoyenne, BorderLayout.NORTH);
+
+		JLabel labelMediane = new JLabel("La mediane des loyers est de " + loyerMoyenneMediane().getMediane());
+		Font nouvellePolice = new Font(labelMediane.getFont().getName(), Font.PLAIN, 20);
+		labelMediane.setFont(nouvellePolice);
+		this.fenetreAccueil.getPanel_4().add(labelMediane, BorderLayout.SOUTH);
 
 		// Ajouter les ChartPanels aux panneaux de fenetreAccueil
 		this.fenetreAccueil.revalidate();
@@ -518,7 +527,7 @@ public class GestionAccueil implements ActionListener {
 		double chargesGarage = daoLouer.totalChargesGarages(location);
 		if (chargesGarage != 0) {
 			modeleTable.setValueAt(chargesGarage, numeroLigne, 3);
-		}else {
+		} else {
 			modeleTable.setValueAt("N/A", numeroLigne, 3);
 		}
 		// Total des provisions sur charges
@@ -984,6 +993,18 @@ public class GestionAccueil implements ActionListener {
 					this.fenetreAccueil.getLayeredPane().add(insertion_facture);
 					insertion_facture.setVisible(true);
 					insertion_facture.moveToFront();
+				} else {
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner une location !", "Erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				break;
+			case "btn_mesLocation_Archiver":
+				if (Sauvegarde.onSave("Louer") == true) {
+					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
+					Fenetre_ArchiverLocation archiver_location = new Fenetre_ArchiverLocation();
+					this.fenetreAccueil.getLayeredPane().add(archiver_location);
+					archiver_location.setVisible(true);
+					archiver_location.moveToFront();
 				} else {
 					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner une location !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);

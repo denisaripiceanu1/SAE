@@ -4,14 +4,14 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import modele.Imposer;
 import modele.Louer;
-import modele.Quotter;
 
-public class SousProgrammeInsertQuotter implements SousProgramme<Quotter> {
+public class SousProgrammeInsertImposer implements SousProgramme<Imposer> {
 
 	@Override
 	public String appelSousProgramme() {
-		return "{ call Inserer_Quotter(?, ?, ?)}";
+		return "{call Inserer_Imposer(?,?)}";
 	}
 
 	@Override
@@ -21,21 +21,22 @@ public class SousProgrammeInsertQuotter implements SousProgramme<Quotter> {
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Quotter donnee) throws SQLException {
+	public void parametres(PreparedStatement prSt, Imposer donnee) throws SQLException {
 		prSt.setString(1, donnee.getBien().getIdBien());
-		prSt.setString(2, donnee.getTypeQuotite().getType_quotite());
-		prSt.setDouble(3, donnee.getPourcentage());
+		prSt.setDouble(2, donnee.getImpot().getIdImpot());
+
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Quotter donnee, int Sequence) throws SQLException {
+	public void parametres(PreparedStatement prSt, Imposer donnee, int Sequence) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void parametresCalcul(CallableStatement st, Louer donnees) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 }

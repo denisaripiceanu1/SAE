@@ -125,7 +125,7 @@ public class Fenetre_Accueil extends JFrame {
 		JPanel panel_Menu_Boutons = new JPanel();
 		panel_Menu_Boutons.setBackground(Color.LIGHT_GRAY);
 		panel_Menu.add(panel_Menu_Boutons, BorderLayout.CENTER);
-		panel_Menu_Boutons.setLayout(new GridLayout(8, 1, 0, 0));
+		panel_Menu_Boutons.setLayout(new GridLayout(7, 1, 0, 0));
 
 		////// Bande accueil//////////////////////////////////////////////////
 		JPanel bandeAccueil = new JPanel();
@@ -226,16 +226,16 @@ public class Fenetre_Accueil extends JFrame {
 		panel_accueil.setLayout(new GridLayout(2, 2, 0, 0));
 
 		this.panel_1 = new JPanel();
-		panel_accueil.add(panel_1);
+		panel_accueil.add(this.panel_1);
 
-		panel_2 = new JPanel();
-		panel_accueil.add(panel_2);
+		this.panel_2 = new JPanel();
+		panel_accueil.add(this.panel_2);
 
-		panel_4 = new JPanel();
-		panel_accueil.add(panel_4);
+		this.panel_4 = new JPanel();
+		panel_accueil.add(this.panel_4);
 
-		panel_3 = new JPanel();
-		panel_accueil.add(panel_3);
+		this.panel_3 = new JPanel();
+		panel_accueil.add(this.panel_3);
 
 		JButton btnCSV = new JButton("Importer un csv");
 		btnCSV.setForeground(Color.WHITE);
@@ -243,7 +243,7 @@ public class Fenetre_Accueil extends JFrame {
 		btnCSV.setBounds(111, 449, 94, 31);
 		btnCSV.addActionListener(this.gestionAccueil);
 		btnCSV.setName("importCSV");
-		panel_4.add(btnCSV);
+		this.panel_4.add(btnCSV);
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES BIENS
@@ -406,8 +406,11 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesLocations = new JTable();
 		this.table_MesLocations.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesLocations.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
-				new String[] { "Locataire", "Bien", "Type" }));
+		this.table_MesLocations.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
+				new String[] { "Locataire", "Bien", "Type", "Date d\u00E9but", "Derni\u00E8re r\u00E9gularisation" }));
+		table_MesLocations.getColumnModel().getColumn(0).setPreferredWidth(60);
+		table_MesLocations.getColumnModel().getColumn(1).setPreferredWidth(58);
+		table_MesLocations.getColumnModel().getColumn(2).setPreferredWidth(70);
 		this.table_MesLocations.setBounds(40, 53, 668, 130);
 		scrollPane_MesLocations.setViewportView(this.table_MesLocations);
 		this.table_MesLocations.getSelectionModel().addListSelectionListener(this.gestionLocations);
@@ -429,7 +432,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesLocations_Charger = new JButton("Charger");
 		btn_MesLocations_Charger.setForeground(Color.WHITE);
 		btn_MesLocations_Charger.setBackground(new Color(0, 102, 204));
-		btn_MesLocations_Charger.setBounds(118, 449, 94, 31);
+		btn_MesLocations_Charger.setBounds(185, 449, 94, 31);
 		btn_MesLocations_Charger.addActionListener(this.gestionAccueil);
 		btn_MesLocations_Charger.setName("btn_MesLocations_Charger");
 		panel_MesLocations.add(btn_MesLocations_Charger);
@@ -437,7 +440,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesLocations_Modifier = new JButton("Modifier");
 		btn_MesLocations_Modifier.setForeground(Color.WHITE);
 		btn_MesLocations_Modifier.setBackground(new Color(0, 102, 204));
-		btn_MesLocations_Modifier.setBounds(396, 449, 99, 31);
+		btn_MesLocations_Modifier.setBounds(438, 449, 99, 31);
 		btn_MesLocations_Modifier.addActionListener(this.gestionAccueil);
 		btn_MesLocations_Modifier.setName("btn_MesLocations_Modifier");
 		panel_MesLocations.add(btn_MesLocations_Modifier);
@@ -445,7 +448,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesLocations_Inserer = new JButton("Insérer");
 		btn_MesLocations_Inserer.setForeground(Color.WHITE);
 		btn_MesLocations_Inserer.setBackground(new Color(0, 102, 204));
-		btn_MesLocations_Inserer.setBounds(258, 449, 94, 31);
+		btn_MesLocations_Inserer.setBounds(312, 449, 94, 31);
 		btn_MesLocations_Inserer.addActionListener(this.gestionAccueil);
 		btn_MesLocations_Inserer.setName("btn_MesLocations_Inserer");
 		panel_MesLocations.add(btn_MesLocations_Inserer);
@@ -453,7 +456,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesLocations_Supprimer = new JButton("Supprimer");
 		btn_MesLocations_Supprimer.setForeground(Color.WHITE);
 		btn_MesLocations_Supprimer.setBackground(new Color(0, 102, 204));
-		btn_MesLocations_Supprimer.setBounds(539, 449, 94, 31);
+		btn_MesLocations_Supprimer.setBounds(568, 449, 94, 31);
 		btn_MesLocations_Supprimer.addActionListener(this.gestionAccueil);
 		btn_MesLocations_Supprimer.setName("btn_MesLocations_Supprimer");
 		panel_MesLocations.add(btn_MesLocations_Supprimer);
@@ -534,6 +537,14 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_restantDu.setBackground(Color.WHITE);
 		this.textField_restantDu.setBounds(510, 196, 152, 40);
 		panel_MesLocations.add(this.textField_restantDu);
+
+		JButton btn_MesLocations_Archiver = new JButton("Archiver");
+		btn_MesLocations_Archiver.setName("btn_MesLocations_Archiver");
+		btn_MesLocations_Archiver.setForeground(Color.WHITE);
+		btn_MesLocations_Archiver.setBackground(new Color(0, 102, 204));
+		btn_MesLocations_Archiver.addActionListener(this.gestionAccueil);
+		btn_MesLocations_Archiver.setBounds(50, 449, 94, 31);
+		panel_MesLocations.add(btn_MesLocations_Archiver);
 
 		//////////////////////////////////////////////////////////////////////////
 		// LAYERED MES
@@ -789,9 +800,9 @@ public class Fenetre_Accueil extends JFrame {
 					"Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 
-		///////////////////////////////////////////////////////////////////
-		// LAYERED REGULARISATION DES CHARGES
-		// ////////////////////////////////////////////////////////////////
+//		///////////////////////////////////////////////////////////////////
+//		// LAYERED REGULARISATION DES CHARGES
+//		// ////////////////////////////////////////////////////////////////
 		this.layeredPane_RegularisationDesCharges = new JLayeredPane();
 		this.contentPane.add(this.layeredPane_RegularisationDesCharges, BorderLayout.CENTER);
 		this.layeredPane_RegularisationDesCharges.setLayout(new BorderLayout(0, 0));
@@ -849,9 +860,9 @@ public class Fenetre_Accueil extends JFrame {
 			e.printStackTrace();
 		}
 
-//		////////////////////////////////////////////////////////////////////////////
-//		// LAYERED
-//		// DOCUMENTS////////////////////////////////////////////////////////////////
+////		////////////////////////////////////////////////////////////////////////////
+////		// LAYERED
+////		// DOCUMENTS////////////////////////////////////////////////////////////////
 		this.layeredPane_MesDocuments = new JLayeredPane();
 		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
 		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
@@ -1053,7 +1064,7 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JPanel getPanel_1() {
-		return panel_1;
+		return this.panel_1;
 	}
 
 	public void setPanel_1(JPanel panel_1) {
@@ -1061,7 +1072,7 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JPanel getPanel_2() {
-		return panel_2;
+		return this.panel_2;
 	}
 
 	public void setPanel_2(JPanel panel_2) {
@@ -1069,7 +1080,7 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JPanel getPanel_3() {
-		return panel_3;
+		return this.panel_3;
 	}
 
 	public void setPanel_3(JPanel panel_3) {
@@ -1077,11 +1088,10 @@ public class Fenetre_Accueil extends JFrame {
 	}
 
 	public JPanel getPanel_4() {
-		return panel_4;
+		return this.panel_4;
 	}
 
 	public void setPanel_4(JPanel panel_4) {
 		this.panel_4 = panel_4;
 	}
-
 }
