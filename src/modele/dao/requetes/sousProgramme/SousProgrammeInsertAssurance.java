@@ -30,13 +30,13 @@ public class SousProgrammeInsertAssurance implements SousProgramme<Assurance> {
 
 
 	@Override
-	public void parametres(PreparedStatement prSt, Assurance donnee, int Sequence) throws SQLException {
+	public void parametresSequence(CallableStatement prSt, Assurance donnee) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void parametresCalcul(CallableStatement st, Louer donnees) {
+	public void parametresCalcul(CallableStatement st, Assurance donnees) {
 		// TODO Auto-generated method stub
 		
 	}

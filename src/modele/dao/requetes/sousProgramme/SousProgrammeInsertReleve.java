@@ -31,13 +31,13 @@ public class SousProgrammeInsertReleve implements SousProgramme<Releve> {
 
 
 	@Override
-	public void parametres(PreparedStatement prSt, Releve donnee, int Sequence) throws SQLException {
+	public void parametresSequence(CallableStatement prSt, Releve donnee) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void parametresCalcul(CallableStatement st, Louer donnees) {
+	public void parametresCalcul(CallableStatement st, Releve donnees) {
 		// TODO Auto-generated method stub
 		
 	}

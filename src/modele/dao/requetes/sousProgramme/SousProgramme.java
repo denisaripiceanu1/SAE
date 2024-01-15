@@ -16,9 +16,9 @@ public interface SousProgramme<T> {
     void parametres(PreparedStatement prSt, T donnee) throws SQLException;
     
     //Méthode utile pour les requêtes sur les séquences
-    void parametres(PreparedStatement prSt, T donnee, int Sequence) throws SQLException;
+    void parametresSequence(CallableStatement prSt, T donnee) throws SQLException;
 
-	void parametresCalcul(CallableStatement st, Louer donnees) throws SQLException;
+	void parametresCalcul(CallableStatement st, T donnees) throws SQLException;
     
     
     

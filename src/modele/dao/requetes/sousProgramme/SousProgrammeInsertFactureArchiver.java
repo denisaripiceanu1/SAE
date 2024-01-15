@@ -19,7 +19,7 @@ public class SousProgrammeInsertFactureArchiver implements SousProgramme<Facture
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... parametres) throws SQLException {
-		prSt.setString(1, parametres[0]); // clé priamire SIRET
+		prSt.setString(1, parametres[0]); // clé primaire SIRET
 		prSt.setString(2, parametres[1]);
 		prSt.setString(3, parametres[2]);
 		prSt.setString(4, parametres[3]);
@@ -35,7 +35,7 @@ public class SousProgrammeInsertFactureArchiver implements SousProgramme<Facture
 
 	@Override
 	public void parametres(PreparedStatement prSt, Facture donnee) throws SQLException {
-		prSt.setString(1, donnee.getNumero()); // clé priamire de Locataire
+		prSt.setString(1, donnee.getNumero()); // clé primaire de Locataire
 		prSt.setDate(2, convertirDate(donnee.getDateEmission()));
 		prSt.setDate(3, convertirDate(donnee.getDatePaiement()));
 		prSt.setString(4, donnee.getModePaiement());
@@ -66,17 +66,6 @@ public class SousProgrammeInsertFactureArchiver implements SousProgramme<Facture
 
 	}
 
-	@Override
-	public void parametres(PreparedStatement prSt, Facture donnee, int Sequence) throws SQLException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void parametresCalcul(CallableStatement st, Louer donnees) {
-		// TODO Auto-generated method stub
-
-	}
 
 	private Date convertirDate(String dateStr) throws SQLException {
 		try {
@@ -84,7 +73,7 @@ public class SousProgrammeInsertFactureArchiver implements SousProgramme<Facture
 			java.util.Date parsed = formatEntree.parse(dateStr);
 
 			// Formater la date pour la sortie
-			SimpleDateFormat formatSortie = new SimpleDateFormat("dd/MM/yy");
+			SimpleDateFormat formatSortie = new SimpleDateFormat("yyyy-MM-dd");
 			String dateFormatee = formatSortie.format(parsed);
 
 			// Convertir la date formatée en objet java.sql.Date
@@ -92,6 +81,18 @@ public class SousProgrammeInsertFactureArchiver implements SousProgramme<Facture
 		} catch (ParseException e) {
 			throw new SQLException("Erreur de format de date : " + dateStr, e);
 		}
+	}
+
+	@Override
+	public void parametresSequence(CallableStatement prSt, Facture donnee) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void parametresCalcul(CallableStatement st, Facture donnees) throws SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

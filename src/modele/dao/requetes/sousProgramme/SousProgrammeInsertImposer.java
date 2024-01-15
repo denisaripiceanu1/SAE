@@ -28,13 +28,13 @@ public class SousProgrammeInsertImposer implements SousProgramme<Imposer> {
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Imposer donnee, int Sequence) throws SQLException {
+	public void parametresSequence(CallableStatement prSt, Imposer donnee) throws SQLException {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void parametresCalcul(CallableStatement st, Louer donnees) {
+	public void parametresCalcul(CallableStatement st, Imposer donnees) {
 		// TODO Auto-generated method stub
 
 	}
