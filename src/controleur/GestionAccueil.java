@@ -189,7 +189,7 @@ public class GestionAccueil implements ActionListener {
 		return this.daoLouer.findMoyenneMediane();
 	}
 
-	private void chargerAccueil() throws SQLException {
+	public void chargerAccueil() throws SQLException {
 		// Créer les datasets
 		DefaultCategoryDataset datasetProvisions = this.createDataset();
 		DefaultCategoryDataset datasetMoyenneLoyer = this.createDatasetMoyenneLoyer();

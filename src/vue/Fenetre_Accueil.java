@@ -699,7 +699,7 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesFactures_Archiver.setForeground(Color.WHITE);
 		btn_MesFactures_Archiver.setBackground(new Color(0, 102, 204));
 		btn_MesFactures_Archiver.setBounds(292, 449, 99, 31);
-		btn_MesFactures_Archiver.addActionListener(gestionAccueil);
+		btn_MesFactures_Archiver.addActionListener(this.gestionAccueil);
 		panel_factures.add(btn_MesFactures_Archiver);
 
 		// ComboBox

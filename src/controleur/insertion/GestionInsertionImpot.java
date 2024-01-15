@@ -51,13 +51,11 @@ public class GestionInsertionImpot implements ActionListener {
 
 				// Attribue l'id de la séquence à l'impot
 				impot.setIdImpot(idImpotSequence);
-				
-				this.fii.getTextField_annee().setText(String.valueOf(impot.getIdImpot()));
 
 				imposer = new Imposer(bienSauvegarde, impot);
 				this.daoImposer.create(imposer);
 
-				
+				this.fii.dispose();
 
 				JOptionPane.showMessageDialog(null, "Impôt ajouté avec succès !", "Succès", JOptionPane.YES_OPTION);
 
