@@ -25,7 +25,7 @@ public class Fenetre_ArchiverLocation extends JInternalFrame {
 		lblNewLabel.setBounds(32, 23, 371, 70);
 		this.getContentPane().add(lblNewLabel);
 
-		JButton btn_supprimer = new JButton("Supprimer");
+		JButton btn_supprimer = new JButton("Archiver");
 		btn_supprimer.addActionListener(this.gestionArchiverLocation);
 		btn_supprimer.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btn_supprimer.setBounds(96, 103, 103, 30);

@@ -998,7 +998,7 @@ public class GestionAccueil implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
-			case "btn_mesLocation_Archiver":
+			case "btn_MesLocations_Archiver":
 				if (Sauvegarde.onSave("Louer") == true) {
 					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
 					Fenetre_ArchiverLocation archiver_location = new Fenetre_ArchiverLocation();
