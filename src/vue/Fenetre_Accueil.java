@@ -265,9 +265,9 @@ public class Fenetre_Accueil extends JFrame {
 		lblNewLabel.setBounds(156, 32, 63, 35);
 		panel.add(lblNewLabel);
 
-		JSeparator separator = new JSeparator();
-		separator.setBounds(94, 70, 193, 11);
-		panel.add(separator);
+		JSeparator panel_separator = new JSeparator();
+		panel_separator.setBounds(94, 70, 193, 11);
+		panel.add(panel_separator);
 
 		this.panel_6 = new JPanel();
 		this.panel_1.add(this.panel_6);
@@ -480,9 +480,9 @@ public class Fenetre_Accueil extends JFrame {
 
 		// Séparateurs
 		JSeparator separator_location = new JSeparator();
-		separator.setForeground(new Color(0, 102, 204));
-		separator.setBounds(258, 63, 190, 2);
-		panel_MesLocations.add(separator);
+		separator_location.setForeground(new Color(0, 102, 204));
+		separator_location.setBounds(258, 63, 190, 2);
+		panel_MesLocations.add(separator_location);
 
 		// Boutons généraux
 		JButton btn_MesLocations_Charger = new JButton("Charger");
@@ -1022,15 +1022,6 @@ public class Fenetre_Accueil extends JFrame {
 		this.layeredPane_MesArchives.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_MesArchives = new JPanel();
-		panel_MesArchives.setBackground(Color.WHITE);
-		this.layeredPane_MesArchives.add(panel_MesArchives);
-		panel_MesArchives.setLayout(null);
-
-		this.layeredPane_MesArchives = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_MesArchives, BorderLayout.CENTER);
-		this.layeredPane_MesArchives.setLayout(new BorderLayout(0, 0));
-
-		this.panel_MesArchives = new JPanel();
 		panel_MesArchives.setBackground(Color.WHITE);
 		this.layeredPane_MesArchives.add(panel_MesArchives);
 		panel_MesArchives.setLayout(null);
