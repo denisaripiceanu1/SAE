@@ -1,6 +1,7 @@
 package vue.insertion;
 
 import java.awt.Color;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 
@@ -18,24 +19,24 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionAffichageCompteursBien;
 import controleur.insertion.GestionAffichageInfoLocataire;
+import controleur.insertion.GestionAffichageReleveCompteurBien;
 import controleur.insertion.GestionTableAffichageCompteursBien;
 import controleur.modification.GestionModificationLocataire;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 
-public class Fenetre_AffichageCompteursBien extends JInternalFrame {
+public class Fenetre_AffichageReleveCompteursBien extends JInternalFrame {
 	
-    private GestionAffichageCompteursBien gestionAffichage;
-	private GestionTableAffichageCompteursBien gestionClic;
+    private GestionAffichageReleveCompteurBien gestionAffichage;
+
 	// Table pour afficher les compteurs associés
     private JScrollPane scrollPane_table_compteurs;
-	private JTable table_compteurs;
+	private JTable table_releve_compteur_bien;
 
-	public Fenetre_AffichageCompteursBien() {
+	public Fenetre_AffichageReleveCompteursBien() {
         // Initialisation du gestionnaire d'affichage 
-        this.gestionAffichage = new GestionAffichageCompteursBien(this); 
-        this.gestionClic = new GestionTableAffichageCompteursBien(this);
+        this.gestionAffichage = new GestionAffichageReleveCompteurBien(this); 
    
         this.setBounds(100, 100, 762, 541);
         this.getContentPane().setLayout(null);
@@ -64,51 +65,37 @@ public class Fenetre_AffichageCompteursBien extends JInternalFrame {
 		panel.add(this.scrollPane_table_compteurs);
 
 		// Table pour afficher les données d'entreprise
-		this.table_compteurs = new JTable();
-		this.table_compteurs
+		this.table_releve_compteur_bien = new JTable();
+		this.table_releve_compteur_bien
 				.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null},
+				{null, null},
 			},
 			new String[] {
-				"Id_Compteur", "Type Compteur", "Prix abonnement"
+				"Date de relev\u00E9", "Index relev\u00E9"
 			}
 		));
-		table_compteurs.getColumnModel().getColumn(1).setPreferredWidth(95);
-		table_compteurs.getColumnModel().getColumn(2).setPreferredWidth(101);
-		this.table_compteurs.setBounds(499, 80, 135, 16);
-		scrollPane_table_compteurs.setViewportView(this.table_compteurs);
-		this.table_compteurs.getSelectionModel().addListSelectionListener(this.gestionClic);
+		table_releve_compteur_bien.getColumnModel().getColumn(0).setPreferredWidth(95);
+		table_releve_compteur_bien.getColumnModel().getColumn(1).setPreferredWidth(101);
+		this.table_releve_compteur_bien.setBounds(499, 80, 135, 16);
+		scrollPane_table_compteurs.setViewportView(this.table_releve_compteur_bien);
 		
 		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setForeground(Color.WHITE);
 		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.setBounds(149, 369, 94, 31);
-		btnAnnuler.addActionListener(gestionAffichage);
+		btnAnnuler.setBounds(330, 376, 94, 31);
+		btnAnnuler.addActionListener(this.gestionAffichage);
 		panel.add(btnAnnuler);
 
-		JButton btnAjouterReleve = new JButton("Ajouter un relevé");
-		btnAjouterReleve.setForeground(Color.WHITE);
-		btnAjouterReleve.setBackground(new Color(0, 102, 204));
-		btnAjouterReleve.setBounds(491, 369, 166, 31);
-		btnAjouterReleve.addActionListener(gestionAffichage);
-		panel.add(btnAjouterReleve);
-		
-		JButton btnAfficherReleve = new JButton("Afficher les relevés");
-		btnAfficherReleve.addActionListener(gestionAffichage);
-		btnAfficherReleve.setForeground(Color.WHITE);
-		btnAfficherReleve.setBackground(new Color(0, 102, 204));
-		btnAfficherReleve.setBounds(287, 369, 166, 31);
-		btnAfficherReleve.addActionListener(gestionAffichage);
-		panel.add(btnAfficherReleve);
     }
-    
-    public GestionAffichageCompteursBien getGestionAffichage() {
-		return gestionAffichage;
+	
+	
+	public GestionAffichageReleveCompteurBien getGestionAffichage() {
+		return this.gestionAffichage;
 	}
-    
+   
 
-    public JTable getTable_compteurs() {
-		return table_compteurs;
+    public JTable getTable_releve_compteur_bien() {
+		return this.table_releve_compteur_bien;
 	}
 }

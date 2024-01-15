@@ -17,6 +17,7 @@ import modele.Immeuble;
 import modele.dao.DaoCompteur;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageCompteursBien;
+import vue.insertion.Fenetre_AffichageReleveCompteursBien;
 import vue.insertion.Fenetre_InsertionEntreprise;
 import vue.insertion.Fenetre_InsertionPaiementBien;
 import vue.insertion.Fenetre_InsertionPaiementLogement;
@@ -53,7 +54,26 @@ public class GestionAffichageCompteursBien implements ActionListener {
 			}
 
 			break;
-
+		case "Afficher les relevés":
+			if (Sauvegarde.onSave("Compteur") == true) {
+				Fenetre_AffichageReleveCompteursBien affichage_releve = new Fenetre_AffichageReleveCompteursBien();
+				fenetre_Principale.getLayeredPane().add(affichage_releve);
+				affichage_releve.setVisible(true);
+				affichage_releve.moveToFront();
+				
+				//On charge les données au moment de l'ouverture 
+				try {
+					affichage_releve.getGestionAffichage().chargerReleveCompteurs();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			} else {
+				JOptionPane.showMessageDialog(fenetre_Principale, "Veuillez sélectionner un compteur !", "Erreur",
+						JOptionPane.ERROR_MESSAGE);
+			}
+			break;
+			
 		case "Annuler":
 			this.facb.dispose();
 			break;
