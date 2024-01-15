@@ -40,13 +40,13 @@ public class SousProgrammeInsertEntreprise implements SousProgramme<Entreprise> 
 
 
 	@Override
-	public void parametres(PreparedStatement prSt, Entreprise donnee, int Sequence) throws SQLException {
+	public void parametresSequence(CallableStatement prSt, Entreprise donnee) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void parametresCalcul(CallableStatement st, Louer donnees) {
+	public void parametresCalcul(CallableStatement st, Entreprise donnees) {
 		// TODO Auto-generated method stub
 		
 	}

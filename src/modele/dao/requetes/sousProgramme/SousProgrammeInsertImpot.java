@@ -11,7 +11,7 @@ public class SousProgrammeInsertImpot implements SousProgramme<Impôt> {
 
 	@Override
 	public String appelSousProgramme() {
-		return "{call Inserer_Impot(?,?,?)}";
+		return "{call Inserer_Impot(?,?,?,?)}";
 	}
 
 	@Override
@@ -22,20 +22,19 @@ public class SousProgrammeInsertImpot implements SousProgramme<Impôt> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, Impôt donnee) throws SQLException {
-		prSt.setString(1, donnee.getNom());
-		prSt.setDouble(2, donnee.getMontant());
-		prSt.setString(3, donnee.getAnnee());
+		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Impôt donnee, int Sequence) throws SQLException {
+	public void parametresSequence(CallableStatement prSt, Impôt donnee) throws SQLException {
 		prSt.setString(1, donnee.getNom());
 		prSt.setDouble(2, donnee.getMontant());
 		prSt.setString(3, donnee.getAnnee());
+		prSt.registerOutParameter(4, java.sql.Types.INTEGER);
 	}
 
 	@Override
-	public void parametresCalcul(CallableStatement st, Louer donnees) {
+	public void parametresCalcul(CallableStatement st, Impôt donnee) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}

@@ -29,13 +29,13 @@ public class SousProgrammeInsertEcheance implements SousProgramme<Echeance> {
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Echeance donnee, int Sequence) throws SQLException {
+	public void parametresSequence(CallableStatement prSt, Echeance donnee) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void parametresCalcul(CallableStatement st, Louer donnees) {
+	public void parametresCalcul(CallableStatement st, Echeance donnees) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -30,13 +30,13 @@ public class SousProgrammeInsertImmeuble implements SousProgramme<Immeuble> {
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Immeuble donnee, int Sequence) throws SQLException {
+	public void parametresSequence(CallableStatement prSt, Immeuble donnee) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void parametresCalcul(CallableStatement st, Louer donnees) {
+	public void parametresCalcul(CallableStatement st, Immeuble donnees) {
 		// TODO Auto-generated method stub
 		
 	}

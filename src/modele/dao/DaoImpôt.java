@@ -1,6 +1,7 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,23 +27,16 @@ public class DaoImpôt extends DaoModele<Impôt> implements Dao<Impôt> {
 	// Méthode qui créer l'objet puis récupère son ID depuis la BD juste après la
 	// création lorsque c'est une séquence
 	public int createAvecSequence(Impôt donnees) throws SQLException {
-		SousProgramme<Impôt> sp = new SousProgrammeInsertImpot();
-		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
-		sp.parametres(st, donnees, Statement.RETURN_GENERATED_KEYS);
-		int idImpot = -1; // Initialiser à une valeur qui ne peut pas être valide
-		int ligneInseree = st.executeUpdate();
-
-		if (ligneInseree > 0) {
-			// La ligne a été insérée avec succès, récupérer l'ID généré
-			ResultSet resultSet = st.getGeneratedKeys();
-			if (resultSet.next()) {
-				idImpot = resultSet.getInt(1);
-			}
-			resultSet.close();
-		}
-		st.close();
-		return idImpot;
+	    SousProgramme<Impôt> sp = new SousProgrammeInsertImpot();
+	    CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+	    sp.parametresSequence(st, donnees);
+	    int idImpot = -1; // Initialiser à une valeur qui ne peut pas être valide
+	    st.executeUpdate();
+	    idImpot = st.getInt(4);  // Récupérer la valeur de l'ID généré, 4 ème parametre dans le sous programme 
+	    st.close();
+	    return idImpot;
 	}
+
 
 	@Override
 	public void update(Impôt donnees) {

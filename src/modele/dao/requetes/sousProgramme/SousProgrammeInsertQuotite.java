@@ -27,13 +27,13 @@ public class SousProgrammeInsertQuotite implements SousProgramme<Quotite> {
 
 
 	@Override
-	public void parametres(PreparedStatement prSt, Quotite donnee, int Sequence) throws SQLException {
+	public void parametresSequence(CallableStatement prSt, Quotite donnee) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void parametresCalcul(CallableStatement st, Louer donnees) {
+	public void parametresCalcul(CallableStatement st, Quotite donnees) {
 		// TODO Auto-generated method stub
 		
 	}

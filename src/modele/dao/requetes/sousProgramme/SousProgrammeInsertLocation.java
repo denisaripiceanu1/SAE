@@ -53,7 +53,7 @@ public class SousProgrammeInsertLocation implements SousProgramme<Louer> {
 
 
 	@Override
-	public void parametres(PreparedStatement prSt, Louer donnee, int Sequence) throws SQLException {
+	public void parametresSequence(CallableStatement prSt, Louer donnee) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}

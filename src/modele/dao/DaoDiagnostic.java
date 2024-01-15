@@ -8,12 +8,14 @@ import java.util.List;
 
 import modele.Bien;
 import modele.Diagnostics;
+import modele.Impôt;
 import modele.dao.requetes.delete.RequeteDeleteDiagnostic;
 import modele.dao.requetes.select.RequeteSelectDiagnostic;
 import modele.dao.requetes.select.RequeteSelectDiagnosticById;
 import modele.dao.requetes.select.RequeteSelectDiagnoticByBien;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertDiagnostic;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertImpot;
 
 public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnostics> {
 
@@ -26,24 +28,16 @@ public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnos
 	// Méthode qui créer l'objet puis récupère son ID depuis la BD juste après la
 	// création lorsque c'est une séquence
 	public int createAvecSequence(Diagnostics donnees) throws SQLException {
-		SousProgramme<Diagnostics> sp = new SousProgrammeInsertDiagnostic();
-		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
-		sp.parametres(st, donnees, Statement.RETURN_GENERATED_KEYS);
-		int idDiagnostic = -1; // Initialiser à une valeur qui ne peut pas être valide
-		int ligneInseree = st.executeUpdate();
-
-		if (ligneInseree > 0) {
-			// La ligne a été insérée avec succès, récupérer l'ID généré
-			ResultSet resultSet = st.getGeneratedKeys();
-			if (resultSet.next()) {
-				idDiagnostic = resultSet.getInt(1);
-			}
-			resultSet.close();
-		}
-		st.close();
-		return idDiagnostic;
-
+	    SousProgramme<Diagnostics> sp = new SousProgrammeInsertDiagnostic();
+	    CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+	    sp.parametresSequence(st, donnees);
+	    int idDiagnostic = -1; // Initialiser à une valeur qui ne peut pas être valide
+	    st.executeUpdate();
+	    idDiagnostic = st.getInt(4);  // Récupérer la valeur de l'ID généré, 4 ème parametre dans le sous programme 
+	    st.close();
+	    return idDiagnostic;
 	}
+	
 
 	@Override
 	public void update(Diagnostics donnees) {
