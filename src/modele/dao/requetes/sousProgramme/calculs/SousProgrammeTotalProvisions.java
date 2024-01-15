@@ -29,10 +29,10 @@ public class SousProgrammeTotalProvisions implements SousProgramme<Louer> {
 	}
 	
 	@Override
-	public void parametres(PreparedStatement prSt, Louer donnee, int Sequence) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+    public void parametresSequence(CallableStatement prSt, Louer donnee) throws SQLException {
+        // TODO Auto-generated method stub
+
+    }
 	
 	@Override
 	public void parametresCalcul(CallableStatement prSt, Louer donnee) throws SQLException {
