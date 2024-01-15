@@ -11,7 +11,7 @@ public class SousProgrammeInsertQuotter implements SousProgramme<Quotter> {
 
 	@Override
 	public String appelSousProgramme() {
-		return "{ call Inserer_Quotter(?)}";
+		return "{ call Inserer_Quotter(?, ?, ?)}";
 	}
 
 	@Override
@@ -22,7 +22,9 @@ public class SousProgrammeInsertQuotter implements SousProgramme<Quotter> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, Quotter donnee) throws SQLException {
-		prSt.setString(1, donnee.getTypeQuotite().getType_quotite());
+		prSt.setString(1, donnee.getBien().getIdBien());
+		prSt.setString(2, donnee.getTypeQuotite().getType_quotite());
+		prSt.setDouble(3, donnee.getPourcentage());
 	}
 
 	@Override
