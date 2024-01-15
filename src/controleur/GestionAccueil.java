@@ -2,6 +2,7 @@ package controleur;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -36,6 +38,7 @@ import modele.Impôt;
 import modele.Locataire;
 import modele.Louer;
 import modele.MoyenneLoyer;
+import modele.MoyenneMediane;
 import modele.ProvisionAnnee;
 import modele.dao.DaoAssurance;
 import modele.dao.DaoBien;
@@ -133,7 +136,6 @@ public class GestionAccueil implements ActionListener {
 
 	private DefaultCategoryDataset createDataset() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		DaoLouer daoLouer = new DaoLouer();
 		try {
 			List<ProvisionAnnee> provisions = daoLouer.findProvisions();
 			for (ProvisionAnnee provision : provisions) {
@@ -157,7 +159,6 @@ public class GestionAccueil implements ActionListener {
 
 	private DefaultCategoryDataset createDatasetMoyenneLoyer() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		DaoLouer daoLouer = new DaoLouer();
 		try {
 			List<MoyenneLoyer> moyennes = daoLouer.findMoyenneLoyer(); // Assurez-vous que la méthode est correctement
 																		// nommée
@@ -180,7 +181,11 @@ public class GestionAccueil implements ActionListener {
 		);
 	}
 
-	private void chargerAccueil() {
+	private MoyenneMediane loyerMoyenneMediane() throws SQLException {
+		return this.daoLouer.findMoyenneMediane();
+	}
+
+	private void chargerAccueil() throws SQLException {
 		// Créer les datasets
 		DefaultCategoryDataset datasetProvisions = createDataset();
 		DefaultCategoryDataset datasetMoyenneLoyer = createDatasetMoyenneLoyer();
@@ -192,7 +197,7 @@ public class GestionAccueil implements ActionListener {
 		// Créer les ChartPanels avec les tailles appropriées
 		ChartPanel chartPanelProvisions = new ChartPanel(chartProvisions);
 		this.fenetreAccueil.getPanel_3().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_3().getWidth(),
-				this.fenetreAccueil.getPanel_4().getHeight()));
+				this.fenetreAccueil.getPanel_3().getHeight()));
 		this.fenetreAccueil.getPanel_3().setLayout(new BorderLayout());
 		this.fenetreAccueil.getPanel_3().add(chartPanelProvisions, BorderLayout.CENTER);
 
@@ -201,6 +206,16 @@ public class GestionAccueil implements ActionListener {
 				this.fenetreAccueil.getPanel_1().getHeight()));
 		this.fenetreAccueil.getPanel_1().setLayout(new BorderLayout());
 		this.fenetreAccueil.getPanel_1().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
+
+		JLabel labelMoyenne = new JLabel("La moyenne des loyers est de " + loyerMoyenneMediane().getMoyenne());
+		Font nouvellePoliceMo = new Font(labelMoyenne.getFont().getName(), Font.PLAIN, 20);
+		labelMoyenne.setFont(nouvellePoliceMo);
+		this.fenetreAccueil.getPanel_2().add(labelMoyenne, BorderLayout.NORTH);
+
+		JLabel labelMediane = new JLabel("La mediane des loyers est de " + loyerMoyenneMediane().getMediane());
+		Font nouvellePolice = new Font(labelMediane.getFont().getName(), Font.PLAIN, 20);
+		labelMediane.setFont(nouvellePolice);
+		this.fenetreAccueil.getPanel_4().add(labelMediane, BorderLayout.SOUTH);
 
 		// Ajouter les ChartPanels aux panneaux de fenetreAccueil
 		this.fenetreAccueil.revalidate();
@@ -505,14 +520,21 @@ public class GestionAccueil implements ActionListener {
 			modeleTable.setValueAt("N/A", numeroLigne, 1);
 		}
 		// Total charges reelles
-		modeleTable.setValueAt(location.getProvision_chargeMens_TTC(), numeroLigne, 2);
+		double chargesReellesBien = daoLouer.totalChargesRéelles(location);
+		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 2);
 		// Charges garages
-		modeleTable.setValueAt(location.getBail(), numeroLigne, 3);
-		double resultat = daoLouer.totalProvisions(location);
+		double chargesGarage = daoLouer.totalChargesGarages(location);
+		if (chargesGarage != 0) {
+			modeleTable.setValueAt(chargesGarage, numeroLigne, 3);
+		} else {
+			modeleTable.setValueAt("N/A", numeroLigne, 3);
+		}
 		// Total des provisions sur charges
-		modeleTable.setValueAt(resultat, numeroLigne, 4);
+		double totalProvisions = daoLouer.totalProvisions(location);
+		modeleTable.setValueAt(totalProvisions, numeroLigne, 4);
 		// TOTAL
-		modeleTable.setValueAt(location.getBail(), numeroLigne, 5);
+		double regularisationCharges = daoLouer.regularisationCharges(location);
+		modeleTable.setValueAt(regularisationCharges, numeroLigne, 5);
 
 	}
 
@@ -623,31 +645,11 @@ public class GestionAccueil implements ActionListener {
 			// NAVIGATION ENTRE LES LAYEREDPANE
 			case "btnAccueil":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_Accueil());
-
-				// Créer les datasets
-				DefaultCategoryDataset datasetProvisions = createDataset();
-				DefaultCategoryDataset datasetMoyenneLoyer = createDatasetMoyenneLoyer();
-
-				// Créer les graphiques
-				JFreeChart chartProvisions = createBarChartPro(datasetProvisions);
-				JFreeChart chartMoyenneLoyer = createBarChartPro(datasetMoyenneLoyer);
-
-				// Créer les ChartPanels avec les tailles appropriées
-				ChartPanel chartPanelProvisions = new ChartPanel(chartProvisions);
-				this.fenetreAccueil.getPanel_3().setPreferredSize(new Dimension(
-						this.fenetreAccueil.getPanel_3().getWidth(), this.fenetreAccueil.getPanel_3().getHeight()));
-				this.fenetreAccueil.getPanel_3().setLayout(new BorderLayout());
-				this.fenetreAccueil.getPanel_3().add(chartPanelProvisions, BorderLayout.CENTER);
-
-				ChartPanel chartPanelMoyenneLoyer = new ChartPanel(chartMoyenneLoyer);
-				this.fenetreAccueil.getPanel_1().setPreferredSize(new Dimension(
-						this.fenetreAccueil.getPanel_1().getWidth(), this.fenetreAccueil.getPanel_1().getHeight()));
-				this.fenetreAccueil.getPanel_1().setLayout(new BorderLayout());
-				this.fenetreAccueil.getPanel_1().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
-
-				// Ajouter les ChartPanels aux panneaux de fenetreAccueil
-				this.fenetreAccueil.revalidate();
-				this.fenetreAccueil.repaint();
+				try {
+					this.chargerAccueil();
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
 				break;
 			case "btnMesBiens":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesBiens());
@@ -995,10 +997,11 @@ public class GestionAccueil implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
+			case "btn_mesLocation_Archiver":
 
-			/////////////////////
-			// LAYERED MES TRAVAUX
-			/////////////////////
+				/////////////////////
+				// LAYERED MES TRAVAUX
+				/////////////////////
 			case "btn_Travaux_Modifier":
 				if (Sauvegarde.onSave("Facture")) {
 					Fenetre_ModificationTravauxImmeuble modif_travaux = new Fenetre_ModificationTravauxImmeuble();
@@ -1081,13 +1084,13 @@ public class GestionAccueil implements ActionListener {
 						modif_charge.getTextField_Numero().setText(chargeCourante.getNumero());
 						modif_charge.getTextField_date_paiement().setText(chargeCourante.getDatePaiement());
 						modif_charge.getTextField_date_emission().setText(chargeCourante.getDateEmission());
-						
+
 						if (chargeCourante.getNumeroDevis() != null) {
-						    modif_charge.getTextField_numeroDevis().setText(chargeCourante.getNumeroDevis());
+							modif_charge.getTextField_numeroDevis().setText(chargeCourante.getNumeroDevis());
 						} else {
-						    modif_charge.getTextField_numeroDevis().setText("N/A");
+							modif_charge.getTextField_numeroDevis().setText("N/A");
 						}
-						
+
 						modif_charge.getTextField_accompteVerse()
 								.setText(String.valueOf(chargeCourante.getMontantReelPaye()));
 						modif_charge.getTextField_montant().setText(String.valueOf(chargeCourante.getMontant()));

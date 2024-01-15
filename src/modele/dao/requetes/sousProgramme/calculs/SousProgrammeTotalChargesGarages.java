@@ -9,11 +9,11 @@ import java.sql.SQLException;
 import modele.Louer;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 
-public class SousProgrammeTotalProvisions implements SousProgramme<Louer> {
+public class SousProgrammeTotalChargesGarages implements SousProgramme<Louer> {
 	
 	@Override
 	public String appelSousProgramme() {
-	    return "{ ? = call totalProvisions(?) }";
+	    return "{ ? = call totalChargesGarage(?) }";
 	}
 
 
