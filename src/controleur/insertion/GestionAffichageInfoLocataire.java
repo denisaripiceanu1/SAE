@@ -88,6 +88,9 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		case "Régularisation des charges":
 			this.fail.dispose();
 			fenetre_Principale.getGestionAccueil().rendreVisible(fenetre_Principale.getLayeredPane_RegularisationDesCharges());
+			Locataire locataire_save = (Locataire) Sauvegarde.getItem("Locataire");
+			String idLocataire = locataire_save.getIdLocataire();
+			fenetre_Principale.getGestionAccueil().filtreRegularisationChargesDepuisInfoLocataire(idLocataire);
 			break;
 
 		case "Solde tout compte":
