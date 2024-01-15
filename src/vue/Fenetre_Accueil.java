@@ -549,7 +549,7 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesLocations.add(this.textField_restantDu);
 
 		JButton btn_MesLocations_Archiver = new JButton("Archiver");
-		btn_MesLocations_Archiver.setName("btn_MesLocations_Charger");
+		btn_MesLocations_Archiver.setName("btn_MesLocations_Archiver");
 		btn_MesLocations_Archiver.setForeground(Color.WHITE);
 		btn_MesLocations_Archiver.setBackground(new Color(0, 102, 204));
 		btn_MesLocations_Archiver.addActionListener(this.gestionAccueil);
