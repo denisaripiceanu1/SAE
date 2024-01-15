@@ -37,7 +37,9 @@ public class GestionConnexion implements ActionListener {
 				// connexion
 				Fenetre_Accueil fenetreAccueil = new Fenetre_Accueil();
 				fenetreAccueil.setVisible(true);
+				//On récupère le gestionnaire de l'accueil pour afficher la page d'accueil et rendre non visible tous le reste 
 				fenetreAccueil.getGestionAccueil().rendreVisible(fenetreAccueil.getLayeredPane_Accueil());
+				//On utilise le gestionnaire pour utiliser la méthode qui charge les graphiques de statistiques
 				fenetreAccueil.getGestionAccueil().chargerAccueil();
 				this.fc.dispose();
 			} catch (SQLException e1) {
