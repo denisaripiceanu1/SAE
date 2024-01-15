@@ -1,5 +1,7 @@
 package modele;
 
+import java.text.DecimalFormat;
+
 public class MoyenneMediane {
 	private double moyenne;
 	private double mediane;
@@ -11,7 +13,7 @@ public class MoyenneMediane {
 	}
 
 	public String getMoyenne() {
-		return String.valueOf(moyenne);
+		return arrondir(moyenne);
 	}
 
 	public void setMoyenne(double moyenne) {
@@ -19,11 +21,15 @@ public class MoyenneMediane {
 	}
 
 	public String getMediane() {
-		return String.valueOf(mediane);
+		return arrondir(mediane);
 	}
 
 	public void setMediane(double mediane) {
 		this.mediane = mediane;
 	}
 
+	public String arrondir(double res) {
+		DecimalFormat df = new DecimalFormat("#.##");
+		return df.format(res);
+	}
 }

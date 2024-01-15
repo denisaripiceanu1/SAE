@@ -206,8 +206,11 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getPanel_1().setLayout(new BorderLayout());
 		this.fenetreAccueil.getPanel_1().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
 
-		JLabel labelMoyenne = new JLabel(loyerMoyenneMediane().getMoyenne());
-		this.fenetreAccueil.getPanel_2().add(labelMoyenne);
+		JLabel labelMoyenne = new JLabel("La moyenne des loyers est de " + loyerMoyenneMediane().getMoyenne());
+		this.fenetreAccueil.getPanel_2().add(labelMoyenne, BorderLayout.NORTH);
+
+		JLabel labelMediane = new JLabel("La mediane des loyers est de " + loyerMoyenneMediane().getMediane());
+		this.fenetreAccueil.getPanel_2().add(labelMediane, BorderLayout.SOUTH);
 
 		// Ajouter les ChartPanels aux panneaux de fenetreAccueil
 		this.fenetreAccueil.revalidate();
