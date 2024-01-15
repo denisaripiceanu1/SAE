@@ -1002,7 +1002,7 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesArchives_Facture = new JTable();
 		this.table_MesArchives_Facture.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
-				new String[] { "Nom", "Montant", "Année" }));
+				new String[] { "Numero", "Désignation", "Montant payé", "Montant", "Date Emission" }));
 		scrollPane_MesArchives_Facture.setViewportView(this.table_MesArchives_Facture);
 
 		// Bouton Facture
@@ -1022,7 +1022,7 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesArchives_Locataire = new JTable();
 		this.table_MesArchives_Locataire.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
-				new String[] { "Nom", "Montant", "Année" }));
+				new String[] { "Id Locataire", "Nom", "Prenom", "Telephone", "Mail" }));
 		scrollPane_MesArchives_Locataire.setViewportView(this.table_MesArchives_Locataire);
 
 		// Bouton Locataire
@@ -1042,7 +1042,7 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesArchives_Louer = new JTable();
 		this.table_MesArchives_Louer.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
-				new String[] { "Nom", "Montant", "Année" }));
+				new String[] { "Id Locataire", "Id Bien", "Date Debut ", "loyer TTC", "Provision charges" }));
 		scrollPane_MesArchives_Louer.setViewportView(this.table_MesArchives_Louer);
 
 		// Bouton Louer
