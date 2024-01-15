@@ -27,19 +27,20 @@ public class GestionConnexion implements ActionListener {
 		switch (boutonClicke.getText()) {
 		case "Se connecter":
 			// Récupération des informations de connexion depuis la fenêtre
-			String login = fc.getNomUtilisateur();
-			String mdp = fc.getMdp();
+			String login = this.fc.getNomUtilisateur();
+			String mdp = this.fc.getMdp();
 			try {
 				// Tentative de création de l'accès avec les informations de connexion
 				CictOracleDataSource.creerAcces(login, mdp);
-				
-				// Si la connexion réussit, ouvrir la fenêtre principale et fermer la fenêtre de connexion
+
+				// Si la connexion réussit, ouvrir la fenêtre principale et fermer la fenêtre de
+				// connexion
 				Fenetre_Accueil fenetreAccueil = new Fenetre_Accueil();
 				fenetreAccueil.setVisible(true);
 				this.fc.dispose();
 			} catch (SQLException e1) {
 				// En cas d'échec de connexion, afficher un message d'erreur
-				JOptionPane.showMessageDialog(fc, "Login ou mot de passe incorrect", "Erreur",
+				JOptionPane.showMessageDialog(this.fc, "Login ou mot de passe incorrect", "Erreur",
 						JOptionPane.ERROR_MESSAGE);
 				e1.printStackTrace();
 			}
