@@ -84,7 +84,7 @@ public class SousProgrammeInsertFactureArchiver implements SousProgramme<Facture
 			java.util.Date parsed = formatEntree.parse(dateStr);
 
 			// Formater la date pour la sortie
-			SimpleDateFormat formatSortie = new SimpleDateFormat("dd/MM/yy");
+			SimpleDateFormat formatSortie = new SimpleDateFormat("yyyy-MM-dd");
 			String dateFormatee = formatSortie.format(parsed);
 
 			// Convertir la date formatée en objet java.sql.Date
