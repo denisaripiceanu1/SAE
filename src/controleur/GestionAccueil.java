@@ -272,6 +272,8 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(location.getLocataire(), numeroLigne, 0);
 		modeleTable.setValueAt(location.getBien(), numeroLigne, 1);
 		modeleTable.setValueAt(bien.getType_bien(), numeroLigne, 2);
+		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 3);
+		modeleTable.setValueAt(location.getDateDerniereRegularisation(), numeroLigne, 4);		
 	}
 
 	private void chargerLocations() throws SQLException {
@@ -584,7 +586,6 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(impot.getNom(), numeroLigne, 0);
 		modeleTable.setValueAt(impot.getMontant(), numeroLigne, 1);
 		modeleTable.setValueAt(impot.getAnnee(), numeroLigne, 2);
-
 	}
 
 	public void chargerImpot() throws SQLException {
