@@ -406,8 +406,17 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesLocations = new JTable();
 		this.table_MesLocations.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesLocations.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
-				new String[] { "Locataire", "Bien", "Type" }));
+		this.table_MesLocations.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null},
+			},
+			new String[] {
+				"Locataire", "Bien", "Type", "Date d\u00E9but", "Derni\u00E8re r\u00E9gularisation"
+			}
+		));
+		table_MesLocations.getColumnModel().getColumn(0).setPreferredWidth(60);
+		table_MesLocations.getColumnModel().getColumn(1).setPreferredWidth(58);
+		table_MesLocations.getColumnModel().getColumn(2).setPreferredWidth(70);
 		this.table_MesLocations.setBounds(40, 53, 668, 130);
 		scrollPane_MesLocations.setViewportView(this.table_MesLocations);
 		this.table_MesLocations.getSelectionModel().addListSelectionListener(this.gestionLocations);
@@ -538,400 +547,400 @@ public class Fenetre_Accueil extends JFrame {
 		//////////////////////////////////////////////////////////////////////////
 		// LAYERED MES
 		// TRAVAUX////////////////////////////////////////////////////////////////
-		this.layeredPane_MesTravaux = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_MesTravaux, BorderLayout.CENTER);
-		this.layeredPane_MesTravaux.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_MesTravaux = new JPanel();
-		panel_MesTravaux.setBackground(Color.WHITE);
-		this.layeredPane_MesTravaux.add(panel_MesTravaux);
-		panel_MesTravaux.setLayout(null);
-
-		// Tableaux et scrollPane
-		JScrollPane scrollPane_MesTravaux = new JScrollPane();
-		scrollPane_MesTravaux.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesTravaux.setBounds(51, 128, 641, 289);
-		panel_MesTravaux.add(scrollPane_MesTravaux);
-
-		this.table_MesTravaux = new JTable();
-		this.table_MesTravaux.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesTravaux
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
-						new String[] { "Numéro", "Bien/Logement", "D\u00E9signation", "Date \u00E9mission", "Montant",
-								"Pay\u00E9", "Prestataire", "Adresse" }));
-		this.table_MesTravaux.setBounds(40, 53, 668, 130);
-		this.table_MesTravaux.getSelectionModel().addListSelectionListener(this.gestionTableTravaux);
-		scrollPane_MesTravaux.setViewportView(this.table_MesTravaux);
-
-		// labels
-		JLabel lbl_MesTravaux = new JLabel("Mes Travaux");
-		lbl_MesTravaux.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_MesTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_MesTravaux.setBounds(244, 22, 216, 43);
-		panel_MesTravaux.add(lbl_MesTravaux);
-
-		// Séparateurs
-		JSeparator separator_MesTravaux = new JSeparator();
-		separator_MesTravaux.setForeground(new Color(0, 102, 204));
-		separator_MesTravaux.setBounds(258, 63, 190, 2);
-		panel_MesTravaux.add(separator_MesTravaux);
-
-		// Boutons généraux
-		JButton btn_Travaux_Modifier = new JButton("Modifier");
-		btn_Travaux_Modifier.setForeground(Color.WHITE);
-		btn_Travaux_Modifier.setBackground(new Color(0, 102, 204));
-		btn_Travaux_Modifier.setBounds(216, 449, 99, 31);
-		btn_Travaux_Modifier.addActionListener(this.gestionAccueil);
-		btn_Travaux_Modifier.setName("btn_Travaux_Modifier");
-		panel_MesTravaux.add(btn_Travaux_Modifier);
-
-		JButton btn_Travaux_Supprimer = new JButton("Supprimer");
-		btn_Travaux_Supprimer.setForeground(Color.WHITE);
-		btn_Travaux_Supprimer.setBackground(new Color(0, 102, 204));
-		btn_Travaux_Supprimer.setBounds(425, 449, 105, 31);
-		btn_Travaux_Supprimer.addActionListener(this.gestionAccueil);
-		btn_Travaux_Supprimer.setName("btn_Travaux_Supprimer");
-		panel_MesTravaux.add(btn_Travaux_Supprimer);
-
-		// Boutons propres à la page
-		JToggleButton tglbtn_Travaux_immeubles = new JToggleButton("Travaux pour mes immeubles");
-		tglbtn_Travaux_immeubles.setBounds(112, 76, 216, 23);
-		tglbtn_Travaux_immeubles.addActionListener(this.gestionAccueil);
-		tglbtn_Travaux_immeubles.setName("tglbtn_Travaux_immeubles");
-		panel_MesTravaux.add(tglbtn_Travaux_immeubles);
-
-		JToggleButton tglbtn_Travaux_logements = new JToggleButton("Travaux pour mes logements");
-		tglbtn_Travaux_logements.setBounds(384, 76, 208, 23);
-		tglbtn_Travaux_logements.addActionListener(this.gestionAccueil);
-		tglbtn_Travaux_logements.setName("tglbtn_Travaux_logements");
-		panel_MesTravaux.add(tglbtn_Travaux_logements);
-
-		///////////////////////////////////////////////////////////////////
-		// LAYERED MES FACTURES
-		// ////////////////////////////////////////////////////////////////
-		this.layeredPane_MesFactures = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_MesFactures, BorderLayout.CENTER);
-		this.layeredPane_MesFactures.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_factures = new JPanel();
-		panel_factures.setBackground(Color.WHITE);
-		this.layeredPane_MesFactures.add(panel_factures);
-		panel_factures.setLayout(null);
-
-		// Tableaux et scrollPane
-		JScrollPane scrollPane_MesFactures = new JScrollPane();
-		scrollPane_MesFactures.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesFactures.setBounds(55, 124, 643, 288);
-		panel_factures.add(scrollPane_MesFactures);
-
-		this.table_MesFactures = new JTable();
-		this.table_MesFactures.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesFactures.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
-				new String[] { "Logement", "Numero", "Designation", "Date d'emission", "Date de paiement", "Imputable",
-						"Montant", "Montant payé", "Restant dû" }));
-		this.table_MesFactures.setBounds(40, 53, 668, 130);
-		scrollPane_MesFactures.setViewportView(this.table_MesFactures);
-		this.table_MesFactures.getSelectionModel().addListSelectionListener(this.gestionTableCharges);
-
-		// Labels
-		JLabel lbl_MesFactures = new JLabel("Mes factures");
-		lbl_MesFactures.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_MesFactures.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_MesFactures.setBounds(244, 22, 216, 43);
-		panel_factures.add(lbl_MesFactures);
-
-		// Séparateurs
-		JSeparator separator_mesFactures = new JSeparator();
-		separator_mesFactures.setForeground(new Color(0, 102, 204));
-		separator_mesFactures.setBounds(258, 63, 190, 2);
-		panel_factures.add(separator_mesFactures);
-
-		// Boutons généraux
-		JButton btn_MesFactures_Modifier = new JButton("Modifier");
-		btn_MesFactures_Modifier.setForeground(Color.WHITE);
-		btn_MesFactures_Modifier.setBackground(new Color(0, 102, 204));
-		btn_MesFactures_Modifier.setBounds(396, 449, 99, 31);
-		btn_MesFactures_Modifier.addActionListener(this.gestionAccueil);
-		btn_MesFactures_Modifier.setName("btn_MesFactures_Modifier");
-		panel_factures.add(btn_MesFactures_Modifier);
-
-		JButton btn_MesFactures_Supprimer = new JButton("Supprimer");
-		btn_MesFactures_Supprimer.setForeground(Color.WHITE);
-		btn_MesFactures_Supprimer.setBackground(new Color(0, 102, 204));
-		btn_MesFactures_Supprimer.setBounds(539, 449, 106, 31);
-		btn_MesFactures_Supprimer.addActionListener(this.gestionAccueil);
-		btn_MesFactures_Supprimer.setName("btn_MesFactures_Supprimer");
-		panel_factures.add(btn_MesFactures_Supprimer);
-
-		// Boutons propres à la page
-		JToggleButton tglbtn_FactureCharge_biens = new JToggleButton("Charger pour mes logements");
-		tglbtn_FactureCharge_biens.setBounds(143, 453, 208, 23);
-		tglbtn_FactureCharge_biens.addActionListener(this.gestionAccueil);
-		tglbtn_FactureCharge_biens.setName("tglbtn_FactureCharge_biens");
-		panel_factures.add(tglbtn_FactureCharge_biens);
-
-		// ComboBox
-		this.comboBox_MesFactures = new JComboBox<String>();
-		this.comboBox_MesFactures.setBounds(55, 81, 171, 29);
-		panel_factures.add(this.comboBox_MesFactures);
-		this.comboBox_MesFactures.addActionListener(this.gestionAccueil);
-
-		// Remplir le JComboBox avec les identifiants des logements
-		try {
-			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
-			identifiantsLogements.add(0, "ID du logement");
-
-			// Ajouter les identifiants au modèle du JComboBox
-			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-					identifiantsLogements.toArray(new String[0]));
-			this.comboBox_MesFactures.setModel(modelComboBox);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
-			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
-					"Erreur", JOptionPane.ERROR_MESSAGE);
-		}
-
-		///////////////////////////////////////////////////////////////////
-		// LAYERED MES ASSURANCES
-		// ////////////////////////////////////////////////////////////////
-		this.layeredPane_MesAssurances = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_MesAssurances, BorderLayout.CENTER);
-		this.layeredPane_MesAssurances.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_MesAssurances = new JPanel();
-		panel_MesAssurances.setBackground(Color.WHITE);
-		this.layeredPane_MesAssurances.add(panel_MesAssurances);
-		panel_MesAssurances.setLayout(null);
-
-		// Tableaux et scrollPane
-		JScrollPane scrollPane_MesAssurances = new JScrollPane();
-		scrollPane_MesAssurances.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesAssurances.setBounds(55, 124, 643, 270);
-		panel_MesAssurances.add(scrollPane_MesAssurances);
-
-		this.table_MesAssurances = new JTable();
-		this.table_MesAssurances.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesAssurances
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
-						new String[] { "Logement", "n\u00B0 Police", "Montant", "Date \u00E9cheance", "Prestataire",
-								"Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
-		this.table_MesAssurances.setBounds(40, 53, 668, 130);
-		this.table_MesAssurances.getSelectionModel().addListSelectionListener(this.gestionTableAssurance);
-		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);
-
-		// Labels
-		JLabel lbl_MesAssurances = new JLabel("Mes Assurances");
-		lbl_MesAssurances.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_MesAssurances.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_MesAssurances.setBounds(244, 22, 216, 43);
-		panel_MesAssurances.add(lbl_MesAssurances);
-
-		// Séparateurs
-		JSeparator separator_mesAssurances = new JSeparator();
-		separator_mesAssurances.setForeground(new Color(0, 102, 204));
-		separator_mesAssurances.setBounds(258, 63, 190, 2);
-		panel_MesAssurances.add(separator_mesAssurances);
-
-		// Boutons généraux
-		JButton btn_MesAssurances_Charger = new JButton("Charger");
-		btn_MesAssurances_Charger.setForeground(Color.WHITE);
-		btn_MesAssurances_Charger.setBackground(new Color(0, 102, 204));
-		btn_MesAssurances_Charger.setBounds(118, 449, 94, 31);
-		btn_MesAssurances_Charger.addActionListener(this.gestionAccueil);
-		btn_MesAssurances_Charger.setName("btn_MesAssurances_Charger");
-		panel_MesAssurances.add(btn_MesAssurances_Charger);
-
-		JButton btn_MesAssurances_Modifier = new JButton("Modifier");
-		btn_MesAssurances_Modifier.setForeground(Color.WHITE);
-		btn_MesAssurances_Modifier.setBackground(new Color(0, 102, 204));
-		btn_MesAssurances_Modifier.setBounds(396, 449, 99, 31);
-		btn_MesAssurances_Modifier.addActionListener(this.gestionAccueil);
-		btn_MesAssurances_Modifier.setName("btn_MesAssurances_Modifier");
-		panel_MesAssurances.add(btn_MesAssurances_Modifier);
-
-		JButton btn_MesAssurances_Inserer = new JButton("Insérer");
-		btn_MesAssurances_Inserer.setForeground(Color.WHITE);
-		btn_MesAssurances_Inserer.setBackground(new Color(0, 102, 204));
-		btn_MesAssurances_Inserer.setBounds(258, 449, 94, 31);
-		btn_MesAssurances_Inserer.addActionListener(this.gestionAccueil);
-		btn_MesAssurances_Inserer.setName("btn_MesAssurances_Inserer");
-		panel_MesAssurances.add(btn_MesAssurances_Inserer);
-
-		JButton btn_MesAssurances_Supprimer = new JButton("Supprimer");
-		btn_MesAssurances_Supprimer.setForeground(Color.WHITE);
-		btn_MesAssurances_Supprimer.setBackground(new Color(0, 102, 204));
-		btn_MesAssurances_Supprimer.setBounds(539, 449, 106, 31);
-		btn_MesAssurances_Supprimer.addActionListener(this.gestionAccueil);
-		btn_MesAssurances_Supprimer.setName("btn_MesAssurances_Supprimer");
-		panel_MesAssurances.add(btn_MesAssurances_Supprimer);
-
-		// ComboBox
-		this.comboBox_MesAssurances = new JComboBox<String>();
-		this.comboBox_MesAssurances.setBounds(55, 80, 130, 29);
-		panel_MesAssurances.add(this.comboBox_MesAssurances);
-		this.comboBox_MesAssurances.addActionListener(this.gestionAccueil);
-
-		// Remplir le JComboBox avec les identifiants des logements
-		try {
-			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
-			identifiantsLogements.add(0, "ID du logement");
-
-			// Ajouter les identifiants au modèle du JComboBox
-			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-					identifiantsLogements.toArray(new String[0]));
-
-			this.comboBox_MesAssurances.setModel(modelComboBox);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
-			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
-					"Erreur", JOptionPane.ERROR_MESSAGE);
-		}
-
-		///////////////////////////////////////////////////////////////////
-		// LAYERED REGULARISATION DES CHARGES
-		// ////////////////////////////////////////////////////////////////
-		this.layeredPane_RegularisationDesCharges = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_RegularisationDesCharges, BorderLayout.CENTER);
-		this.layeredPane_RegularisationDesCharges.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_RegularisationDesCharges = new JPanel();
-		panel_RegularisationDesCharges.setBackground(Color.WHITE);
-		this.layeredPane_RegularisationDesCharges.add(panel_RegularisationDesCharges);
-		panel_RegularisationDesCharges.setLayout(null);
-
-		// Tableaux et scrollPane
-		JScrollPane scrollPane_Regularisation = new JScrollPane();
-		scrollPane_Regularisation.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_Regularisation.setBounds(28, 121, 697, 303);
-		panel_RegularisationDesCharges.add(scrollPane_Regularisation);
-
-		this.tableRegularisation = new JTable();
-		this.tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
-		this.tableRegularisation.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null }, }, new String[] { "Période du", "au",
-						"Total charges réelles", "Charges garage", "Total des provisions", "RESTE" }));
-		this.tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(65);
-		this.tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(65);
-		this.tableRegularisation.setBounds(40, 53, 668, 130);
-		scrollPane_Regularisation.setViewportView(this.tableRegularisation);
-
-		// Labels
-		JLabel lbl_RegularisationDesCharges = new JLabel("Régularisation des Charges");
-		lbl_RegularisationDesCharges.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_RegularisationDesCharges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_RegularisationDesCharges.setBounds(244, 22, 216, 43);
-		panel_RegularisationDesCharges.add(lbl_RegularisationDesCharges);
-
-		// Séparateurs
-		JSeparator separator_RegularisationDesChargess = new JSeparator();
-		separator_RegularisationDesChargess.setForeground(new Color(0, 102, 204));
-		separator_RegularisationDesChargess.setBounds(258, 63, 190, 2);
-		panel_RegularisationDesCharges.add(separator_RegularisationDesChargess);
-
-		// JComboBox
-		this.comboBox_Regularisation = new JComboBox<String>();
-		this.comboBox_Regularisation.setModel(new DefaultComboBoxModel<String>(new String[] { "Locataire" }));
-		this.comboBox_Regularisation.setBounds(55, 81, 130, 29);
-		panel_RegularisationDesCharges.add(this.comboBox_Regularisation);
-		this.comboBox_Regularisation.addActionListener(this.gestionAccueil);
-
-		// Remplir le JComboBox avec les identifiants des locataires
-		try {
-			List<String> identifiantsLocataires = this.daoLocataire.getAllIdLocataire();
-			identifiantsLocataires.add(0, "ID locataire");
-			// Ajouter les identifiants au modèle du JComboBox
-			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-					identifiantsLocataires.toArray(new String[0]));
-			this.comboBox_Regularisation.setModel(modelComboBox);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-//		////////////////////////////////////////////////////////////////////////////
-//		// LAYERED
-//		// DOCUMENTS////////////////////////////////////////////////////////////////
-		this.layeredPane_MesDocuments = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
-		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_MesDocuments = new JPanel();
-		panel_MesDocuments.setBackground(Color.WHITE);
-		this.layeredPane_MesDocuments.add(panel_MesDocuments);
-		panel_MesDocuments.setLayout(null);
-
-		JLabel lbl_MesDocuments = new JLabel("Mes Documents");
-		lbl_MesDocuments.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_MesDocuments.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_MesDocuments.setBounds(244, 22, 216, 43);
-		panel_MesDocuments.add(lbl_MesDocuments);
-
-		JSeparator separator_MesDocuments = new JSeparator();
-		separator_MesDocuments.setForeground(new Color(0, 102, 204));
-		separator_MesDocuments.setBounds(258, 63, 190, 2);
-		panel_MesDocuments.add(separator_MesDocuments);
-
-		// Tableau et scroll
-		JScrollPane scrollPane_MesDocuments = new JScrollPane();
-		scrollPane_MesDocuments.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesDocuments.setBounds(55, 124, 643, 270);
-		panel_MesDocuments.add(scrollPane_MesDocuments);
-
-		this.table_MesDocuments = new JTable();
-		this.table_MesDocuments
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
-						new String[] { "Nom", "Montant", "Année" }));
-		this.table_MesDocuments.setBounds(40, 53, 668, 130);
-		scrollPane_MesDocuments.setViewportView(this.table_MesDocuments);
-
-		// Boutons généraux
-		JButton btn_MesDocuments_Charger = new JButton("Charger");
-		btn_MesDocuments_Charger.setForeground(Color.WHITE);
-		btn_MesDocuments_Charger.setBackground(new Color(0, 102, 204));
-		btn_MesDocuments_Charger.setBounds(118, 449, 94, 31);
-		btn_MesDocuments_Charger.addActionListener(this.gestionAccueil);
-		btn_MesDocuments_Charger.setName("btn_MesDocuments_Charger");
-		panel_MesDocuments.add(btn_MesDocuments_Charger);
-
-		JButton btn_MesDocuments_generer_annexe = new JButton("Génerer une annexe");
-		btn_MesDocuments_generer_annexe.setForeground(Color.WHITE);
-		btn_MesDocuments_generer_annexe.setBackground(new Color(0, 102, 204));
-		btn_MesDocuments_generer_annexe.setBounds(468, 449, 167, 31);
-		btn_MesDocuments_generer_annexe.addActionListener(this.gestionAccueil);
-		btn_MesDocuments_generer_annexe.setName("btn_MesDocuments_generer_annexe");
-		panel_MesDocuments.add(btn_MesDocuments_generer_annexe);
-
-		JButton btn_MesDocuments_Inserer_Impots = new JButton("Insérer un impôt");
-		btn_MesDocuments_Inserer_Impots.setForeground(Color.WHITE);
-		btn_MesDocuments_Inserer_Impots.setBackground(new Color(0, 102, 204));
-		btn_MesDocuments_Inserer_Impots.setBounds(271, 449, 130, 31);
-		btn_MesDocuments_Inserer_Impots.addActionListener(this.gestionAccueil);
-		btn_MesDocuments_Inserer_Impots.setName("btn_MesDocuments_Inserer_Impots");
-		panel_MesDocuments.add(btn_MesDocuments_Inserer_Impots);
-
-		// ComboBox
-		this.comboBox_MesDocuments = new JComboBox<String>();
-		this.comboBox_MesDocuments.setBounds(55, 80, 130, 29);
-		panel_MesDocuments.add(this.comboBox_MesDocuments);
-		this.comboBox_MesDocuments.addActionListener(this.gestionAccueil);
-
-		// Remplir le JComboBox avec les identifiants des logements
-		try {
-			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
-			identifiantsLogements.add(0, "ID du logement");
-
-			// Ajouter les identifiants au modèle du JComboBox
-			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-					identifiantsLogements.toArray(new String[0]));
-
-			this.comboBox_MesDocuments.setModel(modelComboBox);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
-			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
-					"Erreur", JOptionPane.ERROR_MESSAGE);
-		}
+//		this.layeredPane_MesTravaux = new JLayeredPane();
+//		this.contentPane.add(this.layeredPane_MesTravaux, BorderLayout.CENTER);
+//		this.layeredPane_MesTravaux.setLayout(new BorderLayout(0, 0));
+//
+//		JPanel panel_MesTravaux = new JPanel();
+//		panel_MesTravaux.setBackground(Color.WHITE);
+//		this.layeredPane_MesTravaux.add(panel_MesTravaux);
+//		panel_MesTravaux.setLayout(null);
+//
+//		// Tableaux et scrollPane
+//		JScrollPane scrollPane_MesTravaux = new JScrollPane();
+//		scrollPane_MesTravaux.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+//		scrollPane_MesTravaux.setBounds(51, 128, 641, 289);
+//		panel_MesTravaux.add(scrollPane_MesTravaux);
+//
+//		this.table_MesTravaux = new JTable();
+//		this.table_MesTravaux.setSelectionBackground(new Color(0, 102, 204));
+//		this.table_MesTravaux
+//				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
+//						new String[] { "Numéro", "Bien/Logement", "D\u00E9signation", "Date \u00E9mission", "Montant",
+//								"Pay\u00E9", "Prestataire", "Adresse" }));
+//		this.table_MesTravaux.setBounds(40, 53, 668, 130);
+//		this.table_MesTravaux.getSelectionModel().addListSelectionListener(this.gestionTableTravaux);
+//		scrollPane_MesTravaux.setViewportView(this.table_MesTravaux);
+//
+//		// labels
+//		JLabel lbl_MesTravaux = new JLabel("Mes Travaux");
+//		lbl_MesTravaux.setHorizontalAlignment(SwingConstants.CENTER);
+//		lbl_MesTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		lbl_MesTravaux.setBounds(244, 22, 216, 43);
+//		panel_MesTravaux.add(lbl_MesTravaux);
+//
+//		// Séparateurs
+//		JSeparator separator_MesTravaux = new JSeparator();
+//		separator_MesTravaux.setForeground(new Color(0, 102, 204));
+//		separator_MesTravaux.setBounds(258, 63, 190, 2);
+//		panel_MesTravaux.add(separator_MesTravaux);
+//
+//		// Boutons généraux
+//		JButton btn_Travaux_Modifier = new JButton("Modifier");
+//		btn_Travaux_Modifier.setForeground(Color.WHITE);
+//		btn_Travaux_Modifier.setBackground(new Color(0, 102, 204));
+//		btn_Travaux_Modifier.setBounds(216, 449, 99, 31);
+//		btn_Travaux_Modifier.addActionListener(this.gestionAccueil);
+//		btn_Travaux_Modifier.setName("btn_Travaux_Modifier");
+//		panel_MesTravaux.add(btn_Travaux_Modifier);
+//
+//		JButton btn_Travaux_Supprimer = new JButton("Supprimer");
+//		btn_Travaux_Supprimer.setForeground(Color.WHITE);
+//		btn_Travaux_Supprimer.setBackground(new Color(0, 102, 204));
+//		btn_Travaux_Supprimer.setBounds(425, 449, 105, 31);
+//		btn_Travaux_Supprimer.addActionListener(this.gestionAccueil);
+//		btn_Travaux_Supprimer.setName("btn_Travaux_Supprimer");
+//		panel_MesTravaux.add(btn_Travaux_Supprimer);
+//
+//		// Boutons propres à la page
+//		JToggleButton tglbtn_Travaux_immeubles = new JToggleButton("Travaux pour mes immeubles");
+//		tglbtn_Travaux_immeubles.setBounds(112, 76, 216, 23);
+//		tglbtn_Travaux_immeubles.addActionListener(this.gestionAccueil);
+//		tglbtn_Travaux_immeubles.setName("tglbtn_Travaux_immeubles");
+//		panel_MesTravaux.add(tglbtn_Travaux_immeubles);
+//
+//		JToggleButton tglbtn_Travaux_logements = new JToggleButton("Travaux pour mes logements");
+//		tglbtn_Travaux_logements.setBounds(384, 76, 208, 23);
+//		tglbtn_Travaux_logements.addActionListener(this.gestionAccueil);
+//		tglbtn_Travaux_logements.setName("tglbtn_Travaux_logements");
+//		panel_MesTravaux.add(tglbtn_Travaux_logements);
+//
+//		///////////////////////////////////////////////////////////////////
+//		// LAYERED MES FACTURES
+//		// ////////////////////////////////////////////////////////////////
+//		this.layeredPane_MesFactures = new JLayeredPane();
+//		this.contentPane.add(this.layeredPane_MesFactures, BorderLayout.CENTER);
+//		this.layeredPane_MesFactures.setLayout(new BorderLayout(0, 0));
+//
+//		JPanel panel_factures = new JPanel();
+//		panel_factures.setBackground(Color.WHITE);
+//		this.layeredPane_MesFactures.add(panel_factures);
+//		panel_factures.setLayout(null);
+//
+//		// Tableaux et scrollPane
+//		JScrollPane scrollPane_MesFactures = new JScrollPane();
+//		scrollPane_MesFactures.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+//		scrollPane_MesFactures.setBounds(55, 124, 643, 288);
+//		panel_factures.add(scrollPane_MesFactures);
+//
+//		this.table_MesFactures = new JTable();
+//		this.table_MesFactures.setSelectionBackground(new Color(0, 102, 204));
+//		this.table_MesFactures.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
+//				new String[] { "Logement", "Numero", "Designation", "Date d'emission", "Date de paiement", "Imputable",
+//						"Montant", "Montant payé", "Restant dû" }));
+//		this.table_MesFactures.setBounds(40, 53, 668, 130);
+//		scrollPane_MesFactures.setViewportView(this.table_MesFactures);
+//		this.table_MesFactures.getSelectionModel().addListSelectionListener(this.gestionTableCharges);
+//
+//		// Labels
+//		JLabel lbl_MesFactures = new JLabel("Mes factures");
+//		lbl_MesFactures.setHorizontalAlignment(SwingConstants.CENTER);
+//		lbl_MesFactures.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		lbl_MesFactures.setBounds(244, 22, 216, 43);
+//		panel_factures.add(lbl_MesFactures);
+//
+//		// Séparateurs
+//		JSeparator separator_mesFactures = new JSeparator();
+//		separator_mesFactures.setForeground(new Color(0, 102, 204));
+//		separator_mesFactures.setBounds(258, 63, 190, 2);
+//		panel_factures.add(separator_mesFactures);
+//
+//		// Boutons généraux
+//		JButton btn_MesFactures_Modifier = new JButton("Modifier");
+//		btn_MesFactures_Modifier.setForeground(Color.WHITE);
+//		btn_MesFactures_Modifier.setBackground(new Color(0, 102, 204));
+//		btn_MesFactures_Modifier.setBounds(396, 449, 99, 31);
+//		btn_MesFactures_Modifier.addActionListener(this.gestionAccueil);
+//		btn_MesFactures_Modifier.setName("btn_MesFactures_Modifier");
+//		panel_factures.add(btn_MesFactures_Modifier);
+//
+//		JButton btn_MesFactures_Supprimer = new JButton("Supprimer");
+//		btn_MesFactures_Supprimer.setForeground(Color.WHITE);
+//		btn_MesFactures_Supprimer.setBackground(new Color(0, 102, 204));
+//		btn_MesFactures_Supprimer.setBounds(539, 449, 106, 31);
+//		btn_MesFactures_Supprimer.addActionListener(this.gestionAccueil);
+//		btn_MesFactures_Supprimer.setName("btn_MesFactures_Supprimer");
+//		panel_factures.add(btn_MesFactures_Supprimer);
+//
+//		// Boutons propres à la page
+//		JToggleButton tglbtn_FactureCharge_biens = new JToggleButton("Charger pour mes logements");
+//		tglbtn_FactureCharge_biens.setBounds(143, 453, 208, 23);
+//		tglbtn_FactureCharge_biens.addActionListener(this.gestionAccueil);
+//		tglbtn_FactureCharge_biens.setName("tglbtn_FactureCharge_biens");
+//		panel_factures.add(tglbtn_FactureCharge_biens);
+//
+//		// ComboBox
+//		this.comboBox_MesFactures = new JComboBox<String>();
+//		this.comboBox_MesFactures.setBounds(55, 81, 171, 29);
+//		panel_factures.add(this.comboBox_MesFactures);
+//		this.comboBox_MesFactures.addActionListener(this.gestionAccueil);
+//
+//		// Remplir le JComboBox avec les identifiants des logements
+//		try {
+//			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
+//			identifiantsLogements.add(0, "ID du logement");
+//
+//			// Ajouter les identifiants au modèle du JComboBox
+//			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+//					identifiantsLogements.toArray(new String[0]));
+//			this.comboBox_MesFactures.setModel(modelComboBox);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
+//			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
+//					"Erreur", JOptionPane.ERROR_MESSAGE);
+//		}
+//
+//		///////////////////////////////////////////////////////////////////
+//		// LAYERED MES ASSURANCES
+//		// ////////////////////////////////////////////////////////////////
+//		this.layeredPane_MesAssurances = new JLayeredPane();
+//		this.contentPane.add(this.layeredPane_MesAssurances, BorderLayout.CENTER);
+//		this.layeredPane_MesAssurances.setLayout(new BorderLayout(0, 0));
+//
+//		JPanel panel_MesAssurances = new JPanel();
+//		panel_MesAssurances.setBackground(Color.WHITE);
+//		this.layeredPane_MesAssurances.add(panel_MesAssurances);
+//		panel_MesAssurances.setLayout(null);
+//
+//		// Tableaux et scrollPane
+//		JScrollPane scrollPane_MesAssurances = new JScrollPane();
+//		scrollPane_MesAssurances.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+//		scrollPane_MesAssurances.setBounds(55, 124, 643, 270);
+//		panel_MesAssurances.add(scrollPane_MesAssurances);
+//
+//		this.table_MesAssurances = new JTable();
+//		this.table_MesAssurances.setSelectionBackground(new Color(0, 102, 204));
+//		this.table_MesAssurances
+//				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
+//						new String[] { "Logement", "n\u00B0 Police", "Montant", "Date \u00E9cheance", "Prestataire",
+//								"Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
+//		this.table_MesAssurances.setBounds(40, 53, 668, 130);
+//		this.table_MesAssurances.getSelectionModel().addListSelectionListener(this.gestionTableAssurance);
+//		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);
+//
+//		// Labels
+//		JLabel lbl_MesAssurances = new JLabel("Mes Assurances");
+//		lbl_MesAssurances.setHorizontalAlignment(SwingConstants.CENTER);
+//		lbl_MesAssurances.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		lbl_MesAssurances.setBounds(244, 22, 216, 43);
+//		panel_MesAssurances.add(lbl_MesAssurances);
+//
+//		// Séparateurs
+//		JSeparator separator_mesAssurances = new JSeparator();
+//		separator_mesAssurances.setForeground(new Color(0, 102, 204));
+//		separator_mesAssurances.setBounds(258, 63, 190, 2);
+//		panel_MesAssurances.add(separator_mesAssurances);
+//
+//		// Boutons généraux
+//		JButton btn_MesAssurances_Charger = new JButton("Charger");
+//		btn_MesAssurances_Charger.setForeground(Color.WHITE);
+//		btn_MesAssurances_Charger.setBackground(new Color(0, 102, 204));
+//		btn_MesAssurances_Charger.setBounds(118, 449, 94, 31);
+//		btn_MesAssurances_Charger.addActionListener(this.gestionAccueil);
+//		btn_MesAssurances_Charger.setName("btn_MesAssurances_Charger");
+//		panel_MesAssurances.add(btn_MesAssurances_Charger);
+//
+//		JButton btn_MesAssurances_Modifier = new JButton("Modifier");
+//		btn_MesAssurances_Modifier.setForeground(Color.WHITE);
+//		btn_MesAssurances_Modifier.setBackground(new Color(0, 102, 204));
+//		btn_MesAssurances_Modifier.setBounds(396, 449, 99, 31);
+//		btn_MesAssurances_Modifier.addActionListener(this.gestionAccueil);
+//		btn_MesAssurances_Modifier.setName("btn_MesAssurances_Modifier");
+//		panel_MesAssurances.add(btn_MesAssurances_Modifier);
+//
+//		JButton btn_MesAssurances_Inserer = new JButton("Insérer");
+//		btn_MesAssurances_Inserer.setForeground(Color.WHITE);
+//		btn_MesAssurances_Inserer.setBackground(new Color(0, 102, 204));
+//		btn_MesAssurances_Inserer.setBounds(258, 449, 94, 31);
+//		btn_MesAssurances_Inserer.addActionListener(this.gestionAccueil);
+//		btn_MesAssurances_Inserer.setName("btn_MesAssurances_Inserer");
+//		panel_MesAssurances.add(btn_MesAssurances_Inserer);
+//
+//		JButton btn_MesAssurances_Supprimer = new JButton("Supprimer");
+//		btn_MesAssurances_Supprimer.setForeground(Color.WHITE);
+//		btn_MesAssurances_Supprimer.setBackground(new Color(0, 102, 204));
+//		btn_MesAssurances_Supprimer.setBounds(539, 449, 106, 31);
+//		btn_MesAssurances_Supprimer.addActionListener(this.gestionAccueil);
+//		btn_MesAssurances_Supprimer.setName("btn_MesAssurances_Supprimer");
+//		panel_MesAssurances.add(btn_MesAssurances_Supprimer);
+//
+//		// ComboBox
+//		this.comboBox_MesAssurances = new JComboBox<String>();
+//		this.comboBox_MesAssurances.setBounds(55, 80, 130, 29);
+//		panel_MesAssurances.add(this.comboBox_MesAssurances);
+//		this.comboBox_MesAssurances.addActionListener(this.gestionAccueil);
+//
+//		// Remplir le JComboBox avec les identifiants des logements
+//		try {
+//			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
+//			identifiantsLogements.add(0, "ID du logement");
+//
+//			// Ajouter les identifiants au modèle du JComboBox
+//			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+//					identifiantsLogements.toArray(new String[0]));
+//
+//			this.comboBox_MesAssurances.setModel(modelComboBox);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
+//			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
+//					"Erreur", JOptionPane.ERROR_MESSAGE);
+//		}
+//
+//		///////////////////////////////////////////////////////////////////
+//		// LAYERED REGULARISATION DES CHARGES
+//		// ////////////////////////////////////////////////////////////////
+//		this.layeredPane_RegularisationDesCharges = new JLayeredPane();
+//		this.contentPane.add(this.layeredPane_RegularisationDesCharges, BorderLayout.CENTER);
+//		this.layeredPane_RegularisationDesCharges.setLayout(new BorderLayout(0, 0));
+//
+//		JPanel panel_RegularisationDesCharges = new JPanel();
+//		panel_RegularisationDesCharges.setBackground(Color.WHITE);
+//		this.layeredPane_RegularisationDesCharges.add(panel_RegularisationDesCharges);
+//		panel_RegularisationDesCharges.setLayout(null);
+//
+//		// Tableaux et scrollPane
+//		JScrollPane scrollPane_Regularisation = new JScrollPane();
+//		scrollPane_Regularisation.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+//		scrollPane_Regularisation.setBounds(28, 121, 697, 303);
+//		panel_RegularisationDesCharges.add(scrollPane_Regularisation);
+//
+//		this.tableRegularisation = new JTable();
+//		this.tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
+//		this.tableRegularisation.setModel(new DefaultTableModel(
+//				new Object[][] { { null, null, null, null, null, null }, }, new String[] { "Période du", "au",
+//						"Total charges réelles", "Charges garage", "Total des provisions", "RESTE" }));
+//		this.tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(65);
+//		this.tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(65);
+//		this.tableRegularisation.setBounds(40, 53, 668, 130);
+//		scrollPane_Regularisation.setViewportView(this.tableRegularisation);
+//
+//		// Labels
+//		JLabel lbl_RegularisationDesCharges = new JLabel("Régularisation des Charges");
+//		lbl_RegularisationDesCharges.setHorizontalAlignment(SwingConstants.CENTER);
+//		lbl_RegularisationDesCharges.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		lbl_RegularisationDesCharges.setBounds(244, 22, 216, 43);
+//		panel_RegularisationDesCharges.add(lbl_RegularisationDesCharges);
+//
+//		// Séparateurs
+//		JSeparator separator_RegularisationDesChargess = new JSeparator();
+//		separator_RegularisationDesChargess.setForeground(new Color(0, 102, 204));
+//		separator_RegularisationDesChargess.setBounds(258, 63, 190, 2);
+//		panel_RegularisationDesCharges.add(separator_RegularisationDesChargess);
+//
+//		// JComboBox
+//		this.comboBox_Regularisation = new JComboBox<String>();
+//		this.comboBox_Regularisation.setModel(new DefaultComboBoxModel<String>(new String[] { "Locataire" }));
+//		this.comboBox_Regularisation.setBounds(55, 81, 130, 29);
+//		panel_RegularisationDesCharges.add(this.comboBox_Regularisation);
+//		this.comboBox_Regularisation.addActionListener(this.gestionAccueil);
+//
+//		// Remplir le JComboBox avec les identifiants des locataires
+//		try {
+//			List<String> identifiantsLocataires = this.daoLocataire.getAllIdLocataire();
+//			identifiantsLocataires.add(0, "ID locataire");
+//			// Ajouter les identifiants au modèle du JComboBox
+//			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+//					identifiantsLocataires.toArray(new String[0]));
+//			this.comboBox_Regularisation.setModel(modelComboBox);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//
+////		////////////////////////////////////////////////////////////////////////////
+////		// LAYERED
+////		// DOCUMENTS////////////////////////////////////////////////////////////////
+//		this.layeredPane_MesDocuments = new JLayeredPane();
+//		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
+//		this.layeredPane_MesDocuments.setLayout(new BorderLayout(0, 0));
+//
+//		JPanel panel_MesDocuments = new JPanel();
+//		panel_MesDocuments.setBackground(Color.WHITE);
+//		this.layeredPane_MesDocuments.add(panel_MesDocuments);
+//		panel_MesDocuments.setLayout(null);
+//
+//		JLabel lbl_MesDocuments = new JLabel("Mes Documents");
+//		lbl_MesDocuments.setHorizontalAlignment(SwingConstants.CENTER);
+//		lbl_MesDocuments.setFont(new Font("Tahoma", Font.PLAIN, 16));
+//		lbl_MesDocuments.setBounds(244, 22, 216, 43);
+//		panel_MesDocuments.add(lbl_MesDocuments);
+//
+//		JSeparator separator_MesDocuments = new JSeparator();
+//		separator_MesDocuments.setForeground(new Color(0, 102, 204));
+//		separator_MesDocuments.setBounds(258, 63, 190, 2);
+//		panel_MesDocuments.add(separator_MesDocuments);
+//
+//		// Tableau et scroll
+//		JScrollPane scrollPane_MesDocuments = new JScrollPane();
+//		scrollPane_MesDocuments.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
+//		scrollPane_MesDocuments.setBounds(55, 124, 643, 270);
+//		panel_MesDocuments.add(scrollPane_MesDocuments);
+//
+//		this.table_MesDocuments = new JTable();
+//		this.table_MesDocuments
+//				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
+//						new String[] { "Nom", "Montant", "Année" }));
+//		this.table_MesDocuments.setBounds(40, 53, 668, 130);
+//		scrollPane_MesDocuments.setViewportView(this.table_MesDocuments);
+//
+//		// Boutons généraux
+//		JButton btn_MesDocuments_Charger = new JButton("Charger");
+//		btn_MesDocuments_Charger.setForeground(Color.WHITE);
+//		btn_MesDocuments_Charger.setBackground(new Color(0, 102, 204));
+//		btn_MesDocuments_Charger.setBounds(118, 449, 94, 31);
+//		btn_MesDocuments_Charger.addActionListener(this.gestionAccueil);
+//		btn_MesDocuments_Charger.setName("btn_MesDocuments_Charger");
+//		panel_MesDocuments.add(btn_MesDocuments_Charger);
+//
+//		JButton btn_MesDocuments_generer_annexe = new JButton("Génerer une annexe");
+//		btn_MesDocuments_generer_annexe.setForeground(Color.WHITE);
+//		btn_MesDocuments_generer_annexe.setBackground(new Color(0, 102, 204));
+//		btn_MesDocuments_generer_annexe.setBounds(468, 449, 167, 31);
+//		btn_MesDocuments_generer_annexe.addActionListener(this.gestionAccueil);
+//		btn_MesDocuments_generer_annexe.setName("btn_MesDocuments_generer_annexe");
+//		panel_MesDocuments.add(btn_MesDocuments_generer_annexe);
+//
+//		JButton btn_MesDocuments_Inserer_Impots = new JButton("Insérer un impôt");
+//		btn_MesDocuments_Inserer_Impots.setForeground(Color.WHITE);
+//		btn_MesDocuments_Inserer_Impots.setBackground(new Color(0, 102, 204));
+//		btn_MesDocuments_Inserer_Impots.setBounds(271, 449, 130, 31);
+//		btn_MesDocuments_Inserer_Impots.addActionListener(this.gestionAccueil);
+//		btn_MesDocuments_Inserer_Impots.setName("btn_MesDocuments_Inserer_Impots");
+//		panel_MesDocuments.add(btn_MesDocuments_Inserer_Impots);
+//
+//		// ComboBox
+//		this.comboBox_MesDocuments = new JComboBox<String>();
+//		this.comboBox_MesDocuments.setBounds(55, 80, 130, 29);
+//		panel_MesDocuments.add(this.comboBox_MesDocuments);
+//		this.comboBox_MesDocuments.addActionListener(this.gestionAccueil);
+//
+//		// Remplir le JComboBox avec les identifiants des logements
+//		try {
+//			List<String> identifiantsLogements = this.daoBien.getAllIdBien();
+//			identifiantsLogements.add(0, "ID du logement");
+//
+//			// Ajouter les identifiants au modèle du JComboBox
+//			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+//					identifiantsLogements.toArray(new String[0]));
+//
+//			this.comboBox_MesDocuments.setModel(modelComboBox);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
+//			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
+//					"Erreur", JOptionPane.ERROR_MESSAGE);
+//		}
 
 //		PDFListe pdfViewer = new PDFListe();
 //		panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
