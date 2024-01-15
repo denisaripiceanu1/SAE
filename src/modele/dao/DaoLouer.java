@@ -26,6 +26,7 @@ import modele.dao.requetes.select.RequeteSelectLouerMediane;
 import modele.dao.requetes.select.RequeteSelectLouerMoyenne;
 import modele.dao.requetes.select.RequeteSelectLouerProvision;
 import modele.dao.requetes.select.RequeteSelectMoyenneLoyer;
+import modele.dao.requetes.select.RequeteSelectNbLocation;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocation;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocationArchiver;
@@ -277,6 +278,25 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 
 	public List<Louer> findAllArchive() throws SQLException {
 		return find(new RequeteSelectLouerArchive());
+	}
+
+	public int getNombreLocationsParLocataire(String idLocataire) throws SQLException {
+		RequeteSelectNbLocation requeteSelectNbLocation = new RequeteSelectNbLocation();
+		PreparedStatement prSt = CictOracleDataSource.getConnectionBD()
+				.prepareStatement(requeteSelectNbLocation.requete());
+		requeteSelectNbLocation.parametres(prSt, idLocataire);
+		ResultSet resultSet = prSt.executeQuery();
+
+		int nombreLocations = 0;
+
+		if (resultSet.next()) {
+			nombreLocations = resultSet.getInt(1);
+		}
+
+		prSt.close();
+		resultSet.close();
+
+		return nombreLocations;
 	}
 
 }

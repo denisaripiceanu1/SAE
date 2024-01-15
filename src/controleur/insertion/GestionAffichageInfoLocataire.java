@@ -18,7 +18,7 @@ import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
 import vue.Fenetre_Accueil;
-import vue.archiver.Fenetre_ArchiverLocation;
+import vue.archiver.Fenetre_ArchiverLocataire;
 import vue.insertion.Fenetre_AffichageInfoLocataire;
 
 public class GestionAffichageInfoLocataire implements ActionListener {
@@ -100,10 +100,10 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 			try {
 				if (Sauvegarde.onSave("Louer") == true) {
 					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
-					Fenetre_ArchiverLocation archiver_location = new Fenetre_ArchiverLocation();
-					this.fail.getLayeredPane().add(archiver_location);
-					archiver_location.setVisible(true);
-					archiver_location.moveToFront();
+					Fenetre_ArchiverLocataire archiver_locataire = new Fenetre_ArchiverLocataire();
+					this.fail.getLayeredPane().add(archiver_locataire);
+					archiver_locataire.setVisible(true);
+					archiver_locataire.moveToFront();
 				} else {
 					JOptionPane.showMessageDialog(this.fail, "Veuillez sélectionner une location !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);

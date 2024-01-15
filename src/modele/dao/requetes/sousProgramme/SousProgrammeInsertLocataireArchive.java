@@ -23,12 +23,16 @@ public class SousProgrammeInsertLocataireArchive implements Requete<Locataire>, 
 	@Override
 	public void parametres(PreparedStatement prSt, Locataire data) throws SQLException {
 		prSt.setString(1, data.getIdLocataire());
+		prSt.setString(2, data.getNom());
+		prSt.setString(3, data.getPrenom());
+		prSt.setString(4, data.getMail());
+		prSt.setDate(6, java.sql.Date.valueOf(data.getDateNaissance()));
 	}
 
 	@Override
 	public String appelSousProgramme() {
 		// TODO Auto-generated method stub
-		return null;
+		return "{ call Archivage_locataire(?,?,?,?,?,?)}";
 	}
 
 	@Override
