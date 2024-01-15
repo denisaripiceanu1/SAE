@@ -29,14 +29,14 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 	private DaoLocataire daoLocataire;
 	private DaoLouer daoLouer;
 	private DaoBien daoBien;
-	private Locataire locataire;
+	private Louer location;
 
 	public GestionAffichageInfoLocataire(Fenetre_AffichageInfoLocataire fail) {
 		this.fail = fail;
 		this.daoLocataire = new DaoLocataire();
 		this.daoLouer = new DaoLouer();
 		this.daoBien = new DaoBien();
-		this.locataire = (Locataire) Sauvegarde.getItem("Locataire");
+		this.location = (Louer) Sauvegarde.getItem("Louer");
 
 	}
 
@@ -47,27 +47,31 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 
 		// Total charges reelles
 		double chargesReellesBien = daoLouer.totalChargesRéelles(location);
-		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 0);
+		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 2);
 
 		// Travaux imputables
 		double travauxImputables = daoLouer.travauxImputables(location);
-		modeleTable.setValueAt(travauxImputables, numeroLigne, 1);
+		modeleTable.setValueAt(travauxImputables, numeroLigne, 6);
 
 		// Total des provisions sur charges
 		double totalProvisions = daoLouer.totalProvisions(location);
-		modeleTable.setValueAt(totalProvisions, numeroLigne, 2);
+		modeleTable.setValueAt(totalProvisions, numeroLigne, 0);
 
 		// Caution
-		modeleTable.setValueAt(location.getCautionTTC(), numeroLigne, 3);
+		modeleTable.setValueAt(location.getCautionTTC(), numeroLigne, 4);
 
 		// Reste
 		double soldeToutCompte = daoLouer.soldeToutCompte(location);
-		modeleTable.setValueAt(soldeToutCompte, numeroLigne, 4);
-
+		modeleTable.setValueAt(soldeToutCompte, numeroLigne, 8);
+		
+		modeleTable.setValueAt("-", numeroLigne, 1);
+		modeleTable.setValueAt("+", numeroLigne, 3);
+		modeleTable.setValueAt("-", numeroLigne, 5);
+		modeleTable.setValueAt("=", numeroLigne, 7);
 	}
 
 	private void chargerSoldeToutCompte() throws SQLException {
-		List<Louer> locations = this.daoLouer.findByLocataire(locataire.getIdLocataire());
+		List<Louer> locations = this.daoLouer.findLocationByBien(location.getBien().getIdBien());
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fail.getTable_soldeToutCompte().getModel();
 		modeleTable.setRowCount(1);
 
