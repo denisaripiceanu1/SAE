@@ -115,6 +115,7 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
+		this.fenetreAccueil.getLayeredPane_MesArchives().setVisible(false);
 		visible.setVisible(true);
 		this.fenetreAccueil.getContentPane().add(visible, BorderLayout.CENTER);
 	}
@@ -138,7 +139,7 @@ public class GestionAccueil implements ActionListener {
 	private DefaultCategoryDataset createDataset() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		try {
-			List<ProvisionAnnee> provisions = daoLouer.findProvisions();
+			List<ProvisionAnnee> provisions = this.daoLouer.findProvisions();
 			for (ProvisionAnnee provision : provisions) {
 				dataset.addValue(provision.getSommeProvision(), "Provisions", provision.getAnnee());
 			}
@@ -161,8 +162,9 @@ public class GestionAccueil implements ActionListener {
 	private DefaultCategoryDataset createDatasetMoyenneLoyer() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		try {
-			List<MoyenneLoyer> moyennes = daoLouer.findMoyenneLoyer(); // Assurez-vous que la méthode est correctement
-																		// nommée
+			List<MoyenneLoyer> moyennes = this.daoLouer.findMoyenneLoyer(); // Assurez-vous que la méthode est
+																			// correctement
+			// nommée
 			for (MoyenneLoyer moyenne : moyennes) {
 				dataset.addValue(moyenne.getLoyer(), "Moyenne Loyer", moyenne.getLocataire());
 			}
@@ -188,12 +190,12 @@ public class GestionAccueil implements ActionListener {
 
 	private void chargerAccueil() throws SQLException {
 		// Créer les datasets
-		DefaultCategoryDataset datasetProvisions = createDataset();
-		DefaultCategoryDataset datasetMoyenneLoyer = createDatasetMoyenneLoyer();
+		DefaultCategoryDataset datasetProvisions = this.createDataset();
+		DefaultCategoryDataset datasetMoyenneLoyer = this.createDatasetMoyenneLoyer();
 
 		// Créer les graphiques
-		JFreeChart chartProvisions = createBarChartPro(datasetProvisions);
-		JFreeChart chartMoyenneLoyer = createBarChartMoy(datasetMoyenneLoyer);
+		JFreeChart chartProvisions = this.createBarChartPro(datasetProvisions);
+		JFreeChart chartMoyenneLoyer = this.createBarChartMoy(datasetMoyenneLoyer);
 
 		// Créer les ChartPanels avec les tailles appropriées
 		ChartPanel chartPanelProvisions = new ChartPanel(chartProvisions);
@@ -208,12 +210,12 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getPanel_1().setLayout(new BorderLayout());
 		this.fenetreAccueil.getPanel_1().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
 
-		JLabel labelMoyenne = new JLabel("La moyenne des loyers est de " + loyerMoyenneMediane().getMoyenne());
+		JLabel labelMoyenne = new JLabel("La moyenne des loyers est de " + this.loyerMoyenneMediane().getMoyenne());
 		Font nouvellePoliceMo = new Font(labelMoyenne.getFont().getName(), Font.PLAIN, 20);
 		labelMoyenne.setFont(nouvellePoliceMo);
 		this.fenetreAccueil.getPanel_2().add(labelMoyenne, BorderLayout.NORTH);
 
-		JLabel labelMediane = new JLabel("La mediane des loyers est de " + loyerMoyenneMediane().getMediane());
+		JLabel labelMediane = new JLabel("La mediane des loyers est de " + this.loyerMoyenneMediane().getMediane());
 		Font nouvellePolice = new Font(labelMediane.getFont().getName(), Font.PLAIN, 20);
 		labelMediane.setFont(nouvellePolice);
 		this.fenetreAccueil.getPanel_4().add(labelMediane, BorderLayout.SOUTH);
@@ -521,20 +523,20 @@ public class GestionAccueil implements ActionListener {
 			modeleTable.setValueAt("N/A", numeroLigne, 1);
 		}
 		// Total charges reelles
-		double chargesReellesBien = daoLouer.totalChargesRéelles(location);
+		double chargesReellesBien = this.daoLouer.totalChargesRéelles(location);
 		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 2);
 		// Charges garages
-		double chargesGarage = daoLouer.totalChargesGarages(location);
+		double chargesGarage = this.daoLouer.totalChargesGarages(location);
 		if (chargesGarage != 0) {
 			modeleTable.setValueAt(chargesGarage, numeroLigne, 3);
 		} else {
 			modeleTable.setValueAt("N/A", numeroLigne, 3);
 		}
 		// Total des provisions sur charges
-		double totalProvisions = daoLouer.totalProvisions(location);
+		double totalProvisions = this.daoLouer.totalProvisions(location);
 		modeleTable.setValueAt(totalProvisions, numeroLigne, 4);
 		// TOTAL
-		double regularisationCharges = daoLouer.regularisationCharges(location);
+		double regularisationCharges = this.daoLouer.regularisationCharges(location);
 		modeleTable.setValueAt(regularisationCharges, numeroLigne, 5);
 
 	}
@@ -672,6 +674,9 @@ public class GestionAccueil implements ActionListener {
 				break;
 			case "btnMesDocuments":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesDocuments());
+				break;
+			case "btnMesArchives":
+				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesArchives());
 				break;
 			///////////////////
 			// LAYERED ACCUEIL

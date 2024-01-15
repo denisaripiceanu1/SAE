@@ -963,12 +963,20 @@ public class Fenetre_Accueil extends JFrame {
 ////// ARCHIVES
 ////////////////////////////////////////////////////////////////
 
-		JLayeredPane layeredPane_MesArchives = new JLayeredPane();
-		this.contentPane.add(layeredPane_MesArchives, BorderLayout.SOUTH);
+		this.layeredPane_MesArchives = new JLayeredPane();
+		this.contentPane.add(this.layeredPane_MesArchives, BorderLayout.CENTER);
+		this.layeredPane_MesArchives.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_MesArchives = new JPanel();
-		panel_MesArchives.setBounds(0, 0, 10, 10);
-		layeredPane_MesArchives.add(panel_MesArchives);
+		panel_MesArchives.setBackground(Color.WHITE);
+		this.layeredPane_MesArchives.add(panel_MesArchives);
+		panel_MesArchives.setLayout(null);
+
+		JLabel lbl_test = new JLabel("TEST");
+		lbl_test.setBounds(0, 0, 755, 511);
+		lbl_test.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_test.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panel_MesArchives.add(lbl_test);
 
 	}
 
