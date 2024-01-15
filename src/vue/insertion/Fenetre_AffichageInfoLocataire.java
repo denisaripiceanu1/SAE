@@ -157,7 +157,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		// Table pour afficher les données d'entreprise
 		this.table_soldeToutCompte = new JTable();
 		this.table_soldeToutCompte.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
-				new String[] { "Provisions sur charges", "Charges réelles payées", "Caution", "Travaux imputables",
+				new String[] {  "Charges réelles payées",  "Travaux imputables" , "Provisions sur charges", "Caution",
 						"Reste" }));
 		this.scrollPane_locataireSoldeToutCompte.setViewportView(this.table_soldeToutCompte);
 
@@ -191,4 +191,9 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 	public GestionAffichageInfoLocataire getGestionClic() {
 		return this.gestionClic;
 	}
+
+	public JTable getTable_soldeToutCompte() {
+		return table_soldeToutCompte;
+	}
+
 }
