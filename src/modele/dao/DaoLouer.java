@@ -265,4 +265,11 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 		st.close();
 	}
 
+	public Louer findByIdArchive(String... id) throws SQLException {
+		List<Louer> louer = find(new RequeteSelectLouerById(), id);
+		if (louer.isEmpty()) {
+			return null;
+		}
+		return louer.get(0);
+	}
 }
