@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import modele.Assurance;
-import modele.Louer;
 
 public class SousProgrammeInsertAssurance implements SousProgramme<Assurance> {
 
@@ -28,17 +27,16 @@ public class SousProgrammeInsertAssurance implements SousProgramme<Assurance> {
 		prSt.setString(4, donnee.getEntreprise().getSiret());
 	}
 
-
 	@Override
 	public void parametresSequence(CallableStatement prSt, Assurance donnee) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void parametresCalcul(CallableStatement st, Assurance donnees) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
