@@ -1,6 +1,7 @@
 package controleur;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -51,8 +52,7 @@ public class GestionLocations implements ListSelectionListener {
 
 				try {
 					// Récupération de l'objet Louer sélectionné dans la table
-					location = this.daoLouer.findById(
-							tableLocations.getValueAt(selectedRow, 1).toString(),
+					location = this.daoLouer.findById(tableLocations.getValueAt(selectedRow, 1).toString(),
 							tableLocations.getValueAt(selectedRow, 0).toString());
 
 					// Récupération du locataire associé à la location
@@ -83,7 +83,8 @@ public class GestionLocations implements ListSelectionListener {
 						e1.printStackTrace();
 					}
 
-					// Mise à jour des champs de la fenêtre principale avec les informations de la location
+					// Mise à jour des champs de la fenêtre principale avec les informations de la
+					// location
 					JTextField loyer = this.fenetreAccueil.getTextField_loyer();
 					loyer.setText(String.valueOf(location.getLoyerTTC()));
 
@@ -116,12 +117,20 @@ public class GestionLocations implements ListSelectionListener {
 						dateEcheanceField.setText("N/A");
 					}
 
-					JTextField paye = this.fenetreAccueil.getTextField_paye();
-					paye.setText(String.valueOf(location.getMontantReelPaye()));
+					Facture facture;
+					try {
+						facture = daoFacture.findDerniereFactureLoyer(bien);
 
-					JTextField restantDu = this.fenetreAccueil.getTextField_restantDu();
-					restantDu.setText(String.valueOf(location.getLoyerTTC() + location.getProvision_chargeMens_TTC()
-							- location.getMontantReelPaye()));
+						JTextField montantPaye = this.fenetreAccueil.getTextField_paye();
+						montantPaye.setText(String.valueOf(facture.getMontantReelPaye()));
+						
+						JTextField restantDu = this.fenetreAccueil.getTextField_restantDu();
+						restantDu.setText(String.valueOf(location.getLoyerTTC() + location.getProvision_chargeMens_TTC()
+								- facture.getMontantReelPaye()));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 
 					JTextField caution = this.fenetreAccueil.getTextField_caution();
 					caution.setText(String.valueOf(location.getCautionTTC()));
