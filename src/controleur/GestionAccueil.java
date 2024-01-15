@@ -109,14 +109,14 @@ public class GestionAccueil implements ActionListener {
 	// ACCUEIL
 	public void rendreVisible(JLayeredPane visible) {
 		this.fenetreAccueil.getLayeredPane_Accueil().setVisible(false);
-		this.fenetreAccueil.getLayeredPane_MesBiens().setVisible(false);
-		this.fenetreAccueil.getLayeredPane_MesTravaux().setVisible(false);
-		this.fenetreAccueil.getLayeredPane_MesChargesLocatives().setVisible(false);
-		this.fenetreAccueil.getLayeredPane_MesLocations().setVisible(false);
-		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
-		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
-		this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
-		this.fenetreAccueil.getLayeredPane_MesArchives().setVisible(false);
+//		this.fenetreAccueil.getLayeredPane_MesBiens().setVisible(false);
+//		this.fenetreAccueil.getLayeredPane_MesTravaux().setVisible(false);
+//		this.fenetreAccueil.getLayeredPane_MesChargesLocatives().setVisible(false);
+//		this.fenetreAccueil.getLayeredPane_MesLocations().setVisible(false);
+//		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
+//		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
+//		this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
+//		this.fenetreAccueil.getLayeredPane_MesArchives().setVisible(false);
 		visible.setVisible(true);
 		this.fenetreAccueil.getContentPane().add(visible, BorderLayout.CENTER);
 	}
@@ -206,20 +206,20 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getPanel_3().add(chartPanelProvisions, BorderLayout.CENTER);
 
 		ChartPanel chartPanelMoyenneLoyer = new ChartPanel(chartMoyenneLoyer);
-		this.fenetreAccueil.getPanel_1().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_1().getWidth(),
-				this.fenetreAccueil.getPanel_1().getHeight()));
-		this.fenetreAccueil.getPanel_1().setLayout(new BorderLayout());
-		this.fenetreAccueil.getPanel_1().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
+		this.fenetreAccueil.getPanel_2().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_2().getWidth(),
+				this.fenetreAccueil.getPanel_2().getHeight()));
+		this.fenetreAccueil.getPanel_2().setLayout(new BorderLayout());
+		this.fenetreAccueil.getPanel_2().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
 
-		JLabel labelMoyenne = new JLabel("La moyenne des loyers est de " + this.loyerMoyenneMediane().getMoyenne());
+		JLabel labelMoyenne = new JLabel("Moyenne des loyers : " + this.loyerMoyenneMediane().getMoyenne() + " €");
 		Font nouvellePoliceMo = new Font(labelMoyenne.getFont().getName(), Font.PLAIN, 20);
 		labelMoyenne.setFont(nouvellePoliceMo);
-		this.fenetreAccueil.getPanel_2().add(labelMoyenne, BorderLayout.NORTH);
+		this.fenetreAccueil.getPanel_6().add(labelMoyenne, BorderLayout.NORTH);
 
-		JLabel labelMediane = new JLabel("La mediane des loyers est de " + this.loyerMoyenneMediane().getMediane());
+		JLabel labelMediane = new JLabel("Mediane des loyers : " + this.loyerMoyenneMediane().getMediane() + " €");
 		Font nouvellePolice = new Font(labelMediane.getFont().getName(), Font.PLAIN, 20);
 		labelMediane.setFont(nouvellePolice);
-		this.fenetreAccueil.getPanel_4().add(labelMediane, BorderLayout.SOUTH);
+		this.fenetreAccueil.getPanel_8().add(labelMediane, BorderLayout.SOUTH);
 
 		// Ajouter les ChartPanels aux panneaux de fenetreAccueil
 		this.fenetreAccueil.revalidate();
