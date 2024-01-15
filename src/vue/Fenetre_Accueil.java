@@ -4,23 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.sql.SQLException;
-import java.util.List;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -406,14 +401,8 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.table_MesLocations = new JTable();
 		this.table_MesLocations.setSelectionBackground(new Color(0, 102, 204));
-		this.table_MesLocations.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"Locataire", "Bien", "Type", "Date d\u00E9but", "Derni\u00E8re r\u00E9gularisation"
-			}
-		));
+		this.table_MesLocations.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
+				new String[] { "Locataire", "Bien", "Type", "Date d\u00E9but", "Derni\u00E8re r\u00E9gularisation" }));
 		table_MesLocations.getColumnModel().getColumn(0).setPreferredWidth(60);
 		table_MesLocations.getColumnModel().getColumn(1).setPreferredWidth(58);
 		table_MesLocations.getColumnModel().getColumn(2).setPreferredWidth(70);
@@ -438,7 +427,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesLocations_Charger = new JButton("Charger");
 		btn_MesLocations_Charger.setForeground(Color.WHITE);
 		btn_MesLocations_Charger.setBackground(new Color(0, 102, 204));
-		btn_MesLocations_Charger.setBounds(118, 449, 94, 31);
+		btn_MesLocations_Charger.setBounds(185, 449, 94, 31);
 		btn_MesLocations_Charger.addActionListener(this.gestionAccueil);
 		btn_MesLocations_Charger.setName("btn_MesLocations_Charger");
 		panel_MesLocations.add(btn_MesLocations_Charger);
@@ -446,7 +435,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesLocations_Modifier = new JButton("Modifier");
 		btn_MesLocations_Modifier.setForeground(Color.WHITE);
 		btn_MesLocations_Modifier.setBackground(new Color(0, 102, 204));
-		btn_MesLocations_Modifier.setBounds(396, 449, 99, 31);
+		btn_MesLocations_Modifier.setBounds(438, 449, 99, 31);
 		btn_MesLocations_Modifier.addActionListener(this.gestionAccueil);
 		btn_MesLocations_Modifier.setName("btn_MesLocations_Modifier");
 		panel_MesLocations.add(btn_MesLocations_Modifier);
@@ -454,7 +443,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesLocations_Inserer = new JButton("Insérer");
 		btn_MesLocations_Inserer.setForeground(Color.WHITE);
 		btn_MesLocations_Inserer.setBackground(new Color(0, 102, 204));
-		btn_MesLocations_Inserer.setBounds(258, 449, 94, 31);
+		btn_MesLocations_Inserer.setBounds(312, 449, 94, 31);
 		btn_MesLocations_Inserer.addActionListener(this.gestionAccueil);
 		btn_MesLocations_Inserer.setName("btn_MesLocations_Inserer");
 		panel_MesLocations.add(btn_MesLocations_Inserer);
@@ -462,7 +451,7 @@ public class Fenetre_Accueil extends JFrame {
 		JButton btn_MesLocations_Supprimer = new JButton("Supprimer");
 		btn_MesLocations_Supprimer.setForeground(Color.WHITE);
 		btn_MesLocations_Supprimer.setBackground(new Color(0, 102, 204));
-		btn_MesLocations_Supprimer.setBounds(539, 449, 94, 31);
+		btn_MesLocations_Supprimer.setBounds(568, 449, 94, 31);
 		btn_MesLocations_Supprimer.addActionListener(this.gestionAccueil);
 		btn_MesLocations_Supprimer.setName("btn_MesLocations_Supprimer");
 		panel_MesLocations.add(btn_MesLocations_Supprimer);
@@ -543,6 +532,14 @@ public class Fenetre_Accueil extends JFrame {
 		this.textField_restantDu.setBackground(Color.WHITE);
 		this.textField_restantDu.setBounds(510, 196, 152, 40);
 		panel_MesLocations.add(this.textField_restantDu);
+
+		JButton btn_MesLocations_Archiver = new JButton("Archiver");
+		btn_MesLocations_Archiver.setName("btn_MesLocations_Charger");
+		btn_MesLocations_Archiver.setForeground(Color.WHITE);
+		btn_MesLocations_Archiver.setBackground(new Color(0, 102, 204));
+		btn_MesLocations_Archiver.addActionListener(this.gestionAccueil);
+		btn_MesLocations_Archiver.setBounds(50, 449, 94, 31);
+		panel_MesLocations.add(btn_MesLocations_Archiver);
 
 		//////////////////////////////////////////////////////////////////////////
 		// LAYERED MES
@@ -1092,5 +1089,4 @@ public class Fenetre_Accueil extends JFrame {
 	public void setPanel_4(JPanel panel_4) {
 		this.panel_4 = panel_4;
 	}
-
 }
