@@ -49,6 +49,8 @@ public class Fenetre_Accueil extends JFrame {
 	private JLayeredPane layeredPane_MesAssurances;
 	private JLayeredPane layeredPane_RegularisationDesCharges;
 	private JLayeredPane layeredPane_MesDocuments;
+	private JLayeredPane layeredPane_MesArchives;
+
 	private JTable tableMesBiens;
 	private JTable tableMesBiens_Logements;
 	private JTable table_MesLocations;
@@ -125,7 +127,7 @@ public class Fenetre_Accueil extends JFrame {
 		JPanel panel_Menu_Boutons = new JPanel();
 		panel_Menu_Boutons.setBackground(Color.LIGHT_GRAY);
 		panel_Menu.add(panel_Menu_Boutons, BorderLayout.CENTER);
-		panel_Menu_Boutons.setLayout(new GridLayout(7, 1, 0, 0));
+		panel_Menu_Boutons.setLayout(new GridLayout(8, 1, 0, 0));
 
 		////// Bande accueil//////////////////////////////////////////////////
 		JPanel bandeAccueil = new JPanel();
@@ -211,6 +213,14 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesDocuments.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnMesDocuments.setName("btnMesDocuments");
 		panel_Menu_Boutons.add(btnMesDocuments);
+
+		JButton btnMesArchives = new JButton("Mes Archives");
+		btnMesArchives.setForeground(new Color(255, 255, 255));
+		btnMesArchives.addActionListener(this.gestionAccueil);
+		btnMesArchives.setBackground(new Color(0, 102, 204));
+		btnMesArchives.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnMesArchives.setName("btnMesArchives");
+		panel_Menu_Boutons.add(btnMesArchives);
 
 //		///////////////////////////////////////////////////////////////////
 //		// LAYERED ACCUEIL
@@ -408,9 +418,9 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesLocations.setSelectionBackground(new Color(0, 102, 204));
 		this.table_MesLocations.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null }, },
 				new String[] { "Locataire", "Bien", "Type", "Date d\u00E9but", "Derni\u00E8re r\u00E9gularisation" }));
-		table_MesLocations.getColumnModel().getColumn(0).setPreferredWidth(60);
-		table_MesLocations.getColumnModel().getColumn(1).setPreferredWidth(58);
-		table_MesLocations.getColumnModel().getColumn(2).setPreferredWidth(70);
+		this.table_MesLocations.getColumnModel().getColumn(0).setPreferredWidth(60);
+		this.table_MesLocations.getColumnModel().getColumn(1).setPreferredWidth(58);
+		this.table_MesLocations.getColumnModel().getColumn(2).setPreferredWidth(70);
 		this.table_MesLocations.setBounds(40, 53, 668, 130);
 		scrollPane_MesLocations.setViewportView(this.table_MesLocations);
 		this.table_MesLocations.getSelectionModel().addListSelectionListener(this.gestionLocations);
@@ -937,6 +947,7 @@ public class Fenetre_Accueil extends JFrame {
 					identifiantsLogements.toArray(new String[0]));
 
 			this.comboBox_MesDocuments.setModel(modelComboBox);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
@@ -947,10 +958,26 @@ public class Fenetre_Accueil extends JFrame {
 //		PDFListe pdfViewer = new PDFListe();
 //		panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
 
+////////////////////////////////////////////////////////////////////////////
+////// LAYERED
+////// ARCHIVES
+////////////////////////////////////////////////////////////////
+
+		JLayeredPane layeredPane_MesArchives = new JLayeredPane();
+		this.contentPane.add(layeredPane_MesArchives, BorderLayout.SOUTH);
+
+		JPanel panel_MesArchives = new JPanel();
+		panel_MesArchives.setBounds(0, 0, 10, 10);
+		layeredPane_MesArchives.add(panel_MesArchives);
+
 	}
 
 	public JLayeredPane getLayeredPane_MesDocuments() {
 		return this.layeredPane_MesDocuments;
+	}
+
+	public JLayeredPane getLayeredPane_MesArchives() {
+		return this.layeredPane_MesArchives;
 	}
 
 	public JLayeredPane getLayeredPane_Accueil() {
