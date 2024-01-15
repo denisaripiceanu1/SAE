@@ -30,6 +30,9 @@ import javax.swing.table.DefaultTableModel;
 import controleur.GestionAccueil;
 import controleur.GestionBienLogement;
 import controleur.GestionLocations;
+import controleur.GestionTableArchiveFacture;
+import controleur.GestionTableArchiveLocataire;
+import controleur.GestionTableArchiveLouer;
 import controleur.GestionTableAssurance;
 import controleur.GestionTableCharges;
 import controleur.GestionTableLogement;
@@ -92,6 +95,9 @@ public class Fenetre_Accueil extends JFrame {
 	private GestionTableLogement gestionTableLogement;
 	private GestionTableCharges gestionTableCharges;
 	private GestionLocations gestionLocations;
+	private GestionTableArchiveFacture gestionTableArchivesFacture;
+	private GestionTableArchiveLouer gestionTableArchivesLouer;
+	private GestionTableArchiveLocataire gestionTableArchivesLocataire;
 
 	private DaoBien daoBien;
 	private DaoLocataire daoLocataire;
@@ -109,6 +115,9 @@ public class Fenetre_Accueil extends JFrame {
 		this.gestionAccueil = new GestionAccueil(this);
 		this.gestionTableAssurance = new GestionTableAssurance(this);
 		this.gestionTableTravaux = new GestionTableTravaux(this);
+		this.gestionTableArchivesFacture = new GestionTableArchiveFacture(this);
+		this.gestionTableArchivesLouer = new GestionTableArchiveLouer(this);
+		this.gestionTableArchivesLocataire = new GestionTableArchiveLocataire(this);
 
 		this.daoBien = new DaoBien();
 		this.daoLocataire = new DaoLocataire();
@@ -1003,6 +1012,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesArchives_Facture = new JTable();
 		this.table_MesArchives_Facture.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
 				new String[] { "Numero", "Désignation", "Montant payé", "Montant", "Date Emission" }));
+		this.table_MesArchives_Facture.getSelectionModel().addListSelectionListener(this.gestionTableArchivesFacture);
 		scrollPane_MesArchives_Facture.setViewportView(this.table_MesArchives_Facture);
 
 		// Bouton Facture
@@ -1012,6 +1022,7 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesArchives_Facture.setBounds(298, 449, 94, 31);
 		btn_MesArchives_Facture.addActionListener(this.gestionAccueil);
 		btn_MesArchives_Facture.setName("btn_MesDocuments_Facture");
+
 		panel_MesArchives.add(btn_MesArchives_Facture);
 
 		// Tableau et scroll pour le bouton Locataire
@@ -1023,6 +1034,8 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesArchives_Locataire = new JTable();
 		this.table_MesArchives_Locataire.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
 				new String[] { "Id Locataire", "Nom", "Prenom", "Telephone", "Mail" }));
+		this.table_MesArchives_Locataire.getSelectionModel()
+				.addListSelectionListener(this.gestionTableArchivesLocataire);
 		scrollPane_MesArchives_Locataire.setViewportView(this.table_MesArchives_Locataire);
 
 		// Bouton Locataire
@@ -1043,6 +1056,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesArchives_Louer = new JTable();
 		this.table_MesArchives_Louer.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
 				new String[] { "Id Locataire", "Id Bien", "Date Debut ", "loyer TTC", "Provision charges" }));
+		this.table_MesArchives_Louer.getSelectionModel().addListSelectionListener(this.gestionTableArchivesLouer);
 		scrollPane_MesArchives_Louer.setViewportView(this.table_MesArchives_Louer);
 
 		// Bouton Louer
@@ -1220,4 +1234,29 @@ public class Fenetre_Accueil extends JFrame {
 	public void setPanel_4(JPanel panel_4) {
 		this.panel_4 = panel_4;
 	}
+
+	public JTable getTable_MesArchives_Facture() {
+		return table_MesArchives_Facture;
+	}
+
+	public void setTable_MesArchives_Facture(JTable table_MesArchives_Facture) {
+		this.table_MesArchives_Facture = table_MesArchives_Facture;
+	}
+
+	public JTable getTable_MesArchives_Louer() {
+		return table_MesArchives_Louer;
+	}
+
+	public void setTable_MesArchives_Louer(JTable table_MesArchives_Louer) {
+		this.table_MesArchives_Louer = table_MesArchives_Louer;
+	}
+
+	public JTable getTable_MesArchives_Locataire() {
+		return table_MesArchives_Locataire;
+	}
+
+	public void setTable_MesArchives_Locataire(JTable table_MesArchives_Locataire) {
+		this.table_MesArchives_Locataire = table_MesArchives_Locataire;
+	}
+
 }
