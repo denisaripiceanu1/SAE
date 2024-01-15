@@ -30,13 +30,13 @@ public class SousProgrammeInsertICC implements SousProgramme<ICC> {
 
 
 	@Override
-	public void parametres(PreparedStatement prSt, ICC donnee, int Sequence) throws SQLException {
+	public void parametresSequence(CallableStatement prSt, ICC donnee) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void parametresCalcul(CallableStatement st, Louer donnees) {
+	public void parametresCalcul(CallableStatement st, ICC donnees) {
 		// TODO Auto-generated method stub
 		
 	}

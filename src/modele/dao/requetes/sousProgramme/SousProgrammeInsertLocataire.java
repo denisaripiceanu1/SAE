@@ -34,14 +34,15 @@ public class SousProgrammeInsertLocataire implements SousProgramme<Locataire> {
 		prSt.setString(5, donnee.getMail());
 		prSt.setDate(6, Date.valueOf(donnee.getDateNaissance()));
 	}
-	public void parametres(PreparedStatement prSt, Locataire donnee, int Sequence) throws SQLException {
 
+	@Override
+	public void parametresCalcul(CallableStatement st, Locataire donnees) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void parametresCalcul(CallableStatement st, Louer donnees) {
+	public void parametresSequence(CallableStatement prSt, Locataire donnee) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}

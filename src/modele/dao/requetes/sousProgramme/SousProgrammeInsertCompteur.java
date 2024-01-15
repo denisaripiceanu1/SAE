@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import modele.Bien;
 import modele.Compteur;
 import modele.Louer;
 
@@ -47,13 +48,13 @@ public class SousProgrammeInsertCompteur implements SousProgramme<Compteur>{
 	}
 
 	@Override
-	public void parametres(PreparedStatement prSt, Compteur donnee, int Sequence) throws SQLException {
+	public void parametresSequence(CallableStatement prSt, Compteur donnee) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void parametresCalcul(CallableStatement st, Louer donnees) {
+	public void parametresCalcul(CallableStatement st, Compteur donnees) {
 		// TODO Auto-generated method stub
 		
 	}
