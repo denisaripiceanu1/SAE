@@ -2,6 +2,7 @@ package controleur;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -207,10 +208,14 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getPanel_1().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
 
 		JLabel labelMoyenne = new JLabel("La moyenne des loyers est de " + loyerMoyenneMediane().getMoyenne());
+		Font nouvellePoliceMo = new Font(labelMoyenne.getFont().getName(), Font.PLAIN, 20);
+		labelMoyenne.setFont(nouvellePoliceMo);
 		this.fenetreAccueil.getPanel_2().add(labelMoyenne, BorderLayout.NORTH);
 
 		JLabel labelMediane = new JLabel("La mediane des loyers est de " + loyerMoyenneMediane().getMediane());
-		this.fenetreAccueil.getPanel_2().add(labelMediane, BorderLayout.SOUTH);
+		Font nouvellePolice = new Font(labelMediane.getFont().getName(), Font.PLAIN, 20);
+		labelMediane.setFont(nouvellePolice);
+		this.fenetreAccueil.getPanel_4().add(labelMediane, BorderLayout.SOUTH);
 
 		// Ajouter les ChartPanels aux panneaux de fenetreAccueil
 		this.fenetreAccueil.revalidate();
