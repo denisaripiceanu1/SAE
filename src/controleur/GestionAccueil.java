@@ -526,7 +526,7 @@ public class GestionAccueil implements ActionListener {
 		double chargesGarage = daoLouer.totalChargesGarages(location);
 		if (chargesGarage != 0) {
 			modeleTable.setValueAt(chargesGarage, numeroLigne, 3);
-		}else {
+		} else {
 			modeleTable.setValueAt("N/A", numeroLigne, 3);
 		}
 		// Total des provisions sur charges
@@ -997,10 +997,11 @@ public class GestionAccueil implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 				}
 				break;
+			case "btn_mesLocation_Archiver":
 
-			/////////////////////
-			// LAYERED MES TRAVAUX
-			/////////////////////
+				/////////////////////
+				// LAYERED MES TRAVAUX
+				/////////////////////
 			case "btn_Travaux_Modifier":
 				if (Sauvegarde.onSave("Facture")) {
 					Fenetre_ModificationTravauxImmeuble modif_travaux = new Fenetre_ModificationTravauxImmeuble();
