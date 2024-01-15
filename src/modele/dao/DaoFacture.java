@@ -14,6 +14,7 @@ import modele.Facture;
 import modele.Immeuble;
 import modele.dao.requetes.delete.RequeteDeleteTravaux;
 import modele.dao.requetes.select.RequeteSelectFacture;
+import modele.dao.requetes.select.RequeteSelectFactureArchive;
 import modele.dao.requetes.select.RequeteSelectFactureByBien;
 import modele.dao.requetes.select.RequeteSelectFactureByBien2;
 import modele.dao.requetes.select.RequeteSelectFactureById;
@@ -181,5 +182,9 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		sp.parametres(st, donnees);
 		st.execute();
 		st.close();
+	}
+
+	public List<Facture> findAllArchive() throws SQLException {
+		return this.find(new RequeteSelectFactureArchive());
 	}
 }

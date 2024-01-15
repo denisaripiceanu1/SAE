@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modele.Locataire;
+import modele.dao.requetes.delete.RequeteDeleteLocataire;
 import modele.dao.requetes.select.RequeteSelectLocataire;
 import modele.dao.requetes.select.RequeteSelectLocataireById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocataire;
+import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocataireArchive;
 import modele.dao.requetes.update.RequeteUpdateLocataire;
 
 public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire> {
@@ -33,8 +35,8 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 	}
 
 	@Override
-	public void delete(Locataire donnees) {
-
+	public void delete(Locataire donnees) throws SQLException {
+		this.miseAJour(new RequeteDeleteLocataire(), donnees);
 	}
 
 	@Override
@@ -83,6 +85,14 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 			st.close();
 		}
 		return identifiants;
+	}
+
+	public void createArchive(Locataire donnees) throws SQLException {
+		SousProgramme<Locataire> sp = new SousProgrammeInsertLocataireArchive();
+		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+		sp.parametres(st, donnees);
+		st.execute();
+		st.close();
 	}
 
 }

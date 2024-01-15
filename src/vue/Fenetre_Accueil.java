@@ -265,9 +265,9 @@ public class Fenetre_Accueil extends JFrame {
 		lblNewLabel.setBounds(156, 32, 63, 35);
 		panel.add(lblNewLabel);
 
-		JSeparator separator = new JSeparator();
-		separator.setBounds(94, 70, 193, 11);
-		panel.add(separator);
+		JSeparator panel_separator = new JSeparator();
+		panel_separator.setBounds(94, 70, 193, 11);
+		panel.add(panel_separator);
 
 		this.panel_6 = new JPanel();
 		this.panel_1.add(this.panel_6);
@@ -480,9 +480,9 @@ public class Fenetre_Accueil extends JFrame {
 
 		// Séparateurs
 		JSeparator separator_location = new JSeparator();
-		separator.setForeground(new Color(0, 102, 204));
-		separator.setBounds(258, 63, 190, 2);
-		panel_MesLocations.add(separator);
+		separator_location.setForeground(new Color(0, 102, 204));
+		separator_location.setBounds(258, 63, 190, 2);
+		panel_MesLocations.add(separator_location);
 
 		// Boutons généraux
 		JButton btn_MesLocations_Charger = new JButton("Charger");
@@ -1026,21 +1026,6 @@ public class Fenetre_Accueil extends JFrame {
 		this.layeredPane_MesArchives.add(panel_MesArchives);
 		panel_MesArchives.setLayout(null);
 
-		JLabel lbl_test = new JLabel("TEST");
-		lbl_test.setBounds(0, 0, 755, 511);
-		lbl_test.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_test.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel_MesArchives.add(lbl_test);
-
-		this.layeredPane_MesArchives = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_MesArchives, BorderLayout.CENTER);
-		this.layeredPane_MesArchives.setLayout(new BorderLayout(0, 0));
-
-		this.panel_MesArchives = new JPanel();
-		panel_MesArchives.setBackground(Color.WHITE);
-		this.layeredPane_MesArchives.add(panel_MesArchives);
-		panel_MesArchives.setLayout(null);
-
 		JLabel lbl_MesArchives = new JLabel("Mes Archives");
 		lbl_MesArchives.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_MesArchives.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -1061,7 +1046,6 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesArchives_Facture = new JTable();
 		this.table_MesArchives_Facture.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
 				new String[] { "Numero", "Désignation", "Montant payé", "Montant", "Date Emission" }));
-		this.table_MesArchives_Facture.getSelectionModel().addListSelectionListener(this.gestionTableArchivesFacture);
 		scrollPane_MesArchives_Facture.setViewportView(this.table_MesArchives_Facture);
 
 		// Bouton Facture
@@ -1070,7 +1054,7 @@ public class Fenetre_Accueil extends JFrame {
 		btn_MesArchives_Facture.setBackground(new Color(0, 102, 204));
 		btn_MesArchives_Facture.setBounds(298, 449, 94, 31);
 		btn_MesArchives_Facture.addActionListener(this.gestionAccueil);
-		btn_MesArchives_Facture.setName("btn_MesDocuments_Facture");
+		btn_MesArchives_Facture.setName("btn_MesArchives_Facture");
 
 		panel_MesArchives.add(btn_MesArchives_Facture);
 
@@ -1083,8 +1067,6 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesArchives_Locataire = new JTable();
 		this.table_MesArchives_Locataire.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
 				new String[] { "Id Locataire", "Nom", "Prenom", "Telephone", "Mail" }));
-		this.table_MesArchives_Locataire.getSelectionModel()
-				.addListSelectionListener(this.gestionTableArchivesLocataire);
 		scrollPane_MesArchives_Locataire.setViewportView(this.table_MesArchives_Locataire);
 
 		// Bouton Locataire
@@ -1105,7 +1087,6 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesArchives_Louer = new JTable();
 		this.table_MesArchives_Louer.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
 				new String[] { "Id Locataire", "Id Bien", "Date Debut ", "loyer TTC", "Provision charges" }));
-		this.table_MesArchives_Louer.getSelectionModel().addListSelectionListener(this.gestionTableArchivesLouer);
 		scrollPane_MesArchives_Louer.setViewportView(this.table_MesArchives_Louer);
 
 		// Bouton Louer

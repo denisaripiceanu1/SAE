@@ -33,7 +33,7 @@ public class GestionArchiverLocation implements ActionListener {
 			Louer louer_supp = (Louer) Sauvegarde.getItem("Louer");
 			try {
 				Louer louer = this.daoLouer.findById(louer_supp.getBien().getIdBien(),
-						louer_supp.getLocataire().getIdLocataire(), louer_supp.getDateDebut());
+						louer_supp.getLocataire().getIdLocataire());
 				this.daoLouer.deleteVrai(louer);
 				this.daoLouer.createArchiver(louer);
 			} catch (SQLException e1) {

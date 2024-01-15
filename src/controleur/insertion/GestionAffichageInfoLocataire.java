@@ -61,7 +61,7 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		// Reste
 		double soldeToutCompte = daoLouer.soldeToutCompte(location);
 		modeleTable.setValueAt(soldeToutCompte, numeroLigne, 8);
-		
+
 		modeleTable.setValueAt("-", numeroLigne, 1);
 		modeleTable.setValueAt("+", numeroLigne, 3);
 		modeleTable.setValueAt("-", numeroLigne, 5);
@@ -89,7 +89,8 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		switch (btn.getText()) {
 		case "Régularisation des charges":
 			this.fail.dispose();
-			fenetre_Principale.getGestionAccueil().rendreVisible(fenetre_Principale.getLayeredPane_RegularisationDesCharges());
+			fenetre_Principale.getGestionAccueil()
+					.rendreVisible(fenetre_Principale.getLayeredPane_RegularisationDesCharges());
 			Locataire locataire_save = (Locataire) Sauvegarde.getItem("Locataire");
 			String idLocataire = locataire_save.getIdLocataire();
 			fenetre_Principale.getGestionAccueil().filtreRegularisationChargesDepuisInfoLocataire(idLocataire);
@@ -97,7 +98,6 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 
 		case "Solde tout compte":
 			try {
-				this.chargerSoldeToutCompte();
 				if (Sauvegarde.onSave("Louer") == true) {
 					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
 					Fenetre_ArchiverLocation archiver_location = new Fenetre_ArchiverLocation();
@@ -108,6 +108,7 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 					JOptionPane.showMessageDialog(this.fail, "Veuillez sélectionner une location !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
+				this.chargerSoldeToutCompte();
 			} catch (SQLException e1) {
 				// Afficher un message d'erreur à l'utilisateur
 				e1.printStackTrace();
