@@ -182,7 +182,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 		return resultat;
 	}
 
-	// Calcule le total des travaux imputables
+	// Calcule le solde tout compte
 	public double soldeToutCompte(Louer donnees) throws SQLException {
 		SousProgramme<Louer> sp = new SousProgrammeSoldeToutCompte();
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
