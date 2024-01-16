@@ -39,6 +39,7 @@ import controleur.GestionTableLogement;
 import controleur.GestionTableTravaux;
 import modele.dao.DaoBien;
 import modele.dao.DaoLocataire;
+import java.awt.Dimension;
 
 public class Fenetre_Accueil extends JFrame {
 
@@ -50,7 +51,6 @@ public class Fenetre_Accueil extends JFrame {
 	private JLayeredPane layeredPane_MesTravaux;
 	private JLayeredPane layeredPane_MesFactures;
 	private JLayeredPane layeredPane_MesAssurances;
-	private JLayeredPane layeredPane_RegularisationDesCharges;
 	private JLayeredPane layeredPane_MesDocuments;
 	private JLayeredPane layeredPane_MesArchives;
 
@@ -73,11 +73,9 @@ public class Fenetre_Accueil extends JFrame {
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JPanel panel_4;
-	private JTable tableRegularisation;
 
 	private JComboBox<String> comboBox_MesAssurances;
 	private JComboBox<String> comboBox_MesFactures;
-	private JComboBox<String> comboBox_Regularisation;
 	private JComboBox<String> comboBox_MesDocuments;
 
 	private GestionAccueil gestionAccueil;
@@ -144,7 +142,7 @@ public class Fenetre_Accueil extends JFrame {
 		JPanel panel_Menu_Boutons = new JPanel();
 		panel_Menu_Boutons.setBackground(Color.LIGHT_GRAY);
 		panel_Menu.add(panel_Menu_Boutons, BorderLayout.CENTER);
-		panel_Menu_Boutons.setLayout(new GridLayout(8, 1, 0, 0));
+		panel_Menu_Boutons.setLayout(new GridLayout(7, 1, 0, 0));
 
 		////// Bande accueil//////////////////////////////////////////////////
 		JPanel bandeAccueil = new JPanel();
@@ -215,14 +213,6 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesAssurances.setName("btnMesAssurances");
 		panel_Menu_Boutons.add(btnMesAssurances);
 
-		JButton btnRegularisationDesCharges = new JButton("Régularisation des Charges");
-		btnRegularisationDesCharges.setForeground(new Color(255, 255, 255));
-		btnRegularisationDesCharges.addActionListener(this.gestionAccueil);
-		btnRegularisationDesCharges.setBackground(new Color(0, 102, 204));
-		btnRegularisationDesCharges.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnRegularisationDesCharges.setName("btnRegularisationDesCharges");
-		panel_Menu_Boutons.add(btnRegularisationDesCharges);
-
 		JButton btnMesDocuments = new JButton("Mes Documents");
 		btnMesDocuments.setForeground(new Color(255, 255, 255));
 		btnMesDocuments.addActionListener(this.gestionAccueil);
@@ -231,7 +221,9 @@ public class Fenetre_Accueil extends JFrame {
 		btnMesDocuments.setName("btnMesDocuments");
 		panel_Menu_Boutons.add(btnMesDocuments);
 
-		JButton btnMesArchives = new JButton("Mes Archives");
+		JButton btnMesArchives = new JButton("          Mes Archives          ");
+		btnMesArchives.setMaximumSize(new Dimension(151, 21));
+		btnMesArchives.setMinimumSize(new Dimension(127, 21));
 		btnMesArchives.setForeground(new Color(255, 255, 255));
 		btnMesArchives.addActionListener(this.gestionAccueil);
 		btnMesArchives.setBackground(new Color(0, 102, 204));
@@ -901,71 +893,6 @@ public class Fenetre_Accueil extends JFrame {
 					"Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 
-//		///////////////////////////////////////////////////////////////////
-//		// LAYERED REGULARISATION DES CHARGES
-//		// ////////////////////////////////////////////////////////////////
-
-		this.layeredPane_RegularisationDesCharges = new JLayeredPane();
-		this.contentPane.add(this.layeredPane_RegularisationDesCharges, BorderLayout.CENTER);
-		this.layeredPane_RegularisationDesCharges.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_RegularisationDesCharges = new JPanel();
-		panel_RegularisationDesCharges.setBackground(Color.WHITE);
-		this.layeredPane_RegularisationDesCharges.add(panel_RegularisationDesCharges);
-		panel_RegularisationDesCharges.setLayout(null);
-
-		// Tableaux et scrollPane
-		JScrollPane scrollPane_Regularisation = new JScrollPane();
-		scrollPane_Regularisation.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_Regularisation.setBounds(28, 121, 697, 303);
-		panel_RegularisationDesCharges.add(scrollPane_Regularisation);
-
-		this.tableRegularisation = new JTable();
-		this.tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
-		this.tableRegularisation
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null }, },
-						new String[] { "Bien", "P\u00E9riode du", "au", "Charges r\u00E9elles",
-								"Ordures m\u00E9nag\u00E8res", "TOTAL Charges", "Total des provisions", "RESTE" }));
-		this.tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(42);
-		this.tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(62);
-		this.tableRegularisation.getColumnModel().getColumn(2).setPreferredWidth(55);
-		this.tableRegularisation.getColumnModel().getColumn(5).setPreferredWidth(87);
-		this.tableRegularisation.getColumnModel().getColumn(6).setPreferredWidth(91);
-		this.tableRegularisation.getColumnModel().getColumn(7).setPreferredWidth(55);
-		this.tableRegularisation.setBounds(40, 53, 668, 130);
-		scrollPane_Regularisation.setViewportView(this.tableRegularisation);
-
-		// Labels
-		JLabel lbl_RegularisationDesCharges = new JLabel("Régularisation des Charges");
-		lbl_RegularisationDesCharges.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_RegularisationDesCharges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_RegularisationDesCharges.setBounds(244, 22, 216, 43);
-		panel_RegularisationDesCharges.add(lbl_RegularisationDesCharges);
-
-		// Séparateurs
-		JSeparator separator_RegularisationDesChargess = new JSeparator();
-		separator_RegularisationDesChargess.setForeground(new Color(0, 102, 204));
-		separator_RegularisationDesChargess.setBounds(258, 63, 190, 2);
-		panel_RegularisationDesCharges.add(separator_RegularisationDesChargess);
-
-		// JComboBox
-		this.comboBox_Regularisation = new JComboBox<String>();
-		this.comboBox_Regularisation.setModel(new DefaultComboBoxModel<String>(new String[] { "Locataire" }));
-		this.comboBox_Regularisation.setBounds(55, 81, 130, 29);
-		panel_RegularisationDesCharges.add(this.comboBox_Regularisation);
-		this.comboBox_Regularisation.addActionListener(this.gestionAccueil);
-
-		// Remplir le JComboBox avec les identifiants des locataires
-		try {
-			List<String> identifiantsLocataires = this.daoLocataire.getAllIdLocataire();
-			identifiantsLocataires.add(0, "ID locataire");
-			// Ajouter les identifiants au modèle du JComboBox
-			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-					identifiantsLocataires.toArray(new String[0]));
-			this.comboBox_Regularisation.setModel(modelComboBox);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 
 ////		////////////////////////////////////////////////////////////////////////////
 ////		// LAYERED
@@ -1084,7 +1011,7 @@ public class Fenetre_Accueil extends JFrame {
 		// Tableau et scroll pour le bouton Facture
 		JScrollPane scrollPane_MesArchives_Facture = new JScrollPane();
 		scrollPane_MesArchives_Facture.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesArchives_Facture.setBounds(117, 75, 463, 112); // Nouvelle dimension
+		scrollPane_MesArchives_Facture.setBounds(117, 81, 463, 99); // Nouvelle dimension
 		panel_MesArchives.add(scrollPane_MesArchives_Facture);
 
 		this.table_MesArchives_Facture = new JTable();
@@ -1105,7 +1032,7 @@ public class Fenetre_Accueil extends JFrame {
 		// Tableau et scroll pour le bouton Locataire
 		JScrollPane scrollPane_MesArchives_Locataire = new JScrollPane();
 		scrollPane_MesArchives_Locataire.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesArchives_Locataire.setBounds(117, 204, 463, 106); // Nouvelle dimension
+		scrollPane_MesArchives_Locataire.setBounds(117, 211, 463, 99); // Nouvelle dimension
 		panel_MesArchives.add(scrollPane_MesArchives_Locataire);
 
 		this.table_MesArchives_Locataire = new JTable();
@@ -1125,7 +1052,7 @@ public class Fenetre_Accueil extends JFrame {
 		// Tableau et scroll pour le bouton Louer
 		JScrollPane scrollPane_MesArchives_Louer = new JScrollPane();
 		scrollPane_MesArchives_Louer.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_MesArchives_Louer.setBounds(112, 320, 468, 112); // Nouvelle dimension
+		scrollPane_MesArchives_Louer.setBounds(117, 338, 463, 94); // Nouvelle dimension
 		panel_MesArchives.add(scrollPane_MesArchives_Louer);
 
 		this.table_MesArchives_Louer = new JTable();
@@ -1144,17 +1071,17 @@ public class Fenetre_Accueil extends JFrame {
 
 		JLabel lbl_Archive_Locataire = new JLabel("Locataire");
 		lbl_Archive_Locataire.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_Archive_Locataire.setBounds(590, 251, 66, 13);
+		lbl_Archive_Locataire.setBounds(117, 190, 66, 13);
 		panel_MesArchives.add(lbl_Archive_Locataire);
 
 		JLabel lbl_Archive_Louer = new JLabel("Louer");
 		lbl_Archive_Louer.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_Archive_Louer.setBounds(590, 372, 66, 13);
+		lbl_Archive_Louer.setBounds(117, 320, 66, 13);
 		panel_MesArchives.add(lbl_Archive_Louer);
 
 		JLabel lbl_Archive_Facture = new JLabel("Facture");
 		lbl_Archive_Facture.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_Archive_Facture.setBounds(590, 128, 66, 13);
+		lbl_Archive_Facture.setBounds(117, 63, 66, 13);
 		panel_MesArchives.add(lbl_Archive_Facture);
 
 	}
@@ -1191,9 +1118,6 @@ public class Fenetre_Accueil extends JFrame {
 		return this.layeredPane_MesAssurances;
 	}
 
-	public JLayeredPane getLayeredPane_RegularisationDesCharges() {
-		return this.layeredPane_RegularisationDesCharges;
-	}
 
 	@Override
 	public JPanel getContentPane() {
@@ -1257,13 +1181,6 @@ public class Fenetre_Accueil extends JFrame {
 		return this.textField_restantDu;
 	}
 
-	public JTable getTableRegularisation() {
-		return this.tableRegularisation;
-	}
-
-	public JComboBox<String> getComboBox_Regularisation() {
-		return this.comboBox_Regularisation;
-	}
 
 	public JComboBox<String> getComboBox_MesAssurances() {
 		return this.comboBox_MesAssurances;
