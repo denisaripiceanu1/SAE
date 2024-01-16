@@ -678,6 +678,8 @@ public class GestionAccueil implements ActionListener {
 		JTable tableLouer = this.fenetreAccueil.getTable_MesArchives_Louer();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableLouer.getModel();
 
+		System.out.println(louer.getLocataire().getIdLocataire());
+		System.out.println(louer.getBien().getIdBien());
 		modeleTable.setValueAt(louer.getLocataire().getIdLocataire(), numeroLigne, 0);
 		modeleTable.setValueAt(louer.getBien().getIdBien(), numeroLigne, 1);
 		modeleTable.setValueAt(louer.getDateDebut(), numeroLigne, 2);
