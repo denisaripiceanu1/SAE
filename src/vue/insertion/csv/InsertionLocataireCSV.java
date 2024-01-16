@@ -22,7 +22,7 @@ public class InsertionLocataireCSV extends JInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				chemin.choisirChemin();
-				lire.lireCSV(chemin.getSelectedFilePath());
+				lire.lireCSV(chemin.getSelectedFilePath()); // ma bite je le fais
 			}
 		});
 		btnNewButton.setBounds(235, 176, 252, 97);

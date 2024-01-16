@@ -22,7 +22,7 @@ public class InsertionFactureCSV extends JInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				chemin.choisirChemin();
-				lire.lireCSV(chemin.getSelectedFilePath());
+				lire.lireCSV(chemin.getSelectedFilePath()); // ma bite je le fais lui aussi
 			}
 		});
 		btnNewButton.setBounds(235, 176, 252, 97);
