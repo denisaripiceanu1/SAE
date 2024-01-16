@@ -150,6 +150,7 @@ public class GestionAccueil implements ActionListener {
 			e.printStackTrace();
 		}
 		return dataset;
+		
 	}
 
 	private JFreeChart createBarChartPro(DefaultCategoryDataset dataset) {
@@ -160,6 +161,7 @@ public class GestionAccueil implements ActionListener {
 				true, // Générer des tooltips
 				false // Générer des URLs
 		);
+		
 	}
 
 	private DefaultCategoryDataset createDatasetMoyenneLoyer() {
