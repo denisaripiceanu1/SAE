@@ -49,7 +49,8 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		// ordures menageres
 		double orduresMenageres = this.daoLouer.totalOrduresMenageres(location);
 
-		modeleTable.setValueAt(chargesReellesBien + orduresMenageres, numeroLigne, 2);
+		double totalCharges = chargesReellesBien + orduresMenageres;
+		modeleTable.setValueAt(totalCharges, numeroLigne, 2);
 
 		// Travaux imputables
 		double travauxImputables = daoLouer.travauxImputables(location);
