@@ -2,6 +2,8 @@ package vue.insertion.csv;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -22,7 +24,15 @@ public class InsertionFactureCSV extends JInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				chemin.choisirChemin();
-				lire.lireCSV(chemin.getSelectedFilePath());
+				try {
+					lire.lireCSV(chemin.getSelectedFilePath());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton.setBounds(235, 176, 252, 97);
