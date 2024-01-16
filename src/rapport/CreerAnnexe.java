@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import modele.Facture;
 import modele.Immeuble;
 import modele.dao.DaoImmeuble;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
@@ -21,6 +20,11 @@ import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 public class CreerAnnexe {
+    
+    private static void ajouterResultatFoncier(XWPFDocument document, int resultatFoncier) {
+        CreerAnnexe.ajouterUnSousTitre(document, "Résultat Foncier");
+        CreerAnnexe.ajouterLigne(document, "RÉSULTAT", resultatFoncier);
+    }
 
     public static void main(String[] args) {
 
@@ -31,7 +35,7 @@ public class CreerAnnexe {
             XWPFDocument document = new XWPFDocument(modele);
 
             // Entête de la déclaration
-            ajouterUnTitre(document, "Annexe 2044 - Déclaration des Revenus Fonciers de " + LocalDate.now().getYear());
+            CreerAnnexe.ajouterUnTitre(document, "Annexe 2044 - Déclaration des Revenus Fonciers de " + LocalDate.now().getYear());
 
             // Informations
             List<Proprietes> proprietes = new ArrayList<>();
@@ -49,9 +53,9 @@ public class CreerAnnexe {
                     int nombreLocaux = daoImmeuble.getNombreLogementsDansImmeuble(immeuble.getImmeuble());
                     
                     // Calcule du total des loyers dans l'immeuble
-                    int sommeLoyers = daoImmeuble.getSommeLoyersDansImmeublePourPeriode(immeuble.getImmeuble(), "2023-01-01", "2023-12-31");
+                    int sommeLoyers = daoImmeuble.getSommeLoyersDansImmeublePourPeriode(immeuble.getImmeuble(), (LocalDate.now().getYear()-1)+"-05-01", LocalDate.now().getYear()+"-05-31");
                     
-                    List<FraisCharges> fraisEtChargesImmeuble = daoImmeuble.getFraisEtChargesParImmeuble(immeuble.getImmeuble(), "2023-01-01", "2023-12-31");
+                    List<FraisCharges> fraisEtChargesImmeuble = daoImmeuble.getFraisEtChargesParImmeuble(immeuble.getImmeuble(), (LocalDate.now().getYear()-1)+"-05-01", LocalDate.now().getYear()+"-05-31");
                     
                     Proprietes propriete = new Proprietes(
                             immeuble.getImmeuble(),
@@ -64,12 +68,13 @@ public class CreerAnnexe {
                     proprietes.add(propriete);
                     recettes.add(new InfosRecettes(immeuble.getImmeuble(), "Loyers bruts encaissés", sommeLoyers));
                     fraisEtCharges.addAll(fraisEtChargesImmeuble);
-
+                    
                 }
+                
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            
             ajouterUnSousTitre(document, "Caractéristiques des propriétés");
             ajouterInfosProprietes(document, proprietes);
 
@@ -80,10 +85,9 @@ public class CreerAnnexe {
             
             ajouterUnSousTitre(document, "Frais et charges");
             ajouterTableFraisCharge(document, fraisEtCharges);
-
-            // Résultat foncier
-            ajouterUnSousTitre(document, "Résultat Foncier");
-            ajouterLigne(document, "420 RÉSULTAT", 487);
+            
+            int resultatFoncier = calculerResultatFoncier(recettes, fraisEtCharges);
+            ajouterResultatFoncier(document, resultatFoncier);
 
             // Fin de la déclaration
             ajouterFooter(document, "Fin de la Déclaration");
@@ -195,5 +199,12 @@ public class CreerAnnexe {
         }
 
         addTable(document, headers, data);
+    }
+    
+    private static int calculerResultatFoncier(List<InfosRecettes> recettes, List<FraisCharges> fraisEtCharges) {
+        // Logique de calcul du résultat foncier
+        int totalRecettes = recettes.stream().mapToInt(InfosRecettes::getAmount).sum();
+        int totalCharges = fraisEtCharges.stream().mapToInt(FraisCharges::getAmount).sum();
+        return totalRecettes - totalCharges;
     }
 }
