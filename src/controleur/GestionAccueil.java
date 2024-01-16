@@ -117,7 +117,6 @@ public class GestionAccueil implements ActionListener {
 		this.fenetreAccueil.getLayeredPane_MesChargesLocatives().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesLocations().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesAssurances().setVisible(false);
-		this.fenetreAccueil.getLayeredPane_RegularisationDesCharges().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesDocuments().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesArchives().setVisible(false);
 		visible.setVisible(true);
@@ -527,90 +526,7 @@ public class GestionAccueil implements ActionListener {
 			}
 		}
 	}
-
-	///////////////////////////////////////////////////////////////////
-	// LAYERED REGULARISATIONS CHARGES
-	// ////////////////////////////////////////////////////////////////
-	// ---------------------------------------------------------------//
-	public void ecrireLigneTableRegularisation(int numeroLigne, Louer location, /* Facture facture, */ Bien bien)
-			throws SQLException {
-		JTable tableRegularisation = this.fenetreAccueil.getTableRegularisation();
-		DefaultTableModel modeleTable = (DefaultTableModel) tableRegularisation.getModel();
-		// Periode du
-		modeleTable.setValueAt(location.getBien().getIdBien(), numeroLigne, 0);
-		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 1);
-		// au
-		if (location.getDateDerniereRegularisation() != null) {
-			modeleTable.setValueAt(location.getDateDerniereRegularisation(), numeroLigne, 2);
-		} else {
-			modeleTable.setValueAt("N/A", numeroLigne, 2);
-		}
-		// Charges reelles
-		double chargesReellesBien = this.daoLouer.totalChargesRéelles(location);
-		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 3);
-		// Ordures menageres
-		double orduresMenageres = this.daoLouer.totalOrduresMenageres(location);
-		modeleTable.setValueAt(orduresMenageres, numeroLigne, 4);
-		// TOTAL charges
-		double totalCharges = chargesReellesBien + orduresMenageres;
-		modeleTable.setValueAt(totalCharges, numeroLigne, 5);
-		// Total des provisions sur charges
-		double totalProvisions = this.daoLouer.totalProvisions(location);
-		modeleTable.setValueAt(totalProvisions, numeroLigne, 6);
-		// TOTAL
-		double regularisationCharges = this.daoLouer.regularisationCharges(location);
-		modeleTable.setValueAt(regularisationCharges, numeroLigne, 7);
-
-	}
-
-	private void updateTableRegularisationsForLocataire(String idLocataire) throws SQLException {
-		List<Louer> locations = this.daoLouer.findByLocataire(idLocataire);
-
-		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableRegularisation().getModel();
-		modeleTable.setRowCount(locations.size());
-
-		for (int i = 0; i < locations.size(); i++) {
-			Louer l = locations.get(i);
-			Bien bien = this.daoBien.findById(l.getBien().getIdBien());
-
-			this.ecrireLigneTableRegularisation(i, l, bien);
-		}
-
-	}
-
-	// Methode pour filtrer les Regularisation par Id Locataire
-	private void filtreRegularisationChargesByLocataire() {
-		JComboBox<String> comboBox_MesRegularisations = this.fenetreAccueil.getComboBox_Regularisation();
-		String idLocataireSelectionne = comboBox_MesRegularisations.getSelectedItem().toString();
-
-		// Si l'ID selectionne est diffÃ©rent de "ID du Locataire", filtrez la table
-		// des regularisations
-		if (!idLocataireSelectionne.equals("Locataire")) {
-			try {
-				this.updateTableRegularisationsForLocataire(idLocataireSelectionne);
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
-	}
-
-	// Methode pour afficher les régularisation après clic sur infoLocataire
-	public void filtreRegularisationChargesDepuisInfoLocataire(String idLocataire) {
-		JComboBox<String> comboBox_MesRegularisations = this.fenetreAccueil.getComboBox_Regularisation();
-		comboBox_MesRegularisations.setSelectedItem(idLocataire);
-		String idLocataireSelectionne = comboBox_MesRegularisations.getSelectedItem().toString();
-
-		// Si l'ID selectionne est diffÃ©rent de "ID du Locataire", filtrez la table
-		// des regularisations
-		if (!idLocataireSelectionne.equals("Locataire")) {
-			try {
-				this.updateTableRegularisationsForLocataire(idLocataireSelectionne);
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-			}
-		}
-	}
-
+	
 	///////////////////////////////////////////////////////////////////
 	// LAYERED MES DOCUMENTS
 	// ////////////////////////////////////////////////////////////////
@@ -797,9 +713,6 @@ public class GestionAccueil implements ActionListener {
 				break;
 			case "btnMesAssurances":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesAssurances());
-				break;
-			case "btnRegularisationDesCharges":
-				this.rendreVisible(this.fenetreAccueil.getLayeredPane_RegularisationDesCharges());
 				break;
 			case "btnMesDocuments":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesDocuments());
@@ -1380,13 +1293,6 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 
-			////////////////////////////////////
-			// LAYERED REGULARISATION DES CHARGES
-			////////////////////////////////////
-
-			// Coder la cas de la selection d'un locataire
-			// parmi la liste présente dans le JComboBox "comboBox_Regularisation"
-
 			///////////////////////
 			// LAYERED MES DOCUMENTS
 			case "btn_MesDocuments_Inserer_Impots":
@@ -1509,7 +1415,6 @@ public class GestionAccueil implements ActionListener {
 
 		this.filtreAssuranceByLogement();
 		this.filtreChargesByLogement();
-		this.filtreRegularisationChargesByLocataire();
 		this.filtreImpotByLogement();
 	}
 }
