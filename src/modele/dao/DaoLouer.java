@@ -32,7 +32,7 @@ import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocation;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocationArchiver;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeRegularisationCharges;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeSoldeToutCompte;
-import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalChargesGarages;
+import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalChargesReelles;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalChargesReellesBien;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalProvisions;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalTravauxImputables;
@@ -154,7 +154,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 
 	// Calcule le total des charges garages pour une location donnée
 	public double totalChargesGarages(Louer donnees) throws SQLException {
-		SousProgramme<Louer> sp = new SousProgrammeTotalChargesGarages();
+		SousProgramme<Louer> sp = new SousProgrammeTotalChargesReelles();
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametresCalcul(st, donnees);
 		st.execute();

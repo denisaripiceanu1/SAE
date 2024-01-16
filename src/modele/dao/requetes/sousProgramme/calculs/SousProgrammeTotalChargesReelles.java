@@ -9,11 +9,11 @@ import java.sql.SQLException;
 import modele.Louer;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 
-public class SousProgrammeTotalChargesGarages implements SousProgramme<Louer> {
+public class SousProgrammeTotalChargesReelles implements SousProgramme<Louer> {
 	
 	@Override
 	public String appelSousProgramme() {
-	    return "{ ? = call totalChargesGarage(?) }";
+	    return "{ ? = call TOTALChargesReelles(?, ?) }";
 	}
 
 
@@ -32,7 +32,8 @@ public class SousProgrammeTotalChargesGarages implements SousProgramme<Louer> {
 	@Override
 	public void parametresCalcul(CallableStatement prSt, Louer donnee) throws SQLException {
 		prSt.registerOutParameter(1, java.sql.Types.DOUBLE);
-		prSt.setString(2, donnee.getLocataire().getIdLocataire());
+		prSt.setString(2, donnee.getBien().getImmeuble().getImmeuble());
+		prSt.setString(3, donnee.getBien().getIdBien());
 	}
 
 

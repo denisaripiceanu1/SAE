@@ -238,63 +238,63 @@ public class Fenetre_Accueil extends JFrame {
 		// LAYERED ACCUEIL
 		// ////////////////////////////////////////////////////////////////
 
-//		this.layeredPane_Accueil = new JLayeredPane();
-//		this.layeredPane_Accueil.setBackground(new Color(255, 255, 255));
-//		this.contentPane.add(this.layeredPane_Accueil, BorderLayout.CENTER);
-//		this.layeredPane_Accueil.setLayout(new BorderLayout(0, 0));
-//
-//		JPanel panel_accueil = new JPanel();
-//		this.layeredPane_Accueil.add(panel_accueil, BorderLayout.CENTER);
-//		panel_accueil.setLayout(new GridLayout(2, 2, 0, 0));
-//
-//		this.panel_1 = new JPanel();
-//		panel_accueil.add(this.panel_1);
-//		this.panel_1.setLayout(new GridLayout(0, 1, 0, 0));
-//
-//		JPanel panel = new JPanel();
-//		this.panel_1.add(panel);
-//		panel.setLayout(null);
-//
-//		JLabel lblNewLabel = new JLabel("Accueil");
-//		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-//		lblNewLabel.setBounds(156, 32, 63, 35);
-//		panel.add(lblNewLabel);
-//
-//		JSeparator panel_separator = new JSeparator();
-//		panel_separator.setBounds(94, 70, 193, 11);
-//		panel.add(panel_separator);
-//
-//		this.panel_6 = new JPanel();
-//		this.panel_1.add(this.panel_6);
-//
-//		this.panel_2 = new JPanel();
-//		panel_accueil.add(this.panel_2);
-//
-//		this.panel_4 = new JPanel();
-//		panel_accueil.add(this.panel_4);
-//
-//		this.panel_3 = new JPanel();
-//		panel_accueil.add(this.panel_3);
-//
-//		this.panel_8 = new JPanel();
-//		this.panel_4.add(this.panel_8);
-//
-//		this.panel_7 = new JPanel();
-//		this.panel_4.add(this.panel_7);
-//
-//		JButton btnCSV = new JButton("Importer un csv");
-//		btnCSV.setForeground(Color.WHITE);
-//		btnCSV.setBackground(new Color(0, 102, 204));
-//		btnCSV.setBounds(118, 45, 143, 39);
-//		btnCSV.addActionListener(this.gestionAccueil);
-//		this.panel_4.setLayout(new GridLayout(2, 1, 0, 0));
-//		this.panel_7.setLayout(null);
-//		btnCSV.setName("importCSV");
-//		this.panel_7.add(btnCSV);
-//
-//		JPanel panel_titre_accueil = new JPanel();
-//		this.layeredPane_Accueil.add(panel_titre_accueil, BorderLayout.NORTH);
-//		panel_titre_accueil.setLayout(new BorderLayout(0, 0));
+		this.layeredPane_Accueil = new JLayeredPane();
+		this.layeredPane_Accueil.setBackground(new Color(255, 255, 255));
+		this.contentPane.add(this.layeredPane_Accueil, BorderLayout.CENTER);
+		this.layeredPane_Accueil.setLayout(new BorderLayout(0, 0));
+
+		JPanel panel_accueil = new JPanel();
+		this.layeredPane_Accueil.add(panel_accueil, BorderLayout.CENTER);
+		panel_accueil.setLayout(new GridLayout(2, 2, 0, 0));
+
+		this.panel_1 = new JPanel();
+		panel_accueil.add(this.panel_1);
+		this.panel_1.setLayout(new GridLayout(0, 1, 0, 0));
+
+		JPanel panel = new JPanel();
+		this.panel_1.add(panel);
+		panel.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("Accueil");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel.setBounds(156, 32, 63, 35);
+		panel.add(lblNewLabel);
+
+		JSeparator panel_separator = new JSeparator();
+		panel_separator.setBounds(94, 70, 193, 11);
+		panel.add(panel_separator);
+
+		this.panel_6 = new JPanel();
+		this.panel_1.add(this.panel_6);
+
+		this.panel_2 = new JPanel();
+		panel_accueil.add(this.panel_2);
+
+		this.panel_4 = new JPanel();
+		panel_accueil.add(this.panel_4);
+
+		this.panel_3 = new JPanel();
+		panel_accueil.add(this.panel_3);
+
+		this.panel_8 = new JPanel();
+		this.panel_4.add(this.panel_8);
+
+		this.panel_7 = new JPanel();
+		this.panel_4.add(this.panel_7);
+
+		JButton btnCSV = new JButton("Importer un csv");
+		btnCSV.setForeground(Color.WHITE);
+		btnCSV.setBackground(new Color(0, 102, 204));
+		btnCSV.setBounds(118, 45, 143, 39);
+		btnCSV.addActionListener(this.gestionAccueil);
+		this.panel_4.setLayout(new GridLayout(2, 1, 0, 0));
+		this.panel_7.setLayout(null);
+		btnCSV.setName("importCSV");
+		this.panel_7.add(btnCSV);
+
+		JPanel panel_titre_accueil = new JPanel();
+		this.layeredPane_Accueil.add(panel_titre_accueil, BorderLayout.NORTH);
+		panel_titre_accueil.setLayout(new BorderLayout(0, 0));
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES BIENS
