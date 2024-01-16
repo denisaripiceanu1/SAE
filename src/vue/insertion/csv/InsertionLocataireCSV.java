@@ -2,6 +2,7 @@ package vue.insertion.csv;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -22,7 +23,12 @@ public class InsertionLocataireCSV extends JInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				chemin.choisirChemin();
-				lire.lireCSV(chemin.getSelectedFilePath()); // ma bite je le fais
+				try {
+					lire.lireCSV(chemin.getSelectedFilePath());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} // ma bite je le fais
 			}
 		});
 		btnNewButton.setBounds(235, 176, 252, 97);
