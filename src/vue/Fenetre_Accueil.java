@@ -914,26 +914,7 @@ public class Fenetre_Accueil extends JFrame {
 		this.layeredPane_RegularisationDesCharges.add(panel_RegularisationDesCharges);
 		panel_RegularisationDesCharges.setLayout(null);
 
-		// Tableaux et scrollPane
-		JScrollPane scrollPane_Regularisation = new JScrollPane();
-		scrollPane_Regularisation.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_Regularisation.setBounds(28, 121, 697, 303);
-		panel_RegularisationDesCharges.add(scrollPane_Regularisation);
-
-		this.tableRegularisation = new JTable();
-		this.tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
-		this.tableRegularisation
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null }, },
-						new String[] { "Bien", "P\u00E9riode du", "au", "Charges r\u00E9elles",
-								"Ordures m\u00E9nag\u00E8res", "TOTAL Charges", "Total des provisions", "RESTE" }));
-		this.tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(42);
-		this.tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(62);
-		this.tableRegularisation.getColumnModel().getColumn(2).setPreferredWidth(55);
-		this.tableRegularisation.getColumnModel().getColumn(5).setPreferredWidth(87);
-		this.tableRegularisation.getColumnModel().getColumn(6).setPreferredWidth(91);
-		this.tableRegularisation.getColumnModel().getColumn(7).setPreferredWidth(55);
-		this.tableRegularisation.setBounds(40, 53, 668, 130);
-		scrollPane_Regularisation.setViewportView(this.tableRegularisation);
+		
 
 		// Labels
 		JLabel lbl_RegularisationDesCharges = new JLabel("Régularisation des Charges");
