@@ -34,6 +34,7 @@ import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocationArchiver;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeRegularisationCharges;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeSoldeToutCompte;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalChargesReelles;
+import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalOrduresMenageres;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalProvisions;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalTravauxImputables;
 import modele.dao.requetes.update.RequeteUpdateLouer;
