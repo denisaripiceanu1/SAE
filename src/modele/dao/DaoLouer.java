@@ -32,6 +32,7 @@ import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocation;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocationArchiver;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeRegularisationCharges;
+import modele.dao.requetes.sousProgramme.calculs.SousProgrammeRestantDuLoyers;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeSoldeToutCompte;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalChargesReelles;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalOrduresMenageres;
@@ -163,6 +164,18 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 		st.close();
 		return resultat;
 	}
+	
+	// Calcule le total des charges garages pour une location donnée
+		public double restantDuLoyers (Louer donnees) throws SQLException {
+			SousProgramme<Louer> sp = new SousProgrammeRestantDuLoyers();
+			CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
+			sp.parametresCalcul(st, donnees);
+			st.execute();
+			double resultat = st.getDouble(1);
+			st.close();
+			return resultat;
+		}
+	
 
 	// Calcule la regularisation des charges
 	public double regularisationCharges(Louer donnees) throws SQLException {
