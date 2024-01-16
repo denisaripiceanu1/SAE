@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modele.Immeuble;
+import modele.Facture;
+import rapport.FraisCharges;
 import modele.dao.requetes.delete.RequeteDeleteImmeuble;
 import modele.dao.requetes.select.RequeteSelectImmeuble;
 import modele.dao.requetes.select.RequeteSelectImmeubleById;
@@ -102,5 +104,68 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 
 		return nombreLogements;
 	}
+
+	public int getSommeLoyersDansImmeublePourPeriode(String idImmeuble, String periodeImpotDebut, String periodeImpotFin) throws SQLException {
+	    int sommeLoyers = 0;
+
+	    String sql = "SELECT SUM(f.montant_reel_paye) " +
+	                 "FROM Facture f " +
+	                 "INNER JOIN Bien b ON f.Id_Bien = b.Id_Bien " +
+	                 "WHERE b.Id_Immeuble = ? " +
+	                 "  AND f.Designation = 'Loyer' " +
+	                 "  AND f.date_emission BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD')";
+
+	    try (PreparedStatement pstmt = CictOracleDataSource.getConnectionBD().prepareStatement(sql)) {
+	        pstmt.setString(1, idImmeuble);
+	        pstmt.setString(2, periodeImpotDebut);
+	        pstmt.setString(3, periodeImpotFin);
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            if (rs.next()) {
+	                sommeLoyers = rs.getInt(1);
+	            }
+	        }
+	    }
+ 
+	    return sommeLoyers;
+	}
+
+	public List<FraisCharges> getFraisEtChargesParImmeuble(String idImmeuble, String periodeDebut, String periodeFin) {
+	    List<FraisCharges> fraisCharges = new ArrayList<>();
+
+	    // Vous devez ajuster cette requête en fonction de votre modèle de données exact
+	    String sql = "SELECT i.Id_Immeuble, f.Designation, SUM(f.Montant) as MontantTotal " +
+	                 "FROM Facture f " +
+	                 "INNER JOIN Immeuble i ON f.Id_Immeuble = i.Id_immeuble " +
+	                 "WHERE i.Id_Immeuble = ? " +
+	                 "AND f.Designation IN ('Eau', 'Electricité', 'Électricité', 'Ordures ménagères') " +
+	                 "AND f.date_emission BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD') " +
+	                 "GROUP BY i.Id_immeuble, f.designation";
+
+	    try (PreparedStatement pstmt = CictOracleDataSource.getConnectionBD().prepareStatement(sql)) {
+	        pstmt.setString(1, idImmeuble);
+	        pstmt.setString(2, periodeDebut);
+	        pstmt.setString(3, periodeFin);
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            while (rs.next()) {
+	                String nomImmeuble = rs.getString("Id_Immeuble");  // Correction du nom de la colonne
+	                String designation = rs.getString("Designation");
+	                int montantTotal = rs.getInt("MontantTotal");
+
+	                // Créez une instance de FraisCharges et ajoutez-la à la liste
+	                fraisCharges.add(new FraisCharges(nomImmeuble, designation, montantTotal));
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        // Gérez l'exception en fonction de vos besoins (relever ou lancer une exception personnalisée, etc.)
+	        throw new RuntimeException("Erreur lors de la récupération des frais et charges.", e);
+	    }
+
+	    return fraisCharges;
+	}
+
+
 
 }
