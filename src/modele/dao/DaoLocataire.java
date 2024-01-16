@@ -10,6 +10,7 @@ import java.util.List;
 import modele.Locataire;
 import modele.dao.requetes.delete.RequeteDeleteLocataire;
 import modele.dao.requetes.select.RequeteSelectLocataire;
+import modele.dao.requetes.select.RequeteSelectLocataireArchive;
 import modele.dao.requetes.select.RequeteSelectLocataireById;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocataire;
@@ -93,6 +94,26 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 		sp.parametres(st, donnees);
 		st.execute();
 		st.close();
+	}
+
+	protected Locataire creerInstanceArchive(ResultSet curseur) throws SQLException {
+		Locataire locataire = null;
+		try {
+			// Convertir les dates en chaînes de caractères
+			java.sql.Date dateNaissance = curseur.getDate("date_naissance");
+			String dateNaissanceStr = dateNaissance.toString();
+
+			locataire = new Locataire(curseur.getString("Id_Locataire"), curseur.getString("nom"),
+					curseur.getString("prenom"), curseur.getString("telephone"), curseur.getString("mail"),
+					dateNaissanceStr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return locataire;
+	}
+
+	public List<Locataire> findAllArchive() throws SQLException {
+		return this.find(new RequeteSelectLocataireArchive());
 	}
 
 }
