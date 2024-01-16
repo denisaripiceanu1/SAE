@@ -26,7 +26,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import controleur.outils.ImportChemin;
+import controleur.outils.ImportCheminCSV;
 import controleur.outils.LireCSV;
 import controleur.outils.Sauvegarde;
 import modele.Assurance;
@@ -809,7 +809,7 @@ public class GestionAccueil implements ActionListener {
 			// LAYERED ACCUEIL
 			///////////////////
 			case "importCSV":
-				ImportChemin chemin = new ImportChemin();
+				ImportCheminCSV chemin = new ImportCheminCSV();
 				LireCSV lire = new LireCSV();
 				chemin.choisirChemin();
 				try {
