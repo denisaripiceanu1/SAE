@@ -62,16 +62,21 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		// Caution
 		modeleTable.setValueAt(location.getCautionTTC(), numeroLigne, 4);
 
+		// Restant du Loyers
+		double restantDuLoyers = this.daoLouer.restantDuLoyers(location);
+		modeleTable.setValueAt(restantDuLoyers, numeroLigne, 8);
+		
 		// Reste
 		// double soldeToutCompte = daoLouer.soldeToutCompte(location);
 		double soldeToutCompte = daoLouer.soldeToutCompte(location);
 
-		modeleTable.setValueAt(soldeToutCompte, numeroLigne, 8);
+		modeleTable.setValueAt(soldeToutCompte, numeroLigne, 10);
 
 		modeleTable.setValueAt("-", numeroLigne, 1);
 		modeleTable.setValueAt("+", numeroLigne, 3);
 		modeleTable.setValueAt("-", numeroLigne, 5);
-		modeleTable.setValueAt("=", numeroLigne, 7);
+		modeleTable.setValueAt("-", numeroLigne, 7);
+		modeleTable.setValueAt("=", numeroLigne, 9);
 	}
 
 	private void chargerSoldeToutCompte() throws SQLException {

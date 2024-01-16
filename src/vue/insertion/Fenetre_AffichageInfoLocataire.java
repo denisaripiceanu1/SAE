@@ -149,16 +149,18 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
 		this.tableRegularisation = new JTable();
 		this.tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
-		this.tableRegularisation
-				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null }, },
+		this.tableRegularisation.setModel(
+				new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null, null }, },
 						new String[] { "Bien", "P\u00E9riode du", "au", "Charges r\u00E9elles",
-								"Ordures m\u00E9nag\u00E8res", "TOTAL Charges", "Total des provisions", "RESTE" }));
+								"Ordures m\u00E9nag\u00E8res", "TOTAL Charges", "Restant du loyer",
+								"Total des provisions", "RESTE" }));
 		this.tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(42);
 		this.tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(62);
 		this.tableRegularisation.getColumnModel().getColumn(2).setPreferredWidth(55);
 		this.tableRegularisation.getColumnModel().getColumn(5).setPreferredWidth(87);
 		this.tableRegularisation.getColumnModel().getColumn(6).setPreferredWidth(91);
 		this.tableRegularisation.getColumnModel().getColumn(7).setPreferredWidth(55);
+		this.tableRegularisation.getColumnModel().getColumn(8).setPreferredWidth(55);
 		this.tableRegularisation.setBounds(40, 53, 668, 130);
 		scrollPane_Regularisation.setViewportView(this.tableRegularisation);
 
@@ -180,10 +182,10 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
 		// Table pour afficher les données d'entreprise
 		this.table_soldeToutCompte = new JTable();
-		this.table_soldeToutCompte.setModel(
-				new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null, null }, },
-						new String[] { "Provisions sur charges", " ", "Charges r\u00E9elles", "", "Caution", " ",
-								"Travaux imputables", " ", "Reste" }));
+		this.table_soldeToutCompte.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null, null, null, null, null, null, null, null, null }, },
+				new String[] { "Provisions sur charges", " ", "Charges r\u00E9elles", "", "Caution", " ",
+						"Travaux imputables", " ", "Restant du loyer", " ", "Reste" }));
 		table_soldeToutCompte.getColumnModel().getColumn(1).setPreferredWidth(15);
 		table_soldeToutCompte.getColumnModel().getColumn(3).setPreferredWidth(15);
 		table_soldeToutCompte.getColumnModel().getColumn(5).setPreferredWidth(15);
