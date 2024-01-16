@@ -190,6 +190,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		table_soldeToutCompte.getColumnModel().getColumn(3).setPreferredWidth(15);
 		table_soldeToutCompte.getColumnModel().getColumn(5).setPreferredWidth(15);
 		table_soldeToutCompte.getColumnModel().getColumn(7).setPreferredWidth(15);
+		table_soldeToutCompte.getColumnModel().getColumn(9).setPreferredWidth(15);
 		this.scrollPane_locataireSoldeToutCompte.setViewportView(this.table_soldeToutCompte);
 
 		JLabel lblResteLoca = new JLabel("Si votre reste est négatif, alors votre locataire vous doit de l'argent.");
