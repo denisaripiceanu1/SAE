@@ -528,13 +528,13 @@ public class GestionAccueil implements ActionListener {
 		// Total charges reelles
 		double chargesReellesBien = this.daoLouer.totalChargesRéelles(location);
 		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 2);
-		// Charges garages
-		double chargesGarage = this.daoLouer.totalChargesGarages(location);
-		if (chargesGarage != 0) {
-			modeleTable.setValueAt(chargesGarage, numeroLigne, 3);
-		} else {
-			modeleTable.setValueAt("N/A", numeroLigne, 3);
-		}
+		// Total ordures menageres
+//		double chargesGarage = this.daoLouer.totalChargesGarages(location);
+//		if (chargesGarage != 0) {
+//			modeleTable.setValueAt(chargesGarage, numeroLigne, 3);
+//		} else {
+//			modeleTable.setValueAt("N/A", numeroLigne, 3);
+//		}
 		// Total des provisions sur charges
 		double totalProvisions = this.daoLouer.totalProvisions(location);
 		modeleTable.setValueAt(totalProvisions, numeroLigne, 4);

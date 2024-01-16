@@ -1,6 +1,7 @@
 package modele.dao;
 
 import java.sql.CallableStatement;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ import modele.dao.requetes.sousProgramme.SousProgrammeInsertLocationArchiver;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeRegularisationCharges;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeSoldeToutCompte;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalChargesReelles;
-import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalChargesReellesBien;
+import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalOrduresMenageres;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalProvisions;
 import modele.dao.requetes.sousProgramme.calculs.SousProgrammeTotalTravauxImputables;
 import modele.dao.requetes.update.RequeteUpdateLouer;
@@ -143,7 +144,7 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 
 	// Calcule le total des charges réelles pour une location donnée
 	public double totalChargesRéelles(Louer donnees) throws SQLException {
-		SousProgramme<Louer> sp = new SousProgrammeTotalChargesReellesBien();
+		SousProgramme<Louer> sp = new SousProgrammeTotalChargesReelles();
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametresCalcul(st, donnees);
 		st.execute();
@@ -153,8 +154,8 @@ public class DaoLouer extends DaoModele<Louer> implements Dao<Louer> {
 	}
 
 	// Calcule le total des charges garages pour une location donnée
-	public double totalChargesGarages(Louer donnees) throws SQLException {
-		SousProgramme<Louer> sp = new SousProgrammeTotalChargesReelles();
+	public double totalOrduresMenageres (Louer donnees) throws SQLException {
+		SousProgramme<Louer> sp = new SousProgrammeTotalOrduresMenageres();
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 		sp.parametresCalcul(st, donnees);
 		st.execute();
