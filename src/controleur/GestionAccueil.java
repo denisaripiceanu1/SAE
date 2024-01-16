@@ -50,6 +50,7 @@ import modele.dao.DaoImposer;
 import modele.dao.DaoImpôt;
 import modele.dao.DaoLocataire;
 import modele.dao.DaoLouer;
+import rapport.CreerAnnexe;
 import vue.Fenetre_Accueil;
 import vue.archiver.Fenetre_ArchiverFacture;
 import vue.archiver.Fenetre_ArchiverLocation;
@@ -707,6 +708,39 @@ public class GestionAccueil implements ActionListener {
 			this.ecrireLigneTableArchiveFacture(i, facture);
 		}
 	}
+
+	public void ecrireLigneTableArchiveLocataire(int numeroLigne, Locataire loc) throws SQLException {
+		JTable tableLocataire = this.fenetreAccueil.getTable_MesArchives_Locataire();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableLocataire.getModel();
+
+		// Add a null check before accessing properties of loc
+		if (loc != null) {
+			modeleTable.setValueAt(loc.getIdLocataire(), numeroLigne, 0);
+			modeleTable.setValueAt(loc.getNom(), numeroLigne, 1);
+			modeleTable.setValueAt(loc.getPrenom(), numeroLigne, 2);
+			modeleTable.setValueAt(loc.getTelephone(), numeroLigne, 3);
+			modeleTable.setValueAt(loc.getMail(), numeroLigne, 4);
+		} else {
+			// Handle the case where loc is null, e.g., display an error message or log it
+			System.err.println("Error: loc is null at line " + numeroLigne);
+		}
+	}
+
+	public void chargerTableArchiveLoccataire() throws SQLException {
+
+		List<Locataire> locataires = this.daoLocataire.findAllArchive();
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTable_MesArchives_Locataire()
+				.getModel();
+
+		modeleTable.setRowCount(locataires.size());
+
+		for (int i = 0; i < locataires.size(); i++) {
+			Locataire locataire = locataires.get(i);
+			modeleTable.addRow(new Object[0]); // Ajouter une nouvelle ligne
+			this.ecrireLigneTableArchiveLocataire(i, locataire);
+		}
+	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NAVIGATION
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1351,7 +1385,15 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 			case "btn_MesDocuments_generer_annexe":
-
+				try {
+					CreerAnnexe.main(new String[] {});
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Annexe 2044 générée avec succès !", "Succès",
+							JOptionPane.INFORMATION_MESSAGE);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(this.fenetreAccueil, "Erreur lors de la génération de l'annexe.",
+							"Erreur", JOptionPane.ERROR_MESSAGE);
+				}
 				break;
 
 			///////////////////////
@@ -1373,6 +1415,14 @@ public class GestionAccueil implements ActionListener {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			case "btn_MesArchives_Locataire":
+				try {
+					this.chargerTableArchiveLoccataire();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				break;
 			}
 
 		} else if (source instanceof JToggleButton) {
