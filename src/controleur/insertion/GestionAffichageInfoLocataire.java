@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -39,34 +40,37 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 	}
 
 	public void ecrireLigneTableSoldeToutCompte(int numeroLigne, Louer location, /* Facture facture, */ Bien bien)
-			throws SQLException {
-		JTable tableSoldeToutCompte = this.fail.getTable_soldeToutCompte();
-		DefaultTableModel modeleTable = (DefaultTableModel) tableSoldeToutCompte.getModel();
+            throws SQLException {
+        JTable tableSoldeToutCompte = this.fail.getTable_soldeToutCompte();
+        DefaultTableModel modeleTable = (DefaultTableModel) tableSoldeToutCompte.getModel();
 
-		// Total charges reelles
-		double chargesReellesBien = daoLouer.totalChargesRéelles(location);
-		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 2);
+        // charges reelles
+        double chargesReellesBien = daoLouer.totalChargesRéelles(location);
+        // ordures menageres
+        double orduresMenageres = this.daoLouer.totalOrduresMenageres(location);
 
-		// Travaux imputables
-		double travauxImputables = daoLouer.travauxImputables(location);
-		modeleTable.setValueAt(travauxImputables, numeroLigne, 6);
+        modeleTable.setValueAt(chargesReellesBien + orduresMenageres, numeroLigne, 2);
 
-		// Total des provisions sur charges
-		double totalProvisions = daoLouer.totalProvisions(location);
-		modeleTable.setValueAt(totalProvisions, numeroLigne, 0);
+        // Travaux imputables
+        double travauxImputables = daoLouer.travauxImputables(location);
+        modeleTable.setValueAt(travauxImputables, numeroLigne, 6);
 
-		// Caution
-		modeleTable.setValueAt(location.getCautionTTC(), numeroLigne, 4);
+        // Total des provisions sur charges
+        double totalProvisions = daoLouer.totalProvisions(location);
+        modeleTable.setValueAt(totalProvisions, numeroLigne, 0);
 
-		// Reste
-		double soldeToutCompte = daoLouer.soldeToutCompte(location);
-		modeleTable.setValueAt(soldeToutCompte, numeroLigne, 8);
+        // Caution
+        modeleTable.setValueAt(location.getCautionTTC(), numeroLigne, 4);
 
-		modeleTable.setValueAt("-", numeroLigne, 1);
-		modeleTable.setValueAt("+", numeroLigne, 3);
-		modeleTable.setValueAt("-", numeroLigne, 5);
-		modeleTable.setValueAt("=", numeroLigne, 7);
-	}
+        // Reste
+        double soldeToutCompte = daoLouer.soldeToutCompte(location);
+        modeleTable.setValueAt(soldeToutCompte, numeroLigne, 8);
+
+        modeleTable.setValueAt("-", numeroLigne, 1);
+        modeleTable.setValueAt("+", numeroLigne, 3);
+        modeleTable.setValueAt("-", numeroLigne, 5);
+        modeleTable.setValueAt("=", numeroLigne, 7);
+    }
 
 	private void chargerSoldeToutCompte() throws SQLException {
 		List<Louer> locations = this.daoLouer.findLocationByBien(location.getBien().getIdBien());
@@ -88,12 +92,14 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 
 		switch (btn.getText()) {
 		case "Régularisation des charges":
-			this.fail.dispose();
-			fenetre_Principale.getGestionAccueil()
-					.rendreVisible(fenetre_Principale.getLayeredPane_RegularisationDesCharges());
 			Locataire locataire_save = (Locataire) Sauvegarde.getItem("Locataire");
 			String idLocataire = locataire_save.getIdLocataire();
-			fenetre_Principale.getGestionAccueil().filtreRegularisationChargesDepuisInfoLocataire(idLocataire);
+			try {
+				this.updateTableRegularisationsForLocataire(idLocataire);
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 			break;
 
 		case "Solde tout compte":
@@ -119,6 +125,51 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 			}
 			break;
 		}
+	}
+	
+	////////////////////////////////////////////
+	////////////// REGULARISATION //////////////
+	////////////////////////////////////////////
+	
+	public void ecrireLigneTableRegularisation(int numeroLigne, Louer location)
+			throws SQLException {
+		JTable tableRegularisation = this.fail.getTableRegularisation();
+		DefaultTableModel modeleTable = (DefaultTableModel) tableRegularisation.getModel();
+		// Periode du
+		modeleTable.setValueAt(location.getBien().getIdBien(), numeroLigne, 0);
+		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 1);
+		// au
+		if (location.getDateDerniereRegularisation() != null) {
+			modeleTable.setValueAt(location.getDateDerniereRegularisation(), numeroLigne, 2);
+		} else {
+			modeleTable.setValueAt("N/A", numeroLigne, 2);
+		}
+		// Charges reelles
+		double chargesReellesBien = this.daoLouer.totalChargesRéelles(location);
+		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 3);
+		// Ordures menageres
+		double orduresMenageres = this.daoLouer.totalOrduresMenageres(location);
+		modeleTable.setValueAt(orduresMenageres, numeroLigne, 4);
+		// TOTAL charges
+		double totalCharges = chargesReellesBien + orduresMenageres;
+		modeleTable.setValueAt(totalCharges, numeroLigne, 5);
+		// Total des provisions sur charges
+		double totalProvisions = this.daoLouer.totalProvisions(location);
+		modeleTable.setValueAt(totalProvisions, numeroLigne, 6);
+		// TOTAL
+		double regularisationCharges = this.daoLouer.regularisationCharges(location);
+		modeleTable.setValueAt(regularisationCharges, numeroLigne, 7);
+
+	}
+
+	private void updateTableRegularisationsForLocataire(String idLocataire) throws SQLException {
+		Bien bien = (Bien) Sauvegarde.getItem("Logement");
+		Louer location = this.daoLouer.findById( bien.getIdBien() ,idLocataire);
+
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fail.getTableRegularisation().getModel();
+		modeleTable.setRowCount(1); // Toujours une seule ligne puisque il s'agit d'un locataire et de son bien pour une location
+		this.ecrireLigneTableRegularisation(0, location); // Ecrit la ligne
+		
 	}
 
 }
