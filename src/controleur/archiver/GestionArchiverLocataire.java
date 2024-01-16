@@ -44,7 +44,8 @@ public class GestionArchiverLocataire implements ActionListener {
 			try {
 				Locataire locataire = this.daoLocataire.findById(louer_supp.getLocataire().getIdLocataire());
 				List<Facture> facture = this.daoFacture.findFactureChargeByLogement(louer_supp.getBien().getIdBien());
-
+				Louer louer = this.daoLouer.findById(louer_supp.getBien().getIdBien(),
+						louer_supp.getLocataire().getIdLocataire(), louer_supp.getDateDebut());
 				// Vérifier le nombre de locations du locataire
 				int nombreLocations = this.daoLouer.getNombreLocationsParLocataire(locataire.getIdLocataire());
 
@@ -53,8 +54,8 @@ public class GestionArchiverLocataire implements ActionListener {
 						this.daoFacture.delete(factures);
 						this.daoFacture.createArchive(factures);
 					}
-					this.daoLouer.delete(louer_supp);
-					this.daoLouer.createArchiver(louer_supp);
+					this.daoLouer.delete(louer);
+					this.daoLouer.createArchiver(louer);
 					this.daoLocataire.delete(locataire);
 					this.daoLocataire.createArchive(locataire);
 				} else {
