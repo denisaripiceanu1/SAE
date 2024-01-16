@@ -316,8 +316,8 @@ public class GestionAccueil implements ActionListener {
 			Facture f = factures.get(i);
 			if (f != null && f.getImmeuble() != null) {
 				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-				modeleTable.addRow(new Object[] { f.getNumero(), f.getImmeuble().getImmeuble(), f.getDesignation(),
-						f.getDateEmission(), f.getMontant(), f.getDatePaiement(), entreprise.getNom(),
+				modeleTable.addRow(new Object[] { f.getNumero(), f.getImmeuble().getImmeuble(), f.getDateEmission(),
+						f.getMontant(), f.getDatePaiement(), entreprise.getNom(),
 						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
 			}
 		}
@@ -335,8 +335,8 @@ public class GestionAccueil implements ActionListener {
 			Facture f = factures.get(i);
 			if (f != null && f.getBien() != null) {
 				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-				modeleTable.addRow(new Object[] { f.getNumero(), f.getBien().getIdBien(), f.getDesignation(),
-						f.getDateEmission(), f.getMontant(), f.getDatePaiement(), entreprise.getNom(),
+				modeleTable.addRow(new Object[] { f.getNumero(), f.getBien().getIdBien(), f.getDateEmission(),
+						f.getMontant(), f.getDatePaiement(), entreprise.getNom(),
 						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
 			}
 		}

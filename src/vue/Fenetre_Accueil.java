@@ -26,7 +26,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 import controleur.GestionAccueil;
 import controleur.GestionBienLogement;
@@ -323,18 +322,17 @@ public class Fenetre_Accueil extends JFrame {
 		panelMesBiens.add(scrollPaneMesBiens);
 
 		this.tableMesBiens = new JTable();
-		this.tableMesBiens.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
+		this.tableMesBiens.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null }, },
 				new String[] { "Nom du bien", "Adresse", "Nb de logements", "Type" }));
+		this.tableMesBiens.getColumnModel().getColumn(0).setPreferredWidth(61);
+		this.tableMesBiens.getColumnModel().getColumn(0).setMinWidth(61);
+		this.tableMesBiens.getColumnModel().getColumn(2).setPreferredWidth(65);
+		this.tableMesBiens.getColumnModel().getColumn(2).setMinWidth(65);
+		this.tableMesBiens.getColumnModel().getColumn(3).setPreferredWidth(52);
+		this.tableMesBiens.getColumnModel().getColumn(3).setMinWidth(52);
 		this.tableMesBiens.setBounds(40, 53, 668, 130);
 		scrollPaneMesBiens.setViewportView(this.tableMesBiens);
 		this.tableMesBiens.getSelectionModel().addListSelectionListener(this.gestionBienLogement);
-
-		// changer la largeur des colonnes
-		TableColumn bien_type = this.tableMesBiens.getColumnModel().getColumn(3);
-		bien_type.setPreferredWidth(10);
-
-		TableColumn bien_nb_logements = this.tableMesBiens.getColumnModel().getColumn(2);
-		bien_nb_logements.setPreferredWidth(30);
 
 		JScrollPane scrollPaneMesBiens_Logements = new JScrollPane();
 		scrollPaneMesBiens_Logements.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
@@ -344,8 +342,18 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.tableMesBiens_Logements = new JTable();
 		this.tableMesBiens_Logements.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null }, },
+				new Object[][] { { null, null, null, null, null, null, null }, },
 				new String[] { "Nom", "Surface", "Nb pi\u00E8ces", "Etage", "Aquisition", "Occup\u00E9", "Type" }));
+		this.tableMesBiens_Logements.getColumnModel().getColumn(0).setPreferredWidth(53);
+		this.tableMesBiens_Logements.getColumnModel().getColumn(0).setMinWidth(53);
+		this.tableMesBiens_Logements.getColumnModel().getColumn(0).setMaxWidth(53);
+		this.tableMesBiens_Logements.getColumnModel().getColumn(1).setMinWidth(14);
+		this.tableMesBiens_Logements.getColumnModel().getColumn(3).setPreferredWidth(52);
+		this.tableMesBiens_Logements.getColumnModel().getColumn(3).setMinWidth(52);
+		this.tableMesBiens_Logements.getColumnModel().getColumn(3).setMaxWidth(52);
+		this.tableMesBiens_Logements.getColumnModel().getColumn(4).setPreferredWidth(103);
+		this.tableMesBiens_Logements.getColumnModel().getColumn(6).setPreferredWidth(115);
+		this.tableMesBiens_Logements.getColumnModel().getColumn(6).setMinWidth(115);
 		this.tableMesBiens_Logements.setBounds(40, 266, 438, 106);
 		scrollPaneMesBiens_Logements.setViewportView(this.tableMesBiens_Logements);
 		// Pour action de ligne sur table logement
@@ -634,8 +642,21 @@ public class Fenetre_Accueil extends JFrame {
 		this.table_MesTravaux.setSelectionBackground(new Color(0, 102, 204));
 		this.table_MesTravaux
 				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
-						new String[] { "Numéro", "Bien/Logement", "D\u00E9signation", "Date \u00E9mission", "Montant",
-								"Pay\u00E9", "Prestataire", "Adresse" }));
+						new String[] { "Num\u00E9ro", "Bien/Logement", "Date \u00E9mission", "Montant",
+								"Date de Paiement", "Prestataire", "Adresse" }));
+		this.table_MesTravaux.getColumnModel().getColumn(0).setPreferredWidth(54);
+		this.table_MesTravaux.getColumnModel().getColumn(0).setMinWidth(54);
+		this.table_MesTravaux.getColumnModel().getColumn(0).setMaxWidth(54);
+		this.table_MesTravaux.getColumnModel().getColumn(2).setPreferredWidth(66);
+		this.table_MesTravaux.getColumnModel().getColumn(3).setPreferredWidth(40);
+		this.table_MesTravaux.getColumnModel().getColumn(3).setMinWidth(40);
+		this.table_MesTravaux.getColumnModel().getColumn(4).setPreferredWidth(69);
+		this.table_MesTravaux.getColumnModel().getColumn(4).setMinWidth(69);
+		this.table_MesTravaux.getColumnModel().getColumn(5).setPreferredWidth(60);
+		this.table_MesTravaux.getColumnModel().getColumn(5).setMinWidth(45);
+		this.table_MesTravaux.getColumnModel().getColumn(6).setPreferredWidth(110);
+		this.table_MesTravaux.getColumnModel().getColumn(6).setMinWidth(110);
+
 		this.table_MesTravaux.setBounds(40, 53, 668, 130);
 		this.table_MesTravaux.getSelectionModel().addListSelectionListener(this.gestionTableTravaux);
 		scrollPane_MesTravaux.setViewportView(this.table_MesTravaux);
@@ -802,6 +823,11 @@ public class Fenetre_Accueil extends JFrame {
 				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
 						new String[] { "Logement", "n\u00B0 Police", "Montant", "Date \u00E9cheance", "Prestataire",
 								"Adresse", "n\u00B0 T\u00E9l\u00E9phone" }));
+		this.table_MesAssurances.getColumnModel().getColumn(0).setPreferredWidth(40);
+		this.table_MesAssurances.getColumnModel().getColumn(1).setPreferredWidth(40);
+		this.table_MesAssurances.getColumnModel().getColumn(2).setPreferredWidth(40);
+		this.table_MesAssurances.getColumnModel().getColumn(5).setPreferredWidth(115);
+		this.table_MesAssurances.getColumnModel().getColumn(6).setPreferredWidth(60);
 		this.table_MesAssurances.setBounds(40, 53, 668, 130);
 		this.table_MesAssurances.getSelectionModel().addListSelectionListener(this.gestionTableAssurance);
 		scrollPane_MesAssurances.setViewportView(this.table_MesAssurances);
