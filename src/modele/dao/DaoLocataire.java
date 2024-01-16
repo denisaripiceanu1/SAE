@@ -96,22 +96,6 @@ public class DaoLocataire extends DaoModele<Locataire> implements Dao<Locataire>
 		st.close();
 	}
 
-	protected Locataire creerInstanceArchive(ResultSet curseur) throws SQLException {
-		Locataire locataire = null;
-		try {
-			// Convertir les dates en chaînes de caractères
-			java.sql.Date dateNaissance = curseur.getDate("date_naissance");
-			String dateNaissanceStr = dateNaissance.toString();
-
-			locataire = new Locataire(curseur.getString("Id_Locataire"), curseur.getString("nom"),
-					curseur.getString("prenom"), curseur.getString("telephone"), curseur.getString("mail"),
-					dateNaissanceStr);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return locataire;
-	}
-
 	public List<Locataire> findAllArchive() throws SQLException {
 		return this.find(new RequeteSelectLocataireArchive());
 	}
