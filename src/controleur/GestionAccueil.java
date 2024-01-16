@@ -1,6 +1,7 @@
 package controleur;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -139,6 +140,19 @@ public class GestionAccueil implements ActionListener {
 	// LAYERED ACCUEIL
 	///////////////////////////////////////////////////////////////////
 
+	public void viderAccueil() {
+		this.viderPanel(this.fenetreAccueil.getPanel_3());
+		this.viderPanel(this.fenetreAccueil.getPanel_2());
+		this.viderPanel(this.fenetreAccueil.getPanel_6());
+		this.viderPanel(this.fenetreAccueil.getPanel_8());
+	}
+
+	private void viderPanel(Container panel) {
+		panel.removeAll();
+		panel.repaint();
+		panel.revalidate();
+	}
+
 	private DefaultCategoryDataset createDataset() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		try {
@@ -150,6 +164,7 @@ public class GestionAccueil implements ActionListener {
 			e.printStackTrace();
 		}
 		return dataset;
+
 	}
 
 	private JFreeChart createBarChartPro(DefaultCategoryDataset dataset) {
@@ -160,6 +175,7 @@ public class GestionAccueil implements ActionListener {
 				true, // Générer des tooltips
 				false // Générer des URLs
 		);
+
 	}
 
 	private DefaultCategoryDataset createDatasetMoyenneLoyer() {
@@ -316,8 +332,8 @@ public class GestionAccueil implements ActionListener {
 			Facture f = factures.get(i);
 			if (f != null && f.getImmeuble() != null) {
 				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-				modeleTable.addRow(new Object[] { f.getNumero(), f.getImmeuble().getImmeuble(), f.getDesignation(),
-						f.getDateEmission(), f.getMontant(), f.getDatePaiement(), entreprise.getNom(),
+				modeleTable.addRow(new Object[] { f.getNumero(), f.getImmeuble().getImmeuble(), f.getDateEmission(),
+						f.getMontant(), f.getDatePaiement(), entreprise.getNom(),
 						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
 			}
 		}
@@ -335,8 +351,8 @@ public class GestionAccueil implements ActionListener {
 			Facture f = factures.get(i);
 			if (f != null && f.getBien() != null) {
 				Entreprise entreprise = this.daoEntreprise.findById(f.getEntreprise().getSiret());
-				modeleTable.addRow(new Object[] { f.getNumero(), f.getBien().getIdBien(), f.getDesignation(),
-						f.getDateEmission(), f.getMontant(), f.getDatePaiement(), entreprise.getNom(),
+				modeleTable.addRow(new Object[] { f.getNumero(), f.getBien().getIdBien(), f.getDateEmission(),
+						f.getMontant(), f.getDatePaiement(), entreprise.getNom(),
 						entreprise.getAdresse() + " " + entreprise.getCp() + " " + entreprise.getVille() });
 			}
 		}
@@ -759,6 +775,7 @@ public class GestionAccueil implements ActionListener {
 			case "btnAccueil":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_Accueil());
 				try {
+					this.viderAccueil();
 					this.chargerAccueil();
 				} catch (SQLException e2) {
 					e2.printStackTrace();
@@ -808,6 +825,7 @@ public class GestionAccueil implements ActionListener {
 			///////////////////
 			case "btnMesBiens_Charger":
 				try {
+
 					this.chargerBiens();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
