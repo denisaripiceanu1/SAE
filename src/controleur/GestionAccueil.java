@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -520,28 +521,29 @@ public class GestionAccueil implements ActionListener {
 		JTable tableRegularisation = this.fenetreAccueil.getTableRegularisation();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableRegularisation.getModel();
 		// Periode du
-		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 0);
+		modeleTable.setValueAt(location.getBien().getIdBien(), numeroLigne, 0);
+		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 1);
 		// au
 		if (location.getDateDerniereRegularisation() != null) {
-			modeleTable.setValueAt(location.getDateDerniereRegularisation(), numeroLigne, 1);
+			modeleTable.setValueAt(location.getDateDerniereRegularisation(), numeroLigne, 2);
 		} else {
-			modeleTable.setValueAt("N/A", numeroLigne, 1);
+			modeleTable.setValueAt("N/A", numeroLigne, 2);
 		}
 		// Charges reelles
 		double chargesReellesBien = this.daoLouer.totalChargesRéelles(location);
-		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 2);
-		//  Ordures menageres
+		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 3);
+		// Ordures menageres
 		double orduresMenageres = this.daoLouer.totalOrduresMenageres(location);
-		modeleTable.setValueAt(orduresMenageres, numeroLigne, 3);
+		modeleTable.setValueAt(orduresMenageres, numeroLigne, 4);
 		// TOTAL charges
 		double totalCharges = chargesReellesBien + orduresMenageres;
-		modeleTable.setValueAt(totalCharges, numeroLigne, 4);
+		modeleTable.setValueAt(totalCharges, numeroLigne, 5);
 		// Total des provisions sur charges
 		double totalProvisions = this.daoLouer.totalProvisions(location);
-		modeleTable.setValueAt(totalProvisions, numeroLigne, 5);
+		modeleTable.setValueAt(totalProvisions, numeroLigne, 6);
 		// TOTAL
 		double regularisationCharges = this.daoLouer.regularisationCharges(location);
-		modeleTable.setValueAt(regularisationCharges, numeroLigne, 6);
+		modeleTable.setValueAt(regularisationCharges, numeroLigne, 7);
 
 	}
 
@@ -793,7 +795,12 @@ public class GestionAccueil implements ActionListener {
 				ImportChemin chemin = new ImportChemin();
 				LireCSV lire = new LireCSV();
 				chemin.choisirChemin();
-				lire.lireCSV(chemin.getSelectedFilePath());
+				try {
+					lire.lireCSV(chemin.getSelectedFilePath());
+				} catch (IOException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				break;
 
 			///////////////////

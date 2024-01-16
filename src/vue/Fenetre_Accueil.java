@@ -896,9 +896,10 @@ public class Fenetre_Accueil extends JFrame {
 
 		this.tableRegularisation = new JTable();
 		this.tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
-		this.tableRegularisation.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null, null }, }, new String[] { "Période du", "au",
-						"Charges réelles", "Ordures ménagères", "TOTAL Charges", "Total des provisions", "RESTE" }));
+		this.tableRegularisation
+				.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null }, },
+						new String[] { "Id Bien", "Période du", "au", "Charges réelles", "Ordures ménagères",
+								"TOTAL Charges", "Total des provisions", "RESTE" }));
 		this.tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(65);
 		this.tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(65);
 		this.tableRegularisation.setBounds(40, 53, 668, 130);

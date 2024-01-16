@@ -1,5 +1,6 @@
 package controleur.outils;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -20,7 +21,7 @@ public class LireCSV {
 
 	}
 
-	public void lireCSV(String chemin) {
+	public void lireCSV(String chemin) throws FileNotFoundException, IOException {
 		Connection cn = CictOracleDataSource.getConnectionBD();
 		SousProgrammeInsertFacture insertFacture = new SousProgrammeInsertFacture();
 
@@ -42,8 +43,6 @@ public class LireCSV {
 					e.printStackTrace();
 				}
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 }
