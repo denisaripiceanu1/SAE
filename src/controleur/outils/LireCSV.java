@@ -35,10 +35,14 @@ public class LireCSV {
 					continue; // Passe à la prochaine itération pour ignorer la première ligne
 				}
 				try (PreparedStatement prSt = cn.prepareStatement(insertFacture.appelSousProgramme())) {
-					insertFacture.parametresCSV(prSt, csvRecord.get(0), csvRecord.get(1), csvRecord.get(2),
-							csvRecord.get(3), csvRecord.get(4), csvRecord.get(5), csvRecord.get(6), csvRecord.get(7),
-							csvRecord.get(8));
-					prSt.execute();
+					if (csvRecord.size() >= 9) {
+						insertFacture.parametresCSV(prSt, csvRecord.get(0), csvRecord.get(1), csvRecord.get(2),
+								csvRecord.get(3), csvRecord.get(4), csvRecord.get(5), csvRecord.get(6),
+								csvRecord.get(7), csvRecord.get(8));
+						prSt.execute();
+					} else {
+
+					}
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
