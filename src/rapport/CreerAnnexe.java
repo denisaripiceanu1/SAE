@@ -1,7 +1,6 @@
 package rapport;
 
 import java.io.FileInputStream;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import modele.Immeuble;
+import modele.dao.DaoImmeuble;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -32,13 +33,28 @@ public class CreerAnnexe {
             ajouterUnTitre(document, "Annexe 2044 - Déclaration des Revenus Fonciers de " + LocalDate.now().getYear());
 
             // Informations des propriétés
-            List<Proriétés> propriétés = new ArrayList<>();
-            propriétés.add(new Proriétés("Immeuble 1", "[Type1]", "[nom et prenom locataire]", "[Date Acquisition1]", "[Adresse1]"));
-            propriétés.add(new Proriétés("Immeuble 2", "[Type2]", "[nom et prenom locataire]", "[Date Acquisition2]", "[Adresse2]"));
-            propriétés.add(new Proriétés("Immeuble 3", "[Type3]", "[nom et prenom locataire]", "[Date Acquisition3]", "[Adresse3]"));
+            List<Proprietes> proprietes = new ArrayList<>();
+
+            // Utilisez le DAO pour récupérer les immeubles
+            DaoImmeuble daoImmeuble = new DaoImmeuble();
+
+            try {
+                List<Immeuble> immeubles = daoImmeuble.findAll();
+
+                for (Immeuble immeuble : immeubles) {
+                    // Vous pouvez obtenir d'autres informations nécessaires à partir de l'objet Immeuble
+                    int nombreLocaux = daoImmeuble.getNombreLogementsDansImmeuble(immeuble.getImmeuble());
+
+                    Proprietes propriete = new Proprietes(immeuble.getImmeuble(), immeuble.getType_immeuble(),
+                            immeuble.getPeriodeConstruction(), immeuble.getAdresse(), nombreLocaux);
+                    proprietes.add(propriete);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             ajouterUnSousTitre(document, "Caractéristiques des propriétés");
-            ajouterInfosPropriétés(document, propriétés);
+            ajouterInfosProprietes(document, proprietes);
 
             // Recettes
             List<InfosRecettes> recettes = new ArrayList<>();
@@ -83,10 +99,47 @@ public class CreerAnnexe {
             e.printStackTrace();
         }
     }
-    
-    // LES METHODES 
-    
-    // Méthode pour ajouter un sous titre
+
+    private static class Proprietes {
+        private String propertyName;
+        private String propertyType;
+        private String periodeConstruction;
+        private String adresse;
+        private int nombreLocaux;
+
+        public Proprietes(String propertyName, String propertyType, String periodeConstruction, String adresse, int nombreLocaux) {
+            this.propertyName = propertyName;
+            this.propertyType = propertyType;
+            this.periodeConstruction = periodeConstruction;
+            this.adresse = adresse;
+            this.nombreLocaux = nombreLocaux;
+        }
+    }
+
+    private static class InfosRecettes {
+        private String propertyName;
+        private String description;
+        private int amount;
+
+        public InfosRecettes(String propertyName, String description, int amount) {
+            this.propertyName = propertyName;
+            this.description = description;
+            this.amount = amount;
+        }
+    }
+
+    private static class FraisCharges {
+        private String propertyName;
+        private String description;
+        private int amount;
+
+        public FraisCharges(String propertyName, String description, int amount) {
+            this.propertyName = propertyName;
+            this.description = description;
+            this.amount = amount;
+        }
+    }
+
     private static void ajouterUnSousTitre(XWPFDocument document, String title) {
         XWPFParagraph paragraph = document.createParagraph();
         XWPFRun run = paragraph.createRun();
@@ -95,49 +148,36 @@ public class CreerAnnexe {
         run.setText(title);
         paragraph.setSpacingBefore(12);
         paragraph.setSpacingAfter(6);
-        // Utilisez la méthode setAlignment pour définir l'alignement
         paragraph.setAlignment(ParagraphAlignment.CENTER);
     }
 
-    // Méthode pour ajouter une ligne au document
-    private static void addLine(XWPFDocument document, String text) {
+    private static void ajouterLigne(XWPFDocument document, String text, int value) {
         XWPFParagraph paragraph = document.createParagraph();
         XWPFRun run = paragraph.createRun();
-        run.setText(text);
-    }
-    
-    // Surcharge
-    // Refactoring : méthode pour ajouter une ligne à un document et sa valeur associée
-    private static void ajouterLigne(XWPFDocument document, String text, int value) {
-        addLine(document, text + "\t" + value);
+        run.setText(text + "\t" + value);
     }
 
-    // Méthode pour ajouter un titre
     private static void ajouterUnTitre(XWPFDocument document, String title) {
         XWPFParagraph paragraph = document.createParagraph();
         XWPFRun run = paragraph.createRun();
         run.setBold(true);
         run.setFontSize(16);
         run.setText(title);
-        // Utilisez la méthode setAlignment pour définir l'alignement
         paragraph.setAlignment(ParagraphAlignment.CENTER);
         paragraph.setSpacingBefore(12);
         paragraph.setSpacingAfter(12);
     }
 
-    // Méthode pour ajouter un pied de page au document
     private static void ajouterFooter(XWPFDocument document, String text) {
         XWPFParagraph paragraph = document.createParagraph();
         XWPFRun run = paragraph.createRun();
         run.setItalic(true);
         run.setText(text);
-        // Utilisez la méthode setAlignment pour définir l'alignement
         paragraph.setAlignment(ParagraphAlignment.CENTER);
         paragraph.setSpacingBefore(12);
         paragraph.setSpacingAfter(12);
     }
 
-    // Méthode pour ajouter un tableau au document
     private static void addTable(XWPFDocument document, List<String> headers, List<List<String>> data) {
         XWPFTable table = document.createTable();
 
@@ -162,64 +202,18 @@ public class CreerAnnexe {
         }
     }
 
-
-    // Classe pour stocker les informations des propriétés
-    private static class Proriétés {
-        private String propertyName;
-        private String propertyType;
-        private String locataire;
-        private String dateAcquisition;
-        private String adresse;
-
-        public Proriétés(String propertyName, String propertyType, String locataire, String dateAcquisition, String adresse) {
-            this.propertyName = propertyName;
-            this.propertyType = propertyType;
-            this.locataire = locataire;
-            this.dateAcquisition = dateAcquisition;
-            this.adresse = adresse;
-        }
-    }
-
-    // Méthode pour ajouter un tableau d'informations de propriétés au document
-    private static void ajouterInfosPropriétés(XWPFDocument document, List<Proriétés> properties) {
-        List<String> headers = List.of("Nom de la Propriété", "Type", "Locataire", "Date Acquisition", "Adresse");
+    private static void ajouterInfosProprietes(XWPFDocument document, List<Proprietes> properties) {
+        List<String> headers = List.of("Nom de la Propriété", "Type", "Période de Construction", "Adresse", "Nombre de Locaux");
         List<List<String>> data = new ArrayList<>();
 
-        for (Proriétés property : properties) {
-            List<String> rowData = List.of(property.propertyName, property.propertyType, property.locataire, property.dateAcquisition, property.adresse);
+        for (Proprietes property : properties) {
+            List<String> rowData = List.of(property.propertyName, property.propertyType, property.periodeConstruction, property.adresse, String.valueOf(property.nombreLocaux));
             data.add(rowData);
         }
 
         addTable(document, headers, data);
     }
 
-    // Classe pour stocker les informations des recettes
-    private static class InfosRecettes {
-        private String propertyName;
-        private String description;
-        private int amount;
-
-        public InfosRecettes(String propertyName, String description, int amount) {
-            this.propertyName = propertyName;
-            this.description = description;
-            this.amount = amount;
-        }
-    }
-
-    // Classe pour stocker les informations des charges
-    private static class FraisCharges {
-        private String propertyName;
-        private String description;
-        private int amount;
-
-        public FraisCharges(String propertyName, String description, int amount) {
-            this.propertyName = propertyName;
-            this.description = description;
-            this.amount = amount;
-        }
-    }
-
-    // Méthode pour ajouter un tableau d'informations de recettes au document
     private static void ajouterTableRecettes(XWPFDocument document, List<InfosRecettes> incomes) {
         List<String> headers = List.of("Nom de la Propriété", "Description", "Montant");
         List<List<String>> data = new ArrayList<>();
@@ -232,7 +226,6 @@ public class CreerAnnexe {
         addTable(document, headers, data);
     }
 
-    // Méthode pour ajouter un tableau d'informations de charges au document
     private static void ajouterTableFraisCharge(XWPFDocument document, List<FraisCharges> expenses) {
         List<String> headers = List.of("Nom de la Propriété", "Description", "Montant");
         List<List<String>> data = new ArrayList<>();

@@ -519,29 +519,29 @@ public class GestionAccueil implements ActionListener {
 			throws SQLException {
 		JTable tableRegularisation = this.fenetreAccueil.getTableRegularisation();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableRegularisation.getModel();
-
+		// Periode du
 		modeleTable.setValueAt(location.getDateDebut(), numeroLigne, 0);
+		// au
 		if (location.getDateDerniereRegularisation() != null) {
 			modeleTable.setValueAt(location.getDateDerniereRegularisation(), numeroLigne, 1);
 		} else {
 			modeleTable.setValueAt("N/A", numeroLigne, 1);
 		}
-		// Total charges reelles
+		// Charges reelles
 		double chargesReellesBien = this.daoLouer.totalChargesRéelles(location);
 		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 2);
-		// Total ordures menageres
-//		double chargesGarage = this.daoLouer.totalChargesGarages(location);
-//		if (chargesGarage != 0) {
-//			modeleTable.setValueAt(chargesGarage, numeroLigne, 3);
-//		} else {
-//			modeleTable.setValueAt("N/A", numeroLigne, 3);
-//		}
+		//  Ordures menageres
+		double orduresMenageres = this.daoLouer.totalOrduresMenageres(location);
+		modeleTable.setValueAt(orduresMenageres, numeroLigne, 3);
+		// TOTAL charges
+		double totalCharges = chargesReellesBien + orduresMenageres;
+		modeleTable.setValueAt(totalCharges, numeroLigne, 4);
 		// Total des provisions sur charges
 		double totalProvisions = this.daoLouer.totalProvisions(location);
-		modeleTable.setValueAt(totalProvisions, numeroLigne, 4);
+		modeleTable.setValueAt(totalProvisions, numeroLigne, 5);
 		// TOTAL
 		double regularisationCharges = this.daoLouer.regularisationCharges(location);
-		modeleTable.setValueAt(regularisationCharges, numeroLigne, 5);
+		modeleTable.setValueAt(regularisationCharges, numeroLigne, 6);
 
 	}
 
