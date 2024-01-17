@@ -40,25 +40,25 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		this.gestionClic = new GestionAffichageInfoLocataire(this);
 		this.gestionModificationLocataire = new GestionModificationLocataire(this);
 
-		this.setBounds(100, 100, 762, 541);
+		this.setBounds(100, 100, 958, 553);
 		this.getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(6, 6, 755, 511);
+		panel.setBounds(0, 0, 946, 524);
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
 
 		// Titre et séparateur
 		JSeparator separator_AffichageInfoQuotite = new JSeparator();
 		separator_AffichageInfoQuotite.setForeground(new Color(0, 102, 204));
-		separator_AffichageInfoQuotite.setBounds(280, 57, 190, 2);
+		separator_AffichageInfoQuotite.setBounds(399, 56, 190, 2);
 		panel.add(separator_AffichageInfoQuotite);
 
 		JLabel lbl_AffichageInfoLocataire = new JLabel("Mon Locataire");
 		lbl_AffichageInfoLocataire.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_AffichageInfoLocataire.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_AffichageInfoLocataire.setBounds(293, 11, 160, 48);
+		lbl_AffichageInfoLocataire.setBounds(417, 10, 160, 48);
 		panel.add(lbl_AffichageInfoLocataire);
 
 		// Détail locataire
@@ -69,7 +69,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
 		// Bouton Régularisation des charges
 		JButton btnRegularisationCharges = new JButton("Régularisation des charges");
-		btnRegularisationCharges.setBounds(377, 90, 200, 25);
+		btnRegularisationCharges.setBounds(467, 90, 200, 25);
 		panel.add(btnRegularisationCharges);
 		btnRegularisationCharges.addActionListener(this.gestionClic);
 
@@ -78,7 +78,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		this.textField_Id.setColumns(10);
 		this.textField_Id.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Identifiant",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Id.setBounds(33, 130, 190, 40);
+		this.textField_Id.setBounds(21, 132, 190, 40);
 		panel.add(this.textField_Id);
 		this.textField_Id.setEditable(false);
 
@@ -86,46 +86,46 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		this.textField_Nom.setColumns(10);
 		this.textField_Nom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Nom",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Nom.setBounds(33, 182, 190, 40);
+		this.textField_Nom.setBounds(21, 183, 190, 40);
 		panel.add(this.textField_Nom);
 
 		this.textField_Prenom = new JTextField();
 		this.textField_Prenom.setColumns(10);
 		this.textField_Prenom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Prénom ",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Prenom.setBounds(33, 233, 190, 40);
+		this.textField_Prenom.setBounds(21, 233, 190, 40);
 		panel.add(this.textField_Prenom);
 
 		this.textField_Telephone = new JTextField();
 		this.textField_Telephone.setColumns(10);
 		this.textField_Telephone.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "n° Téléphone",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Telephone.setBounds(33, 286, 190, 40);
+		this.textField_Telephone.setBounds(21, 287, 190, 40);
 		panel.add(this.textField_Telephone);
 
 		this.textField_Mail = new JTextField();
 		this.textField_Mail.setColumns(10);
 		this.textField_Mail.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mail",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Mail.setBounds(33, 337, 190, 40);
+		this.textField_Mail.setBounds(21, 338, 190, 40);
 		panel.add(this.textField_Mail);
 
 		this.textField_DateN = new JTextField();
 		this.textField_DateN.setColumns(10);
 		this.textField_DateN.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date de naissance",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_DateN.setBounds(33, 388, 190, 40);
+		this.textField_DateN.setBounds(21, 388, 190, 40);
 		panel.add(this.textField_DateN);
 
 		// Bouton Retour
 		this.btnAnnuler = new JButton("Retour");
-		this.btnAnnuler.setBounds(399, 460, 200, 25);
+		this.btnAnnuler.setBounds(498, 461, 200, 25);
 		panel.add(this.btnAnnuler);
 		this.btnAnnuler.addActionListener(this.gestionModificationLocataire);
 
 		// Bouton Modifier
 		JButton btnModifier = new JButton("Modifier");
-		btnModifier.setBounds(144, 461, 200, 25);
+		btnModifier.setBounds(230, 461, 200, 25);
 		panel.add(btnModifier);
 		btnModifier.addActionListener(this.gestionModificationLocataire);
 
@@ -144,64 +144,78 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		// Tableaux et scrollPane
 		scrollPane_Regularisation = new JScrollPane();
 		scrollPane_Regularisation.setBorder(new LineBorder(new Color(0, 102, 204), 2, true));
-		scrollPane_Regularisation.setBounds(248, 126, 475, 96);
+		scrollPane_Regularisation.setBounds(248, 126, 688, 96);
 		panel.add(scrollPane_Regularisation);
 
 		this.tableRegularisation = new JTable();
 		this.tableRegularisation.setSelectionBackground(new Color(0, 102, 204));
 		this.tableRegularisation.setModel(
-				new DefaultTableModel(new Object[][] { { null, null, null, null, null, null, null, null, null }, },
-						new String[] { "Bien", "P\u00E9riode du", "au", "Charges r\u00E9elles",
-								"Ordures m\u00E9nag\u00E8res", "TOTAL Charges", "Restant du loyer",
-								"Total des provisions", "RESTE" }));
-		this.tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(42);
-		this.tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(62);
-		this.tableRegularisation.getColumnModel().getColumn(2).setPreferredWidth(55);
-		this.tableRegularisation.getColumnModel().getColumn(5).setPreferredWidth(87);
-		this.tableRegularisation.getColumnModel().getColumn(6).setPreferredWidth(91);
-		this.tableRegularisation.getColumnModel().getColumn(7).setPreferredWidth(55);
-		this.tableRegularisation.getColumnModel().getColumn(8).setPreferredWidth(55);
+				new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"Bien", "P\u00E9riode du", "au", "Charges r\u00E9elles", "Ordures m\u00E9nag\u00E8res", "TOTAL Charges", "Restant du loyer", "Total provisions", "RESTE"
+			}
+		));
+		tableRegularisation.getColumnModel().getColumn(0).setPreferredWidth(42);
+		tableRegularisation.getColumnModel().getColumn(1).setPreferredWidth(62);
+		tableRegularisation.getColumnModel().getColumn(2).setPreferredWidth(72);
+		tableRegularisation.getColumnModel().getColumn(3).setPreferredWidth(88);
+		tableRegularisation.getColumnModel().getColumn(4).setPreferredWidth(101);
+		tableRegularisation.getColumnModel().getColumn(5).setPreferredWidth(87);
+		tableRegularisation.getColumnModel().getColumn(6).setPreferredWidth(91);
+		tableRegularisation.getColumnModel().getColumn(7).setPreferredWidth(85);
+		tableRegularisation.getColumnModel().getColumn(8).setPreferredWidth(55);
 		this.tableRegularisation.setBounds(40, 53, 668, 130);
 		scrollPane_Regularisation.setViewportView(this.tableRegularisation);
 
 		// Bouton Solde tout compte
 		JButton btnSoldeToutCompte = new JButton("Solde tout compte");
-		btnSoldeToutCompte.setBounds(377, 268, 210, 25);
+		btnSoldeToutCompte.setBounds(467, 299, 210, 25);
 		panel.add(btnSoldeToutCompte);
 		btnSoldeToutCompte.addActionListener(this.gestionClic);
 
 		JLabel lblDpartLoca = new JLabel("Départ de votre locataire :");
 		lblDpartLoca.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblDpartLoca.setBounds(415, 233, 137, 25);
+		lblDpartLoca.setBounds(511, 267, 137, 25);
 		panel.add(lblDpartLoca);
 
 		this.scrollPane_locataireSoldeToutCompte = new JScrollPane();
 		this.scrollPane_locataireSoldeToutCompte.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
-		this.scrollPane_locataireSoldeToutCompte.setBounds(248, 304, 475, 48);
+		this.scrollPane_locataireSoldeToutCompte.setBounds(248, 334, 688, 68);
 		panel.add(this.scrollPane_locataireSoldeToutCompte);
 
 		// Table pour afficher les données d'entreprise
 		this.table_soldeToutCompte = new JTable();
 		this.table_soldeToutCompte.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null, null, null, null, null, null, null, null }, },
-				new String[] { "Provisions sur charges", " ", "Charges r\u00E9elles", "", "Caution", " ",
-						"Travaux imputables", " ", "Restant du loyer", " ", "Reste" }));
+			new Object[][] {
+				{null, null, null, null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"Provisions sur charges", " ", "Charges r\u00E9elles", "", "Caution", " ", "Travaux imputables", " ", "Restant du loyer", " ", "RESTE"
+			}
+		));
+		table_soldeToutCompte.getColumnModel().getColumn(0).setPreferredWidth(122);
 		table_soldeToutCompte.getColumnModel().getColumn(1).setPreferredWidth(15);
+		table_soldeToutCompte.getColumnModel().getColumn(2).setPreferredWidth(86);
 		table_soldeToutCompte.getColumnModel().getColumn(3).setPreferredWidth(15);
 		table_soldeToutCompte.getColumnModel().getColumn(5).setPreferredWidth(15);
+		table_soldeToutCompte.getColumnModel().getColumn(6).setPreferredWidth(103);
 		table_soldeToutCompte.getColumnModel().getColumn(7).setPreferredWidth(15);
+		table_soldeToutCompte.getColumnModel().getColumn(8).setPreferredWidth(95);
 		table_soldeToutCompte.getColumnModel().getColumn(9).setPreferredWidth(15);
 		this.scrollPane_locataireSoldeToutCompte.setViewportView(this.table_soldeToutCompte);
 
-		JLabel lblResteLoca = new JLabel("Si votre reste est négatif, alors votre locataire vous doit de l'argent.");
+		JLabel lblResteLoca = new JLabel("Si votre reste est négatif, alors votre locataire vous doit de l'argent. Sinon, vous lui en devez");
 		lblResteLoca.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblResteLoca.setBounds(262, 363, 461, 25);
+		lblResteLoca.setBounds(248, 401, 461, 25);
 		panel.add(lblResteLoca);
-
-		JLabel lblRestLoca_2 = new JLabel("Sinon, vous lui en devez");
-		lblRestLoca_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblRestLoca_2.setBounds(263, 388, 380, 25);
-		panel.add(lblRestLoca_2);
+		
+		JLabel lblSiVotreReste = new JLabel("Si votre reste est positif, alors vous devez de l'argent a votre locataire. Sinon, il vous doit de l'argent");
+		lblSiVotreReste.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblSiVotreReste.setBounds(248, 221, 506, 25);
+		panel.add(lblSiVotreReste);
 
 	}
 
