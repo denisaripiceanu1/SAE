@@ -71,11 +71,7 @@ public class Fenetre_AffichageReleveCompteursLogement extends JInternalFrame {
 		panel.add(btnAnnuler);
 
 	}
-
-	public GestionAffichageReleveCompteurLogement getGestionAffichage() {
-		return this.gestionAffichage;
-	}
-
+	
 	public JTable getTable_releve_compteur_logement() {
 		return this.table_releve_compteur_logement;
 	}
