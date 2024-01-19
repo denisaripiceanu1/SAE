@@ -108,8 +108,12 @@ public class GestionAccueil implements ActionListener {
 		this.daoImpot = new DaoImpôt();
 	}
 
-	// ENLEVER LES PAGES DE COMMENTAIRES QUAND ELLES SERONT DECOMMENTER DANS LA PAGE
-	// ACCUEIL
+	/**
+	 * Permet de rendre visible/mettre au premier plan
+	 * les JLayeredPane de l'application
+	 * 
+	 * @param visible (JLayeredPane) : la page à rendre visible
+	 */
 	public void rendreVisible(JLayeredPane visible) {
 		this.fenetreAccueil.getLayeredPane_Accueil().setVisible(false);
 		this.fenetreAccueil.getLayeredPane_MesBiens().setVisible(false);
@@ -122,7 +126,13 @@ public class GestionAccueil implements ActionListener {
 		visible.setVisible(true);
 		this.fenetreAccueil.getContentPane().add(visible, BorderLayout.CENTER);
 	}
-
+	
+	
+	/**
+	 * Permet de vider un JTable tableau
+	 * 
+	 * @param table (JTable) :  La table à vider
+	 */
 	public static void viderTable(JTable table) {
 		DefaultTableModel modeleTable = (DefaultTableModel) table.getModel();
 		int rowCount = modeleTable.getRowCount();
@@ -133,26 +143,41 @@ public class GestionAccueil implements ActionListener {
 				modeleTable.setValueAt(null, row, col);
 			}
 		}
-	}
+	}	
 
-	///////////////////////////////////////////////////////////////////
-	// LAYERED ACCUEIL
-	///////////////////////////////////////////////////////////////////
-
-	public void viderAccueil() {
-		this.viderPanel(this.fenetreAccueil.getPanel_3());
-		this.viderPanel(this.fenetreAccueil.getPanel_2());
-		this.viderPanel(this.fenetreAccueil.getPanel_6());
-		this.viderPanel(this.fenetreAccueil.getPanel_8());
-	}
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LAYERED ACCUEIL
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Permet de vider le contenu d'un panel
+	 * 
+	 * @param panel (Container) : panel à vider
+	 */
 	private void viderPanel(Container panel) {
 		panel.removeAll();
 		panel.repaint();
 		panel.revalidate();
 	}
+	
+	/**
+	 * Permet de vider les panels de la page d'accueil
+	 * pour recalculer les statistiques qui seront 
+	 * mises à jour à la prochaine visite sur le panel
+	 */
+	public void viderAccueil() {
+		this.viderPanel(this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite());
+		this.viderPanel(this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite());
+		this.viderPanel(this.fenetreAccueil.getPanel_Accueil_mediane());
+		this.viderPanel(this.fenetreAccueil.getPanel_Accueil_moyenne());
+	}
 
-	private DefaultCategoryDataset createDataset() {
+	/**
+	 * Crée et retourne un jeu de données (dataset) par défaut pour faire des statistiques
+	 *
+	 * @return dataset (DefaultCategoryDataset) : les données pour les statistiques
+	 */
+	private DefaultCategoryDataset créerJeuDeDonnées() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		try {
 			List<ProvisionAnnee> provisions = this.daoLouer.findProvisions();
@@ -163,26 +188,36 @@ public class GestionAccueil implements ActionListener {
 			e.printStackTrace();
 		}
 		return dataset;
-
 	}
-
-	private JFreeChart createBarChartPro(DefaultCategoryDataset dataset) {
-		return ChartFactory.createBarChart("Évolution des provisions pour charges par année", // Titre du graphique
+	
+	/**
+	 * Crée et retourne un graphique à barres représentant l'évolution des provisions pour charges par année
+	 *
+	 * @param dataset (DefaultCategoryDataset) : données à afficher sur le graphique
+	 * @return (JFreeChart) le graphique à barres
+	 */
+	private JFreeChart creerGraphiqueBarresProvisions(DefaultCategoryDataset dataset) {
+		return ChartFactory.createBarChart(
+				"Évolution des provisions pour charges par année", // Titre du graphique
 				"Année", // Axe des abscisses (X)
 				"Provision pour charges", // Axe des ordonnées (Y)
-				dataset, PlotOrientation.VERTICAL, true, // Inclure la légende
-				true, // Générer des tooltips
-				false // Générer des URLs
+				dataset, // Jeu de données
+				PlotOrientation.VERTICAL, // Orientation du graphique
+				true, // Inclure la légende : oui
+				true, // Générer des tooltips (infos-bulles)
+				false // Générer des URLs : non
 		);
-
 	}
 
-	private DefaultCategoryDataset createDatasetMoyenneLoyer() {
+	/**
+	 * Crée et retourne un jeu de données (dataset) pour le graphique de la moyenne des loyers par locataire
+	 *
+	 * @return dataset (DefaultCategoryDataset): données pour le graphique de moyenne des loyers
+	 */
+	private DefaultCategoryDataset créerJeuDeDonnéesMoyenneLoyer() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		try {
-			List<MoyenneLoyer> moyennes = this.daoLouer.findMoyenneLoyer(); // Assurez-vous que la méthode est
-																			// correctement
-			// nommée
+			List<MoyenneLoyer> moyennes = this.daoLouer.findMoyenneLoyer();
 			for (MoyenneLoyer moyenne : moyennes) {
 				dataset.addValue(moyenne.getLoyer(), "Moyenne Loyer", moyenne.getLocataire());
 			}
@@ -191,58 +226,80 @@ public class GestionAccueil implements ActionListener {
 		}
 		return dataset;
 	}
-
-	private JFreeChart createBarChartMoy(DefaultCategoryDataset dataset) {
-		return ChartFactory.createBarChart("Moyenne des loyers par locataire", // Titre du graphique
+	
+	/**
+	 * Crée et retourne un graphique à barres représentant la moyenne des loyers par locataire
+	 *
+	 * @param dataset Un objet DefaultCategoryDataset contenant les données à afficher sur le graphique.
+	 * @return Un objet JFreeChart représentant le graphique à barres de la moyenne des loyers par locataire.
+	 */
+	private JFreeChart creerGraphiqueBarresMoyenneLoyer(DefaultCategoryDataset dataset) {
+		return ChartFactory.createBarChart(
+				"Moyenne des loyers par locataire", // Titre du graphique
 				"Locataire", // Axe des abscisses (X)
 				"Moyenne", // Axe des ordonnées (Y)
-				dataset, PlotOrientation.VERTICAL, true, // Inclure la légende
+				dataset, // Jeu de données 
+				PlotOrientation.VERTICAL, // Orientation
+				true, // Inclure la légende
 				true, // Générer des tooltips
 				false // Générer des URLs
 		);
 	}
 
+	/**
+	 * Calcule et retourne la moyenne et la médiane des loyers.
+	 * 
+	 * @return (MoyenneMediane) : les valeurs de la moyenne et de la médiane des loyers
+	 * @throws SQLException
+	 */
 	private MoyenneMediane loyerMoyenneMediane() throws SQLException {
 		return this.daoLouer.findMoyenneMediane();
-	}
-
+	}	
+	
+	/**
+	 * Charge la page d'accueil en générant et affichant les graphiques des provisions et des moyennes de loyer
+	 *
+	 * @throws SQLException En cas d'erreur lors de l'accès aux données.
+	 */
 	public void chargerAccueil() throws SQLException {
 		// Créer les datasets
-		DefaultCategoryDataset datasetProvisions = this.createDataset();
-		DefaultCategoryDataset datasetMoyenneLoyer = this.createDatasetMoyenneLoyer();
+		DefaultCategoryDataset datasetProvisions = this.créerJeuDeDonnées();
+		DefaultCategoryDataset datasetMoyenneLoyer = this.créerJeuDeDonnéesMoyenneLoyer();
 
 		// Créer les graphiques
-		JFreeChart chartProvisions = this.createBarChartPro(datasetProvisions);
-		JFreeChart chartMoyenneLoyer = this.createBarChartMoy(datasetMoyenneLoyer);
+		JFreeChart chartProvisions = this.creerGraphiqueBarresProvisions(datasetProvisions);
+		JFreeChart chartMoyenneLoyer = this.creerGraphiqueBarresMoyenneLoyer(datasetMoyenneLoyer);
 
 		// Créer les ChartPanels avec les tailles appropriées
 		ChartPanel chartPanelProvisions = new ChartPanel(chartProvisions);
-		this.fenetreAccueil.getPanel_3().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_3().getWidth(),
-				this.fenetreAccueil.getPanel_3().getHeight()));
-		this.fenetreAccueil.getPanel_3().setLayout(new BorderLayout());
-		this.fenetreAccueil.getPanel_3().add(chartPanelProvisions, BorderLayout.CENTER);
+		this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().getWidth(),
+				this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().getHeight()));
+		this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().setLayout(new BorderLayout());
+		this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().add(chartPanelProvisions, BorderLayout.CENTER);
 
 		ChartPanel chartPanelMoyenneLoyer = new ChartPanel(chartMoyenneLoyer);
-		this.fenetreAccueil.getPanel_2().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_2().getWidth(),
-				this.fenetreAccueil.getPanel_2().getHeight()));
-		this.fenetreAccueil.getPanel_2().setLayout(new BorderLayout());
-		this.fenetreAccueil.getPanel_2().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
+		this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().getWidth(),
+				this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().getHeight()));
+		this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().setLayout(new BorderLayout());
+		this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
 
 		JLabel labelMoyenne = new JLabel("Moyenne des loyers : " + this.loyerMoyenneMediane().getMoyenne() + " €");
 		Font nouvellePoliceMo = new Font(labelMoyenne.getFont().getName(), Font.PLAIN, 20);
 		labelMoyenne.setFont(nouvellePoliceMo);
-		this.fenetreAccueil.getPanel_6().add(labelMoyenne, BorderLayout.NORTH);
+		this.fenetreAccueil.getPanel_Accueil_mediane().add(labelMoyenne, BorderLayout.NORTH);
 
 		JLabel labelMediane = new JLabel("Mediane des loyers : " + this.loyerMoyenneMediane().getMediane() + " €");
 		Font nouvellePolice = new Font(labelMediane.getFont().getName(), Font.PLAIN, 20);
 		labelMediane.setFont(nouvellePolice);
-		this.fenetreAccueil.getPanel_8().add(labelMediane, BorderLayout.SOUTH);
+		this.fenetreAccueil.getPanel_Accueil_moyenne().add(labelMediane, BorderLayout.SOUTH);
 
 		// Ajouter les ChartPanels aux panneaux de fenetreAccueil
 		this.fenetreAccueil.revalidate();
 		this.fenetreAccueil.repaint();
 	}
 
+	
+	
 	///////////////////////////////////////////////////////////////////
 	// LAYERED MES BIENS
 	///////////////////////////////////////////////////////////////////

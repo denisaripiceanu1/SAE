@@ -69,10 +69,10 @@ public class Fenetre_Accueil extends JFrame {
 	private JTextField textField_datePaiement;
 	private JTextField textField_paye;
 	private JTextField textField_restantDu;
-	private JPanel panel_1;
-	private JPanel panel_2;
-	private JPanel panel_3;
-	private JPanel panel_4;
+	private JPanel panelAccueil_graphiqueHautGauche;
+	private JPanel panelAccueil_graphiqueHautDroite;
+	private JPanel panelAccueil_graphiqueBasDroite;
+	private JPanel panelAccueil_graphiqueBasGauche;
 
 	private JComboBox<String> comboBox_MesAssurances;
 	private JComboBox<String> comboBox_MesFactures;
@@ -99,9 +99,9 @@ public class Fenetre_Accueil extends JFrame {
 	private GestionTableTravaux gestionTableTravaux;
 	private GestionTableAssurance gestionTableAssurance;
 	private JPanel panel_5;
-	private JPanel panel_8;
-	private JPanel panel_7;
-	private JPanel panel_6;
+	private JPanel panelAccueil_moyenne;
+	private JPanel panelAccueil_insererCSV;
+	private JPanel panelAccueil_mediane;
 	private JTable table_MesArchives_Locataire;
 	private JTable table_MesArchives_Louer;
 	private JTable table_MesArchives_Facture;
@@ -240,58 +240,54 @@ public class Fenetre_Accueil extends JFrame {
 		this.contentPane.add(this.layeredPane_Accueil, BorderLayout.CENTER);
 		this.layeredPane_Accueil.setLayout(new BorderLayout(0, 0));
 
-		JPanel panel_accueil = new JPanel();
-		this.layeredPane_Accueil.add(panel_accueil, BorderLayout.CENTER);
-		panel_accueil.setLayout(new GridLayout(2, 2, 0, 0));
+		JPanel panelAccueil = new JPanel();
+		this.layeredPane_Accueil.add(panelAccueil, BorderLayout.CENTER);
+		panelAccueil.setLayout(new GridLayout(2, 2, 0, 0));
 
-		this.panel_1 = new JPanel();
-		panel_accueil.add(this.panel_1);
-		this.panel_1.setLayout(new GridLayout(0, 1, 0, 0));
+		this.panelAccueil_graphiqueHautGauche = new JPanel();
+		panelAccueil.add(this.panelAccueil_graphiqueHautGauche);
+		this.panelAccueil_graphiqueHautGauche.setLayout(new GridLayout(0, 1, 0, 0));
 
-		JPanel panel = new JPanel();
-		this.panel_1.add(panel);
-		panel.setLayout(null);
+		JPanel panelAccueil_titre = new JPanel();
+		this.panelAccueil_graphiqueHautGauche.add(panelAccueil_titre);
+		panelAccueil_titre.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Accueil");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel.setBounds(156, 32, 63, 35);
-		panel.add(lblNewLabel);
+		panelAccueil_titre.add(lblNewLabel);
 
 		JSeparator panel_separator = new JSeparator();
 		panel_separator.setBounds(94, 70, 193, 11);
-		panel.add(panel_separator);
+		panelAccueil_titre.add(panel_separator);
 
-		this.panel_6 = new JPanel();
-		this.panel_1.add(this.panel_6);
+		this.panelAccueil_mediane = new JPanel();
+		this.panelAccueil_graphiqueHautGauche.add(this.panelAccueil_mediane);
 
-		this.panel_2 = new JPanel();
-		panel_accueil.add(this.panel_2);
+		this.panelAccueil_graphiqueHautDroite = new JPanel();
+		panelAccueil.add(this.panelAccueil_graphiqueHautDroite);
 
-		this.panel_4 = new JPanel();
-		panel_accueil.add(this.panel_4);
+		this.panelAccueil_graphiqueBasGauche = new JPanel();
+		panelAccueil.add(this.panelAccueil_graphiqueBasGauche);
 
-		this.panel_3 = new JPanel();
-		panel_accueil.add(this.panel_3);
+		this.panelAccueil_graphiqueBasDroite = new JPanel();
+		panelAccueil.add(this.panelAccueil_graphiqueBasDroite);
 
-		this.panel_8 = new JPanel();
-		this.panel_4.add(this.panel_8);
+		this.panelAccueil_moyenne = new JPanel();
+		this.panelAccueil_graphiqueBasGauche.add(this.panelAccueil_moyenne);
 
-		this.panel_7 = new JPanel();
-		this.panel_4.add(this.panel_7);
+		this.panelAccueil_insererCSV = new JPanel();
+		this.panelAccueil_graphiqueBasGauche.add(this.panelAccueil_insererCSV);
 
 		JButton btnCSV = new JButton("Importer un csv");
 		btnCSV.setForeground(Color.WHITE);
 		btnCSV.setBackground(new Color(0, 102, 204));
 		btnCSV.setBounds(118, 45, 143, 39);
 		btnCSV.addActionListener(this.gestionAccueil);
-		this.panel_4.setLayout(new GridLayout(2, 1, 0, 0));
-		this.panel_7.setLayout(null);
+		this.panelAccueil_graphiqueBasGauche.setLayout(new GridLayout(2, 1, 0, 0));
+		this.panelAccueil_insererCSV.setLayout(null);
 		btnCSV.setName("importCSV");
-		this.panel_7.add(btnCSV);
-
-		JPanel panel_titre_accueil = new JPanel();
-		this.layeredPane_Accueil.add(panel_titre_accueil, BorderLayout.NORTH);
-		panel_titre_accueil.setLayout(new BorderLayout(0, 0));
+		this.panelAccueil_insererCSV.add(btnCSV);
 
 		///////////////////////////////////////////////////////////////////
 		// LAYERED MES BIENS
@@ -894,9 +890,10 @@ public class Fenetre_Accueil extends JFrame {
 		}
 
 
-////		////////////////////////////////////////////////////////////////////////////
-////		// LAYERED
-////		// DOCUMENTS////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////
+		// LAYERED
+		// DOCUMENTS
+		////////////////////////////////////////////////////////////////
 
 		this.layeredPane_MesDocuments = new JLayeredPane();
 		this.contentPane.add(this.layeredPane_MesDocuments, BorderLayout.CENTER);
@@ -979,9 +976,6 @@ public class Fenetre_Accueil extends JFrame {
 			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
 					"Erreur", JOptionPane.ERROR_MESSAGE);
 		}
-
-//		PDFListe pdfViewer = new PDFListe();
-//		panel_MesDocuments.add(pdfViewer, BorderLayout.CENTER);
 
 ////////////////////////////////////////////////////////////////////////////
 ////// LAYERED
@@ -1085,6 +1079,8 @@ public class Fenetre_Accueil extends JFrame {
 		panel_MesArchives.add(lbl_Archive_Facture);
 
 	}
+	
+	// GETTERS & SETTERS
 
 	public JLayeredPane getLayeredPane_MesDocuments() {
 		return this.layeredPane_MesDocuments;
@@ -1124,7 +1120,6 @@ public class Fenetre_Accueil extends JFrame {
 		return this.contentPane;
 	}
 
-	// --------- GETTERS --------//
 	public JTable getTableBiens() {
 		return this.tableMesBiens;
 	}
@@ -1194,44 +1189,50 @@ public class Fenetre_Accueil extends JFrame {
 		return this.comboBox_MesDocuments;
 	}
 
-	public JPanel getPanel_1() {
-		return this.panel_1;
+	public JPanel getPanel_Accueil_graphiqueHautGauche() {
+		return this.panelAccueil_graphiqueHautGauche;
 	}
 
-	public void setPanel_1(JPanel panel_1) {
-		this.panel_1 = panel_1;
+	public void setPanel_Accueil_graphiqueHautGauche(JPanel panel) {
+		this.panelAccueil_graphiqueHautGauche = panel;
+	}
+	
+	
+
+	public JPanel getPanel_Accueil_graphiqueHautDroite() {
+		return this.panelAccueil_graphiqueHautDroite;
+	}
+	
+	public void setPanel_Accueil_graphiqueHautDroite(JPanel panel_2) {
+		this.panelAccueil_graphiqueHautDroite = panel_2;
+	}
+	
+
+	public JPanel getPanel_Accueil_graphiqueBasDroite() {
+		return this.panelAccueil_graphiqueBasDroite;
 	}
 
-	public JPanel getPanel_2() {
-		return this.panel_2;
+	public void setPanel_Accueil_graphiqueBasDroite(JPanel panel_3) {
+		this.panelAccueil_graphiqueBasDroite = panel_3;
 	}
 
-	public JPanel getPanel_6() {
-		return this.panel_6;
+	
+	public JPanel getPanel_Accueil_graphiqueBasGauche() {
+		return this.panelAccueil_graphiqueBasGauche;
 	}
 
-	public JPanel getPanel_8() {
-		return this.panel_8;
+	public void setPanel_Accueil_graphiqueBasGauche(JPanel panel_4) {
+		this.panelAccueil_graphiqueBasGauche = panel_4;
 	}
 
-	public void setPanel_2(JPanel panel_2) {
-		this.panel_2 = panel_2;
-	}
 
-	public JPanel getPanel_3() {
-		return this.panel_3;
+	public JPanel getPanel_Accueil_mediane() {
+		return this.panelAccueil_mediane;
 	}
+	
 
-	public void setPanel_3(JPanel panel_3) {
-		this.panel_3 = panel_3;
-	}
-
-	public JPanel getPanel_4() {
-		return this.panel_4;
-	}
-
-	public void setPanel_4(JPanel panel_4) {
-		this.panel_4 = panel_4;
+	public JPanel getPanel_Accueil_moyenne() {
+		return this.panelAccueil_moyenne;
 	}
 
 	public JTable getTable_MesArchives_Facture() {
