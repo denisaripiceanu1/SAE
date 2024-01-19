@@ -42,10 +42,14 @@ public class GestionInsertionPaiementBien implements ActionListener {
 																								// frame
 		switch (btn.getText()) {
 		case "Ajouter":
+			// Création d'un objet Facture à null
 			Facture facture = null;
+			// Récupérer l'immeuble de la sauvegarde
 			Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
+			// Récupérer l'entreprise de la sauvegarde
 			Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
 
+			// Savoir si le locataire est imputable
 			int imputable = 0;
 			if (this.fipb.getRdbtnOui().isSelected()) {
 				imputable = 1;
@@ -69,15 +73,17 @@ public class GestionInsertionPaiementBien implements ActionListener {
 				System.err.println("Erreur lors de l'ajout de la facture : " + e1.getMessage());
 			}
 
-			this.fipb.dispose(); // Fermeture de la fenêtre d'insertion
+			this.fipb.dispose(); // Fermeture de la fenêtre d'insertion après l'insertion
 			break;
 
 		case "Annuler":
+			// Fermeture de la fenêtre d'insertion
 			this.fipb.dispose();
 			break;
 
 		case "Charger":
 			try {
+				// Utilise la méthode chargerEntreprise afin de charger le tableau des entreprises
 				this.chargerEntreprise();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
@@ -94,7 +100,14 @@ public class GestionInsertionPaiementBien implements ActionListener {
 		}
 	}
 
-	// Méthode pour écrire une ligne d'entreprise dans la table d'entreprise
+	/**
+	 * Méthode pour écrire une ligne d'entreprise dans la table d'entreprise
+	 * 
+	 * @param numeroLigne (int) : correspond au numéro de la ligne courante dans la
+	 *                    table des entreprises
+	 * @param e (Entreprise) : correspond à l'entreprise courante
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableEntreprise(int numeroLigne, Entreprise e) throws SQLException {
 		JTable tableEntreprise = this.fipb.getTable_entreprise();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableEntreprise.getModel();
@@ -103,7 +116,11 @@ public class GestionInsertionPaiementBien implements ActionListener {
 		modeleTable.setValueAt(e.getNom(), numeroLigne, 1);
 	}
 
-	// Méthode pour charger les entreprises dans la table d'entreprise
+	/**
+	 * Méthode pour charger les entreprises dans la table d'entreprise
+	 * 
+	 * @throws SQLException
+	 */
 	private void chargerEntreprise() throws SQLException {
 		List<Entreprise> entreprises = this.daoEntreprise.findAll();
 

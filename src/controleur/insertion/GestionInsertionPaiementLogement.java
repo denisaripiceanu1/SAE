@@ -47,10 +47,14 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 			// Gestion des actions en fonction du bouton cliqué
 			switch (bouton.getText()) {
 			case "Ajouter":
+				// Création d'un objet Facture à null
 				Facture facture = null;
+				// Récupérer le Logement de la sauvegarde
 				Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+				// Récupérer l'entreprise de la sauvegarde
 				Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
 
+				// Savoir si le locataire est imputable
 				int imputable = 0;
 				if (this.fipl.getRdbtnOui().isSelected()) {
 					imputable = 1;
@@ -101,16 +105,18 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 						System.err.println("Erreur lors de l'ajout de la facture : " + e1.getMessage());
 					}
 				}
-
-				this.fipl.dispose(); // Fermeture de la fenêtre d'insertion
+				// Fermeture de la fenêtre d'insertion
+				this.fipl.dispose();
 				break;
 
 			case "Annuler":
-				this.fipl.dispose(); // Fermeture de la fenêtre d'insertion en cas d'annulation
+				// Fermeture de la fenêtre d'insertion en cas d'annulation
+				this.fipl.dispose();
 				break;
 
 			case "Charger":
 				try {
+					// Utilisation de la méthode chargerEntreprise afin de charger le tableau des entreprises
 					this.chargerEntreprise();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -118,6 +124,7 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 				break;
 
 			case "Insérer":
+				// Ouverture de la fenêtre d'une entreprise
 				Fenetre_InsertionEntreprise insertionEntreprise = new Fenetre_InsertionEntreprise();
 				fenetrePrincipale.getLayeredPane().add(insertionEntreprise);
 				insertionEntreprise.setVisible(true);
@@ -129,13 +136,18 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 			updateEntrepriseComponents();
 
 		} else if (source instanceof JComboBox) {
+			// Méthode appelée lorsque l'état de l'élément du JComboBox change
 			updateEntrepriseComponents();
 		}
 	}
 
-	// Méthode pour mettre à jour les composants liés à l'entreprise en fonction de
-	// la désignation
+	
+	/**
+	 * Méthode pour mettre à jour les composants liés à l'entreprise en fonction de la désignation
+	 * 
+	 */
 	private void updateEntrepriseComponents() {
+		// Récupère dans une variable l'objet selectionné dans la comboBox
 		Object selectedObject = this.fipl.getComboBox_Designation().getSelectedItem();
 
 		if (selectedObject != null) {
@@ -162,7 +174,14 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 		}
 	}
 
-	// Méthode pour écrire une ligne d'entreprise dans la table d'entreprise
+	/**
+	 * Méthode permettant d'écrire une ligne d'entreprise dans la table d'entreprise
+	 * 
+	 * @param numeroLigne (int) : correspond au numéro de la ligne courante dans la
+	 *                    table des entreprises
+	 * @param e (Entreprise) : correspond à l'entreprise courante
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableEntreprise(int numeroLigne, Entreprise e) throws SQLException {
 		JTable tableEntreprise = this.fipl.getTable_entreprise();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableEntreprise.getModel();
@@ -171,7 +190,10 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 		modeleTable.setValueAt(e.getNom(), numeroLigne, 1);
 	}
 
-	// Méthode pour charger les entreprises dans la table d'entreprise
+	/**
+	 * Méthode permettant de charger les entreprises dans la table d'entreprise
+	 * @throws SQLException
+	 */
 	private void chargerEntreprise() throws SQLException {
 		List<Entreprise> entreprises = this.daoEntreprise.findAll();
 

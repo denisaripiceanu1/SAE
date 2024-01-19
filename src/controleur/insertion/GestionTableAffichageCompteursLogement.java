@@ -16,8 +16,11 @@ public class GestionTableAffichageCompteursLogement implements ListSelectionList
 	private Fenetre_AffichageCompteursLogement fenetre_AffichageCompteursLogements;
 	private DaoCompteur daoCompteur;
 
+	// Constructeur prenant en paramètre la fenêtre d'affichage des compteurs pour un logement
 	public GestionTableAffichageCompteursLogement(Fenetre_AffichageCompteursLogement fenetre_AffichageCompteursLogement) {
 		this.fenetre_AffichageCompteursLogements = fenetre_AffichageCompteursLogement;
+		
+		// Initialisation de l'accès à la base de données pour l'entité Compteur
 		this.daoCompteur = new DaoCompteur();
 	}
 

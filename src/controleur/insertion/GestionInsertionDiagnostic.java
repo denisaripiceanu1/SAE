@@ -17,8 +17,11 @@ public class GestionInsertionDiagnostic implements ActionListener {
 	private Fenetre_InsertionDiagnostic fid;
 	private DaoDiagnostic daoDiagnostic;
 
+	// Constructeur prenant en paramètre la fenêtre d'insertion d'un diagnostic
 	public GestionInsertionDiagnostic(Fenetre_InsertionDiagnostic fid) {
 		this.fid = fid;
+		
+		// Initialisation de l'accès à la base de données pour l'entité Diagnostic
 		this.daoDiagnostic = new DaoDiagnostic();
 	}
 
@@ -29,7 +32,9 @@ public class GestionInsertionDiagnostic implements ActionListener {
 
 		switch (btn.getText()) {
 		case "Ajouter":
+			// Création de l'objet Diagnostic null
 			Diagnostics diagnostic = null;
+			// Récupérer le Logement placé dans la sauvegarde
 			Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
 			try {
 				// Créer un nouveau diagnostic avec les données de la fenêtre d'insertion
@@ -38,6 +43,7 @@ public class GestionInsertionDiagnostic implements ActionListener {
 
 				// Ajouter le nouveau diagnostic dans la base de données
 				int idDiagnosticSequence = this.daoDiagnostic.createAvecSequence(diagnostic);
+				
 				// Attribue l'id de la séquence au diagnostic
 				diagnostic.setIdDiagnostic(idDiagnosticSequence);
 
@@ -51,7 +57,7 @@ public class GestionInsertionDiagnostic implements ActionListener {
 			break;
 
 		case "Annuler":
-			// Annuler l'opération, fermer la fenêtre d'insertion
+			// Fermeture de la fenêtre d'insertion d'un diagnostic
 			this.fid.dispose();
 			break;
 		}

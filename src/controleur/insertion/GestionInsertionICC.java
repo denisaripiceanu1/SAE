@@ -15,8 +15,11 @@ public class GestionInsertionICC implements ActionListener {
     private Fenetre_InsertionICC fii;
     private DaoICC daoICC;
 
+	// Constructeur prenant en paramètre la fenêtre d'insertion d'un ICC
     public GestionInsertionICC(Fenetre_InsertionICC fii) {
         this.fii = fii;
+        
+		// Initialisation de l'accès à la base de données pour l'entité ICC
         this.daoICC = new DaoICC();
     }
 
@@ -28,15 +31,16 @@ public class GestionInsertionICC implements ActionListener {
         // Gérer les actions en fonction du bouton cliqué
         switch (btn.getText()) {
             case "Ajouter":
+            	// Création de l'objet ICC null
                 ICC icc = null;
                 try {
-                    // Créer une nouvelle ICC avec les informations fournies dans la fenêtre d'insertion
+                    // Créer un nouvel ICC avec les informations fournies dans la fenêtre d'insertion
                     icc = new ICC(
                             this.fii.getTextField_Annee().getText(),
                             this.fii.getTextField_Trimestre().getText(),
                             Double.parseDouble(this.fii.getTextField_indice().getText()));
 
-                    // Ajouter la nouvelle ICC à la base de données
+                    // Ajouter le nouvel ICC à la base de données
                     this.daoICC.create(icc);
 
                 } catch (Exception e1) {
@@ -47,7 +51,7 @@ public class GestionInsertionICC implements ActionListener {
                 break;
                 
             case "Annuler":
-                // Annuler l'opération, fermer la fenêtre d'insertion
+                // Fermeture de la fenêtre d'insertion d'un ICC
                 this.fii.dispose();
                 break;
         }

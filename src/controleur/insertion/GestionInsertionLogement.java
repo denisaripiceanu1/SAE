@@ -31,11 +31,19 @@ public class GestionInsertionLogement implements ActionListener {
 	private DaoQuotter daoQuotter;
 	private Immeuble immeubleSauvegarde;
 
+	// Constructeur prenant en paramètre la fenêtre d'insertion d'un logement
 	public GestionInsertionLogement(Fenetre_InsertionLogement fil) {
 		this.fil = fil;
+		
+		// Initialisation de l'accès à la base de données pour l'entité Bien
 		this.daoBien = new DaoBien();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Compteur
 		this.daoCompteur = new DaoCompteur();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Quotter
 		this.daoQuotter = new DaoQuotter();
+		
 		//On créer directement l'immeuble à partir de celui de la sauvegarde pour ne plus en dépendre
 		this.immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
 	}
@@ -58,10 +66,12 @@ public class GestionInsertionLogement implements ActionListener {
 						this.fil.getTextField_DateAcquisition().getText(),
 						this.fil.getComboBox_typeDeLogement().getSelectedItem().toString(),
 						this.immeubleSauvegarde);	
+				
 				// J'ajoute  dans le logement la sauvegarde pour réutiliser
 				Sauvegarde.deleteItem("Logement");
-				Sauvegarde.addItem("Logement", bienTemporaireQ);;
+				Sauvegarde.addItem("Logement", bienTemporaireQ);
 				
+				// Ouverture de la fenêtre d'insertion d'une quotité
 				Fenetre_InsertionQuotite insertion_quotite = new Fenetre_InsertionQuotite();
 				fenetre_Principale.getLayeredPane().add(insertion_quotite);
 				insertion_quotite.setVisible(true);
@@ -86,6 +96,7 @@ public class GestionInsertionLogement implements ActionListener {
 				// On enleve l'immeuble de la sauvegarde pour éviter d'avoir l'id immeuble dans la création du compteur donc constraint check UU
 				Sauvegarde.deleteItem("Immeuble");
 				
+				// Ouverture de la fenêtre d'insertion d'un compteur
 				Fenetre_InsertionCompteur insertion_compteur = new Fenetre_InsertionCompteur();
 				fenetre_Principale.getLayeredPane().add(insertion_compteur);
 				insertion_compteur.setVisible(true);
@@ -110,16 +121,14 @@ public class GestionInsertionLogement implements ActionListener {
 					
 					// Enregistrement du logement dans la base de données
 					this.daoBien.create(logement);
-					
-					// Potentiellement supprimer l'immeuble de la sauvegarde si besoin
-					
-					// Si il y a un compteur à ajouter
+										
+					// Vérifier  qu'il y a un compteur à ajouter
 					if (Sauvegarde.onSave("Compteur")) {
 						this.daoCompteur.create((Compteur) Sauvegarde.getItem("Compteur"));
 						Sauvegarde.clearSave();
 					}
 					
-					// Si il y a une quotité à ajouter
+					// Vérifier qu'il y a une quotité à ajouter
 					if (Sauvegarde.onSave("Quotter")) {
 						this.daoQuotter.create((Quotter) Sauvegarde.getItem("Quotter"));    
 						Sauvegarde.clearSave();
@@ -134,6 +143,7 @@ public class GestionInsertionLogement implements ActionListener {
 				}
 				// Fermeture de la fenêtre d'insertion de logement après ajout
 				this.fil.dispose();
+				
 				break;
 				
 			// Action lors du clic sur "Annuler"

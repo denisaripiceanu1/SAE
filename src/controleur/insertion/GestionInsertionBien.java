@@ -21,9 +21,14 @@ public class GestionInsertionBien implements ActionListener {
     private DaoImmeuble daoImmeuble;
     private DaoCompteur daoCompteur;
 
+	// Constructeur prenant en paramètre la fenêtre d'insertion d'un bien
     public GestionInsertionBien(Fenetre_InsertionBien insertionBien) {
         this.insertionBien = insertionBien;
+        
+		// Initialisation de l'accès à la base de données pour l'entité Immeuble
         this.daoImmeuble = new DaoImmeuble();
+        
+		// Initialisation de l'accès à la base de données pour l'entité Compteur
         this.daoCompteur = new DaoCompteur();
         Sauvegarde.initializeSave();
     }
@@ -32,6 +37,7 @@ public class GestionInsertionBien implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton btn = (JButton) e.getSource();
         Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.insertionBien.getTopLevelAncestor();
+        
         switch (btn.getText()) {
             case "Ajouter un compteur":
                 // Ouvrir la fenêtre d'insertion de compteur
@@ -50,13 +56,14 @@ public class GestionInsertionBien implements ActionListener {
                 Sauvegarde.deleteItem("Immeuble");
                 Sauvegarde.addItem("Immeuble", immeubleTemporaire);
                 
-             // On enleve le logement de la sauvegarde pour éviter d'avoir l'id immeuble dans la création du compteur donc constraint check UU
+                // On enlève le logement de la sauvegarde pour éviter d'avoir l'id immeuble dans la création du compteur donc constraint check UU
 				Sauvegarde.deleteItem("Logement");
                 
                 fenetre_Principale.getLayeredPane().add(fenetreCompteur);
                 fenetreCompteur.setVisible(true);
                 fenetreCompteur.moveToFront();
                 break;
+                
             case "Ajouter":
                 try {
                     // Créer un nouvel immeuble avec les données de la fenêtre d'insertion
@@ -91,7 +98,7 @@ public class GestionInsertionBien implements ActionListener {
                 break;
 
             case "Annuler":
-                // Annuler l'opération, fermer la fenêtre d'insertion
+                // Fermeture la fenêtre d'insertion
                 this.insertionBien.dispose();
                 break;
         }

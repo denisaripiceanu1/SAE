@@ -18,8 +18,11 @@ public class GestionInsertionReleve implements ActionListener {
 	private Fenetre_InsertionReleve fiv;
 	private DaoReleve daoReleve;
 
+	// Constructeur prenant en paramètre la fenêtre d'insertion d'un relevé
 	public GestionInsertionReleve(Fenetre_InsertionReleve fiv) {
 		this.fiv = fiv;
+		
+		// Initialisation de l'accès à la base de données pour l'entité Relevé
 		this.daoReleve = new DaoReleve();
 	}
 
@@ -27,18 +30,20 @@ public class GestionInsertionReleve implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fiv.getTopLevelAncestor();
+		
 		switch (btn.getText()) {
 			// Action lors du clic sur "Ajouter"
 			case "Ajouter":
 				// Récupération de l'id du compteur cliqué depuis la sauvegarde
 				Compteur compteur_sauvegarde = (Compteur) Sauvegarde.getItem("Compteur");
-				Releve releve;
+				// Création d'un objet Releve à null
+				Releve releve = null;
 				try {
 
-					// Création de l'objet relevé
+					// Création de l'objet relevé à partir des données insérées dans la fenêtre
 					releve = new Releve(compteur_sauvegarde, this.fiv.getTextField_dateReleve().getText() , Double.parseDouble(this.fiv.getTextField_indiceCompteur().getText()));
 					
-					// Enregistrement du relevé dans la base de données
+					// Création du relevé dans la base de données
 					this.daoReleve.create(releve);
 					
 				} catch (Exception e1) {

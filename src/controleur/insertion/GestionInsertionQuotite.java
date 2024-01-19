@@ -20,9 +20,14 @@ public class GestionInsertionQuotite implements ActionListener {
 	private DaoQuotite daoQuotite;
 	private DaoQuotter daoQuotter; 
 
+	// Constructeur prenant en paramètre la fenêtre d'insertion d'une quotité
 	public GestionInsertionQuotite(Fenetre_InsertionQuotite fiq) {
 		this.fiq = fiq;
+		
+		// Initialisation de l'accès à la base de données pour l'entité Quotité
 		this.daoQuotite = new DaoQuotite();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Quotter
 		this.daoQuotter = new DaoQuotter();
 	}
 
@@ -30,10 +35,13 @@ public class GestionInsertionQuotite implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fiq.getTopLevelAncestor();
+		
 		switch (btn.getText()) {
 			// Action lors du clic sur "Ajouter"
 			case "Ajouter":
+				// Création d'un objet Quotité à null
 				Quotite quotite_type = null;
+				// Création d'un objet Quotter à null
 				Quotter quotter = null;
 				try {
 					// Récupération du logement par la sauvegarde 
