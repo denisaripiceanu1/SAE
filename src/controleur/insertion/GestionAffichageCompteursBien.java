@@ -8,7 +8,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.outils.Sauvegarde;
@@ -18,13 +17,10 @@ import modele.dao.DaoCompteur;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageCompteursBien;
 import vue.insertion.Fenetre_AffichageReleveCompteursBien;
-import vue.insertion.Fenetre_InsertionEntreprise;
-import vue.insertion.Fenetre_InsertionPaiementBien;
-import vue.insertion.Fenetre_InsertionPaiementLogement;
 import vue.insertion.Fenetre_InsertionReleve;
 
 public class GestionAffichageCompteursBien implements ActionListener {
-	
+
 	private Fenetre_AffichageCompteursBien facb;
 	private DaoCompteur daoCompteur;
 
@@ -43,6 +39,7 @@ public class GestionAffichageCompteursBien implements ActionListener {
 																								// frame
 		switch (btn.getText()) {
 		case "Ajouter un relevé":
+			// Vérifie si le compteur est dans la sauvegarde avant d'ajouter un relevé
 			if (Sauvegarde.onSave("Compteur") == true) {
 				Fenetre_InsertionReleve insertion_releve = new Fenetre_InsertionReleve();
 				fenetre_Principale.getLayeredPane().add(insertion_releve);
@@ -55,13 +52,14 @@ public class GestionAffichageCompteursBien implements ActionListener {
 
 			break;
 		case "Afficher les relevés":
+			// Vérifie si le compteur est dans la sauvegarde avant d'ajouter un relevé
 			if (Sauvegarde.onSave("Compteur") == true) {
 				Fenetre_AffichageReleveCompteursBien affichage_releve = new Fenetre_AffichageReleveCompteursBien();
 				fenetre_Principale.getLayeredPane().add(affichage_releve);
 				affichage_releve.setVisible(true);
 				affichage_releve.moveToFront();
-				
-				//On charge les données au moment de l'ouverture 
+
+				// On charge les données au moment de l'ouverture
 				try {
 					affichage_releve.getGestionAffichage().chargerReleveCompteurs();
 				} catch (SQLException e1) {
@@ -73,8 +71,9 @@ public class GestionAffichageCompteursBien implements ActionListener {
 						JOptionPane.ERROR_MESSAGE);
 			}
 			break;
-			
+
 		case "Annuler":
+			// Fermeture de la fenêtre
 			this.facb.dispose();
 			break;
 		}
@@ -92,9 +91,9 @@ public class GestionAffichageCompteursBien implements ActionListener {
 
 	// Méthode pour charger les compteurs dans la table des compteurs
 	public void chargerCompteurs() throws SQLException {
-		// On récupère l'immeuble de la sauvegarde pour utiliser son ID 
+		// On récupère l'immeuble de la sauvegarde pour utiliser son ID
 		Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
-		
+
 		List<Compteur> compteurs = this.daoCompteur.findByIdImmeubleListe(immeubleSauvegarde.getImmeuble());
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.facb.getTable_compteurs().getModel();
