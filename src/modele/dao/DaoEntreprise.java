@@ -31,6 +31,7 @@ public class DaoEntreprise extends DaoModele<Entreprise> implements Dao<Entrepri
 
 	@Override
 	public void delete(Entreprise donnees) {
+		// TODO Auto-generated method stub
 	}
 
 	@Override

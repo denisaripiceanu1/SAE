@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modele.Immeuble;
-import modele.Facture;
 import rapport.FraisCharges;
 import modele.dao.requetes.delete.RequeteDeleteImmeuble;
 import modele.dao.requetes.select.RequeteSelectImmeuble;
@@ -78,8 +77,6 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 			while (resultSet.next()) {
 				identifiants.add(resultSet.getString("ID_Immeuble"));
 			}
-			resultSet.close();
-			st.close();
 		}
 
 		return identifiants;
@@ -97,9 +94,7 @@ public class DaoImmeuble extends DaoModele<Immeuble> implements Dao<Immeuble> {
 				if (rs.next()) {
 					nombreLogements = rs.getInt(1);
 				}
-				rs.close();
 			}
-			pstmt.close();
 		}
 
 		return nombreLogements;

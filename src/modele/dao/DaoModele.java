@@ -40,10 +40,6 @@ public abstract class DaoModele<T> implements Dao<T> {
 
 	}
 	
-//	public int delete(Requete<T> req, T data) throws SQLException {
-//		return miseAJour(req, data);
-//
-//	}
 
 	// Méthode protégée pour exécuter une requête de recherche
 	protected List<T> find(Requete<T> requete, String... id) throws SQLException {

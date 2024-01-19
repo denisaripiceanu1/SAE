@@ -121,7 +121,6 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 			ResultSet res = st.executeQuery();
 			factures = this.convertirResultSetEnListe(res);
 			res.close();
-			st.close();
 		}
 		if (!factures.isEmpty()) {
 			return factures.get(0);

@@ -32,6 +32,7 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 
 	@Override
 	public void update(Quotter donnees) throws SQLException {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -83,11 +84,10 @@ public class DaoQuotter extends DaoModele<Quotter> implements Dao<Quotter> {
 
 		try (PreparedStatement st = CictOracleDataSource.getConnectionBD()
 				.prepareStatement(new RequeteSelectBienparImmeuble().requete())) {
-			{
+			
 				requete.parametres(st, immeuble.getImmeuble());
 				st.executeUpdate();
-			}
-			st.close();
+			
 		}
 
 	}
