@@ -82,6 +82,8 @@ public class GestionInsertionPaiementLogement implements ActionListener {
 					// sélectionnée auparavant
 				} else {
 					try {
+				
+
 						// Création d'un objet Facture à partir des données saisies dans la fenêtre
 						facture = new Facture(this.fipl.getTextField_Numero().getText(),
 								this.fipl.getTextField_date_emission().getText(),

@@ -109,13 +109,13 @@ public class GestionModificationLogement implements ActionListener {
 			// Si il y a un compteur à ajouter
 			if (Sauvegarde.onSave("Compteur")) {
 				this.daoCompteur.create((Compteur) Sauvegarde.getItem("Compteur"));
-				Sauvegarde.clearSave();
+				Sauvegarde.deleteItem("Compteur");
 			}
 			
 			// Si il y a une quotité à ajouter
 			if (Sauvegarde.onSave("Quotter")) {
 				this.daoQuotter.create((Quotter) Sauvegarde.getItem("Quotter"));    
-				Sauvegarde.clearSave();
+				Sauvegarde.deleteItem("Quotter");
 			}
 	
 			this.modificationLogement.dispose();
