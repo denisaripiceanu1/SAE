@@ -41,7 +41,7 @@ public class GestionModificationTravauxImmeuble implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationTravauxImmeuble.getTopLevelAncestor();
+		Fenetre_Accueil fenetrePrincipale = (Fenetre_Accueil) this.modificationTravauxImmeuble.getTopLevelAncestor();
 
 		switch (btn.getText()) {
 		case "Modifier":
@@ -76,6 +76,8 @@ public class GestionModificationTravauxImmeuble implements ActionListener {
 		case "Annuler":
 			// Annulation de la modification et fermeture de la fenêtre
 			this.modificationTravauxImmeuble.dispose();
+			break;
+		default:
 			break;
 		}
 	}
