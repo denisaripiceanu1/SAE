@@ -21,8 +21,11 @@ public class GestionAffichageReleveCompteurLogement implements ActionListener {
 	private Fenetre_AffichageReleveCompteursLogement farcb;
 	private DaoReleve daoReleve;
 
+	// Constructeur prenant en paramètre la fenêtre d'affichage des relevés pour un
+	// logement donné
 	public GestionAffichageReleveCompteurLogement(Fenetre_AffichageReleveCompteursLogement arcb) {
 		this.farcb = arcb;
+		// Initialisation de l'accès à la base de données pour l'entité Relevé
 		this.daoReleve = new DaoReleve();
 	}
 
@@ -35,12 +38,20 @@ public class GestionAffichageReleveCompteurLogement implements ActionListener {
 																									// internal // frame
 		switch (btn.getText()) {
 		case "Annuler":
+			// Fermeture de la fenêtre
 			this.farcb.dispose();
 			break;
 		}
 	}
 
-	// Méthode pour écrire une ligne de compteur dans la table des compteurs
+	/**
+	 * Méthode pour écrire une ligne de relevé pour un compteur donné
+	 *
+	 * @param numeroLigne (int) : correspond au numéro de la ligne courante dans la
+	 *                    table des relevés
+	 * @param location    (Releve) : correspond au relevé courant
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableReleveCompteurs(int numeroLigne, Releve e) throws SQLException {
 		JTable tableReleveCompteur = this.farcb.getTable_releve_compteur_logement();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableReleveCompteur.getModel();
@@ -49,9 +60,14 @@ public class GestionAffichageReleveCompteurLogement implements ActionListener {
 		modeleTable.setValueAt(e.getIndexComp(), numeroLigne, 1);
 	}
 
-	// Méthode pour charger les compteurs dans la table des compteurs
+	/**
+	 * Méthode pour charger les relevés dans la table d'affichage des relevés pour
+	 * un compteur donné
+	 *
+	 * @throws SQLException
+	 */
 	public void chargerReleveCompteurs() throws SQLException {
-		// On récupère l'immeuble de la sauvegarde pour utiliser son ID
+		// On récupère le compteur de la sauvegarde
 		Compteur compteurSauvegarde = (Compteur) Sauvegarde.getItem("Compteur");
 
 		List<Releve> releve = this.daoReleve.findReleveByCompteur(compteurSauvegarde.getIdCompteur());

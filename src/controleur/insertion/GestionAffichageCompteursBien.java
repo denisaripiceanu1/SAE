@@ -24,7 +24,11 @@ public class GestionAffichageCompteursBien implements ActionListener {
 	private Fenetre_AffichageCompteursBien facb;
 	private DaoCompteur daoCompteur;
 
-	// Constructeur prenant en paramètre la fenêtre d'affichage des compteurs
+	/**
+	 * Constructeur prenant en paramètre la fenêtre d'affichage des compteurs
+	 *
+	 * @param fenetre_AffichageCompteursBiens
+	 */
 	public GestionAffichageCompteursBien(Fenetre_AffichageCompteursBien fenetre_AffichageCompteursBiens) {
 		this.facb = fenetre_AffichageCompteursBiens;
 		// Initialisation de l'accès à la base de données pour l'entité Compteur
@@ -80,10 +84,13 @@ public class GestionAffichageCompteursBien implements ActionListener {
 	
 	
 
-	// Méthode pour écrire une ligne de compteur dans la table des compteurs
 	/**
-	 * @param numeroLigne
-	 * @param e
+	 * Méthode pour écrire une ligne de compteur dans la table des compteurs
+	 *
+	 * @param numeroLigne (int) : correspond au numéro de la ligne courante dans la
+	 *                    table des compteurs
+	 * @param e           (Compteur) : correspond au compteur courant
+	 *
 	 * @throws SQLException
 	 */
 	public void ecrireLigneTableCompteurs(int numeroLigne, Compteur e) throws SQLException {
@@ -95,8 +102,9 @@ public class GestionAffichageCompteursBien implements ActionListener {
 		modeleTable.setValueAt(e.getPrix_abonnement(), numeroLigne, 2);
 	}
 
-	// Méthode pour charger les compteurs dans la table des compteurs
 	/**
+	 * Méthode qui permet de charger les compteurs dans la table des compteurs
+	 *
 	 * @throws SQLException
 	 */
 	public void chargerCompteurs() throws SQLException {
