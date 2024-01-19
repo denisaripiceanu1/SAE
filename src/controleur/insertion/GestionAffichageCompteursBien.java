@@ -81,6 +81,8 @@ public class GestionAffichageCompteursBien implements ActionListener {
 			break;
 		}
 	}
+	
+	
 
 	/**
 	 * Méthode pour écrire une ligne de compteur dans la table des compteurs
