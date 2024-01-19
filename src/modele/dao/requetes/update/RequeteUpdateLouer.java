@@ -11,7 +11,6 @@ public class RequeteUpdateLouer implements Requete<Louer> {
 
 	@Override
 	public String requete() {
-		// TODO Auto-generated method stub
 		return "UPDATE Louer SET nb_mois = ?, loyer_TTC = ?, caution_TTC = ?, bail = ?, date_derniere_reg = ?, loyer_paye = ?, montant_reel_paye = ?, "
 				+ "annee = ?, trimestre = ?, provision_chargeMens_TTC = ?, etat_lieux = ? "
 				+ "WHERE Id_Locataire = ? AND Id_Bien = ? AND Date_Debut = ?";
@@ -19,10 +18,12 @@ public class RequeteUpdateLouer implements Requete<Louer> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, Louer data) throws SQLException {
+	    // Paramétrage des valeurs pour la requête UPDATE à partir de l'objet Assurance
 		prSt.setInt(1, data.getNbMois());
 		prSt.setDouble(2, data.getLoyerTTC());
 		prSt.setDouble(3, data.getCautionTTC());

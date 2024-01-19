@@ -1,10 +1,10 @@
 package modele.dao.requetes.update;
 
 import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
 
 import modele.Entreprise;
-import modele.Immeuble;
 import modele.dao.requetes.Requete;
 
 public class RequeteUpdateEntreprise implements Requete<Entreprise> {
@@ -18,19 +18,19 @@ public class RequeteUpdateEntreprise implements Requete<Entreprise> {
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
 	public void parametres(PreparedStatement prSt, Entreprise data) throws SQLException {
-		prSt.setString(1, data.getNom());
-		prSt.setString(2, data.getAdresse());
-		prSt.setString(3, data.getCp());
-		prSt.setString(4, data.getVille());
-		prSt.setString(5, data.getMail());
-		prSt.setString(6, data.getTelephone());
-		prSt.setString(7, data.getIban());
-		prSt.setString(8, data.getSiret()); // cle primaire
+		// Paramétrage des valeurs pour la requête UPDATE à partir de l'objet Entreprise
+		prSt.setString(1, data.getNom()); 		// Nom de l'entreprise
+		prSt.setString(2, data.getAdresse());	// Adresse de l'entreprise
+		prSt.setString(3, data.getCp());		// Code postal de l'entreprise
+		prSt.setString(4, data.getVille());		// Ville de l'entreprise
+		prSt.setString(5, data.getMail());		// Adresse e-mail de l'entreprise
+		prSt.setString(6, data.getTelephone());	// Numéro de téléphone de l'entreprise
+		prSt.setString(7, data.getIban());		// IBAN de l'entreprise
+		prSt.setString(8, data.getSiret()); 	// Numéro SIRET (clé primaire) pour identifier l'entreprise à mettre à jour
+
 	}
 
 }
