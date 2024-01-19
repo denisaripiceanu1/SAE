@@ -31,6 +31,10 @@ import modele.dao.requetes.update.RequeteUpdateFacture;
 
 public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 
+	/**
+	 * Méthode qui crée une nouvelle facture dans la base de données depuis les
+	 * sous-programmes.
+	 */
 	@Override
 	public void create(Facture donnees) throws SQLException {
 		SousProgramme<Facture> sp = new SousProgrammeInsertFacture();
@@ -40,18 +44,28 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		st.close();
 	}
 
+	/**
+	 * Méthode qui permet de mettre à jour les informations d'une facture dans la
+	 * base de données depuis une requête des sous-programmes.
+	 */
 	@Override
 	public void update(Facture donnees) throws SQLException {
 		this.miseAJour(new RequeteUpdateFacture(), donnees);
-
 	}
 
+	/**
+	 * Méthode qui permet de supprimer une facture dans la base de données depuis
+	 * une requête des sous-programmes.
+	 */
 	@Override
 	public void delete(Facture donnees) throws SQLException {
 		this.miseAJour(new RequeteDeleteTravaux(), donnees);
-
 	}
 
+	/**
+	 * Méthode qui renvoie une facture en fonction de son ID depuis les requêtes des
+	 * sous-programmes.
+	 */
 	@Override
 	public Facture findById(String... id) throws SQLException {
 		List<Facture> factures = this.find(new RequeteSelectFactureById(), id);
@@ -61,11 +75,19 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		return factures.get(0);
 	}
 
+	/**
+	 * Méthode qui renvoie la liste de toutes les factures depuis les requêtes des
+	 * sous-programmes.
+	 */
 	@Override
 	public List<Facture> findAll() throws SQLException {
 		return this.find(new RequeteSelectFacture());
 	}
 
+	/**
+	 * Méthode qui crée une instance de Facture à partir du curseur d'une requête
+	 * dans la base de données.
+	 */
 	@Override
 	protected Facture creerInstance(ResultSet curseur) throws SQLException {
 		Facture facture = null;
@@ -112,6 +134,11 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 	}
 
 	// ---------------- AUTRES METHODES ----------------//
+
+	/**
+	 * Méthode qui renvoie la dernière facture de loyer d'un bien depuis les
+	 * requêtes des sous-programmes.
+	 */
 	public Facture findDerniereFactureLoyer(Bien bien) throws SQLException {
 		List<Facture> factures = null;
 		String b = bien.getIdBien();
@@ -129,6 +156,9 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		}
 	}
 
+	/**
+	 * Méthode privée pour convertir un ResultSet en liste de factures.
+	 */
 	private List<Facture> convertirResultSetEnListe(ResultSet res) throws SQLException {
 		List<Facture> factures = new ArrayList<>();
 
@@ -139,22 +169,42 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		return factures;
 	}
 
+	/**
+	 * Méthode qui renvoie la liste de factures associées à un logement depuis les
+	 * requêtes des sous-programmes.
+	 */
 	public List<Facture> findFactureChargeByLogement(String idLogement) throws SQLException {
 		return this.find(new RequeteSelectFactureByLogement(), idLogement);
 	}
 
+	/**
+	 * Méthode qui renvoie la liste de toutes les factures de charges depuis les
+	 * requêtes des sous-programmes.
+	 */
 	public List<Facture> findFactureCharge() throws SQLException {
 		return this.find(new RequeteSelectFactureCharge());
 	}
 
+	/**
+	 * Méthode qui renvoie la liste de factures associées à un immeuble depuis les
+	 * requêtes des sous-programmes.
+	 */
 	public List<Facture> findFactureImmeuble(String id) throws SQLException {
 		return this.find(new RequeteSelectFactureByImmeuble(), id);
 	}
 
+	/**
+	 * Méthode qui renvoie la liste de factures associées à un bien depuis les
+	 * requêtes des sous-programmes.
+	 */
 	public List<Facture> findFactureByBien(String id) throws SQLException {
 		return this.find(new RequeteSelectFactureByBien2(), id);
 	}
 
+	/**
+	 * Méthode qui renvoie une facture de charge en fonction de son ID depuis les
+	 * requêtes des sous-programmes.
+	 */
 	public Facture findFactureChargeById(String id) throws SQLException {
 		List<Facture> factures = this.find(new RequeteSelectFactureChargeById(), id);
 		if (factures.isEmpty()) {
@@ -163,10 +213,18 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		return factures.get(0);
 	}
 
+	/**
+	 * Méthode qui renvoie la liste de toutes les factures de travaux depuis les
+	 * requêtes des sous-programmes.
+	 */
 	public List<Facture> findFactureTravaux() throws SQLException {
 		return this.find(new RequeteSelectFactureTravaux());
 	}
 
+	/**
+	 * Méthode qui renvoie une facture de travaux en fonction de son ID depuis les
+	 * requêtes des sous-programmes.
+	 */
 	public Facture findFactureTravauxById(String id) throws SQLException {
 		List<Facture> factures = this.find(new RequeteSelectFactureTravauxById(), id);
 		if (factures.isEmpty()) {
@@ -175,6 +233,10 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		return factures.get(0);
 	}
 
+	/**
+	 * Méthode qui crée une archive de facture dans la base de données depuis les
+	 * sous-programmes.
+	 */
 	public void createArchive(Facture donnees) throws SQLException {
 		SousProgramme<Facture> sp = new SousProgrammeInsertFactureArchiver();
 		CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
@@ -183,7 +245,14 @@ public class DaoFacture extends DaoModele<Facture> implements Dao<Facture> {
 		st.close();
 	}
 
+	/**
+	 * Méthode qui récupère toutes les factures archivées depuis la base de données.
+	 * 
+	 * @return Une liste contenant toutes les factures archivées.
+	 * @throws SQLException Si une erreur SQL survient lors de l'exécution de la requête.
+	 */
 	public List<Facture> findAllArchive() throws SQLException {
-		return this.find(new RequeteSelectFactureArchive());
+	    return this.find(new RequeteSelectFactureArchive());
 	}
+
 }

@@ -16,6 +16,10 @@ import modele.dao.requetes.sousProgramme.SousProgrammeInsertEcheance;
 
 public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 
+	/**
+	 * Méthode qui crée une nouvelle échéance dans la base de données depuis les
+	 * sous-programmes.
+	 */
 	@Override
 	public void create(Echeance donnees) throws SQLException {
 		SousProgramme<Echeance> sp = new SousProgrammeInsertEcheance();
@@ -25,18 +29,27 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 		st.close();
 	}
 
+	/**
+	 * Méthode non implémentée pour la mise à jour d'une échéance.
+	 */
 	@Override
 	public void update(Echeance donnees) {
 		// TODO Auto-generated method stub
-
 	}
 
+	/**
+	 * Méthode qui permet de supprimer une échéance dans la base de données depuis
+	 * une requête des sous-programmes.
+	 */
 	@Override
 	public void delete(Echeance donnees) throws SQLException {
 		this.miseAJour(new RequeteDeleteEcheance(), donnees);
-
 	}
 
+	/**
+	 * Méthode qui crée une instance d'Echeance à partir du curseur d'une requête
+	 * dans la base de données.
+	 */
 	@Override
 	protected Echeance creerInstance(ResultSet curseur) throws SQLException {
 		Echeance echeance = null;
@@ -53,6 +66,10 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 		return echeance;
 	}
 
+	/**
+	 * Méthode qui renvoie une échéance en fonction de son ID depuis les requêtes des
+	 * sous-programmes.
+	 */
 	@Override
 	public Echeance findById(String... id) throws SQLException {
 		List<Echeance> echeances = this.find(new RequeteSelectEcheanceById(), id);
@@ -62,6 +79,10 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 		return echeances.get(0);
 	}
 
+	/**
+	 * Méthode qui renvoie une échéance en fonction du numéro de police de
+	 * l'assurance associée depuis les requêtes des sous-programmes.
+	 */
 	public Echeance findByAssuranceNumPolice(String... id) throws SQLException {
 		List<Echeance> echeances = this.find(new RequeteSelectEcheanceByAssuranceNumPolice(), id);
 		if (echeances.isEmpty()) {
@@ -70,10 +91,18 @@ public class DaoEcheance extends DaoModele<Echeance> implements Dao<Echeance> {
 		return echeances.get(0);
 	}
 
+	/**
+	 * Méthode qui renvoie la liste des échéances en fonction du numéro de police de
+	 * l'assurance associée depuis les requêtes des sous-programmes.
+	 */
 	public List<Echeance> findByAssuranceNumPoliceList(String idImmeuble) throws SQLException {
 		return this.find(new RequeteSelectEcheanceByAssuranceNumPolice(), idImmeuble);
 	}
 
+	/**
+	 * Méthode qui renvoie la liste de toutes les échéances depuis les requêtes des
+	 * sous-programmes.
+	 */
 	@Override
 	public List<Echeance> findAll() throws SQLException {
 		return this.find(new RequeteSelectEcheance());

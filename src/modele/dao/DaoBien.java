@@ -19,7 +19,10 @@ import modele.dao.requetes.update.RequeteUpdateBien;
 
 public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 
-
+	/**
+	 * Méthode qui crée un étatAppelable pour insérer un nouveau bien dans la
+	 * base de données depuis les sous-programmes.
+	 */
 	@Override
 	public void create(Bien donnees) throws SQLException {
 		SousProgramme<Bien> sp = new SousProgrammeInsertBien();
@@ -29,16 +32,28 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		st.close();
 	}
 
+	/**
+	 * Méthode qui permet de modifier les valeurs d'un bien dans la base de données
+	 * depuis une requête des sous-programmes.
+	 */
 	@Override
 	public void update(Bien donnees) throws SQLException {
 		this.miseAJour(new RequeteUpdateBien(), donnees);
 	}
 
+	/**
+	 * Méthode qui permet de supprimer un bien dans la base de données depuis une
+	 * requête des sous-programmes.
+	 */
 	@Override
 	public void delete(Bien donnees) throws SQLException {
 		this.miseAJour(new RequeteDeleteBien(), donnees);
 	}
 
+	/**
+	 * Méthode qui crée une instance de Bien à partir du curseur d'une requête dans
+	 * la base de données.
+	 */
 	@Override
 	protected Bien creerInstance(ResultSet curseur) throws SQLException {
 		Bien bien = null;
@@ -53,15 +68,17 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 
 			bien = new Bien(curseur.getString("Id_Bien"), curseur.getDouble("surface_habitable"),
 					curseur.getInt("nb_pieces"), curseur.getInt("num_etage"), dateAcquisitionStr,
-					curseur.getString("type_bien"), immeuble
-
-			);
+					curseur.getString("type_bien"), immeuble);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return bien;
 	}
 
+	/**
+	 * Méthode qui renvoie un Bien en fonction de son ID depuis les requêtes des
+	 * sous-programmes.
+	 */
 	@Override
 	public Bien findById(String... id) throws SQLException {
 		List<Bien> biens = this.find(new RequeteSelectBienById(), id);
@@ -71,6 +88,10 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		return biens.get(0);
 	}
 
+	/**
+	 * Méthode qui renvoie la liste de tous les biens depuis les requêtes des
+	 * sous-programmes.
+	 */
 	@Override
 	public List<Bien> findAll() throws SQLException {
 		return this.find(new RequeteSelectBien());
@@ -78,6 +99,10 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 
 	// ---------------- AUTRES METHODES ----------------//
 
+	/**
+	 * Méthode qui renvoie un Bien en fonction de l'ID d'un immeuble qui lui est
+	 * associé depuis les requêtes des sous-programmes.
+	 */
 	public Bien findBienByImmeubleObject(String id) throws SQLException {
 		List<Bien> biens = this.find(new RequeteSelectBienparImmeuble(), id);
 		if (biens.isEmpty()) {
@@ -86,6 +111,10 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		return biens.get(0);
 	}
 
+	/**
+	 * Méthode qui renvoie une liste de biens en fonction de l'ID d'un immeuble qui
+	 * leur est associé depuis les requêtes des sous-programmes.
+	 */
 	public List<Bien> findBiensparImmeuble(String id) throws SQLException {
 		List<Bien> biens = null;
 
@@ -99,6 +128,9 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		return biens;
 	}
 
+	/**
+	 * Méthode privée qui convertit un ResultSet en une liste de biens.
+	 */
 	private List<Bien> convertirResultSetEnListe(ResultSet res) throws SQLException {
 		List<Bien> biens = new ArrayList<>();
 
@@ -109,6 +141,10 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 		return biens;
 	}
 
+	/**
+	 * Méthode qui renvoie la liste de tous les identifiants de bien depuis la
+	 * base de données.
+	 */
 	public List<String> getAllIdBien() throws SQLException {
 		List<String> identifiants = new ArrayList<>();
 
