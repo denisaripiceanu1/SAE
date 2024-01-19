@@ -155,7 +155,6 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 			designationModel.addElement("Électricité");
 			designationModel.addElement("Entretien");
 			designationModel.addElement("Autre");
-
 		}
 		this.comboBox_Designation.setModel(designationModel);
 
