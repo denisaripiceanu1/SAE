@@ -61,7 +61,9 @@ public class GestionInsertionAssurance implements ActionListener {
 			// Création d'un objet Echeance à null
 			Echeance echeance = null;
 			try {
+				// Récupérer le logement de la sauvegarde
 				Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
+				// Récupérer le bien de la sauvegarde
 				Entreprise entrepriseSauvegarde = (Entreprise) Sauvegarde.getItem("Entreprise");
 
 				// Recherche du Bien par son identifiant

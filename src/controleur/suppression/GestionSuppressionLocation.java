@@ -17,8 +17,11 @@ public class GestionSuppressionLocation implements ActionListener {
 	private Fenetre_SupprimerLocation supprimerLocation;
 	private DaoLouer daoLouer;
 
+	// Constructeur prenant en paramètre la fenêtre de suppression d'une location
 	public GestionSuppressionLocation(Fenetre_SupprimerLocation supprimerLocation) {
 		this.supprimerLocation = supprimerLocation;
+		
+		// Initialisation de l'accès à la base de données pour l'entité Louer
 		this.daoLouer = new DaoLouer();
 		Sauvegarde.initializeSave();
 	}
@@ -30,6 +33,7 @@ public class GestionSuppressionLocation implements ActionListener {
 		switch (btn.getText()) {
 			// Suppression d'une location
 			case "Supprimer":
+		        // Récuperer la location de type Louer de la sauvegarde
 				Louer louer_supp = (Louer) Sauvegarde.getItem("Louer");
 				try {
 					// Récupération de la location à supprimer
@@ -44,8 +48,10 @@ public class GestionSuppressionLocation implements ActionListener {
 				// Fermeture de la fenêtre de suppression de location
 				this.supprimerLocation.dispose();
 				break;
+				
 			// Annulation de la suppression
 			case "Annuler":
+                // Fermeture de la fenêtre de suppression
 				this.supprimerLocation.dispose();
 				break;
 		}

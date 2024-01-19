@@ -47,19 +47,43 @@ public class GestionSuppressionLogement implements ActionListener {
 	private DaoDiagnostic daoDiagnostic;
 	private DaoReleve daoReleve;
 
+	// Constructeur prenant en paramètre la fenêtre de suppression d'une location
 	public GestionSuppressionLogement(Fenetre_SupprimerLogement supprimerLogement) {
 		this.supprimerLogement = supprimerLogement;
+		
+		// Initialisation de l'accès à la base de données pour l'entité Immeuble
 		this.daoImmeuble = new DaoImmeuble();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Bien
 		this.daoBien = new DaoBien();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Assurance
 		this.daoAssurance = new DaoAssurance();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Echeance
 		this.daoEcheance = new DaoEcheance();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Louer
 		this.daoLouer = new DaoLouer();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Facture
 		this.daoFacture = new DaoFacture();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Quotter
 		this.daoQuotter = new DaoQuotter();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Imposer
 		this.daoImposer = new DaoImposer();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Compteur
 		this.daoCompteur = new DaoCompteur();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Releve
 		this.daoReleve = new DaoReleve();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Diagnostic
 		this.daoDiagnostic = new DaoDiagnostic();
+		
 		Sauvegarde.initializeSave();
 	}
 
@@ -82,9 +106,9 @@ public class GestionSuppressionLogement implements ActionListener {
 					List<Quotter> quotters = this.daoQuotter.findQuotterByBien(bien_supp.getIdBien());
 					List<Facture> factureListeBien = this.daoFacture.findFactureByBien(bien_supp.getIdBien());
 					List<Imposer> imposers = this.daoImposer.findImposerByBien(bien_supp.getIdBien());
-					//relevé concernant les compteurs 
+					// Relevé et échéanceconcernant les compteurs 
 					List<Releve> releves;
-					
+				
 					List<Echeance> echeances;
 					
 					// Suppression des assurances liées au logement
@@ -150,8 +174,10 @@ public class GestionSuppressionLogement implements ActionListener {
 				this.supprimerLogement.dispose();
 				
 				break;
+				
 			// Annulation de la suppression
 			case "Annuler":
+				// Fermeture de la fenêtre de suppression
 				this.supprimerLogement.dispose();
 				break;
 		}

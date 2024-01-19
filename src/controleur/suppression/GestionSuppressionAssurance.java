@@ -20,9 +20,14 @@ public class GestionSuppressionAssurance implements ActionListener {
 	private DaoAssurance daoAssurance;
 	private DaoEcheance daoEcheance;
 
+	// Constructeur prenant en paramètre la fenêtre de suppression d'une assurance
 	public GestionSuppressionAssurance(Fenetre_SupprimerAssurance supprimerAssurance) {
 		this.supprimerAssurance = supprimerAssurance;
+
+		// Initialisation de l'accès à la base de données pour l'entité Assurance
 		this.daoAssurance = new DaoAssurance();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Echeance
 		this.daoEcheance = new DaoEcheance();
 		Sauvegarde.initializeSave();
 	}
@@ -31,9 +36,10 @@ public class GestionSuppressionAssurance implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.supprimerAssurance.getTopLevelAncestor();
+		
 		switch (btn.getText()) {
 			case "Supprimer":
-				// Récupération des éléments sauvegardés
+				// Récupération des éléments sauvegardés (l'assurance et l'échéance
 				Assurance assurance_sauvegarde = (Assurance) Sauvegarde.getItem("Assurance");
 				Echeance echeance_sauvegarde = (Echeance) Sauvegarde.getItem("Echeance");
 				
@@ -46,12 +52,15 @@ public class GestionSuppressionAssurance implements ActionListener {
 					// Suppression de l'échéance et de l'assurance
 					this.daoEcheance.delete(echeance_supp);
 					this.daoAssurance.delete(assurance_supp);
+					
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
+				// Fermeture de la fenêtre après de la suppression
 				this.supprimerAssurance.dispose();
 				break;
 			case "Annuler":
+				// Fermeture de la fenêtre de suppression
 				this.supprimerAssurance.dispose();
 				break;
 		}
