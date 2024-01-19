@@ -34,9 +34,9 @@ public class GestionAffichageCompteursBien implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.facb.getTopLevelAncestor(); // fenetre dans laquelle
-																								// on ouvre des internal
-																								// frame
+		// fenetre dans laquelle on ouvre des internal frame
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.facb.getTopLevelAncestor();
+
 		switch (btn.getText()) {
 		case "Ajouter un relevé":
 			// Vérifie si le compteur est dans la sauvegarde avant d'ajouter un relevé
@@ -49,8 +49,8 @@ public class GestionAffichageCompteursBien implements ActionListener {
 				JOptionPane.showMessageDialog(fenetre_Principale, "Veuillez sélectionner un compteur !", "Erreur",
 						JOptionPane.ERROR_MESSAGE);
 			}
-
 			break;
+
 		case "Afficher les relevés":
 			// Vérifie si le compteur est dans la sauvegarde avant d'ajouter un relevé
 			if (Sauvegarde.onSave("Compteur") == true) {
@@ -59,11 +59,10 @@ public class GestionAffichageCompteursBien implements ActionListener {
 				affichage_releve.setVisible(true);
 				affichage_releve.moveToFront();
 
-				// On charge les données au moment de l'ouverture
+				// On charge les données dans le tableau au moment de l'ouverture
 				try {
 					affichage_releve.getGestionAffichage().chargerReleveCompteurs();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			} else {
@@ -80,6 +79,11 @@ public class GestionAffichageCompteursBien implements ActionListener {
 	}
 
 	// Méthode pour écrire une ligne de compteur dans la table des compteurs
+	/**
+	 * @param numeroLigne
+	 * @param e
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableCompteurs(int numeroLigne, Compteur e) throws SQLException {
 		JTable tableCompteur = this.facb.getTable_compteurs();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableCompteur.getModel();
@@ -90,6 +94,9 @@ public class GestionAffichageCompteursBien implements ActionListener {
 	}
 
 	// Méthode pour charger les compteurs dans la table des compteurs
+	/**
+	 * @throws SQLException
+	 */
 	public void chargerCompteurs() throws SQLException {
 		// On récupère l'immeuble de la sauvegarde pour utiliser son ID
 		Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
