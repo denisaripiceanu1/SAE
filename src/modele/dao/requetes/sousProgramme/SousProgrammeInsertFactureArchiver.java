@@ -1,6 +1,7 @@
 package modele.dao.requetes.sousProgramme;
 
 import java.sql.CallableStatement;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -8,7 +9,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import modele.Facture;
-import modele.Louer;
 
 public class SousProgrammeInsertFactureArchiver implements SousProgramme<Facture> {
 
@@ -19,7 +19,7 @@ public class SousProgrammeInsertFactureArchiver implements SousProgramme<Facture
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... parametres) throws SQLException {
-		prSt.setString(1, parametres[0]); // clé primaire SIRET
+		prSt.setString(1, parametres[0]); // clé primaire numero
 		prSt.setString(2, parametres[1]);
 		prSt.setString(3, parametres[2]);
 		prSt.setString(4, parametres[3]);
