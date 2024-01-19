@@ -16,9 +16,11 @@ public class RequeteSelectDiagnostic implements Requete<Diagnostics> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, Diagnostics data) throws SQLException {
+		// TODO Auto-generated method stub
 	}
 }

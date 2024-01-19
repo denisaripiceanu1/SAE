@@ -20,7 +20,7 @@ public class RequeteSelectEcheanceByAssuranceNumPolice implements Requete<Echean
 
 	@Override
 	public void parametres(PreparedStatement prSt, Echeance data) throws SQLException {
-
+		// TODO Auto-generated method stub
 	}
 
 }

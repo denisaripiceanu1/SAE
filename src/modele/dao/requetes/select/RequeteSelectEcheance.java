@@ -15,9 +15,12 @@ public class RequeteSelectEcheance implements Requete<Echeance> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, Echeance data) throws SQLException {
+		// TODO Auto-generated method stub
 	}
+	
 }

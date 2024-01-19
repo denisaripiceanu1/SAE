@@ -15,10 +15,12 @@ public class RequeteSelectImpôt implements Requete<Impôt> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, Impôt data) throws SQLException {
+		// TODO Auto-generated method stub
 	}
 
 }

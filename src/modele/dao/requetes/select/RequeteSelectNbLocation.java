@@ -10,7 +10,6 @@ public class RequeteSelectNbLocation implements Requete<Louer> {
 
 	@Override
 	public String requete() {
-		// TODO Auto-generated method stub
 		return "Select count(*) FROM LOUER WHERE Id_locataire = ?";
 	}
 

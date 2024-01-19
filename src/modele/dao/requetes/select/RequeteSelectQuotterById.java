@@ -10,7 +10,6 @@ public class RequeteSelectQuotterById implements Requete<Quotter> {
 
 	@Override
 	public String requete() {
-		// TODO Auto-generated method stub
 		return "SELECT * FROM Quotter WHERE Id_Bien = ? AND Type_quotite = ?";
 	}
 

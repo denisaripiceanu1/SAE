@@ -26,11 +26,6 @@ public class RequeteSelectLouerById implements Requete<Louer> {
 		// Assurez-vous de convertir les types appropriés pour la base de données
 		prSt.setString(1, data.getBien().getIdBien());
 		prSt.setString(2, data.getLocataire().getIdLocataire());
-		/*
-		 * // Convertir la date au format AAAA-MM-JJ SimpleDateFormat sdf = new
-		 * SimpleDateFormat("yyyy-MM-dd"); String dateDebutStr =
-		 * sdf.format(data.getDateDebut()); prSt.setDate(3,
-		 * java.sql.Date.valueOf(dateDebutStr));
-		 */
+		
 	}
 }

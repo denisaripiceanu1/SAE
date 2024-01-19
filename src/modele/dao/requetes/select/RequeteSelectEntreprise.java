@@ -15,11 +15,12 @@ public class RequeteSelectEntreprise implements Requete<Entreprise> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
-
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, Entreprise data) throws SQLException {
+		// TODO Auto-generated method stub
 
 	}
 

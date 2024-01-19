@@ -15,10 +15,12 @@ public class RequeteSelectReleve implements Requete<Releve> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, Releve data) throws SQLException {
+		// TODO Auto-generated method stub
 	}
 
 }

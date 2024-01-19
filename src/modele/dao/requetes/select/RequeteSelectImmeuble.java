@@ -15,12 +15,12 @@ public class RequeteSelectImmeuble implements Requete<Immeuble> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
-
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, Immeuble data) throws SQLException {
-
+		// TODO Auto-generated method stub
 	}
 
 }
