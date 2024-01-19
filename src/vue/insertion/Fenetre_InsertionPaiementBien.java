@@ -113,6 +113,8 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		designationModel.addElement("Travaux");
 		designationModel.addElement("Eau");
 		designationModel.addElement("Électricité");
+		designationModel.addElement("Entretien");
+		designationModel.addElement("Autre");
 		comboBox_Designation.setModel(designationModel);
 		panel.add(comboBox_Designation);
 
