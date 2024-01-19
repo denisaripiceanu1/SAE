@@ -2,13 +2,13 @@ package modele;
 
 public class Assurance {
 
-	private String numéroPolice;
+	private String numeroPolice;
 	private float montant;
 	private Bien bien;
 	private Entreprise entreprise;
 
-	public Assurance(String numéroPolice, float montant, Bien bien, Entreprise entreprise) {
-		this.numéroPolice = numéroPolice;
+	public Assurance(String numeroPolice, float montant, Bien bien, Entreprise entreprise) {
+		this.numeroPolice = numeroPolice;
 		this.montant = montant;
 		this.bien = bien;
 		this.entreprise = entreprise;
@@ -23,11 +23,11 @@ public class Assurance {
 	}
 
 	public String getNuméroPolice() {
-		return this.numéroPolice;
+		return this.numeroPolice;
 	}
 
-	public void setNuméroPolice(String numéroPolice) {
-		this.numéroPolice = numéroPolice;
+	public void setNuméroPolice(String numeroPolice) {
+		this.numeroPolice = numeroPolice;
 	}
 
 	public float getMontant() {

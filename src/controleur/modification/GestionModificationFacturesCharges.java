@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -24,17 +25,18 @@ public class GestionModificationFacturesCharges implements ActionListener {
 
 	private Fenetre_ModificationFactureChargeLogement modificationFacturesCharge;
 	private DaoFacture daoFacture;
-	private DaoBien daoBien;
 	private DaoEntreprise daoEntreprise;
 
 	public GestionModificationFacturesCharges(Fenetre_ModificationFactureChargeLogement modificationCharge) {
-		// Initialisation du gestionnaire avec la fenêtre de modification des factures et charges
+		// Initialisation du gestionnaire avec la fenêtre de modification des factures
+		// et charges
 		this.modificationFacturesCharge = modificationCharge;
 		// Initialisation des objets d'accès aux données (DAO)
 		this.daoFacture = new DaoFacture();
-		this.daoBien = new DaoBien();
+		new DaoBien();
 		this.daoEntreprise = new DaoEntreprise();
-		// Initialisation de la sauvegarde (peut être utilisée pour stocker des données temporaires)
+		// Initialisation de la sauvegarde (peut être utilisée pour stocker des données
+		// temporaires)
 		Sauvegarde.initializeSave();
 	}
 
@@ -45,8 +47,7 @@ public class GestionModificationFacturesCharges implements ActionListener {
 		if (source instanceof JButton) {
 			// Gérer les événements des boutons
 			JButton btn = (JButton) source;
-			Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationFacturesCharge
-					.getTopLevelAncestor();
+			Fenetre_Accueil fenetrePrincipale = (Fenetre_Accueil) this.modificationFacturesCharge.getTopLevelAncestor();
 
 			switch (btn.getText()) {
 			case "Modifier":
@@ -114,36 +115,44 @@ public class GestionModificationFacturesCharges implements ActionListener {
 		updateEntrepriseComponents();
 	}
 
-	// Méthode pour mettre à jour les composants liés à l'entreprise en fonction de la désignation
+	/**
+	 * Méthode pour mettre à jour les composants liés à l'entreprise en fonction de
+	 * la désignation
+	 *
+	 */
 	private void updateEntrepriseComponents() {
 		Object selectedObject = this.modificationFacturesCharge.getComboBox_Designation().getSelectedItem();
 
 		if (selectedObject != null) {
 			String selectedDesignation = selectedObject.toString();
 
-			switch (selectedDesignation) {
-			case "Loyer":
+			if (selectedDesignation.equals("Loyer")) {
 				// Masquer les composants liés à l'entreprise pour les autres options
 				this.modificationFacturesCharge.getBtn_ajouter_entreprise().setVisible(false);
 				this.modificationFacturesCharge.getBtn_charger_entreprise().setVisible(false);
 				this.modificationFacturesCharge.getScrollPane_table_entreprise().setVisible(false);
 				this.modificationFacturesCharge.getTable_entreprise().setVisible(false);
 				this.modificationFacturesCharge.getLbl_Entreprise().setVisible(false);
-				break;
-			// Afficher les composants liés à l'entreprise pour d'autres options
-			default:
+				// Afficher les composants liés à l'entreprise pour d'autres options
+			} else {
 				this.modificationFacturesCharge.getBtn_ajouter_entreprise().setVisible(true);
 				this.modificationFacturesCharge.getBtn_charger_entreprise().setVisible(true);
 				this.modificationFacturesCharge.getScrollPane_table_entreprise().setVisible(true);
 				this.modificationFacturesCharge.getTable_entreprise().setVisible(true);
 				this.modificationFacturesCharge.getLbl_Entreprise().setVisible(true);
-				break;
 			}
+
 		}
 	}
 
 	// Méthode pour écrire une ligne d'entreprise dans la table d'entreprise
-	public void ecrireLigneTableEntreprise(int numeroLigne, Entreprise e) throws SQLException {
+	/**
+	 * @param numeroLigne (int) : prend en parametre le numero de la ligne du
+	 *                    tableau
+	 * @param e           (Entreprise) : prend en parametre l'entreprise pour
+	 *                    l'inserer dans le tableau
+	 */
+	public void ecrireLigneTableEntreprise(int numeroLigne, Entreprise e) {
 		JTable tableEntreprise = this.modificationFacturesCharge.getTable_entreprise();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableEntreprise.getModel();
 
@@ -151,7 +160,10 @@ public class GestionModificationFacturesCharges implements ActionListener {
 		modeleTable.setValueAt(e.getNom(), numeroLigne, 1);
 	}
 
-	// Méthode pour charger les entreprises dans la table d'entreprise
+	//
+	/**
+	 * Méthode pour charger les entreprises dans la table d'entreprise
+	 */
 	private void chargerEntreprise() throws SQLException {
 		List<Entreprise> entreprises = this.daoEntreprise.findAll();
 

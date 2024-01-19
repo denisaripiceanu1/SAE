@@ -40,8 +40,7 @@ public class GestionModificationLocation implements ActionListener {
 						Double.parseDouble(fml.getTextField_loyer_TCC().getText()),
 						Double.parseDouble(fml.getTextField_provision_chargeMens_TTC().getText()),
 						Double.parseDouble(fml.getTextField_caution_TTC().getText()), louerBD.getBail(),
-						louerBD.getEtat_lieux(), 
-						fml.getTextField_date_derniere_regularisation().getText(),
+						louerBD.getEtat_lieux(), fml.getTextField_date_derniere_regularisation().getText(),
 						louerBD.getLoyerPaye(), louerBD.getIcc(),
 						Double.parseDouble(fml.getTextField_montant_reel_paye().getText()));
 
@@ -58,6 +57,8 @@ public class GestionModificationLocation implements ActionListener {
 		case "Annuler":
 			// Annulation de la modification et fermeture de la fenêtre
 			this.fml.dispose();
+			break;
+		default:
 			break;
 		}
 	}

@@ -19,7 +19,6 @@ import modele.dao.requetes.update.RequeteUpdateBien;
 
 public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 
-	// private static Iterateur<Bien> iterateurBien;
 
 	@Override
 	public void create(Bien donnees) throws SQLException {
@@ -95,7 +94,6 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 			new RequeteSelectBienparImmeuble().parametres(st, id);
 			ResultSet res = st.executeQuery();
 			biens = this.convertirResultSetEnListe(res);
-			st.close();
 		}
 
 		return biens;
@@ -122,21 +120,9 @@ public class DaoBien extends DaoModele<Bien> implements Dao<Bien> {
 			while (resultSet.next()) {
 				identifiants.add(resultSet.getString("ID_Bien"));
 			}
-			resultSet.close();
 		}
 
 		return identifiants;
-	}
-
-	public Iterateur<Bien> findAllIterateur() throws SQLException {
-//        RequeteSelectBien req = new RequeteSelectBien();
-//        PreparedStatement st = CictOracleDataSource.getConnectionBD().prepareStatement(req.requete());
-//        req.parametres(st);
-//        ResultSet res = st.executeQuery();
-//
-//        iterateurBien = new Iterateur<>(res, this);
-//        return DaoBien.iterateurBien;
-		return null;
 	}
 
 }

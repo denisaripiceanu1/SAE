@@ -16,37 +16,39 @@ public class RequeteUpdateFacture implements Requete<Facture> {
 
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
-
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, Facture data) throws SQLException {
-		prSt.setDate(1, data.getDateEmissionAsSqlDate());
-		prSt.setDate(2, data.getDatePaiementAsSqlDate());
-		prSt.setString(3, data.getModePaiement());
-		prSt.setString(4, data.getNumeroDevis());
-		prSt.setString(5, data.getDesignation());
-		prSt.setDouble(6, data.getMontantReelPaye());
-		prSt.setDouble(7, data.getMontant());
-		prSt.setInt(8, data.getImputableLocataire());
-
+		// Paramétrage des valeurs pour la requête UPDATE à partir de l'objet Facture
+		prSt.setDate(1, data.getDateEmissionAsSqlDate()); // Date d'émission
+		prSt.setDate(2, data.getDatePaiementAsSqlDate()); // Date de paiement
+		prSt.setString(3, data.getModePaiement()); // Mode de paiement
+		prSt.setString(4, data.getNumeroDevis()); // Numéro du devis
+		prSt.setString(5, data.getDesignation()); // Désignation de la facture
+		prSt.setDouble(6, data.getMontantReelPaye()); // Montant réel payé
+		prSt.setDouble(7, data.getMontant()); // Montant total de la facture
+		prSt.setInt(8, data.getImputableLocataire()); // Imputable au locataire (boolean)
+		// ID de l'immeuble associé à la facture
 		if (data.getImmeuble() == null) {
 			prSt.setNull(9, java.sql.Types.VARCHAR);
 		} else {
 			prSt.setString(9, data.getImmeuble().getImmeuble());
 		}
-
+		// ID du bien associé à la facture
 		if (data.getBien() == null) {
 			prSt.setNull(10, java.sql.Types.VARCHAR);
 		} else {
 			prSt.setString(10, data.getBien().getIdBien());
 		}
-
+		// SIRET de l'entreprise associée à la facture
 		if (data.getEntreprise() != null && data.getEntreprise().getSiret() != null) {
 			prSt.setString(11, data.getEntreprise().getSiret());
 		} else {
 			prSt.setNull(11, java.sql.Types.VARCHAR);
 		}
+		// Numéro de la facture à mettre à jour
 		prSt.setString(12, data.getNumero());
 	}
 

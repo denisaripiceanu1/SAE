@@ -3,19 +3,16 @@ package modele.dao;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import modele.Bien;
 import modele.Diagnostics;
-import modele.Impôt;
 import modele.dao.requetes.delete.RequeteDeleteDiagnostic;
 import modele.dao.requetes.select.RequeteSelectDiagnostic;
 import modele.dao.requetes.select.RequeteSelectDiagnosticById;
 import modele.dao.requetes.select.RequeteSelectDiagnoticByBien;
 import modele.dao.requetes.sousProgramme.SousProgramme;
 import modele.dao.requetes.sousProgramme.SousProgrammeInsertDiagnostic;
-import modele.dao.requetes.sousProgramme.SousProgrammeInsertImpot;
 
 public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnostics> {
 
