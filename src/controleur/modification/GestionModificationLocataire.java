@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+
 import controleur.outils.Sauvegarde;
 import modele.Locataire;
 import modele.dao.DaoLocataire;
@@ -34,10 +35,15 @@ public class GestionModificationLocataire implements ActionListener {
 			// Fermeture de la fenêtre de modification
 			this.modificationLocataire.dispose();
 			break;
+		default:
+			break;
 		}
 	}
 
-	// Méthode privée pour effectuer la modification du locataire
+	/**
+	 * Méthode privée pour effectuer la modification du locataire
+	 *
+	 */
 	private void modifierLocataire() {
 		Locataire locataire = creerLocataireAPartirDesChamps();
 		try {
@@ -50,14 +56,17 @@ public class GestionModificationLocataire implements ActionListener {
 		this.modificationLocataire.dispose();
 	}
 
-	// Méthode privée pour créer un objet Locataire à partir des champs de saisie
+	/**
+	 * Méthode privée pour créer un objet Locataire à partir des champs de saisie
+	 *
+	 * @return
+	 */
 	private Locataire creerLocataireAPartirDesChamps() {
-		Locataire locataire = new Locataire(this.modificationLocataire.getTextField_Id().getText(),
+		return new Locataire(this.modificationLocataire.getTextField_Id().getText(),
 				this.modificationLocataire.getTextField_Nom().getText(),
 				this.modificationLocataire.getTextField_Prenom().getText(),
 				this.modificationLocataire.getTextField_Telephone().getText(),
 				this.modificationLocataire.getTextField_Mail().getText(),
 				this.modificationLocataire.getTextField_DateN().getText());
-		return locataire;
 	}
 }

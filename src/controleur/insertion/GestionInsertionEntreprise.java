@@ -15,9 +15,12 @@ public class GestionInsertionEntreprise implements ActionListener {
     private Fenetre_InsertionEntreprise fie;
     private DaoEntreprise daoEntreprise;
 
+	// Constructeur prenant en paramètre la fenêtre d'insertion d'une entreprise
     public GestionInsertionEntreprise(Fenetre_InsertionEntreprise fie) {
-        this.daoEntreprise = new DaoEntreprise();
         this.fie = fie;
+        
+		// Initialisation de l'accès à la base de données pour l'entité Entreprise
+        this.daoEntreprise = new DaoEntreprise();
     }
 
     @Override
@@ -27,6 +30,7 @@ public class GestionInsertionEntreprise implements ActionListener {
 
         switch (btn.getText()) {
             case "Ajouter":
+            	// Création de l'objet Entreprise null
                 Entreprise entreprise = null;
                 try {
                     // Créer une nouvelle entreprise avec les informations fournies dans la fenêtre d'insertion
@@ -52,7 +56,7 @@ public class GestionInsertionEntreprise implements ActionListener {
                 break;
 
             case "Annuler":
-                // Annuler l'opération, fermer la fenêtre d'insertion
+                // Fermeture de la fenêtre d'insertion d'une entreprise
                 this.fie.dispose();
                 break;
         }

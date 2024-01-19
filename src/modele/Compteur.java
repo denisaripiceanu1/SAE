@@ -3,14 +3,14 @@ package modele;
 public class Compteur {
 	private String idCompteur;
 	private String typeComp;
-	private double prix_abonnement;
+	private double prixAbonnement;
 	private Bien bien;
 	private Immeuble immeuble;
 
-	public Compteur(String idCompteur, String typeComp,double prix_abonnement,Bien bien, Immeuble immeuble) {
+	public Compteur(String idCompteur, String typeComp,double prixAbonnement,Bien bien, Immeuble immeuble) {
 		this.idCompteur = idCompteur;
 		this.typeComp = typeComp;
-		this.prix_abonnement = prix_abonnement;
+		this.prixAbonnement = prixAbonnement;
 		this.bien = bien;
 		this.immeuble = immeuble;
 	}
@@ -32,11 +32,11 @@ public class Compteur {
 	}
 
 	public double getPrix_abonnement() {
-		return prix_abonnement;
+		return prixAbonnement;
 	}
 
-	public void setPrix_abonnement(double prix_abonnement) {
-		this.prix_abonnement = prix_abonnement;
+	public void setPrix_abonnement(double prixAbonnement) {
+		this.prixAbonnement = prixAbonnement;
 	}
 
 	public Bien getBien() {

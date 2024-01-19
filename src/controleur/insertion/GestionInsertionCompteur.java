@@ -19,6 +19,7 @@ public class GestionInsertionCompteur implements ActionListener {
     private Fenetre_InsertionCompteur fic;
     private DaoCompteur daoCompteur;
 
+	// Constructeur prenant en paramètre la fenêtre d'insertion d'un compteur
     public GestionInsertionCompteur(Fenetre_InsertionCompteur fic) {
         this.fic = fic;
     }
@@ -27,10 +28,11 @@ public class GestionInsertionCompteur implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton btn = (JButton) e.getSource();
         Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.fic.getTopLevelAncestor();
+        
         switch (btn.getText()) {
             case "Ajouter":
                 try {
-                    // Créer un nouveau compteur avec les données de la fenêtre d'insertion
+                    // Création d'un nouveau compteur avec les données de la fenêtre d'insertion
                     Compteur compteur = new Compteur(
                             this.fic.getTextField_IdCompteur().getText(),
                             this.fic.getComboBox_typeDeCompteur().getSelectedItem().toString(),
@@ -52,7 +54,7 @@ public class GestionInsertionCompteur implements ActionListener {
                 break;
 
             case "Annuler":
-                // Annuler l'opération, fermer la fenêtre d'insertion
+                // Fermeture de la fenêtre d'insertion d'un compteur
                 this.fic.dispose();
                 break;
         }

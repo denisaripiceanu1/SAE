@@ -18,8 +18,11 @@ public class GestionTableAffichageCompteursBien implements ListSelectionListener
 	private Fenetre_AffichageCompteursBien fenetreAffichageCompteursBiens;
 	private DaoCompteur daoCompteur;
 
+	// Constructeur prenant en paramètre la fenêtre d'affichage des compteurs pour un bien
 	public GestionTableAffichageCompteursBien(Fenetre_AffichageCompteursBien fenetreAffichageCompteursBiens) {
 		this.fenetreAffichageCompteursBiens = fenetreAffichageCompteursBiens;
+		
+		// Initialisation de l'accès à la base de données pour l'entité Compteur
 		this.daoCompteur = new DaoCompteur();
 	}
 

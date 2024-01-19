@@ -56,8 +56,9 @@ public class GestionInsertionAssurance implements ActionListener {
 
 		switch (btn.getText()) {
 		case "Ajouter":
-			// Création d'un objet Assurance
+			// Création d'un objet Assurance à null
 			Assurance assurance = null;
+			// Création d'un objet Echeance à null
 			Echeance echeance = null;
 			try {
 				Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");

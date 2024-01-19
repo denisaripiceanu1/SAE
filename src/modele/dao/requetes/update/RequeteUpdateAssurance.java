@@ -16,15 +16,15 @@ public class RequeteUpdateAssurance implements Requete<Assurance> {
 	@Override
 	public void parametres(PreparedStatement prSt, String... id) throws SQLException {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void parametres(PreparedStatement prSt, Assurance data) throws SQLException {
-		prSt.setFloat(1, data.getMontant());
-		prSt.setString(2, data.getBien().getIdBien());
-		prSt.setString(3, data.getEntreprise().getSiret());
-		prSt.setString(4, data.getNuméroPolice());
+	    // Paramétrage des valeurs pour la requête UPDATE à partir de l'objet Assurance
+	    prSt.setFloat(1, data.getMontant()); // Montant de l'assurance
+	    prSt.setString(2, data.getBien().getIdBien()); // ID du bien associé à l'assurance
+	    prSt.setString(3, data.getEntreprise().getSiret()); // SIRET de l'entreprise d'assurance associée
+	    prSt.setString(4, data.getNuméroPolice()); // Numéro de police de l'assurance
 	}
 
 }
