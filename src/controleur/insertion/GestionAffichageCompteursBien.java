@@ -8,7 +8,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.outils.Sauvegarde;
@@ -18,17 +17,18 @@ import modele.dao.DaoCompteur;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_AffichageCompteursBien;
 import vue.insertion.Fenetre_AffichageReleveCompteursBien;
-import vue.insertion.Fenetre_InsertionEntreprise;
-import vue.insertion.Fenetre_InsertionPaiementBien;
-import vue.insertion.Fenetre_InsertionPaiementLogement;
 import vue.insertion.Fenetre_InsertionReleve;
 
 public class GestionAffichageCompteursBien implements ActionListener {
-	
+
 	private Fenetre_AffichageCompteursBien facb;
 	private DaoCompteur daoCompteur;
 
-	// Constructeur prenant en paramètre la fenêtre d'affichage des compteurs
+	/**
+	 * Constructeur prenant en paramètre la fenêtre d'affichage des compteurs
+	 *
+	 * @param fenetre_AffichageCompteursBiens
+	 */
 	public GestionAffichageCompteursBien(Fenetre_AffichageCompteursBien fenetre_AffichageCompteursBiens) {
 		this.facb = fenetre_AffichageCompteursBiens;
 		// Initialisation de l'accès à la base de données pour l'entité Compteur
@@ -38,11 +38,12 @@ public class GestionAffichageCompteursBien implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
-		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.facb.getTopLevelAncestor(); // fenetre dans laquelle
-																								// on ouvre des internal
-																								// frame
+		// fenetre dans laquelle on ouvre des internal frame
+		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.facb.getTopLevelAncestor();
+
 		switch (btn.getText()) {
 		case "Ajouter un relevé":
+			// Vérifie si le compteur est dans la sauvegarde avant d'ajouter un relevé
 			if (Sauvegarde.onSave("Compteur") == true) {
 				Fenetre_InsertionReleve insertion_releve = new Fenetre_InsertionReleve();
 				fenetre_Principale.getLayeredPane().add(insertion_releve);
@@ -52,20 +53,20 @@ public class GestionAffichageCompteursBien implements ActionListener {
 				JOptionPane.showMessageDialog(fenetre_Principale, "Veuillez sélectionner un compteur !", "Erreur",
 						JOptionPane.ERROR_MESSAGE);
 			}
-
 			break;
+
 		case "Afficher les relevés":
+			// Vérifie si le compteur est dans la sauvegarde avant d'ajouter un relevé
 			if (Sauvegarde.onSave("Compteur") == true) {
 				Fenetre_AffichageReleveCompteursBien affichage_releve = new Fenetre_AffichageReleveCompteursBien();
 				fenetre_Principale.getLayeredPane().add(affichage_releve);
 				affichage_releve.setVisible(true);
 				affichage_releve.moveToFront();
-				
-				//On charge les données au moment de l'ouverture 
+
+				// On charge les données dans le tableau au moment de l'ouverture
 				try {
 					affichage_releve.getGestionAffichage().chargerReleveCompteurs();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			} else {
@@ -73,14 +74,25 @@ public class GestionAffichageCompteursBien implements ActionListener {
 						JOptionPane.ERROR_MESSAGE);
 			}
 			break;
-			
+
 		case "Annuler":
+			// Fermeture de la fenêtre
 			this.facb.dispose();
 			break;
 		}
 	}
+	
+	
 
-	// Méthode pour écrire une ligne de compteur dans la table des compteurs
+	/**
+	 * Méthode pour écrire une ligne de compteur dans la table des compteurs
+	 *
+	 * @param numeroLigne (int) : correspond au numéro de la ligne courante dans la
+	 *                    table des compteurs
+	 * @param e           (Compteur) : correspond au compteur courant
+	 *
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableCompteurs(int numeroLigne, Compteur e) throws SQLException {
 		JTable tableCompteur = this.facb.getTable_compteurs();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableCompteur.getModel();
@@ -90,11 +102,15 @@ public class GestionAffichageCompteursBien implements ActionListener {
 		modeleTable.setValueAt(e.getPrix_abonnement(), numeroLigne, 2);
 	}
 
-	// Méthode pour charger les compteurs dans la table des compteurs
+	/**
+	 * Méthode qui permet de charger les compteurs dans la table des compteurs
+	 *
+	 * @throws SQLException
+	 */
 	public void chargerCompteurs() throws SQLException {
-		// On récupère l'immeuble de la sauvegarde pour utiliser son ID 
+		// On récupère l'immeuble de la sauvegarde pour utiliser son ID
 		Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
-		
+
 		List<Compteur> compteurs = this.daoCompteur.findByIdImmeubleListe(immeubleSauvegarde.getImmeuble());
 
 		DefaultTableModel modeleTable = (DefaultTableModel) this.facb.getTable_compteurs().getModel();

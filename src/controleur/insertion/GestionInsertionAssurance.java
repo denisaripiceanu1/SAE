@@ -12,13 +12,13 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.outils.Sauvegarde;
 import modele.Assurance;
-import modele.Entreprise;
 import modele.Bien;
 import modele.Echeance;
+import modele.Entreprise;
 import modele.dao.DaoAssurance;
 import modele.dao.DaoBien;
-import modele.dao.DaoEntreprise;
 import modele.dao.DaoEcheance;
+import modele.dao.DaoEntreprise;
 import vue.Fenetre_Accueil;
 import vue.insertion.Fenetre_InsertionAssurance;
 import vue.insertion.Fenetre_InsertionEntreprise;
@@ -32,11 +32,20 @@ public class GestionInsertionAssurance implements ActionListener {
 	private DaoEntreprise daoEntreprise;
 	private DaoEcheance daoEcheance;
 
+	// Constructeur prenant en paramètre la fenêtre d'insertion d'une assurance
 	public GestionInsertionAssurance(Fenetre_InsertionAssurance fia) {
 		this.modificationAssurance = fia;
+
+		// Initialisation de l'accès à la base de données pour l'entité Assurance
 		this.daoAssurance = new DaoAssurance();
+
+		// Initialisation de l'accès à la base de données pour l'entité Bien
 		this.daoBien = new DaoBien();
+
+		// Initialisation de l'accès à la base de données pour l'entité Entreprise
 		this.daoEntreprise = new DaoEntreprise();
+
+		// Initialisation de l'accès à la base de données pour l'entité Echeance
 		this.daoEcheance = new DaoEcheance();
 	}
 
@@ -44,6 +53,7 @@ public class GestionInsertionAssurance implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
 		Fenetre_Accueil fenetre_Principale = (Fenetre_Accueil) this.modificationAssurance.getTopLevelAncestor();
+
 		switch (btn.getText()) {
 		case "Ajouter":
 			// Création d'un objet Assurance
@@ -67,10 +77,12 @@ public class GestionInsertionAssurance implements ActionListener {
 				// Appel de la méthode DAO pour l'ajout de l'assurance dans la base de données
 				this.daoAssurance.create(assurance);
 				this.daoEcheance.create(echeance);
+
 				// Fermeture de la fenêtre d'insertion après l'ajout
 				this.modificationAssurance.dispose();
 			} catch (Exception e1) {
 				e1.printStackTrace();
+
 				// Afficher un message d'erreur à l'utilisateur
 				JOptionPane.showMessageDialog(null,
 						"Erreur lors de l'ajout de l'assurance dans la base de données. Veuillez réessayer plus tard.",
@@ -80,12 +92,13 @@ public class GestionInsertionAssurance implements ActionListener {
 			break;
 
 		case "Annuler":
-			// Annulation de l'opération, fermeture de la fenêtre d'insertion
+			// Fermeture de la fenêtre d'insertion
 			this.modificationAssurance.dispose();
 			break;
 
 		case "Charger":
 			try {
+				// Utilise la méthode chargerEntreprise pour charger le tableau
 				this.chargerEntreprise();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
@@ -102,12 +115,13 @@ public class GestionInsertionAssurance implements ActionListener {
 
 		case "Modifier":
 			if (Sauvegarde.onSave("Entreprise") == true) {
+				// Vérication que l'entreprise est bien dans la sauvegarde
 				Fenetre_ModificationEntreprise modificationEntreprise = new Fenetre_ModificationEntreprise();
 				fenetre_Principale.getLayeredPane().add(modificationEntreprise);
 				modificationEntreprise.setVisible(true);
 				modificationEntreprise.moveToFront();
 
-				// On recupere l'entreprise de la sauvegarde
+				// On récupère l'entreprise de la sauvegarde
 				Entreprise entrepriseSauvgarde = (Entreprise) Sauvegarde.getItem("Entreprise");
 				Entreprise entrepriseCourante;
 
@@ -132,7 +146,14 @@ public class GestionInsertionAssurance implements ActionListener {
 
 	}
 
-	// Méthode pour écrire une ligne d'entreprise dans la table d'entreprise
+	/**
+	 * Méthode pour écrire une ligne d'entreprise dans la table d'entreprise
+	 *
+	 * @param numeroLigne (int) : correspond au numéro de la ligne courante dans la
+	 *                    table des entreprises
+	 * @param e           (Entreprise) : correspond à l'entreprise courante
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableEntreprise(int numeroLigne, Entreprise e) throws SQLException {
 		JTable tableEntreprise = this.modificationAssurance.getTable_entreprise();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableEntreprise.getModel();
@@ -141,7 +162,11 @@ public class GestionInsertionAssurance implements ActionListener {
 		modeleTable.setValueAt(e.getNom(), numeroLigne, 1);
 	}
 
-	// Méthode pour charger les entreprises dans la table d'entreprise
+	/**
+	 * Méthode pour charger les entreprises dans la table d'entreprise
+	 *
+	 * @throws SQLException
+	 */
 	private void chargerEntreprise() throws SQLException {
 		List<Entreprise> entreprises = this.daoEntreprise.findAll();
 

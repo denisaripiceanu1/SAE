@@ -40,6 +40,7 @@ public class GestionAffichageCompteursLogement implements ActionListener {
 		switch (btn.getText()) {
 		case "Ajouter un relevé":
 			if (Sauvegarde.onSave("Compteur") == true) {
+				// Vérifie si le compteur est dans la sauvegarde avant d'ajouter un relevé
 				Fenetre_InsertionReleve insertion_releve = new Fenetre_InsertionReleve();
 				fenetre_Principale.getLayeredPane().add(insertion_releve);
 				insertion_releve.setVisible(true);
@@ -53,6 +54,7 @@ public class GestionAffichageCompteursLogement implements ActionListener {
 
 		case "Afficher les relevés":
 			if (Sauvegarde.onSave("Compteur") == true) {
+				// Vérifie si le compteur est dans la sauvegarde avant d'ajouter un relevé
 				Fenetre_AffichageReleveCompteursLogement affichage_releve = new Fenetre_AffichageReleveCompteursLogement();
 				fenetre_Principale.getLayeredPane().add(affichage_releve);
 				affichage_releve.setVisible(true);
@@ -62,7 +64,6 @@ public class GestionAffichageCompteursLogement implements ActionListener {
 				try {
 					affichage_releve.getGestionAffichage().chargerReleveCompteurs();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			} else {
@@ -72,12 +73,20 @@ public class GestionAffichageCompteursLogement implements ActionListener {
 			break;
 
 		case "Annuler":
+			// Fermeture de la fenêtre
 			this.facl.dispose();
 			break;
 		}
 	}
 
-	// Méthode pour écrire une ligne de compteur dans la table des compteurs
+	/**
+	 * Méthode pour écrire une ligne de compteur dans la table des compteurs
+	 *
+	 * @param numeroLigne (int) : correspond au numéro de la ligne courante dans la
+	 *                    table des compteurs
+	 * @param e           (Compteur) : correspond au compteur courant
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableCompteurs(int numeroLigne, Compteur e) throws SQLException {
 		JTable tableCompteur = this.facl.getTable_compteurs();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableCompteur.getModel();
@@ -87,7 +96,11 @@ public class GestionAffichageCompteursLogement implements ActionListener {
 		modeleTable.setValueAt(e.getPrix_abonnement(), numeroLigne, 2);
 	}
 
-	// Méthode pour charger les compteurs dans la table des compteurs
+	/**
+	 * Méthode qui permet de charger les compteurs dans la table des compteurs
+	 *
+	 * @throws SQLException
+	 */
 	public void chargerCompteurs() throws SQLException {
 		// On récupère le logement de la sauvegarde pour utiliser son ID
 		Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");

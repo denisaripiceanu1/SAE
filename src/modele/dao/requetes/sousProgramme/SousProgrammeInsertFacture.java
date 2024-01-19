@@ -52,7 +52,11 @@ public class SousProgrammeInsertFacture implements SousProgramme<Facture> {
 	public void parametres(PreparedStatement prSt, Facture donnee) throws SQLException {
 		prSt.setString(1, donnee.getNumero()); // clé priamire de Locataire
 		prSt.setDate(2, java.sql.Date.valueOf(donnee.getDateEmission()));
-		prSt.setDate(3, java.sql.Date.valueOf(donnee.getDatePaiement()));
+		if (donnee.getDatePaiement().isEmpty()) {
+			prSt.setNull(3, java.sql.Types.DATE);
+		} else {
+			prSt.setDate(3, java.sql.Date.valueOf(donnee.getDatePaiement()));
+		}
 		prSt.setString(4, donnee.getModePaiement());
 		prSt.setString(5, donnee.getNumeroDevis());
 		prSt.setString(6, donnee.getDesignation());

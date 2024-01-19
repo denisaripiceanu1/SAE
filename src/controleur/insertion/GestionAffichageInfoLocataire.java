@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -30,23 +29,42 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 	private DaoBien daoBien;
 	private Louer location;
 
+	// Constructeur prenant en paramètre la fenêtre d'affichage des informations des
+	// locataires
 	public GestionAffichageInfoLocataire(Fenetre_AffichageInfoLocataire fail) {
 		this.fail = fail;
+
+		// Initialisation de l'accès à la base de données pour l'entité Locataire
 		this.daoLocataire = new DaoLocataire();
+
+		// Initialisation de l'accès à la base de données pour l'entité Louer
 		this.daoLouer = new DaoLouer();
+
+		// Initialisation de l'accès à la base de données pour l'entité Bien
 		this.daoBien = new DaoBien();
+
+		// Récupère la Location selectionnée dans le tableau qui est dans sauvegarde
 		this.location = (Louer) Sauvegarde.getItem("Louer");
 
 	}
 
-	public void ecrireLigneTableSoldeToutCompte(int numeroLigne, Louer location, /* Facture facture, */ Bien bien)
-			throws SQLException {
+	/**
+	 * Méthode pour écrire une ligne de Solde Tout compte dans la table des solde
+	 * tout de compte
+	 *
+	 * @param numeroLigne (int) : correspond au numéro de la ligne courante dans la
+	 *                    table des soldes de tout compte
+	 * @param location    (Louer) : correspond à la location courante
+	 * @param bien        (Bien) : correspond au bien courant
+	 * @throws SQLException
+	 */
+	public void ecrireLigneTableSoldeToutCompte(int numeroLigne, Louer location, Bien bien) throws SQLException {
 		JTable tableSoldeToutCompte = this.fail.getTable_soldeToutCompte();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableSoldeToutCompte.getModel();
 
-		// charges reelles
+		// Charges réelles
 		double chargesReellesBien = daoLouer.totalChargesRéelles(location);
-		// ordures menageres
+		// Ordures ménagères
 		double orduresMenageres = this.daoLouer.totalOrduresMenageres(location);
 
 		double totalCharges = chargesReellesBien + orduresMenageres;
@@ -66,9 +84,8 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		// Restant du Loyers
 		double restantDuLoyers = this.daoLouer.restantDuLoyers(location);
 		modeleTable.setValueAt(restantDuLoyers, numeroLigne, 8);
-		
+
 		// Reste
-		// double soldeToutCompte = daoLouer.soldeToutCompte(location);
 		double soldeToutCompte = daoLouer.soldeToutCompte(location);
 
 		modeleTable.setValueAt(soldeToutCompte, numeroLigne, 10);
@@ -80,6 +97,12 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		modeleTable.setValueAt("=", numeroLigne, 9);
 	}
 
+	/**
+	 * Méthode qui permet de charger les soldes de tout compte dans la table de
+	 * solde de tout compte
+	 *
+	 * @throws SQLException
+	 */
 	private void chargerSoldeToutCompte() throws SQLException {
 		List<Louer> locations = this.daoLouer.findLocationByBien(location.getBien().getIdBien());
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fail.getTable_soldeToutCompte().getModel();
@@ -100,19 +123,21 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 
 		switch (btn.getText()) {
 		case "Régularisation des charges":
+			// Récupère le locataire placé dans la sauvegarde
 			Locataire locataire_save = (Locataire) Sauvegarde.getItem("Locataire");
 			String idLocataire = locataire_save.getIdLocataire();
 			try {
 				this.updateTableRegularisationsForLocataire(idLocataire);
 			} catch (SQLException e2) {
-				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
 			break;
 
 		case "Solde tout compte":
 			try {
+				// Vérifie si la location est dans la sauvegarde
 				if (Sauvegarde.onSave("Louer") == true) {
+					// Récupère le locataire placé dans la sauvegarde
 					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
 					Fenetre_ArchiverLocataire archiver_locataire = new Fenetre_ArchiverLocataire();
 					this.fail.getLayeredPane().add(archiver_locataire);
@@ -139,6 +164,14 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 	////////////// REGULARISATION //////////////
 	////////////////////////////////////////////
 
+	/**
+	 * Méthode pour écrire une ligne dans la table des régularisations de charges
+	 *
+	 * @param numeroLigne (int) : correspond au numéro de la ligne courante dans la
+	 *                    table des régularisations de charges
+	 * @param location    (Louer) : correspond à la location courante
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableRegularisation(int numeroLigne, Louer location) throws SQLException {
 		JTable tableRegularisation = this.fail.getTableRegularisation();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableRegularisation.getModel();
@@ -151,10 +184,10 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 		} else {
 			modeleTable.setValueAt("N/A", numeroLigne, 2);
 		}
-		// Charges reelles
+		// Charges réelles
 		double chargesReellesBien = this.daoLouer.totalChargesRéelles(location);
 		modeleTable.setValueAt(chargesReellesBien, numeroLigne, 3);
-		// Ordures menageres
+		// Ordures ménagères
 		double orduresMenageres = this.daoLouer.totalOrduresMenageres(location);
 		modeleTable.setValueAt(orduresMenageres, numeroLigne, 4);
 		// TOTAL charges
@@ -172,7 +205,15 @@ public class GestionAffichageInfoLocataire implements ActionListener {
 
 	}
 
+	/**
+	 * Met à jour la table des régularisations pour un locataire donné.
+	 *
+	 * @param idLocataire (String) : correspond à l'identifiant du locataire pour
+	 *                    lequel les régularisations doivent être affichées.
+	 * @throws SQLException
+	 */
 	private void updateTableRegularisationsForLocataire(String idLocataire) throws SQLException {
+		// Récupère le logement qui est dans la sauvegarde
 		Bien bien = (Bien) Sauvegarde.getItem("Logement");
 		Louer location = this.daoLouer.findById(bien.getIdBien(), idLocataire);
 
