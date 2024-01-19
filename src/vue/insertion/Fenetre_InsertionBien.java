@@ -47,21 +47,22 @@ public class Fenetre_InsertionBien extends JInternalFrame {
         lbl_InsererUnBien.setBounds(308, 26, 117, 48);
         panel.add(lbl_InsererUnBien);
 
-        // Champs de texte et menus déroulants
+        // Champs de texte
         textField_IdImmeuble = createTextField("Id Bien", 110, 104, 190, 40, panel);
         textField_adresse = createTextField("Adresse", 110, 168, 190, 40, panel);
         textField_codePostal = createTextField("Code Postal", 427, 168, 190, 40, panel);
         textField_ville = createTextField("Ville", 110, 228, 190, 40, panel);
         textField_periodeDeConstruction = createTextField("Période de construction", 427, 228, 190, 40, panel);
-
+        
+        // Menu déroulant
         comboBox_typeDeBien = createComboBox("Type", new String[]{"Immeuble", "Maison"}, 427, 104, 189, 45, panel);
 
-        // Boutons Ajouter et Annuler
+        // Boutons 
         createButton("Ajouter", 246, 447, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionInsertionBien, panel);
         createButton("Annuler", 398, 447, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionInsertionBien, panel);
+        createButton("Ajouter un compteur", 246, 378, 246, 31, Color.WHITE, new Color(0, 102, 204), gestionInsertionBien, panel);
 
         createSeparator(82, 354, 591, 2, panel);
-        createButton("Ajouter un compteur", 246, 378, 246, 31, Color.WHITE, new Color(0, 102, 204), gestionInsertionBien, panel);
     }
 
     // Méthode pour créer un champ de texte avec une bordure spécifique

@@ -1081,7 +1081,6 @@ public class Fenetre_Accueil extends JFrame {
 	}
 	
 	// GETTERS & SETTERS
-
 	public JLayeredPane getLayeredPane_MesDocuments() {
 		return this.layeredPane_MesDocuments;
 	}

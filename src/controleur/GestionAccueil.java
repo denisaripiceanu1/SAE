@@ -196,7 +196,7 @@ public class GestionAccueil implements ActionListener {
 	 * @param dataset (DefaultCategoryDataset) : données à afficher sur le graphique
 	 * @return (JFreeChart) le graphique à barres
 	 */
-	private JFreeChart creerGraphiqueBarresProvisions(DefaultCategoryDataset dataset) {
+	private JFreeChart créerGraphiqueBarresProvisions(DefaultCategoryDataset dataset) {
 		return ChartFactory.createBarChart(
 				"Évolution des provisions pour charges par année", // Titre du graphique
 				"Année", // Axe des abscisses (X)
@@ -233,7 +233,7 @@ public class GestionAccueil implements ActionListener {
 	 * @param dataset Un objet DefaultCategoryDataset contenant les données à afficher sur le graphique.
 	 * @return Un objet JFreeChart représentant le graphique à barres de la moyenne des loyers par locataire.
 	 */
-	private JFreeChart creerGraphiqueBarresMoyenneLoyer(DefaultCategoryDataset dataset) {
+	private JFreeChart créerGraphiqueBarresMoyenneLoyer(DefaultCategoryDataset dataset) {
 		return ChartFactory.createBarChart(
 				"Moyenne des loyers par locataire", // Titre du graphique
 				"Locataire", // Axe des abscisses (X)
@@ -257,55 +257,65 @@ public class GestionAccueil implements ActionListener {
 	}	
 	
 	/**
-	 * Charge la page d'accueil en générant et affichant les graphiques des provisions et des moyennes de loyer
+	 * Charge la page d'accueil en générant et affichant 
+	 * les graphiques des provisions et des moyennes de loyer
 	 *
-	 * @throws SQLException En cas d'erreur lors de l'accès aux données.
+	 * @throws SQLException
 	 */
 	public void chargerAccueil() throws SQLException {
-		// Créer les datasets
-		DefaultCategoryDataset datasetProvisions = this.créerJeuDeDonnées();
-		DefaultCategoryDataset datasetMoyenneLoyer = this.créerJeuDeDonnéesMoyenneLoyer();
+		// Créer les jeux de données
+	    DefaultCategoryDataset datasetProvisions = this.créerJeuDeDonnées();
+	    DefaultCategoryDataset datasetMoyenneLoyer = this.créerJeuDeDonnéesMoyenneLoyer();
 
-		// Créer les graphiques
-		JFreeChart chartProvisions = this.creerGraphiqueBarresProvisions(datasetProvisions);
-		JFreeChart chartMoyenneLoyer = this.creerGraphiqueBarresMoyenneLoyer(datasetMoyenneLoyer);
+	    // Créer les graphiques
+	    JFreeChart chartProvisions = this.créerGraphiqueBarresProvisions(datasetProvisions);
+	    JFreeChart chartMoyenneLoyer = this.créerGraphiqueBarresMoyenneLoyer(datasetMoyenneLoyer);
 
-		// Créer les ChartPanels avec les tailles appropriées
-		ChartPanel chartPanelProvisions = new ChartPanel(chartProvisions);
-		this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().getWidth(),
-				this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().getHeight()));
-		this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().setLayout(new BorderLayout());
-		this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().add(chartPanelProvisions, BorderLayout.CENTER);
+	    // Créer les ChartPanels avec les tailles appropriées pour les graphiques de provisions
+	    ChartPanel chartPanelProvisions = new ChartPanel(chartProvisions);
+	    this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().setPreferredSize(
+	            new Dimension(this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().getWidth(),
+	                          this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().getHeight()));
+	    this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().setLayout(new BorderLayout());
+	    this.fenetreAccueil.getPanel_Accueil_graphiqueBasDroite().add(chartPanelProvisions, BorderLayout.CENTER);
 
-		ChartPanel chartPanelMoyenneLoyer = new ChartPanel(chartMoyenneLoyer);
-		this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().setPreferredSize(new Dimension(this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().getWidth(),
-				this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().getHeight()));
-		this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().setLayout(new BorderLayout());
-		this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
+	    // Créer les ChartPanels avec les tailles appropriées pour les graphiques de moyenne de loyer
+	    ChartPanel chartPanelMoyenneLoyer = new ChartPanel(chartMoyenneLoyer);
+	    this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().setPreferredSize(
+	            new Dimension(this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().getWidth(),
+	                          this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().getHeight()));
+	    this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().setLayout(new BorderLayout());
+	    this.fenetreAccueil.getPanel_Accueil_graphiqueHautDroite().add(chartPanelMoyenneLoyer, BorderLayout.CENTER);
 
-		JLabel labelMoyenne = new JLabel("Moyenne des loyers : " + this.loyerMoyenneMediane().getMoyenne() + " €");
-		Font nouvellePoliceMo = new Font(labelMoyenne.getFont().getName(), Font.PLAIN, 20);
-		labelMoyenne.setFont(nouvellePoliceMo);
-		this.fenetreAccueil.getPanel_Accueil_mediane().add(labelMoyenne, BorderLayout.NORTH);
+	    // Ajouter des labels pour afficher la moyenne et la médiane des loyers
+	    JLabel labelMoyenne = new JLabel("Moyenne des loyers : " + this.loyerMoyenneMediane().getMoyenne() + " €");
+	    Font nouvellePoliceMo = new Font(labelMoyenne.getFont().getName(), Font.PLAIN, 20);
+	    labelMoyenne.setFont(nouvellePoliceMo);
+	    
+	    this.fenetreAccueil.getPanel_Accueil_mediane().add(labelMoyenne, BorderLayout.NORTH);
+	    JLabel labelMediane = new JLabel("Médiane des loyers : " + this.loyerMoyenneMediane().getMediane() + " €");
+	    Font nouvellePolice = new Font(labelMediane.getFont().getName(), Font.PLAIN, 20);
+	    labelMediane.setFont(nouvellePolice);
+	    this.fenetreAccueil.getPanel_Accueil_moyenne().add(labelMediane, BorderLayout.SOUTH);
 
-		JLabel labelMediane = new JLabel("Mediane des loyers : " + this.loyerMoyenneMediane().getMediane() + " €");
-		Font nouvellePolice = new Font(labelMediane.getFont().getName(), Font.PLAIN, 20);
-		labelMediane.setFont(nouvellePolice);
-		this.fenetreAccueil.getPanel_Accueil_moyenne().add(labelMediane, BorderLayout.SOUTH);
-
-		// Ajouter les ChartPanels aux panneaux de fenetreAccueil
-		this.fenetreAccueil.revalidate();
-		this.fenetreAccueil.repaint();
+	    // Rafraîchir la fenêtre d'accueil
+	    this.fenetreAccueil.revalidate();
+	    this.fenetreAccueil.repaint();
 	}
 
 	
 	
-	///////////////////////////////////////////////////////////////////
-	// LAYERED MES BIENS
-	///////////////////////////////////////////////////////////////////
-
-	// ------------------- TABLE BIENS ------------------- //
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LAYERED MES BIENS
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Met à jour une ligne spécifique de la table biens avec les informations de l'immeuble donné
+	 *
+	 * @param numeroLigne (int) : le numéro de la ligne dans la table à mettre à jour
+	 * @param immeuble (Immeuble) : Immeuble contenant les informations à afficher dans la ligne
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableBiens(int numeroLigne, Immeuble immeuble) throws SQLException {
 		JTable tableImmeuble = this.fenetreAccueil.getTableBiens();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableImmeuble.getModel();
@@ -319,30 +329,33 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(immeuble.getType_immeuble(), numeroLigne, 3);
 	}
 
+	
 	public void chargerBiens() throws SQLException {
-
 		List<Immeuble> immeubles = this.daoImmeuble.findAll();
-
+		
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableBiens().getModel();
-
 		modeleTable.setRowCount(immeubles.size());
-
 		for (int i = 0; i < immeubles.size(); i++) {
 			Immeuble immeuble = immeubles.get(i);
 			this.ecrireLigneTableBiens(i, immeuble);
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// LAYERED MES
-	// LOCATIONS////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LAYERED MES LOCATIONS
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// ------------------- TABLE LOCATIONS ------------------- //
-
+	/**
+	 * Met à jour une ligne spécifique de la table des locations avec les informations de la location et du bien associé
+	 *
+	 * @param numeroLigne (int) : le numéro de la ligne dans la table à mettre à jour.
+	 * @param location (Louer) : L'objet Louer contenant les informations de la location.
+	 * @param bien (Bien) : Bien associé à la location
+	 */
 	public void ecrireLigneTableLocations(int numeroLigne, Louer location, Bien bien) {
 		JTable tableLocations = this.fenetreAccueil.getTableLocations();
+		
 		DefaultTableModel modeleTable = (DefaultTableModel) tableLocations.getModel();
-
 		modeleTable.setValueAt(location.getLocataire(), numeroLigne, 0);
 		modeleTable.setValueAt(location.getBien(), numeroLigne, 1);
 		modeleTable.setValueAt(bien.getType_bien(), numeroLigne, 2);
@@ -350,19 +363,19 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(location.getDateDerniereRegularisation(), numeroLigne, 4);
 	}
 
+	/**
+	 * Charge et affiche les informations sur les locations dans la table dédiée sur la fenêtre d'accueil
+	 * 
+	 * @throws SQLException
+	 */
 	private void chargerLocations() throws SQLException {
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableLocations().getModel();
-
-		// Réinitialiser le modèle pour vider la table
 		modeleTable.setRowCount(0);
-
 		List<Bien> biens = this.daoBien.findAll();
 		List<Louer> locations = new ArrayList<>();
-
 		for (Bien b : biens) {
 			locations.addAll(this.daoLouer.findLocationByBien(b.getIdBien()));
 		}
-		// Ajouter les nouvelles lignes
 		for (int i = 0; i < locations.size(); i++) {
 			Louer location = locations.get(i);
 			Bien bien = location.getBien();
@@ -372,18 +385,22 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	//////////////////////////////////////////////////////////////////////////
-	// LAYERED MES
-	// TRAVAUX////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LAYERED MES TRAVAUX
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// ------------------- TABLE TRAVAUX pour un IMMEUBLE ------------------- //
-
+	// Table travaux pour des immeubles
+	/**
+	 * Charge et affiche les informations sur les travaux effectués dans les immeubles 
+	 * dans la table dédiée sur la fenêtre d'accueil
+	 * 
+	 * @throws SQLException
+	 */
 	private void chargerTravauxImmeubles() throws SQLException {
 		List<Facture> factures = this.daoFacture.findFactureTravaux();
-
+		
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableTravaux().getModel();
 		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
-
 		for (int i = 0; i < factures.size(); i++) {
 			Facture f = factures.get(i);
 			if (f != null && f.getImmeuble() != null) {
@@ -395,14 +412,18 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	// ------------------- TABLE TRAVAUX pour un LOGEMENT ------------------- //
-
+	// Table travaux pour des logements
+	/**
+	 * Charge et affiche les informations sur les travaux effectués dans les logements 
+	 * dans la table dédiée sur la fenêtre d'accueil
+	 *
+	 * @throws SQLException
+	 */
 	private void chargerTravauxLogements() throws SQLException {
 		List<Facture> factures = this.daoFacture.findFactureTravaux();
-
+		
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableTravaux().getModel();
 		modeleTable.setRowCount(0); // Efface toutes les lignes existantes
-
 		for (int i = 0; i < factures.size(); i++) {
 			Facture f = factures.get(i);
 			if (f != null && f.getBien() != null) {
@@ -414,18 +435,21 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	///////////////////////////////////////////////////////////////////
-	// LAYERED MES CHARGES LOCATIVES
-	// ////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LAYERED MES CHARGES LOCATIVES
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// ------------------- TABLE CHARGES pour un LOGEMENT ------------------- //
-
-	// Méthode pour écrire une ligne dans la table des charges locatives
+	/**
+	 * Écrit les informations d'une charge locative dans une ligne spécifique
+	 * de la table des charges locatives sur la fenêtre d'accueil
+	 *
+	 * @param numeroLigne Le numéro de la ligne dans la table à mettre à jour.
+	 * @param charge L'objet Facture représentant les informations de la charge locative.
+	 */
 	public void ecrireLigneTableChargesLocatives(int numeroLigne, Facture charge) {
 		JTable tableChargesLocatives = this.fenetreAccueil.getTableChargesLocatives();
+		
 		DefaultTableModel modeleTable = (DefaultTableModel) tableChargesLocatives.getModel();
-
-		// Remplir les colonnes de la table avec les informations de la charge
 		modeleTable.setValueAt(charge.getBien().getIdBien(), numeroLigne, 0);
 		modeleTable.setValueAt(charge.getNumero(), numeroLigne, 1);
 		modeleTable.setValueAt(charge.getDesignation(), numeroLigne, 2);
@@ -441,26 +465,20 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(charge.getMontant() - charge.getMontantReelPaye(), numeroLigne, 8);
 	}
 
-	// Méthode pour charger les charges locatives depuis la base de données
+	/**
+	 * Charge et affiche les informations sur les charges locatives des logements 
+	 * dans la table dédiée sur la fenêtre d'accueil
+	 *
+	 * @throws SQLException
+	 */
 	private void chargerChargesLogement() throws SQLException {
-		// Récupérer la liste des factures de charges depuis la base de données
 		List<Facture> factures = this.daoFacture.findFactureCharge();
-
-		// Récupérer le modèle de la table des charges locatives
+		
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableChargesLocatives().getModel();
-
-		// Effacer toutes les lignes existantes dans la table
 		modeleTable.setRowCount(0);
-
-		// Parcourir la liste des factures pour remplir la table avec les informations
-		// des charges
 		for (int i = 0; i < factures.size(); i++) {
 			Facture f = factures.get(i);
-
-			// Convertir la valeur de la colonne "imputable" de 1 ou 0 à "Oui" ou "Non"
 			String imputable = (f.getImputableLocataire() == 1) ? "Oui" : "Non";
-
-			// Vérifier si la facture et la propriété associée existent
 			if (f != null && f.getBien() != null) {
 				// Ajouter une nouvelle ligne à la table avec les informations de la charge
 				modeleTable.addRow(new Object[] { f.getBien().getIdBien(), f.getNumero(), f.getDesignation(),
@@ -470,7 +488,12 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	// Méthode pour mettre à jour la table des charges pour un logement spécifique
+	/**
+	 * Met à jour la table des charges locatives pour un logement spécifique avec les informations des factures associées.
+	 *
+	 * @param idLogement L'identifiant du logement pour lequel mettre à jour la table des charges locatives.
+	 * @throws SQLException En cas d'erreur lors de l'accès aux données.
+	 */
 	private void updateTableChargesForLogement(String idLogement) throws SQLException {
 		List<Facture> factures = this.daoFacture.findFactureChargeByLogement(idLogement);
 
@@ -484,35 +507,44 @@ public class GestionAccueil implements ActionListener {
 			this.ecrireLigneTableChargesLocatives(i, f);
 		}
 	}
-
-	// Méthode pour filtrer les charges par ID de logement
+	
+	/**
+	 * Filtrer la table des charges locatives en fonction de l'ID 
+	 * du logement sélectionné dans la ComboBox
+	 */
 	private void filtreChargesByLogement() {
 		JComboBox<String> comboBox_MesCharges = this.fenetreAccueil.getComboBox_MesChargesLocatives();
+		
 		String idLogementSelectionne = comboBox_MesCharges.getSelectedItem().toString();
-
-		// Si l'ID sélectionné est différent de "ID du logement", filtrer la table des
-		// charges
+		// Si l'ID sélectionné est différent de "ID du logement", filtrer la table
 		if (!idLogementSelectionne.equals("ID du logement")) {
 			try {
 				this.updateTableChargesForLogement(idLogementSelectionne);
 			} catch (SQLException ex) {
 				ex.printStackTrace();
-
 			}
 		}
 	}
 
-	///////////////////////////////////////////////////////////////////
-	// LAYERED MES ASSURANCES
-	// ////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LAYERED MES ASSURANCES
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// ------------------- TABLE ASSURANCES ------------------- //
-
+	// Table mes assurances
+	/**
+	 * Écrit les informations d'une assurance dans une ligne spécifique de la table des assurances 
+	 * sur la fenêtre d'accueil.
+	 *
+	 * @param numeroLigne (int): Le numéro de la ligne dans la table à mettre à jour
+	 * @param assurance (Assurance) : informations de l'assurance
+	 * @param entreprise (Entreprise) : informations de l'entreprise associée à l'assurance
+	 * @param echeance (Echeance) : informations de l'échéance associée à l'assurance
+	 */
 	public void ecrireLigneTableAssurances(int numeroLigne, Assurance assurance, Entreprise entreprise,
 			Echeance echeance) {
 		JTable tableAssurances = this.fenetreAccueil.getTableAssurances();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableAssurances.getModel();
-
+		
 		modeleTable.setValueAt(assurance.getBien().getIdBien(), numeroLigne, 0);
 		modeleTable.setValueAt(assurance.getNuméroPolice(), numeroLigne, 1);
 		modeleTable.setValueAt(assurance.getMontant(), numeroLigne, 2);
@@ -530,6 +562,13 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
+	
+	/**
+	 * Charge et affiche les informations sur les assurances
+	 * dans la table dédiée sur la fenêtre d'accueil
+	 * 
+	 * @throws SQLException
+	 */
 	private void chargerAssurances() throws SQLException {
 		List<Assurance> assurances = this.daoAssurance.findAll();
 
@@ -540,15 +579,18 @@ public class GestionAccueil implements ActionListener {
 			Assurance a = assurances.get(i);
 			Entreprise entreprise = this.daoEntreprise.findById(a.getEntreprise().getSiret());
 			Echeance echeance = this.daoEcheance.findByAssuranceNumPolice(a.getNuméroPolice());
-			echeance.setDateEcheance(echeance.getDateEcheance().substring(0, 10)); // Pour enlever l'heure de la date et
-																					// éviter les bug de format de type
-																					// "YYYY-DD-MM HH:MM" on garde que
-																					// les 10 premiers pour enlever
-																					// "HH:MM"
+			echeance.setDateEcheance(echeance.getDateEcheance().substring(0, 10)); 
 			this.ecrireLigneTableAssurances(i, a, entreprise, echeance);
 		}
 	}
-
+	
+	/**
+	 * Met à jour la table des assurances pour un logement spécifique 
+	 * avec les informations des assurances associées.
+	 *
+	 * @param idLogement (String) : L'identifiant du logement pour lequel mettre à jour la table des assurances
+	 * @throws SQLException
+	 */
 	private void updateTableAssurancesForLogement(String idLogement) throws SQLException {
 		List<Assurance> assurancesLogement = this.daoAssurance.findByLogement(idLogement);
 
@@ -567,14 +609,14 @@ public class GestionAccueil implements ActionListener {
 		Sauvegarde.addItem("Logement", bien);
 	}
 
-	// ---------------------------------------------------------------//
-	// Methode pour filtrer les Asurances par Id Logement
+	/**
+	 * Filtrer la table des assurances en fonction de l'ID du logement sélectionné dans la ComboBox
+	 */
 	private void filtreAssuranceByLogement() {
 		JComboBox<String> comboBox_MesAssurances = this.fenetreAccueil.getComboBox_MesAssurances();
+		
 		String idLogementSelectionne = comboBox_MesAssurances.getSelectedItem().toString();
-
-		// Si l'ID selectionne est diffÃ©rent de "ID du logement", filtrez la table
-		// des assurances
+		// Si l'ID selectionne est différent de "ID du logement", filtrez la table des assurances
 		if (!idLogementSelectionne.equals("ID du logement")) {
 			try {
 				this.updateTableAssurancesForLogement(idLogementSelectionne);
@@ -584,10 +626,18 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
-	///////////////////////////////////////////////////////////////////
-	// LAYERED MES DOCUMENTS
-	// ////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LAYERED MES DOCUMENTS
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Écrit les informations d'un impôt dans une ligne spécifique de la table 
+	 * des documents sur la fenêtre d'accueil
+	 *
+	 * @param numeroLigne (int) : Le numéro de la ligne dans la table à mettre à jour
+	 * @param impot (Impôt) : les informations de l'impôt
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableDocuments(int numeroLigne, Impôt impot) throws SQLException {
 		JTable tableDocuments = this.fenetreAccueil.getTableDocuments();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableDocuments.getModel();
@@ -597,28 +647,33 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(impot.getAnnee(), numeroLigne, 2);
 	}
 
+	
+	/**
+	 * Charge la table des documents avec les informations des impôts depuis la base de données
+	 * 
+	 * @throws SQLException
+	 */
 	public void chargerImpot() throws SQLException {
-
 		List<Impôt> impots = this.daoImpot.findAll();
-
+		
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTableDocuments().getModel();
-
 		modeleTable.setRowCount(impots.size());
-
 		for (int i = 0; i < impots.size(); i++) {
 			Impôt impot = impots.get(i);
 			modeleTable.addRow(new Object[0]); // Ajouter une nouvelle ligne
 			this.ecrireLigneTableDocuments(i, impot);
 		}
 	}
+	
 
-	// Methode pour filtrer les Impôts par Id Logement
+	/**
+	 * Filtrer la table des documents (Impôts) en fonction de l'ID 
+	 * du logement sélectionné dans la ComboBox.
+	 */
 	private void filtreImpotByLogement() {
 		JComboBox<String> comboBox_Logement = this.fenetreAccueil.getComboBox_MesDocuments();
 		String idLogementSelectionne = comboBox_Logement.getSelectedItem().toString();
-
-		// Si l'ID selectionne est diffÃ©rent de "ID du logement", filtrez la table
-		// des assurances
+		// Si l'ID selectionne est différent de "ID du logement", filtrez la table des assurances
 		if (!idLogementSelectionne.equals("ID du logement")) {
 			try {
 				this.updateTableDocumentsForLogement(idLogementSelectionne);
@@ -628,6 +683,14 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
+	
+	/**
+	 * Met à jour la table des documents (Impôts) pour un logement spécifique 
+	 * avec les informations des impôts associés
+	 *
+	 * @param idLogement (String) : L'identifiant du logement pour lequel mettre à jour la table des documents (Impôts)
+	 * @throws SQLException
+	 */
 	private void updateTableDocumentsForLogement(String idLogement) throws SQLException {
 		List<Imposer> impotLogement = this.daoImposer.findImposerByBien(idLogement);
 
@@ -644,9 +707,18 @@ public class GestionAccueil implements ActionListener {
 		Sauvegarde.addItem("Logement", bien);
 	}
 
-	///////////////////////////////////////////////////////////////////
-	// LAYERED MES DOCUMENTS
-	// ////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LAYERED MES DOCUMENTS
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Écrit les informations d'une location archivée dans une ligne spécifique 
+	 * de la table des archives de locations sur la fenêtre d'accueil
+	 *
+	 * @param numeroLigne (int) : Le numéro de la ligne dans la table à mettre à jour
+	 * @param louer (Louer) : les informations de la location archivée
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableArchiveLouer(int numeroLigne, Louer louer) throws SQLException {
 		JTable tableLouer = this.fenetreAccueil.getTable_MesArchives_Louer();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableLouer.getModel();
@@ -660,12 +732,15 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(louer.getProvision_chargeMens_TTC(), numeroLigne, 4);
 	}
 
+	/**
+	 * Charge la table des archives de locations sur la fenêtre d'accueil 
+	 * avec les informations des locations archivées depuis la base de données
+	 *
+	 * @throws SQLException
+	 */
 	public void chargerTableArchiveLouer() throws SQLException {
-
 		List<Louer> louers = this.daoLouer.findAllArchive();
-
 		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTable_MesArchives_Louer().getModel();
-
 		modeleTable.setRowCount(louers.size());
 
 		for (int i = 0; i < louers.size(); i++) {
@@ -675,6 +750,14 @@ public class GestionAccueil implements ActionListener {
 		}
 	}
 
+	/**
+	 * Écrit les informations d'une facture archivée dans une ligne spécifique 
+	 * de la table des archives de factures sur la fenêtre d'accueil
+	 *
+	 * @param numeroLigne (int) : Le numéro de la ligne dans la table à mettre à jour.
+	 * @param facture (Facture) : informations de la facture archivée
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableArchiveFacture(int numeroLigne, Facture facture) throws SQLException {
 		JTable tableFacture = this.fenetreAccueil.getTable_MesArchives_Facture();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableFacture.getModel();
@@ -686,27 +769,37 @@ public class GestionAccueil implements ActionListener {
 		modeleTable.setValueAt(facture.getModePaiement(), numeroLigne, 4);
 	}
 
+
+	/**
+	 * Charge la table des archives de factures sur la fenêtre d'accueil 
+	 * avec les informations des factures archivées depuis la base de données
+	 * 
+	 * @throws SQLException
+	 */
 	public void chargerTableArchiveFacture() throws SQLException {
-
 		List<Facture> factures = this.daoFacture.findAllArchive();
-
-		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTable_MesArchives_Facture()
-				.getModel();
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTable_MesArchives_Facture().getModel();
 
 		modeleTable.setRowCount(factures.size());
-
 		for (int i = 0; i < factures.size(); i++) {
 			Facture facture = factures.get(i);
-			modeleTable.addRow(new Object[0]); // Ajouter une nouvelle ligne
+			modeleTable.addRow(new Object[0]);
 			this.ecrireLigneTableArchiveFacture(i, facture);
 		}
 	}
-
+	
+	/**
+	 * Écrit les informations d'un locataire archivé dans une ligne spécifique 
+	 * de la table des archives de locataires sur la fenêtre d'accueil.
+	 *
+	 * @param numeroLigne (int) : Le numéro de la ligne dans la table à mettre à jour.
+	 * @param loc (Locataire) : informations du locataire archivé
+	 * @throws SQLException
+	 */
 	public void ecrireLigneTableArchiveLocataire(int numeroLigne, Locataire loc) throws SQLException {
 		JTable tableLocataire = this.fenetreAccueil.getTable_MesArchives_Locataire();
 		DefaultTableModel modeleTable = (DefaultTableModel) tableLocataire.getModel();
 
-		// Add a null check before accessing properties of loc
 		if (loc != null) {
 			modeleTable.setValueAt(loc.getIdLocataire(), numeroLigne, 0);
 			modeleTable.setValueAt(loc.getNom(), numeroLigne, 1);
@@ -714,29 +807,31 @@ public class GestionAccueil implements ActionListener {
 			modeleTable.setValueAt(loc.getTelephone(), numeroLigne, 3);
 			modeleTable.setValueAt(loc.getMail(), numeroLigne, 4);
 		} else {
-			// Handle the case where loc is null, e.g., display an error message or log it
 			System.err.println("Error: loc is null at line " + numeroLigne);
 		}
 	}
 
+	/**
+	 * Charge la table des archives de locataires sur la fenêtre d'accueil 
+	 * avec les informations des locataires archivés depuis la base de données
+	 *
+	 * @throws SQLException
+	 */
 	public void chargerTableArchiveLoccataire() throws SQLException {
-
 		List<Locataire> locataires = this.daoLocataire.findAllArchive();
-
-		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTable_MesArchives_Locataire()
-				.getModel();
+		DefaultTableModel modeleTable = (DefaultTableModel) this.fenetreAccueil.getTable_MesArchives_Locataire().getModel();
 
 		modeleTable.setRowCount(locataires.size());
-
 		for (int i = 0; i < locataires.size(); i++) {
 			Locataire locataire = locataires.get(i);
-			modeleTable.addRow(new Object[0]); // Ajouter une nouvelle ligne
+			modeleTable.addRow(new Object[0]);
 			this.ecrireLigneTableArchiveLocataire(i, locataire);
 		}
 	}
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// NAVIGATION
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// NAVIGATION
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -777,9 +872,9 @@ public class GestionAccueil implements ActionListener {
 			case "btnMesArchives":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesArchives());
 				break;
-			///////////////////
+			////////////////////////////////////////////////////////////////////////////////////
 			// LAYERED ACCUEIL
-			///////////////////
+			////////////////////////////////////////////////////////////////////////////////////
 			case "importCSV":
 				ImportCheminCSV chemin = new ImportCheminCSV();
 				LireCSV lire = new LireCSV();
@@ -791,10 +886,9 @@ public class GestionAccueil implements ActionListener {
 					e2.printStackTrace();
 				}
 				break;
-
-			///////////////////
+			/////////////////////////////////////////////////////////////////////////////////////
 			// LAYERED MES BIENS
-			///////////////////
+			/////////////////////////////////////////////////////////////////////////////////////
 			case "btnMesBiens_Charger":
 				try {
 
@@ -992,9 +1086,9 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 
-			///////////////////////
+			//////////////////////////////////////////////////////////////////////////////////////////////
 			// LAYERED MES LOCATIONS
-			///////////////////////
+			/////////////////////////////////////////////////////////////////////////////////////////////
 			case "btn_MesLocations_Charger":
 				try {
 					this.chargerLocations();
@@ -1121,9 +1215,9 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 
-			/////////////////////
+			//////////////////////////////////////////////////////////////////////////////////////////////
 			// LAYERED MES TRAVAUX
-			/////////////////////
+			//////////////////////////////////////////////////////////////////////////////////////////////
 			case "btn_Travaux_Modifier":
 				if (Sauvegarde.onSave("Facture")) {
 					Fenetre_ModificationTravauxImmeuble modif_travaux = new Fenetre_ModificationTravauxImmeuble();
@@ -1180,9 +1274,9 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 
-			///////////////////////////////
+			/////////////////////////////////////////////////////////////////////////////////////////////
 			// LAYERED MES FACTURES
-			///////////////////////////////
+			/////////////////////////////////////////////////////////////////////////////////////////////
 			case "btn_MesFactures_Modifier":
 				// Premier test si il n'y a aucune charge sélectionnée alors erreur
 				if (Sauvegarde.onSave("Charge") == false) {
@@ -1263,9 +1357,9 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 
-			////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////////////////
 			// LAYERED MES ASSURANCES
-			////////////////////////
+			/////////////////////////////////////////////////////////////////////////////////////////////
 			case "btn_MesAssurances_Charger":
 				try {
 					this.chargerAssurances();
@@ -1350,8 +1444,9 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 
-			///////////////////////
+			////////////////////////////////////////////////////////////////////////////////////////////
 			// LAYERED MES DOCUMENTS
+			///////////////////////////////////////////////////////////////////////////////////////////
 			case "btn_MesDocuments_Inserer_Impots":
 				// Vérifie s'il y a des données d'un logement sauvegardées
 				if (Sauvegarde.onSave("Logement") == true) {
@@ -1386,9 +1481,9 @@ public class GestionAccueil implements ActionListener {
 				}
 				break;
 
-			///////////////////////
-			///////////////////////
+			/////////////////////////////////////////////////////////////////////////////////////////////
 			// LAYERED MES ARCHIVES
+			/////////////////////////////////////////////////////////////////////////////////////////////
 			case "btn_MesArchives_Louer":
 				try {
 					this.chargerTableArchiveLouer();
@@ -1469,7 +1564,7 @@ public class GestionAccueil implements ActionListener {
 			}
 
 		}
-
+		// Filtrage pour les comboBox
 		this.filtreAssuranceByLogement();
 		this.filtreChargesByLogement();
 		this.filtreImpotByLogement();
