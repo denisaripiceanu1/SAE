@@ -42,16 +42,13 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
         panel.setLayout(null);
 
         // Titre et séparateur
+		Utils.createLabel("Ajouter un Compteur", 285, 56, 160, 48, 16, panel);
+
         JSeparator separator_titreInsererCompteur = new JSeparator();
         separator_titreInsererCompteur.setForeground(new Color(0, 102, 204));
         separator_titreInsererCompteur.setBounds(269, 101, 190, 33);
         panel.add(separator_titreInsererCompteur);
-
-        JLabel lbl_InsererUnCompteur = new JLabel("Ajouter un Compteur");
-        lbl_InsererUnCompteur.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lbl_InsererUnCompteur.setBounds(285, 56, 160, 48);
-        panel.add(lbl_InsererUnCompteur);
-
+        
         // Menu déroulant pour le type de compteur
         comboBox_typeDeCompteur = new JComboBox<String>();
         comboBox_typeDeCompteur.setModel(new DefaultComboBoxModel<String>(new String[] { "Eau", "Gaz", "Electricité" }));
@@ -61,9 +58,9 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
         panel.add(comboBox_typeDeCompteur);
 
         // Champs de texte pour l'ID du compteur et l'indice du compteur
-        textField_IdCompteur = Utils.createTextField("Id Compteur", 270, 207, 190, 40, panel, true);
-        textField_IndiceCompteur = Utils.createTextField("Indice du Compteur", 270, 273, 190, 40, panel, true);
-        textFieldPrixAbo = Utils.createTextField("Prix de l'abonnement", 270, 343, 190, 40, panel, true);
+        textField_IdCompteur = Utils.createTextField("Id Compteur", 270, 207, 190, 40, panel);
+        textField_IndiceCompteur = Utils.createTextField("Indice du Compteur", 270, 273, 190, 40, panel);
+        textFieldPrixAbo = Utils.createTextField("Prix de l'abonnement", 270, 343, 190, 40, panel);
 
         // Boutons Ajouter et Annuler
         JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 398, 447, 94, 31);

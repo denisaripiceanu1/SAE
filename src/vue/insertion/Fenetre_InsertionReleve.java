@@ -2,23 +2,18 @@ package vue.insertion;
 
 import java.awt.Color;
 
-import java.awt.Font;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import controleur.insertion.GestionInsertionReleve;
 
 public class Fenetre_InsertionReleve extends JInternalFrame {
-    // Champs de saisie
+	// Champs de saisie
 	private JTextField textField_dateReleve;
 	private JTextField textField_indiceCompteur;
 	// Déclaration des gestionnaires
@@ -40,30 +35,18 @@ public class Fenetre_InsertionReleve extends JInternalFrame {
 		panel.setLayout(null);
 
 		// Libellé "Assurance"
-		JLabel lbl_InsertionImpot = new JLabel("Insérer un relevé");
-		lbl_InsertionImpot.setBounds(291, 39, 163, 20);
-		lbl_InsertionImpot.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_InsertionImpot.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel.add(lbl_InsertionImpot);
+		Utils.createLabel("Insérer un relevé", 291, 39, 163, 20, 16, panel);
 
 		// Champs de saisie
-		this.textField_dateReleve = new JTextField();
-		this.textField_dateReleve.setBounds(276, 166, 197, 40);
-		this.textField_dateReleve.setColumns(10);
-		this.textField_dateReleve.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date relev\u00E9",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		panel.add(this.textField_dateReleve);
+		this.textField_dateReleve = Utils.createTextField("Date relev\\u00E9", 276, 166, 197, 40, panel);
+		this.textField_dateReleve = Utils.createTextField("Indice compteur", 276, 264, 197, 40, panel);
 
-		this.textField_indiceCompteur = new JTextField();
-		this.textField_indiceCompteur.setColumns(10);
-		this.textField_indiceCompteur.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Indice compteur", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_indiceCompteur.setBounds(276, 264, 197, 40);
-		panel.add(this.textField_indiceCompteur);
+		// Boutons "Ajouter" et "Annuler"
+		JButton btnAjouter = Utils.creerBouton(panel, "Ajouter", 249, 431, 94, 31);
+		btnAjouter.addActionListener(this.gestionClic);
 
-        // Boutons "Ajouter" et "Annuler"
-        createButton("Ajouter", 249, 431, 94, 31, "Ajouter", panel, gestionClic);
-        createButton("Annuler", 393, 431, 94, 31, "Annuler", panel, gestionClic);
+		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 393, 431, 94, 31);
+		btnAnnuler.addActionListener(this.gestionClic);
 
 		// Séparateur
 		JSeparator separator_Releve = new JSeparator();
@@ -72,7 +55,6 @@ public class Fenetre_InsertionReleve extends JInternalFrame {
 		panel.add(separator_Releve);
 
 	}
-
 
 	// Getters
 	public JTextField getTextField_dateReleve() {

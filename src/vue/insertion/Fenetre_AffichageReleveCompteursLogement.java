@@ -1,16 +1,13 @@
 package vue.insertion;
 
 import java.awt.Color;
-import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -47,11 +44,7 @@ public class Fenetre_AffichageReleveCompteursLogement extends JInternalFrame {
 		panel.add(separator_AffichageInfoQuotite);
 
 		// Libellé du titre
-		JLabel lbl_AffichageCompteursBien = new JLabel("Compteurs du bien");
-		lbl_AffichageCompteursBien.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_AffichageCompteursBien.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_AffichageCompteursBien.setBounds(293, 11, 160, 48);
-		panel.add(lbl_AffichageCompteursBien);
+		Utils.createLabel("Compteurs du bien", 293, 11, 160, 48, 16, panel);
 
 		// JScrollPane pour la table des relevés des compteurs
 		this.scrollPane_table_compteurs = new JScrollPane();

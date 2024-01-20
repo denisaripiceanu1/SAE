@@ -55,69 +55,18 @@ public class Fenetre_InsertionEntreprise extends JInternalFrame {
 		panel.add(separator_titreInsererEntreprise);
 
 		// Label titre
-		JLabel lbl_InsererUneEntreprise = new JLabel("Ajouter un Prestataire");
-		lbl_InsererUneEntreprise.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUneEntreprise.setBounds(275, 53, 163, 48);
-		panel.add(lbl_InsererUneEntreprise);
+		Utils.createLabel("Ajouter un Prestataire", 275, 53, 163, 48, 16, panel);
 
 		// Champs de saisie
-		textField_Nom = new JTextField();
-		textField_Nom.setColumns(10);
-		textField_Nom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Nom", TitledBorder.LEADING,
-				TitledBorder.ABOVE_TOP, new Font("Tahoma", Font.PLAIN, 12), new Color(0, 0, 0)));
-		textField_Nom.setBounds(131, 166, 190, 40);
-		panel.add(textField_Nom);
-
-		textField_SIRET = new JTextField();
-		textField_SIRET.setColumns(10);
-		textField_SIRET.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "SIRET",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, new Font("Tahoma", Font.PLAIN, 12), new Color(0, 0, 0)));
-		textField_SIRET.setBounds(381, 166, 190, 40);
-		panel.add(textField_SIRET);
-
-		textField_Telephone = new JTextField();
-		textField_Telephone.setColumns(10);
-		textField_Telephone.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"n\u00B0 T\u00E9l\u00E9phone", TitledBorder.LEADING, TitledBorder.ABOVE_TOP,
-				new Font("Tahoma", Font.PLAIN, 12), new Color(0, 0, 0)));
-		textField_Telephone.setBounds(131, 218, 190, 40);
-		panel.add(textField_Telephone);
-
-		textField_Mail = new JTextField();
-		textField_Mail.setColumns(10);
-		textField_Mail.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mail", TitledBorder.LEADING,
-				TitledBorder.ABOVE_TOP, new Font("Tahoma", Font.PLAIN, 12), new Color(0, 0, 0)));
-		textField_Mail.setBounds(381, 218, 190, 40);
-		panel.add(textField_Mail);
-
-		textField_Adresse = new JTextField();
-		textField_Adresse.setColumns(10);
-		textField_Adresse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Adresse",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, new Font("Tahoma", Font.PLAIN, 12), new Color(0, 0, 0)));
-		textField_Adresse.setBounds(131, 270, 190, 40);
-		panel.add(textField_Adresse);
-
-		textField_CP = new JTextField();
-		textField_CP.setColumns(10);
-		textField_CP.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Code Postal",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, new Font("Tahoma", Font.PLAIN, 12), new Color(0, 0, 0)));
-		textField_CP.setBounds(381, 270, 190, 40);
-		panel.add(textField_CP);
-
-		textField_Ville = new JTextField();
-		textField_Ville.setColumns(10);
-		textField_Ville.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Ville",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, new Font("Tahoma", Font.PLAIN, 12), new Color(0, 0, 0)));
-		textField_Ville.setBounds(131, 322, 190, 40);
-		panel.add(textField_Ville);
-
-		textField_IBAN = new JTextField();
-		textField_IBAN.setColumns(10);
-		textField_IBAN.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "IBAN", TitledBorder.LEADING,
-				TitledBorder.ABOVE_TOP, new Font("Tahoma", Font.PLAIN, 12), new Color(0, 0, 0)));
-		textField_IBAN.setBounds(381, 322, 190, 40);
-		panel.add(textField_IBAN);
-
+		textField_Nom = Utils.createTextField("Nom", 131, 166, 190, 40, panel);
+		textField_SIRET = Utils.createTextField("SIRET", 381, 166, 190, 40, panel);
+		textField_Telephone = Utils.createTextField("n° Téléphone", 131, 218, 190, 40, panel);
+		textField_Mail = Utils.createTextField("Mail", 381, 218, 190, 40, panel);
+		textField_Adresse = Utils.createTextField("Adresse", 131, 270, 190, 40, panel);
+		textField_CP = Utils.createTextField("Code Postal", 381, 270, 190, 40, panel);
+		textField_Ville = Utils.createTextField("Ville", 131, 322, 190, 40, panel);
+		textField_IBAN = Utils.createTextField("IBAN", 381, 322, 190, 40, panel);
+		
 		// Boutons généraux
 		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 396, 395, 94, 31);
 		btnAnnuler.addActionListener(this.gestionClic);

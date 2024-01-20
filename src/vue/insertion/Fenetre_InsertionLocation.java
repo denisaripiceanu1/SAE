@@ -2,7 +2,6 @@ package vue.insertion;
 
 import java.awt.Color;
 
-
 import java.awt.Font;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,7 +19,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.GestionTableICCFenetreLocation;
@@ -99,90 +97,20 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		panel.add(lbl_InsererUneLocation);
 
 		// TextFields
-		this.textField_IdLocataire = new JTextField();
-		this.textField_IdLocataire.setColumns(10);
-		this.textField_IdLocataire.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Locataire",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_IdLocataire.setBounds(24, 69, 208, 40);
-		panel.add(this.textField_IdLocataire);
-
-		this.textField_Nom = new JTextField();
-		this.textField_Nom.setColumns(10);
-		this.textField_Nom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Nom",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Nom.setBounds(24, 116, 208, 40);
-		panel.add(this.textField_Nom);
-
-		this.textField_Prenom = new JTextField();
-		this.textField_Prenom.setColumns(10);
-		this.textField_Prenom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Pr\u00E9nom",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Prenom.setBounds(24, 165, 208, 40);
-		panel.add(this.textField_Prenom);
-
-		this.textField_tel = new JTextField();
-		this.textField_tel.setColumns(10);
-		this.textField_tel.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"N\u00B0 t\u00E9l\u00E9phone", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_tel.setBounds(24, 262, 208, 40);
-		panel.add(this.textField_tel);
-
-		this.textField_e_mail = new JTextField();
-		this.textField_e_mail.setColumns(10);
-		this.textField_e_mail.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "E-mail",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_e_mail.setBounds(24, 312, 208, 40);
-		panel.add(this.textField_e_mail);
-
-		this.textField_Date_de_naissance = new JTextField();
-		this.textField_Date_de_naissance.setColumns(10);
-		this.textField_Date_de_naissance.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Date naissance (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_Date_de_naissance.setBounds(24, 215, 208, 40);
-		panel.add(this.textField_Date_de_naissance);
-
-		this.textField_caution = new JTextField();
-		this.textField_caution.setColumns(10);
-		this.textField_caution.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Caution",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_caution.setBounds(548, 247, 120, 40);
-		panel.add(this.textField_caution);
-
-		this.textField_date_arrivee = new JTextField();
-		this.textField_date_arrivee.setColumns(10);
-		this.textField_date_arrivee.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Date d'arriv\u00E9e", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_date_arrivee.setBounds(548, 297, 120, 40);
-		panel.add(this.textField_date_arrivee);
-
-		this.textField_provision_sur_charges = new JTextField();
-		this.textField_provision_sur_charges.setColumns(10);
-		this.textField_provision_sur_charges.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Provisions sur charges", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_provision_sur_charges.setBounds(548, 347, 171, 40);
-		panel.add(this.textField_provision_sur_charges);
-
-		this.textField_loyer = new JTextField();
-		this.textField_loyer.setColumns(10);
-		this.textField_loyer.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Loyer",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_loyer.setBounds(548, 197, 120, 40);
-		panel.add(this.textField_loyer);
+		this.textField_IdLocataire = Utils.createTextField("Id Locataire", 24, 69, 208, 40, panel);
+		this.textField_Nom =  Utils.createTextField("Nom", 24, 116, 208, 40, panel);
+		this.textField_Prenom =  Utils.createTextField("Prénom", 24, 165, 208, 40, panel);
+		this.textField_tel =  Utils.createTextField("N° téléphone", 24, 262, 208, 40, panel);
+		this.textField_e_mail =  Utils.createTextField("E-mail", 24, 312, 208, 40, panel);
+		this.textField_Date_de_naissance =  Utils.createTextField("Date naissance (YYYY-MM-JJ)", 24, 215, 208, 40, panel);
+		this.textField_caution =  Utils.createTextField("Caution", 548, 247, 120, 40, panel);
+		this.textField_date_arrivee =  Utils.createTextField("Date d'arrivée", 548, 297, 120, 40, panel);
+		this.textField_provision_sur_charges =  Utils.createTextField("Provisions sur charges", 548, 347, 171, 40, panel);
+		this.textField_loyer =  Utils.createTextField("Loyer", 548, 197, 120, 40, panel);
 
 		// JLabels
-		JLabel lbl_titre_locataire = new JLabel("Locataire");
-		lbl_titre_locataire.setHorizontalTextPosition(SwingConstants.CENTER);
-		lbl_titre_locataire.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_titre_locataire.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lbl_titre_locataire.setBounds(72, 40, 99, 27);
-		panel.add(lbl_titre_locataire);
-
-		JLabel lbl_titre_logement = new JLabel("Logement");
-		lbl_titre_logement.setHorizontalTextPosition(SwingConstants.CENTER);
-		lbl_titre_logement.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_titre_logement.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lbl_titre_logement.setBounds(313, 80, 99, 27);
-		panel.add(lbl_titre_logement);
+		Utils.createLabel("Locataire", 72, 40, 99, 27, 13, panel);
+		Utils.createLabel("Logement", 313, 80, 99, 27, 13, panel);
 
 		JLabel lblNomEtatDesLieux = new JLabel("État des lieux : ");
 		this.lblNomEtatDesLieux = lblNomEtatDesLieux;
@@ -252,16 +180,24 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		this.table_icc.getSelectionModel().addListSelectionListener(this.gtIccFl);
 
 		// Boutons
-		createButton("Annuler", 400, 457, 94, 31, "Annuler", gestionClic, panel);
-		createButton("Ajouter", 257, 457, 94, 31, "Ajouter", gestionClic, panel);
-		createButton("Ajouter un bail", 24, 429, 154, 21, "Ajouter un bail", gestionClic, panel);
-		createButton("Ajouter l'état des lieux", 24, 364, 154, 21, "Ajouter l'état des lieux", gestionClic, panel);
-		createButton("Charger ICC", 627, 39, 106, 31, "Charger ICC", gestionClic, panel);
-		createButton("Ajouter ICC", 511, 38, 106, 31, "Ajouter ICC", gestionClic, panel);
+		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 400, 457, 94, 31);
+		btnAnnuler.addActionListener(this.gestionClic);
 
+		JButton btnAnjouter = Utils.creerBouton(panel, "Ajouter", 257, 457, 94, 31);
+		btnAnjouter.addActionListener(this.gestionClic);
+
+		JButton btnAjouterBail = Utils.creerBouton(panel, "Ajouter un bail", 24, 429, 154, 21);
+		btnAjouterBail.addActionListener(this.gestionClic);
+
+		JButton btnAjouterEtatLieux = Utils.creerBouton(panel, "Ajouter l'état des lieux", 24, 364, 154, 21);
+		btnAjouterEtatLieux.addActionListener(this.gestionClic);
+
+		JButton btnChargerICC = Utils.creerBouton(panel, "Charger ICC", 627, 39, 106, 31);
+		btnChargerICC.addActionListener(this.gestionClic);
+
+		JButton btnAjouterICC = Utils.creerBouton(panel, "Ajouter ICC", 511, 38, 106, 31);
+		btnAjouterICC.addActionListener(this.gestionClic);
 	}
-
-	
 
 	// Getters pour récupérer les valeurs des champs
 	public JTextField getTextField_IdLocataire() {

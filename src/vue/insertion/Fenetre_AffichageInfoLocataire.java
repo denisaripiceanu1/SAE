@@ -71,12 +71,8 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		separator.setBounds(233, 84, 20, 344);
 		panel.add(separator);
 
-		// JLabels
-		JLabel lbl_AffichageInfoLocataire = new JLabel("Mon Locataire");
-		lbl_AffichageInfoLocataire.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_AffichageInfoLocataire.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_AffichageInfoLocataire.setBounds(417, 10, 160, 48);
-		panel.add(lbl_AffichageInfoLocataire);
+		// JLabels		
+		Utils.createLabel("Mon Locataire", 417, 10, 160, 48, 16, panel);
 
 		JLabel lblDetailLocataire = new JLabel("Détail locataire");
 		lblDetailLocataire.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -106,12 +102,12 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		panel.add(lblSiVotreReste);
 
 		// Champs de texte pour les informations du locataire
-		this.textField_Id = Utils.createTextField("Identifiant", 21, 132, 190, 40, panel, true);
-		this.textField_Nom = Utils.createTextField("Nom", 21, 183, 190, 40, panel, true);
-		this.textField_Prenom = Utils.createTextField("Prénom", 21, 233, 190, 40, panel, true);
-		this.textField_Telephone = Utils.createTextField("n° Téléphone", 21, 287, 190, 40, panel, true);
-		this.textField_Mail = Utils.createTextField("Mail", 21, 338, 190, 40, panel, true);
-		this.textField_DateN = Utils.createTextField("Date de naissance", 21, 388, 190, 40, panel, true);
+		this.textField_Id = Utils.createTextField("Identifiant", 21, 132, 190, 40, panel);
+		this.textField_Nom = Utils.createTextField("Nom", 21, 183, 190, 40, panel);
+		this.textField_Prenom = Utils.createTextField("Prénom", 21, 233, 190, 40, panel);
+		this.textField_Telephone = Utils.createTextField("n° Téléphone", 21, 287, 190, 40, panel);
+		this.textField_Mail = Utils.createTextField("Mail", 21, 338, 190, 40, panel);
+		this.textField_DateN = Utils.createTextField("Date de naissance", 21, 388, 190, 40, panel);
 
 		// Tableau pour afficher la regularisation des charges d'un locataire
 		// et le scrollPane associé
@@ -170,10 +166,10 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		btnModifier.addActionListener(this.gestionModificationLocataire);
 		
 		JButton btnRegularisation = Utils.creerBouton(panel, "Régularisation des charges", 467, 90, 200, 25);
-		btnRegularisation.addActionListener(this.gestionModificationLocataire);
+		btnRegularisation.addActionListener(this.gestionClic);
 		
 		JButton btnSoldeToutCompte = Utils.creerBouton(panel, "Solde tout compte", 467, 299, 210, 25);
-		btnSoldeToutCompte.addActionListener(this.gestionModificationLocataire);
+		btnSoldeToutCompte.addActionListener(this.gestionClic);
 
 	}
 

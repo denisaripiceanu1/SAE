@@ -2,13 +2,10 @@ package vue.insertion;
 
 import java.awt.Color;
 
-import java.awt.Font;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -54,10 +51,7 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		panel.add(separator_titreInsererLogement);
 
 		// Titre
-		JLabel lbl_InsererUnLogement = new JLabel("Insérer un logement");
-		lbl_InsererUnLogement.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUnLogement.setBounds(290, 25, 171, 48);
-		panel.add(lbl_InsererUnLogement);
+		Utils.createLabel("Insérer un logement", 290, 25, 171, 48, 16, panel);
 
 		// ComboBox pour le type de logement
 		this.comboBox_typeDeLogement = new JComboBox<String>();
@@ -69,49 +63,26 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		panel.add(this.comboBox_typeDeLogement);
 
 		// TextFields
-		this.textField_IdLogement = new JTextField();
-		this.textField_IdLogement.setColumns(10);
-		this.textField_IdLogement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Logement",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_IdLogement.setBounds(145, 118, 190, 40);
-		panel.add(this.textField_IdLogement);
-
-		this.textField_SurfaceHabitable = new JTextField();
-		this.textField_SurfaceHabitable.setColumns(10);
-		this.textField_SurfaceHabitable.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Surface habitable", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_SurfaceHabitable.setBounds(145, 193, 190, 40);
-		panel.add(this.textField_SurfaceHabitable);
-
-		this.textField_NbPièces = new JTextField();
-		this.textField_NbPièces.setColumns(10);
-		this.textField_NbPièces.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Nombre de pi\u00E8ces", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_NbPièces.setBounds(375, 193, 190, 40);
-		panel.add(this.textField_NbPièces);
-
-		this.textField_DateAcquisition = new JTextField();
-		this.textField_DateAcquisition.setColumns(10);
-		this.textField_DateAcquisition.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Date d'acquisition", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_DateAcquisition.setBounds(145, 269, 190, 40);
-		panel.add(this.textField_DateAcquisition);
-
-		this.textField_NumEtage = new JTextField();
-		this.textField_NumEtage.setColumns(10);
-		this.textField_NumEtage.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Num\u00E9ro d'\u00E9tage", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_NumEtage.setBounds(375, 269, 190, 40);
-		panel.add(this.textField_NumEtage);
+		this.textField_IdLogement = Utils.createTextField("Id Logement", 145, 118, 190, 40, panel);
+		this.textField_SurfaceHabitable = Utils.createTextField("Surface habitable", 145, 193, 190, 40, panel);
+		this.textField_NbPièces = Utils.createTextField("Nombre de pièces", 375, 193, 190, 40, panel);
+		this.textField_DateAcquisition = Utils.createTextField("Date d'acquisition", 145, 269, 190, 40, panel);
+		this.textField_NumEtage = Utils.createTextField("Numéro d'étage", 375, 269, 190, 40, panel);
 
 		// Boutons généraux
-		createButton("Ajouter", 235, 445, 94, 31, "Ajouter", gestionClic, panel);
-		createButton("Annuler", 394, 445, 94, 31, "Annuler", gestionClic, panel);
-		createButton("Ajouter un compteur", 291, 390, 154, 23, "Ajouter un compteur", gestionClic, panel);
-		createButton("Ajouter une quotité", 290, 356, 154, 23, "Ajouter une quotité", gestionClic, panel);
+		JButton btnAjouter = Utils.creerBouton(panel, "Ajouter", 235, 445, 94, 31);
+		btnAjouter.addActionListener(this.gestionClic);
+
+		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 394, 445, 94, 31);
+		btnAnnuler.addActionListener(this.gestionClic);
+
+		JButton btnAjouterCompteur = Utils.creerBouton(panel, "Ajouter un compteur", 291, 390, 154, 23);
+		btnAjouterCompteur.addActionListener(this.gestionClic);
+
+		JButton btnAjouterQuotite = Utils.creerBouton(panel, "Ajouter une quotité", 290, 356, 154, 23);
+		btnAjouterQuotite.addActionListener(this.gestionClic);
 
 	}
-
 
 	// Getters pour récupérer les valeurs des champs
 	public JTextField getTextField_IdLogement() {

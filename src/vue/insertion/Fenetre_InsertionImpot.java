@@ -38,38 +38,20 @@ public class Fenetre_InsertionImpot extends JInternalFrame {
 		panel.setLayout(null);
 
 		// Libellé "Impôt"
-		JLabel lbl_InsertionImpot = new JLabel("Insérer un Impôt");
-		lbl_InsertionImpot.setBounds(302, 39, 163, 20);
-		lbl_InsertionImpot.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_InsertionImpot.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel.add(lbl_InsertionImpot);
+		Utils.createLabel("Insérer un Impôt", 302, 39, 163, 20, 16, panel);
 
 		// Champs de saisie
-		this.textField_nom = new JTextField();
-		this.textField_nom.setBounds(288, 167, 197, 40);
-		this.textField_nom.setColumns(10);
-		this.textField_nom.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Nom",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		panel.add(this.textField_nom);
+		this.textField_nom = Utils.createTextField("Nom", 288, 167, 197, 40, panel);
+		this.textField_montant = Utils.createTextField("Montant", 288, 229, 197, 40, panel);
+		this.textField_annee = Utils.createTextField("Année", 288, 295, 197, 40, panel);
 
-		this.textField_montant = new JTextField();
-		this.textField_montant.setColumns(10);
-		this.textField_montant.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_montant.setBounds(288, 229, 197, 40);
-		panel.add(this.textField_montant);
+		// Boutons Ajouter et Annuler
+		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 428, 431, 94, 31);
+		btnAnnuler.addActionListener(this.gestionClic);
 
-		this.textField_annee = new JTextField();
-		this.textField_annee.setColumns(10);
-		this.textField_annee.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Année",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_annee.setBounds(288, 295, 197, 40);
-		panel.add(this.textField_annee);
-
-		// Boutons
-		createButton("Ajouter", 276, 431, 94, 31, "Ajouter", gestionClic, panel);
-		createButton("Annuler", 428, 431, 94, 31, "Annuler", gestionClic, panel);
-
+		JButton btnAnjouter = Utils.creerBouton(panel, "Ajouter", 276, 431, 94, 31);
+		btnAnjouter.addActionListener(this.gestionClic);
+		
 		// Séparateur
 		JSeparator separator_Document = new JSeparator();
 		separator_Document.setForeground(new Color(0, 102, 204));
@@ -77,7 +59,7 @@ public class Fenetre_InsertionImpot extends JInternalFrame {
 		panel.add(separator_Document);
 
 	}
-	
+
 	// Getters pour les champs de saisie
 	public JTextField getTextField_nom() {
 		return this.textField_nom;

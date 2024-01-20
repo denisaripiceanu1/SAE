@@ -2,9 +2,7 @@ package vue.insertion;
 
 import javax.swing.*;
 
-
 import java.awt.Color;
-import java.awt.Font;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -62,10 +60,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.getContentPane().add(panel);
 
 		// Labels
-		JLabel lbl_InsererUneFacture = new JLabel("Ajouter une facture ");
-		lbl_InsererUneFacture.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUneFacture.setBounds(294, 26, 153, 48);
-		panel.add(lbl_InsererUneFacture);
+		Utils.createLabel("Insérer un facture", 294, 26, 153, 48, 16, panel);
 
 		JLabel lbl_ImputableLocataire = new JLabel("Imputable Locataire");
 		lbl_ImputableLocataire.setForeground(Color.BLACK);
@@ -86,48 +81,12 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		panel.add(separator_vertical);
 
 		// Champs de saisie
-		textField_Numero = new JTextField();
-		textField_Numero.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Numero.setBounds(24, 104, 202, 40);
-		panel.add(textField_Numero);
-		textField_Numero.setColumns(10);
-
-		textField_date_emission = new JTextField();
-		textField_date_emission.setColumns(10);
-		textField_date_emission
-				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9mission (YYYY-MM-JJ)",
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_emission.setBounds(24, 157, 202, 40);
-		panel.add(textField_date_emission);
-
-		textField_date_paiement = new JTextField();
-		textField_date_paiement.setColumns(10);
-		textField_date_paiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Date Paiement (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_paiement.setBounds(247, 156, 202, 40);
-		panel.add(textField_date_paiement);
-
-		textField_numeroDevis = new JTextField();
-		textField_numeroDevis.setColumns(10);
-		textField_numeroDevis.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro devis",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_numeroDevis.setBounds(24, 217, 202, 40);
-		panel.add(textField_numeroDevis);
-
-		textField_accompteVerse = new JTextField();
-		textField_accompteVerse.setColumns(10);
-		textField_accompteVerse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Acompte vers\u00E9 ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_accompteVerse.setBounds(247, 283, 200, 40);
-		panel.add(textField_accompteVerse);
-
-		textField_montant = new JTextField();
-		textField_montant.setColumns(10);
-		textField_montant.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_montant.setBounds(24, 283, 202, 40);
-		panel.add(textField_montant);
+		Utils.createTextField("Numéro", 24, 104, 202, 40, panel);
+		Utils.createTextField("Date émission (YYYY-MM-JJ)", 24, 168, 202, 40, panel);
+		Utils.createTextField("Date Paiement (YYYY-MM-JJ)", 247, 167, 202, 40, panel);
+		Utils.createTextField("Numéro devis", 24, 228, 202, 40, panel);
+		Utils.createTextField("Montant", 24, 294, 202, 40, panel);
+		Utils.createTextField("Acompte versé", 247, 283, 200, 40, panel);
 
 		// Menu déroulant pour le mode de paiement
 		comboBox_modePaiement = new JComboBox<>();
@@ -168,32 +127,19 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		comboBox_Designation.addActionListener(gestionClic);
 		panel.add(this.comboBox_Designation);
 
-		// Boutons radio
-		this.rdbtnOui.setForeground(new Color(0, 0, 0));
-		this.rdbtnOui.setHorizontalAlignment(SwingConstants.TRAILING);
-		this.rdbtnOui.setHorizontalTextPosition(SwingConstants.LEADING);
-		this.rdbtnOui.setBounds(146, 382, 54, 21);
-		panel.add(this.rdbtnOui);
-		this.rdbtnNon.setBounds(271, 382, 112, 21);
-		panel.add(this.rdbtnNon);
-		ButtonGroup buttonGroup = new ButtonGroup();
-		buttonGroup.add(this.rdbtnOui);
-		buttonGroup.add(this.rdbtnNon);
-
-		// Boutons généraux
-		createButton("Ajouter", 248, 437, 94, 31, "Ajouter", gestionClic, panel);
-		createButton("Annuler", 389, 437, 94, 31, "Annuler", gestionClic, panel);
-
 		// Partie ENTREPRISE
-		createButton("Insérer", 611, 142, 94, 31, "Insérer", gestionClic, panel);
-		createButton("Charger", 505, 142, 94, 31, "Charger", gestionClic, panel);
+		this.btn_ajouter_entreprise = Utils.creerBouton(panel, "Insérer", 611, 142, 94, 31);
+		this.btn_ajouter_entreprise.addActionListener(this.gestionClic);
 
+		this.btn_charger_entreprise = Utils.creerBouton(panel, "Charger", 505, 142, 94, 31);
+		this.btn_charger_entreprise.addActionListener(this.gestionClic);
+
+		// ScrollPane et Table pour afficher les données d'entreprise
 		this.scrollPane_table_entreprise = new JScrollPane();
 		this.scrollPane_table_entreprise.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
 		this.scrollPane_table_entreprise.setBounds(505, 189, 195, 97);
 		panel.add(this.scrollPane_table_entreprise);
 
-		// Table pour afficher les données d'entreprise
 		this.table_entreprise = new JTable();
 		this.table_entreprise.setSelectionBackground(new Color(0, 102, 204));
 		this.table_entreprise
@@ -207,6 +153,25 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.lbl_Entreprise.setBackground(new Color(0, 102, 204));
 		this.lbl_Entreprise.setBounds(573, 104, 132, 31);
 		panel.add(this.lbl_Entreprise);
+
+		// Boutons radio
+		this.rdbtnOui.setForeground(new Color(0, 0, 0));
+		this.rdbtnOui.setHorizontalAlignment(SwingConstants.TRAILING);
+		this.rdbtnOui.setHorizontalTextPosition(SwingConstants.LEADING);
+		this.rdbtnOui.setBounds(146, 382, 54, 21);
+		panel.add(this.rdbtnOui);
+		this.rdbtnNon.setBounds(271, 382, 112, 21);
+		panel.add(this.rdbtnNon);
+		ButtonGroup buttonGroup = new ButtonGroup();
+		buttonGroup.add(this.rdbtnOui);
+		buttonGroup.add(this.rdbtnNon);
+
+		// Boutons généraux
+		JButton btnAjouter = Utils.creerBouton(panel, "Ajouter", 248, 437, 94, 31);
+		btnAjouter.addActionListener(this.gestionClic);
+
+		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 389, 437, 94, 31);
+		btnAnnuler.addActionListener(this.gestionClic);
 
 		// Masquer les composants liés à l'entreprise au début
 		this.btn_ajouter_entreprise.setVisible(false);

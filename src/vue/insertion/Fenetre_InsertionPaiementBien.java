@@ -2,9 +2,7 @@ package vue.insertion;
 
 import javax.swing.*;
 
-
 import java.awt.Color;
-import java.awt.Font;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -21,9 +19,9 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 	private JTextField textField_numeroDevis;
 	private JTextField textField_montant;
 	private JTextField textField_accompteVerse;
-	private JSeparator separator_Travaux;
 
 	// Table pour afficher les données d'entreprise
+	private JScrollPane scrollPane_table_entreprise;
 	private JTable table_entreprise;
 
 	// Boutons radio
@@ -34,12 +32,6 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 	private JComboBox<String> comboBox_modePaiement;
 	private JComboBox<String> comboBox_Designation;
 
-	// Boutons et libellés
-	private JButton btn_ajouter_entreprise;
-	private JButton btn_charger_entreprise;
-	private JScrollPane scrollPane_table_entreprise;
-	private JLabel lbl_Entreprise;
-
 	// Gestionnaires d'événements
 	private GestionTableEntrepriseFenetreFactureBien gteff;
 	private GestionInsertionPaiementBien gestionClic;
@@ -48,7 +40,7 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		// Initialisation des gestionnaires
 		this.gestionClic = new GestionInsertionPaiementBien(this);
 		this.gteff = new GestionTableEntrepriseFenetreFactureBien(this);
-		
+
 		// Configuration de la fenêtre interne
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
@@ -62,10 +54,13 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		this.getContentPane().add(panel);
 
 		// Labels
-		JLabel lbl_InsererUnTravaux = new JLabel("Ajouter une facture ");
-		lbl_InsererUnTravaux.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUnTravaux.setBounds(294, 26, 153, 48);
-		panel.add(lbl_InsererUnTravaux);
+		Utils.createLabel("Insérer un facture", 294, 26, 153, 48, 16, panel);
+
+		JLabel lbl_Entreprise = new JLabel("Entreprise");
+		lbl_Entreprise.setForeground(Color.BLACK);
+		lbl_Entreprise.setBackground(new Color(0, 102, 204));
+		lbl_Entreprise.setBounds(573, 104, 132, 31);
+		panel.add(lbl_Entreprise);
 
 		JLabel lbl_ImputableLocataire = new JLabel("Imputable Locataire");
 		lbl_ImputableLocataire.setForeground(Color.BLACK);
@@ -85,35 +80,17 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		separator.setBounds(473, 106, 20, 278);
 		panel.add(separator);
 
+		JSeparator separator_Travaux = new JSeparator();
+		separator_Travaux.setBounds(90, 401, 591, 2);
+		panel.add(separator_Travaux);
+
 		// Champs de saisie
-		textField_Numero = new JTextField();
-		textField_Numero.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Numero.setBounds(24, 104, 202, 40);
-		panel.add(textField_Numero);
-		textField_Numero.setColumns(10);
-
-		textField_date_emission = new JTextField();
-		textField_date_emission.setColumns(10);
-		textField_date_emission
-				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9mission (YYYY-MM-JJ)",
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_emission.setBounds(24, 168, 202, 40);
-		panel.add(textField_date_emission);
-
-		textField_date_paiement = new JTextField();
-		textField_date_paiement.setColumns(10);
-		textField_date_paiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Date Paiement (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_paiement.setBounds(247, 167, 202, 40);
-		panel.add(textField_date_paiement);
-
-		textField_numeroDevis = new JTextField();
-		textField_numeroDevis.setColumns(10);
-		textField_numeroDevis.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro devis",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_numeroDevis.setBounds(24, 228, 202, 40);
-		panel.add(textField_numeroDevis);
+		Utils.createTextField("Numéro", 24, 104, 202, 40, panel);
+		Utils.createTextField("Date émission (YYYY-MM-JJ)", 24, 168, 202, 40, panel);
+		Utils.createTextField("Date Paiement (YYYY-MM-JJ)", 247, 167, 202, 40, panel);
+		Utils.createTextField("Numéro devis", 24, 228, 202, 40, panel);
+		Utils.createTextField("Montant", 24, 294, 202, 40, panel);
+		Utils.createTextField("Acompte versé", 247, 294, 200, 40, panel);
 
 		// Menu déroulant pour la designation de la facture
 		comboBox_Designation = new JComboBox<>();
@@ -130,24 +107,6 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		comboBox_Designation.setModel(designationModel);
 		panel.add(comboBox_Designation);
 
-		textField_montant = new JTextField();
-		textField_montant.setColumns(10);
-		textField_montant.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_montant.setBounds(24, 294, 202, 40);
-		panel.add(textField_montant);
-
-		textField_accompteVerse = new JTextField();
-		textField_accompteVerse.setColumns(10);
-		textField_accompteVerse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Acompte vers\u00E9 ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_accompteVerse.setBounds(247, 294, 200, 40);
-		panel.add(textField_accompteVerse);
-
-		separator_Travaux = new JSeparator();
-		separator_Travaux.setBounds(90, 401, 591, 2);
-		panel.add(separator_Travaux);
-
 		// Menu déroulant pour le mode de paiement
 		comboBox_modePaiement = new JComboBox<>();
 		comboBox_modePaiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Mode de Paiement",
@@ -159,6 +118,20 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		modePaiementModel.addElement("Espèce");
 		comboBox_modePaiement.setModel(modePaiementModel);
 		panel.add(comboBox_modePaiement);
+
+		// Table pour afficher les données d'entreprise
+		this.scrollPane_table_entreprise = new JScrollPane();
+		this.scrollPane_table_entreprise.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
+		this.scrollPane_table_entreprise.setBounds(505, 189, 195, 97);
+		panel.add(this.scrollPane_table_entreprise);
+
+		this.table_entreprise = new JTable();
+		this.table_entreprise.setSelectionBackground(new Color(0, 102, 204));
+		this.table_entreprise
+				.setModel(new DefaultTableModel(new Object[][] { { null, null }, }, new String[] { "SIRET", "Nom" }));
+		this.table_entreprise.setBounds(499, 80, 135, 16);
+		scrollPane_table_entreprise.setViewportView(this.table_entreprise);
+		this.table_entreprise.getSelectionModel().addListSelectionListener(this.gteff);
 
 		// Boutons radio
 		this.rdbtnOui.setForeground(new Color(0, 0, 0));
@@ -173,32 +146,18 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		buttonGroup.add(this.rdbtnNon);
 
 		// Boutons généraux
-		createButton("Ajouter", 248, 437, 94, 31, "Ajouter", gestionClic, panel);
-		createButton("Annuler", 389, 437, 94, 31, "Annuler", gestionClic, panel);
+		JButton btnAjouter = Utils.creerBouton(panel, "Ajouter", 248, 437, 94, 31);
+		btnAjouter.addActionListener(this.gestionClic);
+
+		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 389, 437, 94, 31);
+		btnAnnuler.addActionListener(this.gestionClic);
 
 		// Partie ENTREPRISE
-		createButton("Insérer", 611, 142, 94, 31, "Insérer", gestionClic, panel);
-		createButton("Charger", 505, 142, 94, 31, "Charger", gestionClic, panel);
+		JButton btnInsérer = Utils.creerBouton(panel, "Insérer", 611, 142, 94, 31);
+		btnInsérer.addActionListener(this.gestionClic);
 
-		this.scrollPane_table_entreprise = new JScrollPane();
-		this.scrollPane_table_entreprise.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
-		this.scrollPane_table_entreprise.setBounds(505, 189, 195, 97);
-		panel.add(this.scrollPane_table_entreprise);
-
-		// Table pour afficher les données d'entreprise
-		this.table_entreprise = new JTable();
-		this.table_entreprise.setSelectionBackground(new Color(0, 102, 204));
-		this.table_entreprise
-				.setModel(new DefaultTableModel(new Object[][] { { null, null }, }, new String[] { "SIRET", "Nom" }));
-		this.table_entreprise.setBounds(499, 80, 135, 16);
-		scrollPane_table_entreprise.setViewportView(this.table_entreprise);
-		this.table_entreprise.getSelectionModel().addListSelectionListener(this.gteff);
-
-		this.lbl_Entreprise = new JLabel("Entreprise");
-		this.lbl_Entreprise.setForeground(Color.BLACK);
-		this.lbl_Entreprise.setBackground(new Color(0, 102, 204));
-		this.lbl_Entreprise.setBounds(573, 104, 132, 31);
-		panel.add(this.lbl_Entreprise);
+		JButton btnCharger = Utils.creerBouton(panel, "Charger", 505, 142, 94, 31);
+		btnCharger.addActionListener(this.gestionClic);
 	}
 
 	public JTextField getTextField_Numero() {
@@ -225,10 +184,6 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		return textField_accompteVerse;
 	}
 
-	public JSeparator getSeparator_Travaux() {
-		return separator_Travaux;
-	}
-
 	public JRadioButton getRdbtnOui() {
 		return rdbtnOui;
 	}
@@ -253,19 +208,8 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		return table_entreprise;
 	}
 
-	public JButton getBtn_ajouter_entreprise() {
-		return btn_ajouter_entreprise;
-	}
-
-	public JButton getBtn_charger_entreprise() {
-		return btn_charger_entreprise;
-	}
-
 	public JScrollPane getScrollPane_table_entreprise() {
 		return scrollPane_table_entreprise;
 	}
 
-	public JLabel getLbl_Entreprise() {
-		return lbl_Entreprise;
-	}
 }

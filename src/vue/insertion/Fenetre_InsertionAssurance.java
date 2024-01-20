@@ -54,16 +54,12 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		panel.setLayout(null);
 
 		// Libellé "Assurance"
-		JLabel lbl_InsertionAssurance = new JLabel("Assurance");
-		lbl_InsertionAssurance.setBounds(302, 39, 163, 20);
-		lbl_InsertionAssurance.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_InsertionAssurance.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel.add(lbl_InsertionAssurance);
+		Utils.createLabel("Assurance", 302, 39, 163, 20, 16, panel);
 
 		// Champs de saisie pour numéro de police
-		this.textField_numPolice = Utils.createTextField("Numéro de police", 135, 166, 197, 40, panel, true);
-		this.textField_numPolice = Utils.createTextField("Montant", 135, 229, 197, 40, panel, true);
-		this.textField_numPolice = Utils.createTextField("Date échéance (YYYY-MM-JJ)", 135, 298, 197, 40, panel, true);
+		this.textField_numPolice = Utils.createTextField("Numéro de police", 135, 166, 197, 40, panel);
+		this.textField_numPolice = Utils.createTextField("Montant", 135, 229, 197, 40, panel);
+		this.textField_numPolice = Utils.createTextField("Date échéance (YYYY-MM-JJ)", 135, 298, 197, 40, panel);
 
 		// Bouton "Ajouter"
 		JButton btnAjouter = Utils.creerBouton(panel, "Ajouter", 276, 431, 94, 31);

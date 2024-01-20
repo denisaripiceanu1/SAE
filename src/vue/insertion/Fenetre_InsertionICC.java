@@ -40,25 +40,21 @@ public class Fenetre_InsertionICC extends JInternalFrame {
 		panel.setLayout(null);
 
 		// Titre et séparateur
+		Utils.createLabel("Ajouter un ICC", 284, 84, 160, 48, 16, panel);
+
 		JSeparator separator_titreInsererQuotite = new JSeparator();
 		separator_titreInsererQuotite.setForeground(new Color(0, 102, 204));
 		separator_titreInsererQuotite.setBounds(271, 130, 190, 2);
 		panel.add(separator_titreInsererQuotite);
 
-		JLabel lbl_InsererUnICC = new JLabel("Ajouter un ICC");
-		lbl_InsererUnICC.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_InsererUnICC.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUnICC.setBounds(284, 84, 160, 48);
-		panel.add(lbl_InsererUnICC);
-
 		// Champ de texte pour l'année
-		this.textField_Annee = Utils.createTextField("Année", 271, 189, 190, 40, panel, true);
-
+		this.textField_Annee = Utils.createTextField("Année", 271, 189, 190, 40, panel);
+		
 		// Champ de texte pour le trimestre
-		this.textField_Trimestre = Utils.createTextField("Trimestre", 271, 263, 190, 40, panel, true);
+		this.textField_Trimestre = Utils.createTextField("Trimestre", 271, 263, 190, 40, panel);
 
 		// Champ de texte pour l'indice
-		this.textField_indice = Utils.createTextField("Indice", 271, 341, 190, 40, panel, true);
+		this.textField_indice = Utils.createTextField("Indice", 271, 341, 190, 40, panel);
 
 		// Boutons Ajouter et Annuler
 		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 398, 395, 94, 31);
