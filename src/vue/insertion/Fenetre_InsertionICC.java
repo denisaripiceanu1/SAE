@@ -16,18 +16,23 @@ import javax.swing.border.TitledBorder;
 import controleur.insertion.GestionInsertionICC;
 
 public class Fenetre_InsertionICC extends JInternalFrame {
+	// Champs de saisie
     private JTextField textField_Annee;
-    private GestionInsertionICC gestionClic;
     private JTextField textField_Trimestre;
     private JTextField textField_indice;
+    
+	// Gestionnaire d'événements
+    private GestionInsertionICC gestionClic;
 
     public Fenetre_InsertionICC() {
         // Initialisation du gestionnaire d'insertion ICC
         this.gestionClic = new GestionInsertionICC(this);
-
+        
+		// Configuration de la fenêtre interne
         this.setBounds(100, 100, 762, 541);
         this.getContentPane().setLayout(null);
 
+		// Configuration du panel principal
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
         panel.setBounds(0, 0, 755, 511);

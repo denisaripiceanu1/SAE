@@ -18,17 +18,22 @@ import javax.swing.border.TitledBorder;
 import controleur.insertion.GestionInsertionQuotite;
 
 public class Fenetre_InsertionQuotite extends JInternalFrame {
-    private JTextField textField_Pourcentage;
+    // Champ de saisie
+	private JTextField textField_Pourcentage;
+	// Déclaration des gestionnaires
     private GestionInsertionQuotite gestionClic;
+    // Menu déroulant pour le type de compteur
     private JComboBox<String> comboBox_typeDeCompteur;
 
     public Fenetre_InsertionQuotite() {
         // Initialisation du gestionnaire d'insertion de quotité
         this.gestionClic = new GestionInsertionQuotite(this);
 
+        // Configuration de la fenêtre interne
         this.setBounds(100, 100, 762, 541);
         this.getContentPane().setLayout(null);
 
+        // Panneau principal
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
         panel.setBounds(0, 0, 755, 511);
@@ -88,7 +93,7 @@ public class Fenetre_InsertionQuotite extends JInternalFrame {
         return button;
     }
 
-    // Getters pour récupérer les valeurs des champs
+    // Getters 
     public JTextField getTextField_Pourcentage() {
         return this.textField_Pourcentage;
     }

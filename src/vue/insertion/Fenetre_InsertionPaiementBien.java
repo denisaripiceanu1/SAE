@@ -2,6 +2,7 @@ package vue.insertion;
 
 import javax.swing.*;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
@@ -44,13 +45,15 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 	private GestionInsertionPaiementBien gestionClic;
 
 	public Fenetre_InsertionPaiementBien() {
-
+		// Initialisation des gestionnaires
 		this.gestionClic = new GestionInsertionPaiementBien(this);
 		this.gteff = new GestionTableEntrepriseFenetreFactureBien(this);
-
+		
+		// Configuration de la fenêtre interne
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
+		// Configuration du panel principal
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(new Color(255, 255, 255));
@@ -73,8 +76,14 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		// Séparateurs
 		JSeparator separator_titreInsererTravaux = new JSeparator();
 		separator_titreInsererTravaux.setForeground(new Color(0, 102, 204));
-		separator_titreInsererTravaux.setBounds(271, 72, 190, 2);
+		separator_titreInsererTravaux.setBounds(271, 72, 190, 20);
 		panel.add(separator_titreInsererTravaux);
+
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBackground(new Color(0, 102, 204));
+		separator.setBounds(473, 106, 20, 278);
+		panel.add(separator);
 
 		// Champs de saisie
 		textField_Numero = new JTextField();
@@ -86,13 +95,16 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 
 		textField_date_emission = new JTextField();
 		textField_date_emission.setColumns(10);
-		textField_date_emission.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9mission (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_date_emission
+				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9mission (YYYY-MM-JJ)",
+						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_date_emission.setBounds(24, 168, 202, 40);
 		panel.add(textField_date_emission);
 
 		textField_date_paiement = new JTextField();
 		textField_date_paiement.setColumns(10);
-		textField_date_paiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date Paiement (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		textField_date_paiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
+				"Date Paiement (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		textField_date_paiement.setBounds(247, 167, 202, 40);
 		panel.add(textField_date_paiement);
 
@@ -161,42 +173,12 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		buttonGroup.add(this.rdbtnNon);
 
 		// Boutons généraux
-		JButton btnAjouter = new JButton("Ajouter");
-		btnAjouter.setForeground(Color.WHITE);
-		btnAjouter.setBackground(new Color(0, 102, 204));
-		btnAjouter.setBounds(248, 437, 94, 31);
-		btnAjouter.addActionListener(gestionClic);
-		panel.add(btnAjouter);
-
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setForeground(Color.WHITE);
-		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.setBounds(389, 437, 94, 31);
-		btnAnnuler.addActionListener(gestionClic);
-		panel.add(btnAnnuler);
-
-		JSeparator separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBackground(new Color(0, 102, 204));
-		separator.setBounds(473, 106, 20, 278);
-		panel.add(separator);
+		createButton("Ajouter", 248, 437, 94, 31, "Ajouter", gestionClic, panel);
+		createButton("Annuler", 389, 437, 94, 31, "Annuler", gestionClic, panel);
 
 		// Partie ENTREPRISE
-		this.btn_ajouter_entreprise = new JButton("Insérer");
-		this.btn_ajouter_entreprise.setForeground(Color.WHITE);
-		this.btn_ajouter_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.btn_ajouter_entreprise.setBackground(new Color(0, 102, 204));
-		this.btn_ajouter_entreprise.setBounds(611, 142, 94, 31);
-		this.btn_ajouter_entreprise.addActionListener(gestionClic);
-		panel.add(this.btn_ajouter_entreprise);
-
-		this.btn_charger_entreprise = new JButton("Charger");
-		this.btn_charger_entreprise.setForeground(Color.WHITE);
-		this.btn_charger_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.btn_charger_entreprise.setBackground(new Color(0, 102, 204));
-		this.btn_charger_entreprise.setBounds(505, 142, 94, 31);
-		this.btn_charger_entreprise.addActionListener(gestionClic);
-		panel.add(this.btn_charger_entreprise);
+		createButton("Insérer", 611, 142, 94, 31, "Insérer", gestionClic, panel);
+		createButton("Charger", 505, 142, 94, 31, "Charger", gestionClic, panel);
 
 		this.scrollPane_table_entreprise = new JScrollPane();
 		this.scrollPane_table_entreprise.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
@@ -217,6 +199,20 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 		this.lbl_Entreprise.setBackground(new Color(0, 102, 204));
 		this.lbl_Entreprise.setBounds(573, 104, 132, 31);
 		panel.add(this.lbl_Entreprise);
+	}
+
+	// Méthode pour créer un bouton avec une couleur de texte, de fond et un
+	// gestionnaire d'événements spécifiques
+	private JButton createButton(String label, int x, int y, int width, int height, String actionCommand,
+			GestionInsertionPaiementBien listener, JPanel panel) {
+		JButton button = new JButton(label);
+		button.setForeground(Color.WHITE);
+		button.setBackground(new Color(0, 102, 204));
+		button.setBounds(x, y, width, height);
+		button.setActionCommand(actionCommand);
+		button.addActionListener(listener);
+		panel.add(button);
+		return button;
 	}
 
 	public JTextField getTextField_Numero() {

@@ -17,19 +17,24 @@ import javax.swing.border.TitledBorder;
 import controleur.insertion.GestionInsertionCompteur;
 
 public class Fenetre_InsertionCompteur extends JInternalFrame {
-    private JTextField textField_IdCompteur;
+    // Champs de saisie
+	private JTextField textField_IdCompteur;
     private JTextField textField_IndiceCompteur;
     private JTextField textFieldPrixAbo;
+    // Menu déroulant pour le type de compteur
     private JComboBox<String> comboBox_typeDeCompteur;
+    // Gestionnaire d'actions
     private GestionInsertionCompteur gestionClic;
 
     public Fenetre_InsertionCompteur() {
         // Initialisation du gestionnaire d'insertion de compteur
         this.gestionClic = new GestionInsertionCompteur(this);
-
+        
+        // Configuration de la fenêtre interne
         this.setBounds(100, 100, 762, 541);
         this.getContentPane().setLayout(null);
 
+        // Panneau principal
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
         panel.setBounds(0, 0, 755, 511);
@@ -39,7 +44,7 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
         // Titre et séparateur
         JSeparator separator_titreInsererCompteur = new JSeparator();
         separator_titreInsererCompteur.setForeground(new Color(0, 102, 204));
-        separator_titreInsererCompteur.setBounds(270, 102, 190, 2);
+        separator_titreInsererCompteur.setBounds(269, 101, 190, 33);
         panel.add(separator_titreInsererCompteur);
 
         JLabel lbl_InsererUnCompteur = new JLabel("Ajouter un Compteur");

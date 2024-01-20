@@ -1,9 +1,8 @@
 package vue.insertion;
 
 import java.awt.Color;
+
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -67,30 +66,30 @@ public class Fenetre_InsertionImpot extends JInternalFrame {
 		this.textField_annee.setBounds(288, 295, 197, 40);
 		panel.add(this.textField_annee);
 
-		// Bouton "Ajouter"
-		JButton btnAjouter = new JButton("Ajouter");
-		btnAjouter.addActionListener(this.gestionClic);
-		btnAjouter.setForeground(Color.WHITE);
-		btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAjouter.setBackground(new Color(0, 102, 204));
-		btnAjouter.setBounds(276, 431, 94, 31);
-		panel.add(btnAjouter);
-
-		// Bouton "Annuler"
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.addActionListener(this.gestionClic);
-		btnAnnuler.setForeground(Color.WHITE);
-		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.setBounds(428, 431, 94, 31);
-		panel.add(btnAnnuler);
+		// Boutons
+		createButton("Ajouter", 276, 431, 94, 31, "Ajouter", gestionClic, panel);
+		createButton("Annuler", 428, 431, 94, 31, "Annuler", gestionClic, panel);
 
 		// Séparateur
 		JSeparator separator_Document = new JSeparator();
 		separator_Document.setForeground(new Color(0, 102, 204));
-		separator_Document.setBounds(302, 72, 190, 2);
+		separator_Document.setBounds(302, 72, 190, 20);
 		panel.add(separator_Document);
 
+	}
+
+	// Méthode pour créer un bouton avec une couleur de texte, de fond et un
+	// gestionnaire d'événements spécifiques
+	private JButton createButton(String label, int x, int y, int width, int height, String actionCommand,
+			GestionInsertionImpot listener, JPanel panel) {
+		JButton button = new JButton(label);
+		button.setForeground(Color.WHITE);
+		button.setBackground(new Color(0, 102, 204));
+		button.setBounds(x, y, width, height);
+		button.setActionCommand(actionCommand);
+		button.addActionListener(listener);
+		panel.add(button);
+		return button;
 	}
 
 	// Getters pour les champs de saisie
@@ -104,10 +103,6 @@ public class Fenetre_InsertionImpot extends JInternalFrame {
 
 	public JTextField getTextField_annee() {
 		return this.textField_annee;
-	}
-
-	public GestionInsertionImpot getGestionClic() {
-		return this.gestionClic;
 	}
 
 }
