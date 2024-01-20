@@ -68,15 +68,21 @@ public class Sauvegarde {
 			}
 		}
 		
-		// Obtention d'un élément de la sauvegarde
+
+		/**Obtention d'un élément de la sauvegarde
+		 * @param name (String) : nom de l'item
+		 * @return l'objet demandée
+		 */
 		public static Object getItem(String name) {
 			if (sauvegarde != null && sauvegarde.containsKey(name)) {
 					return sauvegarde.get(name);
 			}
 			return null;
 		}
-		
-		// Supression d'un élément de la sauvegarde
+
+		/**Supression d'un élément de la sauvegarde
+		 * @param name (String) : nom de l'item a supprimé
+		 */
 		public static void deleteItem(String name) {
 			if (sauvegarde != null && sauvegarde.containsKey(name)) {
 				sauvegarde.remove(name);
