@@ -15,27 +15,20 @@ import vue.Fenetre_Accueil;
 
 public class GestionTableCharges implements ListSelectionListener {
 
-	// Référence à la fenêtre d'accueil
 	private Fenetre_Accueil fenetreAccueil;
-
-	// Accès à la couche d'accès aux données pour l'entité Facture
 	private DaoFacture daoFacture;
 	private DaoBien daoBien;
 
-	// Constructeur prenant en paramètre la fenêtre d'accueil
+	// Constructeur prenant en paramètre la fenêtre d'acceuil
 	public GestionTableCharges(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
-		// Initialisation de l'accès à la base de données pour l'entité Facture et Bien
 		this.daoFacture = new DaoFacture();
 		this.daoBien = new DaoBien();
-		// Initialisation de la sauvegarde
 		Sauvegarde.initializeSave();
 	}
 
-	// Méthode appelée lorsqu'une sélection est modifiée dans la table des charges
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		// Vérifie si l'événement de sélection a été finalisé
 		if (!e.getValueIsAdjusting()) {
 			// Récupère l'indice de la ligne sélectionnée dans la table des charges
 			// locatives

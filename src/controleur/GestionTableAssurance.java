@@ -22,6 +22,7 @@ public class GestionTableAssurance implements ListSelectionListener {
 	private DaoEcheance daoEcheance;
 	private DaoBien daoBien;
 
+	// Constructeur prenant en paramètre la fenêtre d'acceuil
 	public GestionTableAssurance(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
 		this.daoAssurance = new DaoAssurance();

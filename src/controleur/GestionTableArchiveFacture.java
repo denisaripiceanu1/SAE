@@ -1,6 +1,5 @@
 package controleur;
 
-import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -12,6 +11,7 @@ public class GestionTableArchiveFacture implements ListSelectionListener {
 
 	private Fenetre_Accueil fenetreAccueil;
 
+	// Constructeur prenant en paramètre la fenêtre d'acceuil
 	public GestionTableArchiveFacture(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
 	}
@@ -23,16 +23,7 @@ public class GestionTableArchiveFacture implements ListSelectionListener {
 			int selectedRowLogement = fenetreAccueil.getTableLogementsParBien().getSelectedRow();
 
 			if (selectedRowLogement > -1) {
-				// Si une ligne est sélectionnée
-				JTable tableLogement = fenetreAccueil.getTableLogementsParBien();
 				Bien bien = null;
-//				try {
-//					// Récupération de l'objet Bien associé à la ligne sélectionnée
-//					bien = daoBien.findById(tableLogement.getValueAt(selectedRowLogement, 0).toString());
-//				} catch (SQLException e1) {
-//					e1.printStackTrace();
-//				}
-				// Mise à jour de la sauvegarde avec l'objet Bien sélectionné
 				Sauvegarde.deleteItem("Logement");
 				Sauvegarde.addItem("Logement", bien);
 			}

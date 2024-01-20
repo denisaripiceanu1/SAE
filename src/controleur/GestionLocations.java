@@ -29,6 +29,7 @@ public class GestionLocations implements ListSelectionListener {
 	private DaoLocataire daoLocataire;
 	private DaoBien daoBien;
 
+	// Constructeur prenant en paramètre la fenêtre d'acceuil
 	public GestionLocations(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
 		this.fenetreAffichageLocataire = new Fenetre_AffichageInfoLocataire();
@@ -83,8 +84,7 @@ public class GestionLocations implements ListSelectionListener {
 						e1.printStackTrace();
 					}
 
-					// Mise à jour des champs de la fenêtre principale avec les informations de la
-					// location
+					// Mise à jour des champs de la fenêtre principale avec les informations de la location
 					JTextField loyer = this.fenetreAccueil.getTextField_loyer();
 					loyer.setText(String.valueOf(location.getLoyerTTC()));
 
@@ -92,7 +92,7 @@ public class GestionLocations implements ListSelectionListener {
 					JTextField dateEcheanceField = this.fenetreAccueil.getTextField_dateEcheance();
 
 					if (derniereFactureLoyer != null) {
-						// Si la date d'émission n'est pas null, on l'utilise ; sinon, "N/A"
+						// Si la date d'émission n'est pas nulle, on l'utilise ; sinon, "N/A"
 						String dateEmission;
 						if (derniereFactureLoyer.getDateEmission() != null) {
 							dateEmission = derniereFactureLoyer.getDateEmission();
@@ -100,7 +100,7 @@ public class GestionLocations implements ListSelectionListener {
 							dateEmission = "N/A";
 						}
 
-						// Si la date de paiement n'est pas null, on l'utilise ; sinon, "N/A"
+						// Si la date de paiement n'est pas nulle, on l'utilise ; sinon, "N/A"
 						String datePaiement;
 						if (derniereFactureLoyer.getDatePaiement() != null) {
 							datePaiement = derniereFactureLoyer.getDatePaiement();
@@ -128,7 +128,6 @@ public class GestionLocations implements ListSelectionListener {
 						restantDu.setText(String.valueOf(location.getLoyerTTC() + location.getProvision_chargeMens_TTC()
 								- facture.getMontantReelPaye()));
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 

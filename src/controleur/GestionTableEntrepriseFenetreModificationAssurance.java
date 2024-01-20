@@ -12,25 +12,18 @@ import vue.modification.Fenetre_ModificationAssurance;
 
 public class GestionTableEntrepriseFenetreModificationAssurance implements ListSelectionListener {
 
-    // Référence à la fenêtre d'insertion de paiement de logement
     private Fenetre_ModificationAssurance fma;
-
-    // Accès à la couche d'accès aux données pour l'entité Entreprise
     private DaoEntreprise daoEntreprise;
 
     // Constructeur prenant en paramètre la fenêtre d'insertion de paiement de logement
     public GestionTableEntrepriseFenetreModificationAssurance(Fenetre_ModificationAssurance fma) {
         this.fma = fma;
-        // Initialisation de l'accès à la base de données pour l'entité Entreprise
         this.daoEntreprise = new DaoEntreprise();
-        // Initialisation de la sauvegarde
         Sauvegarde.initializeSave();
     }
 
-    // Méthode appelée lorsqu'une sélection est modifiée dans la table d'entreprise
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        // Vérifie si l'événement de sélection a été finalisé
         if (!e.getValueIsAdjusting()) {
             // Récupère l'indice de la ligne sélectionnée dans la table d'entreprise
             int selectedRowEntreprise = this.fma.getTable_entreprise().getSelectedRow();

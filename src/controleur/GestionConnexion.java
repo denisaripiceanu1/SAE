@@ -23,8 +23,8 @@ public class GestionConnexion implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton boutonClicke = (JButton) e.getSource();
-
 		switch (boutonClicke.getText()) {
+		
 		case "Se connecter":
 			// Récupération des informations de connexion depuis la fenêtre
 			String login = this.fc.getNomUtilisateur();
@@ -33,8 +33,7 @@ public class GestionConnexion implements ActionListener {
 				// Tentative de création de l'accès avec les informations de connexion
 				CictOracleDataSource.creerAcces(login, mdp);
 
-				// Si la connexion réussit, ouvrir la fenêtre principale et fermer la fenêtre de
-				// connexion
+				// Si la connexion réussit, ouvrir la fenêtre principale et fermer la fenêtre de connexion
 				Fenetre_Accueil fenetreAccueil = new Fenetre_Accueil();
 				fenetreAccueil.setVisible(true);
 				//On récupère le gestionnaire de l'accueil pour afficher la page d'accueil et rendre non visible tous le reste 
@@ -49,6 +48,7 @@ public class GestionConnexion implements ActionListener {
 				e1.printStackTrace();
 			}
 			break;
+			
 		case "Annuler":
 			// En cas d'annulation, fermer la fenêtre de connexion
 			this.fc.dispose();

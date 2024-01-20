@@ -13,26 +13,18 @@ import vue.modification.Fenetre_ModificationFactureChargeLogement;
 
 public class GestionTableEntrepriseFenetreModificationCharge implements ListSelectionListener {
 
-	// Référence à la fenêtre d'insertion de paiement de logement
 	private Fenetre_ModificationFactureChargeLogement fmfcl;
-
-	// Accès à la couche d'accès aux données pour l'entité Entreprise
 	private DaoEntreprise daoEntreprise;
 
-	// Constructeur prenant en paramètre la fenêtre d'insertion de paiement de
-	// logement
+	// Constructeur prenant en paramètre la fenêtre d'insertion de paiement de logement
 	public GestionTableEntrepriseFenetreModificationCharge(Fenetre_ModificationFactureChargeLogement fmfcl) {
 		this.fmfcl = fmfcl;
-		// Initialisation de l'accès à la base de données pour l'entité Entreprise
 		this.daoEntreprise = new DaoEntreprise();
-		// Initialisation de la sauvegarde
 		Sauvegarde.initializeSave();
 	}
 
-	// Méthode appelée lorsqu'une sélection est modifiée dans la table d'entreprise
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		// Vérifie si l'événement de sélection a été finalisé
 		if (!e.getValueIsAdjusting()) {
 			// Récupère l'indice de la ligne sélectionnée dans la table d'entreprise
 			int selectedRowEntreprise = this.fmfcl.getTable_entreprise().getSelectedRow();
