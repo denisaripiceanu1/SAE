@@ -22,12 +22,13 @@ public class Utils {
     }
     
     // Méthode pour créer un bouton avec des caractéristiques spécifiques
-    public static JButton creerBouton(String texte, int x, int y, int width, int height) {
+    public static JButton creerBouton(JPanel panel, String texte, int x, int y, int width, int height) {
         JButton bouton = new JButton(texte);
         bouton.setForeground(Color.WHITE);
         bouton.setFont(new Font("Tahoma", Font.PLAIN, 12));
         bouton.setBackground(new Color(0, 102, 204));
 		bouton.setBounds(x, y, width, height);
+		panel.add(bouton);
         return bouton;
     }
 }

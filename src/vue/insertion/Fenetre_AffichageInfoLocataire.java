@@ -164,24 +164,18 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		this.scrollPane_locataireSoldeToutCompte.setViewportView(this.table_soldeToutCompte);
 
 		// Création des boutons
-		createButton("Retour", 498, 461, 200, 25, "Retour", panel, gestionModificationLocataire);
-		createButton("Modifier", 230, 461, 200, 25, "Modifier", panel, gestionModificationLocataire);
-		createButton("Régularisation des charges", 467, 90, 200, 25, "Régularisation", panel, gestionClic);
-		createButton("Solde tout compte", 467, 299, 210, 25, "SoldeToutCompte", panel, gestionClic);
+		JButton btnAnnuler = Utils.creerBouton(panel, "Retour", 498, 461, 200, 25);
+		btnAnnuler.addActionListener(this.gestionModificationLocataire);
+		
+		JButton btnModifier = Utils.creerBouton(panel, "Modifier", 230, 461, 200, 25);
+		btnModifier.addActionListener(this.gestionModificationLocataire);
+		
+		JButton btnRegularisation = Utils.creerBouton(panel, "Régularisation des charges", 467, 90, 200, 25);
+		btnRegularisation.addActionListener(this.gestionModificationLocataire);
+		
+		JButton btnSoldeToutCompte = Utils.creerBouton(panel, "Solde tout compte", 467, 299, 210, 25);
+		btnSoldeToutCompte.addActionListener(this.gestionModificationLocataire);
 
-	}
-
-	// Méthode pour créer un JButton
-	private JButton createButton(String label, int x, int y, int width, int height, String actionCommand, JPanel panel,
-			ActionListener actionListener) {
-		JButton button = new JButton(label);
-		button.setForeground(Color.WHITE);
-		button.setBackground(new Color(0, 102, 204));
-		button.setBounds(x, y, width, height);
-		button.setActionCommand(actionCommand);
-		button.addActionListener(actionListener);
-		panel.add(button);
-		return button;
 	}
 
 	// Getters

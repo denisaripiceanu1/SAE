@@ -73,13 +73,13 @@ public class Fenetre_AffichageCompteursBien extends JInternalFrame {
 		this.table_compteurs.getSelectionModel().addListSelectionListener(this.gestionClic);
 
 		// Configuration des boutons
-		JButton btnAnnuler = Utils.creerBouton("Annuler", 149, 369, 94, 31);
+		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 149, 369, 94, 31);
 		btnAnnuler.addActionListener(this.gestionAffichage);
 
-		JButton btnAjoutReleve = Utils.creerBouton("Ajouter un relevé", 491, 369, 166, 31);
+		JButton btnAjoutReleve = Utils.creerBouton(panel, "Ajouter un relevé", 491, 369, 166, 31);
 		btnAjoutReleve.addActionListener(this.gestionAffichage);
 
-		JButton btnAfficherReleve = Utils.creerBouton("Afficher les relevés", 287, 369, 166, 31);
+		JButton btnAfficherReleve = Utils.creerBouton(panel, "Afficher les relevés", 287, 369, 166, 31);
 		btnAfficherReleve.addActionListener(this.gestionAffichage);
 	}
 

@@ -66,14 +66,12 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		this.textField_numPolice = Utils.createTextField("Date échéance (YYYY-MM-JJ)", 135, 298, 197, 40, panel, true);
 
 		// Bouton "Ajouter"
-		JButton btnAjouter = Utils.creerBouton("Ajouter", 276, 431, 94, 31);
+		JButton btnAjouter = Utils.creerBouton(panel, "Ajouter", 276, 431, 94, 31);
 		btnAjouter.addActionListener(this.gestionClic);
-		panel.add(btnAjouter);
 
 		// Bouton "Annuler"
-		JButton btnAnnuler = Utils.creerBouton("Annuler", 428, 431, 94, 31);
+		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 428, 431, 94, 31);
 		btnAnnuler.addActionListener(this.gestionClic);
-		panel.add(btnAnnuler);
 
 		// Séparateur
 		JSeparator separator_Assurance = new JSeparator();
@@ -89,18 +87,15 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		panel.add(separator_vertical);
 
 		// Partie ENTREPRISE
-		this.btn_ajouter_entreprise = Utils.creerBouton("Insérer", 518, 328, 94, 31);
+		this.btn_ajouter_entreprise = Utils.creerBouton(panel, "Insérer", 518, 328, 94, 31);
 		this.btn_ajouter_entreprise.addActionListener(gestionClic);
-		panel.add(this.btn_ajouter_entreprise);
 
-		this.btn_charger_entreprise = Utils.creerBouton("Charger", 412, 328, 94, 31);
+		this.btn_charger_entreprise = Utils.creerBouton(panel, "Charger", 412, 328, 94, 31);
 		this.btn_charger_entreprise.addActionListener(gestionClic);
-		panel.add(this.btn_charger_entreprise);
 
 		// Bouton "Modifier" pour entreprise
-		JButton btn_modifier_entreprise = Utils.creerBouton("Modifier", 624, 329, 94, 31);
+		JButton btn_modifier_entreprise = Utils.creerBouton(panel, "Modifier", 624, 329, 94, 31);
 		btn_modifier_entreprise.addActionListener(gestionClic);
-		panel.add(btn_modifier_entreprise);
 
 		// JScrollPane pour la table des entreprises
 		this.scrollPane_table_entreprise = new JScrollPane();
