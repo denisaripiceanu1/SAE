@@ -80,18 +80,6 @@ public class Fenetre_InsertionQuotite extends JInternalFrame {
         return textField;
     }
 
-    // Méthode pour créer un bouton avec une couleur de texte, de fond et un gestionnaire d'événements spécifiques
-    private JButton createButton(String label, int x, int y, int width, int height, Color textColor, Color bgColor,
-            GestionInsertionQuotite listener, JPanel panel) {
-        JButton button = new JButton(label);
-        button.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        button.setBounds(x, y, width, height);
-        button.setForeground(textColor);
-        button.setBackground(bgColor);
-        button.addActionListener(listener);
-        panel.add(button);
-        return button;
-    }
 
     // Getters 
     public JTextField getTextField_Pourcentage() {

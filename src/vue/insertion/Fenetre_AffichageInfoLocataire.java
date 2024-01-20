@@ -3,7 +3,6 @@ package vue.insertion;
 import java.awt.Color;
 
 import java.awt.Font;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -107,7 +106,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		panel.add(lblSiVotreReste);
 
 		// Champs de texte pour les informations du locataire
-		this.textField_Id = Utils.createTextField("Identifiant", 21, 132, 190, 40, panel, false);
+		this.textField_Id = Utils.createTextField("Identifiant", 21, 132, 190, 40, panel, true);
 		this.textField_Nom = Utils.createTextField("Nom", 21, 183, 190, 40, panel, true);
 		this.textField_Prenom = Utils.createTextField("Prénom", 21, 233, 190, 40, panel, true);
 		this.textField_Telephone = Utils.createTextField("n° Téléphone", 21, 287, 190, 40, panel, true);

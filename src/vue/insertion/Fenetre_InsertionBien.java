@@ -53,31 +53,25 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		panel.add(lbl_InsererUnBien);
 
 		// Champs de texte
-		textField_IdImmeuble = createTextField("Id Bien", 110, 104, 190, 40, panel);
-		textField_adresse = createTextField("Adresse", 110, 168, 190, 40, panel);
-		textField_codePostal = createTextField("Code Postal", 427, 168, 190, 40, panel);
-		textField_ville = createTextField("Ville", 110, 228, 190, 40, panel);
-		textField_periodeDeConstruction = createTextField("Période de construction", 427, 228, 190, 40, panel);
+		textField_IdImmeuble = Utils.createTextField("Id Bien", 110, 104, 190, 40, panel, true);
+		textField_adresse = Utils.createTextField("Adresse", 110, 168, 190, 40, panel, true);
+		textField_codePostal = Utils.createTextField("Code Postal", 427, 168, 190, 40, panel, true);
+		textField_ville = Utils.createTextField("Ville", 110, 228, 190, 40, panel, true);
+		textField_periodeDeConstruction = Utils.createTextField("Période de construction", 427, 228, 190, 40, panel, true);
 
 		// Menu déroulant
 		comboBox_typeDeBien = createComboBox("Type", new String[] { "Immeuble", "Maison" }, 427, 104, 189, 45, panel);
 
 		// Boutons
-		createButton("Ajouter", 246, 447, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionInsertionBien, panel);
-		createButton("Annuler", 398, 447, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionInsertionBien, panel);
-		createButton("Ajouter un compteur", 246, 378, 246, 31, Color.WHITE, new Color(0, 102, 204),
-				gestionInsertionBien, panel);
+		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 398, 447, 94, 31);
+		btnAnnuler.addActionListener(this.gestionInsertionBien);
 
-	}
+		JButton btnAnjouter = Utils.creerBouton(panel, "Ajouter", 246, 447, 94, 31);
+		btnAnjouter.addActionListener(this.gestionInsertionBien);
 
-	// Méthode pour créer un champ de texte avec une bordure spécifique
-	private JTextField createTextField(String title, int x, int y, int width, int height, JPanel panel) {
-		JTextField textField = new JTextField();
-		textField.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), title, TitledBorder.LEADING,
-				TitledBorder.ABOVE_TOP, null, null));
-		textField.setBounds(x, y, width, height);
-		panel.add(textField);
-		return textField;
+		JButton btnAjouterCompteur = Utils.creerBouton(panel, "Ajouter un compteur", 246, 378, 246, 31);
+		btnAjouterCompteur.addActionListener(this.gestionInsertionBien);
+
 	}
 
 	// Méthode pour créer un menu déroulant avec une bordure spécifique
@@ -89,20 +83,6 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		comboBox.setBounds(x, y, width, height);
 		panel.add(comboBox);
 		return comboBox;
-	}
-
-	// Méthode pour créer un bouton avec une couleur de texte, de fond et un
-	// gestionnaire d'événements spécifiques
-	private JButton createButton(String label, int x, int y, int width, int height, Color textColor, Color bgColor,
-			GestionInsertionBien listener, JPanel panel) {
-		JButton button = new JButton(label);
-		button.setForeground(textColor);
-		button.setBackground(bgColor);
-		button.addActionListener(listener);
-		button.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		button.setBounds(x, y, width, height);
-		panel.add(button);
-		return button;
 	}
 
 	// Getters pour récupérer les valeurs des champs

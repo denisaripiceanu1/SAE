@@ -61,7 +61,7 @@ public class Fenetre_InsertionAssurance extends JInternalFrame {
 		panel.add(lbl_InsertionAssurance);
 
 		// Champs de saisie pour numéro de police
-		this.textField_numPolice = Utils.createTextField("Numéro de police", 135, 166, 197, 40, panel, false);
+		this.textField_numPolice = Utils.createTextField("Numéro de police", 135, 166, 197, 40, panel, true);
 		this.textField_numPolice = Utils.createTextField("Montant", 135, 229, 197, 40, panel, true);
 		this.textField_numPolice = Utils.createTextField("Date échéance (YYYY-MM-JJ)", 135, 298, 197, 40, panel, true);
 

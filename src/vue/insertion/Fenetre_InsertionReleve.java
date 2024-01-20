@@ -73,18 +73,6 @@ public class Fenetre_InsertionReleve extends JInternalFrame {
 
 	}
 
-	// Méthode pour créer un JButton
-	private JButton createButton(String label, int x, int y, int width, int height, String actionCommand, JPanel panel,
-			ActionListener actionListener) {
-		JButton button = new JButton(label);
-		button.setForeground(Color.WHITE);
-		button.setBackground(new Color(0, 102, 204));
-		button.setBounds(x, y, width, height);
-		button.setActionCommand(actionCommand);
-		button.addActionListener(actionListener);
-		panel.add(button);
-		return button;
-	}
 
 	// Getters
 	public JTextField getTextField_dateReleve() {

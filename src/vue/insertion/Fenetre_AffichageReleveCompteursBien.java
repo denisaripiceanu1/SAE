@@ -68,7 +68,7 @@ public class Fenetre_AffichageReleveCompteursBien extends JInternalFrame {
         this.scrollPane_table_compteurs.setViewportView(this.table_releve_compteur_bien);
 
         // Configuration du bouton "Annuler"
-        JButton btnAnnuler = Utils.creerBouton("Annuler", 330, 376, 94, 31);
+        JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 330, 376, 94, 31);
         btnAnnuler.addActionListener(this.gestionAffichage);
 
     }

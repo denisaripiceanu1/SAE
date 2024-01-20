@@ -61,41 +61,19 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
         panel.add(comboBox_typeDeCompteur);
 
         // Champs de texte pour l'ID du compteur et l'indice du compteur
-        textField_IdCompteur = createTextField("Id Compteur", 270, 207, 190, 40, panel);
-        textField_IndiceCompteur = createTextField("Indice du Compteur", 270, 273, 190, 40, panel);
+        textField_IdCompteur = Utils.createTextField("Id Compteur", 270, 207, 190, 40, panel, true);
+        textField_IndiceCompteur = Utils.createTextField("Indice du Compteur", 270, 273, 190, 40, panel, true);
+        textFieldPrixAbo = Utils.createTextField("Prix de l'abonnement", 270, 343, 190, 40, panel, true);
 
         // Boutons Ajouter et Annuler
-        createButton("Ajouter", 246, 447, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionClic, panel);
-        createButton("Annuler", 398, 447, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionClic, panel);
+        JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 398, 447, 94, 31);
+		btnAnnuler.addActionListener(this.gestionClic);
 
-        // Champ de texte pour le prix de l'abonnement
-        textFieldPrixAbo = createTextField("Prix de l'abonnement", 270, 343, 190, 40, panel);
+		JButton btnAnjouter = Utils.creerBouton(panel, "Ajouter", 246, 447, 94, 31);
+		btnAnjouter.addActionListener(this.gestionClic);
     }
 
-    // Méthode pour créer un champ de texte avec une bordure spécifique
-    private JTextField createTextField(String title, int x, int y, int width, int height, JPanel panel) {
-        JTextField textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), title, TitledBorder.LEADING,
-                TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-        textField.setBounds(x, y, width, height);
-        panel.add(textField);
-        return textField;
-    }
-
-    // Méthode pour créer un bouton avec une couleur de texte, de fond et un gestionnaire d'événements spécifiques
-    private JButton createButton(String label, int x, int y, int width, int height, Color textColor, Color bgColor,
-            GestionInsertionCompteur listener, JPanel panel) {
-        JButton button = new JButton(label);
-        button.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        button.setBounds(x, y, width, height);
-        button.setForeground(textColor);
-        button.setBackground(bgColor);
-        button.addActionListener(listener);
-        panel.add(button);
-        return button;
-    }
-
+    
     // Getters pour récupérer les valeurs des champs
     public JTextField getTextField_IdCompteur() {
         return textField_IdCompteur;

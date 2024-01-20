@@ -49,38 +49,15 @@ public class Fenetre_InsertionDiagnostic extends JInternalFrame {
         panel.add(lbl_InsererUnDiagnostic);
 
         // Champ de texte pour la date de validité
-        this.textField_Date_Validite = createTextField("Date validité", 263, 232, 190, 40, panel);
+        this.textField_Date_Validite = Utils.createTextField("Date validité", 263, 232, 190, 40, panel, true);
+        this.textField_Type = Utils.createTextField("Type", 263, 161, 190, 40, panel, true);
 
         // Boutons Ajouter et Annuler
-        createButton("Ajouter", 244, 395, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionClic, panel);
-        createButton("Annuler", 396, 395, 94, 31, Color.WHITE, new Color(0, 102, 204), gestionClic, panel);
+		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 396, 395, 94, 31);
+		btnAnnuler.addActionListener(this.gestionClic);
 
-        // Champ de texte pour le type de diagnostic
-        this.textField_Type = createTextField("Type", 263, 161, 190, 40, panel);
-    }
-
-    // Méthode pour créer un champ de texte avec une bordure spécifique
-    private JTextField createTextField(String title, int x, int y, int width, int height, JPanel panel) {
-        JTextField textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), title, TitledBorder.LEADING,
-                TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-        textField.setBounds(x, y, width, height);
-        panel.add(textField);
-        return textField;
-    }
-
-    // Méthode pour créer un bouton avec une couleur de texte, de fond et un gestionnaire d'événements spécifiques
-    private JButton createButton(String label, int x, int y, int width, int height, Color textColor, Color bgColor,
-            GestionInsertionDiagnostic listener, JPanel panel) {
-        JButton button = new JButton(label);
-        button.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        button.setBounds(x, y, width, height);
-        button.setForeground(textColor);
-        button.setBackground(bgColor);
-        button.addActionListener(listener);
-        panel.add(button);
-        return button;
+		JButton btnAnjouter = Utils.creerBouton(panel, "Ajouter", 244, 395, 94, 31);
+		btnAnjouter.addActionListener(this.gestionClic);
     }
 
     // Getters pour récupérer les valeurs des champs

@@ -119,22 +119,11 @@ public class Fenetre_InsertionEntreprise extends JInternalFrame {
 		panel.add(textField_IBAN);
 
 		// Boutons généraux
-		createButton("Ajouter", 244, 395, 94, 31, "Ajouter", gestionClic, panel);
-		createButton("Annuler", 396, 395, 94, 31, "Annuler", gestionClic, panel);
-	}
+		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 396, 395, 94, 31);
+		btnAnnuler.addActionListener(this.gestionClic);
 
-	// Méthode pour créer un bouton avec une couleur de texte, de fond et un
-	// gestionnaire d'événements spécifiques
-	private JButton createButton(String label, int x, int y, int width, int height, String actionCommand,
-			GestionInsertionEntreprise listener, JPanel panel) {
-		JButton button = new JButton(label);
-		button.setForeground(Color.WHITE);
-		button.setBackground(new Color(0, 102, 204));
-		button.setBounds(x, y, width, height);
-		button.setActionCommand(actionCommand);
-		button.addActionListener(listener);
-		panel.add(button);
-		return button;
+		JButton btnAnjouter = Utils.creerBouton(panel, "Ajouter", 244, 395, 94, 31);
+		btnAnjouter.addActionListener(this.gestionClic);
 	}
 
 	// Getters pour récupérer les valeurs des champs

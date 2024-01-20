@@ -77,21 +77,7 @@ public class Fenetre_InsertionImpot extends JInternalFrame {
 		panel.add(separator_Document);
 
 	}
-
-	// Méthode pour créer un bouton avec une couleur de texte, de fond et un
-	// gestionnaire d'événements spécifiques
-	private JButton createButton(String label, int x, int y, int width, int height, String actionCommand,
-			GestionInsertionImpot listener, JPanel panel) {
-		JButton button = new JButton(label);
-		button.setForeground(Color.WHITE);
-		button.setBackground(new Color(0, 102, 204));
-		button.setBounds(x, y, width, height);
-		button.setActionCommand(actionCommand);
-		button.addActionListener(listener);
-		panel.add(button);
-		return button;
-	}
-
+	
 	// Getters pour les champs de saisie
 	public JTextField getTextField_nom() {
 		return this.textField_nom;
