@@ -6,7 +6,7 @@ public class Proprietes {
     private String periodeConstruction;
     private String adresse;
     private int nombreLocaux;
-    private int sommeLoyers;  // Nouveau champ
+    private int sommeLoyers;
 
     public Proprietes(String propertyName, String propertyType, String periodeConstruction, String adresse, int nombreLocaux, int sommeLoyers) {
         this.propertyName = propertyName;
