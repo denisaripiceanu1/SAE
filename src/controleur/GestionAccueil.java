@@ -837,7 +837,7 @@ public class GestionAccueil implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 
-		if (source instanceof JButton) {
+		if (source instanceof JButton) { // Cas de clics sur des JButton
 			JButton btn = (JButton) source;
 			switch (btn.getName()) { // a partir du nom des boutons
 
@@ -1216,7 +1216,6 @@ public class GestionAccueil implements ActionListener {
 				break;
 			case "btn_MesLocations_Archiver":
 				if (Sauvegarde.onSave("Louer") == true) {
-					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
 					Fenetre_ArchiverLocation archiver_location = new Fenetre_ArchiverLocation();
 					this.fenetreAccueil.getLayeredPane().add(archiver_location); // Afficher la fenêtre d'archivage pour une location
 					archiver_location.setVisible(true);
@@ -1518,7 +1517,7 @@ public class GestionAccueil implements ActionListener {
 				break;
 			}
 
-		} else if (source instanceof JToggleButton) { // Cas pour des ToggleButton
+		} else if (source instanceof JToggleButton) { // Cas de clics sur des ToggleButton
 			JToggleButton btnToggle = (JToggleButton) source;
 			switch (btnToggle.getName()) {
 
@@ -1538,6 +1537,7 @@ public class GestionAccueil implements ActionListener {
 				}
 
 				break;
+				
 			case "tglbtn_Travaux_logements":
 				// Permet de trier le tableau de travaux en n'affichant que celles concernant les logements
 				try {

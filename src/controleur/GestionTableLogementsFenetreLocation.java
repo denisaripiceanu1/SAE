@@ -16,6 +16,7 @@ public class GestionTableLogementsFenetreLocation implements ListSelectionListen
     private Fenetre_InsertionLocation fenetreInsertionLocation;
     private DaoBien daoBien;
 
+    // Constructeur prenant en paramètre la fenêtre d'insertion de location
     public GestionTableLogementsFenetreLocation(Fenetre_InsertionLocation fenetreInsertionLocation) {
         this.fenetreInsertionLocation = fenetreInsertionLocation;
         this.daoBien = new DaoBien();

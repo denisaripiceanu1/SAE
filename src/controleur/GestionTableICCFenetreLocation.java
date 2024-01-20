@@ -13,8 +13,8 @@ import vue.insertion.Fenetre_InsertionLocation;
 
 public class GestionTableICCFenetreLocation implements ListSelectionListener {
 
-    private Fenetre_InsertionLocation fil; // Référence vers la fenêtre d'insertion de location
-    private DaoICC daoICC; // DAO pour les objets ICC (Indice du Coût de la Construction)
+    private Fenetre_InsertionLocation fil;
+    private DaoICC daoICC;
 
     public GestionTableICCFenetreLocation(Fenetre_InsertionLocation fil) {
         this.fil = fil;

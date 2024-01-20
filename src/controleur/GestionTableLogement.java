@@ -16,6 +16,7 @@ public class GestionTableLogement implements ListSelectionListener {
 	private Fenetre_Accueil fenetreAccueil;
 	private DaoBien daoBien;
 
+	// Constructeur prenant en paramètre la fenêtre d'acceuil
 	public GestionTableLogement(Fenetre_Accueil fenetreAccueil) {
 		this.fenetreAccueil = fenetreAccueil;
 		this.daoBien = new DaoBien();
