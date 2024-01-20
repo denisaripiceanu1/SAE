@@ -851,24 +851,31 @@ public class GestionAccueil implements ActionListener {
 					e2.printStackTrace();
 				}
 				break;
+				
 			case "btnMesBiens":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesBiens());
 				break;
+				
 			case "btnMesLocations":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesLocations());
 				break;
+				
 			case "btnMesTravaux":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesTravaux());
 				break;
+				
 			case "btnMesChargesLocatives":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesChargesLocatives());
 				break;
+				
 			case "btnMesAssurances":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesAssurances());
 				break;
+				
 			case "btnMesDocuments":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesDocuments());
 				break;
+				
 			case "btnMesArchives":
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_MesArchives());
 				break;
@@ -893,26 +900,30 @@ public class GestionAccueil implements ActionListener {
 					this.chargerBiens();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
-					JOptionPane.showMessageDialog(null, // Message pop-up
+					// Afficher un message d'erreur à l'utilisateur
+					JOptionPane.showMessageDialog(null,
 							"Erreur lors du chargement des logements. Veuillez réessayer plus tard.",
 							"Erreur de chargement", JOptionPane.ERROR_MESSAGE);
 				}
 				break;
 
 			case "btnMesBiens_Supprimer":
+				// Cas de la suppression d'un immeuble
 				if (Sauvegarde.onSave("Immeuble") == true && !Sauvegarde.onSave("Logement")) {
 					Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
 					Fenetre_SupprimerBien supp_bien = new Fenetre_SupprimerBien();
-					this.fenetreAccueil.getLayeredPane().add(supp_bien);
+					this.fenetreAccueil.getLayeredPane().add(supp_bien); // Afficher la page de suppression d'un immeuble
 					supp_bien.setVisible(true);
 					supp_bien.moveToFront();
+				// Cas de la suppression d'un logement
 				} else if (Sauvegarde.onSave("Logement") == true) {
 					Bien bienSauvegarde = (Bien) Sauvegarde.getItem("Logement");
 					Fenetre_SupprimerLogement supp_logement = new Fenetre_SupprimerLogement();
-					this.fenetreAccueil.getLayeredPane().add(supp_logement);
+					this.fenetreAccueil.getLayeredPane().add(supp_logement); // Afficher la page de suppression d'un logement
 					supp_logement.setVisible(true);
 					supp_logement.moveToFront();
 				} else {
+					// Afficher un message d'erreur à l'utilisateur
 					JOptionPane.showMessageDialog(this.fenetreAccueil,
 							"Veuillez sélectionner un bien/logement pour supprimer", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
@@ -921,29 +932,24 @@ public class GestionAccueil implements ActionListener {
 				break;
 
 			case "btnMesBiens_Modifier":
-				//////// POUR UN LOGEMENT --> BIEN (dans notre BDD) ///////////
+				// Cas de la modification d'un logement
 				if (Sauvegarde.onSave("Logement") == true) {
 					Fenetre_ModificationLogement modif_logement = new Fenetre_ModificationLogement();
 					this.fenetreAccueil.getLayeredPane().add(modif_logement);
 					modif_logement.setVisible(true);
 					modif_logement.moveToFront();
-
-					// On recupÃ¨re le logement de la sauvegarde
+					// On recupère le logement de la sauvegarde
 					Bien logementSauvegarde = (Bien) Sauvegarde.getItem("Logement");
 					Bien logementCourant;
-
 					try {
 						logementCourant = this.daoBien.findById(logementSauvegarde.getIdBien());
 						modif_logement.getTextField_IdLogement().setText(logementCourant.getIdBien());
 						modif_logement.getTextField_SurfaceHabitable()
 								.setText(Double.toString(logementCourant.getSurfaceHabitable()));
 						modif_logement.getTextField_NbPièces().setText(Integer.toString(logementCourant.getNbPieces()));
-
 						modif_logement.getTextField_DateAcquisition().setText(logementCourant.getDateAcquisition());
-
 						modif_logement.getTextField_NumEtage().setText(Integer.toString(logementCourant.getNumEtage()));
 						modif_logement.getComboBox_typeDeLogement().setSelectedItem(logementCourant.getType_bien());
-						// voir comment potentiellement récupérer le compteur et les autres trucs
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 						// Afficher un message d'erreur à l'utilisateur
@@ -951,21 +957,21 @@ public class GestionAccueil implements ActionListener {
 								"Erreur lors de la recherche du logement dans la base de données. Veuillez réessayer plus tard.",
 								"Erreur de recherche", JOptionPane.ERROR_MESSAGE);
 					}
-
 				} else {
-					//////// POUR MODIFIER UN IMMEUBLE///////////
-					// Premier test si il n'y a aucun immeuble sélectionné alors erreur
+					// Cas de la modification d'un immeuble
+					// Premier test : s'il n'y a aucun immeuble sélectionné alors erreur
 					if (Sauvegarde.onSave("Immeuble") == false) {
+						// Afficher un message d'erreur à l'utilisateur
 						JOptionPane.showMessageDialog(this.fenetreAccueil,
 								"Veuillez sélectionner un bien/logement pour modifier !", "Erreur",
 								JOptionPane.ERROR_MESSAGE);
 					} else {
-						// On ouvre la fenÃªtre
+						// On ouvre la fenêtre de modification
 						Fenetre_ModificationBien modif_bien = new Fenetre_ModificationBien();
-						this.fenetreAccueil.getLayeredPane().add(modif_bien);
+						this.fenetreAccueil.getLayeredPane().add(modif_bien); 
 						modif_bien.setVisible(true);
 						modif_bien.moveToFront();
-						// permet de recuperer les infos sur l'immeuble courant pour les afficher
+						// Permet de recuperer les infos sur l'immeuble courant pour les afficher
 						// On récupère l'immeuble de la sauvegarde
 						Immeuble immeubleSauvegarde = (Immeuble) Sauvegarde.getItem("Immeuble");
 						Immeuble immeubleCourant;
@@ -973,7 +979,7 @@ public class GestionAccueil implements ActionListener {
 							// A partir de l'ID de l'immeuble dans la sauvegarde on utilise la BD pour
 							// récuperer l'immeuble le plus récent correspondant
 							immeubleCourant = this.daoImmeuble.findById(immeubleSauvegarde.getImmeuble());
-							// afficher les infos dans la page
+							// Afficher les informations stockées dans les champs correspondant
 							modif_bien.getTextField_IdImmeuble().setText(immeubleCourant.getImmeuble());
 							modif_bien.getTextField_adresse().setText(immeubleCourant.getAdresse());
 							modif_bien.getTextField_codePostal().setText(immeubleCourant.getCp());
@@ -994,17 +1000,19 @@ public class GestionAccueil implements ActionListener {
 
 			case "btnMesBiens_AjouterBien":
 				Fenetre_InsertionBien insertion_bien = new Fenetre_InsertionBien();
-				this.fenetreAccueil.getLayeredPane().add(insertion_bien);
+				this.fenetreAccueil.getLayeredPane().add(insertion_bien); // Afficher la page pour inserer un immeuble
 				insertion_bien.setVisible(true);
 				insertion_bien.moveToFront();
 				break;
+				
 			case "btnMesBiens_AjouterPaiements":
 				if (Sauvegarde.onSave("Immeuble") == true) {
 					Fenetre_InsertionPaiementBien paiement_bien = new Fenetre_InsertionPaiementBien();
-					this.fenetreAccueil.getLayeredPane().add(paiement_bien);
+					this.fenetreAccueil.getLayeredPane().add(paiement_bien); // Afficher la page des paiements pour un immeuble
 					paiement_bien.setVisible(true);
 					paiement_bien.moveToFront();
 				} else {
+					// Afficher un message d'erreur à l'utilisateur
 					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -1013,17 +1021,17 @@ public class GestionAccueil implements ActionListener {
 			case "btnMesBiens_AfficherCompteurs_Bien":
 				if (Sauvegarde.onSave("Immeuble") == true) {
 					Fenetre_AffichageCompteursBien affichage_compteursBien = new Fenetre_AffichageCompteursBien();
-					this.fenetreAccueil.getLayeredPane().add(affichage_compteursBien);
-					// On test d'afficher les compteurs au chargement de la page
+					this.fenetreAccueil.getLayeredPane().add(affichage_compteursBien); // Afficher la page des compteurs pour un immeuble
+					// Afficher les compteurs au chargement de la page
 					try {
 						affichage_compteursBien.getGestionAffichage().chargerCompteurs();
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					affichage_compteursBien.setVisible(true);
 					affichage_compteursBien.moveToFront();
 				} else {
+					// Afficher un message d'erreur à l'utilisateur
 					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -1032,10 +1040,11 @@ public class GestionAccueil implements ActionListener {
 			case "btnMesBiens_AjouterLogement":
 				if (Sauvegarde.onSave("Immeuble") == true) {
 					Fenetre_InsertionLogement insertion_logement = new Fenetre_InsertionLogement();
-					this.fenetreAccueil.getLayeredPane().add(insertion_logement);
+					this.fenetreAccueil.getLayeredPane().add(insertion_logement); // Afficher la page pour inserer un logement
 					insertion_logement.setVisible(true);
 					insertion_logement.moveToFront();
 				} else {
+					// Afficher un message d'erreur à l'utilisateur
 					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un bien !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -1044,10 +1053,11 @@ public class GestionAccueil implements ActionListener {
 			case "btnMesBiens_AjouterDiagnostic_Logements":
 				if (Sauvegarde.onSave("Logement") == true) {
 					Fenetre_InsertionDiagnostic diagnostic_logement = new Fenetre_InsertionDiagnostic();
-					this.fenetreAccueil.getLayeredPane().add(diagnostic_logement);
+					this.fenetreAccueil.getLayeredPane().add(diagnostic_logement); // Afficher la page des diagnostics pour un logement
 					diagnostic_logement.setVisible(true);
 					diagnostic_logement.moveToFront();
 				} else {
+					// Afficher un message d'erreur à l'utilisateur
 					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -1056,7 +1066,7 @@ public class GestionAccueil implements ActionListener {
 			case "btnMesBiens_AjouterPaiements_Logements":
 				if (Sauvegarde.onSave("Logement") == true) {
 					Fenetre_InsertionPaiementLogement paiement_logement = new Fenetre_InsertionPaiementLogement(false);
-					this.fenetreAccueil.getLayeredPane().add(paiement_logement);
+					this.fenetreAccueil.getLayeredPane().add(paiement_logement); // Afficher la page des paiements pour un logement
 					paiement_logement.setVisible(true);
 					paiement_logement.moveToFront();
 				} else {
@@ -1068,17 +1078,17 @@ public class GestionAccueil implements ActionListener {
 			case "btnMesBiens_AfficherCompteurs_Logement":
 				if (Sauvegarde.onSave("Logement")) {
 					Fenetre_AffichageCompteursLogement affichage_compteursLogement = new Fenetre_AffichageCompteursLogement();
-					this.fenetreAccueil.getLayeredPane().add(affichage_compteursLogement);
-					// On test d'afficher les compteurs au chargement de la page
+					this.fenetreAccueil.getLayeredPane().add(affichage_compteursLogement); // Afficher la page des compteurs pour un logement
+					// Afficher les compteurs au chargement de la page
 					try {
 						affichage_compteursLogement.getGestionAffichage().chargerCompteurs();
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					affichage_compteursLogement.setVisible(true);
 					affichage_compteursLogement.moveToFront();
 				} else {
+					// Afficher un message d'erreur à l'utilisateur
 					JOptionPane.showMessageDialog(this.fenetreAccueil, "Veuillez sélectionner un logement !", "Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -1092,6 +1102,7 @@ public class GestionAccueil implements ActionListener {
 					this.chargerLocations();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					// Afficher un message d'erreur à l'utilisateur
 					JOptionPane.showMessageDialog(null,
 							"Erreur lors du chargement des locations. Veuillez réessayer plus tard.",
 							"Erreur de chargement", JOptionPane.ERROR_MESSAGE);
@@ -1101,10 +1112,11 @@ public class GestionAccueil implements ActionListener {
 			case "btn_MesLocations_Modifier":
 				if (Sauvegarde.onSave("Louer") == true) {
 					Fenetre_ModificationLocation fml = new Fenetre_ModificationLocation();
-					this.fenetreAccueil.getLayeredPane().add(fml);
+					this.fenetreAccueil.getLayeredPane().add(fml); // Afficher la fenêtre de modification pour une location
 					fml.setVisible(true);
 					fml.moveToFront();
 					Louer locSauvegarde = (Louer) Sauvegarde.getItem("Louer");
+					// Pré-remplir la page avec les informations de la sauvegarde
 					try {
 						Louer louerBD = this.daoLouer.findById(locSauvegarde.getBien().getIdBien(),
 								locSauvegarde.getLocataire().getIdLocataire());
@@ -1117,7 +1129,7 @@ public class GestionAccueil implements ActionListener {
 						fml.getTextField_montant_reel_paye().setText(String.valueOf(louerBD.getMontantReelPaye()));
 						fml.getTextField_Id_Locataire().setText(louerBD.getLocataire().getIdLocataire());
 						fml.getTextField_loyer_TCC().setText(String.valueOf(louerBD.getLoyerTTC()));
-						// Si la date de la derniere regularisation est null
+						// Si la date de la derniere regularisation est nulle
 						if (louerBD.getDateDerniereRegularisation() == null)
 							fml.getTextField_date_derniere_regularisation().setText("N/A");
 						else
