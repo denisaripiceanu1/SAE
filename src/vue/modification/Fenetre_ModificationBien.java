@@ -56,6 +56,7 @@ public class Fenetre_ModificationBien extends JInternalFrame {
 		lbl_InsererUnBien.setBounds(308, 26, 117, 48);
 		panel.add(lbl_InsererUnBien);
 
+		// Initialisation et configuration des champs de saisie
 		this.textField_IdImmeuble = new JTextField();
 		this.textField_IdImmeuble.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Bien",
 				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));

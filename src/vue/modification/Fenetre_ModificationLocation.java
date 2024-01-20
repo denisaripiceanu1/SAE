@@ -148,6 +148,7 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 
 	}
 
+	  // Getters pour récupérer les champs de saisie et d'autres éléments
 	public JTextField getTextField_IdImmeuble() {
 		return textField_IdBien;
 	}
