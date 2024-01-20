@@ -39,9 +39,11 @@ public class DaoImpôt extends DaoModele<Impôt> implements Dao<Impôt> {
 	    SousProgramme<Impôt> sp = new SousProgrammeInsertImpot();
 	    CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 	    sp.parametresSequence(st, donnees);
-	    int idImpot = -1; // Initialiser à une valeur qui ne peut pas être valide
+	    // Initialiser à une valeur qui ne peut pas être valide
+	    int idImpot = -1; 
 	    st.executeUpdate();
-	    idImpot = st.getInt(4);  // Récupérer la valeur de l'ID généré, 4ème paramètre dans le sous-programme 
+	    // Récupérer la valeur de l'ID généré, 4ème paramètre dans le sous-programme 
+	    idImpot = st.getInt(4);  
 	    st.close();
 	    return idImpot;
 	}
