@@ -32,9 +32,11 @@ public class DaoDiagnostic extends DaoModele<Diagnostics> implements Dao<Diagnos
 	    SousProgramme<Diagnostics> sp = new SousProgrammeInsertDiagnostic();
 	    CallableStatement st = CictOracleDataSource.getConnectionBD().prepareCall(sp.appelSousProgramme());
 	    sp.parametresSequence(st, donnees);
-	    int idDiagnostic = -1; // Initialiser à une valeur qui ne peut pas être valide
+	    // Initialiser à une valeur qui ne peut pas être valide
+	    int idDiagnostic = -1; 
 	    st.executeUpdate();
-	    idDiagnostic = st.getInt(4);  // Récupérer la valeur de l'ID généré, 4ème paramètre dans le sous-programme 
+	    // Récupérer la valeur de l'ID généré, 4ème paramètre dans le sous-programme 
+	    idDiagnostic = st.getInt(4);  
 	    st.close();
 	    return idDiagnostic;
 	}

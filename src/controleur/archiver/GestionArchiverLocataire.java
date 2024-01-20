@@ -25,10 +25,17 @@ public class GestionArchiverLocataire implements ActionListener {
 	private DaoLouer daoLouer;
 	private DaoFacture daoFacture;
 
+	// Constructeur prenant en paramètre la fenêtre d'archivage d'un locataire
 	public GestionArchiverLocataire(Fenetre_ArchiverLocataire gestionArchiverLocataire) {
 		this.gestionArchiverLocataire = gestionArchiverLocataire;
+		
+		// Initialisation de l'accès à la base de données pour l'entité Locataire
 		this.daoLocataire = new DaoLocataire();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Louer
 		this.daoLouer = new DaoLouer();
+		
+		// Initialisation de l'accès à la base de données pour l'entité Facture
 		this.daoFacture = new DaoFacture();
 		Sauvegarde.initializeSave();
 	}
@@ -40,23 +47,30 @@ public class GestionArchiverLocataire implements ActionListener {
 		switch (btn.getText()) {
 		// Suppression d'une location
 		case "Archiver":
+			// Récupération de la Location placée dans la sauvegarde
 			Louer louer_supp = (Louer) Sauvegarde.getItem("Louer");
 			try {
 				Locataire locataire = this.daoLocataire.findById(louer_supp.getLocataire().getIdLocataire());
 				List<Facture> facture = this.daoFacture.findFactureChargeByLogement(louer_supp.getBien().getIdBien());
 				Louer louer = this.daoLouer.findById(louer_supp.getBien().getIdBien(),
 						louer_supp.getLocataire().getIdLocataire(), louer_supp.getDateDebut());
-				// Vérifier le nombre de locations du locataire
+				// Vérification du nombre de locations du locataire
 				int nombreLocations = this.daoLouer.getNombreLocationsParLocataire(locataire.getIdLocataire());
 
 				if (nombreLocations == 1) {
 					for (Facture factures : facture) {
+						// Suppression de la facture
 						this.daoFacture.delete(factures);
+						// Création de la même facture mais archivée
 						this.daoFacture.createArchive(factures);
 					}
+					// Suppression de la Location
 					this.daoLouer.delete(louer);
+					// Création de la même Location mais archivée
 					this.daoLouer.createArchiver(louer);
+					// Suppression du locataire
 					this.daoLocataire.delete(locataire);
+					// Création du même locataire mais archivé
 					this.daoLocataire.createArchive(locataire);
 				} else {
 					// Afficher une fenêtre d'erreur car le locataire a plus d'une location
@@ -72,6 +86,7 @@ public class GestionArchiverLocataire implements ActionListener {
 
 		// Annulation de la suppression
 		case "Annuler":
+			// Fermeture de la fenêtre de suppression sans action
 			this.gestionArchiverLocataire.dispose();
 			break;
 		}
