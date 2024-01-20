@@ -846,7 +846,7 @@ public class GestionAccueil implements ActionListener {
 				this.rendreVisible(this.fenetreAccueil.getLayeredPane_Accueil());
 				try {
 					this.viderAccueil();
-					this.chargerAccueil();
+					this.chargerAccueil(); // Mettre à jour les statistiques
 				} catch (SQLException e2) {
 					e2.printStackTrace();
 				}
@@ -882,7 +882,6 @@ public class GestionAccueil implements ActionListener {
 				try {
 					lire.lireCSV(chemin.getSelectedFilePath());
 				} catch (IOException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 				break;
@@ -891,11 +890,10 @@ public class GestionAccueil implements ActionListener {
 			/////////////////////////////////////////////////////////////////////////////////////
 			case "btnMesBiens_Charger":
 				try {
-
 					this.chargerBiens();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
-					JOptionPane.showMessageDialog(null,
+					JOptionPane.showMessageDialog(null, // Message pop-up
 							"Erreur lors du chargement des logements. Veuillez réessayer plus tard.",
 							"Erreur de chargement", JOptionPane.ERROR_MESSAGE);
 				}

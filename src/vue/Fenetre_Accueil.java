@@ -1113,12 +1113,12 @@ public class Fenetre_Accueil extends JFrame {
 		return this.layeredPane_MesAssurances;
 	}
 
-
 	@Override
 	public JPanel getContentPane() {
 		return this.contentPane;
 	}
 
+	
 	public JTable getTableBiens() {
 		return this.tableMesBiens;
 	}
@@ -1147,6 +1147,7 @@ public class Fenetre_Accueil extends JFrame {
 		return this.table_MesDocuments;
 	}
 
+	
 	public JTextField getTextField_loyer() {
 		return this.textField_loyer;
 	}
@@ -1187,6 +1188,8 @@ public class Fenetre_Accueil extends JFrame {
 	public JComboBox<String> getComboBox_MesDocuments() {
 		return this.comboBox_MesDocuments;
 	}
+	
+	
 
 	public JPanel getPanel_Accueil_graphiqueHautGauche() {
 		return this.panelAccueil_graphiqueHautGauche;
@@ -1195,7 +1198,6 @@ public class Fenetre_Accueil extends JFrame {
 	public void setPanel_Accueil_graphiqueHautGauche(JPanel panel) {
 		this.panelAccueil_graphiqueHautGauche = panel;
 	}
-	
 	
 
 	public JPanel getPanel_Accueil_graphiqueHautDroite() {
@@ -1233,6 +1235,8 @@ public class Fenetre_Accueil extends JFrame {
 	public JPanel getPanel_Accueil_moyenne() {
 		return this.panelAccueil_moyenne;
 	}
+	
+	
 
 	public JTable getTable_MesArchives_Facture() {
 		return this.table_MesArchives_Facture;
