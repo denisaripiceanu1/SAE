@@ -100,4 +100,11 @@ public class Fenetre_AffichageCompteursBien extends JInternalFrame {
     public JTable getTable_compteurs() {
         return table_compteurs;
     }
+
+	public GestionAffichageCompteursBien getGestionAffichage() {
+		return gestionAffichage;
+	}
+
+
+    
 }

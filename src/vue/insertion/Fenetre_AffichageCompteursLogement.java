@@ -94,4 +94,9 @@ public class Fenetre_AffichageCompteursLogement extends JInternalFrame {
     public JTable getTable_compteurs() {
         return this.table_compteurs;
     }
+
+	public GestionAffichageCompteursLogement getGestionAffichage() {
+		return gestionAffichage;
+	}
+    
 }

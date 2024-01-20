@@ -78,4 +78,14 @@ public class Fenetre_AffichageReleveCompteursBien extends JInternalFrame {
 	public JTable getTable_releve_compteur_bien() {
 		return this.table_releve_compteur_bien;
 	}
+
+	public GestionAffichageReleveCompteurBien getGestionAffichage() {
+		return gestionAffichage;
+	}
+
+	public JScrollPane getScrollPane_table_compteurs() {
+		return scrollPane_table_compteurs;
+	}
+
+
 }
