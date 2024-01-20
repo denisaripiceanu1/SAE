@@ -2,6 +2,7 @@ package vue.insertion;
 
 import javax.swing.*;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
@@ -52,6 +53,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
+		// Configuration du panel principal
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(new Color(255, 255, 255));
@@ -74,8 +76,14 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		// Séparateurs
 		JSeparator separator_titreInsererTravaux = new JSeparator();
 		separator_titreInsererTravaux.setForeground(new Color(0, 102, 204));
-		separator_titreInsererTravaux.setBounds(271, 72, 190, 2);
+		separator_titreInsererTravaux.setBounds(271, 72, 190, 20);
 		panel.add(separator_titreInsererTravaux);
+
+		JSeparator separator_vertical = new JSeparator();
+		separator_vertical.setOrientation(SwingConstants.VERTICAL);
+		separator_vertical.setBackground(new Color(0, 102, 204));
+		separator_vertical.setBounds(473, 106, 20, 278);
+		panel.add(separator_vertical);
 
 		// Champs de saisie
 		textField_Numero = new JTextField();
@@ -157,7 +165,6 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 			designationModel.addElement("Autre");
 		}
 		this.comboBox_Designation.setModel(designationModel);
-
 		comboBox_Designation.addActionListener(gestionClic);
 		panel.add(this.comboBox_Designation);
 
@@ -174,42 +181,12 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		buttonGroup.add(this.rdbtnNon);
 
 		// Boutons généraux
-		JButton btnAjouter = new JButton("Ajouter");
-		btnAjouter.setForeground(Color.WHITE);
-		btnAjouter.setBackground(new Color(0, 102, 204));
-		btnAjouter.setBounds(248, 437, 94, 31);
-		btnAjouter.addActionListener(gestionClic);
-		panel.add(btnAjouter);
-
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setForeground(Color.WHITE);
-		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.setBounds(389, 437, 94, 31);
-		btnAnnuler.addActionListener(gestionClic);
-		panel.add(btnAnnuler);
-
-		JSeparator separator_vertical = new JSeparator();
-		separator_vertical.setOrientation(SwingConstants.VERTICAL);
-		separator_vertical.setBackground(new Color(0, 102, 204));
-		separator_vertical.setBounds(473, 106, 20, 278);
-		panel.add(separator_vertical);
+		createButton("Ajouter", 248, 437, 94, 31, "Ajouter", gestionClic, panel);
+		createButton("Annuler", 389, 437, 94, 31, "Annuler", gestionClic, panel);
 
 		// Partie ENTREPRISE
-		this.btn_ajouter_entreprise = new JButton("Insérer");
-		this.btn_ajouter_entreprise.setForeground(Color.WHITE);
-		this.btn_ajouter_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.btn_ajouter_entreprise.setBackground(new Color(0, 102, 204));
-		this.btn_ajouter_entreprise.setBounds(611, 142, 94, 31);
-		this.btn_ajouter_entreprise.addActionListener(gestionClic);
-		panel.add(this.btn_ajouter_entreprise);
-
-		this.btn_charger_entreprise = new JButton("Charger");
-		this.btn_charger_entreprise.setForeground(Color.WHITE);
-		this.btn_charger_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.btn_charger_entreprise.setBackground(new Color(0, 102, 204));
-		this.btn_charger_entreprise.setBounds(505, 142, 94, 31);
-		this.btn_charger_entreprise.addActionListener(gestionClic);
-		panel.add(this.btn_charger_entreprise);
+		createButton("Insérer", 611, 142, 94, 31, "Insérer", gestionClic, panel);
+		createButton("Charger", 505, 142, 94, 31, "Charger", gestionClic, panel);
 
 		this.scrollPane_table_entreprise = new JScrollPane();
 		this.scrollPane_table_entreprise.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
@@ -239,6 +216,21 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		lbl_Entreprise.setVisible(false);
 	}
 
+	// Méthode pour créer un bouton avec une couleur de texte, de fond et un
+	// gestionnaire d'événements spécifiques
+	private JButton createButton(String label, int x, int y, int width, int height, String actionCommand,
+			GestionInsertionPaiementLogement listener, JPanel panel) {
+		JButton button = new JButton(label);
+		button.setForeground(Color.WHITE);
+		button.setBackground(new Color(0, 102, 204));
+		button.setBounds(x, y, width, height);
+		button.setActionCommand(actionCommand);
+		button.addActionListener(listener);
+		panel.add(button);
+		return button;
+	}
+
+	// Getters
 	public JTextField getTextField_Numero() {
 		return textField_Numero;
 	}

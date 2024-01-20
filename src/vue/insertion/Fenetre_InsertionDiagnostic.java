@@ -15,17 +15,22 @@ import javax.swing.border.TitledBorder;
 import controleur.insertion.GestionInsertionDiagnostic;
 
 public class Fenetre_InsertionDiagnostic extends JInternalFrame {
+    // Champs de saisie
     private JTextField textField_Date_Validite;
     private JTextField textField_Type;
+    
+    // Gestionnaire d'actions
     private GestionInsertionDiagnostic gestionClic;
 
     public Fenetre_InsertionDiagnostic() {
         // Initialisation du gestionnaire d'insertion de diagnostic
         this.gestionClic = new GestionInsertionDiagnostic(this);
 
+        // Configuration de la fenêtre interne
         this.setBounds(100, 100, 762, 541);
         this.getContentPane().setLayout(null);
 
+        // Panneau principal
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
         panel.setBounds(0, 0, 755, 511);
@@ -35,7 +40,7 @@ public class Fenetre_InsertionDiagnostic extends JInternalFrame {
         // Titre et séparateur
         JSeparator separator_titreInsererBien = new JSeparator();
         separator_titreInsererBien.setForeground(new Color(0, 102, 204));
-        separator_titreInsererBien.setBounds(263, 99, 190, 2);
+        separator_titreInsererBien.setBounds(263, 99, 190, 31);
         panel.add(separator_titreInsererBien);
 
         JLabel lbl_InsererUnDiagnostic = new JLabel("Ajouter un Diagnostic");

@@ -2,6 +2,7 @@ package vue.insertion;
 
 import java.awt.Color;
 
+
 import java.awt.Font;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,41 +29,50 @@ import controleur.insertion.GestionInsertionLocation;
 import modele.dao.DaoImmeuble;
 
 public class Fenetre_InsertionLocation extends JInternalFrame {
+	// Champs de saisie
 	private JTextField textField_IdLocataire;
 	private JTextField textField_Nom;
 	private JTextField textField_Prenom;
 	private JTextField textField_tel;
 	private JTextField textField_e_mail;
 	private JTextField textField_Date_de_naissance;
-	private JTable table_id_logements;
-	private JTable table_icc;
 	private JTextField textField_caution;
 	private JTextField textField_date_arrivee;
 	private JTextField textField_provision_sur_charges;
+	private JTextField textField_loyer;
+
+	// Table pour afficher les identifiants des logements
+	private JTable table_id_logements;
+	// Table pour affciher les differents ICC
+	private JTable table_icc;
+
+	// JLabels
 	private JLabel lblNomEtatDesLieux;
 	private JLabel lblBail;
-	private JPanel panel;
-	private JTextField textField_loyer;
+
+	// ComboBox avec les identifiants des immeubles
 	private JComboBox<String> comboBox_bien;
 
-    // Gestionnaires d'événements
 	private DaoImmeuble daoImmeuble;
+
+	// Gestionnaires d'événements
 	private GestionInsertionLocation gestionClic;
 	private GestionTableLogementsFenetreLocation gtfl;
 	private GestionTableICCFenetreLocation gtIccFl;
 
 	public Fenetre_InsertionLocation() {
-        // Initialisation des gestionnaires
+		// Initialisation des gestionnaires
 		this.gestionClic = new GestionInsertionLocation(this);
 		this.gtfl = new GestionTableLogementsFenetreLocation(this);
 		this.gtIccFl = new GestionTableICCFenetreLocation(this);
+
 		this.daoImmeuble = new DaoImmeuble();
 
-        // Configuration de la fenêtre interne
+		// Configuration de la fenêtre interne
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
-        // Création du panneau principal
+		// Création du panneau principal
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(new Color(255, 255, 255));
@@ -70,17 +80,11 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		panel.setLayout(null);
 		this.getContentPane().add(panel);
 
-        // Séparateur sous le titre
+		// Séparateurs
 		JSeparator separator_titreInsererLocation = new JSeparator();
 		separator_titreInsererLocation.setForeground(new Color(0, 102, 204));
-		separator_titreInsererLocation.setBounds(271, 61, 190, 2);
+		separator_titreInsererLocation.setBounds(271, 52, 190, 21);
 		panel.add(separator_titreInsererLocation);
-
-        // Titre de la fenêtre
-		JLabel lbl_InsererUneLocation = new JLabel("Insérer une location");
-		lbl_InsererUneLocation.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUneLocation.setBounds(290, 14, 171, 48);
-		panel.add(lbl_InsererUneLocation);
 
 		JSeparator separator = new JSeparator();
 		separator.setBackground(new Color(0, 102, 204));
@@ -88,6 +92,13 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		separator.setOrientation(SwingConstants.VERTICAL);
 		panel.add(separator);
 
+		// Titre de la fenêtre
+		JLabel lbl_InsererUneLocation = new JLabel("Insérer une location");
+		lbl_InsererUneLocation.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_InsererUneLocation.setBounds(290, 14, 171, 48);
+		panel.add(lbl_InsererUneLocation);
+
+		// TextFields
 		this.textField_IdLocataire = new JTextField();
 		this.textField_IdLocataire.setColumns(10);
 		this.textField_IdLocataire.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Id Locataire",
@@ -130,61 +141,6 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		this.textField_Date_de_naissance.setBounds(24, 215, 208, 40);
 		panel.add(this.textField_Date_de_naissance);
 
-		JLabel lbl_titre_locataire = new JLabel("Locataire");
-		lbl_titre_locataire.setHorizontalTextPosition(SwingConstants.CENTER);
-		lbl_titre_locataire.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_titre_locataire.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lbl_titre_locataire.setBounds(72, 40, 99, 27);
-		panel.add(lbl_titre_locataire);
-
-		JLabel lbl_titre_logement = new JLabel("Logement");
-		lbl_titre_logement.setHorizontalTextPosition(SwingConstants.CENTER);
-		lbl_titre_logement.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_titre_logement.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lbl_titre_logement.setBounds(313, 80, 99, 27);
-		panel.add(lbl_titre_logement);
-
-		JButton btn_ajouter_location = new JButton("Ajouter");
-		btn_ajouter_location.setForeground(new Color(255, 255, 255));
-		btn_ajouter_location.setBackground(new Color(0, 102, 204));
-		btn_ajouter_location.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_ajouter_location.setBounds(257, 457, 94, 31);
-		btn_ajouter_location.addActionListener(this.gestionClic);
-		panel.add(btn_ajouter_location);
-
-		JButton btn_annuler_location = new JButton("Annuler");
-		btn_annuler_location.setForeground(new Color(255, 255, 255));
-		btn_annuler_location.setBackground(new Color(0, 102, 204));
-		btn_annuler_location.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_annuler_location.setBounds(400, 457, 94, 31);
-		btn_annuler_location.addActionListener(this.gestionClic);
-		panel.add(btn_annuler_location);
-
-		this.comboBox_bien = new JComboBox<String>();
-		comboBox_bien.setBorder(new LineBorder(new Color(0, 102, 204)));
-		comboBox_bien.setModel(new DefaultComboBoxModel<String>(new String[] { "Biens" }));
-		comboBox_bien.setBounds(267, 131, 94, 21);
-		panel.add(comboBox_bien);
-		this.comboBox_bien.addActionListener(this.gestionClic);
-
-		// Remplir le JComboBox avec les identifiants des logements
-		try {
-			List<String> identifiantsImmeuble = this.daoImmeuble.getAllIdImmeuble();
-			identifiantsImmeuble.add(0, "Biens");
-
-			// Ajouter les identifiants au modèle du JComboBox
-			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
-					identifiantsImmeuble.toArray(new String[0]));
-
-			this.comboBox_bien.setModel(modelComboBox);
-			this.comboBox_bien.setModel(modelComboBox);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			// Gestion de l'erreur SQL, par exemple, afficher un message à l'utilisateur
-			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
-					"Erreur", JOptionPane.ERROR_MESSAGE);
-		}
-
 		this.textField_caution = new JTextField();
 		this.textField_caution.setColumns(10);
 		this.textField_caution.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Caution",
@@ -213,7 +169,21 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		this.textField_loyer.setBounds(548, 197, 120, 40);
 		panel.add(this.textField_loyer);
 
-		// Bail et Etat de Lieux
+		// JLabels
+		JLabel lbl_titre_locataire = new JLabel("Locataire");
+		lbl_titre_locataire.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_titre_locataire.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_titre_locataire.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl_titre_locataire.setBounds(72, 40, 99, 27);
+		panel.add(lbl_titre_locataire);
+
+		JLabel lbl_titre_logement = new JLabel("Logement");
+		lbl_titre_logement.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_titre_logement.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_titre_logement.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl_titre_logement.setBounds(313, 80, 99, 27);
+		panel.add(lbl_titre_logement);
+
 		JLabel lblNomEtatDesLieux = new JLabel("État des lieux : ");
 		this.lblNomEtatDesLieux = lblNomEtatDesLieux;
 		lblNomEtatDesLieux.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -227,15 +197,31 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		lblNomBail.setBounds(34, 457, 223, 20); // Adjust the position as needed
 		panel.add(lblNomBail);
 
-		JButton btnAjouterBail = new JButton("Ajouter un bail");
-		btnAjouterBail.setBounds(24, 429, 154, 21);
-		btnAjouterBail.addActionListener(this.gestionClic);
-		panel.add(btnAjouterBail);
+		// JComboBox - Menu deroulant avec les identifiants des logements
+		this.comboBox_bien = new JComboBox<String>();
+		comboBox_bien.setBorder(new LineBorder(new Color(0, 102, 204)));
+		comboBox_bien.setModel(new DefaultComboBoxModel<String>(new String[] { "Biens" }));
+		comboBox_bien.setBounds(267, 131, 94, 21);
+		panel.add(comboBox_bien);
+		this.comboBox_bien.addActionListener(this.gestionClic);
 
-		JButton btnAjouterEtatDesLieux = new JButton("Ajouter l'état des lieux");
-		btnAjouterEtatDesLieux.setBounds(24, 364, 154, 21);
-		btnAjouterEtatDesLieux.addActionListener(this.gestionClic);
-		panel.add(btnAjouterEtatDesLieux);
+		// Remplir le JComboBox avec les identifiants des logements
+		try {
+			List<String> identifiantsImmeuble = this.daoImmeuble.getAllIdImmeuble();
+			identifiantsImmeuble.add(0, "Biens");
+
+			// Ajouter les identifiants au modèle du JComboBox
+			DefaultComboBoxModel<String> modelComboBox = new DefaultComboBoxModel<>(
+					identifiantsImmeuble.toArray(new String[0]));
+
+			this.comboBox_bien.setModel(modelComboBox);
+			this.comboBox_bien.setModel(modelComboBox);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// Gestion de l'erreur SQL
+			JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des identifiants de logement.",
+					"Erreur", JOptionPane.ERROR_MESSAGE);
+		}
 
 		// Table Logements
 		JScrollPane scrollPane_table_id_logements = new JScrollPane();
@@ -259,28 +245,37 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 
 		this.table_icc = new JTable();
 		this.table_icc.setSelectionBackground(new Color(0, 102, 204));
-		this.table_icc.setModel(new DefaultTableModel(new Object[][] { {  null, null, null }, }, new String[] { "Annee", "Trimestre", "ICC" }));
+		this.table_icc.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
+				new String[] { "Annee", "Trimestre", "ICC" }));
 		this.table_icc.setBounds(499, 80, 135, 16);
 		scrollPane_table_icc.setViewportView(this.table_icc);
 		this.table_icc.getSelectionModel().addListSelectionListener(this.gtIccFl);
 
-		JButton btn_ajouter_icc = new JButton("Ajouter ICC");
-		btn_ajouter_icc.setForeground(Color.WHITE);
-		btn_ajouter_icc.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_ajouter_icc.setBackground(new Color(0, 102, 204));
-		btn_ajouter_icc.setBounds(511, 38, 106, 31);
-		panel.add(btn_ajouter_icc);
-		btn_ajouter_icc.addActionListener(this.gestionClic);
+		// Boutons
+		createButton("Annuler", 400, 457, 94, 31, "Annuler", gestionClic, panel);
+		createButton("Ajouter", 257, 457, 94, 31, "Ajouter", gestionClic, panel);
+		createButton("Ajouter un bail", 24, 429, 154, 21, "Ajouter un bail", gestionClic, panel);
+		createButton("Ajouter l'état des lieux", 24, 364, 154, 21, "Ajouter l'état des lieux", gestionClic, panel);
+		createButton("Charger ICC", 627, 39, 106, 31, "Charger ICC", gestionClic, panel);
+		createButton("Ajouter ICC", 511, 38, 106, 31, "Ajouter ICC", gestionClic, panel);
 
-		JButton btn_charger_icc = new JButton("Charger ICC");
-		btn_charger_icc.setForeground(Color.WHITE);
-		btn_charger_icc.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btn_charger_icc.setBackground(new Color(0, 102, 204));
-		btn_charger_icc.setBounds(627, 39, 106, 31);
-		panel.add(btn_charger_icc);
-		btn_charger_icc.addActionListener(this.gestionClic);
 	}
 
+	// Méthode pour créer un bouton avec une couleur de texte, de fond et un
+	// gestionnaire d'événements spécifiques
+	private JButton createButton(String label, int x, int y, int width, int height, String actionCommand,
+			GestionInsertionLocation listener, JPanel panel) {
+		JButton button = new JButton(label);
+		button.setForeground(Color.WHITE);
+		button.setBackground(new Color(0, 102, 204));
+		button.setBounds(x, y, width, height);
+		button.setActionCommand(actionCommand);
+		button.addActionListener(listener);
+		panel.add(button);
+		return button;
+	}
+
+	// Getters pour récupérer les valeurs des champs
 	public JTextField getTextField_IdLocataire() {
 		return this.textField_IdLocataire;
 	}
@@ -328,7 +323,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 	public JTable getTable_liste_logements() {
 		return this.table_id_logements;
 	}
-	
+
 	public JTable getTable_liste_ICC() {
 		return this.table_icc;
 	}
@@ -341,15 +336,8 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		return this.lblBail;
 	}
 
-	public GestionInsertionLocation getGestionClic() {
-		return this.gestionClic;
-	}
-
 	public JComboBox<String> getComboBox_bien() {
 		return comboBox_bien;
 	}
 
-	public JPanel getPanel() {
-		return panel;
-	}
 }

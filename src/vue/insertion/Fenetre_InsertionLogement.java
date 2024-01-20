@@ -1,6 +1,7 @@
 package vue.insertion;
 
 import java.awt.Color;
+
 import java.awt.Font;
 
 import javax.swing.DefaultComboBoxModel;
@@ -17,17 +18,17 @@ import javax.swing.border.TitledBorder;
 import controleur.insertion.GestionInsertionLogement;
 
 public class Fenetre_InsertionLogement extends JInternalFrame {
-
+	// Champs de saisie
 	private JTextField textField_IdLogement;
 	private JTextField textField_SurfaceHabitable;
 	private JTextField textField_NbPièces;
 	private JTextField textField_DateAcquisition;
 	private JTextField textField_NumEtage;
-	private JButton btnAjouter;
-	private JButton btnAnnuler;
-	private JButton btnAjouterCompteur;
-	private JButton btnAjouterQuotite;
+
+	// Gestionnaire d'événements
 	private GestionInsertionLogement gestionClic;
+
+	// ComboBox pour le type de logement
 	private JComboBox<String> comboBox_typeDeLogement;
 
 	public Fenetre_InsertionLogement() {
@@ -35,20 +36,24 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		// logement
 		this.gestionClic = new GestionInsertionLogement(this);
 
+		// Configuration de la fenêtre interne
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
+		// Configuration du panel principal
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 755, 511);
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
 
+		// Séparateur
 		JSeparator separator_titreInsererLogement = new JSeparator();
 		separator_titreInsererLogement.setForeground(new Color(0, 102, 204));
-		separator_titreInsererLogement.setBounds(271, 72, 190, 2);
+		separator_titreInsererLogement.setBounds(271, 72, 190, 12);
 		panel.add(separator_titreInsererLogement);
 
+		// Titre
 		JLabel lbl_InsererUnLogement = new JLabel("Insérer un logement");
 		lbl_InsererUnLogement.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lbl_InsererUnLogement.setBounds(290, 25, 171, 48);
@@ -99,36 +104,26 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		this.textField_NumEtage.setBounds(375, 269, 190, 40);
 		panel.add(this.textField_NumEtage);
 
-		// Bouton Ajouter
-		this.btnAjouter = new JButton("Ajouter");
-		this.btnAjouter.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.btnAjouter.setBounds(235, 445, 94, 31);
-		this.btnAjouter.setForeground(Color.WHITE);
-		this.btnAjouter.setBackground(new Color(0, 102, 204));
-		this.btnAjouter.addActionListener(this.gestionClic);
-		panel.add(this.btnAjouter);
+		// Boutons généraux
+		createButton("Ajouter", 235, 445, 94, 31, "Ajouter", gestionClic, panel);
+		createButton("Annuler", 394, 445, 94, 31, "Annuler", gestionClic, panel);
+		createButton("Ajouter un compteur", 291, 390, 154, 23, "Ajouter un compteur", gestionClic, panel);
+		createButton("Ajouter une quotité", 290, 356, 154, 23, "Ajouter une quotité", gestionClic, panel);
 
-		// Bouton Annuler
-		this.btnAnnuler = new JButton("Annuler");
-		this.btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.btnAnnuler.setBounds(394, 445, 94, 31);
-		this.btnAnnuler.setForeground(Color.WHITE);
-		this.btnAnnuler.setBackground(new Color(0, 102, 204));
-		this.btnAnnuler.addActionListener(this.gestionClic);
-		panel.add(this.btnAnnuler);
+	}
 
-		// Bouton Ajouter Compteur
-		this.btnAjouterCompteur = new JButton("Ajouter un compteur");
-		this.btnAjouterCompteur.setBounds(291, 390, 154, 23);
-		this.btnAjouterCompteur.addActionListener(this.gestionClic);
-		panel.add(this.btnAjouterCompteur);
-
-		// Bouton Ajouter Quotité
-		this.btnAjouterQuotite = new JButton("Ajouter une quotité");
-		this.btnAjouterQuotite.setBounds(290, 356, 154, 23);
-		this.btnAjouterQuotite.addActionListener(this.gestionClic);
-		panel.add(this.btnAjouterQuotite);
-
+	// Méthode pour créer un bouton avec une couleur de texte, de fond et un
+	// gestionnaire d'événements spécifiques
+	private JButton createButton(String label, int x, int y, int width, int height, String actionCommand,
+			GestionInsertionLogement listener, JPanel panel) {
+		JButton button = new JButton(label);
+		button.setForeground(Color.WHITE);
+		button.setBackground(new Color(0, 102, 204));
+		button.setBounds(x, y, width, height);
+		button.setActionCommand(actionCommand);
+		button.addActionListener(listener);
+		panel.add(button);
+		return button;
 	}
 
 	// Getters pour récupérer les valeurs des champs

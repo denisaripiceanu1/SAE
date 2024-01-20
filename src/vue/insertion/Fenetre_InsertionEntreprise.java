@@ -1,6 +1,7 @@
 package vue.insertion;
 
 import java.awt.Color;
+
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -40,15 +41,17 @@ public class Fenetre_InsertionEntreprise extends JInternalFrame {
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
+		// Configuration du panel principal
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 755, 511);
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
 
+		// Séparateur
 		JSeparator separator_titreInsererEntreprise = new JSeparator();
 		separator_titreInsererEntreprise.setForeground(new Color(0, 102, 204));
-		separator_titreInsererEntreprise.setBounds(263, 99, 190, 2);
+		separator_titreInsererEntreprise.setBounds(263, 99, 190, 19);
 		panel.add(separator_titreInsererEntreprise);
 
 		// Label titre
@@ -116,22 +119,25 @@ public class Fenetre_InsertionEntreprise extends JInternalFrame {
 		panel.add(textField_IBAN);
 
 		// Boutons généraux
-		JButton btnAjouter = new JButton("Ajouter");
-		btnAjouter.setForeground(Color.WHITE);
-		btnAjouter.setBackground(new Color(0, 102, 204));
-		btnAjouter.setBounds(244, 395, 94, 31);
-		btnAjouter.addActionListener(this.gestionClic);
-		panel.add(btnAjouter);
-
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setForeground(Color.WHITE);
-		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.setBounds(396, 395, 94, 31);
-		btnAnnuler.addActionListener(this.gestionClic);
-		panel.add(btnAnnuler);
-
+		createButton("Ajouter", 244, 395, 94, 31, "Ajouter", gestionClic, panel);
+		createButton("Annuler", 396, 395, 94, 31, "Annuler", gestionClic, panel);
 	}
 
+	// Méthode pour créer un bouton avec une couleur de texte, de fond et un
+	// gestionnaire d'événements spécifiques
+	private JButton createButton(String label, int x, int y, int width, int height, String actionCommand,
+			GestionInsertionEntreprise listener, JPanel panel) {
+		JButton button = new JButton(label);
+		button.setForeground(Color.WHITE);
+		button.setBackground(new Color(0, 102, 204));
+		button.setBounds(x, y, width, height);
+		button.setActionCommand(actionCommand);
+		button.addActionListener(listener);
+		panel.add(button);
+		return button;
+	}
+
+	// Getters pour récupérer les valeurs des champs
 	public JTextField getTextField_Nom() {
 		return this.textField_Nom;
 	}
