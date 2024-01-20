@@ -9,7 +9,12 @@ public class ImportChemin {
 
 	private String selectedFilePath;
 
-	// Renommé pour éviter la confusion avec un constructeur
+	/**Lorsque vous utilisez comme pour par exemple un bouton 
+	 * cela va ouvrir une petite fenetre avec votre repertoire ou il sera possible de prendre
+	 * seulement un PDF. 
+	 * Avec ce chemin on pour importer un fichier PDF
+	 * 
+	 */
 	public void choisirChemin() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf", "CSV Files", "csv"));
@@ -23,6 +28,9 @@ public class ImportChemin {
 		}
 	}
 
+	/**
+	 * @return (String) : la chaine du chemin 
+	 */
 	public String getSelectedFilePath() {
 		return this.selectedFilePath;
 	}

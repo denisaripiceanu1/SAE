@@ -18,9 +18,14 @@ import modele.dao.requetes.sousProgramme.SousProgrammeInsertFacture;
 public class LireCSV {
 
 	public LireCSV() {
-
+		//TODO
 	}
 
+	/**Methode pour extraire un fichier CSV pour pouvoir l'inserer dans la BD
+	 * @param chemin (String) : prend le chemin ou ce trouve le fichier CSV 
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public void lireCSV(String chemin) throws FileNotFoundException, IOException {
 		Connection cn = CictOracleDataSource.getConnectionBD();
 		SousProgrammeInsertFacture insertFacture = new SousProgrammeInsertFacture();

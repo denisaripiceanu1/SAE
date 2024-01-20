@@ -19,25 +19,37 @@ public class Sauvegarde {
 	 */
 		private static Map<String, Object> sauvegarde;
 		
-		// Initialisation de la sauvegarde
+
+		/**
+		 * Initialisation de la sauvegarde
+		 */
 		public static void initializeSave() {
 			if (sauvegarde == null) {
 				sauvegarde = new HashMap<>();
 			}
 		}
 
-		// Vidage de la sauvegarde
+		/**Vidage de la sauvegarde
+		 * 
+		 */
 		public static void clearSave() {
 			if (sauvegarde != null && !(sauvegarde.isEmpty())) {
 				sauvegarde.clear();
 			}
 		}
 		
+		/**Verifie si une instance existe dans la Map exemple si une Entreprise
+		 * a été sauvegardé auparavant elle enregistrée
+		 * @param name (String) : nom de la Table ou Classe
+		 * @return true si elle est dans la map sinon false
+		 */
 		public static boolean onSave(String name) {
 			return sauvegarde.containsKey(name);
 		}
 		
-		// Accès a la sauvegarde
+		/**Accès a la sauvegarde
+		 * @return
+		 */
 		public static Map<String, Object> getSave() {
 			if (sauvegarde != null) {
 				return sauvegarde;
@@ -45,7 +57,11 @@ public class Sauvegarde {
 			return Collections.emptyMap();
 		}
 		
-		// Ajout d'élément a la sauvegarde
+
+		/**Ajout d'élément a la sauvegarde
+		 * @param nom (String) : nom de l'item a ajouté
+		 * @param item (Object) : la classe de l'objet a ajouté 
+		 */
 		public static void addItem(String nom, Object item) {
 			if (sauvegarde != null) {
 				sauvegarde.put(nom, item);

@@ -27,6 +27,9 @@ public class PDFImporter extends JFrame {
         this.initializeComponents();
     }
 
+    /**Methode pour pouvoir en faire un patern Singleton pour ne pas le crée a chaque utilsation
+     * @return
+     */
     public static PDFImporter getInstance() {
         if (instance == null) {
             instance = new PDFImporter();
@@ -35,6 +38,12 @@ public class PDFImporter extends JFrame {
     }
     
     // Importe le fichier PDF dans la base de données avec l'id et le nom spécifiés
+    /**
+     * @param id (int) : id a inserer dans la BD
+     * @param nom (String) : nom a mettre dans l'insertion de la BD
+     * @throws FileNotFoundException
+     * @throws SQLException
+     */
     public void importPDFBD(int id, String nom) throws FileNotFoundException, SQLException {
     	
     	Connection cn = CictOracleDataSource.getConnectionBD();
@@ -52,7 +61,10 @@ public class PDFImporter extends JFrame {
         pstmt.close();
     }
     
-    // Récupère le nom du fichier PDF
+
+    /**Récupère le nom du fichier PDF
+     * @return
+     */
     public String getPDFFileName() {
         if (selectedFilePath != null && !selectedFilePath.isEmpty()) {
             return new File(selectedFilePath).getName();
@@ -60,7 +72,9 @@ public class PDFImporter extends JFrame {
         return null;
     }
 
-    // Initialise les composants de l'interface graphique
+    /**Initialise les composants de l'interface graphique
+     * 
+     */
     private void initializeComponents() {
         JButton btnImportPDF = new JButton("Import PDF");
         btnImportPDF.addActionListener(e -> importPDFChemin());
@@ -68,7 +82,9 @@ public class PDFImporter extends JFrame {
         this.add(btnImportPDF);
     }
 
-    // Permet à l'utilisateur de choisir un fichier PDF à importer
+    /**Permet à l'utilisateur de choisir un fichier PDF à importer
+     * 
+     */
     public void importPDFChemin() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf"));
@@ -79,7 +95,9 @@ public class PDFImporter extends JFrame {
         }
     }
 
-    // Retourne le chemin du fichier PDF choisi par l'utilisateur
+    /**Retourne le chemin du fichier PDF choisi par l'utilisateur
+     * @return 
+     */
     public String importPDFCheminString() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf"));
@@ -91,7 +109,9 @@ public class PDFImporter extends JFrame {
         return null; 
     }
 
-    // Retourne le chemin du fichier PDF sélectionné
+    /** Retourne le chemin du fichier PDF sélectionné
+     * @return
+     */
     public String getSelectedFilePath() {
         return selectedFilePath;
     }

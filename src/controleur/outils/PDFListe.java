@@ -11,11 +11,15 @@ public class PDFListe extends JPanel {
     private ArrayList<File> pdfFiles;
     private JPanel pdfListPanel;
 
+
     public PDFListe() {
         pdfFiles = new ArrayList<>();
         initializeComponents();
     }
 
+    /**
+     * Initialise les composant de PDFListe
+     */
     private void initializeComponents() {
         this.setLayout(new BorderLayout());
 
@@ -28,6 +32,11 @@ public class PDFListe extends JPanel {
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
+    /**
+     * Ajoute un fichier PDF à la liste et crée un bouton pour celui ci
+     *
+     * @param pdfFile Le fichier PDF à ajouter à la liste.
+     */
     public void addPDFFile(File pdfFile) {
         pdfFiles.add(pdfFile);
         JButton pdfButton = new JButton(pdfFile.getName());
@@ -37,11 +46,16 @@ public class PDFListe extends JPanel {
         pdfListPanel.repaint();
     }
 
+    /**
+     * Ouvre le fichier PDF sélectionne en utilisant l'application systeme par défaut
+     *
+     * @param pdfFile (File): pdfFile Le fichier PDF à ouvrire
+     */
     private void openPDF(File pdfFile) {
         try {
             Desktop.getDesktop().open(pdfFile);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error opening file: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erreur lors de l'ouverture du fichier : " + e.getMessage());
         }
     }
 }

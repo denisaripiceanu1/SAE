@@ -9,7 +9,12 @@ public class ImportCheminCSV {
 
 	private String selectedFilePath;
 
-	// Renommé pour éviter la confusion avec un constructeur
+	/**Lorsque vous utilisez comme pour par exemple un bouton 
+	 * cela va ouvrir une petite fenetre avec votre repertoire ou il sera possible de prendre
+	 * seulement un CSV. 
+	 * Avec ce chemin on pour extraire un fichier CSV
+	 * 
+	 */
 	public void choisirChemin() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileFilter(new FileNameExtensionFilter("CSV Files", "csv"));
