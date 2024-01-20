@@ -2,22 +2,23 @@ package rapport;
 
 public class FraisCharges {
 	
-    private String propertyName;
+    private String nom;
     private String description;
-    private int amount;
+    private int montant;
 
-    public FraisCharges(String propertyName, String description, int amount) {
-        this.propertyName = propertyName;
+    // Constructeur prenant en parametre le nom, la description et le montant des frais & charges
+    public FraisCharges(String nom, String description, int montant) {
+        this.nom = nom;
         this.description = description;
-        this.amount = amount;
+        this.montant = montant;
     }
 
-	public String getPropertyName() {
-		return propertyName;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setPropertyName(String propertyName) {
-		this.propertyName = propertyName;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	public String getDescription() {
@@ -28,12 +29,12 @@ public class FraisCharges {
 		this.description = description;
 	}
 
-	public int getAmount() {
-		return amount;
+	public int getMontant() {
+		return montant;
 	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setMontant(int montant) {
+		this.montant = montant;
 	}
     
     
