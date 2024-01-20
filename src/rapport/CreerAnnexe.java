@@ -212,7 +212,7 @@ public class CreerAnnexe {
         List<List<String>> données = new ArrayList<>();
 
         for (Proprietes propriété : propriétés) {
-            List<String> rowData = List.of(propriété.getPropertyName(), propriété.getPropertyType(), propriété.getPeriodeConstruction(),
+            List<String> rowData = List.of(propriété.getNom(), propriété.getType(), propriété.getPeriodeConstruction(),
             		propriété.getAdresse(), String.valueOf(propriété.getNombreLocaux()));
             données.add(rowData);
         }
@@ -231,7 +231,7 @@ public class CreerAnnexe {
         List<List<String>> données = new ArrayList<>();
 
         for (InfosRecettes recette : recettes) {
-            List<String> rowData = List.of(recette.getPropertyName(), recette.getDescription(), String.valueOf(recette.getAmount()));
+            List<String> rowData = List.of(recette.getNom(), recette.getDescription(), String.valueOf(recette.getMontant()));
             données.add(rowData);
         }
 
@@ -249,7 +249,7 @@ public class CreerAnnexe {
         List<List<String>> données = new ArrayList<>();
 
         for (FraisCharges fg : fraisCharges) {
-            List<String> rowData = List.of(fg.getPropertyName(), fg.getDescription(), String.valueOf(fg.getAmount()));
+            List<String> rowData = List.of(fg.getNom(), fg.getDescription(), String.valueOf(fg.getMontant()));
             données.add(rowData);
         }
 
@@ -264,8 +264,8 @@ public class CreerAnnexe {
      * @return (int) : Le résultat foncier calculé
      */
     private static int calculerResultatFoncier(List<InfosRecettes> recettes, List<FraisCharges> fraisEtCharges) {
-        int totalRecettes = recettes.stream().mapToInt(InfosRecettes::getAmount).sum();
-        int totalCharges = fraisEtCharges.stream().mapToInt(FraisCharges::getAmount).sum();
+        int totalRecettes = recettes.stream().mapToInt(InfosRecettes::getMontant).sum();
+        int totalCharges = fraisEtCharges.stream().mapToInt(FraisCharges::getMontant).sum();
         return totalRecettes - totalCharges;
     }
 }
