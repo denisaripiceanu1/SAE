@@ -62,7 +62,7 @@ public class Fenetre_ModificationTravauxImmeuble extends JInternalFrame {
 		this.textField_dateEmission = Utils.creerTextField("Date émission (YYYY-MM-DD)", 427, 168, 190, 40, panel);
 		this.textField_paye = Utils.creerTextField("Date paiement (YYYY-MM-DD)", 427, 228, 190, 40, panel);
 		this.textField_prestataire = Utils.creerTextField("Prestataire", 110, 294, 190, 40, panel);
-		this.textField_montant = Utils.creerTextField("Montant", 110, 168, 190, 400, panel);
+		this.textField_montant = Utils.creerTextField("Montant", 110, 168, 190, 40, panel);
 		this.textField_adresse = Utils.creerTextField("Adresse", 427, 294, 190, 40, panel);
 		this.textField_Bien_Logement = Utils.creerTextField("Bien/Logement", 427, 104, 190, 40, panel);
 

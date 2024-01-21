@@ -92,14 +92,14 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		panel.add(separator_Factures);
 
 		// Champs de saisie
-		Utils.creerTextField("Numéro", 24, 104, 202, 40, panel);
+		this.textField_Numero = Utils.creerTextField("Numéro", 24, 104, 202, 40, panel);
 		textField_Numero.setEditable(false); // cle primaire de la table Facture non modifiable
 
-		Utils.creerTextField("Date émission (YYYY-MM-DD)", 24, 168, 202, 40, panel);
-		Utils.creerTextField("Date Paiement (YYYY-MM-DD)", 247, 167, 202, 40, panel);
-		Utils.creerTextField("Numéro devis", 24, 228, 202, 40, panel);
-		Utils.creerTextField("Montant", 24, 294, 202, 40, panel);
-		Utils.creerTextField("Acompte versé", 247, 283, 200, 40, panel);
+		this.textField_date_emission = Utils.creerTextField("Date émission (YYYY-MM-DD)", 24, 168, 202, 40, panel);
+		this.textField_date_paiement = Utils.creerTextField("Date Paiement (YYYY-MM-DD)", 247, 167, 202, 40, panel);
+		this.textField_numeroDevis = Utils.creerTextField("Numéro devis", 24, 228, 202, 40, panel);
+		this.textField_montant = Utils.creerTextField("Montant", 24, 294, 202, 40, panel);
+		this.textField_accompteVerse = Utils.creerTextField("Acompte versé", 247, 283, 200, 40, panel);
 
 		// Menu déroulant pour le mode de paiement
 		comboBox_modePaiement = new JComboBox<>();

@@ -68,7 +68,7 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 
 		this.textField_provision_chargeMens_TTC =  Utils.creerTextField("Provision charges mensuelles", 425, 164, 220, 40, panel);
 		this.textField_loyer_TCC =  Utils.creerTextField("Loyer", 166, 273, 220, 40, panel);
-		this.textField_caution_TTC =  Utils.creerTextField("Caution", 425, 221, 120, 40, panel);
+		this.textField_caution_TTC =  Utils.creerTextField("Caution", 425, 221, 220, 40, panel);
 
 		this.textField_Id_Locataire = Utils.creerTextField("Locataire", 166, 164, 220, 40, panel);
 		textField_Id_Locataire.setEditable(false); // cle primaire de la table Louer non modifiable
@@ -84,9 +84,8 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		JButton btnModifier = Utils.creerBouton(panel, "Modifier", 246, 447, 94, 31);
 		btnModifier.addActionListener(this.gestionModificationLocation);
 
-		JButton btnAnjouter = Utils.creerBouton(panel, "Ajouter", 257, 457, 94, 31);
+		JButton btnAnjouter = Utils.creerBouton(panel, "Ajouter", 398, 447, 94, 31);
 		btnAnjouter.addActionListener(this.gestionModificationLocation);
-
 	}
 
 	  // Getters pour récupérer les champs de saisie et d'autres éléments
