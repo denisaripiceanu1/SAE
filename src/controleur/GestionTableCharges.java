@@ -43,10 +43,6 @@ public class GestionTableCharges implements ListSelectionListener {
 				Bien bien = null;
 
 				try {
-					// Utilise les entiers 1 et 0 pour "deductible"
-					int deductible = "Oui"
-							.equalsIgnoreCase(tableFacturesCharges.getValueAt(selectedRowCharge, 2).toString()) ? 1 : 0;
-
 					// Récupère l'objet Facture à partir des données de la ligne sélectionnée dans
 					// la table
 					facture = this.daoFacture.findById(tableFacturesCharges.getValueAt(selectedRowCharge, 1).toString() // numéro
