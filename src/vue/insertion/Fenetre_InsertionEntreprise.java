@@ -2,16 +2,12 @@ package vue.insertion;
 
 import java.awt.Color;
 
-import java.awt.Font;
-
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
+
 
 import controleur.insertion.GestionInsertionEntreprise;
 
@@ -26,8 +22,6 @@ public class Fenetre_InsertionEntreprise extends JInternalFrame {
 	private JTextField textField_CP;
 	private JTextField textField_Ville;
 	private JTextField textField_IBAN;
-	private JTextField textField_Date_Validite;
-	private JTextField textField_Type;
 
 	// Gestionnaires d'événements
 	private GestionInsertionEntreprise gestionClic;
@@ -106,13 +100,5 @@ public class Fenetre_InsertionEntreprise extends JInternalFrame {
 
 	public JTextField getTextField_IBAN() {
 		return this.textField_IBAN;
-	}
-
-	public JTextField getTextField_Date_Validite() {
-		return this.textField_Date_Validite;
-	}
-
-	public JTextField getTextField_Type() {
-		return this.textField_Type;
 	}
 }

@@ -33,6 +33,7 @@ public class Utils {
 		return bouton;
 	}
 
+	// Méthode pour créer un JLabel avec des caractéristiques spécifiques
 	public static JLabel creerLabel(String text, int x, int y, int width, int height, int fontSize, JPanel panel) {
 		JLabel label = new JLabel(text);
 		label.setHorizontalTextPosition(SwingConstants.CENTER);

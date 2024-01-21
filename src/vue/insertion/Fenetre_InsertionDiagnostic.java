@@ -46,7 +46,7 @@ public class Fenetre_InsertionDiagnostic extends JInternalFrame {
         panel.add(separator_titreInsererBien);
 
         // Champ de texte pour la date de validité
-        this.textField_Date_Validite = Utils.creerTextField("Date validité", 263, 232, 190, 40, panel);
+        this.textField_Date_Validite = Utils.creerTextField("Date validité (YYYY-MM-DD)", 263, 232, 190, 40, panel);
         this.textField_Type = Utils.creerTextField("Type", 263, 161, 190, 40, panel);
 
         // Boutons Ajouter et Annuler
