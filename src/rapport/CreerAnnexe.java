@@ -36,8 +36,8 @@ public class CreerAnnexe {
     public static void main(String[] args) {
 
         try {
-            OutputStream fileOut = new FileOutputStream("src/annexe2044.docx");
-            InputStream modele = new FileInputStream("src/vide.docx");
+            OutputStream fileOut = new FileOutputStream("src/rapport/annexe2044.docx");
+            InputStream modele = new FileInputStream("src/rapport/vide.docx");
 
             XWPFDocument document = new XWPFDocument(modele);
 
