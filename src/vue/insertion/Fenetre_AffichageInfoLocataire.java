@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionAffichageInfoLocataire;
 import controleur.modification.GestionModificationLocataire;
+import vue.Utils;
 
 public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 

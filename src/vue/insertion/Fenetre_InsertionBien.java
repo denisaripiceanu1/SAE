@@ -12,6 +12,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.Color;
 
 import controleur.insertion.GestionInsertionBien;
+import vue.Utils;
 
 public class Fenetre_InsertionBien extends JInternalFrame {
 	// Champs de saisie

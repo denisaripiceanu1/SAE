@@ -13,6 +13,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import controleur.insertion.GestionInsertionLogement;
+import vue.Utils;
 
 public class Fenetre_InsertionLogement extends JInternalFrame {
 	// Champs de saisie

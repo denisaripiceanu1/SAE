@@ -10,6 +10,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import controleur.insertion.GestionInsertionReleve;
+import vue.Utils;
 
 public class Fenetre_InsertionReleve extends JInternalFrame {
 	// Champs de saisie

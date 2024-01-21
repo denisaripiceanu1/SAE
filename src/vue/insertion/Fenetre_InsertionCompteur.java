@@ -13,6 +13,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import controleur.insertion.GestionInsertionCompteur;
+import vue.Utils;
 
 public class Fenetre_InsertionCompteur extends JInternalFrame {
     // Champs de saisie

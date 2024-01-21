@@ -9,6 +9,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import controleur.insertion.GestionInsertionDiagnostic;
+import vue.Utils;
 
 public class Fenetre_InsertionDiagnostic extends JInternalFrame {
     // Champs de saisie

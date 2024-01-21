@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 
 import controleur.insertion.GestionAffichageCompteursLogement;
 import controleur.insertion.GestionTableAffichageCompteursLogement;
+import vue.Utils;
 
 public class Fenetre_AffichageCompteursLogement extends JInternalFrame {
 

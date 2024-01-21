@@ -25,6 +25,7 @@ import controleur.GestionTableICCFenetreLocation;
 import controleur.GestionTableLogementsFenetreLocation;
 import controleur.insertion.GestionInsertionLocation;
 import modele.dao.DaoImmeuble;
+import vue.Utils;
 
 public class Fenetre_InsertionLocation extends JInternalFrame {
 	// Champs de saisie
@@ -91,10 +92,7 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		panel.add(separator);
 
 		// Titre de la fenêtre
-		JLabel lbl_InsererUneLocation = new JLabel("Insérer une location");
-		lbl_InsererUneLocation.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUneLocation.setBounds(290, 14, 171, 48);
-		panel.add(lbl_InsererUneLocation);
+		Utils.creerLabel("Insérer une location", 290, 14, 171, 48, 16, panel);
 
 		// TextFields
 		this.textField_IdLocataire = Utils.creerTextField("Id Locataire", 24, 69, 208, 40, panel);

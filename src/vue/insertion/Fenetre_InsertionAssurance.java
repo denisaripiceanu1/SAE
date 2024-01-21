@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.GestionTableEntrepriseFenetreInsertionAssurance;
 import controleur.insertion.GestionInsertionAssurance;
+import vue.Utils;
 
 public class Fenetre_InsertionAssurance extends JInternalFrame {
 	// Champs de saisie

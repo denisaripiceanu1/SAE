@@ -14,6 +14,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import controleur.insertion.GestionInsertionQuotite;
+import vue.Utils;
 
 public class Fenetre_InsertionQuotite extends JInternalFrame {
     // Champ de saisie

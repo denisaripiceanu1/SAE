@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 
 import controleur.insertion.GestionInsertionEntreprise;
+import vue.Utils;
 
 public class Fenetre_InsertionEntreprise extends JInternalFrame {
 

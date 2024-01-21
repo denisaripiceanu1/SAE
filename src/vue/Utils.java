@@ -1,6 +1,7 @@
-package vue.insertion;
+package vue;
 
 import javax.swing.JButton;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;

@@ -12,6 +12,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionAffichageReleveCompteurLogement;
+import vue.Utils;
 
 public class Fenetre_AffichageReleveCompteursLogement extends JInternalFrame {
 

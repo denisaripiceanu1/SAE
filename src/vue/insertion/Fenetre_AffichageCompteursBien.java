@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 
 import controleur.insertion.GestionAffichageCompteursBien;
 import controleur.insertion.GestionTableAffichageCompteursBien;
+import vue.Utils;
 
 public class Fenetre_AffichageCompteursBien extends JInternalFrame {
 

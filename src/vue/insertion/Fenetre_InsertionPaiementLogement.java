@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.GestionTableEntrepriseFenetreFactureLogement;
 import controleur.insertion.GestionInsertionPaiementLogement;
+import vue.Utils;
 
 public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 

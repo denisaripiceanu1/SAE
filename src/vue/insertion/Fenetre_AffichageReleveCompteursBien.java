@@ -11,6 +11,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionAffichageReleveCompteurBien;
+import vue.Utils;
+
 import javax.swing.JScrollPane;
 
 public class Fenetre_AffichageReleveCompteursBien extends JInternalFrame {

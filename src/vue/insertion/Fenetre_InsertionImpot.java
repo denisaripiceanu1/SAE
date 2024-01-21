@@ -9,6 +9,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import controleur.insertion.GestionInsertionImpot;
+import vue.Utils;
 
 public class Fenetre_InsertionImpot extends JInternalFrame {
 	private JTextField textField_nom;
