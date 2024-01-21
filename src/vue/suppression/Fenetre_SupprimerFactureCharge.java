@@ -21,11 +21,11 @@ public class Fenetre_SupprimerFactureCharge extends JInternalFrame {
 		this.getContentPane().setLayout(null);
 
 		// Message de confirmation
-		JLabel lblTitre = new JLabel("Êtes-vous sûr de vouloir supprimer cette charge ?");
-		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTitre.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitre.setBounds(31, 23, 371, 70);
-		this.getContentPane().add(lblTitre);
+		JLabel lblNewLabel = new JLabel("Êtes-vous sûr de vouloir supprimer cette charge ?");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(31, 23, 371, 70);
+		this.getContentPane().add(lblNewLabel);
 
 		// Bouton supprimer
 		JButton btn_supprimer = new JButton("Supprimer");

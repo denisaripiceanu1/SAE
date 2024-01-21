@@ -136,7 +136,7 @@ public class GestionModificationAssurance implements ActionListener {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				break; // or return false; depending on your logic
+				break; 
 			}
 		default:
 			break;
