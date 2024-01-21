@@ -38,7 +38,7 @@ public class Fenetre_InsertionDiagnostic extends JInternalFrame {
         panel.setLayout(null);
 
         // Titre et séparateur
-		Utils.createLabel("Ajouter un Diagnostic", 275, 53, 163, 48, 16, panel);
+		Utils.creerLabel("Ajouter un Diagnostic", 275, 53, 163, 48, 16, panel);
 
         JSeparator separator_titreInsererBien = new JSeparator();
         separator_titreInsererBien.setForeground(new Color(0, 102, 204));
@@ -46,8 +46,8 @@ public class Fenetre_InsertionDiagnostic extends JInternalFrame {
         panel.add(separator_titreInsererBien);
 
         // Champ de texte pour la date de validité
-        this.textField_Date_Validite = Utils.createTextField("Date validité", 263, 232, 190, 40, panel);
-        this.textField_Type = Utils.createTextField("Type", 263, 161, 190, 40, panel);
+        this.textField_Date_Validite = Utils.creerTextField("Date validité", 263, 232, 190, 40, panel);
+        this.textField_Type = Utils.creerTextField("Type", 263, 161, 190, 40, panel);
 
         // Boutons Ajouter et Annuler
 		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 396, 395, 94, 31);

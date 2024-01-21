@@ -72,7 +72,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		panel.add(separator);
 
 		// JLabels		
-		Utils.createLabel("Mon Locataire", 417, 10, 160, 48, 16, panel);
+		Utils.creerLabel("Mon Locataire", 417, 10, 160, 48, 16, panel);
 
 		JLabel lblDetailLocataire = new JLabel("Détail locataire");
 		lblDetailLocataire.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -102,12 +102,12 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		panel.add(lblSiVotreReste);
 
 		// Champs de texte pour les informations du locataire
-		this.textField_Id = Utils.createTextField("Identifiant", 21, 132, 190, 40, panel);
-		this.textField_Nom = Utils.createTextField("Nom", 21, 183, 190, 40, panel);
-		this.textField_Prenom = Utils.createTextField("Prénom", 21, 233, 190, 40, panel);
-		this.textField_Telephone = Utils.createTextField("n° Téléphone", 21, 287, 190, 40, panel);
-		this.textField_Mail = Utils.createTextField("Mail", 21, 338, 190, 40, panel);
-		this.textField_DateN = Utils.createTextField("Date de naissance", 21, 388, 190, 40, panel);
+		this.textField_Id = Utils.creerTextField("Identifiant", 21, 132, 190, 40, panel);
+		this.textField_Nom = Utils.creerTextField("Nom", 21, 183, 190, 40, panel);
+		this.textField_Prenom = Utils.creerTextField("Prénom", 21, 233, 190, 40, panel);
+		this.textField_Telephone = Utils.creerTextField("n° Téléphone", 21, 287, 190, 40, panel);
+		this.textField_Mail = Utils.creerTextField("Mail", 21, 338, 190, 40, panel);
+		this.textField_DateN = Utils.creerTextField("Date de naissance", 21, 388, 190, 40, panel);
 
 		// Tableau pour afficher la regularisation des charges d'un locataire
 		// et le scrollPane associé

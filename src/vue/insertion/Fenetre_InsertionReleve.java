@@ -35,11 +35,11 @@ public class Fenetre_InsertionReleve extends JInternalFrame {
 		panel.setLayout(null);
 
 		// Libellé "Assurance"
-		Utils.createLabel("Insérer un relevé", 291, 39, 163, 20, 16, panel);
+		Utils.creerLabel("Insérer un relevé", 291, 39, 163, 20, 16, panel);
 
 		// Champs de saisie
-		this.textField_dateReleve = Utils.createTextField("Date relev\\u00E9", 276, 166, 197, 40, panel);
-		this.textField_dateReleve = Utils.createTextField("Indice compteur", 276, 264, 197, 40, panel);
+		this.textField_dateReleve = Utils.creerTextField("Date relev\\u00E9", 276, 166, 197, 40, panel);
+		this.textField_dateReleve = Utils.creerTextField("Indice compteur", 276, 264, 197, 40, panel);
 
 		// Boutons "Ajouter" et "Annuler"
 		JButton btnAjouter = Utils.creerBouton(panel, "Ajouter", 249, 431, 94, 31);

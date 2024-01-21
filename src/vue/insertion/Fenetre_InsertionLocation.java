@@ -97,20 +97,20 @@ public class Fenetre_InsertionLocation extends JInternalFrame {
 		panel.add(lbl_InsererUneLocation);
 
 		// TextFields
-		this.textField_IdLocataire = Utils.createTextField("Id Locataire", 24, 69, 208, 40, panel);
-		this.textField_Nom =  Utils.createTextField("Nom", 24, 116, 208, 40, panel);
-		this.textField_Prenom =  Utils.createTextField("Prénom", 24, 165, 208, 40, panel);
-		this.textField_tel =  Utils.createTextField("N° téléphone", 24, 262, 208, 40, panel);
-		this.textField_e_mail =  Utils.createTextField("E-mail", 24, 312, 208, 40, panel);
-		this.textField_Date_de_naissance =  Utils.createTextField("Date naissance (YYYY-MM-JJ)", 24, 215, 208, 40, panel);
-		this.textField_caution =  Utils.createTextField("Caution", 548, 247, 120, 40, panel);
-		this.textField_date_arrivee =  Utils.createTextField("Date d'arrivée", 548, 297, 120, 40, panel);
-		this.textField_provision_sur_charges =  Utils.createTextField("Provisions sur charges", 548, 347, 171, 40, panel);
-		this.textField_loyer =  Utils.createTextField("Loyer", 548, 197, 120, 40, panel);
+		this.textField_IdLocataire = Utils.creerTextField("Id Locataire", 24, 69, 208, 40, panel);
+		this.textField_Nom =  Utils.creerTextField("Nom", 24, 116, 208, 40, panel);
+		this.textField_Prenom =  Utils.creerTextField("Prénom", 24, 165, 208, 40, panel);
+		this.textField_tel =  Utils.creerTextField("N° téléphone", 24, 262, 208, 40, panel);
+		this.textField_e_mail =  Utils.creerTextField("E-mail", 24, 312, 208, 40, panel);
+		this.textField_Date_de_naissance =  Utils.creerTextField("Date naissance (YYYY-MM-JJ)", 24, 215, 208, 40, panel);
+		this.textField_caution =  Utils.creerTextField("Caution", 548, 247, 120, 40, panel);
+		this.textField_date_arrivee =  Utils.creerTextField("Date d'arrivée", 548, 297, 120, 40, panel);
+		this.textField_provision_sur_charges =  Utils.creerTextField("Provisions sur charges", 548, 347, 171, 40, panel);
+		this.textField_loyer =  Utils.creerTextField("Loyer", 548, 197, 120, 40, panel);
 
 		// JLabels
-		Utils.createLabel("Locataire", 72, 40, 99, 27, 13, panel);
-		Utils.createLabel("Logement", 313, 80, 99, 27, 13, panel);
+		Utils.creerLabel("Locataire", 72, 40, 99, 27, 13, panel);
+		Utils.creerLabel("Logement", 313, 80, 99, 27, 13, panel);
 
 		JLabel lblNomEtatDesLieux = new JLabel("État des lieux : ");
 		this.lblNomEtatDesLieux = lblNomEtatDesLieux;

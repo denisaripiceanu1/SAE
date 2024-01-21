@@ -44,7 +44,7 @@ public class Fenetre_AffichageReleveCompteursLogement extends JInternalFrame {
 		panel.add(separator_AffichageInfoQuotite);
 
 		// Libellé du titre
-		Utils.createLabel("Compteurs du bien", 293, 11, 160, 48, 16, panel);
+		Utils.creerLabel("Compteurs du bien", 293, 11, 160, 48, 16, panel);
 
 		// JScrollPane pour la table des relevés des compteurs
 		this.scrollPane_table_compteurs = new JScrollPane();

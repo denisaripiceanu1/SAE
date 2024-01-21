@@ -60,7 +60,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		this.getContentPane().add(panel);
 
 		// Labels
-		Utils.createLabel("Insérer un facture", 294, 26, 153, 48, 16, panel);
+		Utils.creerLabel("Insérer un facture", 294, 26, 153, 48, 16, panel);
 
 		JLabel lbl_ImputableLocataire = new JLabel("Imputable Locataire");
 		lbl_ImputableLocataire.setForeground(Color.BLACK);
@@ -81,12 +81,12 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 		panel.add(separator_vertical);
 
 		// Champs de saisie
-		Utils.createTextField("Numéro", 24, 104, 202, 40, panel);
-		Utils.createTextField("Date émission (YYYY-MM-JJ)", 24, 168, 202, 40, panel);
-		Utils.createTextField("Date Paiement (YYYY-MM-JJ)", 247, 167, 202, 40, panel);
-		Utils.createTextField("Numéro devis", 24, 228, 202, 40, panel);
-		Utils.createTextField("Montant", 24, 294, 202, 40, panel);
-		Utils.createTextField("Acompte versé", 247, 283, 200, 40, panel);
+		Utils.creerTextField("Numéro", 24, 104, 202, 40, panel);
+		Utils.creerTextField("Date émission (YYYY-MM-JJ)", 24, 168, 202, 40, panel);
+		Utils.creerTextField("Date Paiement (YYYY-MM-JJ)", 247, 167, 202, 40, panel);
+		Utils.creerTextField("Numéro devis", 24, 228, 202, 40, panel);
+		Utils.creerTextField("Montant", 24, 294, 202, 40, panel);
+		Utils.creerTextField("Acompte versé", 247, 283, 200, 40, panel);
 
 		// Menu déroulant pour le mode de paiement
 		comboBox_modePaiement = new JComboBox<>();

@@ -38,12 +38,12 @@ public class Fenetre_InsertionImpot extends JInternalFrame {
 		panel.setLayout(null);
 
 		// Libellé "Impôt"
-		Utils.createLabel("Insérer un Impôt", 302, 39, 163, 20, 16, panel);
+		Utils.creerLabel("Insérer un Impôt", 302, 39, 163, 20, 16, panel);
 
 		// Champs de saisie
-		this.textField_nom = Utils.createTextField("Nom", 288, 167, 197, 40, panel);
-		this.textField_montant = Utils.createTextField("Montant", 288, 229, 197, 40, panel);
-		this.textField_annee = Utils.createTextField("Année", 288, 295, 197, 40, panel);
+		this.textField_nom = Utils.creerTextField("Nom", 288, 167, 197, 40, panel);
+		this.textField_montant = Utils.creerTextField("Montant", 288, 229, 197, 40, panel);
+		this.textField_annee = Utils.creerTextField("Année", 288, 295, 197, 40, panel);
 
 		// Boutons Ajouter et Annuler
 		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 428, 431, 94, 31);

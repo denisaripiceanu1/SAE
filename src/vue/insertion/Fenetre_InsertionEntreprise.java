@@ -55,17 +55,17 @@ public class Fenetre_InsertionEntreprise extends JInternalFrame {
 		panel.add(separator_titreInsererEntreprise);
 
 		// Label titre
-		Utils.createLabel("Ajouter un Prestataire", 275, 53, 163, 48, 16, panel);
+		Utils.creerLabel("Ajouter un Prestataire", 275, 53, 163, 48, 16, panel);
 
 		// Champs de saisie
-		textField_Nom = Utils.createTextField("Nom", 131, 166, 190, 40, panel);
-		textField_SIRET = Utils.createTextField("SIRET", 381, 166, 190, 40, panel);
-		textField_Telephone = Utils.createTextField("n° Téléphone", 131, 218, 190, 40, panel);
-		textField_Mail = Utils.createTextField("Mail", 381, 218, 190, 40, panel);
-		textField_Adresse = Utils.createTextField("Adresse", 131, 270, 190, 40, panel);
-		textField_CP = Utils.createTextField("Code Postal", 381, 270, 190, 40, panel);
-		textField_Ville = Utils.createTextField("Ville", 131, 322, 190, 40, panel);
-		textField_IBAN = Utils.createTextField("IBAN", 381, 322, 190, 40, panel);
+		textField_Nom = Utils.creerTextField("Nom", 131, 166, 190, 40, panel);
+		textField_SIRET = Utils.creerTextField("SIRET", 381, 166, 190, 40, panel);
+		textField_Telephone = Utils.creerTextField("n° Téléphone", 131, 218, 190, 40, panel);
+		textField_Mail = Utils.creerTextField("Mail", 381, 218, 190, 40, panel);
+		textField_Adresse = Utils.creerTextField("Adresse", 131, 270, 190, 40, panel);
+		textField_CP = Utils.creerTextField("Code Postal", 381, 270, 190, 40, panel);
+		textField_Ville = Utils.creerTextField("Ville", 131, 322, 190, 40, panel);
+		textField_IBAN = Utils.creerTextField("IBAN", 381, 322, 190, 40, panel);
 		
 		// Boutons généraux
 		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 396, 395, 94, 31);
