@@ -1,16 +1,15 @@
 package vue.insertion;
 
 import javax.swing.JButton;
+
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
-import java.awt.Font;
 
 import controleur.insertion.GestionInsertionBien;
 
