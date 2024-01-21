@@ -1,7 +1,11 @@
 /*
-Vu que nous avons réalisé toutes les vérifications des paramètres de chaque table avec des contraintes NOT NULL, CHECK, UNIQUE, etc., 
-nous avons choisi de ne pas répéter les mêmes vérifications dans les procédures d'insertion. 
-C'est pourquoi ces procédures d'insertion effectuent l'insertion dans la base de données sans aucune vérification supplémentaire.
+Étant donné que nous avons mis en place toutes les vérifications des paramètres de chaque table avec 
+des contraintes telles que NOT NULL, CHECK, UNIQUE, etc., nous avons décidé de ne pas reproduire ces 
+mêmes vérifications dans les procédures d'insertion. Par conséquent, ces procédures d'insertion effectuent 
+l'insertion dans la base de données sans aucune vérification supplémentaire.
+
+Nous avons créé  ces procedures pour privilégiér l'utilisation maximale de procédures PL/SQL, 
+évitant ainsi d'effectuer des insertions directes via JDBC ou DAO.
 */
 -------------------------- LOCATAIRE —-----------------------------------------------
 

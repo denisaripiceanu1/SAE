@@ -51,7 +51,7 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		panel.add(separator_titreInsererLogement);
 
 		// Titre
-		Utils.createLabel("Insérer un logement", 290, 25, 171, 48, 16, panel);
+		Utils.creerLabel("Insérer un logement", 290, 25, 171, 48, 16, panel);
 
 		// ComboBox pour le type de logement
 		this.comboBox_typeDeLogement = new JComboBox<String>();
@@ -63,11 +63,11 @@ public class Fenetre_InsertionLogement extends JInternalFrame {
 		panel.add(this.comboBox_typeDeLogement);
 
 		// TextFields
-		this.textField_IdLogement = Utils.createTextField("Id Logement", 145, 118, 190, 40, panel);
-		this.textField_SurfaceHabitable = Utils.createTextField("Surface habitable", 145, 193, 190, 40, panel);
-		this.textField_NbPièces = Utils.createTextField("Nombre de pièces", 375, 193, 190, 40, panel);
-		this.textField_DateAcquisition = Utils.createTextField("Date d'acquisition", 145, 269, 190, 40, panel);
-		this.textField_NumEtage = Utils.createTextField("Numéro d'étage", 375, 269, 190, 40, panel);
+		this.textField_IdLogement = Utils.creerTextField("Id Logement", 145, 118, 190, 40, panel);
+		this.textField_SurfaceHabitable = Utils.creerTextField("Surface habitable", 145, 193, 190, 40, panel);
+		this.textField_NbPièces = Utils.creerTextField("Nombre de pièces", 375, 193, 190, 40, panel);
+		this.textField_DateAcquisition = Utils.creerTextField("Date d'acquisition", 145, 269, 190, 40, panel);
+		this.textField_NumEtage = Utils.creerTextField("Numéro d'étage", 375, 269, 190, 40, panel);
 
 		// Boutons généraux
 		JButton btnAjouter = Utils.creerBouton(panel, "Ajouter", 235, 445, 94, 31);

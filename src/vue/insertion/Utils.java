@@ -12,7 +12,7 @@ import java.awt.Font;
 
 public class Utils {
 	// Méthode pour créer un champ de texte avec une bordure spécifique
-	public static JTextField createTextField(String title, int x, int y, int width, int height, JPanel panel) {
+	public static JTextField creerTextField(String title, int x, int y, int width, int height, JPanel panel) {
 		JTextField textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), title, TitledBorder.LEADING,
@@ -33,7 +33,7 @@ public class Utils {
 		return bouton;
 	}
 
-	public static JLabel createLabel(String text, int x, int y, int width, int height, int fontSize, JPanel panel) {
+	public static JLabel creerLabel(String text, int x, int y, int width, int height, int fontSize, JPanel panel) {
 		JLabel label = new JLabel(text);
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
 		label.setHorizontalAlignment(SwingConstants.CENTER);

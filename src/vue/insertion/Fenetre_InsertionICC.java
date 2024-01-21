@@ -40,7 +40,7 @@ public class Fenetre_InsertionICC extends JInternalFrame {
 		panel.setLayout(null);
 
 		// Titre et séparateur
-		Utils.createLabel("Ajouter un ICC", 284, 84, 160, 48, 16, panel);
+		Utils.creerLabel("Ajouter un ICC", 284, 84, 160, 48, 16, panel);
 
 		JSeparator separator_titreInsererQuotite = new JSeparator();
 		separator_titreInsererQuotite.setForeground(new Color(0, 102, 204));
@@ -48,13 +48,13 @@ public class Fenetre_InsertionICC extends JInternalFrame {
 		panel.add(separator_titreInsererQuotite);
 
 		// Champ de texte pour l'année
-		this.textField_Annee = Utils.createTextField("Année", 271, 189, 190, 40, panel);
+		this.textField_Annee = Utils.creerTextField("Année", 271, 189, 190, 40, panel);
 		
 		// Champ de texte pour le trimestre
-		this.textField_Trimestre = Utils.createTextField("Trimestre", 271, 263, 190, 40, panel);
+		this.textField_Trimestre = Utils.creerTextField("Trimestre", 271, 263, 190, 40, panel);
 
 		// Champ de texte pour l'indice
-		this.textField_indice = Utils.createTextField("Indice", 271, 341, 190, 40, panel);
+		this.textField_indice = Utils.creerTextField("Indice", 271, 341, 190, 40, panel);
 
 		// Boutons Ajouter et Annuler
 		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 398, 395, 94, 31);

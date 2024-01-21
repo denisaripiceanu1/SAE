@@ -1,16 +1,15 @@
 package vue.insertion;
 
 import javax.swing.JButton;
+
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
-import java.awt.Font;
 
 import controleur.insertion.GestionInsertionBien;
 
@@ -47,14 +46,14 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		separator_titreInsererBien.setBounds(271, 72, 190, 2);
 		panel.add(separator_titreInsererBien);
 
-		Utils.createLabel("Ajouter un Bien", 308, 26, 117, 48, 16, panel);
+		Utils.creerLabel("Ajouter un Bien", 308, 26, 117, 48, 16, panel);
 
 		// Champs de texte
-		textField_IdImmeuble = Utils.createTextField("Id Bien", 110, 104, 190, 40, panel);
-		textField_adresse = Utils.createTextField("Adresse", 110, 168, 190, 40, panel);
-		textField_codePostal = Utils.createTextField("Code Postal", 427, 168, 190, 40, panel);
-		textField_ville = Utils.createTextField("Ville", 110, 228, 190, 40, panel);
-		textField_periodeDeConstruction = Utils.createTextField("Période de construction", 427, 228, 190, 40, panel);
+		textField_IdImmeuble = Utils.creerTextField("Id Bien", 110, 104, 190, 40, panel);
+		textField_adresse = Utils.creerTextField("Adresse", 110, 168, 190, 40, panel);
+		textField_codePostal = Utils.creerTextField("Code Postal", 427, 168, 190, 40, panel);
+		textField_ville = Utils.creerTextField("Ville", 110, 228, 190, 40, panel);
+		textField_periodeDeConstruction = Utils.creerTextField("Période de construction", 427, 228, 190, 40, panel);
 
 		// Menu déroulant
 		comboBox_typeDeBien = createComboBox("Type", new String[] { "Immeuble", "Maison" }, 427, 104, 189, 45, panel);

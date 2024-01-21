@@ -39,7 +39,7 @@ public class Fenetre_InsertionQuotite extends JInternalFrame {
         panel.setLayout(null);
 
         // Titre et séparateur
-		Utils.createLabel("Insérer un Quotité", 284, 84, 160, 48, 16, panel);
+		Utils.creerLabel("Insérer un Quotité", 284, 84, 160, 48, 16, panel);
 
         JSeparator separator_titreInsererQuotite = new JSeparator();
         separator_titreInsererQuotite.setForeground(new Color(0, 102, 204));
@@ -56,7 +56,7 @@ public class Fenetre_InsertionQuotite extends JInternalFrame {
         panel.add(this.comboBox_typeDeCompteur);
 
         // Champ de texte pour le pourcentage
-        this.textField_Pourcentage = Utils.createTextField("Pourcentage (%)", 271, 291, 190, 40, panel);
+        this.textField_Pourcentage = Utils.creerTextField("Pourcentage (%)", 271, 291, 190, 40, panel);
 
         // Boutons Ajouter et Annuler
 		JButton btnAjouter = Utils.creerBouton(panel, "Ajouter", 246, 447, 94, 31);

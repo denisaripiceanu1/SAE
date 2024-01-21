@@ -42,7 +42,7 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
         panel.setLayout(null);
 
         // Titre et séparateur
-		Utils.createLabel("Ajouter un Compteur", 285, 56, 160, 48, 16, panel);
+		Utils.creerLabel("Ajouter un Compteur", 285, 56, 160, 48, 16, panel);
 
         JSeparator separator_titreInsererCompteur = new JSeparator();
         separator_titreInsererCompteur.setForeground(new Color(0, 102, 204));
@@ -58,9 +58,9 @@ public class Fenetre_InsertionCompteur extends JInternalFrame {
         panel.add(comboBox_typeDeCompteur);
 
         // Champs de texte pour l'ID du compteur et l'indice du compteur
-        textField_IdCompteur = Utils.createTextField("Id Compteur", 270, 207, 190, 40, panel);
-        textField_IndiceCompteur = Utils.createTextField("Indice du Compteur", 270, 273, 190, 40, panel);
-        textFieldPrixAbo = Utils.createTextField("Prix de l'abonnement", 270, 343, 190, 40, panel);
+        textField_IdCompteur = Utils.creerTextField("Id Compteur", 270, 207, 190, 40, panel);
+        textField_IndiceCompteur = Utils.creerTextField("Indice du Compteur", 270, 273, 190, 40, panel);
+        textFieldPrixAbo = Utils.creerTextField("Prix de l'abonnement", 270, 343, 190, 40, panel);
 
         // Boutons Ajouter et Annuler
         JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 398, 447, 94, 31);
