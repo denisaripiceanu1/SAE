@@ -1,6 +1,7 @@
 package vue.modification;
 
 import java.awt.Color;
+
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -9,10 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 import controleur.modification.GestionModificationLocation;
+import vue.Utils;
 
 public class Fenetre_ModificationLocation extends JInternalFrame {
 	// Déclaration des champs de texte
@@ -25,8 +25,6 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 	private JTextField textField_loyer_paye;
 	private JTextField textField_montant_reel_paye;
 	private JTextField textField_date_debut;
-
-	private JSeparator separator_Compteur;
 
 	// Gestionnaires d'événements
 	private GestionModificationLocation gestionModificationLocation;
@@ -47,11 +45,16 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		this.getContentPane().add(panel);
 		panel.setLayout(null);
 
-		// Séparateur de titre
+		// Séparateus de titre
 		JSeparator separator_titreInsererBien = new JSeparator();
 		separator_titreInsererBien.setForeground(new Color(0, 102, 204));
-		separator_titreInsererBien.setBounds(271, 72, 190, 2);
+		separator_titreInsererBien.setBounds(278, 72, 190, 19);
 		panel.add(separator_titreInsererBien);
+
+		JSeparator separator_Compteur = new JSeparator();
+		separator_Compteur.setBounds(81, 435, 591, 2);
+		panel.add(separator_Compteur);
+
 
 		// Étiquette du titre
 		JLabel lbl_InsererUnBien = new JLabel("Modifier une Location");
@@ -60,91 +63,29 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 		panel.add(lbl_InsererUnBien);
 
 		// Champs de texte
-		this.textField_IdBien = new JTextField();
-		this.textField_IdBien.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Logement",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, null));
-		this.textField_IdBien.setBounds(166, 104, 220, 40);
-		panel.add(this.textField_IdBien);
-		this.textField_IdBien.setColumns(10);
+		this.textField_IdBien = Utils.creerTextField("Logement", 166, 104, 220, 40, panel);
 		this.textField_IdBien.setEditable(false); // cle primaire de la table Louer non modifiable
 
-		this.textField_provision_chargeMens_TTC = new JTextField();
-		this.textField_provision_chargeMens_TTC.setColumns(10);
-		this.textField_provision_chargeMens_TTC
-				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Provision charge mensuelle TTC",
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_provision_chargeMens_TTC.setBounds(425, 164, 220, 40);
-		panel.add(this.textField_provision_chargeMens_TTC);
+		this.textField_provision_chargeMens_TTC =  Utils.creerTextField("Provision charges mensuelles", 425, 164, 220, 40, panel);
+		this.textField_loyer_TCC =  Utils.creerTextField("Loyer", 166, 273, 220, 40, panel);
+		this.textField_caution_TTC =  Utils.creerTextField("Caution", 425, 221, 120, 40, panel);
 
-		this.textField_loyer_TCC = new JTextField();
-		this.textField_loyer_TCC.setColumns(10);
-		this.textField_loyer_TCC.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Loyer TTC",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_loyer_TCC.setBounds(166, 273, 220, 40);
-		panel.add(this.textField_loyer_TCC);
-
-		this.textField_caution_TTC = new JTextField();
-		this.textField_caution_TTC.setColumns(10);
-		this.textField_caution_TTC.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Caution TTC",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		this.textField_caution_TTC.setBounds(425, 221, 220, 40);
-		panel.add(this.textField_caution_TTC);
-
-		textField_Id_Locataire = new JTextField();
+		this.textField_Id_Locataire = Utils.creerTextField("Locataire", 166, 164, 220, 40, panel);
 		textField_Id_Locataire.setEditable(false); // cle primaire de la table Louer non modifiable
-		textField_Id_Locataire.setColumns(10);
-		textField_Id_Locataire.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Locataire",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Id_Locataire.setBounds(166, 164, 220, 40);
-		panel.add(textField_Id_Locataire);
 
-		textField_date_derniere_regularisation = new JTextField();
-		textField_date_derniere_regularisation.setColumns(10);
-		textField_date_derniere_regularisation
-				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date dernière régularisation",
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_derniere_regularisation.setBounds(166, 221, 220, 40);
-		panel.add(textField_date_derniere_regularisation);
+		this.textField_date_derniere_regularisation =  Utils.creerTextField("Date dernière régularisation", 166, 221, 220, 40, panel);
 
-		textField_montant_reel_paye = new JTextField();
-		textField_montant_reel_paye.setColumns(10);
-		textField_montant_reel_paye
-				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant reel payé",
+		this.textField_montant_reel_paye =  Utils.creerTextField("Montant reel payé", 425, 273, 220, 40, panel);
 
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_montant_reel_paye.setBounds(425, 273, 220, 40);
-		panel.add(textField_montant_reel_paye);
-
-		textField_date_debut = new JTextField();
+		this.textField_date_debut =  Utils.creerTextField("Date début", 425, 104, 220, 40, panel);
 		textField_date_debut.setEditable(false); // cle primaire de la table Louer non modifiable
-		textField_date_debut.setColumns(10);
-		textField_date_debut.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date début",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_debut.setBounds(425, 104, 220, 40);
-		panel.add(textField_date_debut);
 
-		// Bouton de modification
-		JButton btnModifier = new JButton("Modifier");
-		btnModifier.setForeground(Color.WHITE);
-		btnModifier.setBackground(new Color(0, 102, 204));
+		// Boutons
+		JButton btnModifier = Utils.creerBouton(panel, "Modifier", 246, 447, 94, 31);
 		btnModifier.addActionListener(this.gestionModificationLocation);
-		btnModifier.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnModifier.setBounds(246, 447, 94, 31);
-		panel.add(btnModifier);
 
-		// Bouton d'annulation
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setForeground(Color.WHITE);
-		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.addActionListener(this.gestionModificationLocation);
-		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnAnnuler.setBounds(398, 447, 94, 31);
-		panel.add(btnAnnuler);
-
-		// Séparateur
-		this.separator_Compteur = new JSeparator();
-		this.separator_Compteur.setBounds(81, 435, 591, 2);
-		panel.add(this.separator_Compteur);
+		JButton btnAnjouter = Utils.creerBouton(panel, "Ajouter", 257, 457, 94, 31);
+		btnAnjouter.addActionListener(this.gestionModificationLocation);
 
 	}
 
@@ -152,11 +93,6 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 	public JTextField getTextField_IdImmeuble() {
 		return textField_IdBien;
 	}
-
-	public void setTextField_IdImmeuble(JTextField textField_IdImmeuble) {
-		this.textField_IdBien = textField_IdImmeuble;
-	}
-
 	public JTextField getTextField_provision_chargeMens_TTC() {
 		return textField_provision_chargeMens_TTC;
 	}
@@ -179,14 +115,6 @@ public class Fenetre_ModificationLocation extends JInternalFrame {
 
 	public void setTextField_caution_TTC(JTextField textField_caution_TTC) {
 		this.textField_caution_TTC = textField_caution_TTC;
-	}
-
-	public JSeparator getSeparator_Compteur() {
-		return separator_Compteur;
-	}
-
-	public void setSeparator_Compteur(JSeparator separator_Compteur) {
-		this.separator_Compteur = separator_Compteur;
 	}
 
 	public GestionModificationLocation getGestionModificationLocation() {
