@@ -101,6 +101,7 @@ public class Fenetre_ModificationBien extends JInternalFrame {
 		this.comboBox_typeDeBien.setBounds(427, 104, 189, 39);
 		panel.add(this.comboBox_typeDeBien);
 
+		// Configuration des boutons et de la séparation
 		JButton btnModifier = new JButton("Modifier");
 		btnModifier.setForeground(Color.WHITE);
 		btnModifier.setBackground(new Color(0, 102, 204));
