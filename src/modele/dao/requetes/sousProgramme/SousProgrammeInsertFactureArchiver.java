@@ -10,13 +10,30 @@ import java.text.SimpleDateFormat;
 
 import modele.Facture;
 
+/**
+ * Classe représentant un sous-programme SQL pour l'archivage d'une facture.
+ *
+ * @param donnee Objet Facture contenant les données à archiver.
+ */
 public class SousProgrammeInsertFactureArchiver implements SousProgramme<Facture> {
 
+    /**
+     * Retourne l'appel du sous-programme SQL sous forme de chaîne de caractères.
+     *
+     * @return Appel du sous-programme SQL.
+     */
 	@Override
 	public String appelSousProgramme() {
 		return "{ call Inserer_Archivage_Facture(?,?,?,?,?,?,?,?,?,?,?,?)}";
 	}
 
+    /**
+     * Paramètre la PreparedStatement avec les valeurs fournies dans le tableau de chaînes de caractères.
+     *
+     * @param prSt      PreparedStatement à paramétrer.
+     * @param parametres Tableau de chaînes de caractères contenant les valeurs à paramétrer.
+     * @throws SQLException Si une erreur SQL survient lors du paramétrage de la requête.
+     */
 	@Override
 	public void parametres(PreparedStatement prSt, String... parametres) throws SQLException {
 		prSt.setString(1, parametres[0]); // clé primaire numero
@@ -33,6 +50,13 @@ public class SousProgrammeInsertFactureArchiver implements SousProgramme<Facture
 		prSt.setString(12, parametres[11]);
 	}
 
+    /**
+     * Paramètre la PreparedStatement avec les valeurs de l'entité Facture donnée.
+     *
+     * @param prSt   PreparedStatement à paramétrer.
+     * @param donnee Objet représentant l'entité Facture pour laquelle les paramètres doivent être définis.
+     * @throws SQLException Si une erreur SQL survient lors du paramétrage de la requête.
+     */
 	@Override
 	public void parametres(PreparedStatement prSt, Facture donnee) throws SQLException {
 		prSt.setString(1, donnee.getNumero()); // clé primaire de Locataire
@@ -66,7 +90,13 @@ public class SousProgrammeInsertFactureArchiver implements SousProgramme<Facture
 
 	}
 
-
+    /**
+     * Convertit une chaîne de caractères représentant une date au format "dd-MM-yyyy" en un objet Date.
+     *
+     * @param dateStr Chaîne de caractères représentant une date.
+     * @return Objet Date résultant de la conversion.
+     * @throws SQLException Si une erreur de format de date survient.
+     */
 	private Date convertirDate(String dateStr) throws SQLException {
 		try {
 			SimpleDateFormat formatEntree = new SimpleDateFormat("dd-MM-yyyy");
@@ -83,16 +113,31 @@ public class SousProgrammeInsertFactureArchiver implements SousProgramme<Facture
 		}
 	}
 
+    /**
+     * Paramètre la CallableStatement avec les valeurs de l'entité Facture pour les requêtes sur les séquences.
+     *
+     * @param prSt   CallableStatement à paramétrer.
+     * @param donnee Objet représentant l'entité Facture pour laquelle les paramètres de séquence doivent être définis.
+     * @throws SQLException Si une erreur SQL survient lors du paramétrage de la requête.
+     */
 	@Override
 	public void parametresSequence(CallableStatement prSt, Facture donnee) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		// La méthode n'est pas utilisée dans ce contexte
 	}
 
+    /**
+     * Paramètre la CallableStatement avec les valeurs de l'entité Facture pour les calculs spécifiques.
+     *
+     * @param st     CallableStatement à paramétrer.
+     * @param donnees Objet représentant l'entité Facture pour laquelle les paramètres de calcul doivent être définis.
+     * @throws SQLException Si une erreur SQL survient lors du paramétrage de la requête.
+     */
 	@Override
 	public void parametresCalcul(CallableStatement st, Facture donnees) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		// La méthode n'est pas utilisée dans ce contexte
 	}
 
 }
+
