@@ -2,15 +2,15 @@ package vue.insertion;
 
 import java.awt.Color;
 
+
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 import controleur.insertion.GestionInsertionReleve;
+import vue.Utils;
 
 public class Fenetre_InsertionReleve extends JInternalFrame {
 	// Champs de saisie

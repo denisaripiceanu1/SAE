@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.GestionTableEntrepriseFenetreFactureLogement;
 import controleur.insertion.GestionInsertionPaiementLogement;
+import vue.Utils;
 
 public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 
@@ -23,8 +24,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 	// Boutons radio
 	private JRadioButton rdbtnOui = new JRadioButton("Oui");
 	private JRadioButton rdbtnNon = new JRadioButton("Non");
-	private JComboBox<String> comboBox_Designation;
-
+	
 	// Boutons et libellés
 	private JButton btn_ajouter_entreprise;
 	private JButton btn_charger_entreprise;
@@ -40,6 +40,7 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 	// Autres elements
 	private JScrollPane scrollPane_table_entreprise;
 	private JComboBox<String> comboBox_modePaiement;
+	private JComboBox<String> comboBox_Designation;
 
 	public Fenetre_InsertionPaiementLogement(boolean isAjouterFacture) {
 
@@ -82,8 +83,8 @@ public class Fenetre_InsertionPaiementLogement extends JInternalFrame {
 
 		// Champs de saisie
 		Utils.creerTextField("Numéro", 24, 104, 202, 40, panel);
-		Utils.creerTextField("Date émission (YYYY-MM-JJ)", 24, 168, 202, 40, panel);
-		Utils.creerTextField("Date Paiement (YYYY-MM-JJ)", 247, 167, 202, 40, panel);
+		Utils.creerTextField("Date émission (YYYY-MM-DD)", 24, 168, 202, 40, panel);
+		Utils.creerTextField("Date paiement (YYYY-MM-DD)", 247, 167, 202, 40, panel);
 		Utils.creerTextField("Numéro devis", 24, 228, 202, 40, panel);
 		Utils.creerTextField("Montant", 24, 294, 202, 40, panel);
 		Utils.creerTextField("Acompte versé", 247, 283, 200, 40, panel);

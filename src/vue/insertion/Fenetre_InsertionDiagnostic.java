@@ -1,18 +1,15 @@
 package vue.insertion;
 
 import java.awt.Color;
-import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 import controleur.insertion.GestionInsertionDiagnostic;
+import vue.Utils;
 
 public class Fenetre_InsertionDiagnostic extends JInternalFrame {
     // Champs de saisie
@@ -46,7 +43,7 @@ public class Fenetre_InsertionDiagnostic extends JInternalFrame {
         panel.add(separator_titreInsererBien);
 
         // Champ de texte pour la date de validité
-        this.textField_Date_Validite = Utils.creerTextField("Date validité", 263, 232, 190, 40, panel);
+        this.textField_Date_Validite = Utils.creerTextField("Date validité (YYYY-MM-DD)", 263, 232, 190, 40, panel);
         this.textField_Type = Utils.creerTextField("Type", 263, 161, 190, 40, panel);
 
         // Boutons Ajouter et Annuler

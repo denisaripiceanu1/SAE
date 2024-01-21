@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.insertion.GestionAffichageInfoLocataire;
 import controleur.modification.GestionModificationLocataire;
+import vue.Utils;
 
 public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 
@@ -107,7 +108,7 @@ public class Fenetre_AffichageInfoLocataire extends JInternalFrame {
 		this.textField_Prenom = Utils.creerTextField("Prénom", 21, 233, 190, 40, panel);
 		this.textField_Telephone = Utils.creerTextField("n° Téléphone", 21, 287, 190, 40, panel);
 		this.textField_Mail = Utils.creerTextField("Mail", 21, 338, 190, 40, panel);
-		this.textField_DateN = Utils.creerTextField("Date de naissance", 21, 388, 190, 40, panel);
+		this.textField_DateN = Utils.creerTextField("Date de naissance (YYYY-MM-DD)", 21, 388, 190, 40, panel);
 
 		// Tableau pour afficher la regularisation des charges d'un locataire
 		// et le scrollPane associé

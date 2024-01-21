@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.GestionTableEntrepriseFenetreFactureBien;
 import controleur.insertion.GestionInsertionPaiementBien;
+import vue.Utils;
 
 public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 
@@ -86,8 +87,8 @@ public class Fenetre_InsertionPaiementBien extends JInternalFrame {
 
 		// Champs de saisie
 		Utils.creerTextField("Numéro", 24, 104, 202, 40, panel);
-		Utils.creerTextField("Date émission (YYYY-MM-JJ)", 24, 168, 202, 40, panel);
-		Utils.creerTextField("Date Paiement (YYYY-MM-JJ)", 247, 167, 202, 40, panel);
+		Utils.creerTextField("Date émission (YYYY-MM-DD)", 24, 168, 202, 40, panel);
+		Utils.creerTextField("Date Paiement (YYYY-MM-DD)", 247, 167, 202, 40, panel);
 		Utils.creerTextField("Numéro devis", 24, 228, 202, 40, panel);
 		Utils.creerTextField("Montant", 24, 294, 202, 40, panel);
 		Utils.creerTextField("Acompte versé", 247, 294, 200, 40, panel);

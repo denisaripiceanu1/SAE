@@ -12,6 +12,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.Color;
 
 import controleur.insertion.GestionInsertionBien;
+import vue.Utils;
 
 public class Fenetre_InsertionBien extends JInternalFrame {
 	// Champs de saisie
@@ -41,12 +42,12 @@ public class Fenetre_InsertionBien extends JInternalFrame {
 		panel.setLayout(null);
 
 		// Titre et séparateur
+		Utils.creerLabel("Ajouter un Bien", 308, 26, 117, 48, 16, panel);
+
 		JSeparator separator_titreInsererBien = new JSeparator();
 		separator_titreInsererBien.setForeground(new Color(0, 102, 204));
 		separator_titreInsererBien.setBounds(271, 72, 190, 2);
 		panel.add(separator_titreInsererBien);
-
-		Utils.creerLabel("Ajouter un Bien", 308, 26, 117, 48, 16, panel);
 
 		// Champs de texte
 		textField_IdImmeuble = Utils.creerTextField("Id Bien", 110, 104, 190, 40, panel);

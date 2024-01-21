@@ -2,8 +2,6 @@ package vue.modification;
 
 import java.awt.Color;
 
-import java.awt.Font;
-
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -23,8 +21,10 @@ import javax.swing.table.DefaultTableModel;
 
 import controleur.GestionTableEntrepriseFenetreModificationCharge;
 import controleur.modification.GestionModificationFacturesCharges;
+import vue.Utils;
 
 public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
+
 	// Champs de saisie
 	private JTextField textField_Numero;
 	private JTextField textField_date_emission;
@@ -47,7 +47,7 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 	private JScrollPane scrollPane_table_entreprise;
 
 	// Autres elements
-	private JSeparator separator_Travaux;
+	private JSeparator separator_Factures;
 	private JComboBox<String> comboBox_Designation;
 	private JComboBox<String> comboBox_modePaiement;
 
@@ -64,6 +64,7 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		this.setBounds(100, 100, 762, 541);
 		this.getContentPane().setLayout(null);
 
+		// Configuration du panel principal
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(new Color(255, 255, 255));
@@ -72,10 +73,7 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		this.getContentPane().add(panel);
 
 		// Labels
-		JLabel lbl_InsererUneFacture = new JLabel("Modifier une charge ");
-		lbl_InsererUneFacture.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lbl_InsererUneFacture.setBounds(294, 26, 153, 48);
-		panel.add(lbl_InsererUneFacture);
+		Utils.creerLabel("Modifier un facture", 294, 26, 153, 48, 16, panel);
 
 		JLabel lbl_ImputableLocataire = new JLabel("Imputable Locataire");
 		lbl_ImputableLocataire.setForeground(Color.BLACK);
@@ -86,53 +84,22 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		// Séparateurs
 		JSeparator separator_titreInsererTravaux = new JSeparator();
 		separator_titreInsererTravaux.setForeground(new Color(0, 102, 204));
-		separator_titreInsererTravaux.setBounds(271, 72, 190, 2);
+		separator_titreInsererTravaux.setBounds(271, 60, 190, 15);
 		panel.add(separator_titreInsererTravaux);
 
+		separator_Factures = new JSeparator();
+		separator_Factures.setBounds(90, 401, 591, 2);
+		panel.add(separator_Factures);
+
 		// Champs de saisie
-		textField_Numero = new JTextField();
-		textField_Numero.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_Numero.setBounds(24, 104, 202, 40);
-		panel.add(textField_Numero);
-		textField_Numero.setColumns(10);
+		this.textField_Numero = Utils.creerTextField("Numéro", 24, 104, 202, 40, panel);
 		textField_Numero.setEditable(false); // cle primaire de la table Facture non modifiable
 
-		textField_date_emission = new JTextField();
-		textField_date_emission.setColumns(10);
-		textField_date_emission
-				.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Date \u00E9mission (YYYY-MM-JJ)",
-						TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_emission.setBounds(24, 157, 202, 40);
-		panel.add(textField_date_emission);
-
-		textField_date_paiement = new JTextField();
-		textField_date_paiement.setColumns(10);
-		textField_date_paiement.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Date Paiement (YYYY-MM-JJ)", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_date_paiement.setBounds(247, 156, 202, 40);
-		panel.add(textField_date_paiement);
-
-		textField_numeroDevis = new JTextField();
-		textField_numeroDevis.setColumns(10);
-		textField_numeroDevis.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Num\u00E9ro devis",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_numeroDevis.setBounds(24, 217, 202, 40);
-		panel.add(textField_numeroDevis);
-
-		textField_accompteVerse = new JTextField();
-		textField_accompteVerse.setColumns(10);
-		textField_accompteVerse.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)),
-				"Acompte vers\u00E9 ", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_accompteVerse.setBounds(247, 283, 200, 40);
-		panel.add(textField_accompteVerse);
-
-		textField_montant = new JTextField();
-		textField_montant.setColumns(10);
-		textField_montant.setBorder(new TitledBorder(new LineBorder(new Color(0, 102, 204)), "Montant",
-				TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
-		textField_montant.setBounds(24, 283, 202, 40);
-		panel.add(textField_montant);
+		this.textField_date_emission = Utils.creerTextField("Date émission (YYYY-MM-DD)", 24, 168, 202, 40, panel);
+		this.textField_date_paiement = Utils.creerTextField("Date Paiement (YYYY-MM-DD)", 247, 167, 202, 40, panel);
+		this.textField_numeroDevis = Utils.creerTextField("Numéro devis", 24, 228, 202, 40, panel);
+		this.textField_montant = Utils.creerTextField("Montant", 24, 294, 202, 40, panel);
+		this.textField_accompteVerse = Utils.creerTextField("Acompte versé", 247, 283, 200, 40, panel);
 
 		// Menu déroulant pour le mode de paiement
 		comboBox_modePaiement = new JComboBox<>();
@@ -153,18 +120,17 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		this.comboBox_Designation.setBounds(247, 104, 200, 40);
 
 		DefaultComboBoxModel<String> designationModel = new DefaultComboBoxModel<String>();
+		designationModel.addElement("Loyer");
+		designationModel.addElement("Travaux");
 		designationModel.addElement("Eau");
 		designationModel.addElement("Ordures ménagères");
-		designationModel.addElement("Électricité parties communes");
-		designationModel.addElement("????");
-		this.comboBox_Designation.setModel(designationModel);
-		// comboBox_Designation.addActionListener(gestionClic);
-		panel.add(this.comboBox_Designation);
+		designationModel.addElement("Électricité");
+		designationModel.addElement("Entretien");
+		designationModel.addElement("Autre");
 
-		// Séparateur vertical
-		separator_Travaux = new JSeparator();
-		separator_Travaux.setBounds(90, 401, 591, 2);
-		panel.add(separator_Travaux);
+		this.comboBox_Designation.setModel(designationModel);
+		comboBox_Designation.addActionListener(gestionClic);
+		panel.add(this.comboBox_Designation);
 
 		// Boutons radio
 		this.rdbtnOui.setForeground(new Color(0, 0, 0));
@@ -179,19 +145,11 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		buttonGroup.add(this.rdbtnNon);
 
 		// Boutons généraux
-		JButton btnAjouter = new JButton("Modifier");
-		btnAjouter.setForeground(Color.WHITE);
-		btnAjouter.setBackground(new Color(0, 102, 204));
-		btnAjouter.setBounds(248, 437, 94, 31);
-		btnAjouter.addActionListener(gestionClic);
-		panel.add(btnAjouter);
+		JButton btnModifier = Utils.creerBouton(panel, "Modifier", 248, 437, 94, 31);
+		btnModifier.addActionListener(this.gestionClic);
 
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setForeground(Color.WHITE);
-		btnAnnuler.setBackground(new Color(0, 102, 204));
-		btnAnnuler.setBounds(389, 437, 94, 31);
-		btnAnnuler.addActionListener(gestionClic);
-		panel.add(btnAnnuler);
+		JButton btnAnnuler = Utils.creerBouton(panel, "Annuler", 389, 437, 94, 31);
+		btnAnnuler.addActionListener(this.gestionClic);
 
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
@@ -200,21 +158,11 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 		panel.add(separator);
 
 		// Partie ENTREPRISE
-		this.btn_ajouter_entreprise = new JButton("Insérer");
-		this.btn_ajouter_entreprise.setForeground(Color.WHITE);
-		this.btn_ajouter_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.btn_ajouter_entreprise.setBackground(new Color(0, 102, 204));
-		this.btn_ajouter_entreprise.setBounds(611, 142, 94, 31);
-		this.btn_ajouter_entreprise.addActionListener(gestionClic);
-		panel.add(this.btn_ajouter_entreprise);
+		this.btn_ajouter_entreprise = Utils.creerBouton(panel, "Insérer", 611, 142, 94, 31);
+		this.btn_ajouter_entreprise.addActionListener(this.gestionClic);
 
-		this.btn_charger_entreprise = new JButton("Charger");
-		this.btn_charger_entreprise.setForeground(Color.WHITE);
-		this.btn_charger_entreprise.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.btn_charger_entreprise.setBackground(new Color(0, 102, 204));
-		this.btn_charger_entreprise.setBounds(505, 142, 94, 31);
-		this.btn_charger_entreprise.addActionListener(gestionClic);
-		panel.add(this.btn_charger_entreprise);
+		this.btn_charger_entreprise = Utils.creerBouton(panel, "Charger", 505, 142, 94, 31);
+		this.btn_charger_entreprise.addActionListener(this.gestionClic);
 
 		this.scrollPane_table_entreprise = new JScrollPane();
 		this.scrollPane_table_entreprise.setBorder(new LineBorder(new Color(0, 102, 204), 1, true));
@@ -238,6 +186,7 @@ public class Fenetre_ModificationFactureChargeLogement extends JInternalFrame {
 
 	}
 
+	// Getters
 	public JTextField getTextField_Numero() {
 		return textField_Numero;
 	}

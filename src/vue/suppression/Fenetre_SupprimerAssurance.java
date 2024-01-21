@@ -2,6 +2,7 @@ package vue.suppression;
 
 import java.awt.Font;
 
+
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -21,11 +22,11 @@ public class Fenetre_SupprimerAssurance extends JInternalFrame {
 		this.getContentPane().setLayout(null);
 
 		// Message de confirmation
-		JLabel lblNewLabel = new JLabel("Êtes-vous sûr de vouloir supprimer cette assurance ?");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(21, 23, 384, 70);
-		this.getContentPane().add(lblNewLabel);
+		JLabel lblTitre = new JLabel("Êtes-vous sûr de vouloir supprimer cette assurance ?");
+		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTitre.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitre.setBounds(21, 23, 384, 70);
+		this.getContentPane().add(lblTitre);
 
 		// Bouton supprimer
 		JButton btn_supprimer = new JButton("Supprimer");

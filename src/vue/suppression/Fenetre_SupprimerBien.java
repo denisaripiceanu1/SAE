@@ -21,11 +21,11 @@ public class Fenetre_SupprimerBien extends JInternalFrame {
 		this.getContentPane().setLayout(null);
 
 		// Message de confirmation
-		JLabel lblNewLabel = new JLabel("Êtes-vous sûr de vouloir supprimer ce bien ?");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(52, 23, 323, 70);
-		this.getContentPane().add(lblNewLabel);
+		JLabel lblTitre = new JLabel("Êtes-vous sûr de vouloir supprimer ce bien ?");
+		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTitre.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitre.setBounds(52, 23, 323, 70);
+		this.getContentPane().add(lblTitre);
 
 		// Bouton supprimer
 		JButton btn_supprimer = new JButton("Supprimer");
