@@ -1,0 +1,1 @@
+Ó 2javaX.hr2src/vue/suppression/Fenetre_SupprimerLogement.java

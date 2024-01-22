@@ -1,0 +1,1 @@
+© 2javaX0hr:src/modele/dao/requetes/delete/RequeteDeleteAssurance.java

@@ -1,0 +1,1 @@
+¾ 2javaXBhr2src/vue/insertion/Fenetre_InsertionDiagnostic.java

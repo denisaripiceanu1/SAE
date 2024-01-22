@@ -1,0 +1,1 @@
+» 2javaX“hr1src/vue/insertion/Fenetre_InsertionAssurance.java

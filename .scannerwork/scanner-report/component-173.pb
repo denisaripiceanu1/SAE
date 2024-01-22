@@ -1,0 +1,1 @@
+­ 2javaX2hr;src/modele/dao/requetes/delete/RequeteDeleteDiagnostic.java
