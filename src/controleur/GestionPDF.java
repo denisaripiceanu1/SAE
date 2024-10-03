@@ -20,10 +20,10 @@ import vue.insertion.Fenetre_InsertionLocation;
 
 public class GestionPDF extends JInternalFrame {
 
-	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JButton btnNewButton;
+	private JPanel contentPanePDF;
+	private JTextField textFieldPDF;
+	private JTextField nom_bis;
+	private JButton btnPDF;
 	private JLabel nomPdf;
 	private int id;
 	private String nom;
@@ -32,73 +32,69 @@ public class GestionPDF extends JInternalFrame {
 	private ImportChemin chemin;
 
 	/**
-	 * Create the frame.
+	 * Creation du gestionnaire de PDF
 	 */
 	public GestionPDF(Fenetre_InsertionLocation fil) {
 		this.fil = fil;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanePDF = new JPanel();
+		contentPanePDF.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setContentPane(contentPanePDF);
+		contentPanePDF.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("id");
-		lblNewLabel.setBounds(55, 14, 8, 13);
-		contentPane.add(lblNewLabel);
+		JLabel lblPDF = new JLabel("id");
+		lblPDF.setBounds(55, 14, 8, 13);
+		contentPanePDF.add(lblPDF);
 
-		textField = new JTextField();
-		textField.setBounds(68, 11, 96, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textFieldPDF = new JTextField();
+		textFieldPDF.setBounds(68, 11, 96, 19);
+		contentPanePDF.add(textFieldPDF);
+		textFieldPDF.setColumns(10);
 
 		nomPdf = new JLabel("");
-		nomPdf.setBounds(163, 81, 200, 13); // Ajustez la taille si nécessaire
-		contentPane.add(nomPdf);
+		nomPdf.setBounds(163, 81, 200, 13);
+		contentPanePDF.add(nomPdf);
 
-		btnNewButton = new JButton("pdf");
-		btnNewButton.setBounds(68, 77, 85, 21);
-		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					// Déclarez id et nom comme variables locales si elles ne sont pas des variables
-					// d'instance
-					id = Integer.parseInt(textField.getText()); // Assurez-vous que le champ textField contient un
-																// entier
-					nom = textField_1.getText();
-
-					// Assurez-vous que l'instance pdf est correctement initialisée
-					if (pdf == null) {
-						pdf = PDFImporter.getInstance();
-					}
-					chemin.choisirChemin();
-
-					if (pdf.getPDFFileName() != null) {
-						nomPdf.setText(pdf.getPDFFileName());
-					}
-
-				} catch (NumberFormatException ex) {
-					// Gérer l'exception si l'ID n'est pas un entier
-					ex.printStackTrace();
+		btnPDF = new JButton("pdf");
+		btnPDF.setBounds(68, 77, 85, 21);
+		contentPanePDF.add(btnPDF);
+		
+		btnPDF.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				// Déclarez id et nom comme variables locales si elles ne sont pas des variables d'instance
+				id = Integer.parseInt(textFieldPDF.getText());
+				nom = nom_bis.getText();
+				if (pdf == null) {
+					pdf = PDFImporter.getInstance();
 				}
+				chemin.choisirChemin();
+
+				if (pdf.getPDFFileName() != null) {
+					nomPdf.setText(pdf.getPDFFileName());
+				}
+			} catch (NumberFormatException ex) {
+				// Gérer l'exception si l'ID n'est pas un entier
+				ex.printStackTrace();
 			}
+		}
 		});
 
 		JLabel lblNewLabel_1 = new JLabel("Nom");
 		lblNewLabel_1.setBounds(259, 14, 21, 13);
-		contentPane.add(lblNewLabel_1);
+		contentPanePDF.add(lblNewLabel_1);
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(285, 11, 96, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		nom_bis = new JTextField();
+		nom_bis.setBounds(285, 11, 96, 19);
+		contentPanePDF.add(nom_bis);
+		nom_bis.setColumns(10);
 
 		nomPdf = new JLabel("");
-		nomPdf.setBounds(163, 81, 200, 13); // Ajustez la taille si nécessaire
-		contentPane.add(nomPdf);
+		nomPdf.setBounds(163, 81, 200, 13);
+		contentPanePDF.add(nomPdf);
 
 		JButton btnNewButton_1 = new JButton("Ajoutez");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -107,16 +103,14 @@ public class GestionPDF extends JInternalFrame {
 				try {
 					pdf.getInstance().importPDFBD(id, nom);
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
 		btnNewButton_1.setBounds(79, 211, 85, 21);
-		contentPane.add(btnNewButton_1);
+		contentPanePDF.add(btnNewButton_1);
 
 		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.addActionListener(new ActionListener() {
@@ -126,6 +120,6 @@ public class GestionPDF extends JInternalFrame {
 			}
 		});
 		btnAnnuler.setBounds(270, 211, 85, 21);
-		contentPane.add(btnAnnuler);
+		contentPanePDF.add(btnAnnuler);
 	}
 }

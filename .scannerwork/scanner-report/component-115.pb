@@ -1,0 +1,1 @@
+s 2javaXÇhr6src/controleur/insertion/GestionInsertionLocation.java

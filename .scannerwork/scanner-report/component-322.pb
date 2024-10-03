@@ -1,0 +1,1 @@
+Â 2javaX‰hr0src/vue/insertion/Fenetre_InsertionLocation.java

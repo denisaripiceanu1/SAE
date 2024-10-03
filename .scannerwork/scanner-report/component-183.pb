@@ -1,0 +1,1 @@
+· 2javaX7hr8src/modele/dao/requetes/delete/RequeteDeleteQuotter.java
