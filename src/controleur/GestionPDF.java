@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import controleur.outils.ImportChemin;
 import controleur.outils.PDFImporter;
+import controleur.outils.PDFListe;
 import vue.insertion.Fenetre_InsertionLocation;
 
 public class GestionPDF extends JInternalFrame {
